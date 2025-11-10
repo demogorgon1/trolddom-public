@@ -161,6 +161,7 @@ namespace tpublic
 							else
 							{
 								DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
+								TP_VERIFY(damageType != DirectEffect::INVALID_DAMAGE_TYPE, aFlag->m_debugInfo, "'%s' is not a valid damage type.", aFlag->GetIdentifier());
 								m_typeMask |= 1 << (uint32_t)damageType;
 							}
 						});

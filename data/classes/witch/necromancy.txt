@@ -535,6 +535,7 @@ ability raise_dead:
 	cooldowns: [ global spell_unholy_lockout ]
 	flags: [ spell target_aoe interruptable minion_summon class_minion_summon ]
 	aoe_radius: 0
+	aoe_cap: 1
 	states: [ default in_combat ]
 	icon: icon_raise_dead
 	resource_cost mana: 12

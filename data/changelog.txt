@@ -9,7 +9,8 @@ changelog:
 	list:
 	[
 		{ text: "Whispers can be sent by right-clicking on other players in chat." }
-		{ text: "Added option to close automatically chat prompt after sending." }
+		{ text: "Added option to automatically close chat prompt after sending." }
+		{ text: "Sound volume sliders." }
 	]
 		
 	text: "Issues Fixed:"
@@ -20,6 +21,8 @@ changelog:
 		{ text: "Holy and Unholy Condemnation now work like intended." }
 		{ text: "Server and network stability issues fixed." }	
 		{ text: "Fixed bug where movement would continue when key was released." }	
+		{ text: "Raise Dead is now limited to only a single minion like intended." }
+		{ text: "Elemental Shield and Elemental Infusion now affects frost damage like intended." }
 	]
 	
 	#######################################################################################

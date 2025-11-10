@@ -83,40 +83,40 @@ aura sorcerer_elemental_shield_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 6%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.94 }
+	description: "Reduces damage taken by fire and frost effects by 6%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.94 }
 }
 
 aura sorcerer_elemental_shield_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 12%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.88 }
+	description: "Reduces damage taken by fire and frost effects by 12%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.88 }
 }
 
 aura sorcerer_elemental_shield_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 18%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.82 }
+	description: "Reduces damage taken by fire and frost effects by 18%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.82 }
 }
 
 aura sorcerer_elemental_shield_4:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 24%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.76 }
+	description: "Reduces damage taken by fire and frost effects by 24%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.76 }
 }
 
 aura sorcerer_elemental_shield_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 30%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.70 }
+	description: "Reduces damage taken by fire and frost effects by 30%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.70 }
 }
 
 ###############################################################################
@@ -172,7 +172,7 @@ ability shell:
 	string: "Shell"
 	description: "Restores 10% of your health and mana and protects you against all damage for 6 seconds, but makes you unable to do anything."
 	range: 1	
-	cooldowns: [ elemental_infusion ]
+	cooldowns: [ shell ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_shell
@@ -221,7 +221,7 @@ aura elemental_infusion:
 	icon: icon_combustion
 	duration: 200
 	flags: [ unique ]
-	aura_effect damage_output_modifier: { type_mask: [ fire cold ] multiplier: 1.5 }
+	aura_effect damage_output_modifier: { type_mask: [ fire frost ] multiplier: 1.5 }
 	aura_effect resource_cost_modifier: { multiplier: 1.5 }
 }
 

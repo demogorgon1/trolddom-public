@@ -31,6 +31,7 @@ namespace tpublic::DirectEffects
 				if(aChild->m_name == "damage_type")
 				{
 					m_damageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
+					TP_VERIFY(m_damageType != DirectEffect::INVALID_DAMAGE_TYPE, aChild->m_debugInfo, "'%s' is not a valid damage type.", aChild->GetIdentifier());
 				}
 				else if(aChild->m_name == "conditional_critical_chance_bonus")
 				{

@@ -96,7 +96,7 @@ namespace tpublic
 				return DAMAGE_TYPE_POISON;
 			if (strcmp(aString, "nature") == 0)
 				return DAMAGE_TYPE_NATURE;
-			return DamageType(0);
+			return INVALID_DAMAGE_TYPE;
 		}
 
 		inline const char*

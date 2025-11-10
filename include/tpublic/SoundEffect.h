@@ -33,6 +33,7 @@ namespace tpublic
 		struct Info
 		{
 			const char*		m_name;
+			bool			m_ui;
 		};
 
 		// IMPORTANT: Must match Id enum
@@ -40,18 +41,18 @@ namespace tpublic
 		{			
 			{ NULL },
 
-			{ "move" },
-			{ "hit" },
-			{ "miss" },
-			{ "block" },
-			{ "parry" },
-			{ "dodge" },
-			{ "use" },
-			{ "use_local" },
-			{ "equip" },
-			{ "inventory" },
-			{ "vendor" },
-			{ "trash" },
+			{ "move",		false },
+			{ "hit",		false },
+			{ "miss",		false },
+			{ "block",		false },
+			{ "parry",		false },
+			{ "dodge",		false },
+			{ "use",		false },
+			{ "use_local",	false },
+			{ "equip",		true },
+			{ "inventory",	true },
+			{ "vendor",		true },
+			{ "trash",		true },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
