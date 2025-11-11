@@ -39,7 +39,7 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL },
+			{ NULL,			false },
 
 			{ "move",		false },
 			{ "hit",		false },

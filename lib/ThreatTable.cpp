@@ -283,6 +283,7 @@ namespace tpublic
 		{
 			assert(!entitySet.contains(t->m_key));
 			assert(t->m_threat <= prevThreat);
+			TP_UNUSED(prevThreat);
 
 			entitySet.insert(t->m_key);
 			prevThreat = t->m_threat;
