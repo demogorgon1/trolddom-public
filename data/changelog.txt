@@ -2,6 +2,20 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.4"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Threat bonus from Bash is now 150% instead of 100%." }
+		{ text: "Base damage of Divine Smite and Reckoning are now slightly larger at low levels." }
+		{ text: "Judgement For All deals more damage and generates more threat." }
+		{ text: "New paladin talent: Sanctified Might. Converts strength into spell damage." }
+		{ text: "Threat bonus from Oath of Protection is now 150% instead of 50%." }		
+	]
+
+	#######################################################################################
 	heading: "v1.0.3"
 
 	text: "Changes:"
