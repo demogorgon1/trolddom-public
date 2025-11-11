@@ -50,7 +50,8 @@ class paladin:
 	weapon_sprites weapon_2h_axe:   { sprite: paladin_axe_2h   mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_axe_2h   paladin_walk_2_axe_2h ] }
 	weapon_sprites weapon_2h_staff: { sprite: paladin_staff    mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_staff    paladin_walk_2_staff ] }
 	weapon_sprites shield: 			{ sprite: paladin_shield   mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_shield   paladin_walk_2_shield ] }
-			
+	fishing_sprites:				{ sprite: paladin_fishing  mounted_offset: [ -1 -2 ] sprites_walk: [ paladin_walk_1_fishing  paladin_walk_2_fishing ] }
+	
 	armor_decoration: { sprite: paladin_decoration sprite_dead: paladin_decoration_dead sprites_walk: [ paladin_decoration_walk_1 paladin_decoration_walk_2 ] }
 		
 	remains: [ player_remains_1 player_remains_2 player_remains_3 ]

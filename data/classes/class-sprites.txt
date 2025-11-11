@@ -32,6 +32,7 @@ sprites:
 	sprite fighter_6_mounted: { }
 	sprite fighter_7_mounted: { }
 	sprite fighter_8_mounted: { }
+	sprite fighter_fishing: { }
 	
 	cursor: { position: [ 0 16 ] }
 	sprite fighter_naked_dead: { }
@@ -63,6 +64,16 @@ sprites:
 	sprite fighter_walk_1_axe_2h: { flags: [ autoglow ] }
 	sprite fighter_walk_1_mace_2h: { flags: [ autoglow ] }
 	sprite fighter_walk_1_shield: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite fighter_walk_1_fishing: { }
 	
 	cursor: { position: [ 0 48 ] }
 	sprite fighter_naked_walk_2: { }
@@ -83,6 +94,16 @@ sprites:
 	sprite fighter_walk_2_axe_2h: { flags: [ autoglow ] }
 	sprite fighter_walk_2_mace_2h: { flags: [ autoglow ] }
 	sprite fighter_walk_2_shield: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite fighter_walk_2_fishing: { }
 
 	cursor: { position: [ 0 64 ] }
 	sprite priest_naked: { }
@@ -112,6 +133,7 @@ sprites:
 	sprite priest_6_mounted: { }
 	sprite priest_7_mounted: { }
 	sprite priest_8_mounted: { }
+	sprite priest_fishing: { }
 	
 	cursor: { position: [ 0 80 ] }
 	sprite priest_naked_dead: { }
@@ -139,6 +161,20 @@ sprites:
 	skip: { }
 	sprite priest_walk_1_mace_1h: { flags: [ autoglow ] }
 	sprite priest_walk_1_knife_1h: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite priest_walk_1_fishing: { }
 	
 	cursor: { position: [ 0 112 ] }
 	sprite priest_naked_walk_2: { }
@@ -155,6 +191,20 @@ sprites:
 	skip: { }
 	sprite priest_walk_2_mace_1h: { flags: [ autoglow ] }
 	sprite priest_walk_2_knife_1h: { flags: [ autoglow ] }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }	
+	skip: { }
+	skip: { }
+	sprite priest_walk_2_fishing: { }
 	
 	cursor: { position: [ 0 128 ] }
 	sprite sorcerer_naked: { }
@@ -184,7 +234,8 @@ sprites:
 	sprite sorcerer_6_mounted: { }
 	sprite sorcerer_7_mounted: { }
 	sprite sorcerer_8_mounted: { }
-	
+	sprite sorcerer_fishing: { }
+		
 	cursor: { position: [ 0 144 ] }
 	sprite sorcerer_naked_dead: { }
 	sprite sorcerer_dead: { }
@@ -211,7 +262,21 @@ sprites:
 	skip: { }
 	skip: { }
 	sprite sorcerer_walk_1_knife_1h: { flags: [ autoglow ] }
-	
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }	
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite sorcerer_walk_1_fishing: { }
+		
 	cursor: { position: [ 0 176 ] }
 	sprite sorcerer_naked_walk_2: { }
 	sprite sorcerer_walk_2: { }
@@ -227,7 +292,21 @@ sprites:
 	skip: { }
 	skip: { }
 	sprite sorcerer_walk_2_knife_1h: { flags: [ autoglow ] }
-
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }	
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite sorcerer_walk_2_fishing: { }
+	
 	size: { width: 16 height: 16 }
 
 	cursor: { position: [ 0 192 ] }
@@ -258,7 +337,8 @@ sprites:
 	sprite paladin_6_mounted: { }
 	sprite paladin_7_mounted: { }
 	sprite paladin_8_mounted: { }
-	
+	sprite paladin_fishing: { }
+		
 	cursor: { position: [ 0 208 ] }
 	sprite paladin_naked_dead: { }
 	sprite paladin_dead: { }
@@ -289,7 +369,17 @@ sprites:
 	sprite paladin_walk_1_axe_2h: { flags: [ autoglow ] }
 	sprite paladin_walk_1_mace_2h: { flags: [ autoglow ] }
 	sprite paladin_walk_1_shield: { flags: [ autoglow ] }
-	
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite paladin_walk_1_fishing: { }
+		
 	cursor: { position: [ 0 240 ] }
 	sprite paladin_naked_walk_2: { }
 	sprite paladin_walk_2: { }
@@ -309,7 +399,17 @@ sprites:
 	sprite paladin_walk_2_axe_2h: { flags: [ autoglow ] }
 	sprite paladin_walk_2_mace_2h: { flags: [ autoglow ] }
 	sprite paladin_walk_2_shield: { flags: [ autoglow ] }
-
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite paladin_walk_2_fishing: { }
+	
 	cursor: { position: [ 0 256 ] }
 	sprite witch_naked: { }
 	sprite witch: { }
@@ -338,7 +438,8 @@ sprites:
 	sprite witch_6_mounted: { }
 	sprite witch_7_mounted: { }
 	sprite witch_8_mounted: { }	
-	
+	sprite witch_fishing: { }
+		
 	cursor: { position: [ 0 272 ] }
 	sprite witch_naked_dead: { }
 	sprite witch_dead: { }
@@ -365,7 +466,21 @@ sprites:
 	skip: { }
 	skip: { }
 	sprite witch_walk_1_knife_1h: { flags: [ autoglow ] }
-	
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }	
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	sprite witch_walk_1_fishing: { }
+		
 	cursor: { position: [ 0 304 ] }
 	sprite witch_naked_walk_2: { }
 	sprite witch_walk_2: { }
@@ -381,7 +496,21 @@ sprites:
 	skip: { }
 	skip: { }
 	sprite witch_walk_2_knife_1h: { flags: [ autoglow ] }
-
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }
+	skip: { }	
+	skip: { }
+	sprite witch_walk_2_fishing: { }
+	
 }
 
 sprites:

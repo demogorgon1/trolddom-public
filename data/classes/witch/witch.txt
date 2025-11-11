@@ -65,9 +65,10 @@ class witch:
 	armor_style black:  { sprite: witch_6     sprite_dead: witch_6_dead     sprite_mounted: witch_6_mounted     sprites_walk: [ witch_6_walk_1     witch_6_walk_2 ] }
 	armor_style white:  { sprite: witch_7     sprite_dead: witch_7_dead     sprite_mounted: witch_7_mounted     sprites_walk: [ witch_7_walk_1     witch_7_walk_2 ] }
 	armor_style yellow: { sprite: witch_8     sprite_dead: witch_8_dead     sprite_mounted: witch_8_mounted     sprites_walk: [ witch_8_walk_1     witch_8_walk_2 ] }
-		
+	
 	weapon_sprites weapon_2h_staff: { sprite: witch_staff    mounted_offset: [ 2 -3 ] sprites_walk:  [ witch_walk_1_staff witch_walk_2_staff ] }
 	weapon_sprites weapon_1h_knife: { sprite: witch_knife_1h mounted_offset: [ 2 -3 ] sprites_walk: [ witch_walk_1_knife_1h  witch_walk_2_knife_1h ] }
+	fishing_sprites:				{ sprite: witch_fishing  mounted_offset: [ 2 -3 ] sprites_walk: [ witch_walk_1_fishing  witch_walk_2_fishing ] }
 		
 	armor_decoration: { sprite: witch_decoration sprite_dead: witch_decoration_dead sprites_walk: [ witch_decoration_walk_1 witch_decoration_walk_2 ] }
 		

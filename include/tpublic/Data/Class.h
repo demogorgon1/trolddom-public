@@ -884,6 +884,10 @@ namespace tpublic
 						{
 							m_replaceAbilityTable[aMember->m_sourceContext->m_persistentIdTable->GetId(aMember->m_debugInfo, DataType::ID_ABILITY, aMember->m_name.c_str())] = aMember->GetId(DataType::ID_ABILITY);
 						}
+						else if(aMember->m_name == "fishing_sprites")
+						{
+							m_fishingSprites = std::make_unique<SpriteCollection>(aMember);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -919,6 +923,7 @@ namespace tpublic
 				aStream->WriteObjects(m_startReputations);
 				aStream->WriteObjectPointers(m_gearOptimizations);
 				aStream->WriteUIntToUIntTable<uint32_t, uint32_t>(m_replaceAbilityTable);
+				aStream->WriteOptionalObjectPointer(m_fishingSprites);
 
 				for(uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 					m_armorStyles[i].ToStream(aStream);
@@ -975,7 +980,9 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadObjectPointers(m_gearOptimizations))
 					return false;
-				if(!aStream->ReadUIntToUIntTable(m_replaceAbilityTable))
+				if (!aStream->ReadUIntToUIntTable(m_replaceAbilityTable))
+					return false;
+				if (!aStream->ReadOptionalObjectPointer(m_fishingSprites))
 					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
@@ -1014,6 +1021,7 @@ namespace tpublic
 			SpriteCollection										m_armorStyles[ArmorStyle::NUM_IDS];
 			std::unique_ptr<SpriteCollection>						m_weaponSprites[ItemType::NUM_IDS];
 			SpriteCollection										m_armorDecoration;
+			std::unique_ptr<SpriteCollection>						m_fishingSprites;
 			uint32_t												m_unlockedByAchievementId = 0;
 			bool													m_restricted = false;			
 			std::vector<StartReputation>							m_startReputations;

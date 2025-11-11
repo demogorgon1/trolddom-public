@@ -11,6 +11,8 @@ changelog:
 		{ text: "Whispers can be sent by right-clicking on other players in chat." }
 		{ text: "Added option to automatically close chat prompt after sending." }
 		{ text: "Sound volume sliders." }
+		{ text: "Fishing rods now looks different from other staffs." }
+		{ text: "All higher level bags are now larger." }
 	]
 		
 	text: "Issues Fixed:"

@@ -21,7 +21,8 @@ class priest:
 	weapon_sprites weapon_1h_mace:  { sprite: priest_mace_1h  mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_mace_1h  priest_walk_2_mace_1h ] }
 	weapon_sprites weapon_1h_knife: { sprite: priest_knife_1h mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_knife_1h priest_walk_2_knife_1h ] }
 	weapon_sprites weapon_2h_staff: { sprite: priest_staff    mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_staff    priest_walk_2_staff ] }
-		
+	fishing_sprites:				{ sprite: priest_fishing  mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_fishing  priest_walk_2_fishing ] }
+				
 	armor_decoration: { sprite: priest_decoration sprite_dead: priest_decoration_dead sprites_walk: [ priest_decoration_walk_1 priest_decoration_walk_2 ] }
 		
 	remains: [ player_remains_1 player_remains_2 player_remains_3 ]

@@ -93,7 +93,7 @@ item token_of_victory_bag:
 	required_level: 1
 	icon: icon_bag_2
 	rarity: uncommon
-	bag_slots: 10
+	bag_slots: 14
 }
 
 ################################################################################

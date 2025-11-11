@@ -61,6 +61,7 @@ class sorcerer:
 	weapon_sprites weapon_1h_sword: { sprite: sorcerer_sword_1h mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_sword_1h sorcerer_walk_2_sword_1h ] }
 	weapon_sprites weapon_1h_knife: { sprite: sorcerer_knife_1h mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_knife_1h sorcerer_walk_2_knife_1h ] }
 	weapon_sprites weapon_2h_staff: { sprite: sorcerer_staff    mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_staff    sorcerer_walk_2_staff ] }
+	fishing_sprites:				{ sprite: sorcerer_fishing  mounted_offset: [ -1 -2 ] sprites_walk: [ sorcerer_walk_1_fishing  sorcerer_walk_2_fishing ] }
 	
 	armor_decoration: { sprite: sorcerer_decoration sprite_dead: sorcerer_decoration_dead sprites_walk: [ sorcerer_decoration_walk_1 sorcerer_decoration_walk_2 ] }
 			

@@ -75,7 +75,8 @@ class fighter:
 	weapon_sprites weapon_2h_mace:  { sprite: fighter_mace_2h  mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_mace_2h  fighter_walk_2_mace_2h ] }
 	weapon_sprites weapon_2h_axe:   { sprite: fighter_axe_2h   mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_axe_2h   fighter_walk_2_axe_2h ] }
 	weapon_sprites weapon_2h_staff: { sprite: fighter_staff    mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_staff    fighter_walk_2_staff ] }
-	weapon_sprites shield: 			{ sprite: fighter_shield   mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_shield   fighter_walk_2_shield ] }
+	weapon_sprites shield: 			{ sprite: fighter_shield   mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_shield   fighter_walk_2_shield ] }	
+	fishing_sprites:				{ sprite: fighter_fishing  mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_fishing  fighter_walk_2_fishing ] }
 	
 	armor_decoration: { sprite: fighter_decoration sprite_dead: fighter_decoration_dead sprites_walk: [ fighter_decoration_walk_1 fighter_decoration_walk_2 ] }
 
