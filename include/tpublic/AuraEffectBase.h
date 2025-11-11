@@ -270,10 +270,6 @@ namespace tpublic
 									const EntityInstance*			/*aTargetEntityInstance*/,
 									std::mt19937*					/*aRandom*/,
 									IEventQueue*					/*aEventQueue*/) const { }
-		virtual bool			GetStatModifier(
-									Stat::Id						/*aStat*/,
-									uint32_t&						/*aOutNum*/,
-									uint32_t&						/*aOutDenom*/) const { return false; }		
 		virtual bool			UpdateCastTime(
 									const Manifest*					/*aManifest*/,
 									uint32_t						/*aAbilityId*/,

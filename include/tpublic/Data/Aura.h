@@ -262,6 +262,8 @@ namespace tpublic
 							m_colorEffect = Image::RGBA(aChild);
 						else if (aChild->m_name == "color_weapon_glow")
 							m_colorWeaponGlow = Image::RGBA(aChild);
+						else if(aChild->m_name == "stat_conversion")
+							m_statConversions.push_back(Stat::Conversion(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -292,6 +294,7 @@ namespace tpublic
 				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
 				aStream->WriteUInt(m_maxStack);
 				aStream->WriteUInt(m_overrideSpriteId);
+				aStream->WriteObjects(m_statConversions);
 			}
 			 
 			bool
@@ -383,6 +386,12 @@ namespace tpublic
 						return false;
 				}
 
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadObjects(m_statConversions))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -401,6 +410,7 @@ namespace tpublic
 			uint32_t										m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
 			std::unique_ptr<StatModifiers>					m_statModifiers;
+			std::vector<Stat::Conversion>					m_statConversions;
 			CombatFunction									m_charges;
 			uint32_t										m_encounterId = 0;
 			uint32_t										m_particleSystemId = 0;

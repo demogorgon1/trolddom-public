@@ -680,14 +680,14 @@ cooldown bash:
 aura bash:
 {
 	string: "Threatening"
-	description: "Threat generated increased by 100%."
+	description: "Threat generated increased by 150%."
 	type: buff
 	flags: [ unique ]
 	icon: icon_bash
 	duration: 300
 	aura_effect threat_modifier: 
 	{ 
-		multiplier: 2.0
+		multiplier: 2.5
 	}
 }
 

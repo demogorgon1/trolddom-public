@@ -3,6 +3,7 @@
 #include "../AuraEffectBase.h"
 #include "../ComponentBase.h"
 #include "../MoveSpeed.h"
+#include "../Stat.h"
 
 namespace tpublic
 {
