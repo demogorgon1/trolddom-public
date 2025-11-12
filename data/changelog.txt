@@ -11,8 +11,20 @@ changelog:
 		{ text: "Threat bonus from Bash is now 150% instead of 100%." }
 		{ text: "Base damage of Divine Smite and Reckoning are now slightly larger at low levels." }
 		{ text: "Judgement For All deals more damage and generates more threat." }
+		{ text: "Increased bonus threat from Consecrate." }
 		{ text: "New paladin talent: Sanctified Might. Converts strength into spell damage." }
 		{ text: "Threat bonus from Oath of Protection is now 150% instead of 50%." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Server stability issues fixed." }	
+		{ text: "Fixed bug that prevented some percentage based buffs not showing in tool tips." }	
+		{ text: "Fixed bug where party members didn't show up on map if too far away." }	
+		{ text: "Banner of Command now works like intended again." }	
+		{ text: "Whirlwind critical strikes can now trigger Ferocity like intended." }	
 	]
 
 	#######################################################################################

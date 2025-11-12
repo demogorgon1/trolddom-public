@@ -348,6 +348,7 @@ namespace tpublic::DirectEffects
 
 	bool			
 	Damage::CalculateToolTipDamage(
+		const Manifest*						aManifest,
 		const EntityInstance*				aEntityInstance,
 		const AbilityModifierList*			aAbilityModifierList,
 		uint32_t							aAbilityId,
@@ -369,6 +370,10 @@ namespace tpublic::DirectEffects
 				}
 			}
 		}
+
+		const Components::AbilityModifiers* abilityModifiers = aEntityInstance->GetComponent<Components::AbilityModifiers>();
+		if(abilityModifiers != NULL)
+			damageModifier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_DAMAGE_OUTPUT, aAbilityId, m_damageType, aManifest, aEntityInstance);
 
 		m_function.ToRange(NULL, NULL, damageModifier, aEntityInstance, aOutDamage);
 

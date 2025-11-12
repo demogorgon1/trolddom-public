@@ -5,6 +5,8 @@
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/ThreatTarget.h>
 
+#include <tpublic/Data/Item.h>
+
 #include <tpublic/DirectEffects/Simple.h>
 
 #include <tpublic/EntityInstance.h>
@@ -251,6 +253,14 @@ namespace tpublic::DirectEffects
 		}
 		
 		return Result();
+	}
+
+	void			
+	Simple::PostProcessOnUseItem(
+		Data::Item* aItem) const 
+	{
+		if(m_id == SimpleDirectEffect::ID_START_QUEST)
+			aItem->m_flags |= Data::Item::FLAG_STARTS_QUEST;
 	}
 
 }

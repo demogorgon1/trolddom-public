@@ -6,6 +6,7 @@
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/PlayerPublic.h>
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Item.h>
 #include <tpublic/Data/LootGroup.h>
@@ -186,6 +187,21 @@ namespace tpublic
 				{
 					loot.m_playerTag.SetCharacter(characterId, 0); // Player tag character level isn't relevant here
 					aLootable->m_availableLoot.push_back(loot);
+				}
+			}
+			else if (item->DoesStartQuest())
+			{
+				// This item starts a quest. Generate it for anyone who can start it.
+				const Data::Ability* ability = m_manifest->GetById<Data::Ability>(item->m_useAbilityId);
+
+				for (const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
+				{
+					if (Requirements::CheckList(m_manifest, ability->m_requirements, playerEntityInstance, NULL))
+					{
+						const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
+						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, 0); // Player tag character level isn't relevant here
+						aLootable->m_availableLoot.push_back(loot);
+					}
 				}
 			}
 			else

@@ -560,7 +560,7 @@ namespace tpublic::Systems
 									if (mapRouteData != NULL)
 									{
 										if (npc->m_subRouteIndex == SIZE_MAX)
-											npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+											npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);											
 
 										Vec2 direction;
 										bool shouldChangeDirection = false;

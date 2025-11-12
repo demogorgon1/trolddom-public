@@ -127,7 +127,7 @@ namespace tpublic
 				m_professionSkillUseEvents.clear();
 				m_errorNotification = ErrorNotification::INVALID_ID;
 				m_abilityModifierList = NULL;
-				m_equippedItemTypeFlags = 0;
+				m_equippedItemTypeFlags = UINT16_MAX;
 				m_useAbilityFlags = 0;
 				m_useAbilityExtendedFlags = 0;
 				m_notifyLearnedRiding = false;
@@ -185,7 +185,7 @@ namespace tpublic
 
 			const tpublic::AbilityModifierList*								m_abilityModifierList = NULL;
 
-			uint16_t														m_equippedItemTypeFlags = 0;
+			uint16_t														m_equippedItemTypeFlags = UINT16_MAX;
 			uint32_t														m_useAbilityFlags = 0;
 			uint32_t														m_useAbilityExtendedFlags = 0;
 

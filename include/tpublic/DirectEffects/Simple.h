@@ -47,6 +47,8 @@ namespace tpublic
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
 								const IWorldView*				aWorldView) override;
+			void			PostProcessOnUseItem(
+								Data::Item*						aItem) const override;
 
 			// Public data
 			SimpleDirectEffect::Id	m_id = SimpleDirectEffect::INVALID_ID;

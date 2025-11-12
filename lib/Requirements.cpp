@@ -110,7 +110,29 @@ namespace tpublic
 						return false;
 
 					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
-					bool isEquipped = (playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) == (uint16_t)aRequirement->m_id;
+
+					uint16_t flags = playerPrivate->m_equippedItemTypeFlags;
+
+					if(flags == UINT16_MAX)
+					{
+						// Unknown flags, must look at equipment
+						const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+
+						flags = 0;					
+
+						for (uint32_t i = 1; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+						{
+							const ItemInstance& item = equippedItems->m_slots.m_items[i];
+							if (item.IsSet())
+							{
+								const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+								const ItemType::Info* itemTypeInfo = ItemType::GetInfo(itemData->m_itemType);
+								flags |= itemTypeInfo->m_flags;
+							}
+						}
+					}
+						
+					bool isEquipped = (flags & (uint16_t)aRequirement->m_id) == (uint16_t)aRequirement->m_id;
 					bool shouldBeEquipped = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 					if(isEquipped != shouldBeEquipped)
 						return false;

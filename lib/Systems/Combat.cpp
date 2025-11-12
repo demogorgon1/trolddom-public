@@ -181,7 +181,7 @@ namespace tpublic::Systems
 	
 					for(size_t j = 0; j < entry->m_effects.size(); j++)
 					{
-						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
+						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];							
 
 						bool cancelEffect = false;
 

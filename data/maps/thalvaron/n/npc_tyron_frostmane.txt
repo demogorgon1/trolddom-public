@@ -10,7 +10,7 @@ dialogue_screen .tyron_frostmane_dialogue:
 		{ quest<completion_only>: .ranger_fremalt_1 }
 		{ quest: .tyron_frostmane_1 }
 		{ quest: .tyron_frostmane_2 }
-		{ quest<offer_only>: .tyron_frostmane_3 }
+		{ quest<offer_only>: .tyron_frostmane_3 requirement self<must_not_have_completed_quest>: .doctor_hulius_1 }
 		{ quest<completion_only>: .doctor_hulius_1 }
 	]
 }
@@ -165,7 +165,7 @@ quest .tyron_frostmane_3:
 	
 	completion:
 	[
-		"This is definitely the belongings of Doctor Hulius."
+		"These are definitely the belongings of Doctor Hulius."
 	]
 
 	level: 14

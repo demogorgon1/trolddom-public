@@ -6,6 +6,7 @@
 
 #include <tpublic/Helpers.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/ToolTipMultiplier.h>
 
 namespace tpublic::Components
 {
@@ -240,6 +241,20 @@ namespace tpublic::Components
 		return threat;
 	}
 
+	bool			
+	Auras::IsFilter() const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+			{
+				if(effect->IsFilter())
+					return true;
+			}
+		}
+		return false;
+	}
+
 	float			
 	Auras::GetResourceCostMultiplier() const
 	{
@@ -355,6 +370,23 @@ namespace tpublic::Components
 			m_seq++;
 
 		return damage;
+	}
+
+	void			
+	Auras::GetToolTipMultipliers(
+		std::vector<ToolTipMultiplier>&				aOut) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+			{
+				effect->ForEachToolTipMultiplier([&](
+					ToolTipMultiplier& aToolTipMultiplier)
+				{
+					aOut.push_back(std::move(aToolTipMultiplier));
+				});
+			}
+		}
 	}
 
 	bool			

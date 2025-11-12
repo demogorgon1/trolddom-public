@@ -115,6 +115,7 @@ namespace tpublic
 								IEventQueue*						aEventQueue,
 								const IWorldView*					aWorldView) override;
 			bool			CalculateToolTipDamage(
+								const Manifest*						aManifest,
 								const EntityInstance*				aEntityInstance,
 								const AbilityModifierList*			aAbilityModifierList,
 								uint32_t							aAbilityId,

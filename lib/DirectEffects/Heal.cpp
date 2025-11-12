@@ -172,12 +172,19 @@ namespace tpublic::DirectEffects
 
 	bool			
 	Heal::CalculateToolTipHeal(
+		const Manifest*				aManifest,
 		const EntityInstance*		aEntityInstance,
 		const AbilityModifierList*	/*aAbilityModifierList*/,
-		uint32_t					/*aAbilityId*/,
+		uint32_t					aAbilityId,
 		UIntRange&					aOutHeal) const 
 	{
-		m_function.ToRange(NULL, NULL, 1.0f, aEntityInstance, aOutHeal);
+		float multiplier = 1.0f;
+
+		const Components::AbilityModifiers* abilityModifiers = aEntityInstance->GetComponent<Components::AbilityModifiers>();
+		if (abilityModifiers != NULL)
+			multiplier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_HEAL_OUTPUT, aAbilityId, DirectEffect::INVALID_DAMAGE_TYPE, aManifest, aEntityInstance);
+
+		m_function.ToRange(NULL, NULL, multiplier, aEntityInstance, aOutHeal);
 
 		if (m_spread > 0.0f)
 		{

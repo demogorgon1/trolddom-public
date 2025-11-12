@@ -31,7 +31,8 @@ namespace tpublic
 				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008,
 				FLAG_QUEST_REWARD					= 0x00000010,
 				FLAG_DUNGEON_LOOT					= 0x00000020,
-				FLAG_FISHING_ROD					= 0x00000040
+				FLAG_FISHING_ROD					= 0x00000040,
+				FLAG_STARTS_QUEST					= 0x00000080,
 			};
 
 			static inline uint32_t
@@ -57,6 +58,8 @@ namespace tpublic
 						flags |= FLAG_DUNGEON_LOOT;
 					else if (strcmp(identifier, "fishing_rod") == 0)
 						flags |= FLAG_FISHING_ROD;
+					else if (strcmp(identifier, "starts_quest") == 0)
+						flags |= FLAG_STARTS_QUEST;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -275,6 +278,7 @@ namespace tpublic
 			bool	IsKillContributionLoot() const { return m_flags & FLAG_KILL_CONTRIBUTION_LOOT; }
 			bool	IsQuestReward() const { return m_flags & FLAG_QUEST_REWARD; }
 			bool	IsDefined() const { return m_iconSpriteId != 0 && !m_string.empty(); }
+			bool	DoesStartQuest() const { return m_flags & FLAG_STARTS_QUEST; }
 
 			// Base implementation
 			void

@@ -19,6 +19,7 @@ namespace tpublic
 	namespace Data
 	{
 		struct Ability;
+		struct Item;
 	}
 
 	class AbilityModifierList;
@@ -149,18 +150,22 @@ namespace tpublic
 									IEventQueue*						/*aEventQueue*/,
 									const IWorldView*					/*aWorldView*/) { return Result(); }
 		virtual bool			CalculateToolTipDamage(
+									const Manifest*						/*aManifest*/,
 									const EntityInstance*				/*aEntityInstance*/,
 									const AbilityModifierList*			/*aAbilityModifierList*/,
 									uint32_t							/*aAbilityId*/,
 									UIntRange&							/*aOutDamage*/,
 									DirectEffect::DamageType&			/*aOutDamageType*/) const { return false; }
 		virtual bool			CalculateToolTipHeal(
+									const Manifest*						/*aManifest*/,
 									const EntityInstance*				/*aEntityInstance*/,
 									const AbilityModifierList*			/*aAbilityModifierList*/,
 									uint32_t							/*aAbilityId*/,
 									UIntRange&							/*aOutHeal*/) const { return false; }
 		virtual uint32_t		GetToolTipItemId(
 									const Manifest*						/*aManifest*/) const { return 0; }
+		virtual void			PostProcessOnUseItem(
+									Data::Item*							/*aItem*/) const { }
 
 		// Public data
 		uint32_t					m_flags = 0;		

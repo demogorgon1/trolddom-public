@@ -177,6 +177,7 @@ namespace tpublic
 								const EntityInstance*						aTarget,
 								int32_t										aThreat,
 								uint32_t									aAbilityId) const;
+			bool			IsFilter() const;
 			float			GetResourceCostMultiplier() const;
 			void			OnCombatEvent(
 								const Manifest*								aManifest,
@@ -201,6 +202,8 @@ namespace tpublic
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage,
 								int32_t&									aOutAbsorbed);
+			void			GetToolTipMultipliers(
+								std::vector<ToolTipMultiplier>&				aOut) const;
 			bool			UpdateCastTime(
 								const Manifest*								aManifest,
 								uint32_t									aAbilityId,

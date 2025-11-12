@@ -44,6 +44,17 @@ namespace tpublic
 					if(vendorItemIds.contains(aItem->m_id))
 						aItem->m_flags |= Data::Item::FLAG_VENDOR;
 
+					// Some direct effects from item use-abilities need to update their respective items
+					if(aItem->m_useAbilityId != 0)
+					{
+						const Data::Ability* ability = aManifest->GetById<Data::Ability>(aItem->m_useAbilityId);
+						for(const std::unique_ptr<Data::Ability::DirectEffectEntry>& directEffectEntry : ability->m_directEffects)
+							directEffectEntry->m_directEffectBase->PostProcessOnUseItem(aItem);
+					}
+
+					if(aItem->DoesStartQuest())
+						printf("[%s]\n", aItem->m_string.c_str());
+
 					// If no item level (or required level), set item level based on use ability if any
 					if(aItem->m_itemLevel == 0 && aItem->m_useAbilityId != 0)
 					{

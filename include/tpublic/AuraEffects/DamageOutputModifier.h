@@ -28,16 +28,19 @@ namespace tpublic
 
 			// AuraEffectBase implementation
 			int32_t			FilterDamageOutput(
-								const Manifest*				aManifest,
-								const EntityInstance*		aSource,
-								const EntityInstance*		aTarget,
-								DirectEffect::DamageType	aDamageType,
-								int32_t						aDamage,
-								uint32_t					aAbilityId) const override;
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
+								DirectEffect::DamageType					aDamageType,
+								int32_t										aDamage,
+								uint32_t									aAbilityId) const override;
+			bool			IsFilter() const override;
+			void			ForEachToolTipMultiplier(
+								std::function<void(ToolTipMultiplier&)>		aCallback) const override;
 
 			void
 			FromSource(
-				const SourceNode*		aSource) override
+				const SourceNode*											aSource) override
 			{
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)

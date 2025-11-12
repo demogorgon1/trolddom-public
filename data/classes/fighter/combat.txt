@@ -732,7 +732,7 @@ ability whirlwind:
 	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global whirlwind ]
-	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ melee offensive target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_whirlwind
 	delay: 3
