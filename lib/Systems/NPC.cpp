@@ -1179,6 +1179,7 @@ namespace tpublic::Systems
 												targetPosition->m_position,
 												aContext->m_tick,
 												position->m_lastMoveTick,
+												npc->m_lastAttackTick,
 												*aContext->m_random,
 												moveRequest))
 											{
@@ -1189,13 +1190,19 @@ namespace tpublic::Systems
 
 												npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_combatMoveIntervalTicks;
 												npc->m_lastCombatMoveTick = aContext->m_tick;
+												npc->m_moveFailureAccum = 0;
 											}
-											else
+											else 
 											{
-												// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
-												position->m_lastMoveTick = aContext->m_tick;
+												npc->m_moveFailureAccum++;
 
-												aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.5f);
+												if(npc->m_moveFailureAccum > 1)
+												{
+													// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
+													position->m_lastMoveTick = aContext->m_tick;
+
+													aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.5f);
+												}
 											}
 										}
 									}
@@ -1228,7 +1235,7 @@ namespace tpublic::Systems
 			{
 				// FIXME: since (future me: what?)
 				IEventQueue::EventQueueMoveRequest moveRequest;
-				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, *aContext->m_random, moveRequest))
+				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, 0, *aContext->m_random, moveRequest))
 				{
 					// Can't seem to move, teleport all the way back to anchor
 					moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;

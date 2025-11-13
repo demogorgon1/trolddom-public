@@ -2,6 +2,16 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.5"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where enemies with drop threat when moving." }	
+	]
+
+	#######################################################################################
 	heading: "v1.0.4"
 
 	text: "Changes:"

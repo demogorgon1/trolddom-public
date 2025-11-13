@@ -586,6 +586,7 @@ namespace tpublic
 				m_handledRouteTriggerIndices.clear();
 				m_effectiveRouteId = 0;
 				m_patrolResetAfterLeavingCombat = false;
+				m_moveFailureAccum = 0;
 			}
 
 			// Public data			
@@ -634,6 +635,7 @@ namespace tpublic
 			uint32_t									m_effectiveRouteId = 0;
 			Vec2										m_lastTargetPosition;
 			bool										m_patrolResetAfterLeavingCombat = false;
+			uint32_t									m_moveFailureAccum = 0;
 
 			struct SpawnWithTarget
 			{

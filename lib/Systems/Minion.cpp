@@ -576,6 +576,7 @@ namespace tpublic::Systems
 											targetPosition->m_position,
 											aContext->m_tick,
 											position->m_lastMoveTick,
+											0, // Not used for minions (FIXME: or?)
 											*aContext->m_random,
 											moveRequest))
 										{
@@ -619,6 +620,7 @@ namespace tpublic::Systems
 									activeCommand->m_targetPosition,
 									aContext->m_tick,
 									position->m_lastMoveTick,
+									0, // FIXME: used?
 									*aContext->m_random,
 									moveRequest))
 								{
@@ -693,6 +695,7 @@ namespace tpublic::Systems
 										healTargetPosition->m_position,
 										aContext->m_tick,
 										position->m_lastMoveTick,
+										0, // FIXME: used?
 										*aContext->m_random,
 										moveRequest))
 									{
@@ -864,6 +867,7 @@ namespace tpublic::Systems
 									ownerPosition->m_position,
 									aContext->m_tick,
 									position->m_lastMoveTick,
+									0, // FIXME: used?
 									*aContext->m_random,
 									moveRequest))
 								{
