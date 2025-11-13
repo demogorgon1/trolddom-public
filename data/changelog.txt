@@ -14,6 +14,8 @@ changelog:
 		{ text: "Increased bonus threat from Consecrate." }
 		{ text: "New paladin talent: Sanctified Might. Converts strength into spell damage." }
 		{ text: "Threat bonus from Oath of Protection is now 150% instead of 50%." }		
+		{ text: "New guild features: member notes, last online, and sorting." }		
+		{ text: "Items that can start a quest will drop for all eligible party members." }		
 	]
 
 	text: "Issues Fixed:"

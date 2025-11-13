@@ -52,9 +52,6 @@ namespace tpublic
 							directEffectEntry->m_directEffectBase->PostProcessOnUseItem(aItem);
 					}
 
-					if(aItem->DoesStartQuest())
-						printf("[%s]\n", aItem->m_string.c_str());
-
 					// If no item level (or required level), set item level based on use ability if any
 					if(aItem->m_itemLevel == 0 && aItem->m_useAbilityId != 0)
 					{
