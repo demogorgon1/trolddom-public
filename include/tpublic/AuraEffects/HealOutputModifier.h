@@ -93,7 +93,7 @@ namespace tpublic
 
 			void			
 			ForEachToolTipMultiplier(
-				std::function<void(ToolTipMultiplier&)>		aCallback) const 
+				std::function<void(ToolTipMultiplier&)>		aCallback) const override
 			{
 				ToolTipMultiplier t;
 				t.m_type = ToolTipMultiplier::TYPE_HEAL_OUTPUT;
