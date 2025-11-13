@@ -694,7 +694,7 @@ aura bash:
 ability bash:
 {
 	string: "Bash"
-	description: "Does $damage$ damage to target and increases your threat by 100% for 30 seconds."
+	description: "Does $damage$ damage to target and increases your threat by 150% for 30 seconds."
 	range: 1	
 	cooldowns: [ global bash ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
