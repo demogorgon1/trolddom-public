@@ -3,6 +3,13 @@ changelog:
 
 	#######################################################################################
 	heading: "v1.0.5"
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Only nearby party members share looted items and cash." }
+	]
 
 	text: "Issues Fixed:"
 	
@@ -10,6 +17,7 @@ changelog:
 	[
 		{ text: "Fixed bug where enemies would drop threat when moving." }	
 		{ text: "Fixed a couple more issues with aggro." }	
+		{ text: "Fixed some minor bugs and UI issues." }	
 	]
 
 	#######################################################################################
