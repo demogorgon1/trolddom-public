@@ -8,7 +8,8 @@ changelog:
 	
 	list:
 	[
-		{ text: "Fixed bug where enemies with drop threat when moving." }	
+		{ text: "Fixed bug where enemies would drop threat when moving." }	
+		{ text: "Fixed a couple more issues with aggro." }	
 	]
 
 	#######################################################################################

@@ -49,15 +49,17 @@ namespace tpublic::Systems
 	{
 		bool
 		_IsInMeleeRange(
-			const Vec2&				aPosition,
-			const EntityInstance*	aEntityInstance)
+			const Components::Position* aPosition,
+			const EntityInstance*		aEntityInstance)
 		{
 			if(aEntityInstance == NULL)
 				return false;
-			const Components::Position* position = aEntityInstance->GetComponent<Components::Position>();
-			if(position == NULL)
+
+			const Components::Position* otherPosition = aEntityInstance->GetComponent<Components::Position>();
+			if(otherPosition == NULL)
 				return false;
-			return aPosition.DistanceSquared(position->m_position) <= 1;
+
+			return Helpers::CalculateDistanceSquared(aPosition, otherPosition) <= 1;
 		}
 	}
 
@@ -848,7 +850,7 @@ namespace tpublic::Systems
 								if(existingTargetThreat != 0)
 								{
 									// To switch the new target must have 8% more threat if in melee range or 25% more threat if outside
-									bool newTargetInMeleeRange = _IsInMeleeRange(position->m_position, aContext->m_worldView->WorldViewSingleEntityInstance(topThreatEntry->m_key.m_entityInstanceId));
+									bool newTargetInMeleeRange = _IsInMeleeRange(position, aContext->m_worldView->WorldViewSingleEntityInstance(topThreatEntry->m_key.m_entityInstanceId));
 									int32_t newTargetThreatPercentageIncrease = (100 * (topThreatEntry->m_threat - existingTargetThreat)) / existingTargetThreat;
 
 									if((newTargetInMeleeRange && newTargetThreatPercentageIncrease >= 8) || (!newTargetInMeleeRange && newTargetThreatPercentageIncrease >= 25))
@@ -1086,6 +1088,8 @@ namespace tpublic::Systems
 								int32_t ticksSinceLastAttack = aContext->m_tick - npc->m_lastAttackTick;
 								if(ticksSinceLastAttack > 30 && npc->m_maxLeashDistance > 0 && leashDistanceSquared > (int32_t)(npc->m_maxLeashDistance * npc->m_maxLeashDistance))
 								{
+									// FIXME: don't do this in dungeons
+
 									// Exceeded max leash distance nad haven't been able to attack for a bit. Evade!
 									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
 								}
@@ -1171,7 +1175,31 @@ namespace tpublic::Systems
 											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, pushEntityInstance->GetEntityInstanceId(), Vec2(), pushAbility, ItemInstanceReference(), NULL);
 										}
 										else
-										{
+										{	
+											if(position->m_blockingEntityInstanceId != 0)
+											{
+												const EntityInstance* blockingEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(position->m_blockingEntityInstanceId);
+												if(blockingEntityInstance != NULL && blockingEntityInstance->HasComponent<Components::ThreatSource>())
+												{
+													// FIXME: this could be abused by tricking unsuspecting players to block a mob. But if we put on some kind of "must be in same group" requirement,
+													// it could be abused the other way around.
+
+													// Basically let the blocking player/minion taunt - AND - reduce threat on current target to get a fast switch
+													aContext->m_eventQueue->EventQueueThreat(	
+														{ blockingEntityInstance->GetEntityInstanceId(), blockingEntityInstance->GetSeq() },
+														aEntityInstanceId,
+														INT32_MAX,
+														aContext->m_tick,
+														0);
+
+													aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.8f);
+												}
+												else
+												{
+													position->m_blockingEntityInstanceId = 0;
+												}
+											}
+
 											IEventQueue::EventQueueMoveRequest moveRequest;
 											if (npc->m_npcMovement.GetMoveRequest(
 												aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),

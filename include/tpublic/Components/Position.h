@@ -73,6 +73,7 @@ namespace tpublic
 				m_lastMoveTick = 0;
 				m_detached = false;
 				m_updatedOnServer = false;
+				m_blockingEntityInstanceId = 0;
 			}
 
 			// Helpers
@@ -109,6 +110,7 @@ namespace tpublic
 			int32_t		m_lastMoveTick = 0;
 			bool		m_detached = false;
 			bool		m_updatedOnServer = false;
+			uint32_t	m_blockingEntityInstanceId = 0;
 		};
 	}
 
