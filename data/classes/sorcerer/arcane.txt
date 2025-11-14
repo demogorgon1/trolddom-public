@@ -95,6 +95,7 @@ talent sorcerer_arcane_sweet_dreams:
 {
 	string: "Sweet Dreams"
 	icon: icon_sleep
+	talent_tree_points_required: 5
 	points:
 	[
 		{ ability_modifier: sorcerer_arcane_sweet_dreams_1 }
