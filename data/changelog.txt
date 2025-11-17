@@ -15,6 +15,7 @@ changelog:
 	
 	list:
 	[
+		{ text: "Healing Shield now works when cast on other players like intended." }
 		{ text: "Fixed bug where enemies would drop threat when moving." }	
 		{ text: "Fixed a couple more issues with aggro." }	
 		{ text: "Fixed some minor bugs and UI issues." }	
