@@ -187,7 +187,8 @@ namespace tpublic
 								CombatEvent::Id								aCombatEventId,
 								uint32_t									aAbilityId,
 								std::mt19937*								aRandom,
-								IEventQueue*								aEventQueue) const;
+								IEventQueue*								aEventQueue,
+								const IWorldView*							aWorldView) const;
 			void			OnDamageInput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,

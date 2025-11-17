@@ -64,14 +64,15 @@ aura healing_shield:
 	{ 
 		combat_event<target>: [ hit critical block ]
 		combat_event_ability_mask: [ offensive ]
+		ability_aura_source: true
 		ability<target>: $ability [ icon string ]
 		{
 			states: [ default in_combat ]
 			target_particle_system: small_heal	
 			delay: 2
 			sound_effects: !SOUND_HEAL_SMALL{}			
-			flags: [ always_in_range always_in_line_of_sight ]
-			consume_source_aura: healing_shield
+			flags: [ always_in_range always_in_line_of_sight consume_any_aura ]
+			consume_target_aura: healing_shield
 			direct_effect heal: 
 			{ 
 				flags: [ can_be_critical ]

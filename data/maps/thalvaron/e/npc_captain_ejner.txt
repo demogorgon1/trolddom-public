@@ -156,5 +156,5 @@ quest .captain_ejner_2:
 	level: 29
 	objectives: [ .captain_ejner_2 ]
 	prerequisites: [ .captain_ejner_1 ]
-	reward_one_item: [ .captain_ejner_1_a .captain_ejner_1_a ]
+	reward_one_item: [ .captain_ejner_1_a .captain_ejner_1_b ]
 }

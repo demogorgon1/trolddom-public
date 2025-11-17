@@ -476,7 +476,7 @@ ability consumable_strong_rejuvenation_potion (potion):
 {
 	string: "Strong Rejuvenation Potion"
 	description: "Restores 290 health and mana."
-	icon: icon_purple_potion
+	icon: icon_purple_potion_2
 	direct_effect heal: { function: 290 }
 	direct_effect modify_resource: { resource: mana function: 290 }	
 	consume_items: { consumable_strong_rejuvenation_potion: 1 }

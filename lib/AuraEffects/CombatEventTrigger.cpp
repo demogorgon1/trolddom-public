@@ -65,6 +65,10 @@ namespace tpublic::AuraEffects
 				{
 					m_abilityRetainSource = aChild->GetBool();
 				}
+				else if (aChild->m_name == "ability_aura_source")
+				{
+					m_abilityAuraSource = aChild->GetBool();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -87,6 +91,7 @@ namespace tpublic::AuraEffects
 		aStream->WriteUInt(m_combatEventAbilityRejectMask);
 		aStream->WriteUInt(m_probability);
 		aStream->WriteBool(m_abilityRetainSource);
+		aStream->WriteBool(m_abilityAuraSource);
 	}
 
 	bool
@@ -110,7 +115,9 @@ namespace tpublic::AuraEffects
 			return false;
 		if (!aStream->ReadUInt(m_probability))
 			return false;
-		if(!aStream->ReadBool(m_abilityRetainSource))
+		if (!aStream->ReadBool(m_abilityRetainSource))
+			return false;
+		if (!aStream->ReadBool(m_abilityAuraSource))
 			return false;
 		return true;
 	}
@@ -128,6 +135,7 @@ namespace tpublic::AuraEffects
 		t->m_combatEventAbilityRejectMask = m_combatEventAbilityRejectMask;
 		t->m_probability = m_probability;
 		t->m_abilityRetainSource = m_abilityRetainSource;
+		t->m_abilityAuraSource = m_abilityAuraSource;
 		return t;
 	}
 
@@ -138,6 +146,7 @@ namespace tpublic::AuraEffects
 		CombatEventType					aType,
 		CombatEvent::Id					aCombatEventId,
 		uint32_t						aAbilityId,
+		const EntityInstance*			aAuraSourceEntityInstance,
 		const EntityInstance*			aSourceEntityInstance,
 		const EntityInstance*			aTargetEntityInstance,
 		std::mt19937*					aRandom,
@@ -191,8 +200,11 @@ namespace tpublic::AuraEffects
 
 					if(m_abilityRetainSource)
 						source = aSourceEntityInstance;
+					else if(m_abilityAuraSource)
+						source = aAuraSourceEntityInstance;
 
-					aEventQueue->EventQueueAbility({ source->GetEntityInstanceId(), source->GetSeq() }, target->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
+					if(source != NULL)
+						aEventQueue->EventQueueAbility({ source->GetEntityInstanceId(), source->GetSeq() }, target->GetEntityInstanceId(), Vec2(), ability, ItemInstanceReference(), NULL);
 				}
 			}
 		}

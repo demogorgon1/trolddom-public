@@ -77,6 +77,7 @@ namespace tpublic
 				EXTENDED_FLAG_CAN_TARGET_DEAD			= 0x00000100,
 				EXTENDED_FLAG_CAN_TARGET_EVADING		= 0x00000200,
 				EXTENDED_FLAG_TEMPORARY_MINION_SUMMON	= 0x00000400,
+				EXTENDED_FLAG_CONSUME_ANY_AURA			= 0x00000800,
 			};
 
 			static inline Resource::Id
@@ -184,6 +185,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_TARGET_DEAD;
 					else if (strcmp(identifier, "can_target_evading") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_TARGET_EVADING;
+					else if (strcmp(identifier, "consume_any_aura") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_CONSUME_ANY_AURA;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -499,6 +502,7 @@ namespace tpublic
 			bool CanUseMounted() const { return m_extendedFlags & EXTENDED_FLAG_CAN_USE_MOUNTED; }
 			bool CanTargetDead() const { return m_extendedFlags & EXTENDED_FLAG_CAN_TARGET_DEAD; }
 			bool CanTargetEvading() const { return m_extendedFlags & EXTENDED_FLAG_CAN_TARGET_EVADING; }
+			bool CanConsumeAnyAura() const { return m_extendedFlags & EXTENDED_FLAG_CONSUME_ANY_AURA; }
 
 			bool 
 			IsUsableInState(
@@ -623,6 +627,8 @@ namespace tpublic
 							m_toggleAuraId = aMember->GetId(DataType::ID_AURA);
 						else if (aMember->m_name == "consume_source_aura")
 							m_consumeSourceAuraId = aMember->GetId(DataType::ID_AURA);
+						else if (aMember->m_name == "consume_target_aura")
+							m_consumeTargetAuraId = aMember->GetId(DataType::ID_AURA);
 						else if (aMember->m_name == "must_not_have_world_aura")
 							m_mustNotHaveWorldAuraId = aMember->GetId(DataType::ID_WORLD_AURA);
 						else if(aMember->m_name == "increment_character_stat")
@@ -690,6 +696,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_incrementCharacterStatId);
 				aWriter->WriteUInt(m_consumeSourceAuraId);
 				m_killTriggerAbility.ToStream(aWriter);
+				aWriter->WriteUInt(m_consumeTargetAuraId);
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
@@ -801,6 +808,8 @@ namespace tpublic
 					return false;
 				if(!m_killTriggerAbility.FromStream(aReader))
 					return false;
+				if (!aReader->ReadUInt(m_consumeTargetAuraId))
+					return false;
 
 				for (uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 				{
@@ -864,6 +873,7 @@ namespace tpublic
 			uint32_t											m_incrementCharacterStatId = 0;
 			uint32_t											m_consumeSourceAuraId = 0;
 			SecondaryAbility									m_killTriggerAbility;
+			uint32_t											m_consumeTargetAuraId = 0;
 		};
 
 	}

@@ -270,6 +270,7 @@ namespace tpublic
 									CombatEventType								/*aType*/,
 									CombatEvent::Id								/*aCombatEventId*/,
 									uint32_t									/*aAbilityId*/,
+									const EntityInstance*						/*aAuraSourceEntityInstance*/,
 									const EntityInstance*						/*aSourceEntityInstance*/,
 									const EntityInstance*						/*aTargetEntityInstance*/,
 									std::mt19937*								/*aRandom*/,

@@ -55,6 +55,7 @@ namespace tpublic
 									CombatEventType					aType,
 									CombatEvent::Id					aCombatEventId,
 									uint32_t						aAbilityId,
+									const EntityInstance*			aAuraSourceEntityInstance,
 									const EntityInstance*			aSourceEntityInstance,
 									const EntityInstance*			aTargetEntityInstance,
 									std::mt19937*					aRandom,
@@ -67,6 +68,7 @@ namespace tpublic
 			uint32_t						m_combatEventAbilityRejectMask = 0;
 			SecondaryAbility				m_ability;
 			bool							m_abilityRetainSource = false;
+			bool							m_abilityAuraSource = false;
 			std::vector<uint32_t>			m_triggerAbilityIds;
 			uint32_t						m_probability = 0;
 		};

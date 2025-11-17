@@ -5,6 +5,7 @@
 #include <tpublic/Data/Aura.h>
 
 #include <tpublic/Helpers.h>
+#include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/ToolTipMultiplier.h>
 
@@ -278,7 +279,8 @@ namespace tpublic::Components
 		CombatEvent::Id								aCombatEventId,
 		uint32_t									aAbilityId,
 		std::mt19937*								aRandom,
-		IEventQueue*								aEventQueue) const
+		IEventQueue*								aEventQueue,
+		const IWorldView*							aWorldView) const
 	{
 		// This is quite horrible. We pass on aEventQueue, which can potentially trigger changes in this component. Entries could be removed. 
 
@@ -327,7 +329,12 @@ namespace tpublic::Components
 			}
 
 			if(stillExists)
-				t.m_effect->OnCombatEvent(aManifest, t.m_entry->m_auraId, aType, aCombatEventId, aAbilityId, aSource, aTarget, aRandom, aEventQueue);
+			{
+				// FIXME: might need an option to also need seq to match
+				const EntityInstance* auraSourceEntityInstance = aWorldView->WorldViewSingleEntityInstance(t.m_entry->m_sourceEntityInstance.m_entityInstanceId);
+
+				t.m_effect->OnCombatEvent(aManifest, t.m_entry->m_auraId, aType, aCombatEventId, aAbilityId, auraSourceEntityInstance, aSource, aTarget, aRandom, aEventQueue);
+			}
 		}
 	}
 	 
@@ -445,7 +452,7 @@ namespace tpublic::Components
 		for(size_t i = 0; i < m_entries.size(); i++)
 		{
 			std::unique_ptr<Entry>& entry = m_entries[i];
-			if(entry->m_auraId == aAuraId && entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId)
+			if(entry->m_auraId == aAuraId && (entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId || aSourceEntityInstanceId == 0))
 			{
 				const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(aAuraId);
 				bool shouldRemove = false;
