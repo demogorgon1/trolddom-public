@@ -935,6 +935,11 @@ sprites:
 	cursor: { position: [ 0 816 ] }	
 	sprite icon_banner_2: { tags: [ icon ] }
 	sprite icon_sanctified_might: { tags: [ icon ] }
+	sprite icon_rock_salt: { tags: [ icon ] }
+	sprite icon_blasting_salt: { tags: [ icon ] }
+	sprite icon_grenade_1: { tags: [ icon ] }
+	sprite icon_grenade_2: { tags: [ icon ] }
+	sprite icon_grenade_3: { tags: [ icon ] }
 }
 
 

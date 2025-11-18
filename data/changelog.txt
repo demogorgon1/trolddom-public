@@ -12,6 +12,7 @@ changelog:
 		{ text: "Players will be automatically disconnected after being AFK for more than 10 minutes." }		
 		{ text: "Promoting a new guild leader now needs confirmation." }		
 		{ text: "Guild frame indicates dominant worship pantheon for each member." }		
+		{ text: "More level 28 to 30 rare and epic items." }		
 	]
 
 	text: "Issues Fixed:"

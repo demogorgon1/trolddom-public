@@ -132,6 +132,7 @@
 	train_ability: craft_strong_elixir_of_the_owl
 	train_ability: craft_strong_elixir_of_the_giant
 	train_ability: craft_mana_salve
+	train_ability: craft_blasting_salt	
 	
 	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }

@@ -730,3 +730,15 @@ item recipe_poison_protection_potion:
 		}
 	}	
 }
+
+#####################################################
+# Blasting Salt
+
+ability craft_blasting_salt: !ALCHEMY_CRAFT
+{
+	_string: "Blasting Salt"
+	_item: item_blasting_salt
+	_produce: { item_blasting_salt: 1 } 
+	_materials: { item_rock_salt: 1 }
+	_skill: 80
+}

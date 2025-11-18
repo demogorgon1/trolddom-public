@@ -1,4 +1,9 @@
 # Base 
+cooldown grenade:
+{
+	duration: 300
+}
+
 ability potion:
 {
 	flags: [ target_self item ]
@@ -884,4 +889,36 @@ item consumable_poison_protection_potion (potion):
 	icon: icon_potion_11
 	string: "Poison Protection Potion"
 	use_ability: consumable_poison_protection_potion
+}
+
+#####################################################
+# Fragmentation Grenade
+
+item consumable_fragmentation_grenade:
+{
+	icon: icon_grenade_1
+	string: "Fragmentation Grenade"
+	stack: 10	
+	item_level: 10
+
+	use_ability: $ability [ icon string ]
+	{
+		description: "Throw to destroy your enemies."
+		consume_items: { consumable_fragmentation_grenade: 1 }
+		required_level: 10
+		flags: [ item target_aoe target_aoe_hostile offensive ]
+		range: 7
+		aoe_cap: 4
+		aoe_radius: 2		
+		cooldowns: [ global grenade ]	
+		states: [ default in_combat ]
+
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			spread: !DEFAULT_SPREAD{}
+			function: 200			
+		}
+	}
 }

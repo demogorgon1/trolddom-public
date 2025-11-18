@@ -32,6 +32,7 @@
 		]
 	
 		# Common (junk) items
+		<exists _weapon_and_shields_junk_count>
 		{
 			designations:
 			[	
@@ -52,6 +53,7 @@
 		}
 		
 		# Uncommon, rare, and epic items
+		<exists _weapon_and_shields_uncommon_count>
 		{
 			designations:
 			[				
@@ -171,6 +173,7 @@
 		]
 		
 		# Common (junk) items
+		<exists _armor_and_jewelry_junk_count>
 		{
 			designations:
 			[				
@@ -198,6 +201,7 @@
 				{ weight: 10 suffix: [ " of the " noun ] }
 			]
 
+			<exists _armor_and_jewelry_uncommon_count>
 			{
 				level_range: @_level_range
 				

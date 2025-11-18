@@ -76,6 +76,18 @@ item item_potatoes:
 }
 
 #####################################################
+# Blasting Salt
+
+item item_blasting_salt:
+{
+	type: miscellaneous
+	item_level: 10
+	icon: icon_blasting_salt
+	string: "Blasting Salt"
+	stack: 20
+}
+
+#####################################################
 # Misc world drops
 
 item item_bone_fragments:
