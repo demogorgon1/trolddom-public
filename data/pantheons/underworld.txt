@@ -8,6 +8,7 @@ pantheon underworld:
 {
 	string: "The Underworld"
 	icon: icon_unholy
+	small_icon: underworld_11x9
 	faction: underworld
 	opposition: light
 	pray_ability: underworld_pray

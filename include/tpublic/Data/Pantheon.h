@@ -171,6 +171,8 @@ namespace tpublic
 							m_factionId = aChild->GetId(DataType::ID_FACTION);
 						else if (aChild->m_name == "icon")
 							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "small_icon")
+							m_smallIconSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "pray_ability")
 							m_prayAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "opposition")
@@ -197,6 +199,7 @@ namespace tpublic
 			{
 				aWriter->WriteString(m_string);
 				aWriter->WriteUInt(m_iconSpriteId);
+				aWriter->WriteUInt(m_smallIconSpriteId);
 				aWriter->WriteString(m_deitySpecifier);
 				aWriter->WriteString(m_deityDescription);
 				aWriter->WriteUInt(m_factionId);
@@ -219,6 +222,8 @@ namespace tpublic
 				if(!aReader->ReadString(m_string))
 					return false;
 				if (!aReader->ReadUInt(m_iconSpriteId))
+					return false;
+				if (!aReader->ReadUInt(m_smallIconSpriteId))
 					return false;
 				if (!aReader->ReadString(m_deitySpecifier))
 					return false;
@@ -263,6 +268,7 @@ namespace tpublic
 			std::vector<std::string>			m_deityLevels;
 			std::vector<ClassModifier>			m_classModifiers;
 			std::vector<uint32_t>				m_hostileClassIds;
+			uint32_t							m_smallIconSpriteId = 0;
 		};
 
 	}

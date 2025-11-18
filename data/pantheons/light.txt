@@ -8,6 +8,7 @@ pantheon light:
 {
 	string: "The Light"
 	icon: icon_holy
+	small_icon: light_11x9
 	faction: light
 	opposition: underworld
 	pray_ability: light_pray

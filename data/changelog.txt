@@ -11,6 +11,7 @@ changelog:
 		{ text: "Only nearby party members share looted items and cash." }
 		{ text: "Players will be automatically disconnected after being AFK for more than 10 minutes." }		
 		{ text: "Promoting a new guild leader now needs confirmation." }		
+		{ text: "Guild frame indicates dominant worship pantheon for each member." }		
 	]
 
 	text: "Issues Fixed:"
