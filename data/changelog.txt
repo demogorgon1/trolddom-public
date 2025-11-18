@@ -9,6 +9,8 @@ changelog:
 	list:
 	[
 		{ text: "Only nearby party members share looted items and cash." }
+		{ text: "Players will be automatically disconnected after being AFK for more than 10 minutes." }		
+		{ text: "Promoting a new guild leader now needs confirmation." }		
 	]
 
 	text: "Issues Fixed:"
@@ -16,6 +18,8 @@ changelog:
 	list:
 	[
 		{ text: "Healing Shield now works when cast on other players like intended." }
+		{ text: "Fixed bug that caused the threat meter to stop working after changing instance." }	
+		{ text: "Hostile AOE now works in player-versus-player combat like intended." }
 		{ text: "Fixed bug where enemies would drop threat when moving." }	
 		{ text: "Fixed a couple more issues with aggro." }	
 		{ text: "Fixed some minor bugs and UI issues." }	
