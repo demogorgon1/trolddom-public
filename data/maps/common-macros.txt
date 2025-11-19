@@ -3,7 +3,7 @@
 !define RANDOM_ITEM_VENDOR_TOKEN_OF_VICTORY_COST { token_item: item_token_of_victory token_sprite: token_of_victory_currency }
 
 !define EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS fixed_daily_timer
-!define EMBLEM_OF_TRIUMPH_PRICE { quantity: 1 item_cost<[ item_emblem_of_triumph token_of_victory_currency ]>: @_count }	
+!define EMBLEM_OF_TRIUMPH_PRICE { quantity: 1 item_cost<[ item_emblem_of_triumph emblem_of_triumph_currency ]>: @_count }	
 !define RANDOM_ITEM_VENDOR_EMBLEM_OF_TRIUMPH_COST { token_item: item_emblem_of_triumph token_sprite: emblem_of_triumph_currency }
 
 !define TRASH_RESPAWN_TIMER { normal: 36000 fast_trigger: 0 } 

@@ -6,6 +6,7 @@ dialogue_screen .elf_quartermaster_vendor:
 	sell children_of_the_moon_hands_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} }	
 	sell children_of_the_moon_neck_1: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} }	
 	sell recipe_piranha_soup: { quantity: 1 reputation_level_requirement children_of_the_moon: !REVERED_REPUTATION_LEVEL{} cost: 10000 }
+	sell formula_enchant_weapon_frostfire: { quantity: 1 reputation_level_requirement children_of_the_moon: !EXALTED_REPUTATION_LEVEL{} cost: 50000 }
 }
 
 dialogue_screen .elf_quartermaster_dialogue:

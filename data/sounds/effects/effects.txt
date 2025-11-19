@@ -45,5 +45,7 @@ sound eat_1: { source: "eat-1.wav" }
 sound arrow_1: { source: "arrow-1.wav" volume: 0.55 }
 sound parry_1: { source: "parry-1.wav" volume: 0.55 }
 sound block_1: { source: "block-1.wav" volume: 0.55 }
+sound explosion_1: { source: "expl-1.wav" volume: 0.55 }
+sound explosion_2: { source: "expl-2.wav" volume: 0.55 }
 
 

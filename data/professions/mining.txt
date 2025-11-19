@@ -25,7 +25,7 @@ profession mining<primary>:
 		}
 
 		loot_group .mining_rock_salt: { }
-		item item_rock_salt: !GATHER_ITEM { _tags: [ ] }
+		item item_rock_salt: !GATHER_ITEM { }
 	}
 
 	#############################################################################
@@ -113,7 +113,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_copper } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_verdigrisite } possibility: { weight: 1 loot_group: .mining_roseate } } 
-				{ possibility: { weight: 12 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 
+				{ possibility: { weight: 8 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 
 			] 
 		}
 		item item_copper_ore: !GATHER_ITEM { }
@@ -141,7 +141,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_iron } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
-				{ possibility: { weight: 11 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 				
+				{ possibility: { weight: 8 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 				
 			] 
 		}
 		item item_iron_ore: !GATHER_ITEM { }
@@ -169,7 +169,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_azuryte } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
-				{ possibility: { weight: 10 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
+				{ possibility: { weight: 7 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
 			] 
 		}
 		item item_azuryte_ore: !GATHER_ITEM { }
@@ -198,7 +198,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_gold } } 				
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
-				{ possibility: { weight: 10 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
+				{ possibility: { weight: 6 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
 			] 
 		}
 		item item_gold_ore: !GATHER_ITEM { }
@@ -226,7 +226,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_mithril } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
-				{ possibility: { weight: 8 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
+				{ possibility: { weight: 5 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
 			] 
 		}
 		item item_mithril_ore: !GATHER_ITEM { }
@@ -254,7 +254,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_brontium } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
-				{ possibility: { weight: 7 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 												
+				{ possibility: { weight: 5 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 												
 			] 
 		}
 		item item_brontium_ore: !GATHER_ITEM { }
@@ -282,7 +282,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_cindralite } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: fire_elementals } possibility: { weight: 1 loot_group: fire_elementals_uncommon } }
-				{ possibility: { weight: 8 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 												
+				{ possibility: { weight: 5 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 												
 			] 
 		}
 		item item_cindralite_ore: !GATHER_ITEM { }

@@ -67,6 +67,7 @@ namespace tpublic
 			TYPE_MUST_NOT_BE_ON_MAP,
 			TYPE_MUST_BE_ON_MAP,
 			TYPE_MUST_HAVE_FISHING_ROD_EQUIPPED,
+			TYPE_MUST_NOT_HAVE_SOURCE_AURA
 		};
 
 		static DataType::Id
@@ -77,6 +78,7 @@ namespace tpublic
 			{
 			case TYPE_MUST_HAVE_AURA:
 			case TYPE_MUST_NOT_HAVE_AURA:
+			case TYPE_MUST_NOT_HAVE_SOURCE_AURA:
 				return DataType::ID_AURA;
 
 			case TYPE_MUST_HAVE_COMPLETED_QUEST:
@@ -278,6 +280,8 @@ namespace tpublic
 				m_type = TYPE_MUST_BE_ON_MAP;
 			else if(typeString == "must_have_fishing_rod_equipped")
 				m_type = TYPE_MUST_HAVE_FISHING_ROD_EQUIPPED;
+			else if (typeString == "must_not_have_source_aura")
+				m_type = TYPE_MUST_NOT_HAVE_SOURCE_AURA;
 			else
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

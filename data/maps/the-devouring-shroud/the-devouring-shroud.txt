@@ -23,6 +23,7 @@ item the_devouring_shroud_key:
 	item_level: 30
 	rarity: uncommon
 	flags: [ not_sellable unique ]
+	loot_groups: [ .key ]
 }
 
 loot_group .key: {}

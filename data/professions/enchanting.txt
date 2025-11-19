@@ -59,6 +59,7 @@ profession enchanting<primary>:
 	item_level: @_formula_item_level
 	rarity: uncommon	
 	<exists _loot_groups> loot_groups: @_loot_groups
+	<exists _binds> binds: @_binds
 	icon: icon_scroll_1
 	string: @_formula_string
 	use_ability: @_learn_ability
@@ -1026,6 +1027,7 @@ ability disenchant:
 		_formula_required_skill: 95
 		_level_range: [ 22 28 ]
 		_ability: craft_enchant_weapon_frostfire
+		_binds: when_picked_up
 	}
 
 	item formula_enchant_weapon_frostfire: !ENCHANTING_FORMULA_ITEM{}
@@ -1072,6 +1074,7 @@ ability disenchant:
 		_formula_required_skill: 95
 		_level_range: [ 22 28 ]
 		_ability: craft_enchant_cloak_razormind
+		_binds: when_picked_up
 	}
 
 	item formula_enchant_cloak_razormind: !ENCHANTING_FORMULA_ITEM{}
@@ -1118,6 +1121,7 @@ ability disenchant:
 		_formula_required_skill: 95
 		_level_range: [ 22 28 ]
 		_ability: craft_enchant_cloak_dexterity
+		_binds: when_picked_up
 	}
 
 	item formula_enchant_cloak_dexterity: !ENCHANTING_FORMULA_ITEM{}
@@ -1190,6 +1194,7 @@ ability disenchant:
 		_formula_required_skill: 95
 		_level_range: [ 22 30 ]
 		_ability: craft_enchant_weapon_dancing_weapon
+		_binds: when_picked_up
 	}
 
 	item formula_enchant_weapon_dancing_weapon: !ENCHANTING_FORMULA_ITEM{}
@@ -1403,8 +1408,9 @@ ability disenchant:
 		_formula_consume_items: { formula_enchant_weapon_vampiric_edge: 1 }
 		_learn_ability: learn_enchant_weapon_vampiric_edge
 		_formula_required_skill: 110
-		_level_range: [ 22 30 ]
+		_level_range: [ 22 32 ]
 		_ability: craft_enchant_weapon_vampiric_edge
+		_loot_groups: [ karethi_temple_boss_5_recipes ]
 	}
 
 	item formula_enchant_weapon_vampiric_edge: !ENCHANTING_FORMULA_ITEM{}

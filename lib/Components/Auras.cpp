@@ -54,6 +54,20 @@ namespace tpublic::Components
 		return false;
 	}
 
+	bool			
+	Auras::HasAuraWithSource(
+		uint32_t									aAuraId,
+		uint32_t									aEntityInstanceId) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			if (entry->m_auraId == aAuraId && entry->m_sourceEntityInstance.m_entityInstanceId == aEntityInstanceId)
+				return true;
+		}
+
+		return false;
+	}
+
 	Auras::Entry* 
 	Auras::GetAura(
 		uint32_t									aAuraId)

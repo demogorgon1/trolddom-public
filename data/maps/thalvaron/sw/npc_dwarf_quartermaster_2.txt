@@ -1,6 +1,9 @@
 dialogue_screen .dwarf_quartermaster_2_vendor:
 {
 	sell formula_enchant_weapon_fire: !TOKEN_OF_VICTORY_PRICE{ _count: 12 }	
+	sell recipe_fragmentation_grenade: !EMBLEM_OF_TRIUMPH_PRICE{ _count: 12 }
+	sell recipe_incendiary_grenade: !EMBLEM_OF_TRIUMPH_PRICE{ _count: 12 }
+	sell recipe_frost_grenade: !EMBLEM_OF_TRIUMPH_PRICE{ _count: 12 }
 }
 
 dialogue_screen .dwarf_quartermaster_2_dialogue:

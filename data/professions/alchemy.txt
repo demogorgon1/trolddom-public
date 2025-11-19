@@ -738,7 +738,115 @@ ability craft_blasting_salt: !ALCHEMY_CRAFT
 {
 	_string: "Blasting Salt"
 	_item: item_blasting_salt
-	_produce: { item_blasting_salt: 1 } 
+	_produce: { item_blasting_salt: 2 } 
 	_materials: { item_rock_salt: 1 }
 	_skill: 80
+}
+
+#####################################################
+# Fragmentation Grenade
+
+ability craft_fragmentation_grenade: !ALCHEMY_CRAFT
+{
+	_string: "Fragmentation Grenade"
+	_item: consumable_fragmentation_grenade
+	_produce: { consumable_fragmentation_grenade: 5 } 
+	_materials: { item_iron_ingot: 1 item_blasting_salt: 3 }
+	_skill: 85
+}
+
+item recipe_fragmentation_grenade:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	icon: icon_scroll_1
+	string: "Recipe: Fragmentation Grenade"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make Fragmentation Grenades."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_fragmentation_grenade: 1 }
+		required_profession<85>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_fragmentation_grenade }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_fragmentation_grenade
+		}
+	}	
+}
+
+#####################################################
+# Incendiary Grenade
+
+ability craft_incendiary_grenade: !ALCHEMY_CRAFT
+{
+	_string: "Incendiary Grenade"
+	_item: consumable_incendiary_grenade
+	_produce: { consumable_incendiary_grenade: 5 } 
+	_materials: { item_iron_ingot: 1 item_blasting_salt: 2 item_elemental_fire: 1 }
+	_skill: 85
+}
+
+item recipe_incendiary_grenade:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	icon: icon_scroll_1
+	string: "Recipe: Incendiary Grenade"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make Incendiary Grenades."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_incendiary_grenade: 1 }
+		required_profession<85>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_incendiary_grenade }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_incendiary_grenade
+		}
+	}	
+}
+
+#####################################################
+# Frost Grenade
+
+ability craft_frost_grenade: !ALCHEMY_CRAFT
+{
+	_string: "Frost Grenade"
+	_item: consumable_frost_grenade
+	_produce: { consumable_frost_grenade: 5 } 
+	_materials: { item_iron_ingot: 1 item_blasting_salt: 2 item_ectoplasm: 2 }
+	_skill: 85
+}
+
+item recipe_frost_grenade:
+{
+	type: miscellaneous
+	item_level: 20
+	rarity: uncommon
+	icon: icon_scroll_1
+	string: "Recipe: Frost Grenade"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make Frost Grenades."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_frost_grenade: 1 }
+		required_profession<85>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_frost_grenade }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_frost_grenade
+		}
+	}	
 }

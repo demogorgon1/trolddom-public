@@ -97,6 +97,19 @@ namespace tpublic
 				return false;
 			}
 
+			bool 
+			HasAuraWithSource(
+				uint32_t			aAuraId,
+				uint32_t			aEntityInstanceId) const
+			{
+				for(const Entry& t : m_entries)
+				{
+					if(t.m_auraId == aAuraId && t.m_entityInstanceId == aEntityInstanceId)
+						return true;
+				}
+				return false;
+			}
+
 			void
 			Reset()
 			{

@@ -138,6 +138,9 @@ namespace tpublic
 								SourceEntityInstance*						aOutSourceEntityInstance) const;
 			bool			HasAura(
 								uint32_t									aAuraId) const;
+			bool			HasAuraWithSource(
+								uint32_t									aAuraId,
+								uint32_t									aEntityInstanceId) const;
 			Entry*			GetAura(
 								uint32_t									aAuraId);
 			MoveSpeed::Id	GetMoveSpeed() const;

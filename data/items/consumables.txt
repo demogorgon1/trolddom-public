@@ -1,7 +1,7 @@
 # Base 
 cooldown grenade:
 {
-	duration: 300
+	duration: 200
 }
 
 ability potion:
@@ -898,7 +898,7 @@ item consumable_fragmentation_grenade:
 {
 	icon: icon_grenade_1
 	string: "Fragmentation Grenade"
-	stack: 10	
+	stack: 20	
 	item_level: 10
 
 	use_ability: $ability [ icon string ]
@@ -907,18 +907,238 @@ item consumable_fragmentation_grenade:
 		consume_items: { consumable_fragmentation_grenade: 1 }
 		required_level: 10
 		flags: [ item target_aoe target_aoe_hostile offensive ]
-		range: 7
-		aoe_cap: 4
+		range: 8
+		aoe_cap: 6
 		aoe_radius: 2		
+		cast_time: 10
 		cooldowns: [ global grenade ]	
 		states: [ default in_combat ]
+		speed: 6
+		sound_effects: { resolve: [ explosion_1 explosion_2 ] }		
 
+		projectile: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_rock ]
+				flags: [ attached no_rotation no_scaling ]
+				count: 1		
+			}
+		}
+		
+		target_particle_system: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_expl_2_0 effect_expl_2_1 effect_expl_2_2 effect_expl_2_3 effect_expl_2_4 effect_expl_2_5 ]
+				sprite_interval: 110
+				flags: [ attached no_loop ]
+				duration: 660
+				count: 1		
+				scale: 2
+				alpha: 1
+				fade_out: 80
+			}
+			
+			particle:
+			{
+				sprites: [ effect_frag_0 effect_frag_1 effect_frag_2 ]
+				sprite_interval: 50
+				flags: [ attached no_loop ]
+				duration: 180
+				count: 1		
+				scale: 2.2
+				alpha: 1
+			}			
+		}		
+		
 		direct_effect damage:
 		{
 			flags: [ can_be_critical ]
 			damage_type: physical
-			spread: !DEFAULT_SPREAD{}
-			function: 200			
+			spread: 0.4
+			function: 400			
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Concussion"
+				description: "Stunned."
+				icon: icon_stun		
+				type: debuff
+				duration: 15	
+				flags: [ unique ]
+				aura_effect stun: { }
+				particle_system: knock
+			}			
+		}
+	}
+}
+
+#####################################################
+# Incendiary Grenade
+
+item consumable_incendiary_grenade:
+{
+	icon: icon_grenade_3
+	string: "Incendiary Grenade"
+	stack: 20	
+	item_level: 10
+
+	use_ability: $ability [ icon string ]
+	{
+		description: "Throw to burn your enemies."
+		consume_items: { consumable_incendiary_grenade: 1 }
+		required_level: 10
+		flags: [ item target_aoe target_aoe_hostile offensive ]
+		range: 8
+		aoe_cap: 6
+		aoe_radius: 2		
+		cast_time: 10
+		cooldowns: [ global grenade ]	
+		states: [ default in_combat ]
+		speed: 6
+		sound_effects: { resolve: [ explosion_1 explosion_2 ] }		
+
+		projectile: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_rock ]
+				flags: [ attached no_rotation no_scaling ]
+				count: 1		
+			}
+		}
+		
+		target_particle_system: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_expl_3_0 effect_expl_3_1 effect_expl_3_2 effect_expl_3_3 effect_expl_3_4 effect_expl_3_5
+                           effect_expl_3_6 effect_expl_3_7 effect_expl_3_8 effect_expl_3_9 effect_expl_3_10 effect_expl_3_11 ]
+				sprite_interval: 90
+				flags: [ attached no_loop ]
+				duration: 1080
+				count: 1		
+				scale: 2
+				alpha: 1
+				fade_out: 60
+			}		
+		}		
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: fire
+			spread: 0.4
+			function: 280			
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Incendiary Grenade"
+				description: "Burning."
+				icon: icon_fire		
+				type: debuff
+				duration: based_on_effects
+				flags: [ unique_per_source ]
+				particle_system: burning
+				aura_effect repeat: 
+				{ 
+					update_interval: 10
+					update_count: 6
+					ability: $ability [ icon string ]
+					{
+						string: "Envenom"
+						icon: icon_envenom	
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]						
+						direct_effect damage:
+						{
+							damage_type: fire
+							function: 60
+							spread: !DEFAULT_SPREAD{}
+						}
+					}
+				}								
+			}			
+		}
+	}
+}
+
+#####################################################
+# Frost Grenade
+
+item consumable_frost_grenade:
+{
+	icon: icon_grenade_2
+	string: "Frost Grenade"
+	stack: 20	
+	item_level: 10
+
+	use_ability: $ability [ icon string ]
+	{
+		description: "Throw to freeze your enemies."
+		consume_items: { consumable_frost_grenade: 1 }
+		required_level: 10
+		flags: [ item target_aoe target_aoe_hostile offensive ]
+		range: 8
+		aoe_cap: 6
+		aoe_radius: 2		
+		cast_time: 10
+		cooldowns: [ global grenade ]	
+		states: [ default in_combat ]
+		speed: 6
+		sound_effects: { resolve: [ explosion_1 explosion_2 ] }		
+
+		projectile: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_rock ]
+				flags: [ attached no_rotation no_scaling ]
+				count: 1		
+			}
+		}
+		
+		target_particle_system: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+				sprite_interval: 125
+				flags: [ attached blend_add no_loop ]
+				duration: 400
+				count: 1		
+				scale: 2.5
+				alpha: 0.6
+				fade_out: 200
+			}
+		}		
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: frost
+			spread: 0.4
+			function: 320			
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: $aura [ string icon ]
+			{
+				description: "Immobilized."
+				type: debuff
+				duration: 60	
+				flags: [ unique magic ]
+				aura_effect immobilize: { }
+				particle_system: improved_frost_explosion			
+			}
 		}
 	}
 }

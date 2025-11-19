@@ -26,6 +26,7 @@ namespace tpublic
 			ID_INVENTORY,
 			ID_VENDOR,
 			ID_TRASH,
+			ID_RESOLVE,
 
 			NUM_IDS
 		};
@@ -53,6 +54,7 @@ namespace tpublic
 			{ "inventory",	true },
 			{ "vendor",		true },
 			{ "trash",		true },
+			{ "resolve",	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

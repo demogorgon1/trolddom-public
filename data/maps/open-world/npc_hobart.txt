@@ -52,7 +52,7 @@ aura .hobart_1:
 	type: buff
 	icon: icon_tag
 	duration: 6000
-	flags: [ unique ]
+	flags: [ unique_per_source ]
 }
 
 cooldown .hobart_1:
@@ -71,7 +71,7 @@ ability .hobart_1:
 	cooldowns: [ global .hobart_1 ]	
 	states: [ default ]
 	requirement target<must_be_faction>: { id: wildlife }
-	requirement target<must_not_have_aura>: { id: .hobart_1 }
+	requirement target<must_not_have_source_aura>: { id: .hobart_1 }
 	direct_effect apply_aura: { aura: .hobart_1 }
 	sound_effects: !SOUND_INVENTORY{}
 }
@@ -80,7 +80,7 @@ item .hobart_1:
 {
 	binds: when_picked_up
 	type: miscellaneous
-	flags: [ unique not_sellable ]
+	flags: [ not_sellable ]
 	item_level: 1
 	icon: icon_tag		
 	string: "Bundle of Tracking Tags"

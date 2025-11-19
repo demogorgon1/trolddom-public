@@ -210,6 +210,29 @@ namespace tpublic
 				}
 				break;					
 
+			case Requirement::TYPE_MUST_NOT_HAVE_SOURCE_AURA:
+				if(aSelf != NULL)
+				{
+					bool shouldHaveAura = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA;
+					bool hasAura = false;
+
+					if (aManifest->GetById<Data::Aura>(aRequirement->m_id)->m_type == Data::Aura::TYPE_HIDDEN)
+					{
+						// Hidden auras must be checked in the server-side only component
+						const Components::Auras* auras = entity->GetComponent<Components::Auras>();
+						hasAura = auras != NULL && auras->HasAuraWithSource(aRequirement->m_id, aSelf->GetEntityInstanceId());
+					}
+					else
+					{
+						const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+						hasAura = visibleAuras->HasAuraWithSource(aRequirement->m_id, aSelf->GetEntityInstanceId());
+					}
+
+					if(shouldHaveAura != hasAura)
+						return false;						
+				}
+				break;					
+
 			case Requirement::TYPE_MUST_HAVE_AURA_GROUP:
 				{
 					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();

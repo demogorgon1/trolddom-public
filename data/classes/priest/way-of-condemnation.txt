@@ -75,7 +75,7 @@ aura mass_hysteria:
 ability mass_hysteria:
 {
 	string: "Mass Hysteria"
-	description: "Forces all nearby enemies to away in fear for 6 seconds."
+	description: "Forces all nearby enemies to run away in fear for 6 seconds."
 	range: 1	
 	cooldowns: [ global ]
 	cooldown: $cooldown { duration: 600 }
