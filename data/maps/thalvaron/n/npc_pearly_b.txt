@@ -119,7 +119,7 @@ quest .pearly_b_1:
 
 	text:
 	[
-		"Venture through the dark woods in the east to Ravenreach Abbery, pick flowers, and return them to Laura Tokins in Ravenreach."
+		"Collect Lunebloom flowers and deliver them to Brimiar in Faerandor Gorge."
 	]
 	
 	description: 

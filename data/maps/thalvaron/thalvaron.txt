@@ -145,6 +145,11 @@ zone .shrine_of_zilu: { string: "Shrine of Zilu" preposition: "at the" }
 zone .ancient_burial_site: { string: "Ancient Burial Site" preposition: "at the" }
 zone .kobold_shrine: { string: "Kobold Shrine" preposition: "at the" }
 zone .the_lizard_coast: { string: "The Lizard Coast" preposition: "on" }
+zone .stillwater: { string: "Stillwater" preposition: "in" }
+zone .kaldor_island: { string: "Kaldor Island" preposition: "on" }
+zone .the_jungle_passage: { string: "The Jungle Passage" preposition: "in" }
+zone .ancient_battleground: { string: "Ancient Battleground" preposition: "on the" }
+zone .welks_cave: { string: "Welk's Cave" preposition: "in" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -1265,7 +1270,13 @@ map_palette .zones:
 	zone .ashira: [ 233 131 36 ]
 	zone .karethi_temple: [ 152 21 127 ]
 	zone .lonely_cove: [ 10 60 121 ]
-	zone .the_lizard_coast: [ 185 79 137 ]
+	zone .the_lizard_coast: [ 185 79 137 ]	
+	zone .stillwater: [ 127 127 68 ]
+	zone .kaldor_island: [ 177 29 206 ]
+	zone .the_jungle_passage: [ 127 68 106 ]
+	zone .ancient_battleground: [ 186 24 102 ]
+	zone .welks_cave: [ 113 231 234 ]
+
 }
 
 map_palette .sub_zones:

@@ -170,7 +170,7 @@ quest .damon_arkwright_3:
 
 	text:
 	[
-		"Acquire a potion from Gash Hewitt in Ravenreach, summon Kaelithor at Shadowthorn Abbery, and defeat him."
+		"Acquire a potion from Gash Hewitt in Ravenreach, summon Kaelithor at Shadowthorn Abbey, and defeat him."
 	]
 	
 	description: 
