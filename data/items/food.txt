@@ -17,7 +17,7 @@
 	string: "Eating"
 	icon: @_icon
 	type: buff
-	flags: [ channeled cancel_in_combat ]
+	flags: [ channeled ]
 	duration: based_on_effects
 	aura_effect repeat:
 	{
@@ -31,7 +31,7 @@
 {
 	string: @_string
 	description: @_description
-	flags: [ target_self item ]
+	flags: [ target_self item interrupt_on_damage ]
 	icon: @_icon
 	consume_items: @_item
 	states: [ default ]

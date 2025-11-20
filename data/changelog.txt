@@ -4,12 +4,21 @@ changelog:
 	#######################################################################################
 	heading: "v1.0.6"
 
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Power Shield now scales with Spell Damage." }
+	]
+
 	text: "Issues Fixed:"
 	
 	list:
 	[
-		{ text: "Fixed major Linux compatibility issue." }
+		{ text: "Eating is now interrupted by damage like intended." }
+		{ text: "Fixed Linux compatibility issue." }
 		{ text: "Fixed some minor bugs and UI issues." }
+		{ text: "Key binds for hidden action bars now work like intended." }
 	]
 	
 	#######################################################################################

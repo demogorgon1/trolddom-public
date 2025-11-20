@@ -223,6 +223,8 @@ namespace tpublic::Systems
 					for(std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 						effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());
 
+					// FIXME: might want to cancel channeling here
+
 					entry.reset();
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
 					i--;
