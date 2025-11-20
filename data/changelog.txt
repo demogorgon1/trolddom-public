@@ -9,6 +9,8 @@ changelog:
 	list:
 	[
 		{ text: "Power Shield now scales with Spell Damage." }
+		{ text: "Spirit travel is now slightly faster." }
+		{ text: "Names of deleted characters can now be reused." }
 	]
 
 	text: "Issues Fixed:"
@@ -19,6 +21,7 @@ changelog:
 		{ text: "Fixed Linux compatibility issue." }
 		{ text: "Fixed some minor bugs and UI issues." }
 		{ text: "Key binds for hidden action bars now work like intended." }
+		{ text: "Fixed bug that prevented bosses from dropping tokens in The Shrouded Lands." }
 	]
 	
 	#######################################################################################
