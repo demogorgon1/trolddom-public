@@ -57,6 +57,8 @@ namespace tpublic
 							m_playerTriggerAbilityChance = aChild->GetUInt32();
 						else if (aChild->m_tag == "player_trigger_ability_requirement")
 							m_playerTriggerAbilityRequirements.push_back(Requirement(aChild));
+						else if (aChild->m_name == "player_kill_trigger_ability")
+							m_playerKillTriggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "top_zone")
 							m_topZoneId = aChild->GetId(DataType::ID_ZONE);
 						else
@@ -84,6 +86,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_playerTriggerAbilityId);
 				aWriter->WriteObjects(m_playerTriggerAbilityRequirements);
 				aWriter->WriteUInt(m_playerTriggerAbilityChance);
+				aWriter->WriteUInt(m_playerKillTriggerAbilityId);
 				aWriter->WriteUInt(m_lootTableId);
 				aWriter->WriteUInt(m_topZoneId);
 			}
@@ -116,6 +119,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_playerTriggerAbilityChance))
 					return false;
+				if (!aReader->ReadUInt(m_playerKillTriggerAbilityId))
+					return false;
 				if (!aReader->ReadUInt(m_lootTableId))
 					return false;
 				if (!aReader->ReadUInt(m_topZoneId))
@@ -146,6 +151,7 @@ namespace tpublic
 			uint32_t					m_playerTriggerAbilityId = 0;
 			std::vector<Requirement>	m_playerTriggerAbilityRequirements;
 			uint32_t					m_playerTriggerAbilityChance = 0;
+			uint32_t					m_playerKillTriggerAbilityId = 0;
 
 			uint32_t					m_lootTableId = 0;
 			uint32_t					m_topZoneId = 0;

@@ -42,6 +42,7 @@
 #include <tpublic/Components/PlayerStats.h>
 #include <tpublic/Components/PlayerWorldStash.h>
 #include <tpublic/Components/Position.h>
+#include <tpublic/Components/PVPRift.h>
 #include <tpublic/Components/RandomItemVendor.h>
 #include <tpublic/Components/RecentAchievements.h>
 #include <tpublic/Components/Reputation.h>
@@ -115,6 +116,7 @@ namespace tpublic
 		_Register<Components::PlayerStats>();
 		_Register<Components::PlayerWorldStash>();
 		_Register<Components::Position>();
+		_Register<Components::PVPRift>();
 		_Register<Components::RandomItemVendor>();
 		_Register<Components::RecentAchievements>();
 		_Register<Components::Reputation>();

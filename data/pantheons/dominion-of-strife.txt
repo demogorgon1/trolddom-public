@@ -52,6 +52,68 @@ ability dominion_of_strife_pray:
 }
 
 ################################################################################################
+# Player kill aura
+
+aura dominion_of_strife_buff:
+{
+	string: "Bloodsoaked"
+	description: "Honoring the Dominion of Strife."
+	duration: 36000 # 1 hour
+	type: buff
+	max_stack: 100
+	icon: icon_bloodsoaked
+	flags: [ unique always_show_timer ]
+	zones: [ thalvaron_ancient_battleground thalvaron_welks_cave ]
+}
+
+ability dominion_of_strife_kill_trigger:
+{
+	direct_effect apply_aura:
+	{
+		aura: dominion_of_strife_buff
+	}
+}
+
+################################################################################################
+# Rift
+
+entity dominion_of_strife_rift:
+{
+	string: "Rift"
+	
+	systems: [ pvp_rift ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ spawning ] 
+					frames: [ red_gateway_closed_1 red_gateway_closed_2 red_gateway_closed_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+				
+				{ 
+					states: [ default ] 
+					frames: [ red_gateway_1 red_gateway_2 red_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		pvp_rift:
+		{
+		}
+	}
+}
+
+################################################################################################
 # Aura effects
 
 !define local PVP_DAMAGE_REDUCTION

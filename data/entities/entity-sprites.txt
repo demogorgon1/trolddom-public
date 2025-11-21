@@ -1294,6 +1294,12 @@ sprites:
 	sprite dominion_of_strife_shrine_3: { }
 	sprite dominion_of_strife_shrine_4: { }
 	sprite dominion_of_strife_shrine_used: { }
+	sprite red_gateway_1: { }
+	sprite red_gateway_2: { }
+	sprite red_gateway_3: { }
+	sprite red_gateway_closed_1: { }
+	sprite red_gateway_closed_2: { }
+	sprite red_gateway_closed_3: { }
 		
 }
 

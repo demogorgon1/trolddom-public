@@ -201,3 +201,9 @@ map_entity_spawn standing_stone:
 {
 	entity standing_stone: { init_state: default }
 }
+
+map_entity_spawn dominion_of_strife_rift:
+{
+	entity dominion_of_strife_rift: { weight: 1 init_state: spawning }	
+}
+

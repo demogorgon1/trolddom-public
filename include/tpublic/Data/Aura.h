@@ -287,6 +287,8 @@ namespace tpublic
 							m_colorWeaponGlow = Image::RGBA(aChild);
 						else if(aChild->m_name == "stat_conversion")
 							m_statConversions.push_back(Stat::Conversion(aChild));
+						else if(aChild->m_name == "zones")
+							aChild->GetIdArray(DataType::ID_ZONE, m_zoneIds);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -319,6 +321,7 @@ namespace tpublic
 				aStream->WriteUInt(m_overrideSpriteId);
 				aStream->WriteObjects(m_statConversions);
 				aStream->WriteString(m_extraDescription);
+				aStream->WriteUInts(m_zoneIds);
 			}
 			 
 			bool
@@ -422,6 +425,12 @@ namespace tpublic
 						return false;
 				}
 
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadUInts(m_zoneIds))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -454,6 +463,7 @@ namespace tpublic
 			uint32_t										m_maxStack = 1;
 			uint32_t										m_overrideSpriteId = 0;
 			std::string										m_extraDescription;
+			std::vector<uint32_t>							m_zoneIds;
 		};
 
 	}

@@ -19,6 +19,7 @@
 #include <tpublic/MapData.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/Resource.h>
+#include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::Systems
 {
@@ -158,6 +159,17 @@ namespace tpublic::Systems
 					const Components::CombatPublic* sourceCombatPublic = sourceEntity != NULL ? sourceEntity->GetComponent<Components::CombatPublic>() : NULL;
 					if(sourceCombatPublic != NULL && sourceCombatPublic->m_singleTargetAuraEntityInstanceId != aEntityInstanceId)
 						entry->m_cancel = true;
+				}
+
+				if(!entry->m_cancel && aura->m_zoneIds.size() > 0)
+				{
+					if(aContext->m_worldView->WorldViewGetMapData()->m_worldInfoMap)
+					{
+						const Components::Position* position = GetComponent<Components::Position>(aComponents);
+						const WorldInfoMap::Entry& worldInfoMapEntry = aContext->m_worldView->WorldViewGetMapData()->m_worldInfoMap->Get(position->m_position);
+						if(Helpers::FindItem(aura->m_zoneIds, worldInfoMapEntry.m_zoneId) == SIZE_MAX)
+							entry->m_cancel = true;
+					}					
 				}
 
 				if(!entry->m_cancel && aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))

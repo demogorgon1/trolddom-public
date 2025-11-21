@@ -24,6 +24,7 @@ namespace tpublic
 			ID_VENDOR_RESTOCK,
 			ID_MINION,
 			ID_RANDOM_ITEM_VENDOR,
+			ID_PVP_RIFT,
 
 			NUM_IDS
 		};
@@ -45,7 +46,8 @@ namespace tpublic
 			"trigger", 
 			"vendor_restock",
 			"minion",
-			"random_item_vendor"
+			"random_item_vendor",
+			"pvp_rift"
 		};
 
 		static_assert(sizeof(SYSTEM_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
