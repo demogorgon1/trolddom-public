@@ -187,6 +187,8 @@ namespace tpublic
 							m_classModifiers.push_back(ClassModifier(aChild));
 						else if(aChild->m_name == "hostile_classes")
 							aChild->GetIdArray(DataType::ID_CLASS, m_hostileClassIds);
+						else if(aChild->m_name == "pray_favor_multiplier")
+							m_prayFavorMultiplier = aChild->GetFloat();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -210,6 +212,7 @@ namespace tpublic
 				aWriter->WriteString(m_shrineDisplayNamePrefix);
 				aWriter->WriteObjects(m_classModifiers);
 				aWriter->WriteUInts(m_hostileClassIds);
+				aWriter->WriteFloat(m_prayFavorMultiplier);
 
 				for (uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
 					aWriter->WriteString(m_notificationStrings[i]);
@@ -243,7 +246,9 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadObjects(m_classModifiers))
 					return false;
-				if(!aReader->ReadUInts(m_hostileClassIds))
+				if (!aReader->ReadUInts(m_hostileClassIds))
+					return false;
+				if (!aReader->ReadFloat(m_prayFavorMultiplier))
 					return false;
 
 				for(uint32_t i = 0; i < (uint32_t)NUM_NOTIFICATION_STRINGS; i++)
@@ -269,6 +274,7 @@ namespace tpublic
 			std::vector<ClassModifier>			m_classModifiers;
 			std::vector<uint32_t>				m_hostileClassIds;
 			uint32_t							m_smallIconSpriteId = 0;
+			float								m_prayFavorMultiplier = 1.0f;
 		};
 
 	}

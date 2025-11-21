@@ -39,6 +39,8 @@ namespace tpublic
 							m_town = aChild->GetBool();
 						else if (aChild->m_name == "no_map")
 							m_noMap = aChild->GetBool();
+						else if (aChild->m_name == "pvp")
+							m_pvp = aChild->GetBool();
 						else if (aChild->m_name == "can_query_position")
 							m_canQueryPosition = aChild->GetBool();
 						else if (aChild->m_name == "fishing_loot_table")
@@ -74,6 +76,7 @@ namespace tpublic
 				aWriter->WriteString(m_preposition);
 				aWriter->WriteBool(m_town);
 				aWriter->WriteBool(m_noMap);
+				aWriter->WriteBool(m_pvp);
 				aWriter->WriteBool(m_canQueryPosition);
 				aWriter->WriteUInt(m_fishingLootTableId);
 				aWriter->WriteUInt(m_fishingTriggerAbilityId);
@@ -96,6 +99,8 @@ namespace tpublic
 				if(!aReader->ReadBool(m_town))
 					return false;
 				if (!aReader->ReadBool(m_noMap))
+					return false;
+				if (!aReader->ReadBool(m_pvp))
 					return false;
 				if (!aReader->ReadBool(m_canQueryPosition))
 					return false;
@@ -132,6 +137,7 @@ namespace tpublic
 			bool						m_town = false;			
 			bool						m_noMap = false;
 			bool						m_canQueryPosition = false;
+			bool						m_pvp = false;
 			
 			uint32_t					m_fishingLootTableId = 0;
 			uint32_t					m_fishingTriggerAbilityId = 0;

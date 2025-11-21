@@ -43,6 +43,8 @@ namespace tpublic
 							m_pantheonId = aChild->GetId(DataType::ID_PANTHEON);
 						else if(aChild->m_name == "blessing_auras")
 							aChild->GetIdArray(DataType::ID_AURA, m_blessingAuraIds);
+						else if (aChild->m_name == "blessing_aura")
+							m_blessingAuraIds.push_back(aChild->GetId(DataType::ID_AURA));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}

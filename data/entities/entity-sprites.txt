@@ -1289,6 +1289,11 @@ sprites:
 	sprite mushroom_3: { }
 	sprite junk_2: { }
 	sprite mango_1: { }
+	sprite dominion_of_strife_shrine_1: { }
+	sprite dominion_of_strife_shrine_2: { }
+	sprite dominion_of_strife_shrine_3: { }
+	sprite dominion_of_strife_shrine_4: { }
+	sprite dominion_of_strife_shrine_used: { }
 		
 }
 

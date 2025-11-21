@@ -73,6 +73,10 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_ABILITY, m_applyToAbilityIds);
 						}
+						else if(aChild->m_name == "pvp")
+						{
+							m_pvp = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -90,6 +94,7 @@ namespace tpublic
 				aStream->WriteInt(m_multiplierNumerator);
 				aStream->WriteInt(m_multiplierDenominator);
 				aStream->WriteUInts(m_applyToAbilityIds);
+				aStream->WriteBool(m_pvp);
 			}
 
 			bool
@@ -106,6 +111,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadUInts(m_applyToAbilityIds))
 					return false;
+				if (!aStream->ReadBool(m_pvp))
+					return false;
 				return true;
 			}
 
@@ -119,6 +126,7 @@ namespace tpublic
 				t->m_multiplierNumerator = m_multiplierNumerator;
 				t->m_multiplierDenominator = m_multiplierDenominator;
 				t->m_applyToAbilityIds = m_applyToAbilityIds;
+				t->m_pvp = m_pvp;
 
 				return t;
 			}
@@ -127,8 +135,12 @@ namespace tpublic
 			FilterDamageInput(
 				DirectEffect::DamageType	aDamageType,
 				int32_t						aDamage,
-				uint32_t					aAbilityId) const override
+				uint32_t					aAbilityId,
+				uint32_t					aEntityId) const override
 			{
+				if(m_pvp && aEntityId != 0)
+					return aDamage;
+
 				if(!m_applyToAbilityIds.empty() && Helpers::FindItem(m_applyToAbilityIds, aAbilityId) == SIZE_MAX)
 					return aDamage;
 
@@ -148,6 +160,7 @@ namespace tpublic
 			int32_t					m_multiplierNumerator = 1;
 			int32_t					m_multiplierDenominator = 1;
 			std::vector<uint32_t>	m_applyToAbilityIds;
+			bool					m_pvp = false;
 		};
 
 	}

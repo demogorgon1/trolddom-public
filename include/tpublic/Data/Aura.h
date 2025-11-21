@@ -22,6 +22,25 @@ namespace tpublic
 
 			struct AuraEffectEntry
 			{
+				static void 
+				FromObjectArray(
+					const SourceNode*								aSource,
+					std::vector<std::unique_ptr<AuraEffectEntry>>&	aOut)
+				{
+					aSource->GetArray()->ForEachChild([&](
+						const SourceNode* aChild) 
+					{ 
+						aChild->GetObject()->ForEachChild([&](
+							const SourceNode* aChild2)
+						{
+							if(aChild2->m_tag == "aura_effect")
+								aOut.push_back(std::make_unique<AuraEffectEntry>(aChild2));
+							else 
+								TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+						});
+					});
+				}
+
 				AuraEffectEntry()
 				{
 
@@ -238,10 +257,14 @@ namespace tpublic
 							m_flags |= SourceToFlags(aChild);
 						else if (aChild->m_tag == "aura_effect")
 							m_auraEffects.push_back(std::make_unique<AuraEffectEntry>(aChild));
+						else if (aChild->m_name == "aura_effects")
+							AuraEffectEntry::FromObjectArray(aChild, m_auraEffects);
 						else if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "description")
 							m_description = aChild->GetString();
+						else if (aChild->m_name == "extra_description")
+							m_extraDescription = aChild->GetString();
 						else if (aChild->m_name == "max_stack")
 							m_maxStack = aChild->GetUInt32();
 						else if (aChild->m_name == "stat_modifiers")
@@ -295,6 +318,7 @@ namespace tpublic
 				aStream->WriteUInt(m_maxStack);
 				aStream->WriteUInt(m_overrideSpriteId);
 				aStream->WriteObjects(m_statConversions);
+				aStream->WriteString(m_extraDescription);
 			}
 			 
 			bool
@@ -392,6 +416,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadString(m_extraDescription))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -423,6 +453,7 @@ namespace tpublic
 			uint32_t										m_mustNotHaveWorldAuraId = 0;
 			uint32_t										m_maxStack = 1;
 			uint32_t										m_overrideSpriteId = 0;
+			std::string										m_extraDescription;
 		};
 
 	}

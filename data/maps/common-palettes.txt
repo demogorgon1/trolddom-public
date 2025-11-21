@@ -141,4 +141,5 @@
 	doodad potted_plant_2: [ 174 159 102 ]
 	doodad potted_plant_3: [ 74 59 102 ]
 	doodad potted_plant_4: [ 74 159 202 ]
+	doodad ground_mark_2: [ 49 84 120 ]
 }

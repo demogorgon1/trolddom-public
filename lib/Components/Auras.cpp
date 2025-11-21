@@ -154,12 +154,14 @@ namespace tpublic::Components
 	{
 		int32_t damage = aDamage;
 
+		uint32_t sourceEntityId = aSource != NULL ? aSource->GetEntityId() : UINT32_MAX; // FIXME: a bit weird to not use 0 in this case, but it's a special case for players...
+
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					damage = effect->FilterDamageInput(aDamageType, damage, aAbilityId);
+					damage = effect->FilterDamageInput(aDamageType, damage, aAbilityId, sourceEntityId);
 			}
 		}
 						

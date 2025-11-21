@@ -148,8 +148,9 @@ zone .the_lizard_coast: { string: "The Lizard Coast" preposition: "on" }
 zone .stillwater: { string: "Stillwater" preposition: "in" }
 zone .kaldor_island: { string: "Kaldor Island" preposition: "on" }
 zone .the_jungle_passage: { string: "The Jungle Passage" preposition: "in" }
-zone .ancient_battleground: { string: "Ancient Battleground" preposition: "on the" }
-zone .welks_cave: { string: "Welk's Cave" preposition: "in" }
+zone .ancient_battleground: { string: "Ancient Battleground" preposition: "on the" pvp: true }
+zone .welks_cave: { string: "Welk's Cave" preposition: "in" pvp: true }
+zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -538,6 +539,9 @@ map_palette .stuff:
 	entity_spawn duck: [ 239 141 221 ]	
 	entity_spawn homunculus: [ 100 32 177 ]
 	entity_spawn standing_stone: [ 209 44 77 ]
+	entity_spawn dominion_of_strife_deity_1_shrine: [ 49 187 184 ]
+	entity_spawn dominion_of_strife_deity_2_shrine: [ 149 187 184 ]
+	entity_spawn dominion_of_strife_deity_3_shrine: [ 49 87 184 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
@@ -1276,7 +1280,7 @@ map_palette .zones:
 	zone .the_jungle_passage: [ 127 68 106 ]
 	zone .ancient_battleground: [ 186 24 102 ]
 	zone .welks_cave: [ 113 231 234 ]
-
+	zone .flinks_hideout: [ 64 26 159 ]
 }
 
 map_palette .sub_zones:

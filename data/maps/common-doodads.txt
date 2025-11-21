@@ -120,6 +120,7 @@ sprites:
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite large_statue: { }
 	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
+	size: { width: 48 height: 48 } sprite ground_mark_2: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
 	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
@@ -272,6 +273,12 @@ doodad large_statue:
 doodad fs_ground_mark:
 {
 	sprites: [ fs_ground_mark ]
+	map_palette<"x">: { occupy: true } map: [ "x" ]
+}
+
+doodad ground_mark_2:
+{
+	sprites: [ ground_mark_2 ]
 	map_palette<"x">: { occupy: true } map: [ "x" ]
 }
 

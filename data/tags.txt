@@ -43,6 +43,9 @@ tag player_world_creature: { }
 tag reagent: { }
 tag blacksmithing: { }
 tag tailoring: { }
+tag warlike: {}
+tag stupid: {}
+tag wizard: {}
 
 # Ability tags
 tag ability_small_heal_single_target: {}

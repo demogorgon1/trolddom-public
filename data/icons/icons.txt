@@ -940,6 +940,7 @@ sprites:
 	sprite icon_grenade_1: { tags: [ icon ] }
 	sprite icon_grenade_2: { tags: [ icon ] }
 	sprite icon_grenade_3: { tags: [ icon ] }
+	sprite icon_strife: { tags: [ icon ] }
 }
 
 
