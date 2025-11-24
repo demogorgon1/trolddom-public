@@ -1034,6 +1034,7 @@ aura shackle_undeath:
 	duration: 200
 	flags: [ unique magic cancel_on_damage single_target ]
 	aura_effect stun: { }
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 particle_system shackle_undeath:

@@ -64,7 +64,7 @@ ability .hobart_1:
 {
 	string: "Tag Wildlife"
 	description: "Tag wildlife."
-	flags: [ target_other quest_trigger ]
+	flags: [ target_other quest_trigger late_cooldown_trigger ]
 	cast_time: 10
 	range: 2
 	icon: icon_tag

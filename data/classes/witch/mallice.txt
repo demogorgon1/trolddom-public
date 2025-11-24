@@ -767,6 +767,7 @@ aura curse_of_inaction:
 	sound: spell_14
 	aura_effect stun: { }
 	particle_system: judgement	
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 ability curse_of_inaction:

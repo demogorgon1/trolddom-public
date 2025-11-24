@@ -625,6 +625,7 @@ aura knock:
 	flags: [ unique ]
 	aura_effect stun: { }
 	particle_system: knock
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 cooldown knock:

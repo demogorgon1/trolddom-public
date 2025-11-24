@@ -972,6 +972,7 @@ item consumable_fragmentation_grenade:
 				flags: [ unique ]
 				aura_effect stun: { }
 				particle_system: knock
+				priority: !AURA_PRIORITY_CC{}	
 			}			
 		}
 	}
@@ -1053,8 +1054,8 @@ item consumable_incendiary_grenade:
 					update_count: 6
 					ability: $ability [ icon string ]
 					{
-						string: "Envenom"
-						icon: icon_envenom	
+						string: "Incendiary Grenade"
+						icon: icon_fire	
 						states: [ default in_combat ]
 						flags: [ always_in_range always_in_line_of_sight ]						
 						direct_effect damage:

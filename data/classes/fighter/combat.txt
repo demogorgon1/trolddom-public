@@ -769,6 +769,7 @@ aura charge_stun:
 	duration: 20	
 	aura_effect stun: { }
 	particle_system: knock
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 ability charge_trigger:

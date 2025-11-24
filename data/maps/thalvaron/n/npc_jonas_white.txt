@@ -137,7 +137,7 @@ item .jonas_white_2_quest_item:
 	item_level: 15
 	loot_groups: [ .jonas_white_2_quest_item ]
 	flags: [ not_sellable unique ]
-	string: "Elusive Table"
+	string: "Elusive Tablet"
 }
 
 quest .jonas_white_2:

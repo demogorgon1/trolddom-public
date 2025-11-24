@@ -84,7 +84,7 @@ quest .faolan_1:
 
 	text:
 	[
-		"Collect herbs and take them to the shrine of Zilu in the woods east of Zilkore."
+		"Collect herbs and take them to the shrine of Zilu in the woods west of Zilkore."
 	]
 	
 	description: 

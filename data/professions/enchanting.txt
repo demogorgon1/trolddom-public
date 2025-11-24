@@ -1357,7 +1357,7 @@ ability disenchant:
 				description: "Heals over time."
 				type: buff
 				duration: based_on_effects
-				flags: [ magic unique ]
+				flags: [ magic unique  ]
 				aura_effect repeat: 
 				{ 
 					update_interval: 10

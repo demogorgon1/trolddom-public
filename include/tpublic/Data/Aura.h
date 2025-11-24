@@ -289,6 +289,8 @@ namespace tpublic
 							m_statConversions.push_back(Stat::Conversion(aChild));
 						else if(aChild->m_name == "zones")
 							aChild->GetIdArray(DataType::ID_ZONE, m_zoneIds);
+						else if(aChild->m_name == "priority")
+							m_priority = aChild->GetUInt32();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -322,6 +324,7 @@ namespace tpublic
 				aStream->WriteObjects(m_statConversions);
 				aStream->WriteString(m_extraDescription);
 				aStream->WriteUInts(m_zoneIds);
+				aStream->WriteUInt(m_priority);
 			}
 			 
 			bool
@@ -431,6 +434,12 @@ namespace tpublic
 						return false;
 				}
 
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadUInt(m_priority))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -464,6 +473,7 @@ namespace tpublic
 			uint32_t										m_overrideSpriteId = 0;
 			std::string										m_extraDescription;
 			std::vector<uint32_t>							m_zoneIds;
+			uint32_t										m_priority = 0;
 		};
 
 	}

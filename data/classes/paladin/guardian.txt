@@ -75,6 +75,7 @@ aura judgement_for_all:
 	flags: [ unique magic ]
 	aura_effect stun: { }
 	particle_system: judgement
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 ability judgement_for_all:
@@ -393,6 +394,7 @@ aura judgement:
 	flags: [ unique ]
 	aura_effect stun: { }
 	particle_system: judgement
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 cooldown judgement:

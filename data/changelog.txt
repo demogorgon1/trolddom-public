@@ -2,6 +2,26 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.7"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Divine Shield now scales with Healing." }
+		{ text: "Food buffs don't apply until after 5 seconds of eating." }
+		{ text: "Party UI shows up to 4 buffs instead of 3 and also prioritizes more important ones." }
+		{ text: "Sending mail no longer requires a subject." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed some minor bugs and UI issues." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.6"
 
 	text: "Changes:"

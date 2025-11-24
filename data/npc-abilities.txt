@@ -1032,6 +1032,7 @@ ability npc_charge:
 					type: debuff
 					duration: 30	
 					aura_effect stun: { }
+					priority: !AURA_PRIORITY_CC{}	
 				}				
 			}
 		}

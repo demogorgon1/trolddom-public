@@ -441,6 +441,7 @@ aura improved_cleanse_1:
 	aura_group: improved_cleanse
 	duration: based_on_effects	
 	flags: [ unique_per_source magic ]
+	priority: !AURA_PRIORITY_HEAL{}	
 	aura_effect repeat: 
 	{ 
 		update_interval: 20
@@ -473,6 +474,7 @@ aura improved_cleanse_2:
 	aura_group: improved_cleanse
 	duration: based_on_effects	
 	flags: [ unique_per_source magic ]
+	priority: !AURA_PRIORITY_HEAL{}	
 	aura_effect repeat: 
 	{ 
 		update_interval: 20
@@ -505,6 +507,7 @@ aura improved_cleanse_3:
 	aura_group: improved_cleanse
 	duration: based_on_effects	
 	flags: [ unique_per_source magic ]
+	priority: !AURA_PRIORITY_HEAL{}	
 	aura_effect repeat: 
 	{ 
 		update_interval: 20
@@ -717,9 +720,10 @@ aura divine_shield:
 	duration: 200
 	flags: [ unique charged magic ]	
 	icon: icon_divine_shield
-	charges: { expression: a_mul_x_plus_b a: 3.5 b: 18.5 x: level }	
+	charges: { expression: a_mul_x_plus_b a: 1.04 x: spell_damage b: [ [ 1 28 ] [ 30 193 ] ] }		
+
 	particle_system: divine_shield
-	
+	priority: !AURA_PRIORITY_HEAL{}	
 	aura_effect absorb:
 	{
 	}

@@ -744,6 +744,7 @@ aura sleep:
 		update_count: 6
 		ability: sleep_tick
 	}
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 particle_system sleep:

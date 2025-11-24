@@ -70,6 +70,7 @@ aura mass_hysteria:
 		update_interval: 5
 		update_count: 12
 	}
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 ability mass_hysteria:
@@ -333,6 +334,7 @@ aura fear:
 		update_interval: 5
 		update_count: 24
 	}
+	priority: !AURA_PRIORITY_CC{}	
 }
 
 ability fear:

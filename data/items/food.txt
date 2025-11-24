@@ -25,10 +25,19 @@
 		update_count: 10
 		ability: @_ability_tick
 	}
+	
+	<exists _buff> aura_effect repeat:
+	{
+		update_interval: 50
+		update_count: 1
+		ability: $ability { flags: [ always_in_range always_in_line_of_sight ] direct_effect apply_aura: { aura: @_buff} }
+	}
 }
 
 !define local ABILITY_FOOD
 {
+	<exists _buff> fail:{} # Make sure _buff isn't provided for ABILITY_FOOD by mistake (it should be for AURA_FOOD)
+	
 	string: @_string
 	description: @_description
 	flags: [ target_self item interrupt_on_damage ]
@@ -36,7 +45,6 @@
 	consume_items: @_item
 	states: [ default ]
 	direct_effect apply_aura: { aura: @_aura }
-	<exists _buff> direct_effect apply_aura: { aura: @_buff }
 	required_level: @_level
 	cooldowns: [ global ]
 }
@@ -151,8 +159,8 @@
 
 	aura consumable_potato_stew_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 2 } } }
 	ability consumable_potato_stew_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_potato_stew: !AURA_FOOD {}
-	ability consumable_potato_stew: !ABILITY_FOOD { _buff: consumable_potato_stew_buff }
+	aura consumable_potato_stew: !AURA_FOOD { _buff: consumable_potato_stew_buff }
+	ability consumable_potato_stew: !ABILITY_FOOD { }
 	item consumable_potato_stew: !ITEM_FOOD {}
 }
 
@@ -174,8 +182,8 @@
 
 	aura consumable_boiled_potato_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 2 } } }
 	ability consumable_boiled_potato_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_boiled_potato: !AURA_FOOD {}
-	ability consumable_boiled_potato: !ABILITY_FOOD { _buff: consumable_boiled_potato_buff }
+	aura consumable_boiled_potato: !AURA_FOOD { _buff: consumable_boiled_potato_buff }
+	ability consumable_boiled_potato: !ABILITY_FOOD { }
 	item consumable_boiled_potato: !ITEM_FOOD {}
 }
 
@@ -197,8 +205,8 @@
 
 	aura consumable_pickled_herring_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } } }
 	ability consumable_pickled_herring_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_pickled_herring: !AURA_FOOD {}
-	ability consumable_pickled_herring: !ABILITY_FOOD { _buff: consumable_pickled_herring_buff }
+	aura consumable_pickled_herring: !AURA_FOOD { _buff: consumable_pickled_herring_buff }
+	ability consumable_pickled_herring: !ABILITY_FOOD { }
 	item consumable_pickled_herring: !ITEM_FOOD {}
 }
 
@@ -220,8 +228,8 @@
 
 	aura consumable_pickled_sucker_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 1 } constitution: { add: 1 } } }
 	ability consumable_pickled_sucker_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_pickled_sucker: !AURA_FOOD {}
-	ability consumable_pickled_sucker: !ABILITY_FOOD { _buff: consumable_pickled_sucker_buff }
+	aura consumable_pickled_sucker: !AURA_FOOD { _buff: consumable_pickled_sucker_buff }
+	ability consumable_pickled_sucker: !ABILITY_FOOD { }
 	item consumable_pickled_sucker: !ITEM_FOOD {}
 }
 
@@ -243,8 +251,8 @@
 
 	aura consumable_pickled_eel_pie_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 5 } } }
 	ability consumable_pickled_eel_pie_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_pickled_eel_pie: !AURA_FOOD {}
-	ability consumable_pickled_eel_pie: !ABILITY_FOOD { _buff: consumable_pickled_eel_pie_buff }
+	aura consumable_pickled_eel_pie: !AURA_FOOD { _buff: consumable_pickled_eel_pie_buff }
+	ability consumable_pickled_eel_pie: !ABILITY_FOOD { }
 	item consumable_pickled_eel_pie: !ITEM_FOOD {}
 }
 
@@ -266,8 +274,8 @@
 
 	aura consumable_pickled_moonfish_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 5 } } }
 	ability consumable_pickled_moonfish_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_pickled_moonfish: !AURA_FOOD {}
-	ability consumable_pickled_moonfish: !ABILITY_FOOD { _buff: consumable_pickled_moonfish_buff }
+	aura consumable_pickled_moonfish: !AURA_FOOD { _buff: consumable_pickled_moonfish_buff }
+	ability consumable_pickled_moonfish: !ABILITY_FOOD {}
 	item consumable_pickled_moonfish: !ITEM_FOOD {}
 }
 
@@ -311,8 +319,8 @@
 
 	aura consumable_spiced_rice_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 1 } dexterity: { add: 1 } constitution: { add: 1 }} }
 	ability consumable_spiced_rice_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_spiced_rice: !AURA_FOOD {}
-	ability consumable_spiced_rice: !ABILITY_FOOD { _buff: consumable_spiced_rice_buff}
+	aura consumable_spiced_rice: !AURA_FOOD { _buff: consumable_spiced_rice_buff }
+	ability consumable_spiced_rice: !ABILITY_FOOD {}
 	item consumable_spiced_rice: !ITEM_FOOD {}
 }
 
@@ -333,8 +341,8 @@
 
 	aura consumable_pickled_toesnapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 6 } } }
 	ability consumable_pickled_toesnapper_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_pickled_toesnapper: !AURA_FOOD {}
-	ability consumable_pickled_toesnapper: !ABILITY_FOOD { _buff: consumable_pickled_toesnapper_buff}
+	aura consumable_pickled_toesnapper: !AURA_FOOD { _buff: consumable_pickled_toesnapper_buff }
+	ability consumable_pickled_toesnapper: !ABILITY_FOOD {}
 	item consumable_pickled_toesnapper: !ITEM_FOOD {}
 }
 
@@ -355,8 +363,8 @@
 
 	aura consumable_steamed_trout_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 6 } } }
 	ability consumable_steamed_trout_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_steamed_trout: !AURA_FOOD {}
-	ability consumable_steamed_trout: !ABILITY_FOOD { _buff: consumable_steamed_trout_buff }
+	aura consumable_steamed_trout: !AURA_FOOD { _buff: consumable_steamed_trout_buff }
+	ability consumable_steamed_trout: !ABILITY_FOOD {}
 	item consumable_steamed_trout: !ITEM_FOOD {}
 }
 
@@ -377,8 +385,8 @@
 
 	aura consumable_seared_bass_buff: !AURA_FOOD_BUFF { _stat_modifiers: { dexterity: { add: 6 } } }
 	ability consumable_seared_bass_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_seared_bass: !AURA_FOOD {}
-	ability consumable_seared_bass: !ABILITY_FOOD { _buff: consumable_seared_bass_buff }
+	aura consumable_seared_bass: !AURA_FOOD { _buff: consumable_seared_bass_buff }
+	ability consumable_seared_bass: !ABILITY_FOOD {}
 	item consumable_seared_bass: !ITEM_FOOD {}
 }
 
@@ -399,8 +407,8 @@
 
 	aura consumable_spicy_perch_fillet_buff: !AURA_FOOD_BUFF { _stat_modifiers: { strength: { add: 6 } } }
 	ability consumable_spicy_perch_fillet_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_spicy_perch_fillet: !AURA_FOOD {}
-	ability consumable_spicy_perch_fillet: !ABILITY_FOOD { _buff: consumable_spicy_perch_fillet_buff }
+	aura consumable_spicy_perch_fillet: !AURA_FOOD { _buff: consumable_spicy_perch_fillet_buff }
+	ability consumable_spicy_perch_fillet: !ABILITY_FOOD {}
 	item consumable_spicy_perch_fillet: !ITEM_FOOD {}
 }
 
@@ -421,8 +429,8 @@
 
 	aura consumable_mistveil_balls_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 8 } } }
 	ability consumable_mistveil_balls_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_mistveil_balls: !AURA_FOOD {}
-	ability consumable_mistveil_balls: !ABILITY_FOOD { _buff: consumable_mistveil_balls_buff }
+	aura consumable_mistveil_balls: !AURA_FOOD { _buff: consumable_mistveil_balls_buff }
+	ability consumable_mistveil_balls: !ABILITY_FOOD {}
 	item consumable_mistveil_balls: !ITEM_FOOD {}
 }
 
@@ -443,8 +451,8 @@
 
 	aura consumable_herbed_snapper_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 4 } strength: { add: 4 } dexterity: { add: 4 } } }
 	ability consumable_herbed_snapper_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_herbed_snapper: !AURA_FOOD {}
-	ability consumable_herbed_snapper: !ABILITY_FOOD { _buff: consumable_herbed_snapper_buff }
+	aura consumable_herbed_snapper: !AURA_FOOD { _buff: consumable_herbed_snapper_buff }
+	ability consumable_herbed_snapper: !ABILITY_FOOD {}
 	item consumable_herbed_snapper: !ITEM_FOOD {}
 }
 
@@ -465,8 +473,8 @@
 
 	aura consumable_piranha_soup_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spell_damage: { add: 8 } healing: { add: 8 } } }
 	ability consumable_piranha_soup_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_piranha_soup: !AURA_FOOD {}
-	ability consumable_piranha_soup: !ABILITY_FOOD { _buff: consumable_piranha_soup_buff }
+	aura consumable_piranha_soup: !AURA_FOOD { _buff: consumable_piranha_soup_buff }
+	ability consumable_piranha_soup: !ABILITY_FOOD {}
 	item consumable_piranha_soup: !ITEM_FOOD {}
 }
 
@@ -487,7 +495,7 @@
 
 	aura consumable_hot_grilled_shrimp_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 10 } } }
 	ability consumable_hot_grilled_shrimp_tick: !ABILITY_FOOD_TICK {}
-	aura consumable_hot_grilled_shrimp: !AURA_FOOD {}
-	ability consumable_hot_grilled_shrimp: !ABILITY_FOOD { _buff: consumable_hot_grilled_shrimp_buff }
+	aura consumable_hot_grilled_shrimp: !AURA_FOOD { _buff: consumable_hot_grilled_shrimp_buff }
+	ability consumable_hot_grilled_shrimp: !ABILITY_FOOD {}
 	item consumable_hot_grilled_shrimp: !ITEM_FOOD {}
 }

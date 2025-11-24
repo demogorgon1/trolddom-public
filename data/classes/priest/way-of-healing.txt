@@ -60,6 +60,7 @@ aura healing_shield:
 	duration: 200
 	flags: [ unique_per_source magic charged always_show_charges ]
 	charges: 3
+	priority: !AURA_PRIORITY_HEAL{}
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event<target>: [ hit critical block ]
@@ -620,6 +621,7 @@ aura blessing:
 	type: buff	
 	duration: based_on_effects	
 	flags: [ unique_per_source magic ]
+	priority: !AURA_PRIORITY_HEAL{}
 	aura_effect repeat: 
 	{ 
 		update_interval: 10

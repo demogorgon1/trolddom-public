@@ -1,3 +1,7 @@
+!define AURA_PRIORITY_HEAL		1
+!define AURA_PRIORITY_DAMAGE	2
+!define AURA_PRIORITY_CC		3
+
 !define DEFAULT_SPREAD 0.12
 
 cooldown global:

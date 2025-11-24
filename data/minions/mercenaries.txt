@@ -656,6 +656,7 @@
 		duration: based_on_effects
 		flags: [ unique ]
 		aura_effect stun: { }
+		priority: !AURA_PRIORITY_CC{}	
 		particle_system: knock		
 		aura_effect repeat: 
 		{ 

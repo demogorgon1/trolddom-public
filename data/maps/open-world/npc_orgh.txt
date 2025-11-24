@@ -69,7 +69,7 @@ quest .orgh_1:
 	[
 		"The mistress needs some reagents for her research, maybe you can help?\n"
 		"\n"
-		"Up north you'll find an old abandoned town where the dead have climbed out of their graves. Most of them still have intact brains. Go collect some of them for me and I'll extract the important juices."		
+		"North east of here you'll find an old abandoned town where the dead have climbed out of their graves. Most of them still have intact brains. Go collect some of them for me and I'll extract the important juices."		
 		"Be careful, they'll probably not hand them over willingly."
 	]
 
