@@ -134,6 +134,7 @@ namespace tpublic
 				m_entityCompassEvent.reset();
 				m_pendingMapTransfer.reset();
 				m_mapId = 0;
+				m_highPrioInventoryAdds.clear();
 			}
 
 			bool
@@ -198,6 +199,8 @@ namespace tpublic
 			};
 
 			std::optional<PendingMapTransfer>								m_pendingMapTransfer;
+
+			std::vector<tpublic::ItemInstance>								m_highPrioInventoryAdds;
 		};
 	}
 

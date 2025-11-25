@@ -56,6 +56,14 @@ namespace tpublic::Systems
 			}
 			break;
 
+		case EntityState::ID_DEFAULT:
+			if(pvpRift->m_activated)
+			{
+				pvpRift->m_activated = false;
+				return EntityState::ID_SPAWNING;
+			}
+			break;
+
 		default:
 			break;
 		}
