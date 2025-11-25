@@ -143,6 +143,9 @@ namespace tpublic
 								uint32_t									aEntityInstanceId) const;
 			Entry*			GetAura(
 								uint32_t									aAuraId);
+			const Entry*	GetAuraWithSource(
+								uint32_t									aAuraId,
+								uint32_t									aEntityInstanceId) const;
 			MoveSpeed::Id	GetMoveSpeed() const;
 			float			GetAttackHaste(
 								const Manifest*								aManifest) const;

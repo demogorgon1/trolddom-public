@@ -31,6 +31,7 @@ entity thalvaron_cubert_galston: !NPC
 	_default_behavior_state: .cubert_galston
 	_is_threat_source: true
 	_blocking: false
+	_no_combat_tag: true
 }
 
 route thalvaron_cubert_galston_escort: 

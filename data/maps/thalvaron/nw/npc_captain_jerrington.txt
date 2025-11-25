@@ -132,7 +132,6 @@ quest .captain_jerrington_2:
 
 	level: 10
 	prerequisites: [ .captain_jerrington_1 ]
-	next_quest: .lieutenant_tinley_1
 	reward_xp_multiplier: 0.1
 }
 

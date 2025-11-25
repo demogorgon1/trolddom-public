@@ -957,7 +957,7 @@ item consumable_fragmentation_grenade:
 			flags: [ can_be_critical ]
 			damage_type: physical
 			spread: 0.4
-			function: 400			
+			function: 600			
 		}
 		
 		direct_effect apply_aura:
@@ -1034,7 +1034,7 @@ item consumable_incendiary_grenade:
 			flags: [ can_be_critical ]
 			damage_type: fire
 			spread: 0.4
-			function: 280			
+			function: 420			
 		}
 		
 		direct_effect apply_aura:
@@ -1061,7 +1061,7 @@ item consumable_incendiary_grenade:
 						direct_effect damage:
 						{
 							damage_type: fire
-							function: 60
+							function: 90
 							spread: !DEFAULT_SPREAD{}
 						}
 					}
@@ -1126,7 +1126,7 @@ item consumable_frost_grenade:
 			flags: [ can_be_critical ]
 			damage_type: frost
 			spread: 0.4
-			function: 320			
+			function: 480			
 		}
 		
 		direct_effect apply_aura:

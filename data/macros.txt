@@ -143,6 +143,7 @@
 			<exists _no_kill_event and _no_kill_event> no_kill_event: @_no_kill_event
 			<exists _global_aura> global_aura: @_global_aura
 			<exists _combat_move_interval_ticks> combat_move_interval_ticks: @_combat_move_interval_ticks
+			<exists _no_combat_tag and _no_combat_tag> no_combat_tag: @_no_combat_tag
 		}		
 		sprite<static>: 
 		{ 

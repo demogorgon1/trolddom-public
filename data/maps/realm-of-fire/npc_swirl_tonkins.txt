@@ -126,6 +126,7 @@ item .swirl_tonkins_3_quest_item:
 	flags: [ unique not_sellable ]
 	string: "Glowing Amulet"
 	flavor: "Ouch! It's burning hot."
+	quest: .swirl_tonkins_3
 }
 
 objective .swirl_tonkins_3:
@@ -183,6 +184,7 @@ item .swirl_tonkins_4_quest_item:
 	flags: [ not_sellable ]
 	string: "Corrupted Elemental Stone"
 	stack: 6
+	quest: .swirl_tonkins_4
 }
 
 objective .swirl_tonkins_4:
@@ -239,6 +241,7 @@ item .swirl_tonkins_5_quest_item:
 	flags: [ not_sellable ]
 	string: "Arcane Binding"
 	stack: 6
+	quest: .swirl_tonkins_5
 }
 
 objective .swirl_tonkins_5:

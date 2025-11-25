@@ -37,6 +37,7 @@ item .anna_skrald_1_quest_item:
 	loot_groups: [ .anna_skrald_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Lobnorg's Club"
+	quest: .anna_skrald_1
 }
 
 objective .anna_skrald_1:

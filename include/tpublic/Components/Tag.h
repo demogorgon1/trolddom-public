@@ -43,6 +43,7 @@ namespace tpublic
 				m_lootThreshold = Rarity::INVALID_ID;
 
 				m_playerEntityInstanceId = 0;
+				m_noCombatTag = false;
 			}
 
 			// Public data
@@ -52,6 +53,7 @@ namespace tpublic
 
 			// Internal server data
 			uint32_t		m_playerEntityInstanceId = 0;
+			bool			m_noCombatTag = false;
 		};
 	}
 

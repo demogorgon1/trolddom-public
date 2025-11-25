@@ -12,12 +12,16 @@ changelog:
 		{ text: "Food buffs don't apply until after 5 seconds of eating." }
 		{ text: "Party UI shows up to 4 buffs instead of 3 and also prioritizes more important ones." }
 		{ text: "Sending mail no longer requires a subject." }
+		{ text: "Grenades do more damage." }
+		{ text: "New bags drop from higher level enemies." }
 	]
 
 	text: "Issues Fixed:"
 	
 	list:
 	[
+		{ text: "Vampiric Edge is refreshed rather than reapplied." }
+		{ text: "Fixed another bug that could cause escort NPCs to get stuck." }
 		{ text: "Fixed some minor bugs and UI issues." }
 	]
 

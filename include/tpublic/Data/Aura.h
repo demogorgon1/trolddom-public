@@ -127,6 +127,7 @@ namespace tpublic
 				FLAG_GLOBAL_PLAYER			= 0x02000000,
 				FLAG_ALWAYS_SHOW_CHARGES	= 0x04000000,
 				FLAG_ALWAYS_SHOW_TIMER		= 0x08000000,
+				FLAG_EXTEND_EXISTING		= 0x10000000,
 			};
 
 			static Type
@@ -209,6 +210,8 @@ namespace tpublic
 						flags |= FLAG_ALWAYS_SHOW_CHARGES;
 					else if (strcmp(string, "always_show_timer") == 0)
 						flags |= FLAG_ALWAYS_SHOW_TIMER;
+					else if (strcmp(string, "extend_existing") == 0)
+						flags |= FLAG_EXTEND_EXISTING;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});

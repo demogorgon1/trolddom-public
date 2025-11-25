@@ -942,6 +942,8 @@ sprites:
 	sprite icon_grenade_3: { tags: [ icon ] }
 	sprite icon_strife: { tags: [ icon ] }
 	sprite icon_bloodsoaked: { tags: [ icon ] }
+	sprite icon_knapsack_1: { tags: [ icon ] }
+	sprite icon_knapsack_2: { tags: [ icon ] }
 }
 
 

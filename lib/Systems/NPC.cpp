@@ -132,6 +132,13 @@ namespace tpublic::Systems
 			if(npc->m_routeId != 0)
 				npc->m_effectiveRouteId = npc->m_routeId;
 		}
+
+		// Init "no combat tag" flag 
+		if(npc->m_noCombatTag)
+		{
+			Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+			tag->m_noCombatTag = true;
+		}
 	}
 
 	EntityState::Id
