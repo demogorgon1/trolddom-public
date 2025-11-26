@@ -17,6 +17,7 @@ changelog:
 	list:
 	[
 		{ text: "You can now tab-target other players and minions if you're all flagged for PVP." }
+		{ text: "Hold ALT to target self when using abilities." }
 	]
 
 	#######################################################################################
