@@ -128,6 +128,7 @@ namespace tpublic
 				FLAG_ALWAYS_SHOW_CHARGES	= 0x04000000,
 				FLAG_ALWAYS_SHOW_TIMER		= 0x08000000,
 				FLAG_EXTEND_EXISTING		= 0x10000000,
+				FLAG_INCAPACITATION			= 0x20000000
 			};
 
 			static Type
@@ -212,6 +213,8 @@ namespace tpublic
 						flags |= FLAG_ALWAYS_SHOW_TIMER;
 					else if (strcmp(string, "extend_existing") == 0)
 						flags |= FLAG_EXTEND_EXISTING;
+					else if(strcmp(string, "incapacitation") == 0)
+						flags |= FLAG_INCAPACITATION;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -294,6 +297,8 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_ZONE, m_zoneIds);
 						else if(aChild->m_name == "priority")
 							m_priority = aChild->GetUInt32();
+						else if (aChild->m_name == "diminishing_effect")
+							m_diminishingEffectId = aChild->GetId(DataType::ID_DIMINISHING_EFFECT);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -328,6 +333,7 @@ namespace tpublic
 				aStream->WriteString(m_extraDescription);
 				aStream->WriteUInts(m_zoneIds);
 				aStream->WriteUInt(m_priority);
+				aStream->WriteUInt(m_diminishingEffectId);
 			}
 			 
 			bool
@@ -443,6 +449,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_diminishingEffectId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -477,6 +489,7 @@ namespace tpublic
 			std::string										m_extraDescription;
 			std::vector<uint32_t>							m_zoneIds;
 			uint32_t										m_priority = 0;
+			uint32_t										m_diminishingEffectId = 0;
 		};
 
 	}

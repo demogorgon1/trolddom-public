@@ -1,8 +1,11 @@
 #pragma once
 
+#include <tpublic/Data/Aura.h>
+
 #include "../Component.h"
 #include "../ComponentBase.h"
 #include "../Image.h"
+#include "../Manifest.h"
 
 namespace tpublic
 {
@@ -94,6 +97,21 @@ namespace tpublic
 					if(t.m_auraId == aAuraId)
 						return true;
 				}
+				return false;
+			}
+
+			bool			
+			HasAuraFlags(
+				const Manifest*		aManifest,
+				uint32_t			aFlags) const
+			{
+				for (const Entry& entry : m_entries)
+				{
+					const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry.m_auraId);
+					if((aura->m_flags & aFlags) == aFlags)
+						return true;
+				}
+
 				return false;
 			}
 

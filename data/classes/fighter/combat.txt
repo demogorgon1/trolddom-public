@@ -767,9 +767,11 @@ aura charge_stun:
 	icon: icon_stun		
 	type: debuff
 	duration: 20	
+	flags: [ incapacitation ]
 	aura_effect stun: { }
 	particle_system: knock
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 ability charge_trigger:

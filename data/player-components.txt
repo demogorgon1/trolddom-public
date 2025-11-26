@@ -13,6 +13,7 @@ player_components:
 	completed_quests
 	deity_discovery
 	deity_relations
+	diminishing_effects
 	display_name
 	equipped_items	
 	guild_name

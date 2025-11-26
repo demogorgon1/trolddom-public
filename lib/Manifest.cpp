@@ -18,6 +18,7 @@
 #include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
+#include <tpublic/Data/DiminishingEffect.h>
 #include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/Emote.h>
 #include <tpublic/Data/Encounter.h>
@@ -114,6 +115,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();
+		RegisterDataContainer<Data::DiminishingEffect>();
 		RegisterDataContainer<Data::Doodad>();
 		RegisterDataContainer<Data::Emote>();
 		RegisterDataContainer<Data::Encounter>();

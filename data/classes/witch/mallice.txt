@@ -763,11 +763,12 @@ aura curse_of_inaction:
 	icon: icon_curse_of_inaction		
 	type: debuff
 	duration: 60	
-	flags: [ unique magic ]
+	flags: [ unique magic incapacitation ]
 	sound: spell_14
 	aura_effect stun: { }
 	particle_system: judgement	
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 ability curse_of_inaction:

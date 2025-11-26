@@ -55,6 +55,21 @@ namespace tpublic::Components
 	}
 
 	bool			
+	Auras::HasAuraFlags(
+		const Manifest*								aManifest,
+		uint32_t									aFlags) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+			if((aura->m_flags & aFlags) == aFlags)
+				return true;
+		}
+
+		return false;
+	}
+
+	bool			
 	Auras::HasAuraWithSource(
 		uint32_t									aAuraId,
 		uint32_t									aEntityInstanceId) const

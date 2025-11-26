@@ -403,9 +403,10 @@ aura improved_frost_explosion:
 	icon: icon_frost_explosion		
 	type: debuff
 	duration: 50	
-	flags: [ unique magic ]
+	flags: [ unique magic incapacitation ]
 	aura_effect immobilize: { }
 	particle_system: improved_frost_explosion
+	diminishing_effect: root
 }
 
 particle_system improved_frost_explosion:
@@ -804,9 +805,10 @@ ability ice_lance:
 			description: "Immobilized."
 			type: debuff
 			duration: 60	
-			flags: [ unique magic ]
+			flags: [ unique magic incapacitation ]
 			aura_effect immobilize: { }
 			particle_system: improved_frost_explosion
+			diminishing_effect: root
 		}
 	}
 }

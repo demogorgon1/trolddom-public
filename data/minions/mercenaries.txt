@@ -654,7 +654,7 @@
 		icon: icon_rage		
 		type: debuff
 		duration: based_on_effects
-		flags: [ unique ]
+		flags: [ unique incapacitation ]
 		aura_effect stun: { }
 		priority: !AURA_PRIORITY_CC{}	
 		particle_system: knock		
@@ -663,7 +663,8 @@
 			update_interval: 10
 			update_count: 4
 			ability: .mercenary_contract_assassin_backstab_tick
-		}				
+		}		
+		diminishing_effect: stun			
 	}
 
 	ability .mercenary_contract_assassin: !MERCENARY_CONTRACT_ABILITY{}

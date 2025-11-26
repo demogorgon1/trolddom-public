@@ -72,10 +72,11 @@ aura judgement_for_all:
 	icon: icon_stun		
 	type: debuff
 	duration: 40	
-	flags: [ unique magic ]
+	flags: [ unique magic incapacitation ]
 	aura_effect stun: { }
 	particle_system: judgement
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 ability judgement_for_all:
@@ -391,10 +392,11 @@ aura judgement:
 	icon: icon_stun		
 	type: debuff
 	duration: 50	
-	flags: [ unique ]
+	flags: [ unique incapacitation ]
 	aura_effect stun: { }
 	particle_system: judgement
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 cooldown judgement:

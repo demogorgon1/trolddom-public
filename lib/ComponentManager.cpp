@@ -16,6 +16,7 @@
 #include <tpublic/Components/Critter.h>
 #include <tpublic/Components/DeityDiscovery.h>
 #include <tpublic/Components/DeityRelations.h>
+#include <tpublic/Components/DiminishingEffects.h>
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/Environment.h>
 #include <tpublic/Components/EquippedItems.h>
@@ -91,6 +92,7 @@ namespace tpublic
 		_Register<Components::Critter>();
 		_Register<Components::DeityDiscovery>();
 		_Register<Components::DeityRelations>();
+		_Register<Components::DiminishingEffects>();
 		_Register<Components::DisplayName>();
 		_Register<Components::Environment>();
 		_Register<Components::EquippedItems>();

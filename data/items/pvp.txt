@@ -1,0 +1,44 @@
+item pvp_ring_1:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 30
+	icon: icon_ring_1
+	rarity: rare
+	string: "Band of Kaelrath"
+	stat strength: 1
+	stat constitution: 1
+	stat phys_crit_chance: 1
+}
+
+item pvp_ring_2:
+{
+	equipment_slots: [ finger_1 finger_2 ]
+	binds: when_picked_up
+	required_level: 30
+	icon: icon_ring_1
+	rarity: rare
+	string: "Vorynth's Ring"
+	stat spell_damage: 1
+	stat constitution: 1
+	stat spell_crit_chance: 1
+}
+
+item pvp_trinket_1:
+{
+	equipment_slots: [ trinket_1 trinket_2 ]
+	binds: when_picked_up
+	flags: [ unique ]
+	required_level: 30
+	icon: icon_ring_1
+	rarity: epic
+	string: "Medallion of Strife" 
+	use_ability: $ability [ icon string ]
+	{
+		description: "Removes one incapacitating effects from you."
+		cooldown: $cooldown { duration: 1200 }
+		flags: [ target_self item ]
+		requirement self<must_have_aura_flags>: [ incapacitation ]
+		direct_effect remove_aura: { aura_flags: [ incapacitation ] }
+	}		
+}

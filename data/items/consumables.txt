@@ -969,10 +969,11 @@ item consumable_fragmentation_grenade:
 				icon: icon_stun		
 				type: debuff
 				duration: 15	
-				flags: [ unique ]
+				flags: [ unique incapacitation ]
 				aura_effect stun: { }
 				particle_system: knock
 				priority: !AURA_PRIORITY_CC{}	
+				diminishing_effect: stun
 			}			
 		}
 	}
@@ -1136,9 +1137,10 @@ item consumable_frost_grenade:
 				description: "Immobilized."
 				type: debuff
 				duration: 60	
-				flags: [ unique magic ]
+				flags: [ unique magic incapacitation ]
 				aura_effect immobilize: { }
-				particle_system: improved_frost_explosion			
+				particle_system: improved_frost_explosion	
+				diminishing_effect: root				
 			}
 		}
 	}

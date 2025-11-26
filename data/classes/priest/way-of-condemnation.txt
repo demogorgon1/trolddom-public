@@ -62,7 +62,7 @@ aura mass_hysteria:
 	icon: icon_mass_hysteria
 	type: debuff
 	duration: 60	
-	flags: [ unique magic ]
+	flags: [ unique magic incapacitation ]
 	aura_effect stun:
 	{
 		flags: [ immediate ]
@@ -71,6 +71,7 @@ aura mass_hysteria:
 		update_count: 12
 	}
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: cc
 }
 
 ability mass_hysteria:
@@ -326,7 +327,7 @@ aura fear:
 	icon: icon_fear		
 	type: debuff
 	duration: 120	
-	flags: [ unique magic single_target ]
+	flags: [ unique magic single_target incapacitation ]
 	aura_effect stun:
 	{
 		flags: [ immediate ]
@@ -335,6 +336,7 @@ aura fear:
 		update_count: 24
 	}
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: cc
 }
 
 ability fear:

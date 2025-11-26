@@ -1,0 +1,17 @@
+diminishing_effect cc:
+{
+	curve: [ [ 0 1 ] [ 1 0.5 ] [ 2 0.25 ] [ 3 0 ] ]
+	ticks: 150
+}
+
+diminishing_effect stun:
+{
+	curve: [ [ 0 1 ] [ 1 0.75 ] [ 2 0.50 ] ]
+	ticks: 150
+}
+
+diminishing_effect root:
+{
+	curve: [ [ 0 1 ] [ 1 0.75 ] [ 2 0.50 ] ]
+	ticks: 150
+}

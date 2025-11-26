@@ -151,6 +151,17 @@ namespace tpublic
 					newEntry.m_characterId = aCharacterId;
 					newEntry.m_timeStamps[0] = aTimeStamp;
 				}
+
+				// Also prune
+				for(size_t i = 0; i < m_entries.size(); i++)
+				{
+					Entry& t = m_entries[i];
+					if(t.GetCount(aMinTimeStamp) == 0)
+					{
+						Helpers::RemoveCyclicFromVector(m_entries, i);
+						i--;
+					}
+				}
 			}
 
 			size_t

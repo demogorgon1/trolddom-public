@@ -138,6 +138,9 @@ namespace tpublic
 								SourceEntityInstance*						aOutSourceEntityInstance) const;
 			bool			HasAura(
 								uint32_t									aAuraId) const;
+			bool			HasAuraFlags(
+								const Manifest*								aManifest,
+								uint32_t									aFlags) const;
 			bool			HasAuraWithSource(
 								uint32_t									aAuraId,
 								uint32_t									aEntityInstanceId) const;

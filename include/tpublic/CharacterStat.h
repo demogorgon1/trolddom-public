@@ -27,6 +27,7 @@ namespace tpublic
 			ID_MEALS_PREPARED,
 			ID_FISH_CAUGHT,
 			ID_AREAS_DISCOVERED,
+			ID_PVP_RIFTS_LOOTED,
 
 			NUM_IDS
 		};
@@ -56,6 +57,7 @@ namespace tpublic
 			{ "meals_prepared",		"Total meals prepared: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 			{ "fish_caught",		"Total fish caught: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 			{ "areas_discovered",	"Areas discovered: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "pvp_rifts_looted",	"Rifts looted: %zu",								ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

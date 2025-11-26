@@ -1,0 +1,5 @@
+achievement_category pvp: { string: "PVP" order_key: 200 }
+
+achievement pvp_rift_1: { category: pvp string: "Rifter" description: "Loot 10 rifts." points: 10 priority: 0 stat_trigger pvp_rifts_looted: 10 icon: icon_bloodsoaked }
+achievement pvp_rift_2: { category: pvp string: "Rift Enjoyer" description: "Loot 50 rifts." points: 10 priority: 0 stat_trigger pvp_rifts_looted: 50 icon: icon_bloodsoaked root: pvp_rift_1 }
+achievement pvp_rift_3: { category: pvp string: "Blood for the Blood God" description: "Loot 100 rifts." points: 10 priority: 0 stat_trigger pvp_rifts_looted: 100 icon: icon_bloodsoaked root: pvp_rift_1 }

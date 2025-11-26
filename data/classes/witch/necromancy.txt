@@ -1032,9 +1032,10 @@ aura shackle_undeath:
 	icon: icon_shackle_undeath
 	type: debuff
 	duration: 200
-	flags: [ unique magic cancel_on_damage single_target ]
+	flags: [ unique magic cancel_on_damage single_target incapacitation ]
 	aura_effect stun: { }
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: cc
 }
 
 particle_system shackle_undeath:

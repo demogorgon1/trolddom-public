@@ -622,10 +622,11 @@ aura knock:
 	icon: icon_stun		
 	type: debuff
 	duration: 30	
-	flags: [ unique ]
+	flags: [ unique incapacitation ]
 	aura_effect stun: { }
 	particle_system: knock
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 cooldown knock:

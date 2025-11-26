@@ -736,7 +736,7 @@ aura sleep:
 	icon: icon_sleep
 	type: debuff
 	duration: based_on_effects
-	flags: [ unique magic cancel_on_damage single_target ]
+	flags: [ unique magic cancel_on_damage single_target incapacitation ]
 	aura_effect stun: { }
 	aura_effect repeat: 
 	{ 
@@ -745,6 +745,7 @@ aura sleep:
 		ability: sleep_tick
 	}
 	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: cc
 }
 
 particle_system sleep:

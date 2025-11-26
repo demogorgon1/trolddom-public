@@ -3,11 +3,13 @@
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/DiminishingEffects.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
 
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Aura.h>
+#include <tpublic/Data/DiminishingEffect.h>
 
 #include <tpublic/Systems/Combat.h>
 
@@ -243,6 +245,17 @@ namespace tpublic::Systems
 
 					auras->m_seq++;
 					auras->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
+				}
+				else if(aura->m_diminishingEffectId != 0)
+				{
+					// FIXME: this is only safe because we know what we're doing... but don't do it
+					EntityInstance* self = (EntityInstance*)aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+					Components::DiminishingEffects* diminishingEffects = self != NULL ? self->GetComponent<Components::DiminishingEffects>() : NULL;
+					if(diminishingEffects != NULL)
+					{
+						const Data::DiminishingEffect* diminishingEffect = GetManifest()->GetById<Data::DiminishingEffect>(aura->m_diminishingEffectId);
+						diminishingEffects->Refresh(aura->m_diminishingEffectId, aContext->m_tick + diminishingEffect->m_ticks);
+					}
 				}
 			}
 
