@@ -45,6 +45,7 @@
 #include <tpublic/Components/PVPRift.h>
 #include <tpublic/Components/RandomItemVendor.h>
 #include <tpublic/Components/RecentAchievements.h>
+#include <tpublic/Components/RecentPVPKills.h>
 #include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/ResurrectionPoint.h>
 #include <tpublic/Components/Shrine.h>
@@ -119,6 +120,7 @@ namespace tpublic
 		_Register<Components::PVPRift>();
 		_Register<Components::RandomItemVendor>();
 		_Register<Components::RecentAchievements>();
+		_Register<Components::RecentPVPKills>();
 		_Register<Components::Reputation>();
 		_Register<Components::ResurrectionPoint>();
 		_Register<Components::Shrine>();

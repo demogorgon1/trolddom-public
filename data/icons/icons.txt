@@ -944,6 +944,7 @@ sprites:
 	sprite icon_bloodsoaked: { tags: [ icon ] }
 	sprite icon_knapsack_1: { tags: [ icon ] }
 	sprite icon_knapsack_2: { tags: [ icon ] }
+	sprite icon_token_4: { tags: [ icon ] }
 }
 
 

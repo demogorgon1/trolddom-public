@@ -2,6 +2,7 @@ faction dominion_of_strife:
 {
 	string: "Dominion of Strife"
 	flags: [ friendly reputation pantheon ]
+	reputation_from_pvp_kill: 24
 }
 
 pantheon dominion_of_strife:
@@ -109,6 +110,13 @@ entity dominion_of_strife_rift:
 		}		
 		pvp_rift:
 		{
+			aura: dominion_of_strife_buff
+			primary_item: item_badge_of_honor
+			secondary_item: item_emblem_of_triumph
+			faction: dominion_of_strife
+			pantheon: dominion_of_strife
+			announcement_default_deity: dominion_of_strife_deity_1
+			announcement_range: 225
 		}
 	}
 }
@@ -184,6 +192,9 @@ deity dominion_of_strife_deity_1:
 		grandiose
 	]
 	pantheon: dominion_of_strife
+	announcement_now: "Come and get it! Fight for it!"
+	announcement_soon: "Get ready!"
+	announcement_winner: "A flawless strike! {} stands triumphant!"
 	
 	blessing_aura: $aura @domion_of_strife_deity_1_0 !DOMINION_OF_STRIFE_DEITY_1_AURA 
 	{ 
@@ -376,6 +387,9 @@ deity dominion_of_strife_deity_2:
 		warlike
 	]
 	pantheon: dominion_of_strife
+	announcement_now: "The rift has opened! Lay waste!"
+	announcement_soon: "The rift stirs!"
+	announcement_winner: "Behold! {} is victorious!"
 	
 	blessing_aura: $aura @domion_of_strife_deity_2_0 !DOMINION_OF_STRIFE_DEITY_2_AURA 
 	{ 
@@ -573,6 +587,9 @@ deity dominion_of_strife_deity_3:
 		healer
 	]
 	pantheon: dominion_of_strife
+	announcement_now: "It is time! Blessed be the victor!"
+	announcement_soon: "Sharpen your blades, mortals! Soon!"
+	announcement_winner: "Resilience prevails! {} has claimed my blessing!"
 	
 	blessing_aura: $aura @domion_of_strife_deity_3_0 !DOMINION_OF_STRIFE_DEITY_3_AURA 
 	{ 

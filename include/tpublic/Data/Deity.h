@@ -39,6 +39,12 @@ namespace tpublic
 							m_titleSuffix = aChild->GetString();
 						else if (aChild->m_name == "title")
 							m_title = aChild->GetString();
+						else if (aChild->m_name == "announcement_now")
+							m_announcementNow = aChild->GetString();
+						else if (aChild->m_name == "announcement_soon")
+							m_announcementSoon = aChild->GetString();
+						else if (aChild->m_name == "announcement_winner")
+							m_announcementWinner = aChild->GetString();
 						else if (aChild->m_name == "pantheon")
 							m_pantheonId = aChild->GetId(DataType::ID_PANTHEON);
 						else if(aChild->m_name == "blessing_auras")
@@ -61,6 +67,9 @@ namespace tpublic
 				aWriter->WriteString(m_title);
 				aWriter->WriteUInt(m_pantheonId);
 				aWriter->WriteUInts(m_blessingAuraIds);
+				aWriter->WriteString(m_announcementNow);
+				aWriter->WriteString(m_announcementSoon);
+				aWriter->WriteString(m_announcementWinner);
 			}
 			
 			bool
@@ -79,6 +88,12 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInts(m_blessingAuraIds))
 					return false;
+				if (!aReader->ReadString(m_announcementNow))
+					return false;
+				if (!aReader->ReadString(m_announcementSoon))
+					return false;
+				if (!aReader->ReadString(m_announcementWinner))
+					return false;
 				return true;
 			}
 
@@ -89,6 +104,9 @@ namespace tpublic
 			std::string							m_title;
 			uint32_t							m_pantheonId = 0;
 			std::vector<uint32_t>				m_blessingAuraIds;
+			std::string							m_announcementNow;
+			std::string							m_announcementSoon;
+			std::string							m_announcementWinner;
 		};
 
 	}

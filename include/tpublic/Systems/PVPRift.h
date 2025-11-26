@@ -10,7 +10,7 @@ namespace tpublic::Systems
 	{
 	public:
 		static const System::Id ID = System::ID_PVP_RIFT;
-		static const int32_t UPDATE_INTERVAL = 20;
+		static const int32_t UPDATE_INTERVAL = 8;
 
 						PVPRift(
 							const SystemData*	aData);

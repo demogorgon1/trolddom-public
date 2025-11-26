@@ -726,6 +726,22 @@ item item_emblem_of_triumph:
 	binds: when_picked_up
 }
 
+loot_group badge_of_honor: {}
+
+item item_badge_of_honor:
+{
+	string: "Badge of Honor"
+	loot_groups: [ badge_of_honor ]
+	type: miscellaneous
+	item_level: 30
+	flags: [ not_sellable ]
+	stack: 100
+	icon: icon_token_4
+	rarity: uncommon
+	level_range: [ 28 31 ]
+	binds: when_picked_up
+}
+
 #####################################################
 # Realm of Fire talisman
 

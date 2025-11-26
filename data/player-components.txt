@@ -29,6 +29,7 @@ player_components:
 	player_world_stash
 	position
 	recent_achievements
+	recent_pvp_kills
 	reputation
 	spirit_stone_discovery
 	stash

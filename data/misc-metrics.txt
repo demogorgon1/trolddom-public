@@ -12,4 +12,10 @@ misc_metrics:
 	additional_extra_stash_slot_price_multiplier: 1.3
 	max_extra_stash_slot_price: 100000
 	max_extra_stash_slots: 48
+
+	##################################################################
+	# PVP
+	
+	honor_kill_curve: [ [ 0 1 ] [ 1 0.5 ] [ 2 0.25 ] [ 3 0.125 ] [ 4 0 ] ]
+
 }

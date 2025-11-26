@@ -24,6 +24,9 @@ namespace tpublic
 				FIELD_PRIMARY_ITEM_ID,
 				FIELD_SECONDARY_ITEM_ID,
 				FIELD_FACTION_ID,
+				FIELD_PANTHEON_ID,
+				FIELD_ANNOUNCEMENT_DEFAULT_DEITY_ID,
+				FIELD_ANNOUNCEMENT_RANGE
 			};
 
 			static void
@@ -35,6 +38,9 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PRIMARY_ITEM_ID, "primary_item", offsetof(PVPRift, m_primaryItemId))->SetDataType(DataType::ID_ITEM);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SECONDARY_ITEM_ID, "secondary_item", offsetof(PVPRift, m_secondaryItemId))->SetDataType(DataType::ID_ITEM);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_FACTION_ID, "faction", offsetof(PVPRift, m_factionId))->SetDataType(DataType::ID_FACTION);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_PANTHEON_ID, "pantheon", offsetof(PVPRift, m_pantheonId))->SetDataType(DataType::ID_PANTHEON);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ANNOUNCEMENT_DEFAULT_DEITY_ID, "announcement_default_deity", offsetof(PVPRift, m_announcementDefaultDeityId))->SetDataType(DataType::ID_DEITY);
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_ANNOUNCEMENT_RANGE, "announcement_range", offsetof(PVPRift, m_announcementRange));
 			}
 
 			void
@@ -45,8 +51,12 @@ namespace tpublic
 				m_primaryItemId = 0;
 				m_secondaryItemId = 0;
 				m_factionId = 0;
+				m_pantheonId = 0;
+				m_announcementDefaultDeityId = 0;
+				m_announcementRange = 0;
 
 				m_activated = false;
+				m_announced = false;
 			}
 
 			// Public data
@@ -55,9 +65,13 @@ namespace tpublic
 			uint32_t			m_primaryItemId = 0;
 			uint32_t			m_secondaryItemId = 0;
 			uint32_t			m_factionId = 0;
+			uint32_t			m_pantheonId = 0;
+			uint32_t			m_announcementDefaultDeityId = 0;
+			int32_t				m_announcementRange = 0;
 
 			// Internal, server only
 			bool				m_activated = false;
+			bool				m_announced = false;
 		};
 
 	}

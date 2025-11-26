@@ -75,6 +75,7 @@ namespace tpublic
 			ID_CRITTER,
 			ID_SURVIVAL_INFO,
 			ID_PVP_RIFT,
+			ID_RECENT_PVP_KILLS,
 
 			NUM_IDS
 		};
@@ -147,7 +148,8 @@ namespace tpublic
 			"random_item_vendor",
 			"critter",
 			"survival_info",
-			"pvp_rift"
+			"pvp_rift",
+			"recent_pvp_kills"
 		};
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);
