@@ -2,6 +2,24 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.8"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Pantheon: Dominion of Strife." }
+		{ text: "More zones opened up east of the Devouring Shroud." }
+	]
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "You can now tab-target other players and minions if you're all flagged for PVP." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.7"
 
 	text: "Changes:"
