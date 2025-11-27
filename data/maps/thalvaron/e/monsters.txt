@@ -37,6 +37,13 @@ map_entity_spawn thalvaron_zilkore_plant:
 	spawn_timer: !NPC_RESPAWN_NORMAL{} 
 }
 
+map_entity_spawn thalvaron_jungle_plant: 
+{ 
+	entity thalvaron_jungle_plant_a: { } 
+	entity thalvaron_jungle_plant_b: { } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
 {
 	${
 		_level: 25
@@ -76,6 +83,33 @@ map_entity_spawn thalvaron_zilkore_plant:
 
 	entity thalvaron_zilkore_plant_a: !NPC { _string: "Thrasher" _sprite: carnivorous_plant_1 _sprite_dead: carnivorous_plant_1_dead }
 	entity thalvaron_zilkore_plant_b: !NPC { _string: "Thorn Spitter" _sprite: carnivorous_plant_2 _sprite_dead: carnivorous_plant_2_dead _abilities: [ { id: npc_thorn_spit_no_cooldown } ]
+}
+
+# Higher level plant monsters
+{
+	loot_table .plant_monster_2: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { weight: 1 loot_group: .elia_1_quest_item requirement self<must_have_active_quest>: { id: .elia_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_NATURE_ELEMENTALS{}
+		]	
+	}
+
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_long
+		_loot_table: .plant_monster_2
+	}
+
+	entity thalvaron_jungle_plant_a: !NPC { _string: "Blue Clawflower" _sprite: carnivorous_plant_4 _sprite_dead: carnivorous_plant_4_dead }
+	entity thalvaron_jungle_plant_b: !NPC { _string: "Green Clawflower" _sprite: carnivorous_plant_5 _sprite_dead: carnivorous_plant_5_dead _abilities: [ { id: npc_thorn_spit_no_cooldown } ]
 }
 
 ##########################################################################################
@@ -229,6 +263,37 @@ map_entity_spawn thalvaron_mirefiend:
 }
 
 ##########################################################################################
+# Humans
+
+map_entity_spawn thalvaron_jungle_bandit_boss: { entity thalvaron_jungle_bandit_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_jungle_bandit: 
+{ 
+	entity thalvaron_jungle_bandit_a: { } 
+	entity thalvaron_jungle_bandit_b: { } 
+	entity thalvaron_jungle_bandit_c: { } 
+	entity thalvaron_jungle_bandit_d: { } 
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
+# Bandits
+{
+	${		
+		_faction: monsters
+		_creature_type: humanoid		
+		_default_behavior_state: .passive		
+		_loot_table: default_humanoid
+		_level: 30
+	}
+
+	entity thalvaron_jungle_bandit_a: !NPC { _string: "Enforcer" _sprite: man_94 _sprite_dead: man_94_dead }
+	entity thalvaron_jungle_bandit_b: !NPC { _string: "Enforcer" _sprite: man_95 _sprite_dead: man_95_dead }
+	entity thalvaron_jungle_bandit_c: !NPC { _string: "Enforcer" _sprite: man_96 _sprite_dead: man_96_dead }
+	entity thalvaron_jungle_bandit_d: !NPC { _string: "Ranger" _sprite: man_97 _sprite_dead: man_97_dead _abilities: [ { id: npc_shoot } { id: npc_attack } ] }
+	entity thalvaron_jungle_bandit_boss: !NPC { _string: "Jork" _sprite: man_98 _sprite_dead: man_98_dead }
+}   
+
+##########################################################################################
 # Misc monsters
 
 map_entity_spawn thalvaron_forbidden_island_boss: { entity thalvaron_forbidden_island_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
@@ -243,6 +308,39 @@ map_entity_spawn thalvaron_jungle_lizard_boss: { entity thalvaron_jungle_lizard_
 map_entity_spawn thalvaron_thalyssian_spider_26: { entity thalvaron_thalyssian_spider_26: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_thalyssian_spider_27: { entity thalvaron_thalyssian_spider_27: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_battleground_troll: { entity thalvaron_battleground_troll: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_beast: { entity thalvaron_jungle_beast: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Battleground troll
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short				
+		_loot_table: default_humanoid 
+		_weapon_damage: 1.5
+		_resource_health: 2.4
+	}
+
+	entity thalvaron_battleground_troll: !NPC { _string: "Cave Troll" _sprite: troll_1 _sprite_dead: troll_1_dead }
+}
+
+# Beasts
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1.15
+		_resource_health: 1.17
+		_loot_table: default_lion
+		_default_behavior_state: .wandering_long
+
+	}
+
+	entity thalvaron_jungle_beast: !NPC { _string: "Spine Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_charge_rend } { id: npc_attack } ] }
+}
 
 # Forbidden island boss
 {
@@ -470,6 +568,13 @@ map_entity_spawn thalvaron_crust_elemental: { entity thalvaron_crust_elemental: 
 
 map_entity_spawn thalvaron_lizard_wizard: { entity thalvaron_lizard_wizard: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
+map_entity_spawn thalvaron_lizard_man:
+{ 
+	entity thalvaron_lizard_melee: { } 
+	entity thalvaron_lizard_caster: { } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
 # Wizard
 {
 	${
@@ -481,6 +586,20 @@ map_entity_spawn thalvaron_lizard_wizard: { entity thalvaron_lizard_wizard: { } 
 	}
 
 	entity thalvaron_lizard_wizard: !NPC { _string: "Zim'Bwob" _sprite: lizard_man_1 _sprite_dead: lizard_man_1_dead }
+}
+
+# Z'urgh
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: humanoid
+		_loot_table: default_humanoid
+		_default_behavior_state: .passive
+	}
+
+	entity thalvaron_lizard_melee: !NPC { _string: "Z'urgh Warrior" _sprite: lizard_man_5 _sprite_dead: lizard_man_5_dead }
+	entity thalvaron_lizard_caster: !NPC { _string: "Z'urgh Sorcerer" _sprite: lizard_man_3 _sprite_dead: lizard_man_3_dead _abilities: [ { id: npc_curse }	{ id: npc_frostbolt_no_cooldown } ] }
 }
 
 ##########################################################################################
@@ -1197,3 +1316,5 @@ map_entity_spawn thalvaron_sand_golem: { entity thalvaron_sand_golem: {} spawn_t
 	entity thalvaron_sand_golem: !NPC { }
 
 }
+
+

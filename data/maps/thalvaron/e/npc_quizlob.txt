@@ -1,0 +1,24 @@
+dialogue_screen .quizlob:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_quizlob: !NPC
+{
+	_string: "Quizlob"
+	_sprite: lizard_man_9
+	_sprite_dead: lizard_man_9_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .quizlob: { } }
+}

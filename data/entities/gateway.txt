@@ -395,3 +395,77 @@ entity voraghul_portal_return_portal:
 		}
 	}
 }
+
+entity thalvaron_jungle_tower_portal:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}						
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_jungle_tower_portal_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
+
+entity thalvaron_jungle_tower_portal_return:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_jungle_tower_portal_return_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}

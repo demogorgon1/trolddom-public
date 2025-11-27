@@ -945,6 +945,15 @@ sprites:
 	sprite icon_knapsack_1: { tags: [ icon ] }
 	sprite icon_knapsack_2: { tags: [ icon ] }
 	sprite icon_token_4: { tags: [ icon ] }
+	sprite icon_trinket_1: { tags: [ icon ] }
+	sprite icon_ring_16: { tags: [ icon ] }
+	sprite icon_ring_17: { tags: [ icon ] }
+	sprite icon_necklace_17: { tags: [ icon ] }
+	
+	cursor: { position: [ 0 832 ] }	
+	sprite icon_cape_7: { tags: [ icon ] }
+	sprite icon_cape_8: { tags: [ icon ] }
+	sprite icon_cape_9: { tags: [ icon ] }
 }
 
 

@@ -577,17 +577,8 @@ namespace tpublic
 					bool shouldHaveAuraFlags = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA_FLAGS;
 					bool hasAuraFlags = false;
 
-					if (aManifest->GetById<Data::Aura>(aRequirement->m_id)->m_type == Data::Aura::TYPE_HIDDEN)
-					{
-						// Hidden auras must be checked in the server-side only component
-						const Components::Auras* auras = entity->GetComponent<Components::Auras>();
-						hasAuraFlags = auras != NULL && auras->HasAuraFlags(aManifest, aRequirement->m_id);
-					}
-					else
-					{
-						const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
-						hasAuraFlags = visibleAuras->HasAuraFlags(aManifest, aRequirement->m_id);
-					}
+					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+					hasAuraFlags = visibleAuras->HasAuraFlags(aManifest, aRequirement->m_id);
 
 					if(shouldHaveAuraFlags != hasAuraFlags)
 						return false;						

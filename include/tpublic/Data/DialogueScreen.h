@@ -228,6 +228,44 @@ namespace tpublic
 				uint32_t					m_level = 0;
 			};
 
+			struct SellWorshipLevelRequirement
+			{
+				SellWorshipLevelRequirement()
+				{
+
+				}
+
+				SellWorshipLevelRequirement(
+					const SourceNode* aSource)
+				{
+					m_pantheonId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_PANTHEON, aSource->m_name.c_str());
+					m_level = aSource->GetUInt32();
+				}
+
+				void
+					ToStream(
+						IWriter* aWriter) const
+				{
+					aWriter->WriteUInt(m_pantheonId);
+					aWriter->WriteUInt(m_level);
+				}
+
+				bool
+					FromStream(
+						IReader* aReader)
+				{
+					if (!aReader->ReadUInt(m_pantheonId))
+						return false;
+					if (!aReader->ReadUInt(m_level))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t					m_pantheonId = 0;
+				uint32_t					m_level = 0;
+			};
+
 			struct SellItemCost
 			{
 				SellItemCost()
@@ -289,8 +327,10 @@ namespace tpublic
 							m_cost = aChild->GetUInt32();
 						else if(aChild->m_name == "quantity")
 							m_quantity = aChild->GetUInt32();
-						else if(aChild->m_tag == "reputation_level_requirement")
+						else if (aChild->m_tag == "reputation_level_requirement")
 							m_reputationLevelRequirement = SellReputationLevelRequirement(aChild);
+						else if (aChild->m_tag == "worship_level_requirement")
+							m_worshipLevelRequirement = SellWorshipLevelRequirement(aChild);
 						else if (aChild->m_name == "item_cost")
 							m_itemCost = SellItemCost(aChild);
 						else
@@ -306,6 +346,7 @@ namespace tpublic
 					aWriter->WriteUInt(m_cost);
 					aWriter->WriteUInt(m_quantity);
 					aWriter->WriteOptionalObject(m_reputationLevelRequirement);
+					aWriter->WriteOptionalObject(m_worshipLevelRequirement);
 					aWriter->WriteOptionalObject(m_itemCost);
 				}
 
@@ -321,6 +362,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadOptionalObject(m_reputationLevelRequirement))
 						return false;
+					if (!aReader->ReadOptionalObject(m_worshipLevelRequirement))
+						return false;
 					if (!aReader->ReadOptionalObject(m_itemCost))
 						return false;
 					return true;
@@ -331,6 +374,7 @@ namespace tpublic
 				uint32_t										m_cost = 0;
 				uint32_t										m_quantity = 1;
 				std::optional<SellReputationLevelRequirement>	m_reputationLevelRequirement;				
+				std::optional<SellWorshipLevelRequirement>		m_worshipLevelRequirement;
 				std::optional<SellItemCost>						m_itemCost;
 			};
 

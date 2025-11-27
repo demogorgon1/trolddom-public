@@ -6,7 +6,11 @@
 !define EMBLEM_OF_TRIUMPH_PRICE { quantity: 1 item_cost<[ item_emblem_of_triumph emblem_of_triumph_currency ]>: @_count }	
 !define RANDOM_ITEM_VENDOR_EMBLEM_OF_TRIUMPH_COST { token_item: item_emblem_of_triumph token_sprite: emblem_of_triumph_currency }
 
-!define BADGE_OF_HONOR_PRICE { quantity: 1 item_cost<[ item_badge_of_honor badge_of_honor_currency ]>: @_count }	
+!define BADGE_OF_HONOR_PRICE 
+{ 
+	quantity: 1 
+	item_cost<[ item_badge_of_honor badge_of_honor_currency ]>: @_count 	
+}	
 
 !define TRASH_RESPAWN_TIMER { normal: 36000 fast_trigger: 0 } 
 !define QUEST_ITEM_RESPAWN_TIMER { despawn_required: true normal: [ 1000 1400 ] fast: [ 600 1000 ] fast_trigger: 600 }

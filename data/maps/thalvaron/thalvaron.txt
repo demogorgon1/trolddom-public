@@ -20,6 +20,9 @@ map_player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: { }
 map_player_spawn thalvaron_flimlock_3_portal_spawn: { }
 map_player_spawn thalvaron_flimlock_3_portal_return_spawn: { }
 
+map_player_spawn thalvaron_jungle_tower_portal_spawn: { }
+map_player_spawn thalvaron_jungle_tower_portal_return_spawn: { }
+
 map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
 
 zone .top_zone_marshlands: { string: "The Marshlands" preposition: "in" }
@@ -151,6 +154,8 @@ zone .the_jungle_passage: { string: "The Jungle Passage" preposition: "in" }
 zone thalvaron_ancient_battleground: { string: "Ancient Battleground" preposition: "on the" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger }
 zone thalvaron_welks_cave: { string: "Welk's Cave" preposition: "in" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger }
 zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" }
+zone .tower_of_tyrion: { string: "Tower of Tyrion" preposition: "at" }
+zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -514,6 +519,12 @@ map_entity_spawn thalvaron_trader_joseph_1_quest_item: { entity thalvaron_trader
 map_entity_spawn thalvaron_trader_joseph_2_quest_item: { entity thalvaron_trader_joseph_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_pony: { entity pony: { init_state: default } }
 map_entity_spawn thalvaron_louise_farbottom: { entity thalvaron_louise_farbottom: { init_state: default } }
+map_entity_spawn thalvaron_quizlob: { entity thalvaron_quizlob: { init_state: default } }
+map_entity_spawn thalvaron_frollo: { entity thalvaron_frollo: { init_state: default } }
+map_entity_spawn thalvaron_faria: { entity thalvaron_faria: { init_state: default } }
+map_entity_spawn thalvaron_jungle_tower_portal: { entity thalvaron_jungle_tower_portal: { init_state: default } }
+map_entity_spawn thalvaron_jungle_tower_portal_return: { entity thalvaron_jungle_tower_portal_return: { init_state: default } }
+map_entity_spawn thalvaron_elia: { entity thalvaron_elia: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -561,6 +572,8 @@ map_palette .stuff:
 	player_spawn thalvaron_flimlock_3_portal_return_spawn: [ 240 105 230 ]
 	player_spawn thalvaron_the_devouring_shroud_exit: [ 14 121 144 ]
 	player_spawn thalvaron_karethi_temple_exit: [ 111 124 244 ]
+	player_spawn thalvaron_jungle_tower_portal_spawn: [ 210 105 70 ]
+	player_spawn thalvaron_jungle_tower_portal_return_spawn: [ 210 105 240 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
@@ -1162,6 +1175,18 @@ map_palette .stuff:
 	entity_spawn thalvaron_pony: [ 145 15 93 ]
 	entity_spawn thalvaron_louise_farbottom: [ 245 155 12 ]
 	entity_spawn thalvaron_sand_golem: [ 24 94 118 ]
+	entity_spawn thalvaron_quizlob: [ 39 141 94 ]
+	entity_spawn thalvaron_frollo: [ 39 241 94 ]
+	entity_spawn thalvaron_faria: [ 139 141 94 ]
+	entity_spawn thalvaron_jungle_tower_portal_return: [ 45 186 34 ]
+	entity_spawn thalvaron_jungle_tower_portal: [ 45 48 94 ]
+	entity_spawn thalvaron_jungle_plant: [ 40 0 248 ]
+	entity_spawn thalvaron_elia: [ 140 50 248 ]		
+	entity_spawn thalvaron_lizard_man: [ 0 39 148 ]
+	entity_spawn thalvaron_battleground_troll: [ 100 0 238 ]
+	entity_spawn thalvaron_jungle_beast: [ 140 0 129 ]
+	entity_spawn thalvaron_jungle_bandit: [ 9 2 164 ]
+	entity_spawn thalvaron_jungle_bandit_boss: [ 209 2 164 ]
 }
 
 map_palette .levels:
@@ -1282,6 +1307,7 @@ map_palette .zones:
 	zone thalvaron_ancient_battleground: [ 186 24 102 ]
 	zone thalvaron_welks_cave: [ 113 231 234 ]
 	zone .flinks_hideout: [ 64 26 159 ]
+	zone .tower_of_tyrion: [ 29 166 206 ]
 }
 
 map_palette .sub_zones:
@@ -1320,10 +1346,12 @@ map_palette .sub_zones:
 	sub_zone .shrine_of_zilu: [ 170 113 23 ]
 	sub_zone .ancient_burial_site: [ 234 28 128 ]
 	sub_zone .kobold_shrine: [ 239 170 201 ]
+	sub_zone .dark_water: [ 8 54 166 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
 	sub_zone thalvaron_lurker: [ 93 39 84 ]
+	
 }
 
 map_palette .routes:

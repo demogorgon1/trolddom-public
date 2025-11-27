@@ -196,11 +196,16 @@ namespace tpublic::DirectEffects
 
 			chance += _GetCriticalChanceBonus(sourceAuras, abilityModifiers);
 
-			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
-			{
-				damage = (damage * 3) / 2;
+			chance -= targetCombatPrivate->m_resilience;
 
-				result = CombatEvent::ID_CRITICAL;
+			if(chance > 0.0f)
+			{
+				if (Helpers::RandomFloat(aRandom) < chance / 100.0f)
+				{
+					damage = (damage * 3) / 2;
+
+					result = CombatEvent::ID_CRITICAL;
+				}
 			}
 		}
 

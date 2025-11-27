@@ -1,0 +1,36 @@
+dialogue_screen .frollo:
+{
+	text: 
+	[	
+		"Praised be the Dominion of Strife."
+	]		
+	
+	options:
+	[
+		{ 
+			text: "What's up with the rift?" 
+			goto: $dialogue_screen 
+			{ 
+				text: 
+				[ 
+					"Every hour the gods of battle will open a rift at the center of the ancient battlefield. Whoever manage to loot it first will claim its rewards.\n" 
+					"\n"
+					"What rewards? Well... the more soaked in blood you are, the more you'll be rewarded."
+				] 
+			} 
+		}
+	]
+}
+
+entity thalvaron_frollo: !NPC
+{
+	_string: "Frollo"
+	_sprite: man_93
+	_sprite_dead: man_93_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .frollo: { } }
+}

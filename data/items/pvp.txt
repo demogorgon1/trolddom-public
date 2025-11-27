@@ -3,12 +3,14 @@ item pvp_ring_1:
 	equipment_slots: [ finger_1 finger_2 ]
 	binds: when_picked_up
 	required_level: 30
-	icon: icon_ring_1
+	icon: icon_ring_16
 	rarity: rare
 	string: "Band of Kaelrath"
-	stat strength: 1
-	stat constitution: 1
+	stat_weight strength: 2
+	stat_weight constitution: 1
 	stat phys_crit_chance: 1
+	stat resilience: 1
+	budget_bias: -10
 }
 
 item pvp_ring_2:
@@ -16,12 +18,28 @@ item pvp_ring_2:
 	equipment_slots: [ finger_1 finger_2 ]
 	binds: when_picked_up
 	required_level: 30
-	icon: icon_ring_1
+	icon: icon_ring_17
 	rarity: rare
 	string: "Vorynth's Ring"
-	stat spell_damage: 1
-	stat constitution: 1
+	stat_weight spell_damage: 2
+	stat_weight constitution: 1
 	stat spell_crit_chance: 1
+	stat resilience: 1
+	budget_bias: -10
+}
+
+item pvp_neck_1:
+{
+	equipment_slots: [ neck ]
+	binds: when_picked_up
+	required_level: 30
+	icon: icon_necklace_17
+	rarity: rare
+	string: "Matron's Charm" 
+	stat_weight health_per_5: 2
+	stat_weight constitution: 1 
+	stat resilience: 1	
+	budget_bias: -10
 }
 
 item pvp_trinket_1:
@@ -30,15 +48,63 @@ item pvp_trinket_1:
 	binds: when_picked_up
 	flags: [ unique ]
 	required_level: 30
-	icon: icon_ring_1
+	icon: icon_trinket_1
 	rarity: epic
 	string: "Medallion of Strife" 
 	use_ability: $ability [ icon string ]
 	{
-		description: "Removes one incapacitating effects from you."
+		description: "Removes all incapacitating effects."
 		cooldown: $cooldown { duration: 1200 }
-		flags: [ target_self item ]
+		flags: [ target_self item can_use_stunned ]
 		requirement self<must_have_aura_flags>: [ incapacitation ]
-		direct_effect remove_aura: { aura_flags: [ incapacitation ] }
+		direct_effect remove_aura: { aura_flags: [ incapacitation ] aura_type: debuff remove_all: true }
 	}		
+}
+
+item pvp_back_1:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 30
+	icon: icon_cape_7
+	rarity: epic
+	string: "Ever-Burning Cloak" 
+	stat_weight strength: 1
+	stat_weight constitution: 2
+	stat phys_crit_chance: 1
+	stat resilience: 1	
+	budget_bias: -15	
+}
+
+item pvp_back_2:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 30
+	icon: icon_cape_8
+	rarity: epic
+	string: "Shroud of the Warmage" 
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 2
+	stat_weight constitution: 2
+	stat resilience: 1	
+	budget_bias: -5
+}
+
+item pvp_back_3:
+{
+	equipment_slots: [ back ]
+	binds: when_picked_up
+	type: armor_cloth
+	required_level: 30
+	icon: icon_cape_9
+	rarity: epic
+	string: "Cape of the Highborne" 
+	stat_weight wisdom: 1
+	stat_weight healing: 2
+	stat_weight constitution: 2
+	stat resilience: 1	
+	budget_bias: -5
 }

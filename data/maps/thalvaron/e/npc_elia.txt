@@ -1,0 +1,88 @@
+dialogue_screen .elia:
+{
+	text: 
+	[	
+		"What brings you here? Happy to meet someone who's not a carnivorous plant."
+	]		
+	
+	options:
+	[
+		{ quest: .elia_1 }
+	]
+}
+
+entity thalvaron_elia: !NPC
+{
+	_string: "Elia"
+	_sprite: elf_18
+	_sprite_dead: man_18_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .elia: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .elia_1:
+{
+	string: "Thrasher Thorns"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .elia_1_quest_item count: 8 }
+}
+
+loot_group .elia_1_quest_item: {}
+
+item .elia_1_quest_item:
+{
+	icon: icon_fangs_1
+	item_level: 30
+	loot_groups: [ .elia_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Thrasher Thorn"
+	stack: 8
+}
+
+{
+	${ _level: 30 }
+	item .elia_1_a: !QUEST_REWARD_FEET{ _string: "Elven Boots" _icon: icon_boots_5 _wisdom: 1 _spirit: 2 _healing: 4 _type: armor_cloth }
+	item .elia_1_b: !QUEST_REWARD_HEAD{ _string: "Helmet of the Elf Lord" _icon: icon_helmet_5 _strength: 1 _hit_chance: 1 _budget_bias: -10 _type: armor_plate }
+}
+
+quest .elia_1:
+{
+	string: "Sharp Thorns"
+
+	text:
+	[
+		"Hunt clawflowers, collect their thorns, and return to Elia."
+	]
+	
+	description: 
+	[
+		"You might wonder what an elf is doing in these lizard-infested woods. Well, it's quite simple. My employer needs a variety of different objects and reagents that can only be found in these parts.\n"
+		"\n"
+		"Have you seen the large carnivorous flowers walking around on their roots? I don't really understand where they're coming from, you know, from an evolutionary point of view... But that doesn't really matter. I've been told they're called clawflowers.\n"
+		"\n"
+		"No, what matters is that apparently they have some thorns that are very useful. Can you collect some of them for me?"
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's exactly what we need, thanks!"		
+	]
+
+	level: 30
+	objectives: [ .elia_1 ]
+	reward_one_item: [ .elia_1_a .elia_1_b ]
+}

@@ -1,0 +1,31 @@
+!define local VENDOR_ITEM
+{ 
+	quantity: 1 
+	item_cost<[ item_badge_of_honor badge_of_honor_currency ]>: @_count 	
+	worship_level_requirement dominion_of_strife: @_worship_required
+}	
+
+dialogue_screen .faria_vendor:
+{
+	sell pvp_ring_1: !VENDOR_ITEM{ _count: 20 _worship_required: 1 }
+	sell pvp_ring_2: !VENDOR_ITEM{ _count: 20 _worship_required: 1 }
+	sell pvp_neck_1: !VENDOR_ITEM{ _count: 20 _worship_required: 1 }
+	sell pvp_trinket_1: !VENDOR_ITEM{ _count: 35 _worship_required: 2 }
+	sell pvp_back_1: !VENDOR_ITEM{ _count: 45 _worship_required: 3 }
+	sell pvp_back_2: !VENDOR_ITEM{ _count: 45 _worship_required: 3 }
+	sell pvp_back_3: !VENDOR_ITEM{ _count: 45 _worship_required: 3 }
+}
+
+entity thalvaron_faria: !NPC
+{
+	_string: "Faria"
+	_guild_name: "Priestess of War"
+	_sprite: woman_46
+	_sprite_dead: woman_46_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .faria_vendor: { } }
+}

@@ -35,6 +35,8 @@ namespace tpublic
 			ID_MANA_PER_5_SECONDS,
 			ID_ATTACK_POWER,
 			ID_STEALTH,
+			ID_RESILIENCE,
+			ID_HIT,
 
 			NUM_IDS
 		};
@@ -75,6 +77,8 @@ namespace tpublic
 			{ "mana_per_5",				"MP5",			"Mana Per 5 Seconds",						NULL,																	1.0f,	false,	false },
 			{ "attack_power",			"AP",			"Attack Power",								NULL,																	2.0f,	false,	false },
 			{ "stealth",				"STEALTH",		"Stealth",									"Decreases likelihood of detection when stealthed.",					10.0f,	false,	false },
+			{ "resilience",				"RES",			"Resilience",								"Reduces your chance of being hit by a critical strike by %u%%.",		10.0f,	true,	false },
+			{ "hit",					"HIT",			"Hit Chance",								"Improves your chance to hit by %u%%.",									10.0f,	true,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

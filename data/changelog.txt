@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Pantheon: Dominion of Strife." }
 		{ text: "The areas east of the Devouring Shroud have now opened." }
+		{ text: "New item stats: Hit Chance (reduces chance to miss) and Resilience (reduces chance to be hit by critical strike)." }
 	]
 
 	text: "Changes:"
@@ -19,6 +20,7 @@ changelog:
 		{ text: "Stuns, roots, and other incapacitation effects have diminishing returns when used in PVP." }
 		{ text: "You can now tab-target other players and minions if you're all flagged for PVP." }
 		{ text: "Hold ALT to target self when using abilities." }
+		{ text: "It's no longer possible to change equipment while in combat." }
 	]
 
 	#######################################################################################
