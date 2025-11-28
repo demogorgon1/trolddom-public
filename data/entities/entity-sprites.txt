@@ -1080,6 +1080,9 @@ sprites:
 	sprite man_96: { dead: man_96_dead }
 	sprite man_97: { dead: man_97_dead }
 	sprite man_98: { dead: man_98_dead }
+	sprite wood_elemental_3: { dead: wood_elemental_3_dead }
+	sprite carnivorous_plant_6: { dead: carnivorous_plant_6_dead }
+	sprite woman_47: { dead: woman_47_dead }
 
 	cursor: { position: [ 0 944 ] }
 	sprite lizard_man_9_dead: { }		
@@ -1091,6 +1094,9 @@ sprites:
 	sprite man_96_dead: { }	
 	sprite man_97_dead: { }	
 	sprite man_98_dead: { }	
+	sprite wood_elemental_3_dead: { }	
+	sprite carnivorous_plant_6_dead: { }	
+	sprite woman_47_dead: { }	
 	
 }
 

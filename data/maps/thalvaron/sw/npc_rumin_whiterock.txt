@@ -44,6 +44,7 @@ item .rumin_whiterock_1_quest_item:
 	loot_groups: [ .rumin_whiterock_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Paw of One-Eyed Moe"
+	quest: .rumin_whiterock_1
 }
 
 objective .rumin_whiterock_1:

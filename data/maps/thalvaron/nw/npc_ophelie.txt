@@ -59,7 +59,7 @@ quest .ophelie_1:
 
 	text:
 	[
-		"Hunt crabs on the beach and return their claws to Tyron."
+		"Slay the giant angry boar that is roaming the potato field and return to Ophelie."
 	]
 	
 	description: 

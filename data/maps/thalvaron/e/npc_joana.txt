@@ -87,6 +87,7 @@ item .joana_2_quest_item_1:
 	loot_groups: [ .joana_2_quest_item_1 ]
 	flags: [ not_sellable unique ]
 	string: "Orb of Kralir"
+	quest: thalvaron_joana_2
 }
 
 item .joana_2_quest_item_2:
@@ -96,6 +97,7 @@ item .joana_2_quest_item_2:
 	loot_groups: [ .joana_2_quest_item_2 ]
 	flags: [ not_sellable unique ]
 	string: "Orb of Jurgorth"
+	quest: thalvaron_joana_2
 }
 
 item .joana_2_quest_item_3:
@@ -105,6 +107,7 @@ item .joana_2_quest_item_3:
 	loot_groups: [ .joana_2_quest_item_3 ]
 	flags: [ not_sellable unique ]
 	string: "Orb of the Last King"
+	quest: thalvaron_joana_2
 }
 
 objective .joana_2_a:

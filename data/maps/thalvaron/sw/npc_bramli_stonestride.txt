@@ -41,6 +41,7 @@ item .bramli_stonestride_1_quest_item:
 	loot_groups: [ .bramli_stonestride_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Giant Fang"
+	quest: .bramli_stonestride_1
 }
 
 objective .bramli_stonestride_1:

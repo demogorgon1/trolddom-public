@@ -50,6 +50,7 @@ item .durk_1_quest_item:
 	loot_groups: [ .durk_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Durk's Sapling"
+	quest: .durk_1
 	stack: 1
 }
 

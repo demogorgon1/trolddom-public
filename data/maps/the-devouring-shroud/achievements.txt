@@ -7,3 +7,5 @@ achievement the_devouring_shroud_boss_4: { sort_key: 4 category: .the_devouring_
 achievement the_devouring_shroud_boss_5: { sort_key: 5 category: .the_devouring_shroud string: "Tzun'Kala" description: "Slay Tzun'Kala." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_5 icon: icon_skull_1 }
 
 achievement the_devouring_shroud: { category: .the_devouring_shroud string: "The Devouring Shroud" description: "Finish The Devouring Shroud." points: 20 need_achievements: [ the_devouring_shroud_boss_1 the_devouring_shroud_boss_2 the_devouring_shroud_boss_3 the_devouring_shroud_boss_4 the_devouring_shroud_boss_5 ] icon: icon_the_devouring_shroud }
+
+achievement the_devouring_shroud_boss_6: { sort_key: 100 category: .the_devouring_shroud string: "The Devourer" description: "Slay The Devourer." points: 10 priority: 0 kill_trigger: the_devouring_shroud_boss_6 icon: icon_skull_1 }

@@ -17,5 +17,8 @@ sprites:
 	sprite pony_0: { }
 	sprite pony_1: { }
 	sprite pony_2: { }
+	sprite black_horse_0: { }
+	sprite black_horse_1: { }
+	sprite black_horse_2: { }
 
 }

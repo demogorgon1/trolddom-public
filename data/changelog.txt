@@ -9,7 +9,7 @@ changelog:
 	list:
 	[
 		{ text: "Pantheon: Dominion of Strife." }
-		{ text: "The areas east of the Devouring Shroud have now opened." }
+		{ text: "The area east of the Devouring Shroud has opened." }
 		{ text: "New item stats: Hit Chance (reduces chance to miss) and Resilience (reduces chance to be hit by critical strike)." }
 	]
 
@@ -21,6 +21,15 @@ changelog:
 		{ text: "You can now tab-target other players and minions if you're all flagged for PVP." }
 		{ text: "Hold ALT to target self when using abilities." }
 		{ text: "It's no longer possible to change equipment while in combat." }
+		{ text: "Opening things will now be interrupted by taking damage." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where summoned entities dropped loot and generated XP." }
+		{ text: "Fixed more minor quest issues." }
 	]
 
 	#######################################################################################

@@ -92,7 +92,7 @@ item .dag_hammerfest_2_quest_item:
 	loot_groups: [ .dag_hammerfest_2_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Superior Stalker Claw"
-	quest: .dag_hammerfest_2
+	quest: .dag_hammerfest_2	
 }
 
 objective .dag_hammerfest_2:

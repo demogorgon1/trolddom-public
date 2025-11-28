@@ -659,12 +659,11 @@ map_entity_spawn thalvaron_skaldrun_satyr:
 		_level: 22
 		_faction: monsters
 		_creature_type: demon
-		_default_behavior_state: .wandering_short				
-		_loot_table: .seren_virelith_2_quest_item			
+		_default_behavior_state: .wandering_short								
 		_resource_health: 0.75
 	}
 
-	entity thalvaron_skaldrun_demon_spawn: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] }
+	entity thalvaron_skaldrun_demon_spawn: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] _loot_table: .seren_virelith_2_quest_item }
 	entity thalvaron_skaldrun_demon_spawn_summoner: !NPC { _string: "Demonic Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _abilities: [ { id: npc_attack } ] _default_despawn_after_ticks: 50 _no_kill_event: true }
 }
 

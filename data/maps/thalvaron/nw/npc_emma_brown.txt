@@ -41,6 +41,7 @@ item thalvaron_emma_brown_1_quest_item:
 	item_level: 17
 	loot_groups: [ thalvaron_emma_brown_1_quest_item ]
 	flags: [ not_sellable unique ]
+	quest: thalvaron_emma_brown_1
 	string: "The Child's Blood"
 }
 

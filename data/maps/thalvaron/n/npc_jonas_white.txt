@@ -138,6 +138,7 @@ item .jonas_white_2_quest_item:
 	loot_groups: [ .jonas_white_2_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Elusive Tablet"
+	quest: .jonas_white_2
 }
 
 quest .jonas_white_2:

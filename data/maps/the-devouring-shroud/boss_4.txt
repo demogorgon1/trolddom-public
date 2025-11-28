@@ -43,6 +43,7 @@ encounter .boss_4:
 entity the_devouring_shroud_boss_4: !NPC 
 { 
 	_string: "Ixtli" 
+	_guild_name: "High Priest"
 	_level: 30
 	_elite: true
 	_faction: monsters 
@@ -58,6 +59,7 @@ entity the_devouring_shroud_boss_4: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	_in_combat_barks: [ { type: yell text: "Y'ruk z'erk!" flags: [ no_chat_bubble ] } ]	
 
 	_abilities: 
 	[

@@ -10,10 +10,13 @@ dialogue_screen .faria_vendor:
 	sell pvp_ring_1: !VENDOR_ITEM{ _count: 20 _worship_required: 1 }
 	sell pvp_ring_2: !VENDOR_ITEM{ _count: 20 _worship_required: 1 }
 	sell pvp_neck_1: !VENDOR_ITEM{ _count: 20 _worship_required: 1 }
+	sell pvp_bracers_1: !VENDOR_ITEM{ _count: 25 _worship_required: 1 }
+	sell pvp_bracers_2: !VENDOR_ITEM{ _count: 25 _worship_required: 1 }
 	sell pvp_trinket_1: !VENDOR_ITEM{ _count: 35 _worship_required: 2 }
 	sell pvp_back_1: !VENDOR_ITEM{ _count: 45 _worship_required: 3 }
 	sell pvp_back_2: !VENDOR_ITEM{ _count: 45 _worship_required: 3 }
 	sell pvp_back_3: !VENDOR_ITEM{ _count: 45 _worship_required: 3 }
+	sell mount_black_horse: !VENDOR_ITEM{ _count: 50 _worship_required: 4 }	
 }
 
 entity thalvaron_faria: !NPC

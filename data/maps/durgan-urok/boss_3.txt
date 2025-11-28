@@ -29,7 +29,7 @@ loot_table .boss_3:
 		_budget_bias: -10
 		_strength: 2
 		_constitution: 3		
-		_block_chance: 2
+		_block: 2
 	}	
 	
 	item durgan_urok_3_2: !BOSS_DROP_LEGS

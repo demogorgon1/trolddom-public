@@ -954,6 +954,11 @@ sprites:
 	sprite icon_cape_7: { tags: [ icon ] }
 	sprite icon_cape_8: { tags: [ icon ] }
 	sprite icon_cape_9: { tags: [ icon ] }
+	sprite icon_rock_3: { tags: [ icon ] }
+	sprite icon_black_horse: { tags: [ icon ] }
+	sprite icon_bracers_7: { tags: [ icon ] }
+	sprite icon_bracers_8: { tags: [ icon ] }
+	sprite icon_bone_3: { tags: [ icon ] }
 }
 
 

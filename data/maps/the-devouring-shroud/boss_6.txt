@@ -1,0 +1,334 @@
+############################################################
+# Loot
+
+loot_group .boss_6: {}
+
+loot_table .boss_6:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message the_devouring_shroud: "The Devourer will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_6  } }		
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 31
+		_loot_group: .boss_6
+	}		
+	
+	item the_devouring_shroud_6_1: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Pauldrons of the Devourer"
+		_type: armor_plate
+		_icon: icon_shoulders_1
+		_strength: 3
+		_constitution: 2
+		_hit: 1
+		_budget_bias: -10
+	}	
+
+	item the_devouring_shroud_6_2: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Ancient Star Mantle"
+		_type: armor_cloth
+		_icon: icon_shoulders_2
+		_wisdom: 3
+		_constitution: 1
+		_spell_damage: 4
+		_hit: 1
+		_budget_bias: -10
+	}	
+
+	item the_devouring_shroud_6_3: !BOSS_DROP_FINGER
+	{
+		_string: "Ring of Accuracy"
+		_icon: icon_ring_1
+		_constitution: 1
+		_strength: 4
+		_hit: 1
+		_phys_crit: 1
+		_budget_bias: -20
+	}	
+
+	item the_devouring_shroud_6_4: !BOSS_DROP_FINGER
+	{
+		_string: "Spellbinder's Band"
+		_icon: icon_ring_2
+		_wisdom: 1
+		_spell_damage: 2
+		_hit: 1
+		_spell_crit: 1
+		_budget_bias: -20
+	}	
+
+	item the_devouring_shroud_6_5: !BOSS_DROP_WAIST
+	{
+		_string: "Ancient Linen Belt"
+		_icon: icon_belt_1
+		_wisdom: 2
+		_constitution: 1
+		_hit: 1
+		_budget_bias: -10
+		_type: armor_cloth
+	}	
+
+	item the_devouring_shroud_6_6: !BOSS_DROP_WAIST
+	{
+		_string: "Assassin's Girdle"
+		_icon: icon_belt_2
+		_dexterity: 1
+		_hit: 1
+		_haste: 1
+		_budget_bias: -20
+		_type: armor_cloth
+	}	
+
+}
+
+############################################################
+# Boss
+
+item the_devouring_shroud_boss_6_spawn_item:
+{
+	string: "Heart of the Ancient"
+	icon: icon_rock_3
+	rarity: uncommon
+	flags: [ unique not_sellable ]
+	use_ability: $ability [ string icon ]
+	{
+		description: "Place on the dead body of the High Priest."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		states: [ default ]
+		aoe_radius: 2
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: the_devouring_shroud_boss_4 }
+		aoe_requirement target<must_be_in_state>: { id: dead }
+		cast_time: 20			
+		zone: .boss_4 # same as boss 4
+		direct_effect simple<set_map_trigger>: .boss_6_summoned
+	}			
+}
+
+zone .boss_6:
+{
+}
+
+encounter .boss_6:
+{
+	main_entities: [ the_devouring_shroud_boss_6 ]	
+}
+
+entity the_devouring_shroud_boss_6: !NPC 
+{ 
+	_string: "The Devourer" 
+	_level: 31
+	_elite: true
+	_faction: monsters 
+	_sprite: carnivorous_plant_6
+	_sprite_dead: carnivorous_plant_6_dead 
+	_weapon_damage: 1.24
+	_resource_health: 7.2
+	_loot_table: .boss_6
+	_creature_type: elemental
+	_encounter: .boss_6
+	_zone: .boss_4 # Same zone as boss 4
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_in_combat_barks: [ { type: yell text: "Krrgh?!" flags: [ no_chat_bubble ] } ]	
+
+	_abilities: 
+	[
+		{
+			barks:
+			[ 
+				{ type: yell text: "Grrggh!" flags: [ no_chat_bubble ] } 
+			]	
+			
+			target: self			
+			requirement self<must_have_less_health_than>: 20
+			id: $ability @the_devouring_shroud_6_frenzy
+			{
+				string: "Frenzy"
+				cast_time: 10
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 120 }
+				flags: [ target_self ]
+				icon: icon_stuff 
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ icon string ]
+					{
+						type: buff
+						duration: 100
+						flags: [ unique ]
+						color_effect: [ 255 0 0 ]
+
+						stat_modifiers:
+						{
+							attack_haste: { add: 50 } 
+						}
+					}
+				}
+			}			
+		}
+		
+		{
+			id: $ability @the_devouring_shroud_6_infection
+			{
+				string: "Infection"
+				flags: [ target_self target_aoe target_aoe_hostile ]
+				icon: icon_stuff
+				cooldown: $cooldown { duration: 20 }
+				delay: 3
+				aoe_radius: 4
+				aoe_cap: 4
+				aoe_requirement target<must_not_be_in_state>: { id: dead }	
+				
+				source_particle_system: $particle_system
+				{
+					particle:
+					{
+						sprites: [ effect_cloud_0 effect_cloud_1 effect_cloud_2 effect_cloud_3 ]
+						sprite_interval: 125
+						flags: [ attached blend_add no_loop ]
+						duration: 600
+						count: 1		
+						scale: 3
+						alpha: 0.25
+						color_mod: [ 64 255 64 ]
+						fade_in: 100
+						fade_out: 500
+						rotation_rate: 50
+					}
+				}
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura 
+					{
+						string: "Infected"
+						description: "Feeling sick."
+						icon: icon_poison
+						type: debuff
+						duration: based_on_effects
+						flags: [ unique no_refresh poison ]
+
+						aura_effect repeat:
+						{
+							update_interval: 15
+							update_count: 4
+							ability: $ability
+							{
+								string: "Infection"
+								flags: [ always_in_line_of_sight always_in_range ]
+								direct_effect damage:
+								{
+									damage_type: poison
+									function: 35
+									spread: !DEFAULT_SPREAD{}
+								}
+							}
+						}
+					
+					}
+				}
+			}
+		}
+		
+		{
+			requirement self<must_have_less_health_than>: 80
+			target: random_player
+			id: $ability @the_devouring_shroud_6_thorn_spit
+			{
+				string: "Thorn Spit"
+				range: 10
+				min_range: 3
+				cast_time: 20
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 80 }
+				flags: [ offensive target_other target_hostile can_miss interruptable ]
+				states: [ in_combat ]
+				icon: icon_blood
+				delay: 3
+				target_particle_system: green_spell_hit
+				projectile: $particle_system
+				{
+					particle:
+					{
+						sprites: [ effect_witch_bolt ]
+						flags: [ attached no_rotation face_target ]
+						scale: 0.3
+						count: 1		
+					}
+				}
+
+				direct_effect apply_aura:
+				{
+					aura: $aura [ string icon ]
+					{
+						description: "Bleeding."
+						type: debuff
+						duration: based_on_effects
+						aura_effect repeat:
+						{
+							update_interval: 15
+							update_count: 6
+							ability: $ability [ string icon ]
+							{
+								states: [ default in_combat ]
+								flags: [ always_in_range always_in_line_of_sight ]
+								direct_effect damage:
+								{
+									damage_type: bleed
+									function: 50
+									spread: !DEFAULT_SPREAD{}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_6_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_trigger .boss_6_summoned:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_6:
+{
+	entity the_devouring_shroud_boss_6: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_6_killed
+			if: .boss_6_summoned			
+		}
+	}
+}
+
+

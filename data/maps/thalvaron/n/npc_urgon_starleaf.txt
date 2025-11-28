@@ -53,6 +53,7 @@ item .urgon_starleaf_1_quest_item:
 	flags: [ not_sellable ]
 	string: "Plague Bear Butt"
 	stack: 4
+	quest: .urgon_starleaf_1
 }
 
 objective .urgon_starleaf_1_b:
@@ -73,6 +74,7 @@ item .urgon_starleaf_1_quest_item_2:
 	loot_groups: [ .urgon_starleaf_1_quest_item_2 ]
 	flags: [ not_sellable unique ]
 	string: "Skeletal Bear Claw"
+	quest: .urgon_starleaf_1
 }
 
 quest .urgon_starleaf_1:

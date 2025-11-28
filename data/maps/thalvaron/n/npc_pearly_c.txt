@@ -61,6 +61,7 @@ item .pearly_c_1_quest_item_2:
 	loot_groups: [ .pearly_c_1_quest_item_2 ]
 	flags: [ not_sellable unique ]
 	string: "Blood of Shrakolyx"
+	quest: .pearly_c_1
 }
 
 loot_group .pearly_c_1_quest_item: {}

@@ -58,7 +58,7 @@ ability dominion_of_strife_pray:
 aura dominion_of_strife_buff:
 {
 	string: "Bloodsoaked"
-	description: "Honoring the Dominion of Strife."
+	description: "Honoring the Dominion of Strife. Only on the battleground."
 	duration: 36000 # 1 hour
 	type: buff
 	max_stack: 100

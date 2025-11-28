@@ -198,6 +198,7 @@ item .mumle_whiterock_3_quest_item:
 	loot_groups: [ thalvaron_mumle_whiterock_3_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Runed Elemental Rock"
+	quest: thalvaron_mumle_whiterock_3
 }
 
 objective .mumle_whiterock_3:

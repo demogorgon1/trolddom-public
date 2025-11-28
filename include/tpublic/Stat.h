@@ -78,7 +78,7 @@ namespace tpublic
 			{ "attack_power",			"AP",			"Attack Power",								NULL,																	2.0f,	false,	false },
 			{ "stealth",				"STEALTH",		"Stealth",									"Decreases likelihood of detection when stealthed.",					10.0f,	false,	false },
 			{ "resilience",				"RES",			"Resilience",								"Reduces your chance of being hit by a critical strike by %u%%.",		10.0f,	true,	false },
-			{ "hit",					"HIT",			"Hit Chance",								"Improves your chance to hit by %u%%.",									10.0f,	true,	false },
+			{ "hit_chance",				"HIT",			"Hit Chance",								"Improves your chance to hit by %u%%.",									10.0f,	true,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

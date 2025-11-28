@@ -51,6 +51,7 @@ item .thalorion_1_quest_item:
 	loot_groups: [ .thalorion_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Hair of Mona Uptork"
+	quest: .thalorion_1
 }
 
 objective .thalorion_1_b:
@@ -71,6 +72,7 @@ item .thalorion_1_quest_item_2:
 	loot_groups: [ .thalorion_1_quest_item_2 ]
 	flags: [ not_sellable unique ]
 	string: "Hair of Jack Uptork"
+	quest: .thalorion_1
 }
 
 quest .thalorion_1:

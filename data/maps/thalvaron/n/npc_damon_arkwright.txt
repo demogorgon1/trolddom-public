@@ -45,6 +45,7 @@ item thalvaron_damon_arkwright_1_quest_item:
 	loot_groups: [ .damon_arkwright_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Mark of the Vampire"
+	quest: .damon_arkwright_1
 }
 
 objective .damon_arkwright_1:

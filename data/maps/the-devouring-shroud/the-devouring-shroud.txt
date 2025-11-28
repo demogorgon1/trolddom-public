@@ -108,6 +108,7 @@ map_palette .stuff:
 	entity_spawn .boss_3: [ 255 64 0 ]
 	entity_spawn .boss_4: [ 255 0 128 ]
 	entity_spawn .boss_5: [ 255 128 0 ]
+	entity_spawn .boss_6: [ 255 128 128 ]
 	
 	entity_spawn .boss_1_melee_trash: [ 40 102 201 ]
 	entity_spawn .boss_1_spawn: [ 140 201 10 ]
@@ -309,5 +310,11 @@ map the_devouring_shroud:
 		run: { set_trigger: .boss_5_killed }
 	}	
 
+	script:
+	{
+		condition trigger_not_set: .boss_6_killed
+		condition entity_state: { entity_spawn: .boss_6 state: dead }		
+		run: { set_trigger: .boss_6_killed }
+	}	
 }
  

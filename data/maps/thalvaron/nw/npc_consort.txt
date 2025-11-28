@@ -2,7 +2,7 @@ dialogue_screen .consort_dialogue:
 {
 	text: 
 	[	
-		"What are fine day!"
+		"What a fine day to be a prince!"
 	]		
 	
 	options:

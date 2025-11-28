@@ -12,6 +12,8 @@ dialogue_screen .fennian_starleaf_dialogue:
 		{ quest: .fennian_starleaf_1 }
 		{ quest: .fennian_starleaf_2 }
 		{ quest<offer_only>: .fennian_starleaf_3 }
+		{ quest<completion_only>: thalvaron_elia_3 }
+		{ quest: .fennian_starleaf_4 }
 	]
 }
 
@@ -260,3 +262,66 @@ quest .fennian_starleaf_3:
 	reward_xp_multiplier: 0.2
 	reward_cash_multiplier: 0
 }
+
+############################################################
+# Quest 4
+
+objective .fennian_starleaf_4:
+{
+	string: "The Devourer Slain"
+	
+	maps: [ the_devouring_shroud ]
+	
+	kill_npc:
+	{
+		entities: [ the_devouring_shroud_boss_6 ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 30 _rarity: rare }
+	item .fennian_starleaf_4_a: !QUEST_REWARD_NECK{ _string: "Lost Elven Necklace" _icon: icon_necklace_1 _wisdom: 2 _spell_damage: 1 }
+	item .fennian_starleaf_4_b: !QUEST_REWARD_NECK{ _string: "Guardian Chain" _icon: icon_necklace_2 _constitution: 2 _strength: 1 _block: 1 }	
+	item .fennian_starleaf_4_c: !QUEST_REWARD_FINGER{ _string: "Starleaf's Ring" _icon: icon_ring_4 _wisdom: 2 _healing: 1 _spell_crit: 1 _budget_bias: -10 }
+}
+
+quest .fennian_starleaf_4:
+{
+	string: "Imbuing the High Priest"
+
+	text:
+	[
+		"Venture into the Devouring Shroud, slay the High Priest, and use the Heart of the Ancient on his remains."
+	]
+	
+	description: 
+	[
+		"Those jungles have been corrupted by ancient magic. The lizard people are just pawns of a much larger game, but they do have a part to play. In the Devouring Shroud, they have"
+		"constructed temples where they worship their scaly gods. The object you brought me might be able to bring some balance back to the jungle, but in order to do that, you'll"
+		"need to venture into the Devouring Shroud and find one of their high priests. Slay him and place the object on his remains. This will cause the temple to be cleansed of their foul"
+		"magic.\n"
+		"\n"
+		"This might get dangerous."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"I could sense it."
+	]
+
+	quest_items: [ the_devouring_shroud_boss_6_spawn_item ]
+	objectives: [ .fennian_starleaf_4 ]
+	prerequisites: [ thalvaron_elia_3 ]
+	reward_one_item: [ .fennian_starleaf_4_a .fennian_starleaf_4_b .fennian_starleaf_4_c ]
+	reward_all_items: [ the_devouring_shroud_boss_6_spawn_item ]
+	level: 30
+	type: dungeon
+}
+
+

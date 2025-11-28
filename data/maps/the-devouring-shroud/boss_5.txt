@@ -60,6 +60,7 @@ entity the_devouring_shroud_boss_5: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	_in_combat_barks: [ { type: yell text: "Tzun'Kala z'ork!" flags: [ no_chat_bubble ] } ]	
 
 	_abilities: 
 	[

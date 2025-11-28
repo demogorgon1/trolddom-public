@@ -156,6 +156,7 @@ zone thalvaron_welks_cave: { string: "Welk's Cave" preposition: "in" pvp: true p
 zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" }
 zone .tower_of_tyrion: { string: "Tower of Tyrion" preposition: "at" }
 zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true }
+zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -525,6 +526,7 @@ map_entity_spawn thalvaron_faria: { entity thalvaron_faria: { init_state: defaul
 map_entity_spawn thalvaron_jungle_tower_portal: { entity thalvaron_jungle_tower_portal: { init_state: default } }
 map_entity_spawn thalvaron_jungle_tower_portal_return: { entity thalvaron_jungle_tower_portal_return: { init_state: default } }
 map_entity_spawn thalvaron_elia: { entity thalvaron_elia: { init_state: default } }
+map_entity_spawn thalvaron_dawn: { entity thalvaron_dawn: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -1187,6 +1189,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_jungle_beast: [ 140 0 129 ]
 	entity_spawn thalvaron_jungle_bandit: [ 9 2 164 ]
 	entity_spawn thalvaron_jungle_bandit_boss: [ 209 2 164 ]
+	entity_spawn thalvaron_dark_elemental: [ 103 93 82 ]
+	entity_spawn thalvaron_dark_elemental_boss: [ 203 93 82 ]
+	entity_spawn thalvaron_jungle_kobold: [ 39 10 200 ]
+	entity_spawn thalvaron_stillwater_crocodile: [ 30 185 85 ]
+	entity_spawn thalvaron_dawn: [ 230 185 85 ]	
 }
 
 map_palette .levels:
@@ -1308,6 +1315,7 @@ map_palette .zones:
 	zone thalvaron_welks_cave: [ 113 231 234 ]
 	zone .flinks_hideout: [ 64 26 159 ]
 	zone .tower_of_tyrion: [ 29 166 206 ]
+	zone .kobold_caves: [ 211 103 14 ]
 }
 
 map_palette .sub_zones:

@@ -29,6 +29,8 @@ npc_behavior_state .passive:
 # Elementals
 
 map_entity_spawn thalvaron_south_tirnwood_elemental: { entity thalvaron_south_tirnwood_elemental: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_dark_elemental: { entity thalvaron_dark_elemental: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_dark_elemental_boss: { entity thalvaron_dark_elemental_boss: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 map_entity_spawn thalvaron_zilkore_plant: 
 { 
@@ -44,6 +46,7 @@ map_entity_spawn thalvaron_jungle_plant:
 	spawn_timer: !NPC_RESPAWN_NORMAL{} 
 }
 
+# Wood elementals
 {
 	${
 		_level: 25
@@ -56,6 +59,102 @@ map_entity_spawn thalvaron_jungle_plant:
 	}
 
 	entity thalvaron_south_tirnwood_elemental: !NPC { _string: "Confused Wood Elemental" _sprite: wood_elemental_1 _sprite_dead: wood_elemental_1_dead }
+}
+
+# Dark waters wood elementals
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: default_wood_elemental
+		_weapon_damage: 1.1
+		_resource_health: 1.4
+	}
+
+	entity thalvaron_dark_elemental: !NPC { _string: "Wild Branch Elemental" _sprite: wood_elemental_1 _sprite_dead: wood_elemental_1_dead }
+}
+
+# Dark waters wood elementals - boss
+{
+	loot_group .dark_elemental_boss_quest_item: { }
+
+	item .dark_elemental_boss_quest_item:
+	{
+		loot_groups: [ .dark_elemental_boss_quest_item ]		
+		string: "Heart of the Ancient" 
+		icon: icon_rock_3
+		item_level: 30
+		flags: [ unique not_sellable ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: .dark_elemental_boss_quest_item
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: .dark_elemental_boss_quest_item }
+			requirement self<must_not_have_active_quest>: { id: .dark_elemental_boss_quest_item }
+		}
+		
+		binds: when_picked_up
+	}
+	
+	quest .dark_elemental_boss_quest_item:
+	{
+		string: "Heart of the Ancient"
+
+		text:
+		[
+			"Bring the heart to Elia in the Devouring Shroud and see what she makes of it."
+		]
+		
+		description: 
+		[
+			"That elemental was different that the other ones and it had a giant glowing rock inside of it. Maybe Elia or her employer is interested in it?"
+		]
+		
+		completion:
+		[
+			"This was inside a tree?"
+		]
+
+		level: 30
+		reward_xp_multiplier: 0.25
+		reward_cash_multiplier: 0.25
+		quest_items: [ .dark_elemental_boss_quest_item ]
+	}
+
+	loot_table .dark_elemental_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .dark_elemental_boss_quest_item 
+					requirement self<must_not_have_active_quest>: { id: .dark_elemental_boss_quest_item } 
+					requirement self<must_not_have_completed_quest>: { id: .dark_elemental_boss_quest_item } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_WOOD_ELEMENTALS {}
+		]	
+	}	
+
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: .dark_elemental_boss
+		_weapon_damage: 0.9
+		_resource_health: 0.85
+		_elite: true
+	}
+
+	entity thalvaron_dark_elemental_boss: !NPC { _string: "Ancient Protector" _sprite: wood_elemental_3 _sprite_dead: wood_elemental_3_dead }
 }
 
 # Plant monsters
@@ -130,6 +229,14 @@ map_entity_spawn thalvaron_lonely_cove_kobold:
 	spawn_timer: !NPC_RESPAWN_NORMAL{} 
 }
 
+map_entity_spawn thalvaron_jungle_kobold: 
+{ 
+	entity thalvaron_jungle_kobold_a: { } 
+	entity thalvaron_jungle_kobold_b: { } 	
+	entity thalvaron_jungle_kobold_c: { } 	
+	spawn_timer: !NPC_RESPAWN_NORMAL{} 
+}
+
 # Kobolds in the cave in the north
 {
 	${
@@ -157,6 +264,21 @@ map_entity_spawn thalvaron_lonely_cove_kobold:
 	entity thalvaron_lonely_cove_kobold_a: !NPC { _string: "Karethi Kobold Brute" _sprite: kobold_3 _sprite_dead: kobold_3_dead _abilities: [ { id: npc_sunder } { id: npc_attack } ] _resource_health: 0.8 }
 	entity thalvaron_lonely_cove_kobold_b: !NPC { _string: "Karethi Kobold Enforcer" _sprite: kobold_4 _sprite_dead: kobold_4_dead _abilities: [ { id: npc_attack } ] _weapon_damage: 1.1 }
 	entity thalvaron_lonely_cove_kobold_c: !NPC { _string: "Karethi Kobold Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead _abilities: [ { id: npc_heal target: low_health_friend_or_self } { id: npc_frostbolt_no_cooldown } ] _weapon_damage: 0.69 }
+}
+
+# Jungle kobolds
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_jungle_kobold_a: !NPC { _string: "Thalyssian Kobold Brute" _sprite: kobold_3 _sprite_dead: kobold_3_dead _abilities: [ { id: npc_sunder } { id: npc_attack } ] _resource_health: 0.8 }
+	entity thalvaron_jungle_kobold_b: !NPC { _string: "Thalyssian Kobold Enforcer" _sprite: kobold_4 _sprite_dead: kobold_4_dead _abilities: [ { id: npc_attack } ] _weapon_damage: 1.1 }
+	entity thalvaron_jungle_kobold_c: !NPC { _string: "Thalyssian Kobold Soothsayer" _sprite: kobold_5 _sprite_dead: kobold_5_dead _abilities: [ { id: npc_heal target: low_health_friend_or_self } { id: npc_frostbolt_no_cooldown } ] _weapon_damage: 0.69 }
 }
 
 ##########################################################################################
@@ -290,7 +412,21 @@ map_entity_spawn thalvaron_jungle_bandit:
 	entity thalvaron_jungle_bandit_b: !NPC { _string: "Enforcer" _sprite: man_95 _sprite_dead: man_95_dead }
 	entity thalvaron_jungle_bandit_c: !NPC { _string: "Enforcer" _sprite: man_96 _sprite_dead: man_96_dead }
 	entity thalvaron_jungle_bandit_d: !NPC { _string: "Ranger" _sprite: man_97 _sprite_dead: man_97_dead _abilities: [ { id: npc_shoot } { id: npc_attack } ] }
-	entity thalvaron_jungle_bandit_boss: !NPC { _string: "Jork" _sprite: man_98 _sprite_dead: man_98_dead }
+	
+	entity thalvaron_jungle_bandit_boss: !NPC 
+	{ 
+		_string: "Jork" _sprite: man_98 _sprite_dead: man_98_dead 
+		
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ possibility: { weight: 1 loot_group: .elia_2_quest_item requirement self<must_have_active_quest>: { id: .elia_2 } } }
+				
+				!WORLD_DROPS {}
+			]	
+		}				
+	}
 }   
 
 ##########################################################################################
@@ -310,6 +446,7 @@ map_entity_spawn thalvaron_thalyssian_spider_27: { entity thalvaron_thalyssian_s
 map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_battleground_troll: { entity thalvaron_battleground_troll: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_beast: { entity thalvaron_jungle_beast: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_stillwater_crocodile: { entity thalvaron_stillwater_crocodile: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Battleground troll
 {
@@ -324,6 +461,20 @@ map_entity_spawn thalvaron_jungle_beast: { entity thalvaron_jungle_beast: { } sp
 	}
 
 	entity thalvaron_battleground_troll: !NPC { _string: "Cave Troll" _sprite: troll_1 _sprite_dead: troll_1_dead }
+}
+
+# Crocodiles
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_crocodile
+		_can_move_on_all_non_view_blocking_tiles: true
+	}
+
+	entity thalvaron_stillwater_crocodile: !NPC { _string: "Stillwater Crocodile" _sprite: crocodile_1 _sprite_dead: crocodile_1_dead }
 }
 
 # Beasts

@@ -577,6 +577,7 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 		_sprite_dead: crab_4_dead 
 		_abilities: [ { id: npc_attack } ]
 		_despawn_time: { out_of_combat_ticks: 40 }
+		_no_kill_event: true
 	}
 
 	entity realm_of_fire_wizard_spawn: !NPC { _level: 26 }

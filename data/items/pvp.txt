@@ -1,3 +1,35 @@
+item pvp_bracers_1:
+{
+	equipment_slots: [ wrists ]
+	binds: when_picked_up
+	required_level: 30
+	icon: icon_bracers_7
+	rarity: rare
+	string: "Bladebearer Wristguards"
+	stat_weight strength: 1
+	stat_weight constitution: 2
+	stat phys_crit_chance: 1
+	stat resilience: 1
+	budget_bias: -10
+	type: armor_plate
+}
+
+item pvp_bracers_2:
+{
+	equipment_slots: [ wrists ]
+	binds: when_picked_up
+	required_level: 30
+	type: armor_cloth
+	icon: icon_bracers_8
+	rarity: rare
+	string: "Bladebearer Bracers"
+	stat_weight wisdom: 1
+	stat_weight constitution: 2
+	stat spell_crit_chance: 1
+	stat resilience: 1
+	budget_bias: -10
+}
+
 item pvp_ring_1:
 {
 	equipment_slots: [ finger_1 finger_2 ]
