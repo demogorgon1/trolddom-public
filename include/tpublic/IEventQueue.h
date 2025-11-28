@@ -208,6 +208,7 @@ namespace tpublic
 												uint32_t													aKilledCharacterLevel,
 												uint32_t													aKilledFactionId,
 												uint32_t													aKilledClassId,
+												uint64_t													aKilledAccountId,
 												uint32_t													aContributionDenum) = 0;
 	};
 
