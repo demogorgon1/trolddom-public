@@ -415,6 +415,7 @@ ability curse_of_corruption_tick:
 		damage_type: unholy
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }					
 		flags: [ is_magical ]
+		direct: false
 	}		
 	
 }

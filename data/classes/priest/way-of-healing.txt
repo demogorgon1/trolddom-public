@@ -610,6 +610,7 @@ ability blessing_tick:
 	direct_effect heal:
 	{	
 		function: { expression: a_mul_x_plus_b x: healing a: 0.23 b: [ [ 1 5 ] [ 10 12 ] [ 20 28 ] [ 30 46 ] ] }
+		direct: false
 	}	
 }
 

@@ -203,6 +203,7 @@
 					{
 						damage_type: fire
 						function: { expression: a a: 8 elite_multiplier: 1.5 }
+						direct: false
 					}				
 				}
 			}
@@ -314,6 +315,7 @@
 					{
 						damage_type: unholy
 						function: { expression: a a: 8 elite_multiplier: 1.5 }
+						direct: false
 					}				
 				}
 			}

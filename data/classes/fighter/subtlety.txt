@@ -114,6 +114,7 @@ aura assassinate:
 			{
 				damage_type: poison
 				function: { expression: a_mul_x x: ranged a: 0.46 }				
+				direct: false
 			}
 		}
 	}
@@ -410,6 +411,7 @@ ability poison_bomb_tick:
 	{
 		damage_type: poison
 		function: { expression: a_mul_x_plus_b x: attack_power a: 0.06 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 30 36 ] ] }				
+		direct: false		
 	}
 }
 
@@ -721,6 +723,7 @@ ability envenom_tick:
 	{
 		damage_type: poison
 		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 17 ] [ 20 28 ] ] }				
+		direct: false
 	}
 }
 
@@ -905,7 +908,8 @@ ability rend_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 20 36 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 20 36 ] ] }	
+		direct: false		
 	}
 }
 

@@ -120,6 +120,7 @@ ability .baldric_sunstrike_tick:
 		damage_type: holy
 		function: { expression: a a: 9 }
 		spread: !DEFAULT_SPREAD{}
+		direct: false
 	}
 
 }
@@ -136,7 +137,7 @@ aura .baldric_sunstrike:
 	{
 		update_interval: 20
 		update_count: 10
-		ability: .baldric_sunstrike_tick
+		ability: .baldric_sunstrike_tick		
 	}
 }
 

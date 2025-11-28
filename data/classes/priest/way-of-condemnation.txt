@@ -158,6 +158,7 @@ talent priest_creeping_guilt:
 		damage_type: fire		
 		function: { expression: a_mul_x_plus_b x: spell_damage a: @_a b: [ [ 1 @_level_1 ] [ 10 @_level_10 ] [ 20 @_level_20 ] [ 30 @_level_30 ] ] }					
 		flags: [ is_magical ]
+		direct: false
 	}	
 }
 
@@ -797,6 +798,7 @@ ability condemnation_tick:
 		damage_type: fire		
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.34 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }					
 		flags: [ is_magical ]
+		direct: false
 	}	
 	
 	direct_effect damage:
@@ -810,6 +812,7 @@ ability condemnation_tick:
 		damage_type: fire
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.34 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }					
 		flags: [ can_be_critical is_magical ]
+		direct: false
 	}		
 }
 

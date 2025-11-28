@@ -256,6 +256,7 @@ ability intervention_of_wrath_debuff_tick:
 	{
 		damage_type: holy
 		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] [ 20 46 ] ] }						
+		direct: false
 	}
 }
 

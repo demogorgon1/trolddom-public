@@ -988,6 +988,7 @@ ability disenchant:
 							damage_type: fire		
 							function: 12
 							flags: [ is_magical ]
+							direct: false
 						}							
 					}
 				}
@@ -1371,7 +1372,8 @@ ability disenchant:
 						direct_effect heal:
 						{	
 							function: { expression: a_mul_x_plus_b x: healing a: 0.13 b: 23 }
-							spread: !DEFAULT_SPREAD{}									
+							spread: !DEFAULT_SPREAD{}
+							direct: false							
 						}	
 					}				
 				}

@@ -259,7 +259,7 @@ ability dragon_breath_tick:
 		damage_type: fire		
 		function: { expression: a_mul_x_plus_b x: attack_power a: 0.4 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
 		flags: [ is_magical ]
-		spread: !DEFAULT_SPREAD{}
+		spread: !DEFAULT_SPREAD{}		
 	}	
 
 	direct_effect apply_aura:
@@ -292,7 +292,7 @@ aura dragon_breath:
 	{ 
 		update_interval: 10
 		update_count: 4
-		ability: dragon_breath_tick
+		ability: dragon_breath_tick				
 	}		
 }
 

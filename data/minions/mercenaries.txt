@@ -644,6 +644,7 @@
 		{
 			damage_type: bleed
 			function: 32
+			direct: false
 		}
 	}
 

@@ -97,6 +97,7 @@ aura .outside_player_spawn_zone_debuff:
 				damage_type: fire		
 				function: { expression: a_mul_x x: health_max a: 0.20 entity: target }					
 				flags: [ is_magical ]
+				direct: false
 			}					
 		}
 	}

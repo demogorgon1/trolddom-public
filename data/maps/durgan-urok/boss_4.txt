@@ -132,6 +132,7 @@ entity durgan_urok_boss_4: !NPC
 									damage_type: physical
 									function: 55		
 									spread: !DEFAULT_SPREAD{}
+									direct: false
 								}														
 							}
 						}

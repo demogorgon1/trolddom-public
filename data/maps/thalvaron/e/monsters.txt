@@ -1441,7 +1441,7 @@ map_entity_spawn thalvaron_sand_golem: { entity thalvaron_sand_golem: {} spawn_t
 									direct_effect damage:
 									{
 										damage_type: physical
-										function: { expression: a a: 190 }													
+										function: { expression: a a: 190 }											
 									}
 									
 									source_visual<tile_shake>:

@@ -61,6 +61,7 @@ ability npc_poison_attack:
 					{
 						damage_type: poison
 						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+						direct: false
 					}				
 				}
 			}
@@ -189,6 +190,7 @@ ability npc_fireball:
 					{
 						damage_type: fire
 						function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+						direct: false
 					}
 				}
 			}
@@ -305,6 +307,7 @@ ability npc_curse_tick:
 	{
 		damage_type: unholy
 		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+		direct: false
 	}
 }
 
@@ -358,6 +361,7 @@ ability npc_poison_bite_tick:
 	{
 		damage_type: poison
 		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+		direct: false
 	}
 }
 
@@ -419,6 +423,7 @@ ability npc_rend_tick:
 	{
 		damage_type: bleed
 		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.5 }
+		direct: false
 	}
 }
 
@@ -1084,6 +1089,7 @@ ability npc_charge_rend:
 							{
 								damage_type: bleed
 								function: { expression: a a: [ [ 1 4 ] [ 10 14 ] [ 20 28 ] [ 30 56 ] ] elite_multiplier: 2.5 }
+								direct: false
 							}
 						}
 					}
@@ -1148,6 +1154,7 @@ ability npc_infection_aura:
 					{
 						damage_type: poison
 						function: { expression: a a: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }			
+						direct: false
 					}
 				}
 			}
@@ -1288,6 +1295,7 @@ ability npc_poison_bolt:
 					{
 						damage_type: poison
 						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+						direct: false
 					}				
 				}
 			}
@@ -1344,6 +1352,7 @@ ability npc_thorn_spit_no_cooldown:
 					{
 						damage_type: bleed
 						function: { expression: a a: [ [ 1 2 ] [ 10 4 ] [ 20 7 ] [ 30 14 ] ] elite_multiplier: 1.8 }
+						direct: false
 					}
 				}
 			}

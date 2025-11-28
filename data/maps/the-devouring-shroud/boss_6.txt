@@ -236,6 +236,7 @@ entity the_devouring_shroud_boss_6: !NPC
 									damage_type: poison
 									function: 35
 									spread: !DEFAULT_SPREAD{}
+									direct: false
 								}
 							}
 						}
@@ -292,6 +293,7 @@ entity the_devouring_shroud_boss_6: !NPC
 									damage_type: bleed
 									function: 50
 									spread: !DEFAULT_SPREAD{}
+									direct: false
 								}
 							}
 						}

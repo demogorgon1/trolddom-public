@@ -1330,6 +1330,7 @@ loot_table .hounds_and_wolves:
 			damage_type: poison
 			function: 48
 			requirement target<must_not_have_aura>: .damon_arkwright_3_quest_item
+			direct: false
 		}
 
 		direct_effect damage:
@@ -1337,6 +1338,7 @@ loot_table .hounds_and_wolves:
 			damage_type: poison
 			function: 9
 			requirement target<must_have_aura>: .damon_arkwright_3_quest_item
+			direct: false
 		}
 	}
 
