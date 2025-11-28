@@ -37,6 +37,10 @@ namespace tpublic::DirectEffects
 				{
 					m_silent = aChild->GetBool();
 				}
+				else if (aChild->m_name == "direct")
+				{
+					m_direct = aChild->GetBool();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -54,6 +58,7 @@ namespace tpublic::DirectEffects
 		m_function.ToStream(aStream);
 		aStream->WriteBool(m_targetSelf);
 		aStream->WriteBool(m_silent);
+		aStream->WriteBool(m_direct);
 	}
 			
 	bool	
@@ -74,6 +79,13 @@ namespace tpublic::DirectEffects
 			if (!aStream->ReadBool(m_silent))
 				return false;
 		}
+
+		if (!aStream->IsEnd())
+		{
+			if (!aStream->ReadBool(m_direct))
+				return false;
+		}
+
 		return true;
 	}
 
@@ -113,7 +125,8 @@ namespace tpublic::DirectEffects
 					resourceIndex,
 					(int32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget),
 					0,
-					m_silent);
+					m_silent,
+					m_direct);
 			}
 		}
 

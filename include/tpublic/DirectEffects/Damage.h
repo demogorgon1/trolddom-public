@@ -131,6 +131,7 @@ namespace tpublic
 			float										m_threatMultiplier = 1.0f;
 			float										m_spread = 0.0f;
 			uint32_t									m_resolveCancelAuraId = 0;
+			bool										m_direct = true;
 
 			DirectEffect::DamageType	_GetDamageType(
 											const EntityInstance*				aEntityInstance,

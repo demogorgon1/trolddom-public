@@ -35,6 +35,8 @@ namespace tpublic::DirectEffects
 					m_spread = aChild->GetFloat();
 				else if (aChild->m_name == "threat_multiplier")
 					m_threatMultiplier = aChild->GetFloat();
+				else if (aChild->m_name == "direct")
+					m_direct = aChild->GetBool();
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 			}
@@ -51,6 +53,7 @@ namespace tpublic::DirectEffects
 		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
 		aStream->WriteFloat(m_spread);
 		aStream->WriteFloat(m_threatMultiplier);
+		aStream->WriteBool(m_direct);
 	}
 			
 	bool	
@@ -68,6 +71,8 @@ namespace tpublic::DirectEffects
 		if (!aStream->ReadFloat(m_spread))
 			return false;
 		if (!aStream->ReadFloat(m_threatMultiplier))
+			return false;
+		if(!aStream->ReadBool(m_direct))
 			return false;
 		return true;
 	}
@@ -149,7 +154,8 @@ namespace tpublic::DirectEffects
 				healthResourceIndex,
 				(int32_t)heal,
 				0,
-				false);
+				false,
+				m_direct);
 
 			// Anyone on the target's threat target list should gain threat from this
 			const Components::ThreatSource* targetThreatSource = aTarget->GetComponent<Components::ThreatSource>();

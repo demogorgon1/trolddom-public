@@ -66,6 +66,10 @@ namespace tpublic::DirectEffects
 				{
 					m_spread = aChild->GetFloat();
 				}
+				else if(aChild->m_name == "direct")
+				{
+					m_direct = aChild->GetBool();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -93,6 +97,7 @@ namespace tpublic::DirectEffects
 		aStream->WriteFloat(m_threatMultiplier);
 		aStream->WriteUInt(m_resolveCancelAuraId);
 		aStream->WriteFloat(m_spread);
+		aStream->WriteBool(m_direct);
 	}
 			
 	bool	
@@ -132,6 +137,8 @@ namespace tpublic::DirectEffects
 		if(!aStream->ReadUInt(m_resolveCancelAuraId))
 			return false;
 		if (!aStream->ReadFloat(m_spread))
+			return false;
+		if(!aStream->ReadBool(m_direct))
 			return false;
 
 		return true;
@@ -265,6 +272,7 @@ namespace tpublic::DirectEffects
 					rageResourceIndex,
 					rage,
 					0,
+					false,
 					false);
 			}
 		}
@@ -288,6 +296,7 @@ namespace tpublic::DirectEffects
 					rageResourceIndex,
 					rage,
 					0,
+					false,
 					false);
 			}
 		}
@@ -312,7 +321,8 @@ namespace tpublic::DirectEffects
 				healthResourceIndex,
 				-(int32_t)damage,
 				blocked,
-				false);
+				false,
+				m_direct);
 
 			if(m_flags & DirectEffect::FLAG_LEECH)
 			{
@@ -329,6 +339,7 @@ namespace tpublic::DirectEffects
 						healthResourceIndex,
 						(int32_t)damage / 2, // FIXME: might want this to not always be 50%
 						0,
+						false,
 						false);
 				}
 			}
