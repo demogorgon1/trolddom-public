@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Damage-over-time effects no longer interrupt eating or opening." }
 		{ text: "Aura effects and floating combat text only shown for visible entities." }
+		{ text: "Fixed server crash." }
 	]
 
 	#######################################################################################
