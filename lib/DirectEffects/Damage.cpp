@@ -203,7 +203,8 @@ namespace tpublic::DirectEffects
 
 			chance += _GetCriticalChanceBonus(sourceAuras, abilityModifiers);
 
-			chance -= targetCombatPrivate->m_resilience;
+			if(targetCombatPrivate != NULL)
+				chance -= targetCombatPrivate->m_resilience;
 
 			if(chance > 0.0f)
 			{
