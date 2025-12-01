@@ -233,14 +233,24 @@ namespace tpublic
 		uint32_t								aSeed)
 	{
 		std::vector<Entry*> tmp;
-		for (Entry* t = m_head; t != NULL; t = t->m_next)
+
+		Entry* t = m_head;
+
+		while(t != NULL)
 		{
+			Entry* next = t->m_next;
+
 			t->m_next = NULL;
 			t->m_prev = NULL;
+			
 			tmp.push_back(t);
+
+			t = next;
 		}
+
 		m_head = NULL;
 		m_tail = NULL;
+
 		uint32_t r = aSeed;
 
 		while(tmp.size() > 0)
