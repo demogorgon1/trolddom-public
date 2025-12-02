@@ -2,6 +2,7 @@
 
 #include "../ActionBar.h"
 #include "../ArmorStyle.h"
+#include "../Customization.h"
 #include "../DataBase.h"
 #include "../EquipmentSlot.h"
 #include "../ItemType.h"
@@ -188,6 +189,127 @@ namespace tpublic
 				uint32_t				m_mountedSpriteId = 0;
 				std::vector<uint32_t>	m_walkSpriteIds;
 				Vec2					m_mountedOffset;
+			};
+
+			struct CharacterCustomizationBody
+			{
+				CharacterCustomizationBody()
+				{
+					
+				}
+
+				CharacterCustomizationBody(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_tag == "armor_style")		
+						{
+							ArmorStyle::Id armorStyleId = ArmorStyle::StringToId(aChild->m_name.c_str());
+							TP_VERIFY(armorStyleId != ArmorStyle::INVALID_ID, aChild->m_debugInfo, "'%s' not a valid armor style.", aChild->m_name.c_str());
+							m_armorStyles[armorStyleId] = SpriteCollection(aChild);
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
+						}
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aWriter) const
+				{
+					for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
+						m_armorStyles[i].ToStream(aWriter);
+				}
+
+				bool
+				FromStream(
+					IReader*				aReader)
+				{
+					for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
+					{
+						if (!m_armorStyles[i].FromStream(aReader))
+							return false;
+					}
+					return true;
+				}
+
+				~CharacterCustomizationBody()
+				{
+
+				}
+
+				// Public data
+				SpriteCollection											m_armorStyles[ArmorStyle::NUM_IDS];
+			};
+
+			struct CharacterCustomization
+			{
+				void
+				FromSource(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "body")
+							m_body.push_back(std::make_unique<CharacterCustomizationBody>(aChild));
+						else if (aChild->m_name == "hair")
+							m_hair.push_back(std::make_unique<SpriteCollection>(aChild));
+						else if (aChild->m_name == "beard")
+							m_beard.push_back(std::make_unique<SpriteCollection>(aChild));
+						else if (aChild->m_name == "hair_color")
+							m_hairColor.push_back(Image::RGBA(aChild));
+						else if (aChild->m_name == "beard_color")
+							m_beardColor.push_back(Image::RGBA(aChild));
+						else if (aChild->m_name == "default")
+							m_default = Customization(aChild);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aWriter) const
+				{
+					aWriter->WriteObjectPointers(m_body);
+					aWriter->WriteObjectPointers(m_hair);
+					aWriter->WriteObjectPointers(m_beard);
+					aWriter->WritePODs(m_hairColor);
+					aWriter->WritePODs(m_beardColor);
+					m_default.ToStream(aWriter);
+				}
+
+				bool
+				FromStream(
+					IReader*				aReader)
+				{
+					if(!aReader->ReadObjectPointers(m_body))
+						return false;
+					if (!aReader->ReadObjectPointers(m_hair))
+						return false;
+					if (!aReader->ReadObjectPointers(m_beard))
+						return false;
+					if (!aReader->ReadPODs(m_hairColor))
+						return false;
+					if (!aReader->ReadPODs(m_beardColor))
+						return false;
+					if(!m_default.FromStream(aReader))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<std::unique_ptr<CharacterCustomizationBody>>	m_body;
+				std::vector<std::unique_ptr<SpriteCollection>>				m_hair;
+				std::vector<std::unique_ptr<SpriteCollection>>				m_beard;
+				std::vector<Image::RGBA>									m_hairColor;
+				std::vector<Image::RGBA>									m_beardColor;
+				Customization												m_default;
 			};
 
 			struct StartEquipment
@@ -888,6 +1010,10 @@ namespace tpublic
 						{
 							m_fishingSprites = std::make_unique<SpriteCollection>(aMember);
 						}
+						else if(aMember->m_name == "customization")
+						{
+							m_customization.FromSource(aMember);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -930,6 +1056,8 @@ namespace tpublic
 
 				for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 					aStream->WriteOptionalObjectPointer(m_weaponSprites[i]);
+
+				m_customization.ToStream(aStream);
 			}
 			
 			bool	
@@ -997,6 +1125,9 @@ namespace tpublic
 						return false;
 				}
 
+				if(!m_customization.FromStream(aStream))
+					return false;
+
 				return true;
 			}
 
@@ -1027,6 +1158,7 @@ namespace tpublic
 			std::vector<StartReputation>							m_startReputations;
 			std::vector<std::unique_ptr<GearOptimization>>			m_gearOptimizations;
 			std::unordered_map<uint32_t, uint32_t>					m_replaceAbilityTable;
+			CharacterCustomization									m_customization;
 		};
 
 	}

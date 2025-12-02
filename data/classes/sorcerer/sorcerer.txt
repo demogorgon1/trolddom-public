@@ -48,6 +48,56 @@ class sorcerer:
 	
 	systems: [ combat health_regen mana_regen ]
 	
+	customization:
+	{
+		body:
+		{
+			armor_style none:   { sprite: sorcerer_naked sprite_dead: sorcerer_naked_dead sprite_mounted: sorcerer_naked_mounted sprites_walk: [ sorcerer_naked_walk_1 sorcerer_naked_walk_2 ] }
+			armor_style brown:  { sprite: sorcerer       sprite_dead: sorcerer_dead       sprite_mounted: sorcerer_mounted       sprites_walk: [ sorcerer_walk_1       sorcerer_walk_2 ] }
+			armor_style green:  { sprite: sorcerer_2     sprite_dead: sorcerer_2_dead     sprite_mounted: sorcerer_2_mounted     sprites_walk: [ sorcerer_2_walk_1     sorcerer_2_walk_2 ] }
+			armor_style cyan:   { sprite: sorcerer_3     sprite_dead: sorcerer_3_dead     sprite_mounted: sorcerer_3_mounted     sprites_walk: [ sorcerer_3_walk_1     sorcerer_3_walk_2 ] }
+			armor_style red:    { sprite: sorcerer_4     sprite_dead: sorcerer_4_dead     sprite_mounted: sorcerer_4_mounted     sprites_walk: [ sorcerer_4_walk_1     sorcerer_4_walk_2 ] }
+			armor_style purple: { sprite: sorcerer_5     sprite_dead: sorcerer_5_dead     sprite_mounted: sorcerer_5_mounted     sprites_walk: [ sorcerer_5_walk_1     sorcerer_5_walk_2 ] }
+			armor_style black:  { sprite: sorcerer_6     sprite_dead: sorcerer_6_dead     sprite_mounted: sorcerer_6_mounted     sprites_walk: [ sorcerer_6_walk_1     sorcerer_6_walk_2 ] }
+			armor_style white:  { sprite: sorcerer_7     sprite_dead: sorcerer_7_dead     sprite_mounted: sorcerer_7_mounted     sprites_walk: [ sorcerer_7_walk_1     sorcerer_7_walk_2 ] }
+			armor_style yellow: { sprite: sorcerer_8     sprite_dead: sorcerer_8_dead     sprite_mounted: sorcerer_8_mounted     sprites_walk: [ sorcerer_8_walk_1     sorcerer_8_walk_2 ] }		
+		}
+		
+		body:
+		{
+			armor_style none:   { sprite: sorcerer_naked_body_2 sprite_dead: sorcerer_naked_dead_body_2 sprite_mounted: sorcerer_naked_mounted_body_2 sprites_walk: [ sorcerer_naked_walk_1_body_2 sorcerer_naked_walk_2_body_2 ] }
+			armor_style brown:  { sprite: sorcerer_body_2       sprite_dead: sorcerer_dead_body_2       sprite_mounted: sorcerer_mounted_body_2       sprites_walk: [ sorcerer_walk_1_body_2       sorcerer_walk_2_body_2 ] }
+			armor_style green:  { sprite: sorcerer_2_body_2     sprite_dead: sorcerer_2_dead_body_2     sprite_mounted: sorcerer_2_mounted_body_2     sprites_walk: [ sorcerer_2_walk_1_body_2     sorcerer_2_walk_2_body_2 ] }
+			armor_style cyan:   { sprite: sorcerer_3_body_2     sprite_dead: sorcerer_3_dead_body_2     sprite_mounted: sorcerer_3_mounted_body_2     sprites_walk: [ sorcerer_3_walk_1_body_2     sorcerer_3_walk_2_body_2 ] }
+			armor_style red:    { sprite: sorcerer_4_body_2     sprite_dead: sorcerer_4_dead_body_2     sprite_mounted: sorcerer_4_mounted_body_2     sprites_walk: [ sorcerer_4_walk_1_body_2     sorcerer_4_walk_2_body_2 ] }
+			armor_style purple: { sprite: sorcerer_5_body_2     sprite_dead: sorcerer_5_dead_body_2     sprite_mounted: sorcerer_5_mounted_body_2     sprites_walk: [ sorcerer_5_walk_1_body_2     sorcerer_5_walk_2_body_2 ] }
+			armor_style black:  { sprite: sorcerer_6_body_2     sprite_dead: sorcerer_6_dead_body_2     sprite_mounted: sorcerer_6_mounted_body_2     sprites_walk: [ sorcerer_6_walk_1_body_2     sorcerer_6_walk_2_body_2 ] }
+			armor_style white:  { sprite: sorcerer_7_body_2     sprite_dead: sorcerer_7_dead_body_2     sprite_mounted: sorcerer_7_mounted_body_2     sprites_walk: [ sorcerer_7_walk_1_body_2     sorcerer_7_walk_2_body_2 ] }
+			armor_style yellow: { sprite: sorcerer_8_body_2     sprite_dead: sorcerer_8_dead_body_2     sprite_mounted: sorcerer_8_mounted_body_2     sprites_walk: [ sorcerer_8_walk_1_body_2     sorcerer_8_walk_2_body_2 ] }		
+		}		
+		
+		hair: { }
+		hair: { sprite: sorcerer_hair_1 sprite_dead: sorcerer_dead_hair_1 sprite_mounted: sorcerer_mounted_hair_1 sprites_walk: [ sorcerer_walk_1_hair_1 sorcerer_walk_2_hair_1 ] }
+		hair: { sprite: sorcerer_hair_2 sprite_dead: sorcerer_dead_hair_2 sprite_mounted: sorcerer_mounted_hair_2 sprites_walk: [ sorcerer_walk_1_hair_2 sorcerer_walk_2_hair_2 ] }
+		hair: { sprite: sorcerer_hair_3 sprite_dead: sorcerer_dead_hair_3 sprite_mounted: sorcerer_mounted_hair_3 sprites_walk: [ sorcerer_walk_1_hair_3 sorcerer_walk_2_hair_3 ] }
+		hair: { sprite: sorcerer_hair_4 sprite_dead: sorcerer_dead_hair_4 sprite_mounted: sorcerer_mounted_hair_4 sprites_walk: [ sorcerer_walk_1_hair_4 sorcerer_walk_2_hair_4 ] }
+		
+		beard: { }
+		beard: { sprite: sorcerer_beard_1 sprite_dead: sorcerer_dead_beard_1 sprite_mounted: sorcerer_mounted_beard_1 sprites_walk: [ sorcerer_walk_1_beard_1 sorcerer_walk_2_beard_1 ] }
+		beard: { sprite: sorcerer_beard_2 sprite_dead: sorcerer_dead_beard_2 sprite_mounted: sorcerer_mounted_beard_2 sprites_walk: [ sorcerer_walk_1_beard_2 sorcerer_walk_2_beard_2 ] }
+		beard: { sprite: sorcerer_beard_3 sprite_dead: sorcerer_dead_beard_3 sprite_mounted: sorcerer_mounted_beard_3 sprites_walk: [ sorcerer_walk_1_beard_3 sorcerer_walk_2_beard_3 ] }
+		beard: { sprite: sorcerer_beard_4 sprite_dead: sorcerer_dead_beard_4 sprite_mounted: sorcerer_mounted_beard_4 sprites_walk: [ sorcerer_walk_1_beard_4 sorcerer_walk_2_beard_4 ] }
+		beard: { sprite: sorcerer_beard_5 sprite_dead: sorcerer_dead_beard_5 sprite_mounted: sorcerer_mounted_beard_5 sprites_walk: [ sorcerer_walk_1_beard_5 sorcerer_walk_2_beard_5 ] }	
+
+		hair_color: [ 128 128 128 ]
+		hair_color: [ 255 255 255 ]
+
+		beard_color: [ 128 128 128 ]
+		beard_color: [ 255 255 255 ]
+
+		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
+	}	
+	
 	armor_style none:   { sprite: sorcerer_naked sprite_dead: sorcerer_naked_dead sprite_mounted: sorcerer_naked_mounted sprites_walk: [ sorcerer_naked_walk_1 sorcerer_naked_walk_2 ] }		
 	armor_style brown:  { sprite: sorcerer       sprite_dead: sorcerer_dead       sprite_mounted: sorcerer_mounted       sprites_walk: [ sorcerer_walk_1       sorcerer_walk_2 ] }
 	armor_style green:  { sprite: sorcerer_2     sprite_dead: sorcerer_2_dead     sprite_mounted: sorcerer_2_mounted     sprites_walk: [ sorcerer_2_walk_1     sorcerer_2_walk_2 ] }

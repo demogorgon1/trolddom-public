@@ -57,6 +57,56 @@ class fighter:
 	
 	systems: [ combat health_regen rage ]
 	
+	customization:
+	{
+		body:
+		{
+			armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprite_mounted: fighter_naked_mounted sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
+			armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprite_mounted: fighter_mounted       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
+			armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprite_mounted: fighter_2_mounted     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
+			armor_style cyan:   { sprite: fighter_3     sprite_dead: fighter_3_dead     sprite_mounted: fighter_3_mounted     sprites_walk: [ fighter_3_walk_1     fighter_3_walk_2 ] }
+			armor_style red:    { sprite: fighter_4     sprite_dead: fighter_4_dead     sprite_mounted: fighter_4_mounted     sprites_walk: [ fighter_4_walk_1     fighter_4_walk_2 ] }
+			armor_style purple: { sprite: fighter_5     sprite_dead: fighter_5_dead     sprite_mounted: fighter_5_mounted     sprites_walk: [ fighter_5_walk_1     fighter_5_walk_2 ] }
+			armor_style black:  { sprite: fighter_6     sprite_dead: fighter_6_dead     sprite_mounted: fighter_6_mounted     sprites_walk: [ fighter_6_walk_1     fighter_6_walk_2 ] }
+			armor_style white:  { sprite: fighter_7     sprite_dead: fighter_7_dead     sprite_mounted: fighter_7_mounted     sprites_walk: [ fighter_7_walk_1     fighter_7_walk_2 ] }
+			armor_style yellow: { sprite: fighter_8     sprite_dead: fighter_8_dead     sprite_mounted: fighter_8_mounted     sprites_walk: [ fighter_8_walk_1     fighter_8_walk_2 ] }		
+		}
+		
+		body:
+		{
+			armor_style none:   { sprite: fighter_naked_body_2 sprite_dead: fighter_naked_dead_body_2 sprite_mounted: fighter_naked_mounted_body_2 sprites_walk: [ fighter_naked_walk_1_body_2 fighter_naked_walk_2_body_2 ] }
+			armor_style brown:  { sprite: fighter_body_2       sprite_dead: fighter_dead_body_2       sprite_mounted: fighter_mounted_body_2       sprites_walk: [ fighter_walk_1_body_2       fighter_walk_2_body_2 ] }
+			armor_style green:  { sprite: fighter_2_body_2     sprite_dead: fighter_2_dead_body_2     sprite_mounted: fighter_2_mounted_body_2     sprites_walk: [ fighter_2_walk_1_body_2     fighter_2_walk_2_body_2 ] }
+			armor_style cyan:   { sprite: fighter_3_body_2     sprite_dead: fighter_3_dead_body_2     sprite_mounted: fighter_3_mounted_body_2     sprites_walk: [ fighter_3_walk_1_body_2     fighter_3_walk_2_body_2 ] }
+			armor_style red:    { sprite: fighter_4_body_2     sprite_dead: fighter_4_dead_body_2     sprite_mounted: fighter_4_mounted_body_2     sprites_walk: [ fighter_4_walk_1_body_2     fighter_4_walk_2_body_2 ] }
+			armor_style purple: { sprite: fighter_5_body_2     sprite_dead: fighter_5_dead_body_2     sprite_mounted: fighter_5_mounted_body_2     sprites_walk: [ fighter_5_walk_1_body_2     fighter_5_walk_2_body_2 ] }
+			armor_style black:  { sprite: fighter_6_body_2     sprite_dead: fighter_6_dead_body_2     sprite_mounted: fighter_6_mounted_body_2     sprites_walk: [ fighter_6_walk_1_body_2     fighter_6_walk_2_body_2 ] }
+			armor_style white:  { sprite: fighter_7_body_2     sprite_dead: fighter_7_dead_body_2     sprite_mounted: fighter_7_mounted_body_2     sprites_walk: [ fighter_7_walk_1_body_2     fighter_7_walk_2_body_2 ] }
+			armor_style yellow: { sprite: fighter_8_body_2     sprite_dead: fighter_8_dead_body_2     sprite_mounted: fighter_8_mounted_body_2     sprites_walk: [ fighter_8_walk_1_body_2     fighter_8_walk_2_body_2 ] }		
+		}		
+		
+		hair: { }
+		hair: { sprite: fighter_hair_1 sprite_dead: fighter_dead_hair_1 sprite_mounted: fighter_mounted_hair_1 sprites_walk: [ fighter_walk_1_hair_1 fighter_walk_2_hair_1 ] }
+		hair: { sprite: fighter_hair_2 sprite_dead: fighter_dead_hair_2 sprite_mounted: fighter_mounted_hair_2 sprites_walk: [ fighter_walk_1_hair_2 fighter_walk_2_hair_2 ] }
+		hair: { sprite: fighter_hair_3 sprite_dead: fighter_dead_hair_3 sprite_mounted: fighter_mounted_hair_3 sprites_walk: [ fighter_walk_1_hair_3 fighter_walk_2_hair_3 ] }
+		hair: { sprite: fighter_hair_4 sprite_dead: fighter_dead_hair_4 sprite_mounted: fighter_mounted_hair_4 sprites_walk: [ fighter_walk_1_hair_4 fighter_walk_2_hair_4 ] }
+		
+		beard: { }
+		beard: { sprite: fighter_beard_1 sprite_dead: fighter_dead_beard_1 sprite_mounted: fighter_mounted_beard_1 sprites_walk: [ fighter_walk_1_beard_1 fighter_walk_2_beard_1 ] }
+		beard: { sprite: fighter_beard_2 sprite_dead: fighter_dead_beard_2 sprite_mounted: fighter_mounted_beard_2 sprites_walk: [ fighter_walk_1_beard_2 fighter_walk_2_beard_2 ] }
+		beard: { sprite: fighter_beard_3 sprite_dead: fighter_dead_beard_3 sprite_mounted: fighter_mounted_beard_3 sprites_walk: [ fighter_walk_1_beard_3 fighter_walk_2_beard_3 ] }
+		beard: { sprite: fighter_beard_4 sprite_dead: fighter_dead_beard_4 sprite_mounted: fighter_mounted_beard_4 sprites_walk: [ fighter_walk_1_beard_4 fighter_walk_2_beard_4 ] }
+		beard: { sprite: fighter_beard_5 sprite_dead: fighter_dead_beard_5 sprite_mounted: fighter_mounted_beard_5 sprites_walk: [ fighter_walk_1_beard_5 fighter_walk_2_beard_5 ] }	
+
+		hair_color: [ 128 128 128 ]
+		hair_color: [ 255 255 255 ]
+
+		beard_color: [ 128 128 128 ]
+		beard_color: [ 255 255 255 ]
+
+		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
+	}
+	
 	armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprite_mounted: fighter_naked_mounted sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
 	armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprite_mounted: fighter_mounted       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
 	armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprite_mounted: fighter_2_mounted     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
