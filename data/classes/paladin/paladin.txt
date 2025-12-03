@@ -27,6 +27,8 @@ class paladin:
 	
 	string: "Paladin"	
 	description: "Warrior of the Light."
+	icon: icon_paladin_2
+	icon_locked: icon_paladin_2_locked
 	
 	unlocked_by_achievement: light_follower
 	
@@ -73,11 +75,11 @@ class paladin:
 		beard: { sprite: paladin_beard_4 sprite_dead: paladin_dead_beard_4 sprite_mounted: paladin_mounted_beard_4 sprites_walk: [ paladin_walk_1_beard_4 paladin_walk_2_beard_4 ] }
 		beard: { sprite: paladin_beard_5 sprite_dead: paladin_dead_beard_5 sprite_mounted: paladin_mounted_beard_5 sprites_walk: [ paladin_walk_1_beard_5 paladin_walk_2_beard_5 ] }	
 
-		hair_color: [ 128 128 128 ]
-		hair_color: [ 255 255 255 ]
+		hair_color<"Dark">: [ 128 128 128 ]
+		hair_color<"Light">: [ 255 255 255 ]
 
-		beard_color: [ 128 128 128 ]
-		beard_color: [ 255 255 255 ]
+		beard_color<"Dark">: [ 128 128 128 ]
+		beard_color<"Light">: [ 255 255 255 ]
 
 		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
 	}	

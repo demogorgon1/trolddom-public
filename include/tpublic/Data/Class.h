@@ -246,6 +246,45 @@ namespace tpublic
 				SpriteCollection											m_armorStyles[ArmorStyle::NUM_IDS];
 			};
 
+			struct CharacterCustomizationColor
+			{
+				CharacterCustomizationColor()
+				{
+
+				}
+
+				CharacterCustomizationColor(
+					const SourceNode*		aSource)
+				{
+					m_color = Image::RGBA(aSource);
+					if(aSource->m_annotation)
+						m_string = aSource->m_annotation->GetString();
+				}
+
+				void
+				ToStream(
+					IWriter*				aWriter) const
+				{
+					aWriter->WritePOD(m_color);
+					aWriter->WriteString(m_string);
+				}
+
+				bool
+				FromStream(
+					IReader*				aReader)
+				{
+					if(!aReader->ReadPOD(m_color))
+						return false;
+					if(!aReader->ReadString(m_string))
+						return false;
+					return true;
+				}
+
+				// Public data
+				Image::RGBA													m_color;
+				std::string													m_string;
+			};
+
 			struct CharacterCustomization
 			{
 				void
@@ -262,9 +301,9 @@ namespace tpublic
 						else if (aChild->m_name == "beard")
 							m_beard.push_back(std::make_unique<SpriteCollection>(aChild));
 						else if (aChild->m_name == "hair_color")
-							m_hairColor.push_back(Image::RGBA(aChild));
+							m_hairColor.push_back(CharacterCustomizationColor(aChild));
 						else if (aChild->m_name == "beard_color")
-							m_beardColor.push_back(Image::RGBA(aChild));
+							m_beardColor.push_back(CharacterCustomizationColor(aChild));
 						else if (aChild->m_name == "default")
 							m_default = Customization(aChild);
 						else
@@ -279,8 +318,8 @@ namespace tpublic
 					aWriter->WriteObjectPointers(m_body);
 					aWriter->WriteObjectPointers(m_hair);
 					aWriter->WriteObjectPointers(m_beard);
-					aWriter->WritePODs(m_hairColor);
-					aWriter->WritePODs(m_beardColor);
+					aWriter->WriteObjects(m_hairColor);
+					aWriter->WriteObjects(m_beardColor);
 					m_default.ToStream(aWriter);
 				}
 
@@ -294,21 +333,32 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadObjectPointers(m_beard))
 						return false;
-					if (!aReader->ReadPODs(m_hairColor))
+					if (!aReader->ReadObjects(m_hairColor))
 						return false;
-					if (!aReader->ReadPODs(m_beardColor))
+					if (!aReader->ReadObjects(m_beardColor))
 						return false;
 					if(!m_default.FromStream(aReader))
 						return false;
 					return true;
 				}
 
+				bool
+				ValidateCustomization(
+					const Customization&	aCustomization) const
+				{
+					return (size_t)aCustomization.m_body < m_body.size() &&
+						(size_t)aCustomization.m_hair < m_hair.size() &&
+						(size_t)aCustomization.m_beard < m_beard.size() &&
+						(size_t)aCustomization.m_hairColor < m_hairColor.size() &&
+						(size_t)aCustomization.m_beardColor < m_beardColor.size();
+				}
+
 				// Public data
 				std::vector<std::unique_ptr<CharacterCustomizationBody>>	m_body;
 				std::vector<std::unique_ptr<SpriteCollection>>				m_hair;
 				std::vector<std::unique_ptr<SpriteCollection>>				m_beard;
-				std::vector<Image::RGBA>									m_hairColor;
-				std::vector<Image::RGBA>									m_beardColor;
+				std::vector<CharacterCustomizationColor>					m_hairColor;
+				std::vector<CharacterCustomizationColor>					m_beardColor;
 				Customization												m_default;
 			};
 
@@ -1014,6 +1064,14 @@ namespace tpublic
 						{
 							m_customization.FromSource(aMember);
 						}
+						else if(aMember->m_name == "icon")
+						{
+							m_iconSpriteId = aMember->GetId(DataType::ID_SPRITE);
+						}
+						else if(aMember->m_name == "icon_locked")
+						{
+							m_iconLockedSpriteId = aMember->GetId(DataType::ID_SPRITE);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -1058,6 +1116,8 @@ namespace tpublic
 					aStream->WriteOptionalObjectPointer(m_weaponSprites[i]);
 
 				m_customization.ToStream(aStream);
+				aStream->WriteUInt(m_iconSpriteId);
+				aStream->WriteUInt(m_iconLockedSpriteId);
 			}
 			
 			bool	
@@ -1127,6 +1187,10 @@ namespace tpublic
 
 				if(!m_customization.FromStream(aStream))
 					return false;
+				if (!aStream->ReadUInt(m_iconSpriteId))
+					return false;
+				if (!aStream->ReadUInt(m_iconLockedSpriteId))
+					return false;
 
 				return true;
 			}
@@ -1135,6 +1199,8 @@ namespace tpublic
 			uint32_t												m_version = 0;
 			std::string												m_displayName;
 			std::string												m_description;
+			uint32_t												m_iconSpriteId = 0;
+			uint32_t												m_iconLockedSpriteId = 0;
 			Color													m_color1;
 			Color													m_color2;
 			uint32_t												m_defaultAttackAbilityId = 0;

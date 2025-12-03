@@ -45,6 +45,7 @@ class sorcerer:
 
 	string: "Sorcerer"	
 	description: "Master of magic."
+	icon: icon_sorcerer_2
 	
 	systems: [ combat health_regen mana_regen ]
 	
@@ -89,11 +90,11 @@ class sorcerer:
 		beard: { sprite: sorcerer_beard_4 sprite_dead: sorcerer_dead_beard_4 sprite_mounted: sorcerer_mounted_beard_4 sprites_walk: [ sorcerer_walk_1_beard_4 sorcerer_walk_2_beard_4 ] }
 		beard: { sprite: sorcerer_beard_5 sprite_dead: sorcerer_dead_beard_5 sprite_mounted: sorcerer_mounted_beard_5 sprites_walk: [ sorcerer_walk_1_beard_5 sorcerer_walk_2_beard_5 ] }	
 
-		hair_color: [ 128 128 128 ]
-		hair_color: [ 255 255 255 ]
+		hair_color<"Dark">: [ 128 128 128 ]
+		hair_color<"Light">: [ 255 255 255 ]
 
-		beard_color: [ 128 128 128 ]
-		beard_color: [ 255 255 255 ]
+		beard_color<"Dark">: [ 128 128 128 ]
+		beard_color<"Light">: [ 255 255 255 ]
 
 		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
 	}	

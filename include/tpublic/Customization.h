@@ -69,6 +69,20 @@ namespace tpublic
 			return true;
 		}
 
+		bool
+		operator==(
+			const Customization&	aOther) const
+		{
+			return m_body == aOther.m_body && m_hair == aOther.m_hair && m_beard == aOther.m_beard && m_hairColor == aOther.m_hairColor && m_beardColor == aOther.m_beardColor;
+		}
+
+		bool
+		operator!=(
+			const Customization&	aOther) const
+		{
+			return !this->operator==(aOther);
+		}
+
 		// Public data
 		uint8_t		m_body = 0;
 		uint8_t		m_hair = 0;

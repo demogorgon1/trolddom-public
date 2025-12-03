@@ -959,6 +959,13 @@ sprites:
 	sprite icon_bracers_7: { tags: [ icon ] }
 	sprite icon_bracers_8: { tags: [ icon ] }
 	sprite icon_bone_3: { tags: [ icon ] }
+	sprite icon_fighter_2: { tags: [ icon ] }
+	sprite icon_priest_2: { tags: [ icon ] }
+	sprite icon_sorcerer_2: { tags: [ icon ] }
+	sprite icon_witch_2: { tags: [ icon ] }
+	sprite icon_paladin_2: { tags: [ icon ] }
+	sprite icon_witch_2_locked: { tags: [ icon ] }
+	sprite icon_paladin_2_locked: { tags: [ icon ] }
 }
 
 

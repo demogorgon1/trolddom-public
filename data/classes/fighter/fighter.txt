@@ -54,6 +54,7 @@ class fighter:
 
 	string: "Fighter"	
 	description: "Defeat your enemies in hand-to-hand combat."
+	icon: icon_fighter_2
 	
 	systems: [ combat health_regen rage ]
 	
@@ -98,11 +99,11 @@ class fighter:
 		beard: { sprite: fighter_beard_4 sprite_dead: fighter_dead_beard_4 sprite_mounted: fighter_mounted_beard_4 sprites_walk: [ fighter_walk_1_beard_4 fighter_walk_2_beard_4 ] }
 		beard: { sprite: fighter_beard_5 sprite_dead: fighter_dead_beard_5 sprite_mounted: fighter_mounted_beard_5 sprites_walk: [ fighter_walk_1_beard_5 fighter_walk_2_beard_5 ] }	
 
-		hair_color: [ 128 128 128 ]
-		hair_color: [ 255 255 255 ]
+		hair_color<"Dark">: [ 128 128 128 ]
+		hair_color<"Light">: [ 255 255 255 ]
 
-		beard_color: [ 128 128 128 ]
-		beard_color: [ 255 255 255 ]
+		beard_color<"Dark">: [ 128 128 128 ]
+		beard_color<"Light">: [ 255 255 255 ]
 
 		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
 	}
