@@ -168,21 +168,21 @@ aura revenge:
 
 	aura_effect combat_event_trigger: 
 	{ 
-		combat_event<target>: parry
+		combat_event<source>: parry
 		combat_event_ability_mask: [ offensive melee ]
 		ability<target>: revenge
 	}
 	
 	aura_effect combat_event_trigger: 
 	{ 
-		combat_event<target>: dodge
+		combat_event<source>: dodge
 		combat_event_ability_mask: [ offensive melee ]
 		ability<target>: revenge
 	}
 
 	aura_effect combat_event_trigger: 
 	{ 
-		combat_event<target>: block
+		combat_event<source>: block
 		combat_event_ability_mask: [ offensive melee ]
 		ability<target>: revenge
 	}	
