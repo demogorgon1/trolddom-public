@@ -1694,6 +1694,68 @@ sprites:
 
 	size: { width: 16 height: 16 }
 
+	cursor: { position: [ 0 0 ] }
+	sprite fighter_naked_body_3: { }
+	sprite fighter_body_3: { }
+	sprite fighter_2_body_3: { }
+	sprite fighter_3_body_3: { }
+	sprite fighter_4_body_3: { }
+	sprite fighter_5_body_3: { }
+	sprite fighter_6_body_3: { }
+	sprite fighter_7_body_3: { }
+	sprite fighter_8_body_3: { }	
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	sprite fighter_naked_mounted_body_3: { }
+	sprite fighter_mounted_body_3: { }	
+	sprite fighter_2_mounted_body_3: { }
+	sprite fighter_3_mounted_body_3: { }
+	sprite fighter_4_mounted_body_3: { }
+	sprite fighter_5_mounted_body_3: { }
+	sprite fighter_6_mounted_body_3: { }
+	sprite fighter_7_mounted_body_3: { }
+	sprite fighter_8_mounted_body_3: { }	
+	
+	cursor: { position: [ 0 16 ] }
+	sprite fighter_naked_dead_body_3: { }
+	sprite fighter_dead_body_3: { }
+	sprite fighter_2_dead_body_3: { }
+	sprite fighter_3_dead_body_3: { }
+	sprite fighter_4_dead_body_3: { }
+	sprite fighter_5_dead_body_3: { }
+	sprite fighter_6_dead_body_3: { }
+	sprite fighter_7_dead_body_3: { }
+	sprite fighter_8_dead_body_3: { }
+	
+	cursor: { position: [ 0 32 ] }
+	sprite fighter_naked_walk_1_body_3: { }
+	sprite fighter_walk_1_body_3: { }
+	sprite fighter_2_walk_1_body_3: { }
+	sprite fighter_3_walk_1_body_3: { }
+	sprite fighter_4_walk_1_body_3: { }
+	sprite fighter_5_walk_1_body_3: { }
+	sprite fighter_6_walk_1_body_3: { }
+	sprite fighter_7_walk_1_body_3: { }
+	sprite fighter_8_walk_1_body_3: { }
+
+	cursor: { position: [ 0 48 ] }
+	sprite fighter_naked_walk_2_body_3: { }
+	sprite fighter_walk_2_body_3: { }
+	sprite fighter_2_walk_2_body_3: { }
+	sprite fighter_3_walk_2_body_3: { }
+	sprite fighter_4_walk_2_body_3: { }
+	sprite fighter_5_walk_2_body_3: { }
+	sprite fighter_6_walk_2_body_3: { }
+	sprite fighter_7_walk_2_body_3: { }
+	sprite fighter_8_walk_2_body_3: { }
+	
 	cursor: { position: [ 0 256 ] }
 	sprite witch_naked_body_3: { }
 	sprite witch_body_3: { }
@@ -1764,6 +1826,68 @@ sprites:
 
 	size: { width: 16 height: 16 }
 
+	cursor: { position: [ 0 0 ] }
+	sprite fighter_naked_body_4: { }
+	sprite fighter_body_4: { }
+	sprite fighter_2_body_4: { }
+	sprite fighter_3_body_4: { }
+	sprite fighter_4_body_4: { }
+	sprite fighter_5_body_4: { }
+	sprite fighter_6_body_4: { }
+	sprite fighter_7_body_4: { }
+	sprite fighter_8_body_4: { }	
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	skip: {}		
+	sprite fighter_naked_mounted_body_4: { }
+	sprite fighter_mounted_body_4: { }	
+	sprite fighter_2_mounted_body_4: { }
+	sprite fighter_3_mounted_body_4: { }
+	sprite fighter_4_mounted_body_4: { }
+	sprite fighter_5_mounted_body_4: { }
+	sprite fighter_6_mounted_body_4: { }
+	sprite fighter_7_mounted_body_4: { }
+	sprite fighter_8_mounted_body_4: { }	
+	
+	cursor: { position: [ 0 16 ] }
+	sprite fighter_naked_dead_body_4: { }
+	sprite fighter_dead_body_4: { }
+	sprite fighter_2_dead_body_4: { }
+	sprite fighter_3_dead_body_4: { }
+	sprite fighter_4_dead_body_4: { }
+	sprite fighter_5_dead_body_4: { }
+	sprite fighter_6_dead_body_4: { }
+	sprite fighter_7_dead_body_4: { }
+	sprite fighter_8_dead_body_4: { }
+	
+	cursor: { position: [ 0 32 ] }
+	sprite fighter_naked_walk_1_body_4: { }
+	sprite fighter_walk_1_body_4: { }
+	sprite fighter_2_walk_1_body_4: { }
+	sprite fighter_3_walk_1_body_4: { }
+	sprite fighter_4_walk_1_body_4: { }
+	sprite fighter_5_walk_1_body_4: { }
+	sprite fighter_6_walk_1_body_4: { }
+	sprite fighter_7_walk_1_body_4: { }
+	sprite fighter_8_walk_1_body_4: { }
+
+	cursor: { position: [ 0 48 ] }
+	sprite fighter_naked_walk_2_body_4: { }
+	sprite fighter_walk_2_body_4: { }
+	sprite fighter_2_walk_2_body_4: { }
+	sprite fighter_3_walk_2_body_4: { }
+	sprite fighter_4_walk_2_body_4: { }
+	sprite fighter_5_walk_2_body_4: { }
+	sprite fighter_6_walk_2_body_4: { }
+	sprite fighter_7_walk_2_body_4: { }
+	sprite fighter_8_walk_2_body_4: { }
+	
 	cursor: { position: [ 0 256 ] }
 	sprite witch_naked_body_4: { }
 	sprite witch_body_4: { }

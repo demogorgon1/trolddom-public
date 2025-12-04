@@ -125,13 +125,9 @@ class witch:
 		beard: { sprite: witch_beard_4 sprite_dead: witch_dead_beard_4 sprite_mounted: witch_mounted_beard_4 sprites_walk: [ witch_walk_1_beard_4 witch_walk_2_beard_4 ] }
 		beard: { sprite: witch_beard_5 sprite_dead: witch_dead_beard_5 sprite_mounted: witch_mounted_beard_5 sprites_walk: [ witch_walk_1_beard_5 witch_walk_2_beard_5 ] }	
 
-		hair_color<"Dark">: [ 128 128 128 ]
-		hair_color<"Light">: [ 255 255 255 ]
-
-		beard_color<"Dark">: [ 128 128 128 ]
-		beard_color<"Light">: [ 255 255 255 ]
-
-		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
+		default: { body: 0 hair: 3 beard: 0 hair_color: 12 beard_color: 12 }
+		
+		!CUSTOMIZATION_COLORS{}
 	}	
 	
 	armor_style none:   { sprite: witch_naked sprite_dead: witch_naked_dead sprite_mounted: witch_naked_mounted sprites_walk: [ witch_naked_walk_1 witch_naked_walk_2 ] }	

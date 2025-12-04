@@ -5,3 +5,36 @@
 ]
 
 !define HEALTH_PER_LEVEL 14
+
+!define CUSTOMIZATION_COLORS
+{
+	hair_color<"Dark Gray">: [ 60 60 60 ]
+	hair_color<"Gray">: [ 124 124 124 ]
+	hair_color<"Light Gray">: [ 181 181 181 ]
+	hair_color<"White">: [ 255 255 255 ]
+	hair_color<"Black">: [ 38 25 7 ]
+	hair_color<"Dark Brown">: [ 87 70 28 ]
+	hair_color<"Brown">: [ 120 100 46 ]
+	hair_color<"Light Brown">: [ 190 151 93 ]
+	hair_color<"Red">: [ 169 73 25 ]
+	hair_color<"Dark Red">: [ 127 50 13 ]
+	hair_color<"Yellow">: [ 194 195 23 ]
+	hair_color<"Dark Yellow">: [ 103 103 12 ]
+	hair_color<"Dark Purple">: [ 70 9 77 ]
+	hair_color<"Dark Green">: [ 17 60 6 ]
+
+	beard_color<"Dark Gray">: [ 60 60 60 ]
+	beard_color<"Gray">: [ 124 124 124 ]
+	beard_color<"Light Gray">: [ 181 181 181 ]
+	beard_color<"White">: [ 255 255 255 ]
+	beard_color<"Black">: [ 38 25 7 ]
+	beard_color<"Dark Brown">: [ 87 70 28 ]
+	beard_color<"Brown">: [ 120 100 46 ]
+	beard_color<"Light Brown">: [ 190 151 93 ]
+	beard_color<"Red">: [ 169 73 25 ]
+	beard_color<"Dark Red">: [ 127 50 13 ]
+	beard_color<"Yellow">: [ 194 195 23 ]
+	beard_color<"Dark Yellow">: [ 103 103 12 ]
+	beard_color<"Dark Purple">: [ 70 9 77 ]
+	beard_color<"Dark Green">: [ 17 60 6 ]
+}

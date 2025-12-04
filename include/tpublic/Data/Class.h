@@ -210,6 +210,10 @@ namespace tpublic
 							TP_VERIFY(armorStyleId != ArmorStyle::INVALID_ID, aChild->m_debugInfo, "'%s' not a valid armor style.", aChild->m_name.c_str());
 							m_armorStyles[armorStyleId] = SpriteCollection(aChild);
 						}
+						else if(aChild->m_name == "offset")
+						{
+							m_offset = aChild->GetVec2();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
@@ -223,6 +227,8 @@ namespace tpublic
 				{
 					for (uint32_t i = 1; i < (uint32_t)ArmorStyle::NUM_IDS; i++)
 						m_armorStyles[i].ToStream(aWriter);
+
+					m_offset.ToStream(aWriter);
 				}
 
 				bool
@@ -234,6 +240,10 @@ namespace tpublic
 						if (!m_armorStyles[i].FromStream(aReader))
 							return false;
 					}
+
+					if(!m_offset.FromStream(aReader))
+						return false;
+
 					return true;
 				}
 
@@ -244,6 +254,7 @@ namespace tpublic
 
 				// Public data
 				SpriteCollection											m_armorStyles[ArmorStyle::NUM_IDS];
+				Vec2														m_offset;
 			};
 
 			struct CharacterCustomizationColor

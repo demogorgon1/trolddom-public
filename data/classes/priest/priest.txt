@@ -49,13 +49,9 @@ class priest:
 		beard: { sprite: priest_beard_4 sprite_dead: priest_dead_beard_4 sprite_mounted: priest_mounted_beard_4 sprites_walk: [ priest_walk_1_beard_4 priest_walk_2_beard_4 ] }
 		beard: { sprite: priest_beard_5 sprite_dead: priest_dead_beard_5 sprite_mounted: priest_mounted_beard_5 sprites_walk: [ priest_walk_1_beard_5 priest_walk_2_beard_5 ] }	
 
-		hair_color<"Dark">: [ 128 128 128 ]
-		hair_color<"Light">: [ 255 255 255 ]
-
-		beard_color<"Dark">: [ 128 128 128 ]
-		beard_color<"Light">: [ 255 255 255 ]
-
-		default: { body: 0 hair: 0 beard: 0 hair_color: 0 beard_color: 0 }
+		default: { body: 0 hair: 1 beard: 2 hair_color: 5 beard_color: 5 }
+		
+		!CUSTOMIZATION_COLORS{}
 	}	
 	
 	armor_style none:   { sprite: priest_naked sprite_dead: priest_naked_dead sprite_mounted: priest_naked_mounted sprites_walk: [ priest_naked_walk_1 priest_naked_walk_2 ] }	
