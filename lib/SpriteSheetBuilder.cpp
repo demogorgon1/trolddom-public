@@ -183,7 +183,7 @@ namespace tpublic
 						// FIXME: should be defined in a palette in data
 						if(aRGBA == Image::RGBA(255, 255, 255, 255))
 						{
-							sprite->m_info.m_headAnchor = Vec2((int32_t)(aX - offsetX), (int32_t)(aY - offsetY));
+							sprite->m_info.m_headAnchor = Vec2{ (int32_t)(aX - offsetX), (int32_t)(aY - offsetY) };
 							return false;
 						}
 						return true; // Continue
