@@ -222,8 +222,10 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
+					lootable->m_extraLootTableId = auras->GetLootTableId(*aContext->m_random, GetManifest());
+
 					const MapData* mapData = aContext->m_worldView->WorldViewGetMapData();
-					if(lootable->m_lootTableId != 0 || mapData->m_mapInfo.m_mapLootTableIds.size() > 0)
+					if(lootable->m_lootTableId != 0 || mapData->m_mapInfo.m_mapLootTableIds.size() > 0 || lootable->m_extraLootTableId != 0)
 						aContext->m_eventQueue->EventQueueGenerateLoot(aEntityInstanceId);
 				}
 			}

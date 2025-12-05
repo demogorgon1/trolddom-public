@@ -597,6 +597,32 @@ namespace tpublic
 	}
 
 	void		
+	Image::ForEachPixel(
+		uint32_t		aX0,
+		uint32_t		aY0,
+		uint32_t		aX1,
+		uint32_t		aY1,
+		PixelCallback	aCallback) const
+	{
+		if (m_data == NULL || m_width == 0 || m_height == 0)
+			return;
+
+		assert(aX0 >= 0 && aY0 >= 0 && aX1 <= m_width && aY1 <= m_height);
+		assert(aX1 >= aX0 && aY1 >= aY0);
+
+		for(uint32_t y = aY0; y < aY1; y++)
+		{
+			for (uint32_t x = aX0; x < aX1; x++)
+			{
+				uint32_t i = y * m_width + x;
+
+				if(!aCallback(x, y, m_data[i]))
+					return;
+			}
+		}
+	}
+
+	void		
 	Image::ToStream(
 		IWriter*	aWriter) const
 	{

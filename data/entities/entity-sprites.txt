@@ -1,6 +1,8 @@
 sprites:
 {
 	source: "npcs.png"
+	
+	overlay_source: "npcs-anchors.png"
 
 	size: { width: 16 height: 16 }
 
@@ -1083,6 +1085,7 @@ sprites:
 	sprite wood_elemental_3: { dead: wood_elemental_3_dead }
 	sprite carnivorous_plant_6: { dead: carnivorous_plant_6_dead }
 	sprite woman_47: { dead: woman_47_dead }
+	sprite gnome_2: { dead: gnome_2_dead }
 
 	cursor: { position: [ 0 944 ] }
 	sprite lizard_man_9_dead: { }		
@@ -1097,6 +1100,7 @@ sprites:
 	sprite wood_elemental_3_dead: { }	
 	sprite carnivorous_plant_6_dead: { }	
 	sprite woman_47_dead: { }	
+	sprite gnome_2_dead: { }	
 	
 }
 

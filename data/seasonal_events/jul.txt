@@ -1,0 +1,260 @@
+seasonal_event jul: 
+{
+	period: { month: december range: [ 1 31 ] }
+
+	random_npc_aura:
+	{
+		aura: jul_hat_common		
+		probability: 2
+		requirement self<must_not_be_elite>: {}
+		requirement self<must_be_npc_with_head_anchor>: {}
+	}
+
+	random_npc_aura:
+	{
+		aura: jul_hat_common
+		probability: 5
+		requirement self<must_be_elite>: {}
+		requirement self<must_be_npc_with_head_anchor>: {}
+		requirement self<must_be_lower_than_level>: 12
+	}
+
+	random_npc_aura:
+	{
+		aura: jul_hat_uncommon
+		probability: 5
+		requirement self<must_be_elite>: {}
+		requirement self<must_be_npc_with_head_anchor>: {}
+		requirement self<must_be_at_least_level>: 12		
+	}
+	
+	random_npc_aura:
+	{
+		aura: jul_hat_rare_1
+		probability: 1
+		requirement self<must_be_elite>: {}
+		requirement self<must_be_npc_with_head_anchor>: {}
+		requirement self<must_be_at_least_level>: 20
+	}
+	
+	random_npc_aura:
+	{
+		aura: jul_hat_rare_2
+		probability: 1
+		requirement self<must_be_npc_with_head_anchor>: {}
+		requirement self<must_be_at_least_level>: 20
+	}	
+}
+
+faction jul_consortium:
+{
+	string: "The Jule Consortium"
+	flags: [ friendly reputation show ]
+	default_reputation: !NEUTRAL_REPUTATION{}
+}
+
+aura_group jul_hat: {}
+
+!define local NPC_AURA
+{
+	string: "Festive"
+	description: "Nice and warm."
+	flags: [ unique indefinite silent ]
+	aura_group: jul_hat
+	icon: @_icon
+	type: buff
+	head_effect_sprite: @_hat
+	loot_table: @_loot_table	
+}
+
+loot_group jul_hat_common: {}
+loot_group jul_hat_uncommon: {}
+loot_group jul_hat_rare_1: {}
+loot_group jul_hat_rare_2: {}
+
+aura jul_hat_common: !NPC_AURA { _icon: icon_jul_hat_red _hat: effect_jul_hat_red _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_common } } ] } }
+aura jul_hat_uncommon: !NPC_AURA { _icon: icon_jul_hat_green _hat: effect_jul_hat_green _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_uncommon } } ] } }
+aura jul_hat_rare_1: !NPC_AURA { _icon: icon_jul_hat_blue _hat: effect_jul_hat_blue _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_rare_1 } } ] } }
+aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat_purple _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_rare_2 } } ] } }
+
+!define local ITEM
+{
+	string: @_string
+	icon: @_icon
+	use_ability: @_ability
+	rarity: uncommon
+	binds: when_picked_up
+	loot_groups: [ @_loot_group ]
+	item_level: 10
+	required_level: 1
+	type: miscellaneous
+}
+
+!define local ITEM_ABILITY
+{
+	string: @_string
+	icon: @_icon	
+	description: "Put on."
+	flags: [ target_self item ]
+	cooldowns: [ global ]
+	states: [ default in_combat ]
+	direct_effect apply_aura: 
+	{
+		aura: $aura
+		{
+			string: "Festive"
+			description: "Nice and warm."
+			flags: [ unique silent always_show_timer ]
+			duration: 6000
+			aura_group: jul_hat
+			icon: @_icon
+			type: buff
+			head_effect_sprite: @_hat
+		}
+	}
+}
+
+{
+	${ _string: "Red Winter Hat" _icon: icon_jul_hat_red _hat: effect_jul_hat_red _loot_group: jul_hat_common }
+
+	ability jul_hat_common: !ITEM_ABILITY {}
+	item jul_hat_common: !ITEM { _ability: jul_hat_common }	
+}
+
+{
+	${ _string: "Green Winter Hat" _icon: icon_jul_hat_green _hat: effect_jul_hat_green _loot_group: jul_hat_uncommon }
+	
+	ability jul_hat_uncommon: !ITEM_ABILITY {}
+	item jul_hat_uncommon: !ITEM { _ability: jul_hat_uncommon }	
+}
+
+{
+	${ _string: "Blue Winter Hat" _icon: icon_jul_hat_blue _hat: effect_jul_hat_blue _loot_group: jul_hat_rare_1 }
+	
+	ability jul_hat_rare_1: !ITEM_ABILITY {}
+	item jul_hat_rare_1: !ITEM { _ability: jul_hat_rare_1 }	
+}
+
+{
+	${ _string: "Purple Winter Hat" _icon: icon_jul_hat_purple _hat: effect_jul_hat_purple _loot_group: jul_hat_rare_2 }
+
+	ability jul_hat_rare_2: !ITEM_ABILITY {}
+	item jul_hat_rare_2: !ITEM { _ability: jul_hat_rare_2 }	
+}
+
+############################################################
+# Nisse NPC
+
+dialogue_screen .nisse_dialogue:
+{
+	text: 
+	[	
+		"Hey, you!\n"
+		"\n"
+		"We're in a bit of an emergency situation here, all hands on deck. A large shipment of winter hats was lost and they're spread all over the place! Exactly what happened we don't know, but there must have been some"
+		"kind of high altitude catastrophic incident. We absolutely must recover as much of the shipment as possible before the Jule festivities later this month! If the shipment is lost it will have disastrous effects on"
+		"our stocks and we might have to cancel the festivities all together! It would be a total disaster for everyone, especially the stock owners! The big boss will get very upset!\n"
+		"\n"
+		"If you find any of our winter hats, please return them. Only you can save Jul!"
+	]
+	
+	options:
+	[
+		{ quest: .nisse_1 }
+		{ quest: .nisse_2 }
+		{ text: "Are you a gnome?" goto: $dialogue_screen { text: [ "Rude." ] } }
+	]
+}
+
+map_entity_spawn jul_nisse:
+{
+	entity jul_nisse: { weight: 1 init_state: default }
+}
+
+entity jul_nisse: !NPC
+{
+	_string: "Nisse"
+	_dialogue_root: $dialogue_root { .nisse_dialogue: {} }
+	_faction: jul_consortium
+	_sprite: gnome_2
+	_sprite_dead: gnome_2_dead	
+	_level: 30
+	_creature_type: humanoid
+	_not_pushable: true	
+}
+
+objective .nisse_1:
+{
+	string: "Red Winter Hat"	
+	collect_items: { item: jul_hat_common count: 1 }
+}
+
+quest .nisse_1:
+{
+	string: "Red Winter Hat"
+
+	text:
+	[
+		"Recover a Red Winter Hat and return it to the Nisse."
+	]
+	
+	description: 
+	[
+		"The most of the hats we lost were of the red variety. You can find them all over the place, I think."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"Good job!"
+	]
+	
+	objectives: [ .nisse_1 ]
+	repeat_mode: always
+	level: 1
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 2
+}
+
+objective .nisse_2:
+{
+	string: "Green Winter Hat"	
+	collect_items: { item: jul_hat_uncommon count: 1 }
+}
+
+quest .nisse_2:
+{
+	string: "Green Winter Hat"
+
+	text:
+	[
+		"Recover a Green Winter Hat and return it to the Nisse."
+	]
+	
+	description: 
+	[
+		"Our green hats might be more difficult to find. Might have to go underground."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"Good job!"
+	]
+	
+	objectives: [ .nisse_1 ]
+	repeat_mode: always
+	level: 1
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 5
+}

@@ -966,6 +966,12 @@ sprites:
 	sprite icon_paladin_2: { tags: [ icon ] }
 	sprite icon_witch_2_locked: { tags: [ icon ] }
 	sprite icon_paladin_2_locked: { tags: [ icon ] }
+	sprite icon_jul_hat_red: { tags: [ icon ] }
+
+	cursor: { position: [ 0 848 ] }	
+	sprite icon_jul_hat_green: { tags: [ icon ] }
+	sprite icon_jul_hat_blue: { tags: [ icon ] }
+	sprite icon_jul_hat_purple: { tags: [ icon ] }
 }
 
 

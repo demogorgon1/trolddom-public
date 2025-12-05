@@ -89,6 +89,10 @@ sprites:
 	sprite effect_burning_2: { flags: [ centered ] }
 	sprite effect_burning_3: { flags: [ centered ] }
 	sprite effect_burning_4: { flags: [ centered ] }
+	sprite effect_jul_hat_green: { flags: [ ] }
+	sprite effect_jul_hat_blue: { flags: [ ] }
+	sprite effect_jul_hat_purple: { flags: [ ] }
+	sprite effect_jul_hat_red: { flags: [ ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

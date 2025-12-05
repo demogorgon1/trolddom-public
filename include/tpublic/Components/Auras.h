@@ -133,6 +133,9 @@ namespace tpublic
 				});
 			}
 
+			uint32_t		GetLootTableId(
+								std::mt19937&								aRandom,
+								const Manifest*								aManifest) const;
 			bool			HasEffect(
 								AuraEffect::Id								aId,
 								SourceEntityInstance*						aOutSourceEntityInstance) const;

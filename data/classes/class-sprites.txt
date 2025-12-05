@@ -857,6 +857,7 @@ sprites:
 sprites:
 {
 	source: "classes-body-1.png"
+	overlay_source: "classes-body-1-head-anchor.png"
 
 	size: { width: 16 height: 16 }
 
@@ -1372,6 +1373,7 @@ sprites:
 sprites:
 {
 	source: "classes-body-2.png"
+	overlay_source: "classes-body-2-head-anchor.png"
 
 	size: { width: 16 height: 16 }
 
@@ -1691,6 +1693,7 @@ sprites:
 sprites:
 {
 	source: "classes-body-3.png"
+	overlay_source: "classes-body-3-head-anchor.png"
 
 	size: { width: 16 height: 16 }
 
@@ -1823,6 +1826,7 @@ sprites:
 sprites:
 {
 	source: "classes-body-4.png"
+	overlay_source: "classes-body-4-head-anchor.png"
 
 	size: { width: 16 height: 16 }
 

@@ -556,6 +556,7 @@ map_palette .stuff:
 	entity_spawn dominion_of_strife_deity_2_shrine: [ 149 187 184 ]
 	entity_spawn dominion_of_strife_deity_3_shrine: [ 49 87 184 ]
 	entity_spawn dominion_of_strife_rift: [ 93 91 104 ]
+	entity_spawn jul_nisse: [ 40 192 91 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]

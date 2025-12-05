@@ -492,7 +492,8 @@ namespace tpublic
 				FIELD_GLOBAL_AURA,
 				FIELD_AGGRO_RANGE_BIAS,
 				FIELD_COMBAT_MOVE_INTERVAL_TICKS,
-				FIELD_NO_COMBAT_TAG
+				FIELD_NO_COMBAT_TAG,
+				FIELD_HAS_HEAD_ANCHOR
 			};
 
 			static void
@@ -525,6 +526,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_AGGRO_RANGE_BIAS, "aggro_range_bias", offsetof(NPC, m_aggroRangeBias));
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_COMBAT_MOVE_INTERVAL_TICKS, "combat_move_interval_ticks", offsetof(NPC, m_combatMoveIntervalTicks));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_COMBAT_TAG, "no_combat_tag", offsetof(NPC, m_noCombatTag));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_HAS_HEAD_ANCHOR, "has_head_anchor", offsetof(NPC, m_hasHeadAnchor));
 			}
 
 			const StateEntry*
@@ -568,6 +570,7 @@ namespace tpublic
 				m_aggroRangeBias = 0;
 				m_combatMoveIntervalTicks = 2;
 				m_noCombatTag = false;
+				m_hasHeadAnchor = false;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -619,6 +622,7 @@ namespace tpublic
 			int32_t										m_aggroRangeBias = 0;
 			int32_t										m_combatMoveIntervalTicks = 2;
 			bool										m_noCombatTag = false;
+			bool										m_hasHeadAnchor = false;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

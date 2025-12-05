@@ -91,6 +91,7 @@ namespace tpublic
 		uint32_t height = 0;
 
 		Image sourceImage;
+		Image sourceOverlayImage;
 
 		bool makeAltGreyscale = false;
 
@@ -101,6 +102,11 @@ namespace tpublic
 			{				
 				std::string path = aNode->m_realPath + "/" + aNode->m_value;
 				sourceImage.LoadPNG(path.c_str());
+			}
+			else if (aNode->m_name == "overlay_source")
+			{
+				std::string path = aNode->m_realPath + "/" + aNode->m_value;
+				sourceOverlayImage.LoadPNG(path.c_str());
 			}
 			else if(aNode->m_name == "make_alt_greyscale")
 			{
@@ -164,6 +170,25 @@ namespace tpublic
 				sourceImage.Extract(offsetX, offsetY, width, height, sprite->m_image);		
 
 				sprite->m_info.m_averageColor = sprite->m_image.GetAverageColor();
+
+				if(sourceOverlayImage.HasData())
+				{
+					TP_VERIFY(sourceOverlayImage.GetWidth() == sourceImage.GetWidth() && sourceOverlayImage.GetHeight() == sourceImage.GetHeight(), aNode->m_debugInfo, "Source overlay size mismatch.");
+
+					sourceOverlayImage.ForEachPixel(offsetX, offsetY, offsetX + width, offsetY + height, [&](
+						uint32_t			aX,
+						uint32_t			aY,
+						const Image::RGBA&	aRGBA) -> bool
+					{
+						// FIXME: should be defined in a palette in data
+						if(aRGBA == Image::RGBA(255, 255, 255, 255))
+						{
+							sprite->m_info.m_headAnchor = Vec2((int32_t)(aX - offsetX), (int32_t)(aY - offsetY));
+							return false;
+						}
+						return true; // Continue
+					});
+				}
 
 				offsetX += width; // Automatically advance horizontally
 

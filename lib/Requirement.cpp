@@ -227,6 +227,14 @@ namespace tpublic
 			m_type = TYPE_MUST_NOT_HAVE_SOURCE_AURA;
 		else if (typeString == "must_have_aura_flags")
 			m_type = TYPE_MUST_HAVE_AURA_FLAGS;
+		else if (typeString == "must_be_elite")
+			m_type = TYPE_MUST_BE_ELITE;
+		else if (typeString == "must_not_be_elite")
+			m_type = TYPE_MUST_NOT_BE_ELITE;
+		else if(typeString == "must_be_lower_than_level")
+			m_type = TYPE_MUST_BE_LOWER_THAN_LEVEL;
+		else if(typeString == "must_be_npc_with_head_anchor")
+			m_type = TYPE_MUST_BE_NPC_WITH_HEAD_ANCHOR;
 		else
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

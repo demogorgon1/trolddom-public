@@ -161,6 +161,7 @@ namespace tpublic
 			aStream->WriteObjects(m_namedAnchors);
 			aStream->WritePOD(m_averageColor);
 			aStream->WriteOptionalObject(m_iconMetaData);
+			aStream->WriteOptionalObject(m_headAnchor);
 
 			aStream->WriteUInt(m_borderTable.size());
 			for(BorderTable::const_iterator i = m_borderTable.cbegin(); i != m_borderTable.cend(); i++)
@@ -201,6 +202,8 @@ namespace tpublic
 			if(!aStream->ReadPOD(m_averageColor))
 				return false;
 			if(!aStream->ReadOptionalObject(m_iconMetaData))
+				return false;
+			if(!aStream->ReadOptionalObject(m_headAnchor))
 				return false;
 
 			{
@@ -297,6 +300,7 @@ namespace tpublic
 		std::vector<uint32_t>		m_waterAnimationSpriteIds;
 		uint32_t					m_overviewMapOverrideSpriteId = 0;
 		uint32_t					m_glowSpriteId = 0;
+		std::optional<Vec2>			m_headAnchor; 
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;

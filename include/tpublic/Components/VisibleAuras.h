@@ -73,7 +73,8 @@ namespace tpublic
 				FIELD_COLOR_EFFECT,
 				FIELD_COLOR_WEAPON_GLOW,
 				FIELD_MOUNT_ID,
-				FIELD_OVERRIDE_SPRITE_ID
+				FIELD_OVERRIDE_SPRITE_ID,
+				FIELD_HEAD_EFFECT_SPRITE_ID
 			};
 			
 			static void
@@ -86,6 +87,7 @@ namespace tpublic
 				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_WEAPON_GLOW, offsetof(VisibleAuras, m_colorWeaponGlow));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MOUNT_ID, NULL, offsetof(VisibleAuras, m_mountId));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_OVERRIDE_SPRITE_ID, NULL, offsetof(VisibleAuras, m_overrideSpriteId));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEAD_EFFECT_SPRITE_ID, NULL, offsetof(VisibleAuras, m_headEffectSpriteId));
 			}
 
 			bool 
@@ -137,6 +139,7 @@ namespace tpublic
 				m_colorWeaponGlow.reset();
 				m_mountId = 0;
 				m_overrideSpriteId = 0;
+				m_headEffectSpriteId = 0;
 
 				m_seq = 0;
 			}
@@ -153,6 +156,7 @@ namespace tpublic
 			std::optional<Image::RGBA>	m_colorWeaponGlow;
 			uint32_t					m_mountId = 0;
 			uint32_t					m_overrideSpriteId = 0;
+			uint32_t					m_headEffectSpriteId = 0;
 
 			// Internal
 			uint32_t					m_seq = 0;

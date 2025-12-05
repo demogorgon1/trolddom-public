@@ -12,6 +12,26 @@
 namespace tpublic::Components
 {
 
+	uint32_t			
+	Auras::GetLootTableId(
+		std::mt19937&								aRandom,
+		const Manifest*								aManifest) const
+	{
+		std::vector<uint32_t> lootTableIds;
+		
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+			if(aura->m_lootTableId != 0)
+				lootTableIds.push_back(aura->m_lootTableId);
+		}
+
+		if(lootTableIds.empty())
+			return 0;
+
+		return Helpers::RandomItem(aRandom, lootTableIds);
+	}
+
 	bool
 	Auras::HasEffect(
 		AuraEffect::Id								aId,

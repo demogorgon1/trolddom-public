@@ -6,6 +6,7 @@
 #include <tpublic/Components/CompletedQuests.h>
 #include <tpublic/Components/EquippedItems.h>
 #include <tpublic/Components/Inventory.h>
+#include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
@@ -73,6 +74,13 @@ namespace tpublic
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
 					if(combatPublic == NULL || combatPublic->m_level < aRequirement->m_id)
+						return false;
+				}
+				break;
+			case Requirement::TYPE_MUST_BE_LOWER_THAN_LEVEL:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic == NULL || combatPublic->m_level >= aRequirement->m_id)
 						return false;
 				}
 				break;
@@ -585,6 +593,25 @@ namespace tpublic
 				}
 				break;					
 
+			case Requirement::TYPE_MUST_BE_ELITE:
+			case Requirement::TYPE_MUST_NOT_BE_ELITE:
+				{
+					bool shouldBeElite = aRequirement->m_type == Requirement::TYPE_MUST_BE_ELITE;					
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					bool isElite = combatPublic != NULL && combatPublic->IsElite();
+
+					if(shouldBeElite != isElite)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_BE_NPC_WITH_HEAD_ANCHOR:
+				{
+					const Components::NPC* npc = entity->GetComponent<Components::NPC>();
+					if(npc == NULL || !npc->m_hasHeadAnchor)
+						return false;
+				}
+				break;
 
 			default:
 				assert(false);

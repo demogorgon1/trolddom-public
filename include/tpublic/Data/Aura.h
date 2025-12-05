@@ -299,6 +299,10 @@ namespace tpublic
 							m_priority = aChild->GetUInt32();
 						else if (aChild->m_name == "diminishing_effect")
 							m_diminishingEffectId = aChild->GetId(DataType::ID_DIMINISHING_EFFECT);
+						else if (aChild->m_name == "head_effect_sprite")
+							m_headEffectSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "loot_table")
+							m_lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -334,6 +338,8 @@ namespace tpublic
 				aStream->WriteUInts(m_zoneIds);
 				aStream->WriteUInt(m_priority);
 				aStream->WriteUInt(m_diminishingEffectId);
+				aStream->WriteUInt(m_headEffectSpriteId);
+				aStream->WriteUInt(m_lootTableId);
 			}
 			 
 			bool
@@ -455,6 +461,18 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_headEffectSpriteId))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_lootTableId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -490,6 +508,8 @@ namespace tpublic
 			std::vector<uint32_t>							m_zoneIds;
 			uint32_t										m_priority = 0;
 			uint32_t										m_diminishingEffectId = 0;
+			uint32_t										m_headEffectSpriteId = 0;
+			uint32_t										m_lootTableId = 0;
 		};
 
 	}

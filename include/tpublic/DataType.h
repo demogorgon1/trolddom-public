@@ -74,6 +74,7 @@ namespace tpublic
 			ID_SURVIVAL_SCRIPT,
 			ID_WORLD_MAP,
 			ID_DIMINISHING_EFFECT,
+			ID_SEASONAL_EVENT,
 
 			NUM_IDS
 		};
@@ -145,7 +146,8 @@ namespace tpublic
 			"critter",
 			"survival_script",
 			"world_map",
-			"diminishing_effect"
+			"diminishing_effect",
+			"seasonal_event"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

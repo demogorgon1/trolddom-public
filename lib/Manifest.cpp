@@ -51,6 +51,7 @@
 #include <tpublic/Data/Quest.h>
 #include <tpublic/Data/RealmBalance.h>
 #include <tpublic/Data/Route.h>
+#include <tpublic/Data/SeasonalEvent.h>
 #include <tpublic/Data/Sound.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/SurvivalScript.h>
@@ -148,6 +149,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Quest>();
 		RegisterDataContainer<Data::RealmBalance>();
 		RegisterDataContainer<Data::Route>();
+		RegisterDataContainer<Data::SeasonalEvent>();
 		RegisterDataContainer<Data::Sound>();
 		RegisterDataContainer<Data::Sprite>();
 		RegisterDataContainer<Data::SurvivalScript>();
