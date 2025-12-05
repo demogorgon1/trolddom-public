@@ -253,7 +253,7 @@ quest .nisse_2:
 		"Good job!"
 	]
 	
-	objectives: [ .nisse_1 ]
+	objectives: [ .nisse_2 ]
 	repeat_mode: always
 	level: 1
 	reward_xp_multiplier: 0
