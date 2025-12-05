@@ -5,7 +5,7 @@ seasonal_event jul:
 	random_npc_aura:
 	{
 		aura: jul_hat_common		
-		probability: 2
+		probability: 3
 		requirement self<must_not_be_elite>: {}
 		requirement self<must_be_npc_with_head_anchor>: {}
 	}
@@ -88,6 +88,7 @@ aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat
 	item_level: 10
 	required_level: 1
 	type: miscellaneous
+	level_range: [ 1 31 ]
 }
 
 !define local ITEM_ABILITY
@@ -98,6 +99,7 @@ aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat
 	flags: [ target_self item ]
 	cooldowns: [ global ]
 	states: [ default in_combat ]
+	increment_character_stat: @_stat
 	direct_effect apply_aura: 
 	{
 		aura: $aura
@@ -117,28 +119,28 @@ aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat
 {
 	${ _string: "Red Winter Hat" _icon: icon_jul_hat_red _hat: effect_jul_hat_red _loot_group: jul_hat_common }
 
-	ability jul_hat_common: !ITEM_ABILITY {}
+	ability jul_hat_common: !ITEM_ABILITY { _stat: red_winter_hats_worn }
 	item jul_hat_common: !ITEM { _ability: jul_hat_common }	
 }
 
 {
 	${ _string: "Green Winter Hat" _icon: icon_jul_hat_green _hat: effect_jul_hat_green _loot_group: jul_hat_uncommon }
 	
-	ability jul_hat_uncommon: !ITEM_ABILITY {}
+	ability jul_hat_uncommon: !ITEM_ABILITY { _stat: green_winter_hats_worn }
 	item jul_hat_uncommon: !ITEM { _ability: jul_hat_uncommon }	
 }
 
 {
 	${ _string: "Blue Winter Hat" _icon: icon_jul_hat_blue _hat: effect_jul_hat_blue _loot_group: jul_hat_rare_1 }
 	
-	ability jul_hat_rare_1: !ITEM_ABILITY {}
+	ability jul_hat_rare_1: !ITEM_ABILITY { _stat: blue_winter_hats_worn }
 	item jul_hat_rare_1: !ITEM { _ability: jul_hat_rare_1 }	
 }
 
 {
 	${ _string: "Purple Winter Hat" _icon: icon_jul_hat_purple _hat: effect_jul_hat_purple _loot_group: jul_hat_rare_2 }
 
-	ability jul_hat_rare_2: !ITEM_ABILITY {}
+	ability jul_hat_rare_2: !ITEM_ABILITY { _stat: purple_winter_hats_worn }
 	item jul_hat_rare_2: !ITEM { _ability: jul_hat_rare_2 }	
 }
 
@@ -258,3 +260,4 @@ quest .nisse_2:
 	reward_cash_multiplier: 0
 	reward_reputation_multiplier: 5
 }
+
