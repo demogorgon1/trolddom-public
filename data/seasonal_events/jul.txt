@@ -13,7 +13,7 @@ seasonal_event jul:
 	random_npc_aura:
 	{
 		aura: jul_hat_common
-		probability: 5
+		probability: 10
 		requirement self<must_be_elite>: {}
 		requirement self<must_be_npc_with_head_anchor>: {}
 		requirement self<must_be_lower_than_level>: 12
@@ -22,7 +22,7 @@ seasonal_event jul:
 	random_npc_aura:
 	{
 		aura: jul_hat_uncommon
-		probability: 5
+		probability: 10
 		requirement self<must_be_elite>: {}
 		requirement self<must_be_npc_with_head_anchor>: {}
 		requirement self<must_be_at_least_level>: 12		
@@ -31,7 +31,7 @@ seasonal_event jul:
 	random_npc_aura:
 	{
 		aura: jul_hat_rare_1
-		probability: 1
+		probability: 2
 		requirement self<must_be_elite>: {}
 		requirement self<must_be_npc_with_head_anchor>: {}
 		requirement self<must_be_at_least_level>: 20

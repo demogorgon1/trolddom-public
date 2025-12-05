@@ -3,6 +3,7 @@
 #include "../AbilityModifierList.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../Customization.h"
 #include "../ErrorNotification.h"
 #include "../EventHistory.h"
 #include "../LootCooldowns.h"
@@ -71,6 +72,7 @@ namespace tpublic
 				FIELD_KNOWS_RIDING,
 				FIELD_LOOT_COOLDOWNS,
 				FIELD_NON_HARDCORE_FLAG,
+				FIELD_CUSTOMIZATION,
 			};
 
 			static void
@@ -91,6 +93,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KNOWS_RIDING, NULL, offsetof(PlayerPrivate, m_knowsRiding));
 				aSchema->DefineCustomObjectNoSource<LootCooldowns>(FIELD_LOOT_COOLDOWNS, offsetof(PlayerPrivate, m_lootCooldowns));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NON_HARDCORE_FLAG, NULL, offsetof(PlayerPrivate, m_nonHardcoreFlag));
+				aSchema->DefineCustomOptionalObjectNoSource<Customization>(FIELD_CUSTOMIZATION, offsetof(PlayerPrivate, m_customization));
 
 				aSchema->OnRead<PlayerPrivate>([](
 					PlayerPrivate*				aPlayerPrivate,
@@ -120,6 +123,7 @@ namespace tpublic
 				m_knowsRiding = false;
 				m_lootCooldowns.Reset();
 				m_nonHardcoreFlag = false;
+				m_customization.reset();
 
 				m_tryEditPlayerWorlds = false;
 				m_recall = false;
@@ -166,6 +170,7 @@ namespace tpublic
 			bool															m_knowsRiding = false;
 			LootCooldowns													m_lootCooldowns;
 			bool															m_nonHardcoreFlag = false;
+			std::optional<Customization>									m_customization; 
 
 			// Not serialized, internal
 			uint32_t														m_mapId = 0;
