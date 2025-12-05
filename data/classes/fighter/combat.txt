@@ -24,9 +24,9 @@ talent_tree fighter_combat:
 	
 	map:
 	[
-		"D.A...G"
-		"d.d...d"
-		"J.B.C.F"
+		"D...A.G"
+		"d...d.d"
+		"J.C.B.F"
 		"d...|.d"
 		"E.K.|.H"
 		"..|.d.."

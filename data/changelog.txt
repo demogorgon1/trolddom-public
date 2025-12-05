@@ -2,6 +2,26 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.10"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "The Jule Consortium needs your help." }
+		{ text: "Character customization." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Divine Shield now scales with healing like intended." }
+		{ text: "Fixed bug where Ferocity, and not Riposte, was shown as a prerequisite for Blade Guard." }
+		{ text: "Fixed minor quest issues." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.9"
 
 	text: "Issues Fixed:"

@@ -58,7 +58,7 @@ quest .rubert_1:
 	[
 		"The weather is so nice out here! Are you also here to relax?\n"
 		"\n"
-		"I'm actually here honeymooning with my new wife, Diane. Or, well, she hasn't shown up yet. I wonder what's taking her so long, we were supposed to meet here too days ago. The plan was that she'd"
+		"I'm actually here honeymooning with my new wife, Diane. Or, well, she hasn't shown up yet. I wonder what's taking her so long, we were supposed to meet here two days ago. The plan was that she'd"
 		"arrive down at Riddle's Crossing and then hike up here. We love the outdoors! Anyway, maybe you can go look for her? Tell her the water is great!"
 	]
 

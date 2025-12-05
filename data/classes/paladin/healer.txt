@@ -720,7 +720,7 @@ aura divine_shield:
 	duration: 200
 	flags: [ unique charged magic ]	
 	icon: icon_divine_shield
-	charges: { expression: a_mul_x_plus_b a: 1.04 x: spell_damage b: [ [ 1 28 ] [ 30 193 ] ] }		
+	charges: { expression: a_mul_x_plus_b a: 1.04 x: healing b: [ [ 1 28 ] [ 30 193 ] ] }		
 
 	particle_system: divine_shield
 	priority: !AURA_PRIORITY_HEAL{}	
