@@ -15,7 +15,7 @@ namespace tpublic
 			static const DataType::Id DATA_TYPE = DataType::ID_SEASONAL_EVENT;
 			static const bool TAGGED = false;
 
-			static const uint32_t
+			static uint32_t
 			SourceToMonth(
 				const SourceNode*		aSource)
 			{
