@@ -29,18 +29,6 @@ entity thalvaron_blunt_ronson: !NPC
 
 loot_group .blunt_ronson_1_quest_item: { }
 
-item .blunt_ronson_1_quest_item:
-{
-	binds: when_picked_up
-	loot_groups: [ .blunt_ronson_1_quest_item ]		
-	string: "Important Document" 
-	icon: icon_book
-	stack: 1
-	item_level: 19
-	quest: .blunt_ronson_1
-	flags: [ not_sellable unique ]
-}
-
 entity thalvaron_blunt_ronson_1_quest_item:
 {
 	string: "Ronson's Chest"
