@@ -103,5 +103,5 @@ quest .warden_tylior_1:
 
 	objectives: [ .warden_tylior_1_a .warden_tylior_1_b .warden_tylior_1_c ]
 	level: 19
-	reward_one_item: [ .warden_tylior_1_a ]
+	reward_all_items: [ .warden_tylior_1_a ]
 }
