@@ -900,10 +900,11 @@ ability disenchant:
 	ability enchant_weapon_fire_trigger:
 	{
 		string: "Flaming Weapon"
+		flags: [ always_in_range always_in_line_of_sight ]
 		direct_effect damage:
 		{
 			damage_type: fire
-			function: 40
+			function: 50
 		}	
 	}
 
@@ -922,7 +923,7 @@ ability disenchant:
 			combat_event_ability_mask: [ offensive melee ]
 			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
 			ability<target>: enchant_weapon_fire_trigger
-			probability: 10
+			probability: 20
 		}	
 	}
 
@@ -965,6 +966,7 @@ ability disenchant:
 	ability enchant_weapon_frostfire_trigger:
 	{
 		string: "Frostfire"
+		flags: [ always_in_range always_in_line_of_sight ]
 		direct_effect apply_aura:
 		{
 			aura: $aura
@@ -986,7 +988,7 @@ ability disenchant:
 						direct_effect damage:
 						{	
 							damage_type: fire		
-							function: 12
+							function: 32
 							flags: [ is_magical ]
 							direct: false
 						}							
@@ -1011,7 +1013,7 @@ ability disenchant:
 			combat_event_ability_mask: [ offensive spell ]
 			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
 			ability<target>: enchant_weapon_frostfire_trigger
-			probability: 25
+			probability: 35
 		}		
 	}
 

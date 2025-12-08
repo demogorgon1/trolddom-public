@@ -839,7 +839,7 @@ ability frost_explosion:
 	description: "Inflicts $damage$ damage on up to 3 nearby enemies."
 	range: 1
 	cooldowns: [ global frost_explosion spell_frost_lockout ]
-	flags: [ spell target_self target_aoe target_aoe_hostile ]
+	flags: [ offensive spell target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_frost_explosion
 	talent_tree: sorcerer_elemental

@@ -74,7 +74,7 @@ aura cyclone:
 		{
 			string: "Whirlwind"
 			range: 1	
-			flags: [ target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+			flags: [ offensive target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 			states: [ default in_combat ]
 			delay: 3
 			aoe_radius: 1
@@ -732,7 +732,7 @@ ability whirlwind:
 	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global whirlwind ]
-	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ offensive melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_whirlwind
 	delay: 3
@@ -802,7 +802,7 @@ ability charge:
 	min_range: 3
 	range: 7
 	cooldowns: [ charge ]
-	flags: [ target_other target_hostile trigger_move_cooldown ]
+	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
 	states: [ default in_combat ]
 	icon: icon_charge
 	talent_tree: fighter_combat 

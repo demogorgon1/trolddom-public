@@ -501,7 +501,7 @@ ability enfeeblement:
 	description: "Slows target casts and melee attacks for 30 seconds."
 	range: 7
 	cooldowns: [ global spell_unholy_lockout enfeeblement ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_enfeeblement
 	resource_cost mana: 12

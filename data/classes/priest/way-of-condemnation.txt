@@ -81,7 +81,7 @@ ability mass_hysteria:
 	range: 1	
 	cooldowns: [ global ]
 	cooldown: $cooldown { duration: 600 }
-	flags: [ target_self target_aoe target_aoe_hostile ]
+	flags: [ offensive target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_mass_hysteria
 	resource_cost mana: 15
@@ -192,7 +192,7 @@ ability creeping_guilt:
 	range: 6
 	cast_time: 18
 	cooldowns: [ global spell_fire_lockout ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_special_7
 	resource_cost mana: 24
@@ -346,7 +346,7 @@ ability fear:
 	description: "Inflicts terror on the target, causing it to run away from you for 12 seconds."
 	range: 6
 	cooldowns: [ global ]
-	flags: [ spell target_other target_hostile interruptable ]
+	flags: [ offensive spell target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_fear
 	resource_cost mana: 10
@@ -416,7 +416,7 @@ ability spiritual_crisis:
 	description: "Deals $damage$ damage to target and reduces their haste by 15% for 20 seconds."
 	range: 6
 	cooldowns: [ global spiritual_crisis ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_tree
 	resource_cost mana: 10
@@ -839,7 +839,7 @@ ability condemnation:
 	description: "Inflicts damage to the target over 10 seconds."
 	range: 6
 	cooldowns: [ global spell_fire_lockout ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_holy_condemnation
 	resource_cost mana: 11

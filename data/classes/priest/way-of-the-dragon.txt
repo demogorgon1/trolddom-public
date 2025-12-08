@@ -682,7 +682,7 @@ ability toughen_up:
 	description: "Increases your armor by 100% for 10 seconds."
 	cooldowns: [ global spell_healing_lockout ]
 	cooldown: $cooldown { duration: 1200 }
-	flags: [ spell target_other target_self target_friendly interruptable ]
+	flags: [ spell target_self ]
 	states: [ default in_combat ]
 	icon: icon_special_12
 	resource_cost mana: 11

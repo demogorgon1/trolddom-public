@@ -86,7 +86,7 @@ ability judgement_for_all:
 	range: 1	
 	cooldowns: [ global ]
 	cooldown: $cooldown { duration: 600 }
-	flags: [ spell target_self target_aoe target_aoe_hostile ]
+	flags: [ spell offensive target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_judgement_for_all
 	delay: 3

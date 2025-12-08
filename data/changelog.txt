@@ -4,11 +4,23 @@ changelog:
 	#######################################################################################
 	heading: "v1.0.11"
 
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Flaming Weapon and Frostfire enchants deal more damage." }		
+	]
+
 	text: "Issues Fixed:"
 	
 	list:
 	[
+		{ text: "Incapacitating effects and most AOE abilities now trigger combat immediately when used against other players." }
+		{ text: "Toughen Up can only target yourself like intended." }
+		{ text: "Fixed bug that prevent Frostfire enchant from triggering outside melee range." }
+		{ text: "Fixed issue with custom servers and offline mode." }
 		{ text: "Fixed some quest issues." }
+		{ text: "Fixed other minor bugs." }		
 	]
 
 	#######################################################################################
