@@ -77,9 +77,12 @@ namespace tpublic
 			return; // No changes, no need to do anything
 
 		for(const std::string& parseRootPath : aParseRootPaths)
-		{
-			// Recursively parse all .txt files in root path
-			_ParseDirectory(parseRootPath.c_str(), parseRootPath.c_str());
+		{	
+			if(std::filesystem::exists(parseRootPath))
+			{
+				// Recursively parse all .txt files in root path
+				_ParseDirectory(parseRootPath.c_str(), parseRootPath.c_str());
+			}
 		}
 
 		{
