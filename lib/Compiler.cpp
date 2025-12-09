@@ -286,26 +286,29 @@ namespace tpublic
 			std::string directory = std::move(directories[directories.size() - 1]);
 			directories.pop_back();
 
-			std::error_code errorCode;
-			std::filesystem::directory_iterator it(directory.c_str(), errorCode);
-			TP_CHECK(!errorCode, "Failed to search directory: %s (%s)", directory.c_str(), errorCode.message().c_str());
-
-			for (const std::filesystem::directory_entry& entry : it)
+			if(std::filesystem::exists(directory))
 			{
-				std::string path = entry.path().string().c_str();
+				std::error_code errorCode;
+				std::filesystem::directory_iterator it(directory.c_str(), errorCode);
+				TP_CHECK(!errorCode, "Failed to search directory: %s (%s)", directory.c_str(), errorCode.message().c_str());
 
-				if (entry.is_regular_file())
+				for (const std::filesystem::directory_entry& entry : it)
 				{
-					uint64_t timeStamp = (uint64_t)std::chrono::duration_cast<std::chrono::milliseconds>(entry.last_write_time().time_since_epoch()).count();
-					size_t fileSize = (size_t)entry.file_size();
+					std::string path = entry.path().string().c_str();
 
-					checkSum.AddString(path.c_str());
-					checkSum.AddPOD(fileSize);
-					checkSum.AddPOD(timeStamp);
-				}
-				else if(entry.is_directory())
-				{
-					directories.push_back(path);
+					if (entry.is_regular_file())
+					{
+						uint64_t timeStamp = (uint64_t)std::chrono::duration_cast<std::chrono::milliseconds>(entry.last_write_time().time_since_epoch()).count();
+						size_t fileSize = (size_t)entry.file_size();
+
+						checkSum.AddString(path.c_str());
+						checkSum.AddPOD(fileSize);
+						checkSum.AddPOD(timeStamp);
+					}
+					else if (entry.is_directory())
+					{
+						directories.push_back(path);
+					}
 				}
 			}
 		}

@@ -393,7 +393,7 @@ talent sorcerer_elemental_improved_frost_explosion:
 
 ability_modifier improved_frost_explosion:
 {
-	description: "Frost Explosion freezes enemies in place for 5 seconds."
+	description: "Frost Explosion deals 30% more damage and freezes enemies in place for an additional 3 seconds."
 }
 
 aura improved_frost_explosion:
@@ -402,7 +402,7 @@ aura improved_frost_explosion:
 	description: "Immobilized."
 	icon: icon_frost_explosion		
 	type: debuff
-	duration: 50	
+	duration: 60	
 	flags: [ unique magic incapacitation ]
 	aura_effect immobilize: { }
 	particle_system: improved_frost_explosion
@@ -833,10 +833,23 @@ cooldown frost_explosion:
 	talent_tree: sorcerer_elemental
 }
 
+aura frost_explosion:
+{
+	string: "Frost Explosion"
+	description: "Immobilized."
+	icon: icon_frost_explosion		
+	type: debuff
+	duration: 30	
+	flags: [ unique magic incapacitation ]
+	aura_effect immobilize: { }
+	particle_system: improved_frost_explosion
+	diminishing_effect: root
+}
+
 ability frost_explosion:
 {
 	string: "Frost Explosion"
-	description: "Inflicts $damage$ damage on up to 3 nearby enemies."
+	description: "Inflicts $damage$ damage on up to 3 nearby enemies and roots them for 3 seconds."
 	range: 1
 	cooldowns: [ global frost_explosion spell_frost_lockout ]
 	flags: [ offensive spell target_self target_aoe target_aoe_hostile ]
@@ -852,6 +865,16 @@ ability frost_explosion:
 
 	direct_effect damage:
 	{
+		must_have_ability_modifier: improved_frost_explosion
+		flags: [ can_be_critical is_magical ]
+		damage_type: frost
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.36 b: [ [ 1 19 ] [ 10 39 ] [ 20 78 ] [ 30 128 ] ] }													
+		spread: !DEFAULT_SPREAD{}
+	}
+
+	direct_effect damage:
+	{
+		must_not_have_ability_modifiers: [ improved_frost_explosion ]
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }													
@@ -862,6 +885,12 @@ ability frost_explosion:
 	{	
 		must_have_ability_modifier: improved_frost_explosion
 		aura: improved_frost_explosion
+	}
+	
+	direct_effect apply_aura:
+	{	
+		must_not_have_ability_modifiers: [ improved_frost_explosion ]
+		aura: frost_explosion
 	}
 	
 	direct_effect apply_aura:
