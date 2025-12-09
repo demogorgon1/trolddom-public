@@ -13,7 +13,7 @@
 }	
 
 !define TRASH_RESPAWN_TIMER { normal: 36000 fast_trigger: 0 } 
-!define QUEST_ITEM_RESPAWN_TIMER { despawn_required: true normal: [ 1000 1400 ] fast: [ 600 1000 ] fast_trigger: 600 }
+!define QUEST_ITEM_RESPAWN_TIMER { despawn_required: true normal: [ 700 1000 ] fast: [ 400 500 ] fast_trigger: 600 }
 !define CHEST_RESPAWN { despawn_required: true normal: [ 6000 9000 ] fast_trigger: 0 }
 !define ESCORT_RESPAWN { despawn_required: true normal: [ 100 200 ] fast_trigger: 0 }
 

@@ -11,6 +11,7 @@ changelog:
 		{ text: "Character sheet shows chance to miss." }		
 		{ text: "The self-cast modifier key (ALT) will cause targeted AOE abilities to target your location." }		
 		{ text: "Cooldown of targeted AOE abilities will not trigger before cast is canceled." }		
+		{ text: "Spawn rate of quest items have been increased." }		
 	]
 
 	text: "Issues Fixed:"
