@@ -11,6 +11,7 @@ changelog:
 		{ text: "Fixed bug where client could get stuck with flashing screen when entering an instance." }
 		{ text: "Inner Peace can only target caster like intended." }
 		{ text: "Fixed quest bug (thanks davicustv)." }		
+		{ text: "The minions of John Krellington no longer give XP when killed." }
 	]
 
 	#######################################################################################
