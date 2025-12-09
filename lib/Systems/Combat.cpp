@@ -3,8 +3,13 @@
 #include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/DiminishingEffects.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/VisibleAuras.h>
+
+#include <tpublic/Data/Ability.h>
+#include <tpublic/Data/Aura.h>
+#include <tpublic/Data/DiminishingEffect.h>
 
 #include <tpublic/Systems/Combat.h>
 
@@ -12,9 +17,11 @@
 #include <tpublic/Helpers.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/Resource.h>
+#include <tpublic/WorldInfoMap.h>
 
 namespace tpublic::Systems
 {
@@ -39,7 +46,7 @@ namespace tpublic::Systems
 
 	EntityState::Id
 	Combat::UpdatePrivate(
-		uint32_t			/*aEntityId*/,
+		uint32_t			aEntityId,
 		uint32_t			aEntityInstanceId,
 		EntityState::Id		aEntityState,
 		int32_t				/*aTicksInState*/,
@@ -85,31 +92,70 @@ namespace tpublic::Systems
 
 			Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
 
+			const std::unordered_set<uint32_t>& globalAuras = aContext->m_worldView->WorldViewGetGlobalAuras();
+			if(!globalAuras.empty())
+			{
+				// Need to make sure that all applicable global auras are active
+				for(uint32_t globalAuraId : globalAuras)
+				{
+					if(!auras->HasAura(globalAuraId))
+					{
+						const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(globalAuraId);
+						TP_CHECK(aura->m_flags & Data::Aura::FLAG_GLOBAL, "Aura '%s' not flagged as global.", aura->m_name.c_str());
+
+						bool shouldBePlayer = (aura->m_flags & Data::Aura::FLAG_GLOBAL_PLAYER) != 0;
+						bool isPlayer = aEntityId == 0;
+
+						if(shouldBePlayer == isPlayer)
+						{
+							// FIXME: should be refactored. Making some assumptions about what kind of auras we're talking about
+							std::vector<std::unique_ptr<AuraEffectBase>> effects;
+							for (const std::unique_ptr<Data::Aura::AuraEffectEntry>& t : aura->m_auraEffects)
+							{
+								std::unique_ptr<AuraEffectBase> effect(t->m_auraEffectBase->Copy());
+								effects.push_back(std::move(effect));
+							}
+
+							std::unique_ptr<Components::Auras::Entry> newAura = std::make_unique<Components::Auras::Entry>();
+							newAura->m_auraId = globalAuraId;
+							newAura->m_effects = std::move(effects);
+							newAura->m_noEffects = newAura->m_effects.empty();
+						
+							auras->m_entries.push_back(std::move(newAura));
+							auras->m_seq++;
+						}
+					}
+				}
+			}
+
 			for(size_t i = 0; i < auras->m_entries.size(); i++)
 			{
 				std::unique_ptr<Components::Auras::Entry>& entry = auras->m_entries[i];
 
 				const Data::Aura* aura = GetManifest()->GetById<Data::Aura>(entry->m_auraId);
-				if((aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_GLOBAL) != 0 && !globalAuras.contains(entry->m_auraId))
 					entry->m_cancel = true;
 
-				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_OUTSIDE_COMBAT) != 0 && aEntityState != EntityState::ID_IN_COMBAT)
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_IN_COMBAT) != 0 && aEntityState == EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 
-				if((aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && (aura->m_flags & Data::Aura::FLAG_ITEM) == 0 && aEntityState == EntityState::ID_DEAD)
+				if (!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_OUTSIDE_COMBAT) != 0 && aEntityState != EntityState::ID_IN_COMBAT)
 					entry->m_cancel = true;
 
-				if ((aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) == 0 && (aura->m_flags & Data::Aura::FLAG_ITEM) == 0 && aEntityState == EntityState::ID_DEAD)
 					entry->m_cancel = true;
 
-				if((aura->m_flags & Data::Aura::FLAG_CANCEL_INDOOR) != 0)
+				if (!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_ON_DAMAGE) != 0 && combatPublic->m_damageAccum > 0)
+					entry->m_cancel = true;
+
+				if(!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_CANCEL_INDOOR) != 0)
 				{
 					const Components::Position* position = GetComponent<Components::Position>(aComponents);
 					if(aContext->m_worldView->WorldViewGetMapData()->IsTileIndoor(position->m_position.m_x, position->m_position.m_y))
 						entry->m_cancel = true;
 				}
 
-				if (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET)
+				if (!entry->m_cancel && (aura->m_flags & Data::Aura::FLAG_SINGLE_TARGET))
 				{
 					const EntityInstance* sourceEntity = aContext->m_worldView->WorldViewSingleEntityInstance(entry->m_sourceEntityInstance.m_entityInstanceId);
 					const Components::CombatPublic* sourceCombatPublic = sourceEntity != NULL ? sourceEntity->GetComponent<Components::CombatPublic>() : NULL;
@@ -117,7 +163,21 @@ namespace tpublic::Systems
 						entry->m_cancel = true;
 				}
 
-				if(aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))
+				if(!entry->m_cancel && aura->m_zoneIds.size() > 0)
+				{
+					if(aContext->m_worldView->WorldViewGetMapData()->m_worldInfoMap)
+					{
+						const Components::Position* position = GetComponent<Components::Position>(aComponents);
+						const WorldInfoMap::Entry& worldInfoMapEntry = aContext->m_worldView->WorldViewGetMapData()->m_worldInfoMap->Get(position->m_position);
+						if(Helpers::FindItem(aura->m_zoneIds, worldInfoMapEntry.m_zoneId) == SIZE_MAX)
+							entry->m_cancel = true;
+					}					
+				}
+
+				if(!entry->m_cancel && aura->m_mustNotHaveWorldAuraId != 0 && aContext->m_worldView->WorldViewHasWorldAura(aura->m_mustNotHaveWorldAuraId))
+					entry->m_cancel = true;
+
+				if(!entry->m_cancel && aContext->m_worldView->WorldViewIsAnyEncounterCancellingAura(aura->m_id))
 					entry->m_cancel = true;
 
 				if(!entry->m_cancel)
@@ -135,7 +195,7 @@ namespace tpublic::Systems
 	
 					for(size_t j = 0; j < entry->m_effects.size(); j++)
 					{
-						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];
+						std::unique_ptr<AuraEffectBase>& effect = entry->m_effects[j];							
 
 						bool cancelEffect = false;
 
@@ -172,10 +232,12 @@ namespace tpublic::Systems
 				if(aura->m_encounterId != 0 && !aContext->m_worldView->WorldViewIsEncounterActive(aura->m_encounterId))
 					entry->m_cancel = true;
 
-				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick >= entry->m_end))
+				if(entry->m_cancel || (!entry->m_noEffects && entry->m_effects.size() == 0) || (entry->m_end != 0 && aContext->m_tick > entry->m_end))
 				{
 					for(std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 						effect->OnFade(entry->m_sourceEntityInstance, aEntityInstanceId, aContext, GetManifest());
+
+					// FIXME: might want to cancel channeling here
 
 					entry.reset();
 					Helpers::RemoveCyclicFromVector(auras->m_entries, i);
@@ -183,6 +245,17 @@ namespace tpublic::Systems
 
 					auras->m_seq++;
 					auras->SetPendingPersistenceUpdate(tpublic::ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY);
+				}
+				else if(aura->m_diminishingEffectId != 0)
+				{
+					// FIXME: this is only safe because we know what we're doing... but don't do it
+					EntityInstance* self = (EntityInstance*)aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
+					Components::DiminishingEffects* diminishingEffects = self != NULL ? self->GetComponent<Components::DiminishingEffects>() : NULL;
+					if(diminishingEffects != NULL)
+					{
+						const Data::DiminishingEffect* diminishingEffect = GetManifest()->GetById<Data::DiminishingEffect>(aura->m_diminishingEffectId);
+						diminishingEffects->Refresh(aura->m_diminishingEffectId, aContext->m_tick + diminishingEffect->m_ticks);
+					}
 				}
 			}
 
@@ -221,6 +294,7 @@ namespace tpublic::Systems
 			visibleAuras->m_colorWeaponGlow.reset();
 			visibleAuras->m_mountId = 0;
 			visibleAuras->m_overrideSpriteId = 0;
+			visibleAuras->m_headEffectSpriteId = 0;
 			
 			uint32_t colorEffectR = 0;
 			uint32_t colorEffectG = 0;
@@ -277,6 +351,9 @@ namespace tpublic::Systems
 
 				if(aura->m_overrideSpriteId != 0)
 					visibleAuras->m_overrideSpriteId = aura->m_overrideSpriteId;
+
+				if (aura->m_headEffectSpriteId != 0)
+					visibleAuras->m_headEffectSpriteId = aura->m_headEffectSpriteId;
 
 				if(entry->HasEffect(AuraEffect::ID_STUN))
 					visibleAuras->m_auraFlags |= Components::VisibleAuras::AURA_FLAG_STUNNED;

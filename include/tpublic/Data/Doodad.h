@@ -131,6 +131,10 @@ namespace tpublic
 						{
 							m_autoProbability = UIntRange(aChild);
 						}
+						else if(aChild->m_name == "no_cover")
+						{
+							m_noCover = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -150,6 +154,7 @@ namespace tpublic
 				aWriter->WriteUInts(m_map);
 				aWriter->WriteOptionalObject(m_autoProbability);
 				m_sizeInTiles.ToStream(aWriter);
+				aWriter->WriteBool(m_noCover);
 			}
 			
 			bool
@@ -172,6 +177,8 @@ namespace tpublic
 					return false;
 				if(!m_sizeInTiles.FromStream(aReader))
 					return false;
+				if(!aReader->ReadBool(m_noCover))
+					return false;
 				return true;
 			}
 
@@ -183,6 +190,7 @@ namespace tpublic
 			Vec2												m_mapOffset;
 			std::optional<UIntRange>							m_autoProbability;
 			Vec2												m_sizeInTiles;
+			bool												m_noCover = false;
 		};
 
 	}

@@ -1,0 +1,118 @@
+dialogue_screen .fullay:
+{
+	text: 
+	[	
+		"Passing north or south?"
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .fullay_1 requirement self<must_not_have_completed_quest>: .old_man_james_1 }
+		{ quest<offer_only>: .fullay_2 }
+	]
+}
+
+entity thalvaron_fullay: !NPC
+{
+	_string: "Fullay"
+	_sprite: woman_40
+	_sprite_dead: woman_40_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fullay: { } }
+}
+
+############################################################
+# Quest 1
+
+quest .fullay_1:
+{
+	string: "Old Man James"
+
+	text:
+	[
+		"Seek out James at the Faerandor Pass."
+	]
+	
+	description: 
+	[
+		"West of here you'll find the Faerandor Pass. At the height of it, there is a small post manned by James, an old friend of mine. He's been living there for ages and barely ever gets any visitors. Maybe you"
+		"can go there and see what he's up to?"
+	]
+
+	completion:
+	[
+		"Fullay sent you? He's still refusing to wear shoes?"
+	]
+	
+	reward_xp_multiplier: 0.32
+	reward_cash_multiplier: 0.27
+	level: 26
+}
+
+############################################################
+# Quest 2
+
+loot_group .fullay_2_quest_item: { }
+
+item .fullay_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fullay_2_quest_item ]		
+	string: "Thalyssian Snake Scale" 
+	icon: icon_scales_3
+	item_level: 26
+	quest: .fullay_2
+	flags: [ not_sellable ]
+	stack: 6
+}
+
+objective .fullay_2:
+{
+	string: "Thalyssian Snake Scale"
+	collect_items: { item: .fullay_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 26 }
+	item .fullay_2_a: !QUEST_REWARD_HEAD{ _string: "Thalyssian Helmet" _icon: icon_helmet_2 _constitution: 2 _strength: 1 _type: armor_plate }
+	item .fullay_2_b: !QUEST_REWARD_WRISTS{ _string: "Thalyssian Bracers of Healing" _icon: icon_mail_bracers_3 _constitution: 1 _wisdom: 2 _healing: 3 _type: armor_cloth }
+}
+
+quest .fullay_2:
+{
+	string: "Jungle Business"
+
+	text:
+	[
+		"Hunt Thalyssian snakes for their scales and deliver them to Joseph in New Thalyssar."
+	]
+	
+	description: 
+	[
+		"South of here you'll find New Thalyssar, a recently established trading post. I've been doing some business with a guy named Joseph. He has set up shop there and sometimes I sell him exotic items from the"
+		"jungle. Recently he requested some scales from a type of snake that lives in these parts. No way I'm going to hunt snakes. Maybe you don't mind? Collect some snake scales and deliver them to Joseph.\n"
+		"\n"
+		"You'll find a ton of these snakes in the jungle south west of here."
+	]
+	
+	completion:
+	[
+		"Oh, those will bring in the cash! Thanks!"
+	]
+	
+	progress:
+	[
+		"Well, just kill those innocent snakes, take their scales, and deliver them to where they're supposed to go."
+	]
+
+	level: 26
+	objectives: [ .fullay_2 ]
+	reward_one_item: [ .fullay_2_a .fullay_2_b ]
+}
+
+
+

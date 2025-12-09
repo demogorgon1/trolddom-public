@@ -10,6 +10,7 @@ dialogue_screen .clara_hawthorne_dialogue:
 		{ quest<completion_only>: thalvaron_jonas_white_3 }
 		{ text: "What can you tell me about the tablet?" requirement self<must_have_completed_quest>: thalvaron_jonas_white_3 
 		  goto: $dialogue_screen { text: [ "Hmm... It's indeed a curiosity. I'll have to do more research. I'll contact you when I know more." ] } }
+		{ quest<completion_only>: thalvaron_bail_trok_2 }
 	]
 }
 

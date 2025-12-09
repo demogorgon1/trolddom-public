@@ -4,6 +4,9 @@ map_player_spawn thalvaron_lich_tower_exit: { }
 map_player_spawn thalvaron_valoris_insurgency_exit: { }
 map_player_spawn thalvaron_tirnwood_thicket_exit: { }
 map_player_spawn thalvaron_durgan_urok_exit: { }
+map_player_spawn thalvaron_trial_of_fire_return_spawn: { }
+map_player_spawn thalvaron_the_devouring_shroud_exit: { }
+map_player_spawn thalvaron_karethi_temple_exit: { }
 
 map_player_spawn thalvaron_wizard_realm_spawn: { }
 map_player_spawn thalvaron_wizard_realm_return_spawn: { }
@@ -14,76 +17,146 @@ map_player_spawn thalvaron_the_shrouded_lands_underworld_return: { }
 map_player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: { }
 map_player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: { }
 
-zone .valoris: { string: "Valoris" }
-zone .valoris_south: { string: "Fernwick Hills" }
-zone .valoris_south_mountains: { string: "Clearview Slopes" }
-zone .valoris_south_sea: { string: "Clearview" }
-zone .valoris_docks: { string: "Docks" town: true }
-zone .valoris_trade_district: { string: "Trade District" town: true }
-zone .valoris_royal_gardens: { string: "Royal Gardens" town: true }
-zone .valoris_royal_castle: { string: "Royal Castle" town: true }  
-zone .valoris_the_garrison: { string: "The Garrison" town: true }
-zone .valoris_southgate: { string: "Southgate" town: true }
-zone .valoris_royal_district: { string: "Royal District" town: true }
-zone .valoris_eastgate: { string: "Eastgate" }
-zone .valoris_south_town: { string: "Fernwick" }
-zone .north_wetlands: { string: "North Marshlands" }
-zone .middle_wetlands: { string: "Middle Marshlands" }
-zone .south_wetlands: { string: "South Marshlands" }
-zone .wetlands_town: { string: "Mirehaven" }
-zone .south_badlands: { string: "South Badlands" }
-zone .north_badlands: { string: "North Badlands" }
-zone .center_pass: { string: "Ravenreach Pass" }
-zone .valoris_east: { string: "Eastview" }
-zone .valoris_north_woods: { string: "Eastview Woods" }
-zone .north_pass: { string: "Iceveil Pass" }
-zone .mountains: { string: "Iceveil Highlands" }
-zone .myst_woodlands_town: { string: "Edmund's Haunt" }
-zone .myst_woodlands: { string: "Duskwhisper Vale" }
-zone .haunted_woods_main: { string: "Shadowthorn Forest" }
-zone .haunted_woods_west: { string: "Shadowthorn Thicket" }
-zone .haunted_woods_town: { string: "Ravenreach" }
-zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" }
-zone .haunted_woods_east: { string: "Faerandor" }
-zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_skaldrun }
-zone .lich_woods: { string: "Hollows of the Undying" }
-zone .way_north_pass: { string: "The Northern Pass" }
-zone .duskwhisper_caves: { string: "Duskwhisper Caves" }
-zone .old_mans_cave: { string: "Old Man's Cave" }
-zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true }
-zone .eastern_faerandor: { string: "Eastern Faerandor" }
-zone .myst_woodlands_coast: { string: "The Lonely Coast" }
-zone .mongos_swamp: { string: "Mongo's Swamp" }
-zone .dwarf_city: { string: "Durgan Tharok" town: true }
-zone .lake_dourgol: { string: "Lake Dourgol" }
-zone .faerandor_gorge: { string: "Faerandor Gorge" }
-zone .dark_strand: { string: "Dark Strand" }
-zone .lake_ylynor: { string: "Lake Ylynor" }
-zone .lake_joonor: { string: "Lake Joonor" }
-zone .highborne_tower: { string: "Tower of Xalizant" }
-zone .lich_tower: { string: "Tower of Indulath" }
-zone .temple_of_the_undying: { string: "Temple of the Undying" }
-zone .tirnwood: { string: "Tirnwood Vale" }
-zone .holy_temple: { string: "Holy Temple of Valoris" }
-zone .underworld_society: { string: "Society of the Underworld" }
-zone .echosrest: { string: "Echo's Rest" }
-zone .highborne_realm: { string: "Realm of the Highborne" no_map: true }
-zone .jungle_highlands: { string: "Xandralis Highlands" }
-zone .the_desolate_pass: { string: "The Desolate Pass" }
-zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } }
-zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun }
-zone .skaldrun: { string: "Skaldrun" }
-zone .durgan_urok: { string: "Durgan Urok" }
-zone .hidden_pool: { string: "Great Ape Sanctuary" }
-zone .skaldrun_pass: { string: "Howling Pass" }
-zone .urthon_gate: { string: "Urthon Gate" }
-zone .entor_spring: { string: "Entor Spring" }
-zone .jungle_temple: { string: "Ancient Temple" }
-zone .shrine_of_ryux: { string: "Shrine of Ryux" }
-zone .tower_of_voraghul: { string: "Tower of Voraghul" }
-zone .the_crystal_caves: { string: "The Crystal Caves" }
-zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" }
-zone .inner_durgan_urok: { string: "Inner Durgan Urok" }
+map_player_spawn thalvaron_flimlock_3_portal_spawn: { }
+map_player_spawn thalvaron_flimlock_3_portal_return_spawn: { }
+
+map_player_spawn thalvaron_jungle_tower_portal_spawn: { }
+map_player_spawn thalvaron_jungle_tower_portal_return_spawn: { }
+
+map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
+
+zone .top_zone_marshlands: { string: "The Marshlands" preposition: "in" }
+zone .top_zone_badlands: { string: "The Badlands" preposition: "in" }
+zone .top_zone_kareth: { string: "Kareth" loot_table: .kareth_zone_drops preposition: "in" }
+zone .top_zone_thallysian_wilds: { string: "Thalyssian Wilds" loot_table: .thallysian_wilds_zone_drops preposition: "in the" }
+
+zone .valoris: { string: "Valoris" preposition: "in" }
+zone .valoris_south: { string: "Fernwick Hills" preposition: "around"}
+zone .valoris_south_mountains: { string: "Clearview Slopes" preposition: "around" }
+zone .valoris_south_sea: { string: "Clearview" preposition: "around" }
+zone .valoris_docks: { string: "Docks" town: true preposition: "at the" }
+zone .valoris_trade_district: { string: "Trade District" town: true preposition: "in the" }
+zone .valoris_royal_gardens: { string: "Royal Gardens" town: true preposition: "in the" }
+zone .valoris_royal_castle: { string: "Royal Castle" town: true preposition: "at the" }  
+zone .valoris_the_garrison: { string: "The Garrison" town: true preposition: "around" }
+zone .valoris_southgate: { string: "Southgate" town: true preposition: "in" }
+zone .valoris_royal_district: { string: "Royal District" town: true preposition: "in the" }
+zone .valoris_eastgate: { string: "Eastgate" preposition: "in"}
+zone .valoris_south_town: { string: "Fernwick" preposition: "in"}
+zone .north_wetlands: { string: "North Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
+zone .middle_wetlands: { string: "Middle Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
+zone .south_wetlands: { string: "South Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
+zone .wetlands_town: { string: "Mirehaven" top_zone: .top_zone_marshlands preposition: "in"}
+zone .south_badlands: { string: "South Badlands" top_zone: .top_zone_badlands preposition: "in the" }
+zone .north_badlands: { string: "North Badlands" top_zone: .top_zone_badlands preposition: "in the" }
+zone .center_pass: { string: "Ravenreach Pass" preposition: "at" }
+zone .valoris_east: { string: "Eastview" preposition: "in" }
+zone .valoris_north_woods: { string: "Eastview Woods" preposition: "in" }
+zone .north_pass: { string: "Iceveil Pass" preposition: "at" }
+zone .mountains: { string: "Iceveil Highlands" preposition: "at" }
+zone .myst_woodlands_town: { string: "Edmund's Haunt" preposition: "in" }
+zone .myst_woodlands: { string: "Duskwhisper Vale" preposition: "in" }
+zone .haunted_woods_main: { string: "Shadowthorn Forest" preposition: "in" }
+zone .haunted_woods_west: { string: "Shadowthorn Thicket" preposition: "in" }
+zone .haunted_woods_town: { string: "Ravenreach" preposition: "in" }
+zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" preposition: "at" }
+zone .haunted_woods_east: { string: "Faerandor" preposition: "in" }
+zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_jungle preposition: "in" }
+zone .lich_woods: { string: "Hollows of the Undying" preposition: "in the" }
+zone .way_north_pass: { string: "The Northern Pass" preposition: "at" }
+zone .duskwhisper_caves: { string: "Duskwhisper Caves" preposition: "in the" }
+zone .old_mans_cave: { string: "Old Man's Cave" preposition: "in the" }
+zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true preposition: "in the" }
+zone .eastern_faerandor: { string: "Eastern Faerandor" preposition: "in" }
+zone .myst_woodlands_coast: { string: "The Lonely Coast" preposition: "at the" }
+zone .mongos_swamp: { string: "Mongo's Swamp" top_zone: .top_zone_marshlands preposition: "around"}
+zone .dwarf_city: { string: "Durgan Tharok" town: true preposition: "in" }
+zone .lake_dourgol: { string: "Lake Dourgol" preposition: "around" }
+zone .faerandor_gorge: { string: "Faerandor Gorge" preposition: "around" }
+zone .dark_strand: { string: "Dark Strand" preposition: "around" }
+zone .lake_ylynor: { string: "Lake Ylynor" preposition: "around" }
+zone .lake_joonor: { string: "Lake Joonor" preposition: "around" }
+zone .highborne_tower: { string: "Tower of Xalizant" preposition: "at the" }
+zone .lich_tower: { string: "Tower of Indulath" preposition: "at the" }
+zone .temple_of_the_undying: { string: "Temple of the Undying" preposition: "at the" }
+zone .tirnwood: { string: "Tirnwood Vale" preposition: "in" }
+zone .holy_temple: { string: "Holy Temple of Valoris" preposition: "at the" }
+zone .underworld_society: { string: "Society of the Underworld" preposition: "at the" }
+zone .echosrest: { string: "Echo's Rest" preposition: "at" }
+zone .highborne_realm: { string: "Realm of the Highborne" no_map: true preposition: "in the" }
+zone .jungle_highlands: { string: "Xandralis Highlands" preposition: "in the" }
+zone .the_desolate_pass: { string: "The Desolate Pass" preposition: "at" }
+zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } preposition: "around" }
+zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun preposition: "around" }
+zone .skaldrun: { string: "Skaldrun" preposition: "in" }
+zone .durgan_urok: { string: "Durgan Urok" preposition: "in" }
+zone .hidden_pool: { string: "Great Ape Sanctuary" top_zone: thalvaron_jungle preposition: "at the"  }
+zone .skaldrun_pass: { string: "Howling Pass" preposition: "at the" }
+zone .urthon_gate: { string: "Urthon Gate" preposition: "around" }
+zone .entor_spring: { string: "Entor Spring" preposition: "around" }
+zone .jungle_temple: { string: "Ancient Temple" top_zone: thalvaron_jungle preposition: "at the" }
+zone .shrine_of_ryux: { string: "Shrine of Ryux" preposition: "at the" }
+zone .tower_of_voraghul: { string: "Tower of Voraghul" preposition: "in the" }
+zone .the_crystal_caves: { string: "The Crystal Caves" top_zone: thalvaron_jungle preposition: "in" }
+zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" preposition: "in the" }
+zone .inner_durgan_urok: { string: "Inner Durgan Urok" preposition: "in" }
+zone .northern_tunnels: { string: "Northern Tunnels" preposition: "in the" }
+zone .northgrove: { string: "Northgrove" preposition: "in" }
+zone .northgrove_caves: { string: "Northgrove Caves" preposition: "in the"  }
+zone .outcast_coast: { string: "Outcast Coast" preposition: "at the" }
+zone .tyrons_land: { string: "Tyron's Land" preposition: "around" }
+zone .tyrons_rock: { string: "Tyron's Rock" preposition: "around" }
+zone .cape_valor: { string: "Cape Valor" preposition: "at" }
+zone .brior_hills: { string: "Brior Hills" preposition: "in" }
+zone .catacombs: { string: "Royal Catacombs" top_zone: .valoris preposition: "in the" }
+zone .southern_tirnwood: { string: "Southern Tirnwood" preposition: "in" }
+zone .zilkore: { string: "Zilkore" preposition: "in" }
+zone .northern_thalyssian_wilds: { string: "Northern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .emerald_strand: { string: "Emerald Strand" top_zone: .top_zone_thallysian_wilds preposition: "at the" }
+zone .thalyssian_wilds: { string: "Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .the_devouring_shroud: { string: "The Devouring Shroud" top_zone: .top_zone_thallysian_wilds preposition: "in" }
+zone .thalyssian_highlands: { string: "Thalyssian Highlands" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .southern_thalyssian_wilds: { string: "Southern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
+zone .new_thalyssar: { string: "New Thalyssar" top_zone: .top_zone_thallysian_wilds preposition: "in New Thalyssar" }
+zone .riddles_crossing: { string: "Riddle's Crossing" top_zone: .top_zone_thallysian_wilds preposition: "at" }
+zone .the_verdant_mire: { string: "The Verdant Mire" top_zone: .top_zone_thallysian_wilds preposition: "in" }
+zone .xandralis_mountains: { string: "Xandralis Mountains" preposition: "in the" }
+zone .the_desolate_lowlands: { string: "The Desolate Lowlands" preposition: "in" }
+zone .urthon: { string: "Urthon" preposition: "in" }
+zone .faerandor_pass: { string: "Faerandor Pass" preposition: "at" }
+zone .forbidden_island: { string: "Forbidden Island" preposition: "on the" }
+zone .twin_temples: { string: "Twin Temples" preposition: "at the" }
+zone .temple_of_firbiu: { string: "Temple of Firbiu" preposition: "at the" }
+zone .temple_of_feruc: { string: "Temple of Feruc" preposition: "at the" }
+zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true preposition: "at the" }
+zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" preposition: "at the" }
+zone .urthonak_keep: { string: "Urthonak Keep" preposition: "at" }
+zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" preposition: "around the" }
+zone .northern_kareth: { string: "Northern Kareth" top_zone: .top_zone_kareth preposition: "in" }
+zone .the_serpents_rest: { string: "The Serpent's Rest" top_zone: .top_zone_kareth preposition: "at" }
+zone .eastern_kareth: { string: "Eastern Kareth" top_zone: .top_zone_kareth preposition: "in" }
+zone .southern_kareth: { string: "Southern Kareth" top_zone: .top_zone_kareth preposition: "in" }
+zone .kareth_pass: { string: "Kareth Pass" top_zone: .top_zone_kareth preposition: "around" }
+zone .balidor: { string: "Balidor" preposition: "in" }
+zone .ashira: { string: "Ashira" preposition: "in" }
+zone .karethi_temple: { string: "Karethi Temple" preposition: "at the"  }
+zone .tomb_of_kralir: { string: "Tomb of Kralir" preposition: "in the" }
+zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" preposition: "in the" }
+zone .tomb_of_the_last_king: { string: "Tomb of the Last King" preposition: "in the" }
+zone .lonely_cove: { string: "Lonely Cove" preposition: "at the" }
+zone .shrine_of_zilu: { string: "Shrine of Zilu" preposition: "at the" }
+zone .ancient_burial_site: { string: "Ancient Burial Site" preposition: "at the" }
+zone .kobold_shrine: { string: "Kobold Shrine" preposition: "at the" }
+zone .the_lizard_coast: { string: "The Lizard Coast" preposition: "on" }
+zone .stillwater: { string: "Stillwater" preposition: "in" }
+zone .kaldor_island: { string: "Kaldor Island" preposition: "on" }
+zone .the_jungle_passage: { string: "The Jungle Passage" preposition: "in" }
+zone thalvaron_ancient_battleground: { string: "Ancient Battleground" preposition: "on the" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger }
+zone thalvaron_welks_cave: { string: "Welk's Cave" preposition: "in" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger }
+zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" }
+zone .tower_of_tyrion: { string: "Tower of Tyrion" preposition: "at" }
+zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true }
+zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -106,6 +179,8 @@ map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION
 map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
 map_portal thalvaron_tirnwood_thicket_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: tirnwood_thicket }
 map_portal thalvaron_durgan_urok_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: durgan_urok }
+map_portal thalvaron_the_devouring_shroud_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: the_devouring_shroud }
+map_portal thalvaron_karethi_temple_entrance: { animation: !HOLE_PORTAL_ANIMATION{} map: karethi_temple }
 
 map_cliff .rocky_cliff: { cliff_style: rocks elevation: 1 }
 map_cliff .rocky_cliff_ramp: { cliff_style: rocks elevation: 1 ramp: true }
@@ -113,6 +188,8 @@ map_cliff .badlands_cliff: { cliff_style: badlands elevation: 1 }
 map_cliff .badlands_cliff_ramp: { cliff_style: badlands elevation: 1 ramp: true }
 map_cliff .wall_cliff: { cliff_style: wall elevation: 1 }
 map_cliff .wall_cliff_ramp: { cliff_style: wall elevation: 1 ramp: true }
+map_cliff .dummy_cliff_minus_0: { cliff_style: dummy elevation: -1 }
+map_cliff .dummy_cliff_minus_0_ramp: { cliff_style: dummy elevation: -1 ramp: true }
 map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
 map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
 map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
@@ -174,7 +251,7 @@ map_entity_spawn thalvaron_thora: { entity thalvaron_thora: { init_state: defaul
 map_entity_spawn thalvaron_tyler: { entity thalvaron_tyler: { init_state: default } }
 map_entity_spawn thalvaron_thora_2_return_portal: { entity thalvaron_thora_2_return_portal: { init_state: default } }
 map_entity_spawn thalvaron_wizard: { entity thalvaron_wizard: { init_state: default } }
-map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } }
+map_entity_spawn thalvaron_wizard_door: { entity thalvaron_wizard_door: { init_state: default } spawn_timer: { despawn_required: true } }
 map_entity_spawn thalvaron_royal_chef: { entity thalvaron_royal_chef: { init_state: default } }
 map_entity_spawn thalvaron_royal_chef_assistant: { entity thalvaron_royal_chef_assistant: { init_state: default } }
 map_entity_spawn thalvaron_clara_hawthorne: { entity thalvaron_clara_hawthorne: { init_state: default } }
@@ -218,6 +295,21 @@ map_entity_spawn thalvaron_blimcraft_assistant: { entity thalvaron_blimcraft_ass
 map_entity_spawn thalvaron_gateway_2: { entity gateway_2: { init_state: default } }
 map_entity_spawn thalvaron_tailoring_trainer: { entity thalvaron_tailoring_trainer: { init_state: default } }
 map_entity_spawn thalvaron_jim_farseer: { entity thalvaron_jim_farseer: { init_state: default } }
+map_entity_spawn thalvaron_ghorm: { entity thalvaron_ghorm: { init_state: default } }
+map_entity_spawn thalvaron_bar_patron_trogor: { entity thalvaron_bar_patron_trogor: { init_state: default } }
+map_entity_spawn thalvaron_anna_skrald: { entity thalvaron_anna_skrald: { init_state: default } }
+map_entity_spawn thalvaron_tyron: { entity thalvaron_tyron: { init_state: default } }
+map_entity_spawn thalvaron_ophelie: { entity thalvaron_ophelie: { init_state: default } }
+map_entity_spawn thalvaron_captain_jerrington_quest_item: { entity thalvaron_captain_jerrington_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_roel_1_quest_item: { entity thalvaron_ranger_roel_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_roel: { entity thalvaron_ranger_roel: { init_state: default } }
+map_entity_spawn thalvaron_junior: { entity thalvaron_junior: { init_state: default } }
+map_entity_spawn thalvaron_father_tobias_door: { entity thalvaron_father_tobias_door: { init_state: default } spawn_timer: { despawn_required: true } }
+map_entity_spawn thalvaron_briana_roft_1_quest_item: { entity thalvaron_briana_roft_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_briana_roft: { entity thalvaron_briana_roft: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor_3: { entity thalvaron_random_vendor_3: { init_state: default } }
+map_entity_spawn thalvaron_random_vendor_4: { entity thalvaron_random_vendor_4: { init_state: default } }
+map_entity_spawn thalvaron_dutsim: { entity thalvaron_dutsim: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -367,6 +459,74 @@ map_entity_spawn thalvaron_orm_thogore: { entity thalvaron_orm_thogore: { init_s
 map_entity_spawn thalvaron_orm_thogore_1_quest_item: { entity thalvaron_orm_thogore_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_brill_craigsworth_3_quest_item: { entity thalvaron_brill_craigsworth_3_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 map_entity_spawn thalvaron_green_statue: { entity thalvaron_green_statue: { init_state: default } }
+map_entity_spawn thalvaron_seren_virelith_4_quest_item: { entity thalvaron_seren_virelith_4_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_virgil: { entity thalvaron_ranger_virgil: { init_state: default } }
+
+# E
+map_entity_spawn thalvaron_faolan: { entity thalvaron_faolan: { init_state: default } }
+map_entity_spawn thalvaron_farkas: { entity thalvaron_farkas: { init_state: default } }
+map_entity_spawn thalvaron_fenris: { entity thalvaron_fenris: { init_state: default } }
+map_entity_spawn thalvaron_freki: { entity thalvaron_freki: { init_state: default } }
+map_entity_spawn thalvaron_fridolf: { entity thalvaron_fridolf: { init_state: default } }
+map_entity_spawn thalvaron_friduwulf: { entity thalvaron_friduwulf: { init_state: default } }
+map_entity_spawn thalvaron_old_man_james: { entity thalvaron_old_man_james: { init_state: default } }
+map_entity_spawn thalvaron_frida: { entity thalvaron_frida: { init_state: default } }
+map_entity_spawn thalvaron_frolok: { entity thalvaron_frolok: { init_state: default } }
+map_entity_spawn thalvaron_rubert: { entity thalvaron_rubert: { init_state: default } }
+map_entity_spawn thalvaron_troels_ronson: { entity thalvaron_troels_ronson: { init_state: default } }
+map_entity_spawn thalvaron_egon_riddle: { entity thalvaron_egon_riddle: { init_state: default } }
+map_entity_spawn thalvaron_grim_ironspear: { entity thalvaron_grim_ironspear: { init_state: default } }
+map_entity_spawn thalvaron_brila_stargazer: { entity thalvaron_brila_stargazer: { init_state: default } }
+map_entity_spawn thalvaron_ranger_cromor: { entity thalvaron_ranger_cromor: { init_state: default } }
+map_entity_spawn thalvaron_sheriff_nordberg: { entity thalvaron_sheriff_nordberg: { init_state: default } }
+map_entity_spawn thalvaron_captain_blackstone: { entity thalvaron_captain_blackstone: { init_state: default } }
+map_entity_spawn thalvaron_trader_joseph: { entity thalvaron_trader_joseph: { init_state: default } }
+map_entity_spawn thalvaron_deputy_reumer: { entity thalvaron_deputy_reumer: { init_state: default } }
+map_entity_spawn thalvaron_flimlock: { entity thalvaron_flimlock: { init_state: default } }
+map_entity_spawn thalvaron_fradi: { entity thalvaron_fradi: { init_state: default } }
+map_entity_spawn thalvaron_fullay: { entity thalvaron_fullay: { init_state: default } }
+map_entity_spawn thalvaron_diane: { entity thalvaron_diane: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+map_entity_spawn thalvaron_flimlock_3_portal: { entity thalvaron_flimlock_3_portal: { init_state: default } }
+map_entity_spawn thalvaron_flimlock_3_portal_return: { entity thalvaron_flimlock_3_portal_return: { init_state: default } }
+map_entity_spawn thalvaron_chad_wartorn: { entity thalvaron_chad_wartorn: { init_state: default } }
+map_entity_spawn thalvaron_sandra_riddle: { entity thalvaron_sandra_riddle: { init_state: default } }
+map_entity_spawn thalvaron_ulok_ironspear: { entity thalvaron_ulok_ironspear: { init_state: default } }
+map_entity_spawn thalvaron_fritz_dawnstar: { entity thalvaron_fritz_dawnstar: { init_state: default } }
+map_entity_spawn thalvaron_fritz_dawnstar_horse: { entity thalvaron_fritz_dawnstar_horse: { init_state: default } }
+map_entity_spawn thalvaron_sandra_riddle_1_quest_item: { entity thalvaron_sandra_riddle_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_ranger_ursa: { entity thalvaron_ranger_ursa: { init_state: default } }
+map_entity_spawn thalvaron_captain_ejner: { entity thalvaron_captain_ejner: { init_state: default } }
+map_entity_spawn thalvaron_erik_the_bleak: { entity thalvaron_erik_the_bleak: { init_state: default } } 
+map_entity_spawn thalvaron_joana: { entity thalvaron_joana: { init_state: default } } 
+map_entity_spawn thalvaron_dag_hammerfest: { entity thalvaron_dag_hammerfest: { init_state: default } } 
+map_entity_spawn thalvaron_carla_longton: { entity thalvaron_carla_longton: { init_state: default } } 
+map_entity_spawn thalvaron_urgon_lark: { entity thalvaron_urgon_lark: { init_state: default } } 
+map_entity_spawn thalvaron_farmer_farbottom: { entity thalvaron_farmer_farbottom: { init_state: default } } 
+map_entity_spawn thalvaron_zizlo: { entity thalvaron_zizlo: { init_state: default } } 
+map_entity_spawn thalvaron_bail_trok: { entity thalvaron_bail_trok: { init_state: default } } 
+map_entity_spawn thalvaron_bail_trok_mount: { entity thalvaron_bail_trok_mount: { init_state: default } } 
+map_entity_spawn thalvaron_captain_ejner_2_quest_item: { entity thalvaron_captain_ejner_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_bail_trok_1_quest_item: { entity thalvaron_bail_trok_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_brila_stargazer_1_quest_item: { entity thalvaron_brila_stargazer_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_captain_blackstone_1_quest_item: { entity thalvaron_captain_blackstone_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_faolan_1_quest_item: { entity thalvaron_faolan_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_zilu: { entity thalvaron_zilu: { init_state: default } } 
+map_entity_spawn thalvaron_flimlock_1_quest_item: { entity thalvaron_flimlock_1_quest_item: { init_state: default } } # No respawn needed
+map_entity_spawn thalvaron_flimlock_2_quest_item: { entity thalvaron_flimlock_2_quest_item: { init_state: default } } # No respawn needed
+map_entity_spawn thalvaron_fradi_1_quest_item: { entity thalvaron_fradi_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_old_man_james_2_quest_item: { entity thalvaron_old_man_james_2_quest_item: { init_state: default } } # No respawn needed
+map_entity_spawn thalvaron_sandra_riddle_2_quest_item: { entity thalvaron_sandra_riddle_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_trader_joseph_1_quest_item: { entity thalvaron_trader_joseph_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_trader_joseph_2_quest_item: { entity thalvaron_trader_joseph_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_pony: { entity pony: { init_state: default } }
+map_entity_spawn thalvaron_louise_farbottom: { entity thalvaron_louise_farbottom: { init_state: default } }
+map_entity_spawn thalvaron_quizlob: { entity thalvaron_quizlob: { init_state: default } }
+map_entity_spawn thalvaron_frollo: { entity thalvaron_frollo: { init_state: default } }
+map_entity_spawn thalvaron_faria: { entity thalvaron_faria: { init_state: default } }
+map_entity_spawn thalvaron_jungle_tower_portal: { entity thalvaron_jungle_tower_portal: { init_state: default } }
+map_entity_spawn thalvaron_jungle_tower_portal_return: { entity thalvaron_jungle_tower_portal_return: { init_state: default } }
+map_entity_spawn thalvaron_elia: { entity thalvaron_elia: { init_state: default } }
+map_entity_spawn thalvaron_dawn: { entity thalvaron_dawn: { init_state: default } }
 
 map_palette .stuff:
 {
@@ -391,6 +551,12 @@ map_palette .stuff:
 	entity_spawn seagull: [ 139 141 21 ]	
 	entity_spawn duck: [ 239 141 221 ]	
 	entity_spawn homunculus: [ 100 32 177 ]
+	entity_spawn standing_stone: [ 209 44 77 ]
+	entity_spawn dominion_of_strife_deity_1_shrine: [ 49 187 184 ]
+	entity_spawn dominion_of_strife_deity_2_shrine: [ 149 187 184 ]
+	entity_spawn dominion_of_strife_deity_3_shrine: [ 49 87 184 ]
+	entity_spawn dominion_of_strife_rift: [ 93 91 104 ]
+	entity_spawn jul_nisse: [ 40 192 91 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
@@ -403,15 +569,26 @@ map_palette .stuff:
 	player_spawn thalvaron_blimcraft_highborne_3_portal_spawn: [ 40 105 130 ]
 	player_spawn thalvaron_blimcraft_highborne_3_portal_return_spawn: [ 140 105 130 ]
 	player_spawn thalvaron_durgan_urok_exit: [ 114 124 144 ]
+	player_spawn thalvaron_trial_of_fire_return_spawn: [ 149 99 100 ]
+	player_spawn thalvaron_realm_of_fire_return_spawn: [ 99 134 105 ]
+	player_spawn thalvaron_flimlock_3_portal_spawn: [ 240 105 30 ]
+	player_spawn thalvaron_flimlock_3_portal_return_spawn: [ 240 105 230 ]
+	player_spawn thalvaron_the_devouring_shroud_exit: [ 14 121 144 ]
+	player_spawn thalvaron_karethi_temple_exit: [ 111 124 244 ]
+	player_spawn thalvaron_jungle_tower_portal_spawn: [ 210 105 70 ]
+	player_spawn thalvaron_jungle_tower_portal_return_spawn: [ 210 105 240 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
 	portal thalvaron_tirnwood_thicket_entrance: [ 144 228 92 ]
 	portal thalvaron_durgan_urok_entrance: [ 244 218 92 ]
+	portal thalvaron_the_devouring_shroud_entrance: [ 241 218 92 ]
+	portal thalvaron_karethi_temple_entrance: [ 244 218 2 ]
 	
 	wall stone_wall: [ 128 128 128 ]
 	wall fence: [ 64 128 140 ]
 	wall wood_wall: [ 164 128 140 ]
+	wall desert_wall: [ 190 175 95 ]
 	
 	# NW
 	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
@@ -555,6 +732,40 @@ map_palette .stuff:
 	entity_spawn thalvaron_tailoring_trainer: [ 30 130 33 ]
 	entity_spawn thalvaron_jim_farseer: [ 40 82 176 ]
 	entity_spawn voraghul_portal_closed: [ 206 102 91 ]
+	entity_spawn voraghul_portal_open: [ 106 109 91 ]
+	entity_spawn thalvaron_ghorm: [ 30 104 230 ]
+	entity_spawn thalvaron_bar_patron_trogor: [ 10 120 230 ]
+	entity_spawn thalvaron_anna_skrald: [ 110 110 230 ]
+	entity_spawn thalvaron_goblin: [ 30 39 194 ]
+	entity_spawn thalvaron_goblin_boss: [ 230 39 194 ]
+	entity_spawn thalvaron_north_wolf: [ 130 39 152 ]
+	entity_spawn thalvaron_tyron: [ 31 39 208 ]
+	entity_spawn thalvaron_ophelie: [ 61 239 108 ]
+	entity_spawn thalvaron_north_boar: [ 60 100 99 ]
+	entity_spawn thalvaron_north_crab: [ 60 100 199 ]	
+	entity_spawn thalvaron_goblin_healer: [ 160 110 90 ]
+	entity_spawn thalvaron_captain_jerrington_quest_item: [ 250 200 93 ]
+	entity_spawn thalvaron_goblin_tunneler: [ 104 83 97 ]
+	entity_spawn thalvaron_ranger_roel_1_quest_item: [ 77 63 148 ]
+	entity_spawn thalvaron_ranger_roel: [ 177 163 148 ]
+	entity_spawn thalvaron_north_crabman: [ 12 38 93 ]
+	entity_spawn thalvaron_north_crabman_boss: [ 212 38 93 ]
+	entity_spawn thalvaron_junior: [ 94 128 61 ]
+	entity_spawn thalvaron_north_deer_24: [ 39 147 49 ]
+	entity_spawn thalvaron_north_bear_24: [ 139 147 111 ]
+	entity_spawn thalvaron_father_tobias_door: [ 20 148 172 ]
+	entity_spawn thalvaron_catacombs_skeleton: [ 120 148 48 ]
+	entity_spawn thalvaron_catacombs_boss_1: [ 220 148 100 ]
+	entity_spawn thalvaron_catacombs_boss_2: [ 220 148 200 ]
+	entity_spawn thalvaron_catacombs_boss_3: [ 220 248 100 ]
+	entity_spawn thalvaron_catacombs_boss_4: [ 120 148 100 ]
+	entity_spawn thalvaron_catacombs_boss_5: [ 120 148 200 ]
+	entity_spawn thalvaron_catacombs_boss_6: [ 120 248 100 ]
+	entity_spawn thalvaron_briana_roft_1_quest_item: [ 40 29 204 ]
+	entity_spawn thalvaron_briana_roft: [ 240 29 204 ]
+	entity_spawn thalvaron_random_vendor_3: [ 30 70 102 ]
+	entity_spawn thalvaron_random_vendor_4: [ 130 170 102 ]
+	entity_spawn thalvaron_dutsim: [ 230 110 105 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -847,6 +1058,143 @@ map_palette .stuff:
 	entity_spawn thalvaron_green_statue: [ 155 184 177 ]
 	entity_spawn thalvaron_se_deer: [ 30 184 71 ]
 	entity_spawn thalvaron_se_boar: [ 30 184 171 ]
+	entity_spawn thalvaron_se_poison_crab: [ 40 90 140 ]
+	entity_spawn thalvaron_seren_virelith_4_quest_item: [ 140 80 22 ]
+	entity_spawn thalvaron_ranger_virgil: [ 240 180 122 ]
+	
+	# E
+	entity_spawn thalvaron_faolan: [ 201 209 182 ]
+	entity_spawn thalvaron_farkas: [ 201 209 82 ]
+	entity_spawn thalvaron_fenris: [ 201 9 182 ]
+	entity_spawn thalvaron_freki: [ 1 209 182 ]
+	entity_spawn thalvaron_fridolf: [ 101 209 182 ]
+	entity_spawn thalvaron_friduwulf: [ 201 109 182 ]
+	entity_spawn thalvaron_old_man_james: [ 148 74 102 ]
+	entity_spawn thalvaron_frida: [ 30 141 96 ]
+	entity_spawn thalvaron_frolok: [ 130 41 196 ]
+	entity_spawn thalvaron_rubert: [ 230 41 196 ]
+	entity_spawn thalvaron_troels_ronson: [ 119 29 114 ]
+	entity_spawn thalvaron_egon_riddle: [ 201 49 119 ]
+	entity_spawn thalvaron_grim_ironspear: [ 104 13 158 ]
+	entity_spawn thalvaron_brila_stargazer: [ 184 82 119 ]
+	entity_spawn thalvaron_ranger_cromor: [ 239 129 22 ]
+	entity_spawn thalvaron_sheriff_nordberg: [ 39 71 108 ]
+	entity_spawn thalvaron_captain_blackstone: [ 131 104 80 ]
+	entity_spawn thalvaron_trader_joseph: [ 231 100 105 ]
+	entity_spawn thalvaron_deputy_reumer: [ 18 238 92 ]
+	entity_spawn thalvaron_flimlock: [ 230 210 201 ] 
+	entity_spawn thalvaron_east_kobold: [ 21 78 117 ]
+	entity_spawn thalvaron_zilkore_sandcrawler: [ 121 78 139 ]
+	entity_spawn thalvaron_fradi: [ 221 84 82 ]
+	entity_spawn thalvaron_forbidden_island_boss: [ 112 48 28 ]
+	entity_spawn thalvaron_zilkore_crab_man_boss: [ 212 48 28 ]
+	entity_spawn thalvaron_zilkore_crab_man_small: [ 112 248 28 ]
+	entity_spawn thalvaron_zilkore_crab_man_large: [ 112 48 228 ]
+	entity_spawn thalvaron_south_tirnwood_elemental: [ 30 160 190 ]
+	entity_spawn thalvaron_zilkore_plant: [ 130 240 220 ]
+	entity_spawn thalvaron_thalyssian_beast: [ 230 49 105 ]
+	entity_spawn thalvaron_thalyssian_snake: [ 29 148 108 ]
+	entity_spawn thalvaron_fullay: [ 129 48 208 ]
+	entity_spawn thalvaron_e_boar_25: [ 194 44 91 ]
+	entity_spawn thalvaron_e_boar_26: [ 194 44 94 ]
+	entity_spawn thalvaron_jungle_harpy: [ 39 191 111 ]
+	entity_spawn thalvaron_mirefiend: [ 139 91 11 ]
+	entity_spawn thalvaron_diane: [ 156 74 72 ]
+	entity_spawn thalvaron_jungle_lizard_boss: [ 255 93 81 ]
+	entity_spawn thalvaron_jungle_lizard: [ 25 93 255 ]
+	entity_spawn thalvaron_thalyssian_spider_26: [ 34 12 89 ]
+	entity_spawn thalvaron_thalyssian_spider_27: [ 34 12 189 ]
+	entity_spawn thalvaron_wyvern: [ 150 131 49 ]
+	entity_spawn thalvaron_crust_elemental: [ 150 131 249 ]
+	entity_spawn thalvaron_lizard_wizard: [ 40 188 234 ]
+	entity_spawn thalvaron_flimlock_3_portal_return: [ 140 88 34 ]
+	entity_spawn thalvaron_flimlock_3_portal: [ 40 188 34 ]
+	entity_spawn thalvaron_chad_wartorn: [ 95 99 129 ]
+	entity_spawn thalvaron_sandra_riddle: [ 195 99 129 ]
+	entity_spawn thalvaron_ulok_ironspear: [ 95 199 129 ]
+	entity_spawn thalvaron_fritz_dawnstar_horse: [ 30 158 89 ]
+	entity_spawn thalvaron_fritz_dawnstar: [ 230 158 89 ]
+	entity_spawn thalvaron_ranger_ursa: [ 100 148 177 ]
+	entity_spawn thalvaron_urthon_orc_boss: [ 140 148 177 ]
+	entity_spawn thalvaron_urthon_orc: [ 140 248 177 ]
+	entity_spawn thalvaron_urthon_orc_wolf_wrangler: [ 150 82 110 ]
+	entity_spawn thalvaron_urthon_orc_wolf: [ 250 82 110 ]
+	entity_spawn thalvaron_sandra_riddle_1_quest_item: [ 150 85 48 ]
+	entity_spawn thalvaron_captain_ejner: [ 250 185 18 ]
+	entity_spawn thalvaron_urthon_orc_boss_2: [ 190 140 181 ]
+	entity_spawn thalvaron_erik_the_bleak: [ 201 183 30 ]
+	entity_spawn thalvaron_kareth_skeleton: [ 101 181 40 ]
+	entity_spawn thalvaron_joana: [208 184 111 ]
+	entity_spawn thalvaron_kareth_skeleton_boss: [ 201 93 88 ]
+	entity_spawn thalvaron_dag_hammerfest: [ 104 58 199 ]
+	entity_spawn thalvaron_carla_longton: [ 204 158 99 ]
+	entity_spawn thalvaron_urgon_lark: [ 4 58 199 ]
+	entity_spawn thalvaron_kareth_skeleton_priest: [ 40 98 47 ]
+	entity_spawn thalvaron_kareth_skeleton_guard: [ 140 98 47 ]
+	entity_spawn thalvaron_kareth_skeleton_archer: [ 140 98 247 ]
+	entity_spawn thalvaron_kareth_stalker_small: [ 240 98 247 ]
+	entity_spawn thalvaron_kareth_stalker_large: [ 140 198 247 ]
+	entity_spawn thalvaron_kareth_tomb_1: [ 94 89 105 ]
+	entity_spawn thalvaron_kareth_tomb_2: [ 194 89 105 ]
+	entity_spawn thalvaron_kareth_tomb_3: [ 94 189 105 ]
+	entity_spawn thalvaron_karethi_scorpion: [ 66 81 87 ]
+	entity_spawn thalvaron_urthon_wild_wolf: [ 166 181 187 ]
+	entity_spawn thalvaron_farmer_farbottom: [ 50 161 188 ]
+	entity_spawn thalvaron_lonely_cove_kobold: [ 105 71 203 ]
+	entity_spawn thalvaron_zizlo: [ 205 71 203 ]
+	entity_spawn thalvaron_desert_crocodile: [ 101 84 127 ]
+	entity_spawn thalvaron_bail_trok: [ 29 105 195 ]
+	entity_spawn thalvaron_bail_trok_mount: [ 29 205 95 ]
+	entity_spawn thalvaron_captain_ejner_2_quest_item: [ 129 104 88 ]
+	entity_spawn thalvaron_bail_trok_1_quest_item: [ 149 88 71 ]
+	entity_spawn thalvaron_brila_stargazer_1_quest_item: [ 250 28 100 ]
+	entity_spawn thalvaron_captain_blackstone_1_quest_item: [ 101 109 190 ]
+	entity_spawn thalvaron_diane_ambush_1_a: [ 201 109 190 ]
+	entity_spawn thalvaron_diane_ambush_2_a: [ 101 209 190 ]
+	entity_spawn thalvaron_diane_ambush_2_b: [ 101 109 90 ]
+	entity_spawn thalvaron_diane_ambush_3_a: [ 201 209 190 ]
+	entity_spawn thalvaron_diane_ambush_3_b: [ 101 9 190 ]	
+	entity_spawn thalvaron_diane_ambush_4_a: [ 101 249 190 ]	
+	entity_spawn thalvaron_kareth_skeleton_high_wizard: [ 39 81 72 ]
+	entity_spawn thalvaron_zilu: [ 140 169 105 ]
+	entity_spawn thalvaron_faolan_1_quest_item: [ 240 10 158 ]
+	entity_spawn thalvaron_flimlock_1_quest_item: [ 109 55 91 ]
+	entity_spawn thalvaron_flimlock_2_quest_item: [ 204 91 192 ]
+	entity_spawn thalvaron_flimlock_2_spawn_1: [ 204 191 192 ]
+	entity_spawn thalvaron_flimlock_2_spawn_2: [ 4 191 192 ]
+	entity_spawn thalvaron_flimlock_2_spawn_3: [ 204 1 192 ]
+	entity_spawn thalvaron_fradi_1_quest_item: [ 108 48 204 ]
+	entity_spawn thalvaron_urthon_ghoul: [ 30 159 95 ]
+	entity_spawn thalvaron_urthon_necromancer: [ 130 159 195 ]
+	entity_spawn thalvaron_old_man_james_2_quest_item: [ 230 59 95 ]
+	entity_spawn thalvaron_old_man_james_2_spawn_1: [ 130 59 95 ]
+	entity_spawn thalvaron_old_man_james_2_spawn_2: [ 220 59 195 ]
+	entity_spawn thalvaron_old_man_james_2_spawn_3: [ 20 251 95 ]
+	entity_spawn thalvaron_jungle_harpy_2: [ 20 251 195 ]
+	entity_spawn thalvaron_sandra_riddle_2_quest_item: [ 121 125 159 ]
+	entity_spawn thalvaron_trader_joseph_1_quest_item: [ 222 111 49 ]
+	entity_spawn thalvaron_trader_joseph_2_quest_item: [ 122 211 49 ]
+	entity_spawn thalvaron_kareth_skeleton_special: [ 45 45 129 ]
+	entity_spawn thalvaron_pony: [ 145 15 93 ]
+	entity_spawn thalvaron_louise_farbottom: [ 245 155 12 ]
+	entity_spawn thalvaron_sand_golem: [ 24 94 118 ]
+	entity_spawn thalvaron_quizlob: [ 39 141 94 ]
+	entity_spawn thalvaron_frollo: [ 39 241 94 ]
+	entity_spawn thalvaron_faria: [ 139 141 94 ]
+	entity_spawn thalvaron_jungle_tower_portal_return: [ 45 186 34 ]
+	entity_spawn thalvaron_jungle_tower_portal: [ 45 48 94 ]
+	entity_spawn thalvaron_jungle_plant: [ 40 0 248 ]
+	entity_spawn thalvaron_elia: [ 140 50 248 ]		
+	entity_spawn thalvaron_lizard_man: [ 0 39 148 ]
+	entity_spawn thalvaron_battleground_troll: [ 100 0 238 ]
+	entity_spawn thalvaron_jungle_beast: [ 140 0 129 ]
+	entity_spawn thalvaron_jungle_bandit: [ 9 2 164 ]
+	entity_spawn thalvaron_jungle_bandit_boss: [ 209 2 164 ]
+	entity_spawn thalvaron_dark_elemental: [ 103 93 82 ]
+	entity_spawn thalvaron_dark_elemental_boss: [ 203 93 82 ]
+	entity_spawn thalvaron_jungle_kobold: [ 39 10 200 ]
+	entity_spawn thalvaron_stillwater_crocodile: [ 30 185 85 ]
+	entity_spawn thalvaron_dawn: [ 230 185 85 ]	
 }
 
 map_palette .levels:
@@ -865,6 +1213,14 @@ map_palette .levels:
 	level<20>: [ 255 127 0 ]
 	level<21>: [ 145 203 128 ]
 	level<22>: [ 0 107 255 ]
+	level<23>: [ 115 86 122 ]
+	level<24>: [ 248 185 5 ]
+	level<25>: [ 9 58 147 ]
+	level<26>: [ 102 9 147 ]
+	level<27>: [ 222 61 92 ]
+	level<28>: [ 61 181 222 ]
+	level<29>: [ 230 163 240 ]
+	level<30>: [ 240 232 163 ]
 }
 
 map_palette .zones:
@@ -914,6 +1270,53 @@ map_palette .zones:
 	zone .urthon_gate: [ 34 122 244 ]
 	zone .entor_spring: [ 211 130 62 ]
 	zone .shrine_of_ryux: [ 70 232 243 ]
+	zone .northern_tunnels: [ 128 167 167 ]
+	zone .northgrove: [ 212 97 138 ]	
+	zone .northgrove_caves: [ 135 26 225 ]
+	zone .outcast_coast: [ 26 129 225 ]
+	zone .tyrons_land: [ 225 199 26 ]	
+	zone .tyrons_rock: [ 24 173 24 ]
+	zone .cape_valor: [ 225 26 90 ]
+	zone .brior_hills: [ 71 160 88 ]
+	zone .catacombs: [ 225 52 26 ]	
+	zone .southern_tirnwood: [ 228 34 115 ] 
+	zone .zilkore: [ 147 34 228 ]
+	zone .northern_thalyssian_wilds: [ 222 228 34 ]
+	zone .emerald_strand: [ 94 138 156 ]
+	zone .thalyssian_wilds: [ 103 211 14 ]
+	zone .the_devouring_shroud: [ 39 14 211 ]
+	zone .thalyssian_highlands: [ 139 94 222 ]
+	zone .southern_thalyssian_wilds: [ 49 105 241 ]
+	zone .new_thalyssar: [ 160 210 200 ]
+	zone .riddles_crossing: [ 210 160 168 ]
+	zone .the_verdant_mire: [ 222 94 177 ]
+	zone .xandralis_mountains: [ 241 49 61 ]
+	zone .the_desolate_lowlands: [ 49 241 173 ]
+	zone .urthon: [ 250 172 49 ]	
+	zone .faerandor_pass: [ 191 138 248 ]
+	zone .forbidden_island: [ 34 228 184 ]
+	zone .twin_temples: [ 211 14 103 ]
+	zone .realm_of_the_lizard_wizard_ext: [ 213 62 134 ]	
+	zone .urthonak_keep: [ 173 2 134 ]
+	zone .urthon_burial_grounds: [ 49 250 75 ]
+	zone .northern_kareth: [ 74 207 198 ]
+	zone .the_serpents_rest: [ 207 74 181 ]
+	zone .eastern_kareth: [ 74 207 95 ]
+	zone .southern_kareth: [ 125 74 207 ]
+	zone .kareth_pass: [ 171 113 177 ]
+	zone .balidor: [ 139 248 22 ]
+	zone .ashira: [ 233 131 36 ]
+	zone .karethi_temple: [ 152 21 127 ]
+	zone .lonely_cove: [ 10 60 121 ]
+	zone .the_lizard_coast: [ 185 79 137 ]	
+	zone .stillwater: [ 127 127 68 ]
+	zone .kaldor_island: [ 177 29 206 ]
+	zone .the_jungle_passage: [ 127 68 106 ]
+	zone thalvaron_ancient_battleground: [ 186 24 102 ]
+	zone thalvaron_welks_cave: [ 113 231 234 ]
+	zone .flinks_hideout: [ 64 26 159 ]
+	zone .tower_of_tyrion: [ 29 166 206 ]
+	zone .kobold_caves: [ 211 103 14 ]
 }
 
 map_palette .sub_zones:
@@ -943,10 +1346,21 @@ map_palette .sub_zones:
 	sub_zone .the_crystal_caves: [ 129 35 207 ]
 	sub_zone .swamp_of_skaldrun: [ 96 135 232 ]
 	sub_zone .inner_durgan_urok: [ 232 96 140 ]
+	sub_zone .temple_of_firbiu: [ 255 171 101 ]
+	sub_zone .temple_of_feruc: [ 31 211 182 ]
+	sub_zone .realm_of_the_lizard_wizard: [ 113 62 134 ]
+	sub_zone .tomb_of_kralir: [ 40 169 123 ]
+	sub_zone .tomb_of_jurgorth: [ 169 161 40 ]
+	sub_zone .tomb_of_the_last_king: [ 144 40 169 ]
+	sub_zone .shrine_of_zilu: [ 170 113 23 ]
+	sub_zone .ancient_burial_site: [ 234 28 128 ]
+	sub_zone .kobold_shrine: [ 239 170 201 ]
+	sub_zone .dark_water: [ 8 54 166 ]
 	
 	sub_zone thalvaron_crab_giant: [ 39 192 83 ]
 	sub_zone thalvaron_vampire_boss: [ 139 93 48 ]
 	sub_zone thalvaron_lurker: [ 93 39 84 ]
+	
 }
 
 map_palette .routes:
@@ -956,10 +1370,13 @@ map_palette .routes:
 	route thalvaron_doctor_hulius_escort: [ 39 48 168 ]
 	route thalvaron_mongo_patrol: [ 39 148 168 ]
 	route thalvaron_borli_stouthammer_escort: [ 132 143 221 ]
+	route thalvaron_diane_escort: [ 243 145 49 ]
 }
 
 map_palette .doodads:
 {
+	!DEFAULT_DOODAD_PALETTE{}
+
 	doodad crates: [ 45 39 100 ]
 	doodad sack: [ 35 100 200 ]
 	doodad table: [ 35 130 200 ]
@@ -1007,6 +1424,15 @@ map_palette .doodads:
 	doodad jungle_plant_purple: [ 147 66 77 ]
 	doodad closed_gate: [ 31 1 138 ]
 	doodad fs_ground_mark: [ 30 105 39 ]
+	doodad bones: [ 130 105 39 ]
+	doodad sarcophagus_open: [ 30 105 239 ]
+	doodad sarcophagus_closed: [ 30 205 39 ]
+	doodad jungle_plant: [ 49 205 50 ]
+	doodad dark_stairs_left: [ 144 49 146 ]
+	doodad dark_stairs_center: [ 104 41 146 ]
+	doodad dark_stairs_right: [ 104 42 246 ]	
+	doodad small_rocks: [ 204 52 210 ]
+	doodad statue: [ 104 153 149 ]
 	
 	doodad wall_sign_generic<"Mathew's Emporium">: [ 197 173 111 ]	
 	doodad wall_sign_generic<"John & Mary's">: [ 97 173 111 ]	
@@ -1027,6 +1453,7 @@ map_palette .doodads:
 	doodad wall_sign_generic<"Rare Imports">: [ 231 121 11 ]	
 	doodad wall_sign_generic<"The Valorisian">: [ 231 21 152 ]	
 	doodad sign_generic_right<"Durgan Urok">: [ 127 140 221 ]	
+	doodad wall_sign_generic<"Black Outlet ">: [ 231 171 21 ]	
 }
 
 map_palette .cliffs:
@@ -1040,6 +1467,9 @@ map_palette .cliffs:
 	cliff .wall_cliff: [ 197 169 134 ]
 	cliff .wall_cliff_ramp: [ 136 152 174 ]
 
+	cliff .dummy_cliff_minus_0: [ 167 18 224 ]
+	cliff .dummy_cliff_minus_0_ramp: [ 146 56 134 ]	
+
 	cliff .dummy_cliff_0: [ 137 18 124 ]
 	cliff .dummy_cliff_0_ramp: [ 116 56 134 ]	
 
@@ -1048,6 +1478,11 @@ map_palette .cliffs:
 
 	cliff .dummy_cliff_2: [ 197 169 234 ]
 	cliff .dummy_cliff_2_ramp: [ 136 252 174 ]	
+}
+
+map_palette .restricted:
+{
+	flags<[ restricted ]>: [ 255 255 255 ]
 }
 
 map thalvaron:
@@ -1122,7 +1557,13 @@ map thalvaron:
 			palettes:	[ .cliffs ]
 			source:		"thalvaron-cliffs.png"
 		}									
-	]
+		
+		{
+			palettes:	[ .restricted ]
+			source:		"thalvaron-restricted.png"
+		}											
+	]	
 }
  
+
 

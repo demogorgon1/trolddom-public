@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/MinionMode.h>
 
@@ -227,6 +228,16 @@ namespace tpublic::Systems
 		{
 			// No owner, gotta despawn.
 			return EntityState::ID_DESPAWNING;
+		}
+
+		if(minionPrivate->m_requiredOwnerAuraId != 0)
+		{
+			const Components::Auras* ownerAuras = ownerEntityInstance->GetComponent<Components::Auras>();
+			if(!ownerAuras->HasAura(minionPrivate->m_requiredOwnerAuraId))
+			{
+				// Owner doesn't have the required aura, need to despawn
+				return EntityState::ID_DESPAWNING;
+			}
 		}
 
 		bool shouldDie = aEntityState != EntityState::ID_DEAD && combatPublic->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL);
@@ -565,6 +576,7 @@ namespace tpublic::Systems
 											targetPosition->m_position,
 											aContext->m_tick,
 											position->m_lastMoveTick,
+											0, // Not used for minions (FIXME: or?)
 											*aContext->m_random,
 											moveRequest))
 										{
@@ -608,6 +620,7 @@ namespace tpublic::Systems
 									activeCommand->m_targetPosition,
 									aContext->m_tick,
 									position->m_lastMoveTick,
+									0, // FIXME: used?
 									*aContext->m_random,
 									moveRequest))
 								{
@@ -682,6 +695,7 @@ namespace tpublic::Systems
 										healTargetPosition->m_position,
 										aContext->m_tick,
 										position->m_lastMoveTick,
+										0, // FIXME: used?
 										*aContext->m_random,
 										moveRequest))
 									{
@@ -853,6 +867,7 @@ namespace tpublic::Systems
 									ownerPosition->m_position,
 									aContext->m_tick,
 									position->m_lastMoveTick,
+									0, // FIXME: used?
 									*aContext->m_random,
 									moveRequest))
 								{

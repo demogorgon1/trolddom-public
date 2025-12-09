@@ -16,6 +16,7 @@
 #include <tpublic/Components/Critter.h>
 #include <tpublic/Components/DeityDiscovery.h>
 #include <tpublic/Components/DeityRelations.h>
+#include <tpublic/Components/DiminishingEffects.h>
 #include <tpublic/Components/DisplayName.h>
 #include <tpublic/Components/Environment.h>
 #include <tpublic/Components/EquippedItems.h>
@@ -42,8 +43,10 @@
 #include <tpublic/Components/PlayerStats.h>
 #include <tpublic/Components/PlayerWorldStash.h>
 #include <tpublic/Components/Position.h>
+#include <tpublic/Components/PVPRift.h>
 #include <tpublic/Components/RandomItemVendor.h>
 #include <tpublic/Components/RecentAchievements.h>
+#include <tpublic/Components/RecentPVPKills.h>
 #include <tpublic/Components/Reputation.h>
 #include <tpublic/Components/ResurrectionPoint.h>
 #include <tpublic/Components/Shrine.h>
@@ -51,6 +54,7 @@
 #include <tpublic/Components/SpiritStoneDiscovery.h>
 #include <tpublic/Components/Sprite.h>
 #include <tpublic/Components/Stash.h>
+#include <tpublic/Components/SurvivalInfo.h>
 #include <tpublic/Components/Tag.h>
 #include <tpublic/Components/Talents.h>
 #include <tpublic/Components/ThreatSource.h>
@@ -88,6 +92,7 @@ namespace tpublic
 		_Register<Components::Critter>();
 		_Register<Components::DeityDiscovery>();
 		_Register<Components::DeityRelations>();
+		_Register<Components::DiminishingEffects>();
 		_Register<Components::DisplayName>();
 		_Register<Components::Environment>();
 		_Register<Components::EquippedItems>();
@@ -114,8 +119,10 @@ namespace tpublic
 		_Register<Components::PlayerStats>();
 		_Register<Components::PlayerWorldStash>();
 		_Register<Components::Position>();
+		_Register<Components::PVPRift>();
 		_Register<Components::RandomItemVendor>();
 		_Register<Components::RecentAchievements>();
+		_Register<Components::RecentPVPKills>();
 		_Register<Components::Reputation>();
 		_Register<Components::ResurrectionPoint>();
 		_Register<Components::Shrine>();
@@ -123,6 +130,7 @@ namespace tpublic
 		_Register<Components::SpiritStoneDiscovery>();
 		_Register<Components::Sprite>();
 		_Register<Components::Stash>();
+		_Register<Components::SurvivalInfo>();
 		_Register<Components::Tag>();
 		_Register<Components::Talents>();
 		_Register<Components::ThreatSource>();

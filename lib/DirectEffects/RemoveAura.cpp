@@ -6,6 +6,7 @@
 
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {
@@ -32,6 +33,8 @@ namespace tpublic
 						m_auraGroupId = aChild->GetId(DataType::ID_AURA_GROUP);
 					else if(aChild->m_name == "target_self")
 						m_targetSelf = aChild->GetBool();
+					else if (aChild->m_name == "remove_all")
+						m_removeAll = aChild->GetBool();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 				}
@@ -48,6 +51,7 @@ namespace tpublic
 			aStream->WriteUInt(m_auraId);
 			aStream->WriteUInt(m_auraGroupId);
 			aStream->WriteBool(m_targetSelf);
+			aStream->WriteBool(m_removeAll);
 		}
 
 		bool
@@ -65,6 +69,8 @@ namespace tpublic
 			if (!aStream->ReadUInt(m_auraGroupId))
 				return false;
 			if (!aStream->ReadBool(m_targetSelf))
+				return false;
+			if (!aStream->ReadBool(m_removeAll))
 				return false;
 			return true;
 		}
@@ -132,11 +138,21 @@ namespace tpublic
 
 				if(candidates.size() > 0)
 				{
-					size_t i = Helpers::RandomInRange<size_t>(aRandom, 0, candidates.size() - 1);
-
 					// This is a bit of a hack as we're not supposed to update entities directly here. 
 					// We can, however, signal a bool safely - which is easier than having to post an update on an event queue.
-					candidates[i]->m_cancel = true;
+
+					if(m_removeAll)
+					{
+						for(Components::Auras::Entry* t : candidates)
+							t->m_cancel = true;
+					}
+					else
+					{
+						size_t i = Helpers::RandomInRange<size_t>(aRandom, 0, candidates.size() - 1);
+						
+						candidates[i]->m_cancel = true;
+					}
+
 				}
 			}
 

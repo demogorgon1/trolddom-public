@@ -6,6 +6,7 @@
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/Noise.h>
+#include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/Terrain.h>
 
 #include <tpublic/MapGenerators/World.h>
@@ -197,8 +198,10 @@ namespace tpublic::MapGenerators
 			for(uint32_t i = 0, count = m_width * m_height; i < count; i++)
 				levels[i] = m_levelMap[i].m_level;
 
+			const uint32_t* zoneMap = m_zoneMap.empty() ? NULL : &m_zoneMap[0];
+
 			aOutMapData->m_worldInfoMap = std::make_unique<WorldInfoMap>();
-			aOutMapData->m_worldInfoMap->Build(m_manifest, (int32_t)m_width, (int32_t)m_height, &levels[0], NULL, NULL, NULL);
+			aOutMapData->m_worldInfoMap->Build(m_manifest, (int32_t)m_width, (int32_t)m_height, &levels[0], NULL, zoneMap, NULL);
 		}
 
 		// Doodads
@@ -427,9 +430,28 @@ namespace tpublic::MapGenerators
 
 			otherWalkableArea->Merge(walkableArea);
 
+			std::set<Vec2> pathPositions;
+
 			for (size_t j = 0; j < path.size(); j++)
 			{
 				const Vec2& pathPosition = path[j];
+
+				int32_t radius = 0;
+				if(!m_params->m_connectConversionRadius.empty())
+					radius = (int32_t)Helpers::RandomItem(m_random, m_params->m_connectConversionRadius);
+
+				for(int32_t y = -radius; y <= radius; y++)
+				{
+					for (int32_t x = -radius; x <= radius; x++)
+					{
+						if(x * x + y * y <= radius * radius)
+							pathPositions.insert({ pathPosition.m_x + x, pathPosition.m_y + y });
+					}
+				}
+			}
+
+			for(const Vec2& pathPosition : pathPositions)
+			{
 				otherWalkableArea->m_positions.insert(pathPosition);
 
 				uint32_t terrainId = m_terrainMap[pathPosition.m_x + pathPosition.m_y * (int32_t)m_width];
@@ -491,6 +513,20 @@ namespace tpublic::MapGenerators
 		assert(aPosition.m_x >= 0 && aPosition.m_y >= 0 && aPosition.m_x < (int32_t)m_width && aPosition.m_y < (int32_t)m_height);
 		Vec2 p = { aPosition.m_x % NOISE_MAP_SIZE, aPosition.m_y % NOISE_MAP_SIZE };
 		return m_noiseMap[p.m_x + p.m_y * NOISE_MAP_SIZE];
+	}
+
+	void			
+	World::Builder::UpdateZoneMap(
+		const Vec2&					aPosition,
+		uint32_t					aZoneId)
+	{
+		if(aPosition.m_x < 0 || aPosition.m_y < 0 || aPosition.m_x >= (int32_t)m_width || aPosition.m_y >= (int32_t)m_height)
+			return;
+
+		if(m_zoneMap.empty())
+			m_zoneMap.resize(m_width * m_height);
+
+		m_zoneMap[aPosition.m_x + aPosition.m_y * (int32_t)m_width] = aZoneId;
 	}
 
 	void			
@@ -959,6 +995,29 @@ namespace tpublic::MapGenerators
 				}
 				break;
 
+			case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE:
+				{
+					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+					TP_CHECK(specialEntity.m_range.has_value(), "Missing spawn distanace range.");
+					std::vector<Vec2> positions;
+					m_playerSpawnDistanceCombined->GetPositionsInRange(specialEntity.m_range->m_min, specialEntity.m_range->m_max, positions);
+					if (positions.size() > 0)
+						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+				}
+				break;
+
+			case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE:
+				{
+					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+					TP_CHECK(specialEntity.m_range.has_value(), "Missing spawn distanace range.");
+					uint32_t maxDistance = m_playerSpawnDistanceCombined->GetMax();
+					std::vector<Vec2> positions;
+					m_playerSpawnDistanceCombined->GetPositionsInRange((specialEntity.m_range->m_min * maxDistance) / 100, (specialEntity.m_range->m_max * maxDistance) / 100, positions);
+					if (positions.size() > 0)
+						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
+				}
+				break;
+
 			default:
 				break;
 			}
@@ -1014,6 +1073,53 @@ namespace tpublic::MapGenerators
 		}
 	}
 
+	void
+	World::Builder::InitZones()
+	{
+		if(m_params->m_playerSpawnZoneRadius > 0)
+		{
+			TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+
+			if(m_params->m_playerSpawnZoneId != 0)
+			{
+				std::vector<Vec2> positions;
+				m_playerSpawnDistanceCombined->GetPositionsInRange(0, m_params->m_playerSpawnZoneRadius, positions);
+
+				for(const Vec2& position : positions)
+					UpdateZoneMap(position, m_params->m_playerSpawnZoneId);
+			}
+
+			if (m_params->m_outsidePlayerSpawnZoneId != 0)
+			{
+				std::vector<Vec2> positions;
+				m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_params->m_playerSpawnZoneRadius, positions);
+
+				for (const Vec2& position : positions)
+					UpdateZoneMap(position, m_params->m_outsidePlayerSpawnZoneId);
+			}
+
+			for(const PlayerSpawnZoneBoundaryEntity& playerSpawnZoneBoundaryEntity : m_playerSpawnZoneBoundaryEntities)
+			{
+				MapData::EntitySpawn entitySpawn;
+				entitySpawn.m_entityId = playerSpawnZoneBoundaryEntity.m_entityId;
+				entitySpawn.m_mapEntitySpawnId = m_params->m_objectMapEntitySpawnId;
+
+				std::vector<Vec2> positions;
+				m_playerSpawnDistanceCombined->GetPositionsInRange(
+					m_params->m_playerSpawnZoneRadius + playerSpawnZoneBoundaryEntity.m_range.m_min, 
+					m_params->m_playerSpawnZoneRadius + playerSpawnZoneBoundaryEntity.m_range.m_max, 
+					positions);
+
+				for (const Vec2& position : positions)
+				{
+					entitySpawn.m_x = position.m_x;
+					entitySpawn.m_y = position.m_y;
+					m_entitySpawns.push_back(entitySpawn);
+				}
+			}
+		}
+	}
+
 	//---------------------------------------------------------------------------------
 
 	World::IExecuteFactory::IExecuteFactory()
@@ -1035,6 +1141,7 @@ namespace tpublic::MapGenerators
 		Register<ExecutePlayerSpawns>();
 		Register<ExecuteAddSpecialEntitySpawn>();
 		Register<ExecuteAddRandomRoute>();
+		Register<ExecuteAddPlayerSpawnZoneBoundaryEntity>();
 	}
 
 	World::IExecuteFactory::~IExecuteFactory()
@@ -1288,27 +1395,46 @@ namespace tpublic::MapGenerators
 			{
 				uint32_t offset = x + y * aBuilder->m_width;
 				uint32_t terrainId = aBuilder->m_terrainMap[offset];
-				uint32_t surroundingTerrainId = 0;
 
-				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-				for (uint32_t j = 0; j < 4; j++)
+				if(terrainId == m_fromTerrainId || m_fromTerrainId == 0)
 				{
-					const Vec2& neighbor = NEIGHBORS[j];
-					uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
-					if (neighborTerrainId == terrainId || (surroundingTerrainId != 0 && surroundingTerrainId != neighborTerrainId))
-					{
-						surroundingTerrainId = 0;
-						break;
-					}
-					else if (surroundingTerrainId == 0)
-					{
-						surroundingTerrainId = neighborTerrainId;
-					}
-				}
+					uint32_t replacementTerrainId = 0;
 
-				if (surroundingTerrainId != 0)
-				{
-					changes.push_back({ offset, surroundingTerrainId });
+					static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+
+					if(m_toTerrainId == 0)
+					{
+						for (uint32_t j = 0; j < 4; j++)
+						{
+							const Vec2& neighbor = NEIGHBORS[j];
+							uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
+							if (neighborTerrainId == terrainId || (replacementTerrainId != 0 && replacementTerrainId != neighborTerrainId))
+							{
+								replacementTerrainId = 0;
+								break;
+							}
+							else if (replacementTerrainId == 0)
+							{
+								replacementTerrainId = neighborTerrainId;
+							}
+						}
+					}
+					else
+					{
+						replacementTerrainId = m_toTerrainId;
+
+						for (uint32_t j = 0; j < 4 && replacementTerrainId != 0; j++)
+						{
+							const Vec2& neighbor = NEIGHBORS[j];
+							uint32_t neighborTerrainId = aBuilder->GetTerrainIdWithOffset(x, y, neighbor.m_x, neighbor.m_y);
+							if(neighborTerrainId == m_fromTerrainId || neighborTerrainId == 0)
+								replacementTerrainId = 0;
+						}
+
+					}
+
+					if (replacementTerrainId != 0)
+						changes.push_back({ offset, replacementTerrainId });
 				}
 			}
 		}
@@ -1368,18 +1494,29 @@ namespace tpublic::MapGenerators
 	{
 		TP_CHECK(aBuilder->m_terrainMap.size() > 0 && aBuilder->m_width > 0 && aBuilder->m_height > 0, "No terrain map.");
 
-		std::unordered_set<uint32_t> entitySpawnOffsets;
+		std::unordered_map<uint32_t, Image::RGBA> objects;
 		for (const MapData::EntitySpawn& entitySpawn : aBuilder->m_entitySpawns)
-			entitySpawnOffsets.insert((uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)aBuilder->m_width));
+		{
+			if(entitySpawn.m_mapEntitySpawnId != 0)
+			{
+				const Data::MapEntitySpawn* mapEntitySpawn = aBuilder->m_manifest->GetById<Data::MapEntitySpawn>(entitySpawn.m_mapEntitySpawnId);
+				if(mapEntitySpawn->m_debugColor.has_value())
+				{
+					uint32_t offset = (uint32_t)(entitySpawn.m_x + entitySpawn.m_y * (int32_t)aBuilder->m_width);
+					objects[offset] = mapEntitySpawn->m_debugColor.value();
+				}
+			}
+		}
 
 		Image image;
 		image.Allocate(aBuilder->m_width, aBuilder->m_height);
 		Image::RGBA* out = image.GetData();
 		for (uint32_t i = 0; i < aBuilder->m_width * aBuilder->m_height; i++)
 		{
-			if (entitySpawnOffsets.contains(i))
+			std::unordered_map<uint32_t, Image::RGBA>::const_iterator j = objects.find(i);
+			if (j != objects.cend())
 			{
-				*out = { 255, 0, 0, 255 };
+				*out = j->second;
 			}
 			else
 			{
@@ -1396,6 +1533,7 @@ namespace tpublic::MapGenerators
 			}
 			out++;
 		}
+
 		image.SavePNG(m_path.c_str());
 	}
 
@@ -1406,11 +1544,12 @@ namespace tpublic::MapGenerators
 		const Data::Noise* noise = aBuilder->m_manifest->GetById<Data::Noise>(m_noiseId);
 		NoiseInstance noiseInstance(noise, aBuilder->m_random);
 
-		uint32_t offset = 0;
-		for (int32_t y = 0; y < (int32_t)aBuilder->m_height; y++)
+		for (int32_t y = (uint32_t)m_border; y < (int32_t)(aBuilder->m_height - m_border); y++)
 		{
-			for (int32_t x = 0; x < (int32_t)aBuilder->m_width; x++)
+			for (int32_t x = (uint32_t)m_border; x < (int32_t)(aBuilder->m_width - m_border); x++)
 			{
+				uint32_t offset = (uint32_t)x + (uint32_t)y * aBuilder->m_width;
+
 				int32_t sample = noiseInstance.Sample({ x, y });
 				uint32_t terrainId = aBuilder->m_terrainMap[offset];
 
@@ -1651,6 +1790,13 @@ namespace tpublic::MapGenerators
 		aBuilder->m_routes.push_back(std::move(t));
 	}
 
+	void				
+	World::ExecuteAddPlayerSpawnZoneBoundaryEntity::Run(
+		Builder*						aBuilder) const
+	{
+		aBuilder->m_playerSpawnZoneBoundaryEntities.push_back({ m_range, m_entityId });
+	}
+
 	//---------------------------------------------------------------------------------
 
 	World::World()
@@ -1692,6 +1838,22 @@ namespace tpublic::MapGenerators
 				else if (aChild->m_name == "object_map_entity_spawn")
 				{
 					m_params.m_objectMapEntitySpawnId = aChild->GetId(DataType::ID_MAP_ENTITY_SPAWN);
+				}
+				else if (aChild->m_name == "connect_conversion_radius")
+				{
+					aChild->GetUIntArray(m_params.m_connectConversionRadius);
+				}
+				else if (aChild->m_name == "player_spawn_zone_radius")
+				{
+					m_params.m_playerSpawnZoneRadius = aChild->GetUInt32();
+				}
+				else if (aChild->m_name == "player_spawn_zone")
+				{
+					m_params.m_playerSpawnZoneId = aChild->GetId(DataType::ID_ZONE);
+				}
+				else if (aChild->m_name == "outside_player_spawn_zone")
+				{
+					m_params.m_outsidePlayerSpawnZoneId = aChild->GetId(DataType::ID_ZONE);
 				}
 				else
 				{
@@ -1783,6 +1945,13 @@ namespace tpublic::MapGenerators
 		builder.InitPlayerSpawns();
 		builder.InitSpecialEntities();
 		builder.InitRoutes();
+		builder.InitZones();
+
+		//{
+		//	ExecuteDebugTerrainMap debugTerrainMap;
+		//	debugTerrainMap.m_path = "debug-terrain-map.png";
+		//	debugTerrainMap.Run(&builder);
+		//}
 
 		builder.CreateMapData(aSourceMapData, aOutMapData);
 

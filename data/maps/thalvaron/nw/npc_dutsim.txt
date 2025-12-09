@@ -1,0 +1,32 @@
+dialogue_screen .dutsim_dialogue:
+{
+	text: 
+	[	
+		"I know everything about everything worth knowing anything about."
+	]		
+	
+	options:
+	[
+		{ 
+			text: "What do you know about reagents?"
+			goto: $dialogue_screen 
+			{ 
+				oracle: { item_tag: reagent search: "Reagent Name" } 
+			} 
+		}
+	]
+}
+
+entity thalvaron_dutsim: !NPC
+{
+	_string: "Dutsim"
+	_guild_name: "Oracle"
+	_sprite: man_92
+	_sprite_dead: man_92_dead
+	_dialogue_root: $dialogue_root { .dutsim_dialogue: { } }
+	_level: 30
+	_faction: valoris
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}

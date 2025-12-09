@@ -1,0 +1,81 @@
+dialogue_screen .ranger_cromor:
+{
+	text: 
+	[	
+		"State your business."
+	]		
+	
+	options:
+	[
+		{ quest: .ranger_cromor_1 }
+	]
+}
+
+entity thalvaron_ranger_cromor: !NPC
+{
+	_string: "Ranger Cromor"
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .ranger_cromor: { } }
+	_route: thalvaron_default_patrol
+	_default_behavior_state: thalvaron_default_patrol_friendly
+}
+
+############################################################
+# Quest 1
+
+objective .ranger_cromor_1:
+{
+	string: "Scalemaw Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_lizard_boss ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 27 }
+	item .ranger_cromor_1_a: !QUEST_REWARD_WAIST{ _string: "Ranger's Waistband" _icon: icon_cloth_belt_3 _constitution: 1 _wisdom: 1 _spirit: 1 _type: armor_cloth }
+	item .ranger_cromor_1_b: !QUEST_REWARD_SHOULDERS{ _string: "Ranger's Shoulder Guards" _icon: icon_shoulders_5 _dexterity: 1 _strength: 1 _type: armor_mail }
+}
+
+quest .ranger_cromor_1:
+{
+	string: "Lizard Hunt"
+
+	text:
+	[
+		"Venture into the jungle to the north, find and kill Scalemaw, and return to Ranger Cromor."
+	]
+	
+	description: 
+	[
+		"I'm in charge of security around here and it's not looking good. The wildlife isn't really compatible with civilization. The locals told me about a giant lizard coming out at night, terrorizing everyone."
+		"They call it Scalemaw. Kill this nasty lizard and I'll make it worth your while.\n"
+		"\n"
+		"Reportedly it lives in the jungle to the north of here."
+	]
+
+	progress:
+	[
+		"Scared of lizards?"
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+	
+	objectives: [ .ranger_cromor_1 ]
+	level: 27
+	reward_one_item: [ .ranger_cromor_1_a .ranger_cromor_1_b ]
+}

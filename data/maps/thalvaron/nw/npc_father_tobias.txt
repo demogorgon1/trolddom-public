@@ -1,11 +1,312 @@
+dialogue_screen .father_tobias_dialogue:
+{
+	text: 
+	[	
+		"Praise the Light. All hope might not be lost for you."
+	]		
+	
+	options:
+	[	
+		{ quest<completion_only>: .inn_keeper_2 }
+		{ quest: .father_tobias_1 }	
+		{ quest: .father_tobias_2 }	
+		{ quest<completion_only>: thalvaron_joana_2 }
+		{ quest<offer_only>: thalvaron_father_tobias_3 } 
+	]
+}
+
 entity thalvaron_father_tobias: !NPC
 {
 	_string: "Father Tobias"
 	_sprite: man_62
 	_sprite_dead: man_62_dead
+	_dialogue_root: $dialogue_root { .father_tobias_dialogue: {} }
 	_level: 20
 	_faction: npcs
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+item .father_tobias_quest_item_1:
+{
+	binds: when_picked_up
+	string: "Key to the Catacombs"
+	icon: icon_key_2
+	item_level: 20
+	flags: [ not_sellable unique ]
+}
+
+objective .father_tobias_1:
+{
+	string: "Catacombs Investigated"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_catacombs_skeleton ]
+		count: 1
+		boolean: true
+	}
+}
+
+entity thalvaron_father_tobias_door:
+{
+	string: "Catacombs Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			requirements:
+			{
+				self<must_have_item>: { id: .father_tobias_quest_item_1 }
+			}
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_3 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_3 ] z_offset: -3 }
+			]		
+		}		
+		hover_text<static>:
+		{
+			string: "Requires Key to the Catacombs."
+		}		
+	}
+}
+
+quest .father_tobias_1:
+{
+	string: "Investigating the Catacombs"
+
+	text:
+	[
+		"Venture the catacombs under the castle and check for anything spooky."
+	]
+
+	description:
+	[
+		"A few days ago the Prince came to me and told me about a nightmare he had about the old catacombs under the castle. He was very shaken and couldn't stop talking about ghouls and ghosts. I assured him"
+		"that there is no such things down there, but in the end he made promise to go make sure. I was thinking that maybe you could go take a look? I don't really have time to do it myself. I have, uh, religious"
+		"practices to attend to.\n"
+		"\n"
+		"Here take this key, it will unlock the gate to the catacombs. You'll find it down in the basement, accessible from the outside of the castle to the east."
+	]
+
+	progress:
+	[
+		"Did you go down there?"
+	]
+
+	completion:
+	[
+		"What? Oh no, undead creatures in my catacombs? Who yould have thought!"
+	]
+
+	quest_items: [ .father_tobias_quest_item_1 ]
+	reward_all_items: [ .father_tobias_quest_item_1 ]
+	level: 23
+	objectives: [ .father_tobias_1 ]
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .father_tobias_quest_item_2_a: { }
+loot_group .father_tobias_quest_item_2_b: { }
+loot_group .father_tobias_quest_item_2_c: { }
+loot_group .father_tobias_quest_item_2_d: { }
+loot_group .father_tobias_quest_item_2_e: { }
+loot_group .father_tobias_quest_item_2_f: { }
+
+item .father_tobias_quest_item_2_g:
+{
+	binds: when_picked_up
+	string: "Torch" 
+	flavor: "Suitable for burning bones."
+	icon: icon_torch
+	item_level: 23
+	quest: .father_tobias_2
+	flags: [ not_sellable unique ]
+}
+
+!define local BONES_ABILITY
+{	
+	description: "Burn."
+	requirement self<must_have_item>: .father_tobias_quest_item_2_g
+	flags: [ target_self quest_trigger ]
+	states: [ default ]	
+	icon: icon_bone_2	
+	consume_items: { entry: { item: @_id quantity: 1 } }
+}
+
+!define local BONES_ITEM
+{
+	binds: when_picked_up
+	loot_groups: [ @_id ]		
+	string: @_string 
+	icon: icon_bone_2
+	item_level: 23
+	quest: .father_tobias_2
+	flags: [ not_sellable unique ]
+	use_ability: @_id
+}
+
+!define local BONES_OBJECTIVE
+{
+	string: @_string
+	use_ability: { ability: @_id count: 1 boolean: true }	
+}
+
+ability .father_tobias_quest_item_2_a: !BONES_ABILITY { _id: .father_tobias_quest_item_2_a }
+item .father_tobias_quest_item_2_a: !BONES_ITEM { _string: "Remains of Lady Brior" _id: .father_tobias_quest_item_2_a }
+objective .father_tobias_quest_item_2_a: !BONES_OBJECTIVE { _string: "Remains of Lady Brior Torched." _id: .father_tobias_quest_item_2_a }
+
+ability .father_tobias_quest_item_2_b: !BONES_ABILITY { _id: .father_tobias_quest_item_2_b }
+item .father_tobias_quest_item_2_b: !BONES_ITEM { _string: "Remains of Lord Erston" _id: .father_tobias_quest_item_2_b }
+objective .father_tobias_quest_item_2_b: !BONES_OBJECTIVE { _string: "Remains of Lord Erston Torched." _id: .father_tobias_quest_item_2_b }
+
+ability .father_tobias_quest_item_2_c: !BONES_ABILITY { _id: .father_tobias_quest_item_2_c }
+item .father_tobias_quest_item_2_c: !BONES_ITEM { _string: "Remains of Count Ukos" _id: .father_tobias_quest_item_2_c }
+objective .father_tobias_quest_item_2_c: !BONES_OBJECTIVE { _string: "Remains of Count Ukos Torched." _id: .father_tobias_quest_item_2_c }
+
+ability .father_tobias_quest_item_2_d: !BONES_ABILITY { _id: .father_tobias_quest_item_2_d }
+item .father_tobias_quest_item_2_d: !BONES_ITEM { _string: "Remains of Prince Gerth" _id: .father_tobias_quest_item_2_d }
+objective .father_tobias_quest_item_2_d: !BONES_OBJECTIVE { _string: "Remains of Prince Gerth Torched." _id: .father_tobias_quest_item_2_d }
+
+ability .father_tobias_quest_item_2_e: !BONES_ABILITY { _id: .father_tobias_quest_item_2_e }
+item .father_tobias_quest_item_2_e: !BONES_ITEM { _string: "Remains of Commander Banntor" _id: .father_tobias_quest_item_2_e }
+objective .father_tobias_quest_item_2_e: !BONES_OBJECTIVE { _string: "Remains of Commander Banntor Torched." _id: .father_tobias_quest_item_2_e }
+
+ability .father_tobias_quest_item_2_f: !BONES_ABILITY { _id: .father_tobias_quest_item_2_f }
+item .father_tobias_quest_item_2_f: !BONES_ITEM { _string: "Remains of Miss Turhast" _id: .father_tobias_quest_item_2_f }
+objective .father_tobias_quest_item_2_f: !BONES_OBJECTIVE { _string: "Remains of Miss Turhast Torched." _id: .father_tobias_quest_item_2_f }
+
+quest .father_tobias_2:
+{
+	string: "Burning Bones"
+
+	text:
+	[
+		"Burn bones of the living dead in the catacombs."
+	]
+	
+	description: 
+	[
+		"To be totally honest with you, I suspected we might have some problems in the catacombs. Ages ago we had certain \"problematic\" earthly remains that decided to come back to life. I had a colleague of"
+		"mine to go and do some rituals to fix the problem, which worked at the time, but I always suspected we needed to take some more drastic measures.\n"
+		"\n"
+		"When the dead won't stay dead, the best you can do is to burn their bones. The problem, of course, is that some of these skeletons are the remains of some really important people. The masters of the"
+		"castle wouldn't be happy about any bone burning. But... maybe you can do the deed? Here, take this torch. Find the problematic skeletons and burn them."
+	]
+
+	progress:
+	[
+		"Not up for it? Completely understandable."
+	]
+	
+	completion:
+	[
+		"Ohh. Thanks a lot, but please don't tell anyone at the castle."
+	]
+
+	quest_items: [ .father_tobias_quest_item_2_g ]
+	objectives: [ .father_tobias_quest_item_2_a .father_tobias_quest_item_2_b .father_tobias_quest_item_2_c .father_tobias_quest_item_2_d .father_tobias_quest_item_2_e .father_tobias_quest_item_2_f ]
+	prerequisites: [ .father_tobias_1 ]
+	level: 23
+}
+
+############################################################
+# Quest 3
+
+loot_group thalvaron_father_tobias_quest_item_3: { }
+
+item .father_tobias_quest_item_3:
+{
+	binds: when_picked_up
+	string: "Torch" 
+	flavor: "Suitable for burning bones."
+	icon: icon_torch
+	item_level: 30
+	quest: thalvaron_father_tobias_3
+	flags: [ not_sellable unique ]
+}
+
+!define local BONES_ABILITY_2
+{	
+	description: "Burn."
+	requirement self<must_have_item>: .father_tobias_quest_item_3
+	flags: [ target_self quest_trigger ]
+	states: [ default ]	
+	icon: icon_bone_2	
+	consume_items: { entry: { item: @_id quantity: 1 } }
+}
+
+!define local BONES_ITEM_2
+{
+	binds: when_picked_up
+	loot_groups: [ @_id ]		
+	string: @_string 
+	icon: icon_bone_2
+	item_level: 30
+	quest: thalvaron_father_tobias_3
+	flags: [ not_sellable unique ]
+	use_ability: @_ability_id
+}
+
+!define local BONES_OBJECTIVE_2
+{
+	string: @_string
+	use_ability: { ability: @_id count: 1 boolean: true }	
+}
+
+ability .father_tobias_quest_item_3_x: !BONES_ABILITY_2 { _id: .father_tobias_quest_item_3_x }
+item .father_tobias_quest_item_3_x: !BONES_ITEM_2 { _string: "Remains of High Wizard Urjux" _id: thalvaron_father_tobias_quest_item_3 _ability_id: .father_tobias_quest_item_3_x }
+objective .father_tobias_quest_item_3_x: !BONES_OBJECTIVE_2 { _string: "Remains of High Wizard Urjux Torched." _id: .father_tobias_quest_item_3_x }
+                                                  
+quest thalvaron_father_tobias_3:                          
+{            
+	string: "Burning More Bones"
+
+	text:
+	[
+		"Burn bones of High Wizard Urjux at the Temple of Kareth."
+	]
+	
+	description: 
+	[
+		"The orbs you showed to me are used by evil forces to channel their powers. My best guess is that the main source is linked to Urjux, a powerful ancient wizard of Kareth, who died a long time ago."
+		"Probably not totally dead, though.\n"
+		"\n"
+		"The standard solution for dealing with troublesome corpses is to burn their bones. Seek out the High Wizard at the Temple of Kareth, defeat him, and burn his bones.\n"
+		"\n"
+		"Report to Joana when you've done the deed."
+	]
+
+	progress:
+	[
+		"How are you doing?"
+	]
+	
+	completion:
+	[
+		"Praised be! Our prayers have been answered! The gods have opened the door!"
+	]
+
+	quest_items: [ .father_tobias_quest_item_3 ]
+	objectives: [ .father_tobias_quest_item_3_x ]	
+	prerequisites: [ thalvaron_joana_2 ]
+	level: 30
 }

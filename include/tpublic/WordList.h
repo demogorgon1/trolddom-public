@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Data/TagContext.h"
-
-#include "Hash.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "SourceNode.h"
@@ -12,6 +9,11 @@
 namespace tpublic
 {
 	class Manifest;
+}
+
+namespace tpublic::Data
+{
+	struct TagContext;
 }
 
 namespace tpublic::WordList
@@ -118,107 +120,18 @@ namespace tpublic::WordList
 
 	struct QueryParams
 	{
-		bool
-		Compare(
-			const QueryParams&							aOther) const
-		{
-			assert(m_prepared);
-			assert(aOther.m_prepared);
-			return m_mustHaveTags == aOther.m_mustHaveTags && m_mustNotHaveTags == aOther.m_mustNotHaveTags && m_tagScoring == aOther.m_tagScoring;
-		}
-
-		void
-		AddTagContext(
-			const tpublic::Data::TagContext*			aTagContext)
-		{
-			for(uint32_t tagId : aTagContext->m_mustHaveTags)
-				m_mustHaveTags.push_back(tagId);
-
-			for (uint32_t tagId : aTagContext->m_mustNotHaveTags)
-				m_mustNotHaveTags.push_back(tagId);
-
-			for(const tpublic::Data::TagContext::Scoring& scoring : aTagContext->m_scoring)
-				m_tagScoring.push_back({ scoring.m_tagId, scoring.m_score });
-		}
-
-		uint32_t
-		GetHash() const
-		{
-			assert(m_prepared);
-			Hash::CheckSum hash;
-			if(m_mustHaveTags.size() > 0)
-				hash.AddData(&m_mustHaveTags[0], m_mustHaveTags.size() * sizeof(uint32_t));
-			if (m_mustNotHaveTags.size() > 0)
-				hash.AddData(&m_mustNotHaveTags[0], m_mustNotHaveTags.size() * sizeof(uint32_t));
-			if (m_tagScoring.size() > 0)
-				hash.AddData(&m_tagScoring[0], m_tagScoring.size() * sizeof(uint32_t) * 2);
-			return hash.m_hash;
-		}
-
-		void
-		Prepare()
-		{
-			assert(!m_prepared);
-			std::sort(m_mustHaveTags.begin(), m_mustHaveTags.end(), [](uint32_t aLHS, uint32_t aRHS) { return aLHS < aRHS; });
-			std::sort(m_mustNotHaveTags.begin(), m_mustNotHaveTags.end(), [](uint32_t aLHS, uint32_t aRHS) { return aLHS < aRHS; });
-
-			std::sort(m_tagScoring.begin(), m_tagScoring.end(), [](
-				const std::pair<uint32_t, uint32_t>& aLHS, 
-				const std::pair<uint32_t, uint32_t>& aRHS) 
-			{ 
-				if(aLHS.first == aRHS.first)
-					return aLHS.second < aRHS.second;
-				return aLHS.first < aRHS.first;
-			});
-
-			m_prepared = true;
-		}
-
-		uint32_t
-		GetTagScore(
-			uint32_t									aTagId) const
-		{
-			if(m_tagScoring.size() == 0)
-				return 1;
-
-			// FIXME: assuming that only a few tags are scored (otherwise we'll need a hashtable)
-			for (const std::pair<uint32_t, uint32_t>& tagScoring : m_tagScoring)
-			{
-				if(tagScoring.first == aTagId)
-					return tagScoring.second;
-			}
-			return 0;
-		}
-
-		bool
-		HasTag(
-			uint32_t									aTagId) const
-		{
-			for(uint32_t mustHaveTag : m_mustHaveTags)
-			{
-				if(mustHaveTag == aTagId)
-					return true;
-			}
-
-			for (const std::pair<uint32_t, uint32_t>& tagScoring : m_tagScoring)
-			{
-				if(tagScoring.first == aTagId)
-					return true;
-			}
-
-			return false;
-		}
-
-		void
-		ForEachTag(
-			std::function<void(uint32_t)>				aCallback) const
-		{
-			for(uint32_t tagId : m_mustHaveTags)
-				aCallback(tagId);
-
-			for (const std::pair<uint32_t, uint32_t>& tagScoring : m_tagScoring)
-				aCallback(tagScoring.first);
-		}
+		bool		Compare(
+						const QueryParams&							aOther) const;
+		void		AddTagContext(
+						const tpublic::Data::TagContext*			aTagContext);
+		uint32_t	GetHash() const;
+		void		Prepare();
+		uint32_t	GetTagScore(
+						uint32_t									aTagId) const;
+		bool		HasTag(
+						uint32_t									aTagId) const;
+		void		ForEachTag(
+						std::function<void(uint32_t)>				aCallback) const;
 
 		// Public data
 		std::vector<uint32_t>							m_mustHaveTags;

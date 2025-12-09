@@ -228,6 +228,44 @@ namespace tpublic
 				uint32_t					m_level = 0;
 			};
 
+			struct SellWorshipLevelRequirement
+			{
+				SellWorshipLevelRequirement()
+				{
+
+				}
+
+				SellWorshipLevelRequirement(
+					const SourceNode* aSource)
+				{
+					m_pantheonId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_PANTHEON, aSource->m_name.c_str());
+					m_level = aSource->GetUInt32();
+				}
+
+				void
+					ToStream(
+						IWriter* aWriter) const
+				{
+					aWriter->WriteUInt(m_pantheonId);
+					aWriter->WriteUInt(m_level);
+				}
+
+				bool
+					FromStream(
+						IReader* aReader)
+				{
+					if (!aReader->ReadUInt(m_pantheonId))
+						return false;
+					if (!aReader->ReadUInt(m_level))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t					m_pantheonId = 0;
+				uint32_t					m_level = 0;
+			};
+
 			struct SellItemCost
 			{
 				SellItemCost()
@@ -289,8 +327,10 @@ namespace tpublic
 							m_cost = aChild->GetUInt32();
 						else if(aChild->m_name == "quantity")
 							m_quantity = aChild->GetUInt32();
-						else if(aChild->m_tag == "reputation_level_requirement")
+						else if (aChild->m_tag == "reputation_level_requirement")
 							m_reputationLevelRequirement = SellReputationLevelRequirement(aChild);
+						else if (aChild->m_tag == "worship_level_requirement")
+							m_worshipLevelRequirement = SellWorshipLevelRequirement(aChild);
 						else if (aChild->m_name == "item_cost")
 							m_itemCost = SellItemCost(aChild);
 						else
@@ -306,6 +346,7 @@ namespace tpublic
 					aWriter->WriteUInt(m_cost);
 					aWriter->WriteUInt(m_quantity);
 					aWriter->WriteOptionalObject(m_reputationLevelRequirement);
+					aWriter->WriteOptionalObject(m_worshipLevelRequirement);
 					aWriter->WriteOptionalObject(m_itemCost);
 				}
 
@@ -321,6 +362,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadOptionalObject(m_reputationLevelRequirement))
 						return false;
+					if (!aReader->ReadOptionalObject(m_worshipLevelRequirement))
+						return false;
 					if (!aReader->ReadOptionalObject(m_itemCost))
 						return false;
 					return true;
@@ -331,6 +374,7 @@ namespace tpublic
 				uint32_t										m_cost = 0;
 				uint32_t										m_quantity = 1;
 				std::optional<SellReputationLevelRequirement>	m_reputationLevelRequirement;				
+				std::optional<SellWorshipLevelRequirement>		m_worshipLevelRequirement;
 				std::optional<SellItemCost>						m_itemCost;
 			};
 
@@ -373,6 +417,52 @@ namespace tpublic
 				uint32_t			m_professionLevel = 0;
 			};
 
+			struct Oracle
+			{
+				Oracle()
+				{
+
+				}
+
+				Oracle(
+					const SourceNode* aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "item_tag")
+							m_itemTag = aChild->GetId(DataType::ID_TAG);
+						else if(aChild->m_name == "search")
+							m_search = aChild->GetString();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_itemTag);
+					aWriter->WriteString(m_search);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if (!aReader->ReadUInt(m_itemTag))
+						return false;
+					if (!aReader->ReadString(m_search))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_itemTag = 0;
+				std::string			m_search;
+			};
+
 			void
 			Verify() const
 			{
@@ -413,6 +503,10 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_ABILITY, m_trainAbilities);
 						else if(aChild->m_name == "random_item_vendor")
 							m_randomItemVendor = aChild->GetBool();
+						else if(aChild->m_name == "oracle")
+							m_oracle = std::make_unique<Oracle>(aChild);
+						else if(aChild->m_name == "nothing_to_train_dialogue_screen")
+							m_nothingToTrainDialogueScreenId = aChild->GetId(DataType::ID_DIALOGUE_SCREEN);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -429,6 +523,8 @@ namespace tpublic
 				aStream->WriteObjects(m_trainProfessions);
 				aStream->WriteUInts(m_trainAbilities);
 				aStream->WriteBool(m_randomItemVendor);
+				aStream->WriteOptionalObjectPointer(m_oracle);
+				aStream->WriteUInt(m_nothingToTrainDialogueScreenId);
 			}
 
 			bool
@@ -447,6 +543,10 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadBool(m_randomItemVendor))
 					return false;
+				if (!aStream->ReadOptionalObjectPointer(m_oracle))
+					return false;
+				if(!aStream->ReadUInt(m_nothingToTrainDialogueScreenId))
+					return false;
 				return true;
 			}
 
@@ -456,7 +556,9 @@ namespace tpublic
 			std::vector<Sell>					m_sell;
 			std::vector<TrainProfession>		m_trainProfessions;
 			std::vector<uint32_t>				m_trainAbilities;
+			uint32_t							m_nothingToTrainDialogueScreenId = 0;
 			bool								m_randomItemVendor = false;
+			std::unique_ptr<Oracle>				m_oracle;
 		};
 
 	}

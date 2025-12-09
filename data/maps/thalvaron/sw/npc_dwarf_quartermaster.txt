@@ -5,6 +5,9 @@ dialogue_screen .dwarf_quartermaster_vendor:
 	sell kingdom_of_thuldarim_waist_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !HONORED_REPUTATION_LEVEL{} }	
 	sell kingdom_of_thuldarim_hands_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} }	
 	sell kingdom_of_thuldarim_neck_1: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} }		
+	sell formula_enchant_cloak_razormind: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} cost: 30000 }		
+	sell formula_enchant_cloak_dexterity: { quantity: 1 reputation_level_requirement kingdom_of_thuldarim: !REVERED_REPUTATION_LEVEL{} cost: 30000 }		
+	
 }
 
 dialogue_screen .dwarf_quartermaster_dialogue:

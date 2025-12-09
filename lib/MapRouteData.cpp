@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Route.h>
+#include <tpublic/Data/Sprite.h>
 
 #include <tpublic/DistanceField.h>
 #include <tpublic/Manifest.h>

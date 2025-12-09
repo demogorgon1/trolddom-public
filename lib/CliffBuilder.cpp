@@ -11,7 +11,7 @@ namespace tpublic
 	CliffBuilder::AddCliff(
 		const Vec2&							aPosition,
 		const Data::CliffStyle*				aCliffStyle,
-		uint8_t								aElevation,
+		int8_t								aElevation,
 		bool								aRamp)
 	{
 		Cell t = { aCliffStyle, aElevation, aRamp };

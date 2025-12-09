@@ -16,6 +16,9 @@ talent_tree fighter_subtlety:
 		talent fighter_subtlety_stealth: "H"
 		talent fighter_subtlety_one_handed_weapon_mastery: "I"
 		talent fighter_subtlety_improved_poison_bomb: "J"
+		talent fighter_subtlety_improved_hamstring: "K"
+		talent fighter_subtlety_accuracy: "L"
+		talent fighter_subtlety_assassinate: "M"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_down: "|"
@@ -27,10 +30,187 @@ talent_tree fighter_subtlety:
 		"....d...."
 		"DlC.E.G.F"
 		"|.....d.."
-		"|.I...J.."
-		"d........"
-		"H........"
+		"|.I.K.J.L"
+		"d.......|"
+		"H.......|"
+		"........d"
+		"........M"
 	]	
+}
+
+###############################################################################
+# Assassinate
+
+talent fighter_subtlety_assassinate:
+{
+	string: "Assassinate"
+	icon: icon_assassination
+	prerequisites: [ fighter_subtlety_accuracy ]	
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: assassinate }
+	]
+}
+
+ability assassinate:
+{
+	string: "Assassinate"
+	tags: [ ability_ranged ]
+	description: "Fires your ranged weapon at target, dealing $damage$ damage, and applies a powerful poison."
+	range: 8	
+	min_range: 3
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 300 }
+	flags: [ ranged offensive target_other target_hostile can_miss ranged_cast_time ]
+	states: [ default in_combat ]
+	speed: 8
+	talent_tree: fighter_subtlety
+	projectile: $particle_system
+	{
+		particle:
+		{	
+			sprites: [ effect_arrow_poison ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.3
+			count: 1			
+		}
+	}	
+	
+	icon: icon_assassination
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: ranged a: 1.5 }				
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: assassinate
+	}
+}
+
+aura assassinate:
+{
+	string: "Assassinate"
+	description: "Poisoned."
+	type: debuff
+	icon: icon_assassination
+	duration: based_on_effects
+	flags: [ unique_per_source poison ]
+	
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 6
+		ability: $ability [ icon string ]
+		{
+			states: [ default in_combat ]
+			flags: [ always_in_range always_in_line_of_sight ]
+			
+			direct_effect damage:
+			{
+				damage_type: poison
+				function: { expression: a_mul_x x: ranged a: 0.46 }				
+				direct: false
+			}
+		}
+	}
+}
+
+###############################################################################
+# Accuracy
+
+talent fighter_subtlety_accuracy:
+{
+	string: "Accuracy"
+	icon: icon_accuracy
+	prerequisites: [ ]	
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: fighter_subtlety_accuracy_1 }
+		{ aura: fighter_subtlety_accuracy_2 }
+		{ aura: fighter_subtlety_accuracy_3 }
+	]
+}
+
+aura fighter_subtlety_accuracy_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with ranged attacks by 15%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ fighter_shoot assassinate ]
+		multiplier: 1.15
+		type_mask: [ physical ]
+	}
+}
+
+aura fighter_subtlety_accuracy_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with ranged attacks by 30%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ fighter_shoot assassinate ]
+		multiplier: 1.30
+		type_mask: [ physical ]
+	}
+}
+
+aura fighter_subtlety_accuracy_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with ranged attacks by 45%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ fighter_shoot assassinate ]
+		multiplier: 1.45
+		type_mask: [ physical ]
+	}
+}
+
+###############################################################################
+# Improved Hamstring
+
+talent fighter_subtlety_improved_hamstring:
+{
+	string: "Improved Hamstring"
+	icon: icon_hamstring
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: fighter_subtlety_improved_hamstring_1 }
+		{ ability_modifier: fighter_subtlety_improved_hamstring_2 }
+		{ ability_modifier: fighter_subtlety_improved_hamstring_3 }
+	]
+}
+
+ability_modifier fighter_subtlety_improved_hamstring_1:
+{	
+	description: "Increases duration of Hamstring by 1 second."
+	ability: hamstring
+	modify_aura_duration: 10
+}
+
+ability_modifier fighter_subtlety_improved_hamstring_2:
+{	
+	description: "Increases duration of Hamstring by 2 second."
+	ability: hamstring
+	modify_aura_duration: 20
+}
+
+ability_modifier fighter_subtlety_improved_hamstring_3:
+{	
+	description: "Increases duration of Hamstring by 3 second."
+	ability: hamstring
+	modify_aura_duration: 30
 }
 
 ###############################################################################
@@ -91,6 +271,7 @@ aura fighter_subtlety_one_handed_weapon_mastery_1:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.02
+		type_mask: [ physical ]
 	}
 }
 
@@ -103,6 +284,7 @@ aura fighter_subtlety_one_handed_weapon_mastery_2:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.04
+		type_mask: [ physical ]
 	}
 }
 
@@ -115,6 +297,7 @@ aura fighter_subtlety_one_handed_weapon_mastery_3:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.06
+		type_mask: [ physical ]
 	}
 }
 
@@ -127,6 +310,7 @@ aura fighter_subtlety_one_handed_weapon_mastery_4:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.08
+		type_mask: [ physical ]
 	}
 }
 
@@ -139,6 +323,7 @@ aura fighter_subtlety_one_handed_weapon_mastery_5:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.10
+		type_mask: [ physical ]
 	}
 }
 
@@ -225,7 +410,8 @@ ability poison_bomb_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.06 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] ] }				
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.06 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 30 36 ] ] }				
+		direct: false		
 	}
 }
 
@@ -536,7 +722,8 @@ ability envenom_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 17 ] ] }				
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.07 b: [ [ 1 5 ] [ 10 10 ] [ 20 17 ] [ 20 28 ] ] }				
+		direct: false
 	}
 }
 
@@ -574,7 +761,8 @@ ability envenom:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.35 b: [ [ 1 15 ] [ 10 30 ] [ 20 50 ] [ 30 82 ] ] }				
+		spread: !DEFAULT_SPREAD{}		
 	}
 	
 	direct_effect apply_aura:
@@ -720,7 +908,8 @@ ability rend_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 20 36 ] ] }	
+		direct: false		
 	}
 }
 

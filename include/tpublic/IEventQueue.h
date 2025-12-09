@@ -109,7 +109,7 @@ namespace tpublic
 												const Data::Ability*										aAbility,
 												const ItemInstanceReference&								aItem = ItemInstanceReference(),
 												const AbilityModifierList*									aAbilityModifierList = NULL,
-												const std::optional<tpublic::Vec2>&							aOrigin = std::optional<tpublic::Vec2>()) = 0;
+												const std::optional<Vec2>&									aOrigin = std::optional<Vec2>()) = 0;
 		virtual void						EventQueueMove(
 												const EventQueueMoveRequest&								aMoveRequest) = 0;
 		virtual void						EventQueueMoveAdjacent(
@@ -129,7 +129,7 @@ namespace tpublic
 		virtual void						EventQueueGroupLoot(
 												uint32_t													aEntityInstanceId,
 												uint64_t													aGroupId,
-												const tpublic::Components::Lootable::AvailableLoot&			aLoot,
+												const Components::Lootable::AvailableLoot&					aLoot,
 												size_t														aLootIndex,
 												const std::vector<uint32_t>&								aGroupMemberEntityInstanceIds) = 0;
 		virtual void						EventQueueChanneling(
@@ -152,12 +152,13 @@ namespace tpublic
 												uint32_t													aTargetEntityInstanceId,
 												int32_t														aThreat,
 												int32_t														aTick,
+												uint32_t													aAbilityId,
 												const std::optional<float>&									aMultiply = std::optional<float>()) = 0;
 		virtual void						EventQueueThreatClear(
 												uint32_t													aEntityInstanceId) = 0;
-		virtual tpublic::EntityInstance*	EventQueueSpawnEntity(
+		virtual EntityInstance*				EventQueueSpawnEntity(
 												uint32_t													aEntityId,
-												tpublic::EntityState::Id									aInitState,
+												EntityState::Id												aInitState,
 												uint32_t													aMapEntitySpawnId,
 												bool														aDetachedFromSpawn) = 0;
 		virtual void						EventQueueMakeOffering(
@@ -169,6 +170,12 @@ namespace tpublic
 		virtual void						EventQueueChat(
 												uint32_t													aEntityInstanceId,
 												const Chat&													aChat) = 0;
+		virtual void						EventQueueChatAnnouncement(
+												const char*													aFromName,
+												const Vec2&													aFromPosition,
+												int32_t														aRange,
+												bool														aYell,
+												const char*													aText) = 0;
 		virtual void						EventQueueLearnProfessionAbility(
 												uint32_t													aEntityInstanceId,
 												uint32_t													aProfessionId,
@@ -201,6 +208,7 @@ namespace tpublic
 												uint32_t													aKilledCharacterLevel,
 												uint32_t													aKilledFactionId,
 												uint32_t													aKilledClassId,
+												uint64_t													aKilledAccountId,
 												uint32_t													aContributionDenum) = 0;
 	};
 

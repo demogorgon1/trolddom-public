@@ -5,10 +5,14 @@
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/PlayerPrivate.h>
 
+#include <tpublic/Data/AbilityModifier.h>
+
 #include <tpublic/DirectEffects/Damage.h>
 
+#include <tpublic/AbilityMetrics.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/Manifest.h>
 #include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
 
@@ -27,6 +31,7 @@ namespace tpublic::DirectEffects
 				if(aChild->m_name == "damage_type")
 				{
 					m_damageType = DirectEffect::StringToDamageType(aChild->GetIdentifier());
+					TP_VERIFY(m_damageType != DirectEffect::INVALID_DAMAGE_TYPE, aChild->m_debugInfo, "'%s' is not a valid damage type.", aChild->GetIdentifier());
 				}
 				else if(aChild->m_name == "conditional_critical_chance_bonus")
 				{
@@ -53,6 +58,18 @@ namespace tpublic::DirectEffects
 				{
 					m_threatMultiplier = aChild->GetFloat();
 				}
+				else if(aChild->m_name == "resolve_cancel_aura")
+				{
+					m_resolveCancelAuraId = aChild->GetId(DataType::ID_AURA);
+				}
+				else if (aChild->m_name == "spread")
+				{
+					m_spread = aChild->GetFloat();
+				}
+				else if(aChild->m_name == "direct")
+				{
+					m_direct = aChild->GetBool();
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -78,6 +95,9 @@ namespace tpublic::DirectEffects
 		}
 
 		aStream->WriteFloat(m_threatMultiplier);
+		aStream->WriteUInt(m_resolveCancelAuraId);
+		aStream->WriteFloat(m_spread);
+		aStream->WriteBool(m_direct);
 	}
 			
 	bool	
@@ -113,6 +133,12 @@ namespace tpublic::DirectEffects
 		}
 
 		if(!aStream->ReadFloat(m_threatMultiplier))
+			return false;
+		if(!aStream->ReadUInt(m_resolveCancelAuraId))
+			return false;
+		if (!aStream->ReadFloat(m_spread))
+			return false;
+		if(!aStream->ReadBool(m_direct))
 			return false;
 
 		return true;
@@ -152,7 +178,14 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t damage = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		float realDamage = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		if(m_spread > 0.0f)
+		{
+			std::uniform_real_distribution<float> spread(realDamage * (1.0f - m_spread), realDamage * (1.0f + m_spread));
+			realDamage = spread(aRandom);
+		}
+
+		uint32_t damage = (uint32_t)realDamage;
 
 		if(damage == 0)
 			damage = 1;
@@ -170,11 +203,17 @@ namespace tpublic::DirectEffects
 
 			chance += _GetCriticalChanceBonus(sourceAuras, abilityModifiers);
 
-			if(Helpers::RandomFloat(aRandom) < chance / 100.0f)
-			{
-				damage = (damage * 3) / 2;
+			if(targetCombatPrivate != NULL)
+				chance -= targetCombatPrivate->m_resilience;
 
-				result = CombatEvent::ID_CRITICAL;
+			if(chance > 0.0f)
+			{
+				if (Helpers::RandomFloat(aRandom) < chance / 100.0f)
+				{
+					damage = (damage * 3) / 2;
+
+					result = CombatEvent::ID_CRITICAL;
+				}
 			}
 		}
 
@@ -190,10 +229,10 @@ namespace tpublic::DirectEffects
 		}
 
 		if (sourceAuras != NULL)
-			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage);
+			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage, aAbilityId);
 
 		if (targetAuras != NULL)
-			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage);
+			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage, aAbilityId);
 
 		uint32_t blocked = 0;
 
@@ -215,7 +254,7 @@ namespace tpublic::DirectEffects
 			size_t rageResourceIndex;
 			if (sourceCombatPublic->GetResourceIndex(Resource::ID_RAGE, rageResourceIndex))
 			{
-				const AbilityMetrics* abilityMetrics = &aManifest->m_abilityMetrics;
+				const AbilityMetrics* abilityMetrics = aManifest->m_abilityMetrics.get();
 				int32_t rageConstant = (int32_t)abilityMetrics->m_rageConstantAtLevelCurve.Sample(sourceCombatPublic->m_level) + 1;
 				int32_t rageBasePerSecond = result == CombatEvent::ID_CRITICAL ? (int32_t)abilityMetrics->m_rageCritBasePerSecond : (int32_t)abilityMetrics->m_rageHitBasePerSecond;
 				int32_t rageBase = (sourceCombatPrivate->m_weaponCooldown * rageBasePerSecond) / 20;
@@ -234,6 +273,7 @@ namespace tpublic::DirectEffects
 					rageResourceIndex,
 					rage,
 					0,
+					false,
 					false);
 			}
 		}
@@ -243,7 +283,7 @@ namespace tpublic::DirectEffects
 			size_t rageResourceIndex;
 			if (targetCombatPublic->GetResourceIndex(Resource::ID_RAGE, rageResourceIndex))
 			{
-				const AbilityMetrics* abilityMetrics = &aManifest->m_abilityMetrics;
+				const AbilityMetrics* abilityMetrics = aManifest->m_abilityMetrics.get();
 				int32_t rageConstant = (int32_t)abilityMetrics->m_rageConstantAtLevelCurve.Sample(targetCombatPublic->m_level) + 1;
 				int32_t rage = (int32_t)(5 * damage) / (8 * rageConstant) + 1;
 
@@ -257,6 +297,7 @@ namespace tpublic::DirectEffects
 					rageResourceIndex,
 					rage,
 					0,
+					false,
 					false);
 			}
 		}
@@ -268,6 +309,9 @@ namespace tpublic::DirectEffects
 			if(targetAuras != NULL)
 				targetAuras->OnDamageInput(aManifest, aSource, aTarget, m_damageType, (int32_t)damage, result, aEventQueue, aWorldView, aResourceChangeQueue);
 
+			if(m_resolveCancelAuraId != 0)
+				aEventQueue->EventQueueRemoveAura(aSource->GetEntityInstanceId(), m_resolveCancelAuraId);
+
 			aResourceChangeQueue->AddResourceChange(
 				result,
 				damageType,
@@ -278,7 +322,8 @@ namespace tpublic::DirectEffects
 				healthResourceIndex,
 				-(int32_t)damage,
 				blocked,
-				false);
+				false,
+				m_direct);
 
 			if(m_flags & DirectEffect::FLAG_LEECH)
 			{
@@ -295,6 +340,7 @@ namespace tpublic::DirectEffects
 						healthResourceIndex,
 						(int32_t)damage / 2, // FIXME: might want this to not always be 50%
 						0,
+						false,
 						false);
 				}
 			}
@@ -311,7 +357,7 @@ namespace tpublic::DirectEffects
 
 			threat = (int32_t)((float)threat * threatMultiplier);
 
-			aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick);
+			aEventQueue->EventQueueThreat(aSourceEntityInstance, aTarget->GetEntityInstanceId(), threat, aTick, aAbilityId);
 		}
 
 		return { result };
@@ -319,6 +365,7 @@ namespace tpublic::DirectEffects
 
 	bool			
 	Damage::CalculateToolTipDamage(
+		const Manifest*						aManifest,
 		const EntityInstance*				aEntityInstance,
 		const AbilityModifierList*			aAbilityModifierList,
 		uint32_t							aAbilityId,
@@ -341,7 +388,24 @@ namespace tpublic::DirectEffects
 			}
 		}
 
+		const Components::AbilityModifiers* abilityModifiers = aEntityInstance->GetComponent<Components::AbilityModifiers>();
+		if(abilityModifiers != NULL)
+			damageModifier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_DAMAGE_OUTPUT, aAbilityId, m_damageType, aManifest, aEntityInstance);
+
 		m_function.ToRange(NULL, NULL, damageModifier, aEntityInstance, aOutDamage);
+
+		if(m_spread > 0.0f)
+		{
+			aOutDamage.m_min = (uint32_t)((float)aOutDamage.m_min * (1.0f - m_spread));
+			aOutDamage.m_max = (uint32_t)((float)aOutDamage.m_max * (1.0f + m_spread));
+
+			if (aOutDamage.m_min == 0)
+				aOutDamage.m_min = 1;
+
+			if (aOutDamage.m_max == 0)
+				aOutDamage.m_max = 1;
+		}
+
 		aOutDamageType = _GetDamageType(aEntityInstance, aAbilityModifierList, aAbilityId);
 		return true;
 	}

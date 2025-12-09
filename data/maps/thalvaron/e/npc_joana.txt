@@ -1,0 +1,170 @@
+dialogue_screen .joana:
+{
+	text: 
+	[	
+		"May you be cleansed by the Light."
+	]		
+	
+	options:
+	[
+		{ quest: .joana_1 }
+		{ quest<offer_only>: thalvaron_joana_2 }
+		{ quest<completion_only>: .erik_the_bleak_2 }
+		{ quest<completion_only>: thalvaron_father_tobias_3 } 
+	]
+}
+
+entity thalvaron_joana: !NPC
+{
+	_string: "Joana"
+	_sprite: woman_43
+	_sprite_dead: woman_43_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .joana: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .joana_1:
+{
+	string: "Xildur Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_kareth_skeleton_boss ]
+		count: 1
+	}
+}
+
+quest .joana_1:
+{
+	string: "Infiltrating the Undead Command"
+
+	text:
+	[
+		"Locate Xildur to the north east of the Serpent's Rest and destroy him."
+	]
+	
+	description: 
+	[
+		"I don't know how these skeletal monsters operate. They seem to mostly wander around mindlessly at the moment, but sometimes it seems like they are commanded by some more powerful creature."
+		"I've located one of these commanders at an compound north east of here. It's a monstrous skeleton, allegedly the remains of some ancient captain named Xildur. Locate this monster and destroy it."
+	]
+
+	progress:
+	[
+		"Lost in the desert?"
+	]
+	
+	completion:
+	[
+		"Good job, but we're not done yet."
+	]
+	
+	objectives: [ .joana_1 ]
+	next_quest: thalvaron_joana_2
+	level: 29
+}
+                                                  
+############################################################
+# Quest 2
+      
+loot_group .joana_2_quest_item_1: {}
+loot_group .joana_2_quest_item_2: {}
+loot_group .joana_2_quest_item_3: {}
+
+item .joana_2_quest_item_1:
+{
+	icon: icon_orb_1
+	item_level: 29
+	loot_groups: [ .joana_2_quest_item_1 ]
+	flags: [ not_sellable unique ]
+	string: "Orb of Kralir"
+	quest: thalvaron_joana_2
+}
+
+item .joana_2_quest_item_2:
+{
+	icon: icon_orb_1
+	item_level: 29
+	loot_groups: [ .joana_2_quest_item_2 ]
+	flags: [ not_sellable unique ]
+	string: "Orb of Jurgorth"
+	quest: thalvaron_joana_2
+}
+
+item .joana_2_quest_item_3:
+{
+	icon: icon_orb_1
+	item_level: 29
+	loot_groups: [ .joana_2_quest_item_3 ]
+	flags: [ not_sellable unique ]
+	string: "Orb of the Last King"
+	quest: thalvaron_joana_2
+}
+
+objective .joana_2_a:
+{
+	string: "Orb of Kralir"
+	collect_items: { item: .joana_2_quest_item_1 count: 1 }
+}
+
+objective .joana_2_b:
+{
+	string: "Orb of Jurgorth"
+	collect_items: { item: .joana_2_quest_item_2 count: 1 }
+}
+
+objective .joana_2_c:
+{
+	string: "Orb of the Last King"
+	collect_items: { item: .joana_2_quest_item_3 count: 1 }
+}
+
+{
+	${ _level: 29 }
+	item .joana_2_a: !QUEST_REWARD_FINGER{ _string: "Ring of the Holy Spellweaver" _icon: icon_ring_1 _constitution: 1 _healing: 5 _budget_bias: -10 _spell_crit: 1 }
+	item .joana_2_b: !QUEST_REWARD_WRISTS{ _string: "Desert Guard's Armguards" _icon: icon_bracers_3 _constitution: 2 _strength: 1 _type: armor_plate }
+}
+
+quest thalvaron_joana_2:
+{
+	string: "Entering the Tombs"
+
+	text:
+	[
+		"Retrieve orbs from tombs of Kareth and deliver them to Father Tobias in Valoris."
+	]
+	
+	description: 
+	[
+		"The eastern parts of Kareth are littered with old tombs. I have a feeling that these are connected to the evil presence that has taken hold of these lands. I have heard that some of these tombs contain"
+		"powerful orbs that are of great interest to our cause. I want you to retrieve these and deliver them to Father Tobias in Valoris. He will know what to do with them.\n"
+		"\n"
+		"The first orb is in the Tomb of Kralier in the mountains of north eastern Kareth.\n"
+		"The second orb is in the Tomb of Jurgorth east of here.\n"		
+		"And, finally, even further to the east you'll find the last orb in the Tomb of the Last King."
+	]
+	
+	completion:
+	[
+		"Huh, what unholy nonsense is this? Let me see."
+	]
+	
+	progress:
+	[
+		"Any progress?"
+	]
+
+	level: 29
+	objectives: [ .joana_2_a .joana_2_b .joana_2_c ]	
+	prerequisites: [ .joana_1 ]
+	reward_one_item: [ .joana_2_a .joana_2_b ]
+}

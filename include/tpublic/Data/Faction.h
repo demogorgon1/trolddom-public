@@ -111,6 +111,10 @@ namespace tpublic
 						{
 							m_reputationFromKill.push_back(ReputationFromKill(aChild));
 						}
+						else if (aChild->m_name == "reputation_from_pvp_kill")
+						{
+							m_reputationFromPVPKill = aChild->GetInt32();
+						}
 						else if (aChild->m_name == "influence_tile_transform")
 						{
 							uint32_t fromSpriteId = 0;
@@ -153,6 +157,7 @@ namespace tpublic
 					aStream->WriteUInt(i->first);
 					aStream->WriteUInt(i->second);
 				}
+				aStream->WriteInt(m_reputationFromPVPKill);
 			}
 
 			bool
@@ -183,6 +188,10 @@ namespace tpublic
 						m_influenceTileTransformTable[fromSpriteId] = toSpriteId;
 					}
 				}
+
+				if (!aStream->ReadInt(m_reputationFromPVPKill))
+					return false;
+
 				return true;
 			}
 
@@ -209,6 +218,7 @@ namespace tpublic
 			std::string						m_string;
 			int32_t							m_defaultReputation = 0;
 			std::vector<ReputationFromKill>	m_reputationFromKill;
+			int32_t							m_reputationFromPVPKill = 0;
 			
 			typedef std::unordered_map<uint32_t, uint32_t> InfluenceTileTransformTable;
 			InfluenceTileTransformTable		m_influenceTileTransformTable;

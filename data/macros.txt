@@ -103,6 +103,8 @@
 				<exists _in_combat_barks> barks: @_in_combat_barks
 				
 				<exists _despawn_on_leave_combat and _despawn_on_leave_combat> despawn_on_leave: true
+				
+				<exists _in_combat_on_enter_ability> on_enter_ability: @_in_combat_on_enter_ability
 			}	
 			
 			<exists _dead_on_enter_ability> state dead:
@@ -113,6 +115,11 @@
 			<exists _evading_on_enter_ability> state evading:
 			{
 				on_enter_ability: @_evading_on_enter_ability
+			}
+			
+			<exists _spawn_barks> state spawning:
+			{
+				barks: @_spawn_barks
 			}
 			
 			<exists _dead_barks> state dead: { barks: @_dead_barks }
@@ -134,6 +141,9 @@
 			<exists _melee_push_priority> melee_push_priority: @_melee_push_priority
 			<exists _display_name_when_dead> display_name_when_dead: @_display_name_when_dead
 			<exists _no_kill_event and _no_kill_event> no_kill_event: @_no_kill_event
+			<exists _global_aura> global_aura: @_global_aura
+			<exists _combat_move_interval_ticks> combat_move_interval_ticks: @_combat_move_interval_ticks
+			<exists _no_combat_tag and _no_combat_tag> no_combat_tag: @_no_combat_tag
 		}		
 		sprite<static>: 
 		{ 
@@ -168,6 +178,7 @@
 		<exists _kill_contribution and _kill_contribution> kill_contribution: { }
 		<exists _random_item_vendor> random_item_vendor: @_random_item_vendor
 		<exists _display_name_when_dead> display_name: { string: @_string }
+		<exists _critter> critter: { critter: @_critter }
 	}
 	
 	<exists _tags> tags: @_tags
@@ -180,7 +191,7 @@
 {
 	string: @_string
 	binds: when_picked_up
-	required_level: @_level
+	item_level: @_level
 	icon: @_icon
 	
 	<exists _type> type: @_type
@@ -205,6 +216,8 @@
 	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
 	<exists _attack_power> stat_weight attack_power: @_attack_power
 	
+	<exists _hit> stat hit_chance: @_hit
+	<exists _resilience> stat resilience: @_resilience
 	<exists _parry> stat parry_chance: @_parry
 	<exists _dodge> stat dodge_chance: @_dodge
 	<exists _block> stat block_chance: @_block
@@ -274,6 +287,8 @@
 	<exists _mana_per_5> stat_weight mana_per_5: @_mana_per_5
 	<exists _attack_power> stat_weight attack_power: @_attack_power
 	
+	<exists _hit> stat hit_chance: @_hit
+	<exists _resilience> stat resilience: @_resilience	
 	<exists _parry> stat parry_chance: @_parry
 	<exists _dodge> stat dodge_chance: @_dodge
 	<exists _block> stat block_chance: @_block

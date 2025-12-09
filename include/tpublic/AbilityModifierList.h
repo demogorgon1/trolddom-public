@@ -23,6 +23,8 @@ namespace tpublic
 																		uint32_t							aAbilityId) const;
 		int32_t														GetAbilityModifyAuraUpdateCount(
 																		uint32_t							aAbilityId) const;
+		int32_t														GetAbilityModifyAuraDuration(
+																		uint32_t							aAbilityId) const;
 		int32_t														GetAbilityModifyRange(
 																		uint32_t							aAbilityId) const;
 		int32_t														GetAbilityModifyCastTime(

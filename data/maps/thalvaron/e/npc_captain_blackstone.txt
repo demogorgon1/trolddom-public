@@ -1,0 +1,119 @@
+dialogue_screen .captain_blackstone:
+{
+	text: 
+	[	
+		"Wipe your feet first if you're planning on getting on my boat."
+	]		
+	
+	options:
+	[
+		{ quest: .captain_blackstone_1 }
+	]
+}
+
+entity thalvaron_captain_blackstone: !NPC
+{
+	_string: "Captain Blackstone"
+	_sprite: man_26
+	_sprite_dead: man_26_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .captain_blackstone: { } }
+}
+
+############################################################
+# Quest 1
+
+# FIXME quest
+# collect item from shore/boat in south swamp
+
+objective .captain_blackstone_1:
+{
+	string: "Captain's Stash"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .captain_blackstone_1_quest_item count: 1 }
+}
+
+loot_group .captain_blackstone_1_quest_item: {}
+
+item .captain_blackstone_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 27
+	loot_groups: [ .captain_blackstone_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Captain's Stash"
+}
+
+loot_table .captain_blackstone_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .captain_blackstone_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_captain_blackstone_1_quest_item:
+{
+	string: "Captain's Stash"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ satchel ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .captain_blackstone_1_quest_item
+			verb: open
+			range: 1 
+			level: 27
+			despawn: true 		
+			required_quest: .captain_blackstone_1
+		}		
+	}
+}
+
+{
+	${ _level: 27 }
+	item .captain_blackstone_1_a: !QUEST_REWARD_LEGS{ _string: "Swashbuckler's Pants" _icon: icon_cloth_legs_1 _constitution: 1 _wisdom: 4 _mana_per_5: 3 _healing: 2 _type: armor_cloth }
+	item .captain_blackstone_1_b: !QUEST_REWARD_HANDS{ _string: "Rusty Gauntlets" _icon: icon_cloth_hands_1 _constitution: 3 _dexterity: 1 _type: armor_plate }
+}
+
+quest .captain_blackstone_1:
+{
+	string: "Blackstone's Belongings"
+
+	text:
+	[
+		"Retrieve Captain Blackstone's belongings south of the Verdant Mire."
+	]
+	
+	description: 
+	[
+		"Before getting the job as the captain of this fine vessel, I arrived here by rowboat. Reason for that doesn't really matter. Anyway, I landed south of here, beyond the swamp. To get up here"
+		"I had to fight my way past all kinds of weird creatures. Unfortunately, later I realized that I had forgotten some of my belongings by the boat and I'd rather not go back there to get them. Seems like"
+		"a suitable task for someone like you. Can you help?"
+	]
+	
+	completion:
+	[
+		"Ah, yes, thank you for the help."
+	]
+	
+	progress:
+	[
+		"Did the mosquitoes chase you back here?"
+	]
+
+	level: 27
+	objectives: [ .captain_blackstone_1 ]
+	reward_one_item: [ .captain_blackstone_1_a .captain_blackstone_1_b ]
+}

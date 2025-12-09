@@ -1,0 +1,139 @@
+dialogue_screen .ulok_ironspear:
+{
+	text: 
+	[	
+		"If this place had been built by dwarves it wouldn't be falling apart."
+	]		
+	
+	options:
+	[
+		{ quest: .ulok_ironspear_1 }
+		{ quest: .ulok_ironspear_2 }
+	]
+}
+
+entity thalvaron_ulok_ironspear: !NPC
+{
+	_string: "Ulok Ironspear"
+	_sprite: dwarf_22
+	_sprite_dead: dwarf_22_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .ulok_ironspear: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .ulok_ironspear_1_quest_item: { }
+
+item .ulok_ironspear_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .ulok_ironspear_1_quest_item ]		
+	string: "Pristine Wolf Tooth" 
+	icon: icon_sharp_tooth
+	stack: 5
+	item_level: 28
+	quest: .ulok_ironspear_1
+	flags: [ not_sellable ]
+}
+
+objective .ulok_ironspear_1:
+{
+	string: "Pristine Wolf Teeth"
+	collect_items: { item: .ulok_ironspear_1_quest_item count: 5 }
+}
+
+quest .ulok_ironspear_1:
+{
+	string: "Advanced Alchemy Ingredients"
+
+	text:
+	[
+		"Collect teeth from wolves in Urthon and return to Ulok Ironspear."
+	]
+	
+	description: 
+	[
+		"I know a guy back in Durgan Tharok who does a lot of alchemy. Never said me anything, but whatever. He pays pretty good for weird ingredients that I locate around the world.\n"
+		"\n"
+		"Apparently wolf teeth are a useful reagent, for some reason. There happens to be wolves all over the place here. Maybe go grab me some teeth and we can share the profit?"
+	]
+	
+	completion:
+	[
+		"Looks like it could be wolf teeth. If they're not, please don't tell me where you found them. Good enough."
+	]
+	
+	progress:
+	[
+		"Huh? Cold feet?"
+	]
+
+	level: 28
+	objectives: [ .ulok_ironspear_1 ]
+	next_quest: .ulok_ironspear_2
+}
+
+############################################################
+# Quest 2
+
+loot_group .ulok_ironspear_2_quest_item: { }
+
+item .ulok_ironspear_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .ulok_ironspear_2_quest_item ]		
+	string: "Karethi Stinger" 
+	icon: icon_stinger_2
+	stack: 5
+	item_level: 29
+	quest: .ulok_ironspear_2
+	flags: [ not_sellable ]
+}
+
+objective .ulok_ironspear_2:
+{
+	string: "Karethi Stingers"
+	collect_items: { item: .ulok_ironspear_2_quest_item count: 5 }
+}
+
+{
+	${ _level: 29 }
+	item .ulok_ironspear_2_a: !QUEST_REWARD_CHEST{ _string: "Shirt of the Sandy Wizard" _icon: icon_cloth_shirt_7 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
+	item .ulok_ironspear_2_b: !QUEST_REWARD_CHEST{ _string: "Dwarven Mithril Chestplate" _icon: icon_chest_1 _constitution: 2 _strength: 3 _type: armor_plate }
+}
+
+quest .ulok_ironspear_2:
+{
+	string: "Exotic Poisons"
+
+	text:
+	[
+		"Collect stingers from scorpions in Kareth."
+	]
+	
+	description: 
+	[
+		"My guy in Durgan Tharok also talks a lot about the scorpions of Kareth. You know, the great desert to the south of here. If you can bring me some stingers from there, that would be great."
+	]
+	
+	completion:
+	[
+		"Those are bigger than expected. How large were those scorpions?"
+	]
+	
+	progress:
+	[
+		"Do you have anything for me?"
+	]
+
+	level: 29
+	objectives: [ .ulok_ironspear_2 ]
+	prerequisites: [ .ulok_ironspear_1 ]
+	reward_one_item: [ .ulok_ironspear_2_a .ulok_ironspear_2_b ]
+}

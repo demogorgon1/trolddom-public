@@ -2,7 +2,7 @@
 
 #include "Data/Sound.h"
 
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
@@ -26,6 +26,7 @@ namespace tpublic
 			ID_INVENTORY,
 			ID_VENDOR,
 			ID_TRASH,
+			ID_RESOLVE,
 
 			NUM_IDS
 		};
@@ -33,25 +34,27 @@ namespace tpublic
 		struct Info
 		{
 			const char*		m_name;
+			bool			m_ui;
 		};
 
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{			
-			{ NULL },
+			{ NULL,			false },
 
-			{ "move" },
-			{ "hit" },
-			{ "miss" },
-			{ "block" },
-			{ "parry" },
-			{ "dodge" },
-			{ "use" },
-			{ "use_local" },
-			{ "equip" },
-			{ "inventory" },
-			{ "vendor" },
-			{ "trash" },
+			{ "move",		false },
+			{ "hit",		false },
+			{ "miss",		false },
+			{ "block",		false },
+			{ "parry",		false },
+			{ "dodge",		false },
+			{ "use",		false },
+			{ "use_local",	false },
+			{ "equip",		true },
+			{ "inventory",	true },
+			{ "vendor",		true },
+			{ "trash",		true },
+			{ "resolve",	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

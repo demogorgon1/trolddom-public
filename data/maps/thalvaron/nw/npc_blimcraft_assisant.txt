@@ -8,6 +8,7 @@ dialogue_screen .blimcraft_assistant:
 	options:
 	[
 		{ quest<completion_only>: thalvaron_blimcraft_highborne_3 }
+		{ quest<completion_only>: thalvaron_blimcraft_highborne_4 }
 		{ quest: thalvaron_blimcraft_assistant_1 }
 	]
 }
@@ -26,7 +27,7 @@ entity thalvaron_blimcraft_assistant: !NPC
 }
 
 ############################################################
-# Quest 3
+# Quest 1
 
 objective .blimcraft_assistant_1:
 {

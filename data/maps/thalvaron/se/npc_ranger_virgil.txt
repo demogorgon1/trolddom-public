@@ -1,0 +1,87 @@
+dialogue_screen .ranger_virgil_greetings:
+{
+	text: 
+	[	
+		"The river has subsided a bit. You should be able to cross safely."
+	]
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_ranger_roel_2 }
+		{ quest<offer_only>: thalvaron_ranger_virgil_1 }
+		{ quest<offer_only>: thalvaron_ranger_virgil_2 requirement self<must_not_have_completed_quest>: thalvaron_ranger_roel_2 requirement self<must_not_have_active_quest>: thalvaron_ranger_roel_2 }
+	]
+}
+
+entity thalvaron_ranger_virgil: !NPC
+{
+	_string: "Ranger Virgil"
+	_dialogue_root: $dialogue_root { .ranger_virgil_greetings: { } }
+	_sprite: woman_5
+	_sprite_dead: woman_5_dead	
+	_level: 30
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+quest thalvaron_ranger_virgil_1:
+{
+	string: "Zilkore"
+
+	text:
+	[
+		"Seek out Fenris in Zilkore to the east."
+	]
+	
+	description: 
+	[
+		"The message you brought to me from my good friend in the west was indeed quite concerning. You know, he lived with the Zilkore people for a while. It's a small tribe of indigenous people who have been living"
+		"in these lands for a very long time. Anyway, Roel wrote about crabs of the west have started to walk on their hind legs and become increasingly aggressive. Also, apparently, he saw mutated crabs when he lived"
+		"out here as well. He seems quite obsessed with crabs.\n"
+		"\n"
+		"He is quite concerned about the Zilkore and the crab situation. I'm busy manning my little post here, so maybe you can go and visit them? Just follow this path east and you'll find their village. Speak to"
+		"Fenris, their leader."		
+	]
+
+	completion:
+	[
+		"You come from Roel and you speak of crabs?"
+	]
+
+	reward_xp_multiplier: 0.25
+	reward_cash_multiplier: 0.25
+	level: 25
+	prerequisites: [ thalvaron_ranger_roel_2 ]
+}
+
+##########################################################################################
+# Quest 2
+
+quest thalvaron_ranger_virgil_2:
+{
+	string: "Brother in Arms"
+
+	text:
+	[
+		"Seek out Ranger Roel at the Outcast Coast north of Valoris."
+	]
+	
+	description: 
+	[
+		"I haven't heard from my dear friend Roel for a while. Last I heard he traveled to the Outcast Coast north of Valoris to seek a life of solitude. Can't you go and find him, check if he's all right?"
+	]
+
+	completion:
+	[
+		"Oh, how wonderful."
+	]
+
+	reward_xp_multiplier: 0.25
+	reward_cash_multiplier: 0.25
+	level: 23	
+}

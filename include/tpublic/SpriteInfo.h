@@ -21,10 +21,12 @@ namespace tpublic
 			FLAG_TILE_NO_WAVES				= 0x0020,
 			FLAG_TILE_SNOW					= 0x0040,
 			FLAG_TILE_INDOOR				= 0x0080,
-			FLAG_STANDALONE					= 0x0100,
-			FLAG_CENTERED					= 0x0200,
-			FLAG_DOUBLED					= 0x0400,
-			FLAG_AUTOGLOW					= 0x0800
+			FLAG_TILE_NO_WATER_EDGE			= 0x0100,
+			FLAG_TILE_DESERT				= 0x0200,
+			FLAG_STANDALONE					= 0x0400,
+			FLAG_CENTERED					= 0x0800,
+			FLAG_DOUBLED					= 0x1000,
+			FLAG_AUTOGLOW					= 0x2000
 		};
 
 		struct NamedAnchor
@@ -111,6 +113,10 @@ namespace tpublic
 				return FLAG_TILE_SNOW;
 			if (strcmp(aString, "tile_indoor") == 0)
 				return FLAG_TILE_INDOOR;
+			if (strcmp(aString, "tile_no_water_edge") == 0)
+				return FLAG_TILE_NO_WATER_EDGE;
+			if (strcmp(aString, "tile_desert") == 0)
+				return FLAG_TILE_DESERT;
 			if (strcmp(aString, "standalone") == 0)
 				return FLAG_STANDALONE;
 			if (strcmp(aString, "centered") == 0)
@@ -155,6 +161,7 @@ namespace tpublic
 			aStream->WriteObjects(m_namedAnchors);
 			aStream->WritePOD(m_averageColor);
 			aStream->WriteOptionalObject(m_iconMetaData);
+			aStream->WriteOptionalObject(m_headAnchor);
 
 			aStream->WriteUInt(m_borderTable.size());
 			for(BorderTable::const_iterator i = m_borderTable.cbegin(); i != m_borderTable.cend(); i++)
@@ -195,6 +202,8 @@ namespace tpublic
 			if(!aStream->ReadPOD(m_averageColor))
 				return false;
 			if(!aStream->ReadOptionalObject(m_iconMetaData))
+				return false;
+			if(!aStream->ReadOptionalObject(m_headAnchor))
 				return false;
 
 			{
@@ -291,6 +300,7 @@ namespace tpublic
 		std::vector<uint32_t>		m_waterAnimationSpriteIds;
 		uint32_t					m_overviewMapOverrideSpriteId = 0;
 		uint32_t					m_glowSpriteId = 0;
+		std::optional<Vec2>			m_headAnchor; 
 
 		// This is a bit wonky, only using a shared_ptr here so SpriteInfo can be copied easily.
 		typedef std::unordered_map<uint32_t, std::shared_ptr<std::vector<uint32_t>>> BorderTable;

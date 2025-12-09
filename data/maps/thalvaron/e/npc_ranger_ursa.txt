@@ -1,0 +1,127 @@
+dialogue_screen .ranger_ursa:
+{
+	text: 
+	[	
+		"Welcome to the gates of Urthon."
+	]		
+	
+	options:
+	[
+		{ quest: .ranger_ursa_1 }
+		{ quest: .ranger_ursa_2 }
+	]
+}
+
+entity thalvaron_ranger_ursa: !NPC
+{
+	_string: "Ranger Ursa"
+	_sprite: woman_6
+	_sprite_dead: woman_6_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .ranger_ursa: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .ranger_ursa_1:
+{
+	string: "Uglor Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_orc_boss ]
+		count: 1
+	}
+}
+
+quest .ranger_ursa_1:
+{
+	string: "Orc Scouting Party"
+
+	text:
+	[
+		"Find and kill Uglor in the woods of western Urthon."
+	]
+	
+	description: 
+	[
+		"North of here lies the desolate lands of Urthon. Once part of a powerful empire, its inhabitants eventually disappeared. Nobody really knows what happened.\n"
+		"\n"
+		"I tracked an orc scouting party here. They continued north, but I have no interest in entering Urthon. The party was led by an orc named Uglor. If you want to help me,"
+		"find this orc and kill him. I think they're in the woods to the left after you're past this wall."
+	]
+
+	progress:
+	[
+		"No luck tracking them down?"
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+	
+	objectives: [ .ranger_ursa_1 ]
+	level: 28
+}
+
+############################################################
+# Quest 2
+
+objective .ranger_ursa_2:
+{
+	string: "Wolf Wrangler Bazstik Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_orc_wolf_wrangler ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 28 }
+	item .ranger_ursa_2_a: !QUEST_REWARD_SHOULDERS{ _string: "Mantle of the Urthonak Wizard" _icon: icon_shoulders_9 _constitution: 1 _wisdom: 4 _spirit: 2 _type: armor_cloth }
+	item .ranger_ursa_2_b: !QUEST_REWARD_LEGS{ _string: "Unstoppable Legplates" _icon: icon_plate_legs_1 _constitution: 2 _strength: 1 _dodge_chance: 1 _budget_bias: -10 _type: armor_plate }
+}
+
+quest .ranger_ursa_2:
+{
+	string: "Wrangling the Wrangler"
+
+	text:
+	[
+		"Locate and kill Bazstik in the woodland mountains north of the gate to Urthon."
+	]
+	
+	description: 
+	[
+		"The lands north of here have long been a place where orc wolf riders source their mounts. I know of an infamous wolf wrangler going by the name of Bazstik, who operates in the mountains to the north.\n"
+		"\n"
+		"If you can find and kill him it would be a great service to the kingdom."
+	]
+
+	progress:
+	[
+		"He's most likely in a cave somewhere."
+	]
+	
+	completion:
+	[
+		"Excellent!"
+	]
+	
+	objectives: [ .ranger_ursa_2 ]
+	prerequisites: [ .ranger_ursa_1 ]
+	reward_one_item: [ .ranger_ursa_2_a .ranger_ursa_2_b ]
+	level: 28
+}

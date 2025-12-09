@@ -1,11 +1,9 @@
 #pragma once
 
-#include "../Data/Aura.h"
-
 #include "../AuraEffectBase.h"
 #include "../ComponentBase.h"
-#include "../Manifest.h"
 #include "../MoveSpeed.h"
+#include "../Stat.h"
 
 namespace tpublic
 {
@@ -135,13 +133,25 @@ namespace tpublic
 				});
 			}
 
+			uint32_t		GetLootTableId(
+								std::mt19937&								aRandom,
+								const Manifest*								aManifest) const;
 			bool			HasEffect(
 								AuraEffect::Id								aId,
 								SourceEntityInstance*						aOutSourceEntityInstance) const;
 			bool			HasAura(
 								uint32_t									aAuraId) const;
+			bool			HasAuraFlags(
+								const Manifest*								aManifest,
+								uint32_t									aFlags) const;
+			bool			HasAuraWithSource(
+								uint32_t									aAuraId,
+								uint32_t									aEntityInstanceId) const;
 			Entry*			GetAura(
 								uint32_t									aAuraId);
+			const Entry*	GetAuraWithSource(
+								uint32_t									aAuraId,
+								uint32_t									aEntityInstanceId) const;
 			MoveSpeed::Id	GetMoveSpeed() const;
 			float			GetAttackHaste(
 								const Manifest*								aManifest) const;
@@ -152,28 +162,34 @@ namespace tpublic
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,
-								int32_t										aDamage) const;
+								int32_t										aDamage,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterDamageOutput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,				
 								DirectEffect::DamageType					aDamageType,
-								int32_t										aDamage) const;
+								int32_t										aDamage,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterHealInput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
-								int32_t										aHeal) const;
+								int32_t										aHeal,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterHealOutput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
-								int32_t										aHeal) const;
+								int32_t										aHeal,
+								uint32_t									aAbilityId) const;
 			int32_t			FilterThreat(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
-								int32_t										aThreat) const;
+								int32_t										aThreat,
+								uint32_t									aAbilityId) const;
+			bool			IsFilter() const;
 			float			GetResourceCostMultiplier() const;
 			void			OnCombatEvent(
 								const Manifest*								aManifest,
@@ -183,7 +199,8 @@ namespace tpublic
 								CombatEvent::Id								aCombatEventId,
 								uint32_t									aAbilityId,
 								std::mt19937*								aRandom,
-								IEventQueue*								aEventQueue) const;
+								IEventQueue*								aEventQueue,
+								const IWorldView*							aWorldView) const;
 			void			OnDamageInput(
 								const Manifest*								aManifest,
 								const EntityInstance*						aSource,
@@ -198,10 +215,16 @@ namespace tpublic
 								DirectEffect::DamageType					aDamageType,
 								int32_t										aDamage,
 								int32_t&									aOutAbsorbed);
+			void			GetToolTipMultipliers(
+								std::vector<ToolTipMultiplier>&				aOut) const;
 			bool			UpdateCastTime(
 								const Manifest*								aManifest,
 								uint32_t									aAbilityId,
 								int32_t&									aCastTime);
+			bool			ConsumeAura(
+								const Manifest*								aManifest,
+								uint32_t									aAuraId,
+								uint32_t									aSourceEntityInstanceId);
 			bool			RemoveAura(
 								uint32_t									aAuraId,
 								uint32_t									aMaxRemove,

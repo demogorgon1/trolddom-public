@@ -19,6 +19,7 @@ namespace tpublic
 		const Vec2&							aDestination,
 		int32_t								aCurrentTick,
 		int32_t								aLastMoveTick,
+		int32_t								aLastAttackTick,
 		std::mt19937&						aRandom,
 		IEventQueue::EventQueueMoveRequest& aOut)
 	{
@@ -27,8 +28,10 @@ namespace tpublic
 		case MODE_DIRECT:
 			{
 				int32_t ticksSinceLastMove = aCurrentTick - aLastMoveTick;
+				int32_t ticksSinceLastAttack = aCurrentTick - aLastAttackTick;
+
 				// Move directly towards the destination, no pathfinding, nice and cheap
-				if (ticksSinceLastMove > 8 && !m_directOnly)
+				if (ticksSinceLastMove > 8 && ticksSinceLastAttack > 25 && !m_directOnly)
 				{
 					// We've been stuck for a bit, gotta try something more complex
 					Reset(aCurrentTick);

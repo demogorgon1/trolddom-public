@@ -115,6 +115,7 @@ namespace tpublic
 								IEventQueue*						aEventQueue,
 								const IWorldView*					aWorldView) override;
 			bool			CalculateToolTipDamage(
+								const Manifest*						aManifest,
 								const EntityInstance*				aEntityInstance,
 								const AbilityModifierList*			aAbilityModifierList,
 								uint32_t							aAbilityId,
@@ -128,6 +129,9 @@ namespace tpublic
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
 			std::unordered_map<uint32_t, float>			m_abilityModifierMultipliers;		
 			float										m_threatMultiplier = 1.0f;
+			float										m_spread = 0.0f;
+			uint32_t									m_resolveCancelAuraId = 0;
+			bool										m_direct = true;
 
 			DirectEffect::DamageType	_GetDamageType(
 											const EntityInstance*				aEntityInstance,

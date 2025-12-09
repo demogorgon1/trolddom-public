@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Tag.h>
+#include <tpublic/Data/TagContext.h>
 
 #include <tpublic/Manifest.h>
 #include <tpublic/TaggedData.h>

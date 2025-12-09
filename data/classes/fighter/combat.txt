@@ -16,21 +16,156 @@ talent_tree fighter_combat:
 		talent fighter_combat_fast_recovery: "H"
 		talent fighter_combat_blade_guard: "I"
 		talent fighter_combat_two_handed_weapon_mastery: "J"
+		talent fighter_combat_improved_whirlwind: "K"
+		talent fighter_combat_cyclone: "L"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"D.A...G"
-		"d.d...d"
-		"J.B.C.F"
+		"D...A.G"
+		"d...d.d"
+		"J.C.B.F"
 		"d...|.d"
-		"E...|.H"
-		"....d.."
-		"....I.."
+		"E.K.|.H"
+		"..|.d.."
+		"..|.I.."
+		"..d...."
+		"..L...."
 	]
 	
+}
+
+###############################################################################
+# Cyclone
+
+talent fighter_combat_cyclone:
+{
+	string: "Cyclone"
+	icon: icon_cyclone
+	prerequisites: [ fighter_combat_improved_whirlwind ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: cyclone }
+	]
+}
+
+cooldown cyclone:
+{
+	duration: 600
+}
+
+aura cyclone:
+{
+	string: "Cyclone"
+	description: "Whirlwinding."
+	type: buff
+	icon: icon_cyclone
+	duration: based_on_effects
+	flags: [ unique ]
+	particle_system: knock
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: 4
+		ability: $ability [ icon ]
+		{
+			string: "Whirlwind"
+			range: 1	
+			flags: [ offensive target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+			states: [ default in_combat ]
+			delay: 3
+			aoe_radius: 1
+			aoe_cap: 3
+			aoe_requirement target<must_not_be_in_state>: { id: dead }
+			source_particle_system: whirlwind	
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				aura_conditional_critical_chance_bonus<relentless_overpower>: 50		
+				function: { expression: x x: weapon }		
+			}
+		}
+	}
+	aura_effect stun:
+	{
+	}
+}
+
+ability cyclone:
+{
+	string: "Cyclone"
+	description: "Performs a Whirlwind attack every second for 4 seconds. Unable to do anything else while active."
+	range: 1	
+	cooldowns: [ global cyclone ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_cyclone
+	delay: 3
+	talent_tree: fighter_combat
+		
+	direct_effect apply_aura:
+	{
+		aura: cyclone
+	}
+}
+
+###############################################################################
+# Improved Whirlwind
+
+talent fighter_combat_improved_whirlwind:
+{
+	string: "Improved Whirlwind"
+	icon: icon_whirlwind
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: fighter_combat_improved_whirlwind_1 }
+		{ aura: fighter_combat_improved_whirlwind_2 }
+		{ aura: fighter_combat_improved_whirlwind_3 }
+	]
+}
+
+aura fighter_combat_improved_whirlwind_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with Whirlwind by 15%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.15
+		type_mask: [ physical ]
+		apply_to_abilities: [ whirlwind ]
+	}
+}
+
+aura fighter_combat_improved_whirlwind_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with Whirlwind by 30%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.30
+		type_mask: [ physical ]
+		apply_to_abilities: [ whirlwind ]
+	}
+}
+
+aura fighter_combat_improved_whirlwind_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your damage done with Whirlwind by 45%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.45
+		type_mask: [ physical ]
+		apply_to_abilities: [ whirlwind ]
+	}
 }
 
 ###############################################################################
@@ -61,6 +196,7 @@ aura fighter_combat_two_handed_weapon_mastery_1:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.02
+		type_mask: [ physical ]
 	}
 }
 
@@ -73,6 +209,7 @@ aura fighter_combat_two_handed_weapon_mastery_2:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.04
+		type_mask: [ physical ]
 	}
 }
 
@@ -85,6 +222,7 @@ aura fighter_combat_two_handed_weapon_mastery_3:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.06
+		type_mask: [ physical ]
 	}
 }
 
@@ -97,6 +235,7 @@ aura fighter_combat_two_handed_weapon_mastery_4:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.08
+		type_mask: [ physical ]
 	}
 }
 
@@ -109,6 +248,7 @@ aura fighter_combat_two_handed_weapon_mastery_5:
 	{
 		requirement self<must_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.10
+		type_mask: [ physical ]
 	}
 }
 
@@ -346,7 +486,7 @@ aura fighter_combat_ferocity:
 	description: "Your critical strikes increase your critical strike chance by 10% for 10 seconds. Also affects nearby party members. Stacks up to 5 times."
 	aura_effect combat_event_trigger: 
 	{ 
-		combat_event_ability_mask: [ offensive melee ]
+		combat_event_ability_mask: [ melee ]
 		combat_event<source>: critical
 		ability<self>: fighter_combat_ferocity_trigger
 	}
@@ -467,7 +607,7 @@ ability mortal_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] [ 30 59 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -560,7 +700,7 @@ ability strike:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		aura_conditional_critical_chance_bonus<relentless_overpower>: 50
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }
 	}
 }
 
@@ -592,7 +732,7 @@ ability whirlwind:
 	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global whirlwind ]
-	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ offensive melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_whirlwind
 	delay: 3
@@ -627,8 +767,11 @@ aura charge_stun:
 	icon: icon_stun		
 	type: debuff
 	duration: 20	
+	flags: [ incapacitation ]
 	aura_effect stun: { }
 	particle_system: knock
+	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 ability charge_trigger:
@@ -659,7 +802,7 @@ ability charge:
 	min_range: 3
 	range: 7
 	cooldowns: [ charge ]
-	flags: [ target_other target_hostile trigger_move_cooldown ]
+	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
 	states: [ default in_combat ]
 	icon: icon_charge
 	talent_tree: fighter_combat 

@@ -1,0 +1,553 @@
+map_player_spawn .player_spawn:
+{
+}
+
+noise .magma_lane_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 19000]>:
+			{
+				perlin: { scale: 21000 }
+				constant: 3
+			}
+		
+			divide:
+			{
+				perlin: { scale: 18000 }
+				constant: 4
+			}
+			
+			perlin: { scale: 9000 }
+			perlin: { scale: 5700 }
+			perlin: { scale: 2400 }
+			 
+			constant: 15000			
+		}
+		
+		constant: 256
+	}
+}
+
+
+noise .rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 19000]>:
+			{
+				perlin: { scale: 21000 }
+				constant: 3
+			}
+		
+			divide:
+			{
+				perlin: { scale: 18000 }
+				constant: 4
+			}
+			
+			perlin: { scale: 9000 }
+			perlin: { scale: 5700 }
+			perlin: { scale: 2400 }
+			 
+			constant: 15000			
+		}
+		
+		constant: 256
+	}
+}
+
+noise .temperature:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 100 }
+			perlin: { scale: 50 }
+			
+			constant: 32000	
+		}
+		
+		constant: 256
+	}	
+}
+
+aura .outside_player_spawn_zone_debuff:
+{
+	string: "Intense Fire"
+	description: "Infernal fire burns you."
+	icon: icon_fire
+	type: debuff
+	flags: [ unique indefinite ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: indefinite
+		ability: $ability [ string icon ]
+		{
+			states: [ default in_combat ]
+			flags: [ always_in_range always_in_line_of_sight ]			
+			direct_effect damage:
+			{	
+				damage_type: fire		
+				function: { expression: a_mul_x x: health_max a: 0.20 entity: target }					
+				flags: [ is_magical ]
+				direct: false
+			}					
+		}
+	}
+}
+
+zone .outside_player_spawn_zone:
+{
+	no_map: true
+	
+	player_trigger_ability_requirement self<must_not_have_started_survival>: {}
+	player_trigger_ability_requirement self<must_not_have_aura>: .outside_player_spawn_zone_debuff
+	
+	player_trigger_ability: $ability
+	{
+		direct_effect apply_aura:
+		{
+			aura: .outside_player_spawn_zone_debuff
+		}
+	}	
+}
+
+map_entity_spawn .boss_1: {	spawn_timer: { only_when_triggered: true } debug_color: [ 255 0 0 ] }
+map_entity_spawn .boss_2: {	spawn_timer: { only_when_triggered: true } debug_color: [ 255 255 0 ] }
+map_entity_spawn .boss_3: {	spawn_timer: { only_when_triggered: true } debug_color: [ 0 0 255 ] }
+map_entity_spawn .boss_4: {	spawn_timer: { only_when_triggered: true } debug_color: [ 255 0 255 ] }
+
+map_entity_spawn .object:
+{	
+}
+
+map_entity_spawn .survival_start_object:
+{	
+	entity .survival_start_object: { init_state: default } 	
+}
+
+entity .survival_start_object:
+{
+	string: "Orb of Trials"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ glowing_orb_2_a glowing_orb_2_b ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+				
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			trigger_ability: $ability
+			{
+				string: "Orb of Trials"
+				direct_effect simple<start_survival>: {}
+				direct_effect remove_aura: { aura: .outside_player_spawn_zone_debuff }
+			}
+		}	
+	}
+}
+
+!define local FLAG_SPAWN_CRAB_BOSS 0
+!define local FLAG_SPAWN_ROCK_ELEMENTAL_BOSS 1
+!define local FLAG_SPAWN_RIFT_KEEPER_BOSS 2
+!define local FLAG_SPAWN_FIRE_ELEMENTAL_BOSS 3
+
+map trial_of_fire:
+{
+	string: "Trial of Fire"
+	type: private
+	default_player_spawn: .player_spawn
+	has_dynamic_overview_map: true
+	max_players: 5
+	max_minions: 1
+	
+	default_tile: lava_b	
+	default_fishing_loot_table: fish_realm_of_fire
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35			
+	
+	seed: 39447431
+	
+	default_exit_portal: $map_portal
+	{
+		map: thalvaron
+		spawn: thalvaron_trial_of_fire_return_spawn
+	}	
+	
+	survival_script: $survival_script
+	{
+		wave_spawn_distance: [ 26 28 ]
+		wave_max_distance: 48
+		reset_when_inactive: true		
+		conditional_entity_map: !TRIAL_OF_FIRE_CONDITIONAL_ENTITY_MAP {}
+
+		thread<crabs>:
+		{	
+			thread_run_condition_entity_not_dead: [ .fireclaw ]
+								
+			wait<60>: {}
+										
+			repeat<2>:
+			{
+				wait<[ 40 80 ]>: {}
+				wave<1>: !TRIAL_OF_FIRE_CRABS {}
+			}
+			
+			repeat<2>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<2>: !TRIAL_OF_FIRE_CRABS {}
+			}
+
+			wait<120>: {}
+
+			repeat<3>:
+			{
+				wait<[ 70 90 ]>: {} 
+				wave<[ 1 2 ]>: !TRIAL_OF_FIRE_CRABS {}
+			}			
+		
+			set_flag<!FLAG_SPAWN_CRAB_BOSS{}>: {}
+		
+			repeat:
+			{
+				wait<150>: {}
+				wave<1>: !TRIAL_OF_FIRE_CRABS {}
+			}
+		}
+		
+		thread<crab_boss>:
+		{
+			thread_run_condition_flag: [ !FLAG_SPAWN_CRAB_BOSS{} ]
+			thread_boss_map_entity_spawns: [ .boss_1 ]
+			spawn_boss<1>: [ .fireclaw ]	
+		}
+		
+		thread<rock_elementals>:
+		{	
+			thread_run_condition_entity_not_dead: [ .basaltis ]
+			thread_run_condition_flag: [ !FLAG_SPAWN_CRAB_BOSS{} ]
+			
+			wait<250>: {}
+					
+			repeat<2>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<1>: !TRIAL_OF_FIRE_ROCK_ELEMENTALS {}
+			}
+			
+			repeat<2>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<2>: !TRIAL_OF_FIRE_ROCK_ELEMENTALS {}
+			}
+		
+			wait<120>: {}
+		
+			repeat<2>:
+			{
+				wait<[ 60 80 ]>: {} 
+				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_ROCK_ELEMENTALS {}
+			}			
+			
+			set_flag<!FLAG_SPAWN_ROCK_ELEMENTAL_BOSS{}>: {}
+			
+			repeat:
+			{
+				wait<140>: {}
+				wave<1>: !TRIAL_OF_FIRE_ROCK_ELEMENTALS {}
+			}
+		}		
+		
+		thread<rock_elemental_boss>:
+		{
+			thread_run_condition_flag: [ !FLAG_SPAWN_ROCK_ELEMENTAL_BOSS{} ]
+			thread_boss_map_entity_spawns: [ .boss_2 ]
+			spawn_boss<1>: [ .basaltis ]	
+		}		
+		
+		thread<satyrs>:
+		{	
+			thread_run_condition_entity_not_dead: [ .rift_keeper ]
+			thread_run_condition_flag: [ !FLAG_SPAWN_ROCK_ELEMENTAL_BOSS{} ]
+			
+			wait<300>: {}
+					
+			repeat<3>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<1>: !TRIAL_OF_FIRE_SATYRS {}
+			}
+			
+			repeat<2>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<2>: !TRIAL_OF_FIRE_SATYRS {}
+			}
+		
+			wait<120>: {}
+		
+			repeat<3>:
+			{
+				wait<[ 50 80 ]>: {} 
+				wave<[ 1 2 ]>: !TRIAL_OF_FIRE_SATYRS {}
+			}			
+			
+			set_flag<!FLAG_SPAWN_RIFT_KEEPER_BOSS{}>: {}
+			
+			repeat:
+			{
+				wait<130>: {}
+				wave<1>: !TRIAL_OF_FIRE_SATYRS {}
+			}
+		}		
+		
+		thread<rift_keeper_boss>:
+		{
+			thread_run_condition_flag: [ !FLAG_SPAWN_RIFT_KEEPER_BOSS{} ]
+			thread_boss_map_entity_spawns: [ .boss_3 ]
+			spawn_boss<1>: [ .rift_keeper ]	
+		}		
+
+		thread<fire_elemental>:
+		{	
+			thread_run_condition_entity_not_dead: [ .ignivar ]
+			thread_run_condition_flag: [ !FLAG_SPAWN_RIFT_KEEPER_BOSS{} ]
+			
+			wait<200>: {}
+					
+			repeat<3>:
+			{
+				wait<[ 40 80 ]>: {}
+				wave<1>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}
+			
+			repeat<2>:
+			{
+				wait<[ 60 90 ]>: {}
+				wave<2>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}
+		
+			wait<120>: {}
+		
+			repeat<3>:
+			{
+				wait<[ 50 70 ]>: {} 
+				wave<[ 2 3 ]>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}			
+			
+			set_flag<!FLAG_SPAWN_FIRE_ELEMENTAL_BOSS{}>: {}
+			
+			repeat:
+			{
+				wait<120>: {}
+				wave<1>: !TRIAL_OF_FIRE_FIRE_ELEMENTALS {}
+			}
+		}		
+		
+		thread<rift_keeper_boss>:
+		{
+			thread_run_condition_flag: [ !FLAG_SPAWN_FIRE_ELEMENTAL_BOSS{} ]
+			thread_boss_map_entity_spawns: [ .boss_4 ]
+			spawn_boss<1>: [ .ignivar ]	
+		}				
+	}  
+
+	generator world:
+	{
+		terrain_palette_entry<lava>: "."
+		terrain_palette_entry<flat_volcanic>: "X"
+		object_map_entity_spawn: .object
+		connect_conversion_radius: [ 0 0 0 0 1 1 1 1 1 1 2 ]
+		outside_player_spawn_zone: .outside_player_spawn_zone
+		player_spawn_zone_radius: 8
+
+		player_spawn_entity: $entity
+		{
+			string: "Thalvaron"
+			
+			components:
+			{
+				position: { }		
+				gateway: 
+				{ 
+					maps: [ { map: thalvaron map_player_spawn: thalvaron_trial_of_fire_return_spawn } ]
+					schedule: none
+				}
+				sprite<static>: 
+				{ 
+					animations:
+					[
+						{ 
+							states: [ default in_combat spawning ] 
+							frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+							frame_delay: 120 
+							random_start_frame: true 
+							z_offset: -3
+						}
+					]		
+				}		
+			}
+		}
+	
+		execute all:
+		{
+			execute one_of:
+			{
+				execute paletted_map:
+				[
+					"...."
+					".XX."
+					".XX."
+					"...."
+				]
+			}
+			
+			execute double: { passes: 5 }
+			execute median_filter: 1
+			execute double: { passes: 1 no_mutations: true }
+			execute add_borders: lava
+			execute add_borders: lava
+			
+			execute overlay: 
+			{
+				noise: .rocks_overlay
+				terrain<black_rocks>: { above: 112 }				
+				border: 1
+			}
+			
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: temperature
+				noise: .temperature
+			}		
+			
+			execute overlay: 
+			{
+				noise: .magma_lane_overlay
+				terrain<coast_volcanic>: { above: 220 }				
+				border: 48
+			}
+
+			execute despeckle: { from_terrain: lava to_terrain: coast_volcanic }			
+			
+			execute player_spawns: 1		
+			
+			execute add_player_spawn_zone_boundary_entity:
+			{ 
+				range: [ 1 1 ]
+				entity: $entity @trial_of_fire_boundary_fire_1
+				{
+					components:
+					{
+						position: { }		
+						sprite: 
+						{ 
+							animations: 
+							[
+								{ 
+									states: [ default ] 
+									frames: [ fire_0 fire_1 fire_2 ] 
+									frame_delay: 120 
+									random_start_frame: true 
+									z_offset: -1
+								}			
+							]			
+						}		
+						visibility<static>: 
+						{
+							requirements: { requirement self<must_not_have_started_survival>: {} }
+						}
+					}				
+				}
+			}
+			
+			execute add_player_spawn_zone_boundary_entity:
+			{ 
+				range: [ 2 2 ]
+				entity: $entity @trial_of_fire_boundary_fire_2
+				{
+					components:
+					{
+						position: { }		
+						sprite: 
+						{ 
+							animations: 
+							[
+								{ 
+									states: [ default ] 
+									frames: [ fire_fade_0 fire_fade_1 fire_fade_2 ] 
+									frame_delay: 120 
+									random_start_frame: true 
+									z_offset: -1
+								}			
+							]			
+						}		
+						visibility<static>: 
+						{
+							requirements: { requirement self<must_not_have_started_survival>: {} }
+						}
+					}				
+				}
+			}		
+
+			execute add_special_entity_spawn:
+			{
+				placement<[ 4 5 ]>: in_player_spawn_distance_range
+				entity_spawn: [ .survival_start_object ]
+			}
+			
+			# Boss 1
+			execute add_special_entity_spawn:
+			{
+				placement<[ 20 32 ]>: in_player_spawn_distance_range_percentage
+				entity_spawn: [ .boss_1 ]
+			}			
+
+			# Boss 2
+			execute add_special_entity_spawn:
+			{
+				placement<[ 41 52 ]>: in_player_spawn_distance_range_percentage
+				entity_spawn: [ .boss_2 ]
+			}			
+			
+			# Boss 3
+			execute add_special_entity_spawn:
+			{
+				placement<[ 63 71 ]>: in_player_spawn_distance_range_percentage
+				entity_spawn: [ .boss_3 ]
+			}						
+			
+			# Boss 4
+			execute add_special_entity_spawn:
+			{
+				placement<[ 85 95 ]>: in_player_spawn_distance_range_percentage
+				entity_spawn: [ .boss_4 ]
+			}		
+		}				
+	}
+}

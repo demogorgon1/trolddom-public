@@ -24,6 +24,7 @@ namespace tpublic
 		void	GenerateDoodads(
 					uint32_t											aSeed,
 					const uint32_t*										aTileMap,
+					const uint32_t*										aCoverTileMap,
 					const Vec2&											aSize,
 					const Vec2&											aRegionPosition,
 					const Vec2&											aRegionSize,					

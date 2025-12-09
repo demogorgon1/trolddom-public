@@ -9,6 +9,7 @@
 #include <tpublic/Data/Pantheon.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Tag.h>
+#include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/WordGenerator.h>
 
 #include <tpublic/CreateName.h>
@@ -1218,14 +1219,25 @@ namespace tpublic
 
 					std::unordered_map<std::string, uint32_t> materials = baseMaterials;
 
-					uint32_t commonMaterialCount = 1 + (uint32_t)(itemPrefix->m_materialMultiplier * (float)level);
-					const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId);
-					assert(commonMaterialName != NULL);
-					materials[commonMaterialName] = commonMaterialCount; 
+					// Primary common material
+					{
+						uint32_t commonMaterialCount = 1 + (uint32_t)(0.5f * itemPrefix->m_materialMultiplier * (float)level);
+						const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId, false);
+						assert(commonMaterialName != NULL);
+						materials[commonMaterialName] = commonMaterialCount;
+					}
+
+					// Secondary common material
+					{
+						uint32_t commonMaterialCount = 1 + (uint32_t)(0.5f * itemPrefix->m_materialMultiplier * (float)level);
+						const char* commonMaterialName = _PickMaterialName(level, Rarity::ID_COMMON, professionTagId, true);
+						assert(commonMaterialName != NULL);
+						materials[commonMaterialName] += commonMaterialCount;
+					}
 
 					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_UNCOMMON)
 					{
-						const char* reagentName = _PickMaterialName(level, Rarity::ID_COMMON, reagentTagId);
+						const char* reagentName = _PickMaterialName(level, Rarity::ID_COMMON, reagentTagId, true);
 						uint32_t count = _GetRandomIntInRange<uint32_t>(1, 2);
 
 						if ((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_RARE)
@@ -1236,7 +1248,7 @@ namespace tpublic
 					
 					if((uint32_t)itemPrefix->m_rarity >= (uint32_t)Rarity::ID_RARE)
 					{
-						const char* reagentName = _PickMaterialName(level, Rarity::ID_UNCOMMON, reagentTagId);
+						const char* reagentName = _PickMaterialName(level, Rarity::ID_UNCOMMON, reagentTagId, true);
 						materials[reagentName] = _GetRandomIntInRange<uint32_t>(1, 2);
 					}
 
@@ -1654,13 +1666,15 @@ namespace tpublic
 	GenerationJob::_PickMaterialName(
 		uint32_t										aLevel,
 		Rarity::Id										aRarity,
-		uint32_t										aTagId)
+		uint32_t										aTagId,
+		bool											aMixed)
 	{
 		const TaggedData::Tag* tag = m_taggedItemData->Get()->GetTag(aTagId);
 		TP_VERIFY(tag != NULL, m_source->m_debugInfo, "No tagged item data: %u", aTagId);
 
 		uint32_t bestLevelDiff = UINT32_MAX;
 		std::vector<const Data::Item*> bestItems;
+		std::vector<const Data::Item*> otherItems;
 
 		for(uint32_t itemId : tag->m_dataIds)
 		{
@@ -1678,8 +1692,14 @@ namespace tpublic
 					bestItems = { item };
 					bestLevelDiff = levelDiff;
 				}
+				
+				if(aMixed && levelDiff <= 10 && item->m_itemLevel < aLevel)
+					otherItems.push_back(item);
 			}
 		}
+
+		for(const Data::Item* otherItem : otherItems)
+			bestItems.push_back(otherItem);
 
 		TP_VERIFY(bestItems.size() > 0, m_source->m_debugInfo, "Unable to pick material: %u", aTagId);
 		const Data::Item* materialItem = _GetRandomItemInVector(bestItems);

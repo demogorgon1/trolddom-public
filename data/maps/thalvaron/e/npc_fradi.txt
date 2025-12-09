@@ -1,0 +1,117 @@
+dialogue_screen .fradi:
+{
+	text: 
+	[	
+		"Huh, this is the forbidden island, you know."
+	]		
+	
+	options:
+	[
+		{ quest: .fradi_1 }
+	]
+}
+
+entity thalvaron_fradi: !NPC
+{
+	_string: "Fradi the Shaman"
+	_sprite: man_86
+	_sprite_dead: man_86_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fradi: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .fradi_1_quest_item: {}
+
+item .fradi_1_quest_item:
+{
+	icon: icon_junk_1
+	item_level: 25
+	loot_groups: [ .fradi_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Beach Junk"
+	quest: .fradi_1
+	stack: 6
+}
+
+loot_table .fradi_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .fradi_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_fradi_1_quest_item:
+{
+	string: "Junk"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ junk_2 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .fradi_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 25
+			despawn: true 		
+			required_quest: .fradi_1
+		}		
+	}
+}
+
+objective .fradi_1:
+{
+	string: "Beach Junk Collected"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .fradi_1_quest_item count: 6 }
+}
+
+{
+	${ _level: 27 }
+	item .fradi_1_a: !QUEST_REWARD_WRISTS{ _string: "Environmentalist's Bracers" _icon: icon_bracers_1 _constitution: 2 _wisdom: 3 _type: armor_cloth }
+	item .fradi_1_b: !QUEST_REWARD_SHOULDERS{ _string: "Shoulderguards of the Zilkore" _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _dexterity: 4 _type: armor_plate }
+}
+
+quest .fradi_1:
+{
+	string: "Cleaning the Beach"
+
+	text:
+	[
+		"Collect junk on the beaches of Zilkore and return to Fradi."
+	]
+	
+	description: 
+	[
+		"People thought I was weird, so they made me a shaman, and sent me off to live here. Well, what's so weird about wanting to keep the beaches clean? I don't know. Is it weird? Anyway, maybe"
+		"you can help me collect some junk. It's all over these beaches."
+	]
+
+	progress:
+	[
+		"Out of junk?"
+	]
+	
+	completion:
+	[
+		"Ah, looks good. Needs to be careful where you step when shoes are against your beliefs."
+	]
+
+	objectives: [ .fradi_1 ]
+	level: 25
+	reward_one_item: [ .fradi_1_a .fradi_1_b ]
+}

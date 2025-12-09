@@ -9,6 +9,7 @@
 #include "Systems/Minion.h"
 #include "Systems/NPC.h"
 #include "Systems/Openable.h"
+#include "Systems/PVPRift.h"
 #include "Systems/Rage.h"
 #include "Systems/RandomItemVendor.h"
 #include "Systems/Shrine.h"
@@ -38,6 +39,7 @@ namespace tpublic
 			_Register<Systems::Minion>();
 			_Register<Systems::NPC>();
 			_Register<Systems::Openable>();
+			_Register<Systems::PVPRift>();
 			_Register<Systems::Rage>();
 			_Register<Systems::RandomItemVendor>();
 			_Register<Systems::Shrine>();

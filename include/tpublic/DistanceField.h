@@ -43,6 +43,10 @@ namespace tpublic
 		void		GetPositionsMoreThanValue(
 						uint32_t										aValue,
 						std::vector<Vec2>&								aOut) const;
+		void		GetPositionsInRange(
+						uint32_t										aMin,
+						uint32_t										aMax,
+						std::vector<Vec2>&								aOut) const;
 
 		// Public data
 		int32_t		m_width = 0;

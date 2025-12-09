@@ -46,6 +46,12 @@ namespace tpublic
 		const char*			aCachePath,
 		const char*			aToolsPath)
 	{
+		if(!std::filesystem::exists(Helpers::Format("%s/opusenc.exe", aToolsPath)))
+		{
+			printf("WARNING: opusenc.exe not found in %s, not building sound data.", aToolsPath);
+			return;
+		}
+
 		std::filesystem::create_directories(aCachePath);
 
 		// Load sounds, converting them to opus if needed

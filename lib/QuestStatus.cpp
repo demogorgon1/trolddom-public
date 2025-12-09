@@ -9,6 +9,7 @@
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/QuestStatus.h>
+#include <tpublic/XPMetrics.h>
 
 namespace tpublic
 {
@@ -54,7 +55,7 @@ namespace tpublic
 			const Components::CombatPublic* combatPublic = aPlayerEntity->GetComponent<Components::CombatPublic>();
 			const Data::Quest* quest = aManifest->GetById<Data::Quest>(aQuestId);
 			int32_t levelDiff = (int32_t)quest->m_level - (int32_t)combatPublic->m_level;
-			aManifest->m_xpMetrics.GetLevelDiffColor(levelDiff, aOutColor);
+			aManifest->m_xpMetrics->GetLevelDiffColor(levelDiff, aOutColor);
 		}
 	}
 

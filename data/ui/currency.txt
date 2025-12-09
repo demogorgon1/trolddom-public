@@ -4,5 +4,7 @@ sprites:
 	
 	size: { width: 8 height: 8 }
 	sprite token_of_victory_currency: { }
+	sprite emblem_of_triumph_currency: { }
+	sprite badge_of_honor_currency: { }
 }
  

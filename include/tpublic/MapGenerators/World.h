@@ -35,6 +35,10 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WriteUInt(m_playerSpawnEntityId);
 				aWriter->WriteUInt(m_objectMapEntitySpawnId);
+				aWriter->WriteUInts(m_connectConversionRadius);
+				aWriter->WriteUInt(m_playerSpawnZoneRadius);
+				aWriter->WriteUInt(m_playerSpawnZoneId);
+				aWriter->WriteUInt(m_outsidePlayerSpawnZoneId);
 			}
 
 			bool
@@ -45,12 +49,24 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadUInt(m_objectMapEntitySpawnId))
 					return false;
+				if (!aReader->ReadUInts(m_connectConversionRadius))
+					return false;
+				if (!aReader->ReadUInt(m_playerSpawnZoneRadius))
+					return false;
+				if (!aReader->ReadUInt(m_playerSpawnZoneId))
+					return false;
+				if (!aReader->ReadUInt(m_outsidePlayerSpawnZoneId))
+					return false;
 				return true;
 			}
 
 			// Public data
 			uint32_t					m_playerSpawnEntityId = 0;
 			uint32_t					m_objectMapEntitySpawnId = 0;
+			std::vector<uint32_t>		m_connectConversionRadius;
+			uint32_t					m_playerSpawnZoneRadius = 0;
+			uint32_t					m_playerSpawnZoneId = 0;
+			uint32_t					m_outsidePlayerSpawnZoneId = 0;
 		};
 
 		struct MinorBosses
@@ -233,7 +249,9 @@ namespace tpublic::MapGenerators
 			{
 				INVALID_PLACEMENT,
 
-				PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS
+				PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS,
+				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE,
+				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE,
 			};
 
 			SpecialEntity()
@@ -247,8 +265,20 @@ namespace tpublic::MapGenerators
 				aSource->GetObject()->ForEachChild([&](
 					const SourceNode* aChild)
 				{
+					if(aChild->m_annotation)
+					{
+						if(aChild->m_annotation->m_children.size() == 2 && aChild->m_annotation->IsArrayType(SourceNode::TYPE_NUMBER))
+							m_range = UIntRange(aChild->m_annotation.get());
+						else
+							TP_VERIFY(false, aChild->m_annotation->m_debugInfo, "Invalid annotation.");
+					}
+
 					if(aChild->m_name == "placement" && aChild->IsIdentifier("far_away_from_player_spawns"))
 						m_placement = PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS;
+					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range"))
+						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE;
+					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range_percentage"))
+						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE;
 					else if(aChild->m_name == "entity_spawn")
 						aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawns);
 					else
@@ -262,6 +292,7 @@ namespace tpublic::MapGenerators
 			{
 				aWriter->WritePOD(m_placement);
 				aWriter->WriteUInts(m_mapEntitySpawns);
+				aWriter->WriteOptionalObject(m_range);
 			}
 
 			bool
@@ -272,12 +303,15 @@ namespace tpublic::MapGenerators
 					return false;
 				if(!aReader->ReadUInts(m_mapEntitySpawns))
 					return false;
+				if(!aReader->ReadOptionalObject(m_range))
+					return false;
 				return true;
 			}
 
 			// Public data
 			Placement								m_placement = INVALID_PLACEMENT;
 			std::vector<uint32_t>					m_mapEntitySpawns;
+			std::optional<UIntRange>				m_range;
 		};
 
 		struct Builder
@@ -308,10 +342,14 @@ namespace tpublic::MapGenerators
 			void			InitNoiseMap();
 			uint32_t		SampleNoiseMap(
 								const Vec2&					aPosition) const;
+			void			UpdateZoneMap(
+								const Vec2&					aPosition,
+								uint32_t					aZoneId);
 			void			InitBosses();
 			void			InitPlayerSpawns();
 			void			InitSpecialEntities();
 			void			InitRoutes();
+			void			InitZones();
 
 			// Public data
 			const Params*									m_params = NULL;
@@ -406,6 +444,12 @@ namespace tpublic::MapGenerators
 				std::vector<Vec2>							m_positions;
 			};
 
+			struct PlayerSpawnZoneBoundaryEntity
+			{
+				UIntRange									m_range;
+				uint32_t									m_entityId = 0;
+			};
+
 			std::vector<std::unique_ptr<Boss>>				m_bosses;
 			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
 			std::vector<std::unique_ptr<PlayerSpawn>>		m_playerSpawns;
@@ -414,7 +458,9 @@ namespace tpublic::MapGenerators
 			std::vector<Doodad>								m_doodads;
 			std::vector<SpecialEntity>						m_specialEntities;
 			std::vector<std::unique_ptr<Route>>				m_routes;
-
+			std::vector<uint32_t>							m_zoneMap;
+			std::vector<PlayerSpawnZoneBoundaryEntity>		m_playerSpawnZoneBoundaryEntities;
+		
 			UIntRange										m_levelRange;
 		};
 
@@ -441,6 +487,7 @@ namespace tpublic::MapGenerators
 				TYPE_PLAYER_SPAWNS,
 				TYPE_ADD_SPECIAL_ENTITY_SPAWN,
 				TYPE_ADD_RANDOM_ROUTE,
+				TYPE_ADD_PLAYER_SPAWN_ZONE_BOUNDARY_ENTITY,
 
 				NUM_TYPES
 			};
@@ -484,6 +531,8 @@ namespace tpublic::MapGenerators
 					return TYPE_ADD_SPECIAL_ENTITY_SPAWN;
 				else if(t == "add_random_route")
 					return TYPE_ADD_RANDOM_ROUTE;
+				else if (t == "add_player_spawn_zone_boundary_entity")
+					return TYPE_ADD_PLAYER_SPAWN_ZONE_BOUNDARY_ENTITY;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid execute type.", aSource->m_name.c_str());
 				return INVALID_TYPE;
 			}
@@ -926,21 +975,37 @@ namespace tpublic::MapGenerators
 			void
 			FromSource(
 				const IExecuteFactory*				/*aFactory*/,
-				const SourceNode*					/*aSource*/) override
+				const SourceNode*					aSource) override
 			{
+				aSource->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "from_terrain")
+						m_fromTerrainId = aChild->GetId(DataType::ID_TERRAIN);
+					else if(aChild->m_name == "to_terrain")
+						m_toTerrainId = aChild->GetId(DataType::ID_TERRAIN);
+					else 
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
 			}
 
 			void
 			ToStream(
-				IWriter*							/*aWriter*/) const override
+				IWriter*							aWriter) const override
 			{
+				aWriter->WriteUInt(m_fromTerrainId);
+				aWriter->WriteUInt(m_toTerrainId);
 			}
 
 			bool
 			FromStream(
 				const IExecuteFactory*				/*aFactory*/,
-				IReader*							/*aReader*/) override
+				IReader*							aReader) override
 			{
+				if(!aReader->ReadUInt(m_fromTerrainId))
+					return false;
+				if (!aReader->ReadUInt(m_toTerrainId))
+					return false;
 				return true;
 			}
 
@@ -948,6 +1013,8 @@ namespace tpublic::MapGenerators
 									Builder*			aBuilder) const override;
 
 			// Public data
+			uint32_t			m_fromTerrainId = 0;
+			uint32_t			m_toTerrainId = 0;
 		};
 
 		struct ExecuteAddBorders : public IExecute
@@ -1213,7 +1280,7 @@ namespace tpublic::MapGenerators
 					aWriter->WriteUInt(m_doodadId);
 					aWriter->WriteUInts(m_terrainIds);
 					m_range.ToStream(aWriter);
-					m_probability.ToStream(aWriter);
+					m_probability.ToStream(aWriter);					
 				}
 
 				bool
@@ -1265,6 +1332,8 @@ namespace tpublic::MapGenerators
 						m_terrains.push_back(std::make_unique<Terrain>(aChild));
 					else if (aChild->m_name == "doodad")
 						m_doodads.push_back(std::make_unique<Doodad>(aChild));
+					else if(aChild->m_name == "border")
+						m_border = aChild->GetUInt32();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
@@ -1278,6 +1347,7 @@ namespace tpublic::MapGenerators
 				aWriter->WriteUInt(m_noiseId);
 				aWriter->WriteObjectPointers(m_terrains);
 				aWriter->WriteObjectPointers(m_doodads);
+				aWriter->WriteUInt(m_border);
 			}
 
 			bool
@@ -1291,6 +1361,8 @@ namespace tpublic::MapGenerators
 					return false;
 				if (!aReader->ReadObjectPointers(m_doodads))
 					return false;
+				if (!aReader->ReadUInt(m_border))
+					return false;
 				return true;
 			}
 
@@ -1301,6 +1373,7 @@ namespace tpublic::MapGenerators
 			uint32_t										m_noiseId = 0;
 			std::vector<std::unique_ptr<Terrain>>			m_terrains;
 			std::vector<std::unique_ptr<Doodad>>			m_doodads;
+			uint32_t										m_border = 0;
 		};
 
 		struct ExecuteTerrainModifierMap : public IExecute
@@ -1745,6 +1818,59 @@ namespace tpublic::MapGenerators
 
 			// Public data
 			uint32_t					m_routeId = 0;
+		};
+
+		struct ExecuteAddPlayerSpawnZoneBoundaryEntity : public IExecute
+		{
+			static const Type TYPE = TYPE_ADD_PLAYER_SPAWN_ZONE_BOUNDARY_ENTITY;
+
+			ExecuteAddPlayerSpawnZoneBoundaryEntity() : IExecute(TYPE) { }
+			virtual	~ExecuteAddPlayerSpawnZoneBoundaryEntity() { }
+
+			// IExecute implementation
+			void
+			FromSource(
+				const IExecuteFactory*				/*aFactory*/,
+				const SourceNode*					aSource) override
+			{				
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "range")					
+						m_range = UIntRange(aChild);
+					else if(aChild->m_name == "entity")
+						m_entityId = aChild->GetId(DataType::ID_ENTITY);
+					else 
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*							aWriter) const override
+			{
+				m_range.ToStream(aWriter);
+				aWriter->WriteUInt(m_entityId);
+			}
+
+			bool
+			FromStream(
+				const IExecuteFactory*				/*aFactory*/,
+				IReader*							aReader) override
+			{
+				if (!m_range.FromStream(aReader))
+					return false;
+				if (!aReader->ReadUInt(m_entityId))
+					return false;
+				return true;
+			}
+
+			void				Run(
+									Builder*			aBuilder) const override;
+
+			// Public data
+			UIntRange					m_range;
+			uint32_t					m_entityId = 0;
 		};
 
 		// MapGeneratorBase implementation

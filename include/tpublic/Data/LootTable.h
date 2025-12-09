@@ -2,6 +2,7 @@
 
 #include "../DataBase.h"
 #include "../Requirement.h"
+#include "../UIntRange.h"
 
 namespace tpublic
 {
@@ -87,7 +88,7 @@ namespace tpublic
 						if(aChild->m_name == "weight")
 							m_weight = aChild->GetUInt32();
 						else if (aChild->m_name == "quantity")
-							m_quantity = aChild->GetUInt32();
+							m_quantity = UIntRange(aChild);
 						else if(aChild->m_name == "loot_group")
 							m_lootGroupId = aChild->GetId(DataType::ID_LOOT_GROUP);
 						else if (aChild->m_name == "loot_cooldown")
@@ -109,7 +110,7 @@ namespace tpublic
 				{
 					aStream->WriteUInt(m_weight);
 					aStream->WriteUInt(m_lootGroupId);
-					aStream->WriteUInt(m_quantity);
+					m_quantity.ToStream(aStream);
 					aStream->WriteUInts(m_creatureTypes);
 					aStream->WriteObjects(m_requirements);
 					aStream->WriteUInt(m_lootCooldownId);
@@ -125,7 +126,7 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadUInt(m_lootGroupId))
 						return false;
-					if (!aStream->ReadUInt(m_quantity))
+					if (!m_quantity.FromStream(aStream))
 						return false;
 					if (!aStream->ReadUInts(m_creatureTypes))
 						return false;
@@ -161,7 +162,7 @@ namespace tpublic
 				// Public data
 				uint32_t						m_weight = 1;
 				uint32_t						m_lootGroupId = 0;
-				uint32_t						m_quantity = 1;
+				UIntRange						m_quantity = { 1, 1 };
 				std::vector<uint32_t>			m_creatureTypes;
 				std::vector<Requirement>		m_requirements;
 				uint32_t						m_lootCooldownId = 0;

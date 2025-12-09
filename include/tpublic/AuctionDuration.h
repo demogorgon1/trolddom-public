@@ -10,10 +10,10 @@ namespace tpublic
 		{
 			INVALID_ID,
 
-			ID_6_HOURS,
 			ID_12_HOURS,
 			ID_24_HOURS,
 			ID_48_HOURS,
+			ID_72_HOURS,
 
 			NUM_IDS
 		};
@@ -30,10 +30,10 @@ namespace tpublic
 		{
 			{ NULL, 0, 0 },
 
-			{ "6 Hours", 5, 6 * 60 * 60 },
-			{ "12 Hours", 10, 12 * 60 * 60 },
-			{ "24 Hours", 15, 24 * 60 * 60 },
-			{ "48 Hours", 20, 48 * 60 * 60 },
+			{ "12 Hours", 2, 12 * 60 * 60 },
+			{ "24 Hours", 4, 24 * 60 * 60 },
+			{ "48 Hours", 6, 48 * 60 * 60 },
+			{ "72 Hours", 8, 72 * 60 * 60 },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

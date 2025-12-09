@@ -109,11 +109,24 @@ sprites:
 
 	cursor: { position: [ 0 48 ] }
 	sprite doodad_sign_right: { flags: [ tile_walkable ] }
+	sprite doodad_bone_1: { flags: [ tile_walkable ] }
+	sprite doodad_bone_2: { flags: [ tile_walkable ] }
+	sprite doodad_bone_3: { flags: [ tile_walkable ] }
+	sprite doodad_sarcophagus_open: { flags: [ tile_walkable ] }
+	sprite doodad_sarcophagus_closed: { flags: [ tile_walkable ] }
+	sprite doodad_statue: { flags: [ ] }
 	
 	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite large_statue: { }
 	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
+	size: { width: 80 height: 80 } sprite ground_mark_2: { flags: [ tile_walkable ] }
+	
+	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
+	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
+	sprite doodad_potted_plant_2: { flags: [ tile_walkable ] }
+	sprite doodad_potted_plant_3: { flags: [ tile_walkable ] }
+	sprite doodad_potted_plant_4: { flags: [ tile_walkable ] }
 }
 
 doodad small_rocks:
@@ -152,6 +165,30 @@ doodad small_rocks_brown:
 	auto_probability: [ 1 40 ]
 }
 
+doodad desert_small_rocks_brown:
+{
+	sprites: [ doodad_rocks_5 doodad_rocks_6 doodad_rocks_7 doodad_rocks_8 doodad_rocks_9 doodad_rocks_11 doodad_rocks_12 ]
+	map_palette<"x">: { must_be_one_of: [ sand_2 sand_3 ] occupy: true }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: [ 1 80 ]
+}
+
+doodad desert_small_rocks:
+{
+	sprites: [ doodad_rocks_1 doodad_rocks_2 doodad_rocks_3 doodad_rocks_4 doodad_rocks_10 doodad_rocks_13 doodad_rocks_14 ]
+	map_palette<"x">: { must_be_one_of: [ sand_2 sand_3 ] occupy: true  }
+	map_palette<"y">: { must_not_be_one_of: [ forest forest_2 pine_forest_1 pine_forest_2 pine_forest_3 ] } 
+	map: [ "y"
+	       "x" ]
+	map_offset: [ 0 -1 ]
+	
+	auto_probability: [ 1 64 ]
+}
+
 doodad grass_patch:
 {
 	sprites: [ doodad_grass_1 doodad_grass_2 ]
@@ -163,6 +200,7 @@ doodad grass_patch:
 	map_offset: [ -1 -1 ]
 	
 	auto_probability: [ 1 56 ]
+	no_cover: true
 }
 
 !define local GROUND_AUTO_DOODAD
@@ -186,7 +224,7 @@ doodad jungle_plant: !GROUND_AUTO_DOODAD { _sprites: [ doodad_jungle_1 doodad_ju
 doodad pier_edge:
 {
 	sprites: [ doodad_pier_edge_1 ]
-	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
 	map_palette<"y">: { must_be_one_of: [ wood_floor ] } 
 	map: [ "y"
 	       "x" ]
@@ -198,8 +236,8 @@ doodad pier_edge:
 doodad pier_edge_2:
 {
 	sprites: [ doodad_pier_edge_2 ]
-	map_palette<"x">: { must_be_one_of: [ water ] }
-	map_palette<"y">: { must_be_one_of: [ road_1 road_2 ] } 
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
+	map_palette<"y">: { must_be_one_of: [ road_1 road_2 rock_floor rock_floor_alt_1 rock_floor_alt_2 ] } 
 	map: [ "y"
 	       "x" ]
 	map_offset: [ 0 -1 ]
@@ -210,7 +248,7 @@ doodad pier_edge_2:
 doodad pier_edge_3:
 {
 	sprites: [ doodad_pier_edge_1 ]
-	map_palette<"x">: { must_be_one_of: [ water ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
 	map_palette<"y">: { must_be_one_of: [ outside_wood_floor_1 ] } 
 	map: [ "y"
 	       "x" ]
@@ -236,6 +274,40 @@ doodad fs_ground_mark:
 {
 	sprites: [ fs_ground_mark ]
 	map_palette<"x">: { occupy: true } map: [ "x" ]
+}
+
+doodad ground_mark_2:
+{
+	sprites: [ ground_mark_2 ]
+	map_palette<"x">: { occupy: true } map: [ "x" ]
+}
+
+doodad potted_plant_1:
+{
+	sprites: [ doodad_potted_plant_1 ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
+}
+
+doodad potted_plant_2:
+{
+	sprites: [ doodad_potted_plant_2 ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
+}
+
+doodad potted_plant_3:
+{
+	sprites: [ doodad_potted_plant_3 ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
+}
+
+doodad potted_plant_4:
+{
+	sprites: [ doodad_potted_plant_4 ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
 }
 
 doodad crates: { sprites: [ doodad_crates_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
@@ -289,4 +361,7 @@ doodad dark_stairs_center: { sprites: [ doodad_dark_stairs_center ] map_palette<
 doodad dark_stairs_right: { sprites: [ doodad_dark_stairs_right ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad closed_gate: { sprites: [ doodad_closed_gate ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sign_generic_right: { sprites: [ doodad_sign_right ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
-
+doodad bones: { sprites: [ doodad_bone_1 doodad_bone_2 doodad_bone_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad sarcophagus_open: { sprites: [ doodad_sarcophagus_open ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad sarcophagus_closed: { sprites: [ doodad_sarcophagus_closed ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad statue: { sprites: [ doodad_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] } 

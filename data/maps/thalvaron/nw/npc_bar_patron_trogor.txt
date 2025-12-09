@@ -1,0 +1,70 @@
+dialogue_screen .bar_patron_trogor_dialogue_2:
+{
+	text: 
+	[
+		"Uhm, no."
+	]
+}
+
+dialogue_screen .bar_patron_trogor_dialogue:
+{
+	text: 
+	[	
+		"Be careful! The walls have ears."
+	]		
+	
+	options:
+	[
+		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .bar_patron_trogor_dialogue_2 requirement self<must_have_active_quest>: .gnome_1 }	
+		{ quest<offer_only>: .bar_patrol_trogor_1 }
+	]
+}
+
+
+dialogue_root .bar_patron_trogor_dialogue:
+{
+	.bar_patron_trogor_dialogue: { }
+}
+
+entity thalvaron_bar_patron_trogor: !NPC
+{
+	_string: "Trogor"
+	_dialogue_root: .bar_patron_trogor_dialogue
+	_sprite: man_2
+	_sprite_dead: man_2_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+quest .bar_patrol_trogor_1:
+{
+	string: "Delivery Problems"
+
+	text:
+	[
+		"Find the secret tunnel from the royal gardens, go into the forest, and find Trogor's business partner."
+	]
+	
+	description: 
+	[
+		"You look like a morally questionably $class$, who will accept any task as long as you're paid. Well. You know the royal gardens? Just by the duck pond"
+		"there is an old building, hasn't been used for a while. In there you'll find a tunnel that leads north into the forest. You'll find my business partner there. Please hurry, it's quite urgent."
+		"Don't ask any questions, just do the job and you'll be rewarded."
+	]
+
+	completion:
+	[
+		"Trogor sent you?"
+	]
+	
+	level: 23
+	reward_cash_multiplier: 0.25
+	reward_xp_multiplier: 0.25
+}
+

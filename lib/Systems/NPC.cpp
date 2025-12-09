@@ -14,6 +14,7 @@
 #include <tpublic/Components/ThreatTarget.h>
 #include <tpublic/Components/VisibleAuras.h>
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Faction.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NPCBehaviorState.h>
@@ -21,6 +22,7 @@
 
 #include <tpublic/Systems/NPC.h>
 
+#include <tpublic/ApplyNPCMetrics.h>
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Haste.h>
 #include <tpublic/Helpers.h>
@@ -34,6 +36,8 @@
 #include <tpublic/Manifest.h>
 #include <tpublic/MapData.h>
 #include <tpublic/MapRouteData.h>
+#include <tpublic/NPCMetrics.h>
+#include <tpublic/RealmModifierList.h>
 #include <tpublic/Requirements.h>
 #include <tpublic/StealthUtils.h>
 #include <tpublic/WorldInfoMap.h>
@@ -45,15 +49,17 @@ namespace tpublic::Systems
 	{
 		bool
 		_IsInMeleeRange(
-			const Vec2&				aPosition,
-			const EntityInstance*	aEntityInstance)
+			const Components::Position* aPosition,
+			const EntityInstance*		aEntityInstance)
 		{
 			if(aEntityInstance == NULL)
 				return false;
-			const Components::Position* position = aEntityInstance->GetComponent<Components::Position>();
-			if(position == NULL)
+
+			const Components::Position* otherPosition = aEntityInstance->GetComponent<Components::Position>();
+			if(otherPosition == NULL)
 				return false;
-			return aPosition.DistanceSquared(position->m_position) <= 1;
+
+			return Helpers::CalculateDistanceSquared(aPosition, otherPosition) <= 1;
 		}
 	}
 
@@ -65,6 +71,7 @@ namespace tpublic::Systems
 	{
 		RequireComponent<Components::Auras>();
 		RequireComponent<Components::CombatPublic>();
+		RequireComponent<Components::CombatPrivate>();
 		RequireComponent<Components::Lootable>();
 		RequireComponent<Components::NPC>();
 		RequireComponent<Components::Position>();
@@ -125,6 +132,13 @@ namespace tpublic::Systems
 			if(npc->m_routeId != 0)
 				npc->m_effectiveRouteId = npc->m_routeId;
 		}
+
+		// Init "no combat tag" flag 
+		if(npc->m_noCombatTag)
+		{
+			Components::Tag* tag = GetComponent<Components::Tag>(aComponents);
+			tag->m_noCombatTag = true;
+		}
 	}
 
 	EntityState::Id
@@ -136,14 +150,28 @@ namespace tpublic::Systems
 		ComponentBase**			aComponents,
 		Context*				aContext) 
 	{		
+		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+
 		if(aEntityState == EntityState::ID_SPAWNING)
-			return aTicksInState < SPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DEFAULT;
+		{
+			if(aTicksInState < SPAWN_TICKS)
+				return EntityState::CONTINUE;
+
+			const Components::NPC::StateEntry* spawningState = npc->GetState(EntityState::ID_SPAWNING);
+			if (spawningState != NULL && spawningState->m_barks.size() > 0)
+			{
+				const Chat* bark = Helpers::RandomItemPointer(*aContext->m_random, spawningState->m_barks);
+				assert(bark != NULL);
+				aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
+			}
+
+			return EntityState::ID_DEFAULT;
+		}
 
 		if (aEntityState == EntityState::ID_DESPAWNING)
 			return aTicksInState < DESPAWN_TICKS ? EntityState::CONTINUE : EntityState::ID_DESPAWNED;
 
 		const Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
-		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
 		Components::ThreatTarget* threat = GetComponent<Components::ThreatTarget>(aComponents);
 		const Components::Auras* auras = GetComponent<Components::Auras>(aComponents);
@@ -156,7 +184,7 @@ namespace tpublic::Systems
 		}
 
 		bool despawnOnLeaveState = state != NULL && state->m_despawnOnLeave;	
-		uint32_t despawnAfterTicks = state != NULL && state->m_despawnAfterTicks;
+		uint32_t despawnAfterTicks = state != NULL ? state->m_despawnAfterTicks : 0;
 
 		if(despawnAfterTicks != 0 && (uint32_t)aTicksInState > despawnAfterTicks)
 			return EntityState::ID_DESPAWNING;
@@ -194,8 +222,10 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
+					lootable->m_extraLootTableId = auras->GetLootTableId(*aContext->m_random, GetManifest());
+
 					const MapData* mapData = aContext->m_worldView->WorldViewGetMapData();
-					if(lootable->m_lootTableId != 0 || mapData->m_mapInfo.m_mapLootTableIds.size() > 0)
+					if(lootable->m_lootTableId != 0 || mapData->m_mapInfo.m_mapLootTableIds.size() > 0 || lootable->m_extraLootTableId != 0)
 						aContext->m_eventQueue->EventQueueGenerateLoot(aEntityInstanceId);
 				}
 			}
@@ -232,7 +262,7 @@ namespace tpublic::Systems
 
 		Vec2 leashPosition = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_lastTargetPosition : position->m_position;
 		int32_t leashDistanceSquared = aEntityState == EntityState::ID_IN_COMBAT ? npc->m_anchorPosition.DistanceSquared(leashPosition) : 0;
-		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics.m_minLeashRange * GetManifest()->m_npcMetrics.m_minLeashRange;
+		int32_t minLeashRangeSquared = GetManifest()->m_npcMetrics->m_minLeashRange * GetManifest()->m_npcMetrics->m_minLeashRange;
 
 		bool isSurvivalMap = aContext->m_worldView->WorldViewGetMapData()->m_mapInfo.m_survivalScriptId != 0;
 
@@ -242,7 +272,7 @@ namespace tpublic::Systems
 			threat->m_table.Update(aContext->m_tick, threatRemovedEntities);
 
 			for (const SourceEntityInstance& threatRemovedEntity : threatRemovedEntities)
-				aContext->m_eventQueue->EventQueueThreat(threatRemovedEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);
+				aContext->m_eventQueue->EventQueueThreat(threatRemovedEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick, 0);
 		}
 		else if(npc->m_inactiveEncounterDespawn) 
 		{
@@ -308,7 +338,7 @@ namespace tpublic::Systems
 
 				IWorldView::EntityQuery entityQuery;
 				entityQuery.m_position = position->m_position;
-				entityQuery.m_maxDistance = GetManifest()->m_npcMetrics.GetMaxAggroRange();
+				entityQuery.m_maxDistance = GetManifest()->m_npcMetrics->GetMaxAggroRange();
 				entityQuery.m_flags = IWorldView::EntityQuery::FLAG_LINE_OF_SIGHT;
 
 				aContext->m_worldView->WorldViewQueryEntityInstances(entityQuery, [&](
@@ -328,9 +358,18 @@ namespace tpublic::Systems
 								int32_t aggroRange = 0;
 
 								if (blind)
+								{
 									aggroRange = 1;
+								}
 								else
-									aggroRange = GetManifest()->m_npcMetrics.GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
+								{
+									aggroRange = GetManifest()->m_npcMetrics->GetAggroRangeForLevelDifference((int32_t)combat->m_level, (int32_t)targetCombatPublic->m_level);
+
+									aggroRange += npc->m_aggroRangeBias;
+
+									if(aggroRange < 1)
+										aggroRange = 1;
+								}
 
 								if (targetCombatPublic->m_stealthLevel > 0)
 								{
@@ -350,18 +389,18 @@ namespace tpublic::Systems
 									}
 
 									if (detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity)))
-										aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick);
+										aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick, 0);
 								}
 							}
 						}
 						else if (topThreatEntity != NULL && aEntity->GetState() == EntityState::ID_DEFAULT && (!faction->IsNeutralOrFriendly() || faction->IsPVP()))
 						{
 							const Components::CombatPublic* nearbyNonPlayerCombatPublic = aEntity->GetComponent<Components::CombatPublic>();
-							int32_t aggroAssistRange = GetManifest()->m_npcMetrics.m_aggroAssistRange;
+							int32_t aggroAssistRange = GetManifest()->m_npcMetrics->m_aggroAssistRange;
 							if(nearbyNonPlayerCombatPublic != NULL && nearbyNonPlayerCombatPublic->m_factionId == combat->m_factionId && aDistanceSquared <= aggroAssistRange * aggroAssistRange)
 							{	
 								int32_t threatTick = aContext->m_tick; // threat->m_table.GetTick(); (FIXME: which makes most sense)
-								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threatTick);
+								aContext->m_eventQueue->EventQueueThreat({ topThreatEntity->GetEntityInstanceId(), topThreatEntity->GetSeq() }, aEntity->GetEntityInstanceId(), 1, threatTick, 0);
 							}
 						}
 					}
@@ -403,7 +442,7 @@ namespace tpublic::Systems
 		case EntityState::ID_DEFAULT:
 			if(npc->m_spawnWithTarget.has_value())
 			{
-				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entity, aEntityInstanceId, npc->m_spawnWithTarget->m_threat, aContext->m_tick);
+				aContext->m_eventQueue->EventQueueThreat(npc->m_spawnWithTarget->m_entity, aEntityInstanceId, npc->m_spawnWithTarget->m_threat, aContext->m_tick, 0);
 				npc->m_spawnWithTarget.reset();
 			}
 			else if (!threat->m_table.IsEmpty())
@@ -467,7 +506,12 @@ namespace tpublic::Systems
 					switch(npc->m_npcBehaviorState->m_behavior)
 					{
 					case NPCBehavior::ID_SURVIVAL_WAVE:
-						
+					case NPCBehavior::ID_SURVIVAL_BOSS:
+						if(npc->m_npcBehaviorState->m_despawnIfLostPlayer)
+						{
+							if(!aContext->m_worldView->WorldViewIsSurvivalActive())
+								returnValue = EntityState::ID_DESPAWNING;
+						}
 						break;
 
 					case NPCBehavior::ID_PATROLLING:
@@ -527,7 +571,7 @@ namespace tpublic::Systems
 									if (mapRouteData != NULL)
 									{
 										if (npc->m_subRouteIndex == SIZE_MAX)
-											npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);
+											npc->m_subRouteIndex = mapRouteData->GetSubRouteIndexByPosition(npc->m_effectiveRouteId, position->m_position);											
 
 										Vec2 direction;
 										bool shouldChangeDirection = false;
@@ -599,7 +643,7 @@ namespace tpublic::Systems
 								}
 
 								if (npc->m_npcBehaviorState != NULL)
-									npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks;
+									npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_npcBehaviorState->m_patrolMoveIntervalTicks + ((*aContext->m_random)() & 1);
 							}
 						}
 						break;
@@ -815,7 +859,7 @@ namespace tpublic::Systems
 								if(existingTargetThreat != 0)
 								{
 									// To switch the new target must have 8% more threat if in melee range or 25% more threat if outside
-									bool newTargetInMeleeRange = _IsInMeleeRange(position->m_position, aContext->m_worldView->WorldViewSingleEntityInstance(topThreatEntry->m_key.m_entityInstanceId));
+									bool newTargetInMeleeRange = _IsInMeleeRange(position, aContext->m_worldView->WorldViewSingleEntityInstance(topThreatEntry->m_key.m_entityInstanceId));
 									int32_t newTargetThreatPercentageIncrease = (100 * (topThreatEntry->m_threat - existingTargetThreat)) / existingTargetThreat;
 
 									if((newTargetInMeleeRange && newTargetThreatPercentageIncrease >= 8) || (!newTargetInMeleeRange && newTargetThreatPercentageIncrease >= 25))
@@ -860,7 +904,7 @@ namespace tpublic::Systems
 
 						if (target == NULL || target->GetState() == EntityState::ID_DEAD || target->GetSeq() != npc->m_targetEntity.m_entityInstanceSeq)
 						{
-							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick);
+							aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, INT32_MIN, aContext->m_tick, 0);
 
 							npc->m_castInProgress.reset();
 							npc->m_targetEntity = SourceEntityInstance();
@@ -888,6 +932,9 @@ namespace tpublic::Systems
 									if(self != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, target))
 										continue;
 								}
+
+								if (npc->m_encounterId != 0 && aContext->m_worldView->WorldViewIsEncounterBlockingNPCAbility(npc->m_encounterId, ability->m_id))
+									continue;
 
 								if (abilityEntry.m_targetType == Components::NPC::AbilityEntry::TARGET_TYPE_DEFAULT)
 								{
@@ -1050,6 +1097,8 @@ namespace tpublic::Systems
 								int32_t ticksSinceLastAttack = aContext->m_tick - npc->m_lastAttackTick;
 								if(ticksSinceLastAttack > 30 && npc->m_maxLeashDistance > 0 && leashDistanceSquared > (int32_t)(npc->m_maxLeashDistance * npc->m_maxLeashDistance))
 								{
+									// FIXME: don't do this in dungeons
+
 									// Exceeded max leash distance nad haven't been able to attack for a bit. Evade!
 									aContext->m_eventQueue->EventQueueThreatClear(aEntityInstanceId);
 								}
@@ -1135,7 +1184,31 @@ namespace tpublic::Systems
 											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, pushEntityInstance->GetEntityInstanceId(), Vec2(), pushAbility, ItemInstanceReference(), NULL);
 										}
 										else
-										{
+										{	
+											if(position->m_blockingEntityInstanceId != 0)
+											{
+												const EntityInstance* blockingEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(position->m_blockingEntityInstanceId);
+												if(blockingEntityInstance != NULL && blockingEntityInstance->HasComponent<Components::ThreatSource>())
+												{
+													// FIXME: this could be abused by tricking unsuspecting players to block a mob. But if we put on some kind of "must be in same group" requirement,
+													// it could be abused the other way around.
+
+													// Basically let the blocking player/minion taunt - AND - reduce threat on current target to get a fast switch
+													aContext->m_eventQueue->EventQueueThreat(	
+														{ blockingEntityInstance->GetEntityInstanceId(), blockingEntityInstance->GetSeq() },
+														aEntityInstanceId,
+														INT32_MAX,
+														aContext->m_tick,
+														0);
+
+													aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.8f);
+												}
+												else
+												{
+													position->m_blockingEntityInstanceId = 0;
+												}
+											}
+
 											IEventQueue::EventQueueMoveRequest moveRequest;
 											if (npc->m_npcMovement.GetMoveRequest(
 												aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(),
@@ -1143,6 +1216,7 @@ namespace tpublic::Systems
 												targetPosition->m_position,
 												aContext->m_tick,
 												position->m_lastMoveTick,
+												npc->m_lastAttackTick,
 												*aContext->m_random,
 												moveRequest))
 											{
@@ -1151,15 +1225,21 @@ namespace tpublic::Systems
 
 												aContext->m_eventQueue->EventQueueMove(moveRequest);
 
-												npc->m_moveCooldownUntilTick = aContext->m_tick + 2;
+												npc->m_moveCooldownUntilTick = aContext->m_tick + npc->m_combatMoveIntervalTicks;
 												npc->m_lastCombatMoveTick = aContext->m_tick;
+												npc->m_moveFailureAccum = 0;
 											}
-											else
+											else 
 											{
-												// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
-												position->m_lastMoveTick = aContext->m_tick;
+												npc->m_moveFailureAccum++;
 
-												aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+												if(npc->m_moveFailureAccum > 1)
+												{
+													// Seems like we're stuck chasing the top threat target. Reduce threat on that one.
+													position->m_lastMoveTick = aContext->m_tick;
+
+													aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.5f);
+												}
 											}
 										}
 									}
@@ -1168,7 +1248,7 @@ namespace tpublic::Systems
 								{
 									position->m_lastMoveTick = aContext->m_tick;
 
-									aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0.5f);
+									aContext->m_eventQueue->EventQueueThreat(npc->m_targetEntity, aEntityInstanceId, -1, 0, 0, 0.5f);
 								}
 							}
 						}
@@ -1192,7 +1272,7 @@ namespace tpublic::Systems
 			{
 				// FIXME: since (future me: what?)
 				IEventQueue::EventQueueMoveRequest moveRequest;
-				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, *aContext->m_random, moveRequest))
+				if (!npc->m_npcMovement.GetMoveRequest(aContext->m_worldView->WorldViewGetMapData()->m_mapPathData.get(), position->m_position, npc->m_anchorPosition, aContext->m_tick, position->m_lastMoveTick, 0, *aContext->m_random, moveRequest))
 				{
 					// Can't seem to move, teleport all the way back to anchor
 					moveRequest.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
@@ -1230,6 +1310,19 @@ namespace tpublic::Systems
 		Components::CombatPublic* combat = GetComponent<Components::CombatPublic>(aComponents);
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
 		Components::Position* position = GetComponent<Components::Position>(aComponents);
+
+		if (combat->IsElite())
+		{
+			bool isEasyElitesEnabled = aContext->m_worldView->WorldViewGetRealmModifierList()->GetFlag(RealmModifier::ID_EASY_ELITES, false);
+
+			if (isEasyElitesEnabled)
+			{
+				// FIXME: if a component is static (like CombatPrivate often is), this will get messed up if entity updates ever get parallelized
+				Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+
+				ApplyNPCMetrics::MakeEliteEasy(GetManifest()->m_npcMetrics.get(), combat, combatPrivate);
+			}
+		}
 
 		if(npc->m_restoreResources)
 		{

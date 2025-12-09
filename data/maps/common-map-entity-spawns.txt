@@ -32,31 +32,50 @@ map_entity_spawn underworld_shrine_top_deity:
 	entity underworld_shrine_top_deity: { init_state: default } 
 }
 
+map_entity_spawn dominion_of_strife_deity_1_shrine:
+{	
+	spawn_timer: { despawn_required: true }
+	entity dominion_of_strife_deity_1_shrine: { init_state: default } 
+}
+
+map_entity_spawn dominion_of_strife_deity_2_shrine:
+{	
+	spawn_timer: { despawn_required: true }
+	entity dominion_of_strife_deity_2_shrine: { init_state: default } 
+}
+
+map_entity_spawn dominion_of_strife_deity_3_shrine:
+{	
+	spawn_timer: { despawn_required: true }
+	entity dominion_of_strife_deity_3_shrine: { init_state: default } 
+}
+
 map_entity_spawn mining:
 {	
 	spawn_timer: { despawn_required: true }
 
-	entity mining_gold_vein: { level: [ 4 22 ] weight: 1 init_state: default } 
+	entity mining_gold_vein: { level: [ 4 25 ] weight: 1 init_state: default } 
 
 	entity mining_copper_vein: { level: [ 1 6 ] weight: 5 init_state: default } 
 	entity mining_iron_vein: { level: [ 4 12 ] weight: 5 init_state: default } 
 	entity mining_azuryte_vein: { level: [ 11 16 ] weight: 5 init_state: default } 
 	entity mining_mithril_vein: { level: [ 14 19 ] weight: 5 init_state: default } 
-	entity mining_brontium_vein: { level: [ 17 22 ] weight: 5 init_state: default } 
+	entity mining_brontium_vein: { level: [ 17 30 ] weight: 5 init_state: default } 
 }
 
 map_entity_spawn herbalism:
 {	
 	spawn_timer: { despawn_required: true }
 
-	entity herbalism_wild_herbs: { level: [ 1 22 ] weight: 1 init_state: default must_not_have_tile_flags: [ tile_snow ] }
+	entity herbalism_wild_herbs: { level: [ 1 28 ] weight: 1 init_state: default must_not_have_tile_flags: [ tile_snow ] }
 
 	entity herbalism_dewleaf: { level: [ 1 6 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] }
 	entity herbalism_mistflower: { level: [ 4 12 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_emberbloom: { level: [ 11 16 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_sunweave: { level: [ 14 19 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
-	entity herbalism_sylmarel: { level: [ 17 22 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
+	entity herbalism_sylmarel: { level: [ 17 28 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_frostbloom: { level: [ 11 20 ] weight: 4 init_state: default must_have_tile_flags: [ tile_snow ] } 
+	entity herbalism_sand_orchid: { level: [ 28 30 ] weight: 4 init_state: default must_have_tile_flags: [ tile_desert ] } 
 }
 
 map_entity_spawn potatoes:
@@ -101,6 +120,11 @@ map_entity_spawn fireplace_unlit:
 	entity fireplace_unlit: { weight: 1 }
 }
 
+map_entity_spawn fire:
+{
+	entity fire: { }
+}
+
 map_entity_spawn stash:
 {
 	entity stash: { }
@@ -143,6 +167,11 @@ map_entity_spawn voraghul_portal_closed:
 	entity voraghul_portal_closed: { weight: 1 init_state: default }	
 }
 
+map_entity_spawn voraghul_portal_open:
+{
+	entity voraghul_portal_open: { weight: 1 init_state: default }	
+}
+
 map_entity_spawn target_dummy:
 {
 	entity target_dummy: { weight: 1 }
@@ -166,5 +195,15 @@ map_entity_spawn seagull:
 map_entity_spawn homunculus:
 {	
 	entity homunculus: { init_state: default } 
+}
+
+map_entity_spawn standing_stone:
+{
+	entity standing_stone: { init_state: default }
+}
+
+map_entity_spawn dominion_of_strife_rift:
+{
+	entity dominion_of_strife_rift: { weight: 1 init_state: spawning }	
 }
 

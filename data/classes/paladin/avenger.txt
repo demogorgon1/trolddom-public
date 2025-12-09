@@ -15,21 +15,156 @@ talent_tree paladin_avenger:
 		talent paladin_piercing_strike: "G"
 		talent paladin_holy_strength: "H"
 		talent paladin_intervention_of_wrath: "I"
+		talent paladin_improved_divine_smite: "J"
+		talent paladin_vindicate: "K"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 	}
 	
 	map:
 	[
-		"A...B"
-		"....d"
-		"D.E.C"
-		"d.d.."
-		"G.F.H"
-		"....d"
-		"....I"
+		"A...B.J"
+		"....d.|"
+		"D.E.C.|"
+		"d.d...|"
+		"G.F.H.|"
+		"....d.|"
+		"....I.|"
+		"......d"
+		"......K"
 	]
 
+}
+
+###############################################################################
+# Vindicate
+
+talent paladin_vindicate:
+{
+	string: "Vindicate"
+	icon: icon_vindicate
+	talent_tree_points_required: 20
+	prerequisites: [ paladin_improved_divine_smite ]
+	points:
+	[
+		{ ability: vindicate }
+	]
+}
+
+ability vindicate_trigger:
+{	
+	string: "Vindicate"
+	icon: icon_vindicate
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	direct_effect damage: 
+	{
+		damage_type: holy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 50 ] [ 10 100 ] [ 20 200 ] [ 30 300 ] ] }					
+		flags: [ is_magical can_be_critical ]
+		spread: !DEFAULT_SPREAD{}	
+	}
+	direct_effect remove_aura:
+	{
+		aura: vindicate
+	}
+}				
+
+aura vindicate:
+{
+	string: "Vindicate"
+	icon: icon_vindicate
+	type: debuff
+	duration: based_on_effects	
+	flags: [ unique_per_source magic ]
+	sound: spell_14
+	aura_effect repeat: 
+	{ 
+		update_interval: 100
+		update_count: 1
+		ability: vindicate_trigger
+	}
+	aura_effect combat_event_trigger:
+	{
+		trigger_abilities: [ divine_smite ]
+		combat_event<target>: [ hit critical ]
+		ability<target>: vindicate_trigger		
+		ability_retain_source: true
+	}
+}
+
+ability vindicate:
+{
+	string: "Vindicate"
+	description: "Inflicts holy damage after 10 seconds or on next Divine Smite."
+	range: 6
+	cooldowns: [ global spell_holy_lockout ]
+	cooldown: $cooldown { duration: 50 }
+	flags: [ spell offensive target_other target_hostile interruptable ]
+	states: [ default in_combat ]
+	icon: icon_vindicate
+	resource_cost mana: 12
+	delay: 3
+	talent_tree: paladin_avenger
+	
+	direct_effect apply_aura:
+	{	
+		aura: vindicate
+	}	
+}
+
+###############################################################################
+# Improved Divine Smite
+
+talent paladin_improved_divine_smite:
+{
+	string: "Improved Divine Smite"
+	icon: icon_divine_smite
+	points:
+	[
+		{ aura: paladin_improved_divine_smite_1 }
+		{ aura: paladin_improved_divine_smite_2 }
+		{ aura: paladin_improved_divine_smite_3 }
+	]
+}
+
+aura paladin_improved_divine_smite_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Divine Smite by 15%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ divine_smite ]
+		multiplier: 1.15
+		type_mask: [ all ]
+	}
+}
+
+aura paladin_improved_divine_smite_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Divine Smite by 30%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ divine_smite ]
+		multiplier: 1.30
+		type_mask: [ all ]
+	}
+}
+
+aura paladin_improved_divine_smite_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Divine Smite by 45%."
+	aura_effect damage_output_modifier:
+	{
+		apply_to_abilities: [ divine_smite ]
+		multiplier: 1.45
+		type_mask: [ all ]
+	}
 }
 
 ###############################################################################
@@ -120,7 +255,8 @@ ability intervention_of_wrath_debuff_tick:
 	direct_effect damage:
 	{
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] ] }						
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.080 b: [ [ 1 6 ] [ 10 13 ] [ 20 28 ] [ 20 46 ] ] }						
+		direct: false
 	}
 }
 
@@ -222,7 +358,7 @@ ability piercing_strike_secondary:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
 	}		
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}
@@ -246,7 +382,9 @@ ability piercing_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault		
 	}	
 	
 	direct_effect trigger_ability:
@@ -297,7 +435,8 @@ ability exorcism:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.8 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] [ 30 165 ] ] }		
+		spread: !DEFAULT_SPREAD{}		
 	}	
 }
 
@@ -340,8 +479,9 @@ ability divine_smite:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }			
-	}	
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 23 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }			
+		spread: !DEFAULT_SPREAD{}
+	}		
 }
 
 ###############################################################################
@@ -726,10 +866,10 @@ particle_system holy_storm:
 ability holy_storm:
 {
 	string: "Holy Storm"
-	description: "Inflicts $damage$ holy damage on up to 3 adjacent enemies."
+	description: "Inflicts $damage$ damage on up to 3 adjacent enemies."
 	range: 1	
 	cooldowns: [ global holy_storm ]
-	flags: [ spell melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ spell offensive melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_holy_storm
 	delay: 3
@@ -745,6 +885,8 @@ ability holy_storm:
 		flags: [ can_be_critical ]
 		damage_type: holy
 		function: { expression: x x: weapon_normalized }		
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault		
 	}
 }
 
@@ -788,7 +930,9 @@ ability reckoning:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 12 ] [ 10 24 ] [ 20 48 ] ] }
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 20 ] [ 10 32 ] [ 20 48 ] [ 30 79 ] ] }
+		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
+		resolve_cancel_aura: paladin_holy_assault		
 	}
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}

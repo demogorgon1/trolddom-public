@@ -231,7 +231,7 @@ quest .sheriff_cunningham_3:
 
 	text:
 	[
-		"Find kobolds near the blocked off pass to the west and kill them."
+		"Recover contraband in the caves north of Edmund's Haunt and return to Sheriff Cunningham."
 	]
 	
 	description: 

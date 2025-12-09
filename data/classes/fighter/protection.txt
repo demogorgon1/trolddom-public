@@ -16,8 +16,11 @@ talent_tree fighter_protection:
 		talent fighter_protection_revenge: "H"
 		talent fighter_protection_last_stand: "I"
 		talent fighter_protection_shield_crush: "J"
+		talent fighter_protection_heroic_strike: "K"
+		talent fighter_protection_provocation: "L"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
+		sprite talent_tree_down: "|"
 	}
 	
 	map:
@@ -26,10 +29,124 @@ talent_tree fighter_protection:
 		"..d...."
 		"D.GrB.F"
 		"d.d...."
-		"E.I.H.."
-		"....d.."
-		"....J.."
+		"E.I.H.K"
+		"|...d.."
+		"|...J.."
+		"d......"
+		"L......"
 	]
+}
+
+###############################################################################
+# Provocation
+
+talent fighter_protection_provocation:
+{
+	string: "Provocation"
+	icon: icon_provocation
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: provocation }
+	]
+}
+
+ability provocation:
+{
+	string: "Provocation"
+	description: "Forces all nearby enemies to attack you for 5 seconds."
+	range: 1	
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 600 }
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	states: [ default in_combat ]
+	icon: icon_provocation
+	delay: 3
+	aoe_radius: 5
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	talent_tree: fighter_protection
+	
+	direct_effect threat:
+	{	
+		apply_to: source
+		add: top
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: taunt
+	}	
+}
+
+###############################################################################
+# Heroic Strike
+
+talent fighter_protection_heroic_strike:
+{
+	string: "Heroic Strike"
+	icon: icon_strike_2
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: fighter_protection_heroic_strike_1 }
+		{ aura: fighter_protection_heroic_strike_2 }
+		{ aura: fighter_protection_heroic_strike_3 }
+	]
+}
+
+aura fighter_protection_heroic_strike_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your threat and damage from Strike by 8%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.08
+		type_mask: [ physical ]
+		apply_to_abilities: [ strike ]
+	}
+	aura_effect threat_modifier:
+	{
+		multiplier: 1.08
+		apply_to_abilities: [ strike ]
+	}
+}
+
+aura fighter_protection_heroic_strike_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your threat and damage from Strike by 16%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.16
+		type_mask: [ physical ]
+		apply_to_abilities: [ strike ]
+	}
+	aura_effect threat_modifier:
+	{
+		multiplier: 1.16
+		apply_to_abilities: [ strike ]
+	}
+}
+
+aura fighter_protection_heroic_strike_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your threat and damage from Strike by 24%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.24
+		type_mask: [ physical ]
+		apply_to_abilities: [ strike ]
+	}
+	aura_effect threat_modifier:
+	{
+		multiplier: 1.24
+		apply_to_abilities: [ strike ]
+	}
 }
 
 ###############################################################################
@@ -85,7 +202,8 @@ ability shield_crush:
 	{	
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 0.42 }				
+		function: { expression: a_mul_x x: attack_power a: 0.42 }			
+		spread: !DEFAULT_SPREAD{}
 	}
 		
 	direct_effect apply_aura:
@@ -243,7 +361,7 @@ ability banner_of_command_tick:
 {
 	string: "Banner of Command"
 	range: 8	
-	flags: [ target_self target_aoe target_aoe_hostile target_aoe_friendly target_aoe_always_self ]
+	flags: [ target_aoe target_aoe_hostile target_aoe_friendly target_self ]
 	states: [ default in_combat ]
 	icon: icon_banner
 	delay: 3
@@ -504,9 +622,11 @@ aura knock:
 	icon: icon_stun		
 	type: debuff
 	duration: 30	
-	flags: [ unique ]
+	flags: [ unique incapacitation ]
 	aura_effect stun: { }
 	particle_system: knock
+	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 cooldown knock:
@@ -533,7 +653,6 @@ ability knock:
 		threat: 10
 	}
 }
-
 
 particle_system knock:
 {
@@ -563,21 +682,21 @@ cooldown bash:
 aura bash:
 {
 	string: "Threatening"
-	description: "Threat generated increased by 100%."
+	description: "Threat generated increased by 150%."
 	type: buff
 	flags: [ unique ]
 	icon: icon_bash
 	duration: 300
 	aura_effect threat_modifier: 
 	{ 
-		multiplier: 2.0
+		multiplier: 2.5
 	}
 }
 
 ability bash:
 {
 	string: "Bash"
-	description: "Does $damage$ damage to target and increases your threat by 100% for 30 seconds."
+	description: "Does $damage$ damage to target and increases your threat by 150% for 30 seconds."
 	range: 1	
 	cooldowns: [ global bash ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -592,6 +711,7 @@ ability bash:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: a_mul_x x: attack_power a: 0.30 }				
+		spread: !DEFAULT_SPREAD{}
 	}
 		
 	direct_effect damage:
@@ -600,6 +720,7 @@ ability bash:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: a_mul_x x: attack_power a: 0.90 }				
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect remove_aura:
@@ -638,9 +759,27 @@ aura taunt:
 	type: debuff
 	duration: 50	
 	flags: [ unique ]
+	particle_system: taunt
 	
 	aura_effect taunt: 
 	{
+	}
+}
+
+particle_system taunt:
+{
+	particle:
+	{
+		sprites: [ effect_taunt_0 effect_taunt_1 effect_taunt_2 effect_taunt_1 ]
+		flags: [ attached ]
+		sprite_interval: 125
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
 	}
 }
 

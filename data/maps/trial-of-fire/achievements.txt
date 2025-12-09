@@ -1,0 +1,13 @@
+achievement_category .trial_of_fire: { string: "Trial of Fire" order_key: 100 }
+
+achievement trial_of_fire_ignivar: { sort_key: 1 category: .trial_of_fire string: "Ignivar the Corruptor" description: "Slay Ignivar." points: 10 priority: 0 kill_trigger: .ignivar icon: icon_skull_1 no_progress_values: true }
+achievement trial_of_fire_ignivar_1: { sort_key: 2 category: .trial_of_fire string: "Bigger and Stronger" description: "Slay Ignivar while Fireclaw is still alive." points: 10 priority: 0 kill_trigger: .ignivar icon: icon_claw_2 no_progress_values: true kill_trigger_must_be_alive: .fireclaw }
+achievement trial_of_fire_ignivar_2: { sort_key: 3 category: .trial_of_fire string: "Thick Skinned" description: "Slay Ignivar while Basaltis is still alive." points: 10 priority: 0 kill_trigger: .ignivar icon: icon_rock_1 no_progress_values: true kill_trigger_must_be_alive: .basaltis }
+achievement trial_of_fire_ignivar_3: { sort_key: 4 category: .trial_of_fire string: "On Fire" description: "Slay Ignivar while the Rift Keeper is still alive." points: 10 priority: 0 kill_trigger: .ignivar icon: icon_fury no_progress_values: true kill_trigger_must_be_alive: .rift_keeper }
+
+achievement_category .trial_of_fire_elite: { string: "Trial of Fire (Elite)" order_key: 101 }
+
+achievement trial_of_fire_ignivar_elite: { sort_key: 5 category: .trial_of_fire_elite string: "Ignivar the Corruptor (Elite)" description: "Slay Ignivar." points: 10 priority: 0 kill_trigger: .ignivar_elite icon: icon_skull_1 no_progress_values: true }
+achievement trial_of_fire_ignivar_1_elite: { sort_key: 6 category: .trial_of_fire_elite string: "Bigger and Stronger  (Elite)" description: "Slay Ignivar while Fireclaw is still alive." points: 10 priority: 0 kill_trigger: .ignivar_elite icon: icon_claw_2 no_progress_values: true kill_trigger_must_be_alive: .fireclaw_elite }
+achievement trial_of_fire_ignivar_2_elite: { sort_key: 7 category: .trial_of_fire_elite string: "Thick Skinned  (Elite)" description: "Slay Ignivar while Basaltis is still alive." points: 10 priority: 0 kill_trigger: .ignivar_elite icon: icon_rock_1 no_progress_values: true kill_trigger_must_be_alive: .basaltis_elite }
+achievement trial_of_fire_ignivar_3_elite: { sort_key: 8 category: .trial_of_fire_elite string: "On Fire (Elite)" description: "Slay Ignivar while the Rift Keeper is still alive." points: 10 priority: 0 kill_trigger: .ignivar_elite icon: icon_fury no_progress_values: true kill_trigger_must_be_alive: .rift_keeper_elite }

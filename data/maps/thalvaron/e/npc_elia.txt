@@ -1,0 +1,185 @@
+dialogue_screen .elia:
+{
+	text: 
+	[	
+		"What brings you here? Happy to meet someone who's not a carnivorous plant."
+	]		
+	
+	options:
+	[
+		{ quest: .elia_1 }
+		{ quest: .elia_2 }
+		{ quest<completion_only>: .dark_elemental_boss_quest_item }
+		{ quest<offer_only>: thalvaron_elia_3 }
+	]
+}
+
+entity thalvaron_elia: !NPC
+{
+	_string: "Elia"
+	_sprite: elf_18
+	_sprite_dead: man_18_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_faction: children_of_the_moon		
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .elia: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .elia_1:
+{
+	string: "Thrasher Thorns"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .elia_1_quest_item count: 8 }
+}
+
+loot_group .elia_1_quest_item: {}
+
+item .elia_1_quest_item:
+{
+	icon: icon_fangs_1
+	item_level: 30
+	loot_groups: [ .elia_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Thrasher Thorn"
+	stack: 8
+}
+
+quest .elia_1:
+{
+	string: "Sharp Thorns"
+
+	text:
+	[
+		"Hunt clawflowers, collect their thorns, and return to Elia."
+	]
+	
+	description: 
+	[
+		"You might wonder what an elf is doing in these lizard-infested woods. Well, it's quite simple. My employer needs a variety of different objects and reagents that can only be found in these parts.\n"
+		"\n"
+		"Have you seen the large carnivorous flowers walking around on their roots? I don't really understand where they're coming from, you know, from an evolutionary point of view... But that doesn't really matter. I've been told they're called clawflowers.\n"
+		"\n"
+		"No, what matters is that apparently they have some thorns that are very useful. Can you collect some of them for me?"
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"That's exactly what we need, thanks!"		
+	]
+
+	level: 30
+	objectives: [ .elia_1 ]
+}
+
+############################################################
+# Quest 2
+
+objective .elia_2:
+{
+	string: "Elia's Bag of Reagents"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .elia_2_quest_item count: 1 }
+}
+
+loot_group .elia_2_quest_item: {}
+
+item .elia_2_quest_item:
+{
+	icon: icon_green_bag
+	item_level: 30
+	loot_groups: [ .elia_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Elia's Bag of Reagents"
+	quest: .elia_2
+}
+
+{
+	${ _level: 30 }
+	item .elia_2_a: !QUEST_REWARD_FEET{ _string: "Elven Boots" _icon: icon_boots_5 _wisdom: 1 _spirit: 2 _healing: 4 _type: armor_cloth }
+	item .elia_2_b: !QUEST_REWARD_HEAD{ _string: "Helmet of the Elf Lord" _icon: icon_helmet_5 _strength: 1 _hit: 1 _budget_bias: -10 _type: armor_plate }
+	item .elia_2_c: !QUEST_REWARD_FEET{ _string: "Soothsayer Sandals" _icon: icon_boots_4 _spell_damage: 1 _hit: 1 _budget_bias: -10 _type: armor_cloth }
+}
+
+quest .elia_2:
+{
+	string: "Thieving Bastards"
+
+	text:
+	[
+		"Travel to the island of Kaldor to the south, locate the bandits, retrieve Elia's bag and return it to her."
+	]
+	
+	description: 
+	[
+		"I appreciate how you helped with those plants, but I actually have a much bigger problem. When I was exploring far south, on the island of Kaldor, I was attacked by a bunch of bandits. I didn't"
+		"expect to run into humans down there, but well, that happened. What are they doing here? I don't know. Anyway, the biggest and ugliest of them stole my bag of reagents before I could flee.\n"
+		"\n"
+		"I really need those reagents. That's the reason why I'm here in the jungle in the first place. If you head down to Kaldor, please see if you can find these bandits and make them return my stuff."
+	]
+
+	progress:
+	[
+		"Yes? Kaldor island is far to the south."
+	]
+	
+	completion:
+	[
+		"Excellent! Thank you so much!"		
+	]
+
+	level: 30
+	objectives: [ .elia_2 ]
+	reward_one_item: [ .elia_2_a .elia_2_b .elia_2_c ]
+	prerequisites: [ .elia_1 ]
+}
+
+############################################################
+# Quest 3
+
+item .elia_3_quest_item:
+{
+	icon: icon_rock_3
+	item_level: 30
+	flags: [ not_sellable unique ]
+	string: "Heart of the Ancient"
+}
+
+quest thalvaron_elia_3:
+{
+	string: "Heat of the Ancient"
+
+	text:
+	[
+		"Bring the Heart of the Ancient to Fennian Starleaf in Duskwhisper."
+	]
+	
+	description: 
+	[
+		"I have no idea what this is, but it looks interesting. I think you should bring it to my friend Fennian Starleaf up north in the woods of Duskwhisper. Maybe you've met him already? He knows"
+		"a lot about trees."
+	]
+	
+	completion:
+	[
+		"You have brought me this all the way from Kaldor island?"		
+	]
+
+	level: 30
+	quest_items: [ .elia_3_quest_item ]
+	prerequisites: [ .dark_elemental_boss_quest_item ]
+}

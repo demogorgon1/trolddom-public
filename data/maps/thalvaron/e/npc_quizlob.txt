@@ -1,0 +1,125 @@
+dialogue_screen .quizlob:
+{
+	text: 
+	[	
+		"Hello."
+	]		
+	
+	options:
+	[	
+		{ quest: .quizlob_1 }
+		{ quest: .quizlob_2 }
+	]
+}
+
+entity thalvaron_quizlob: !NPC
+{
+	_string: "Quizlob"
+	_sprite: lizard_man_9
+	_sprite_dead: lizard_man_9_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .quizlob: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .quizlob_1:
+{
+	string: "Stillwater Crocodiles Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_stillwater_crocodile ]
+		count: 5
+	}
+}
+
+quest .quizlob_1:
+{
+	string: "Crocodiles?"
+
+	text:
+	[
+		"Quizlob probably wants you do kill some crocodiles and return to him when done."
+	]
+	
+	description: 
+	[
+		"*Points at crude drawing of crocodile*\n"
+		"\n"
+		"*Points out the door*"
+	]
+
+	progress:
+	[
+		"J'urk?"
+	]
+	
+	completion:
+	[
+		"Blaz'rok!"
+	]
+	
+	objectives: [ .quizlob_1 ]
+	level: 30
+}
+
+############################################################
+# Quest 2
+
+objective .quizlob_2:
+{
+	string: "Jungle Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_kobold_a thalvaron_jungle_kobold_b thalvaron_jungle_kobold_c ]
+		count: 8
+	}
+}
+
+{
+	${ _level: 30 }
+	item .quizlob_2_a: !QUEST_REWARD_TRINKET{ _string: "Slimy Kobold Bone" _icon: icon_bone_3 _hit: 1 }
+}
+
+quest .quizlob_2:
+{
+	string: "Kobolds?"
+
+	text:
+	[
+		"Quizlob probably wants you do kill some kobolds and return to him when done."
+	]
+	
+	description: 
+	[
+		"*Points at crude drawing of kobold*\n"
+		"\n"
+		"*Points north west*"
+	]
+
+	progress:
+	[
+		"J'urk? Kobold'ork?"
+	]
+	
+	completion:
+	[
+		"Haha! Blizwok?!"
+	]
+	
+	objectives: [ .quizlob_2 ]
+	prerequisites: [ .quizlob_1 ]
+	reward_all_items: [ .quizlob_2_a ]
+	level: 30
+}

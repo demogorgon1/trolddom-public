@@ -1,0 +1,486 @@
+dialogue_screen .flimlock:
+{
+	text: 
+	[	
+		"Welcome to my swamp! I hope you'll enjoy your stay!"
+	]		
+	
+	options:
+	[
+		{ quest: .flimlock_1 }
+		{ quest: .flimlock_2 }
+		{ quest: .flimlock_3 }
+		{ quest: .flimlock_4 }
+		{ quest<completion_only>: .crust_elemental_quest_item }
+		{ quest<completion_only>: .zislo_1 }
+	]
+}
+
+entity thalvaron_flimlock: !NPC
+{
+	_string: "Flimlock"
+	_sprite: man_35
+	_sprite_dead: man_35_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .flimlock: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .flimlock_1:
+{
+	string: "Water Samples Collected"
+	
+	maps: [ thalvaron ]
+	
+	manual_counter:
+	{
+		count: 5
+	}
+}
+
+item .flimlock_1_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 27
+	icon: icon_green_bottle		
+	string: "Swamp Vial"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Collect water from the Verdant Mire."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 8
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_flimlock_1_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+	}	
+}
+
+entity thalvaron_flimlock_1_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 6000 trigger_manual_objective: .flimlock_1 }
+		combat_public: { faction: monsters }
+	}
+}
+
+quest .flimlock_1:
+{
+	string: "Swamp Research"
+
+	text:
+	[
+		"Help Flimlock with his research and return to him."
+	]
+	
+	description: 
+	[
+		"Isn't this just the most wonderful place? Everything is so moist and you can't walk anywhere without getting wet socks! Constant buzz of insects, marvelous creatures clawing at your ankles if"
+		"you get too close to a body of water. There is something special about this place. I'm thinking maybe it's something in the water, so I've been doing some research. Maybe you can help me"
+		"taking some samples from the water puddles around here?"
+	]
+
+	progress:
+	[
+		"Did you spot any interesting plants or diseases?"
+	]
+	
+	completion:
+	[
+		"Thank you."
+	]
+	
+	level: 27
+	quest_items: [ .flimlock_1_quest_item ]
+	objectives: [ .flimlock_1 ]
+}
+
+############################################################
+# Quest 2
+
+objective .flimlock_2:
+{
+	string: "Elixir Administered"	
+	maps: [ thalvaron ]	
+	manual_boolean: {}
+}
+
+map_entity_spawn thalvaron_flimlock_2_spawn_1: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_flimlock_2_spawn_2: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_flimlock_2_spawn_3: { spawn_timer: { only_when_triggered: true } }
+
+item .flimlock_2_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 27
+	icon: icon_bottle_3		
+	string: "Swamp Elixir"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Pour into water at the old burial site."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 4
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_flimlock_2_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+		
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20	entity: thalvaron_mire_ghoul_a map_entity_spawn: thalvaron_flimlock_2_spawn_1 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20	entity: thalvaron_mire_ghoul_b map_entity_spawn: thalvaron_flimlock_2_spawn_2 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20	entity: thalvaron_mire_ghoul_a map_entity_spawn: thalvaron_flimlock_2_spawn_3 }			
+	}	
+}
+
+entity thalvaron_flimlock_2_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 50 trigger_manual_objective: .flimlock_2 }
+		combat_public: { faction: monsters }
+	}
+}
+
+{
+	${ _level: 27 }
+	item .flimlock_2_a: !QUEST_REWARD_1H_SWORD{ _string: "Swiftstrike Shortsword" _icon: icon_sword_15 _constitution: 3 _dexterity: 2 _strength: 1 }
+	item .flimlock_2_b: !QUEST_REWARD_2H_STAFF{ _string: "Staff of the Mire" _icon: icon_staff_3 _constitution: 1 _wisdom: 3 _spell_damage: 4 }
+}
+
+quest .flimlock_2:
+{
+	string: "Experimenting with the Swamp"
+
+	text:
+	[
+		"Travel to the old burial site in the southern Verdant Mire and pour the elixir into the water."
+	]
+	
+	description: 
+	[
+		"The water samples you collected had a very peculiar taste, which gave me a good idea about an experiment. Here, takes this elixir and pour it in the water down by the old Zilkore burial site in the"
+		"southernmost part of the swamp. Come back and tell me about the results afterwards."
+	]
+
+	progress:
+	[
+		"The place is down south. Can't miss it, pillars, stone tiles on the ground."
+	]
+	
+	completion:
+	[
+		"Ghouls rising up from the ground to attack you? Well, that's quite unexpected."
+	]
+	
+	level: 27
+	quest_items: [ .flimlock_2_quest_item ]
+	prerequisites: [ .flimlock_1 ]
+	objectives: [ .flimlock_2 ]
+	reward_one_item: [ .flimlock_2_a .flimlock_2_b ]
+}
+
+############################################################
+# Quest 3
+
+objective .flimlock_3:
+{
+	string: "Evil Wizard Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_lizard_wizard ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 27 }
+	item .flimlock_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Lizard Skin Mantle" _icon: icon_shoulders_3 _constitution: 1 _wisdom: 1 _spirit: 2 _healing: 3 _type: armor_cloth }
+	item .flimlock_3_b: !QUEST_REWARD_FINGER{ _string: "Ancient Stone Ring" _icon: icon_ring_2 _constitution: 2 _strength: 1 }
+}
+
+quest .flimlock_3:
+{
+	string: "The Desolate Tower"
+
+	text:
+	[
+		"Travel to the Desolate Tower to the south east, defeat the evil wizard within, and return to Flimlock."
+	]
+	
+	description: 
+	[
+		"Strange dusty elementals... And something is defintely up in this swamp as well. I'm fairly certain it must"
+		"be linked to the old wizard tower at the coast south east of here. Some evil wizard must have taken residence and who knows what they're up to. I think you should travel to this tower, find out"
+		"who lives there, and kill them. "
+	]
+
+	progress:
+	[
+		"You can't find the place? It's somewhere."
+	]
+	
+	completion:
+	[
+		"Oh, a lizard man? Hmm. Not good. The lizard people usually keep to themselves in the jungles of the Devouring Shroud. I wonder what brought him there."
+	]
+	
+	level: 27
+	prerequisites: [ .crust_elemental_quest_item ]
+	reward_one_item: [ .flimlock_3_a .flimlock_3_b ]
+	objectives: [ .flimlock_3 ]
+}
+
+entity thalvaron_flimlock_3_portal:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}						
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_flimlock_3_portal_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
+
+entity thalvaron_flimlock_3_portal_return:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_flimlock_3_portal_return_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
+
+############################################################
+# Quest 4
+
+objective .flimlock_4:
+{
+	string: "Water Sample Collected"
+	
+	maps: [ the_devouring_shroud ]
+	
+	manual_counter:
+	{
+		count: 1
+	}
+}
+
+item .flimlock_4_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 30
+	icon: icon_green_bottle		
+	string: "Water Vial"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Collect pungent water from the Devouring Shroud."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 8
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_flimlock_4_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+	}	
+}
+
+entity thalvaron_flimlock_4_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 6000 trigger_manual_objective: .flimlock_4 }
+		combat_public: { faction: monsters }
+	}
+}
+
+{
+	${ _level: 30 _rarity: rare }
+	
+	item .flimlock_4_a: !QUEST_REWARD_TRINKET
+	{ 
+		_string: "Flimlock's Vial of Power" _icon: icon_purple_potion_2
+		_item_aura: $aura
+		{
+			string: "Flimlock's Vial of Power" icon: icon_purple_potion_2 				
+			description: "Your offensive spells increase your spell damage by 9 for 10 seconds. Stacks up to 6 times."
+			type: hidden
+			flags: [ item silent ]
+			
+			aura_effect combat_event_trigger: 
+			{ 
+				combat_event<source>: [ hit critical ]
+				combat_event_ability_mask: [ spell offensive ]
+				ability<self>: $ability [ icon string ]
+				{
+					states: [ default in_combat ]
+					direct_effect apply_aura:
+					{
+						aura: $aura [ icon string ]
+						{
+							type: buff
+							duration: 100
+							flags: [ unique magic silent always_show_timer ]
+							max_stack: 6
+							stat_modifiers: { spell_damage: { add: 9 } }							
+						}
+					}
+				}
+			}
+		}	
+	}
+	
+	item .flimlock_4_b: !QUEST_REWARD_TRINKET
+	{ 
+		_string: "Flimlock's Vial of the Beast" _icon: icon_red_potion_2
+		_item_aura: $aura
+		{
+			string: "Flimlock's Vial of the Beast" icon: icon_red_potion_2 				
+			description: "Your melee attacks increase your Dexterity by 9 for 10 seconds. Stacks up to 6 times."
+			type: hidden
+			flags: [ item silent ]
+			
+			aura_effect combat_event_trigger: 
+			{ 
+				combat_event<source>: [ hit critical ]
+				combat_event_ability_mask: [ melee offensive ]
+				ability<self>: $ability [ icon string ]
+				{
+					states: [ default in_combat ]
+					direct_effect apply_aura:
+					{
+						aura: $aura [ icon string ]
+						{
+							type: buff
+							duration: 100
+							flags: [ unique magic silent always_show_timer ]
+							max_stack: 6
+							stat_modifiers: { dexterity: { add: 9 } }							
+						}
+					}
+				}
+			}
+		}	
+	}	
+}
+	
+quest .flimlock_4:
+{
+	string: "The Devouring Shroud"
+
+	text:
+	[
+		"Venture into the Devouring Shroud, find the pungent water, sample it, and return to Flimlock."
+	]
+	
+	description: 
+	[
+		"I've finally managed to figure out what Zislo wanted to tell me.\n\n"
+		"You know, the proud Thalyssian lizard people reside deep in the jungle to the east, inside the Devouring Shroud and beyond. Most of them don't like outsiders, so you should be careful"
+		"if you ever encounter any of them. Except Zislo, of course, he's great. Anyway, I could smell from the statue that he has found some exceptionally pungent water deep inside the Devouring Shroud."
+		"He wants me to run some experiments on it. You should know the drill by now. Take this vial, fill it with the water, and return it to me.\n\n"  
+		"As far as I could understand on Zislo, the puddle of water is inside a cave. Where exactly I can't tell. Go into the Devouring Shroud and try to locate it."
+	]
+
+	progress:
+	[
+		"Can't find it? Follow your nose."
+	]
+	
+	completion:
+	[
+		"How wonderful! I'll commence the experiments immediately!"
+	]
+	
+	type: dungeon
+	objectives: [ .flimlock_4 ]
+	level: 30
+	prerequisites: [ .zislo_1 ]
+	reward_one_item: [ .flimlock_4_a .flimlock_4_b ]
+	quest_items: [ .flimlock_4_quest_item ]
+}

@@ -41,6 +41,7 @@ item thalvaron_emma_brown_1_quest_item:
 	item_level: 17
 	loot_groups: [ thalvaron_emma_brown_1_quest_item ]
 	flags: [ not_sellable unique ]
+	quest: thalvaron_emma_brown_1
 	string: "The Child's Blood"
 }
 
@@ -99,10 +100,11 @@ quest thalvaron_emma_brown_1:
 	description: 
 	[
 		"This is the mark of Kaelithor the Relentless, a horrible vampire from the south. He was banished a long time ago. You say that you just found this in the forests of Shadowthorn? That's not good.\n\n"
-		"It's hard to get truly rid of a powerful vampire like Kaelithor, so it's not surprising that he is no back. If you want to end his menace once and for all you need magic to make him vulnerable to your weapons. But that's not" 
-		"enough. First you need to make him come up of his hiding hole and face you. That can be hard as vampires are very sneaky creatures - they will only pick fights they know they will win.\n\n"
+		"It's hard to get truly rid of a powerful vampire like Kaelithor, so it's not surprising that he is now back. If you want to end his menace once and for all you need magic to make him vulnerable to your weapons. But that's not" 
+		"enough. First you need to make him come out of his hiding hole and face you. That can be hard as vampires are very sneaky creatures - they will only pick fights they know they will win.\n\n"
 		"Luckily the object you've brought me will be useful in this regard. You need to infuse it with the blood of one of his children and you'll be able to draw him out. Find such blood and bring it to Damon Arkwright and he'll"
-		"know what to do."
+		"know what to do.\n\n"
+		"Seek out his children somewhere deep in the forests of Shadowthorn."
 	]
 
 	progress:

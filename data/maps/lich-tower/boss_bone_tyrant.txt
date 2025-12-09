@@ -12,6 +12,7 @@ loot_table .bone_tyrant:
 		{ possibility: { loot_group: .bone_tyrant  } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_SKELETONS{}
+		!WORLD_DROPS_CLOTH{}		
 	]	
 }
 
@@ -155,7 +156,7 @@ map_entity_spawn .bone_tyrant:
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .passive		
-		_elite: true
+		_elite: false
 		_encounter: .bone_tyrant
 		_zone: .bone_tyrant	
 		_out_of_zone_action: { use: enrage }

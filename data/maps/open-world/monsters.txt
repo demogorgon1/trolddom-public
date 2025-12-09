@@ -47,7 +47,7 @@ item .spawn_of_umbracoth_quest_drop:
 	flavor: "Slimy."
 	icon: icon_tentacle
 	item_level: 5
-	flags: [ unique not_sellable ]
+	flags: [ unique not_sellable ] 
 	use_ability: .spawn_of_umbracoth_quest_drop_start_quest
 	binds: when_picked_up
 }

@@ -23,7 +23,8 @@ namespace tpublic
 					const char*											aPersistentIdTablePath,
 					const char*											aDataOutputPath,
 					const char*											aGeneratedSourceOutputPath,
-					Compression::Level									aCompressionLevel);
+					Compression::Level									aCompressionLevel,
+					const char*											aOnlyBuildMap);
 
 	private:
 

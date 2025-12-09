@@ -24,6 +24,7 @@ dialogue_screen .bar_chef_greetings:
 	
 	options:
 	[
+		{ quest<completion_only>: realm_of_fire_werner_2 }
 		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .bar_chef_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
 		{ goto: .bar_chef_vendor text: "Let me browse your goods." }
 		{ goto: .bar_chef_trainer text: "Please teach me about cooking." }

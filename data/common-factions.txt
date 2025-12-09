@@ -66,3 +66,11 @@ faction dark_elves:
 {
 	# Not shown in game
 }
+
+##########################################################################################
+# Realm of Fire enemy factions
+
+faction minions_of_voraghul:
+{
+	# Not shown in game
+}

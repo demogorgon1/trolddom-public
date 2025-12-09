@@ -78,6 +78,21 @@ sprites:
 	sprite effect_void_zone_0: { flags: [ ] }
 	sprite effect_void_zone_1: { flags: [ ] }
 	sprite effect_void_zone_2: { flags: [ ] }
+	sprite effect_taunt_0: { flags: [ centered ] }
+	sprite effect_taunt_1: { flags: [ centered ] }
+	sprite effect_taunt_2: { flags: [ centered ] }
+	sprite effect_shell_0: { flags: [ centered ] }
+	sprite effect_shell_1: { flags: [ centered ] }
+	sprite effect_shell_2: { flags: [ centered ] }
+	sprite effect_burning_0: { flags: [ centered ] }
+	sprite effect_burning_1: { flags: [ centered ] }
+	sprite effect_burning_2: { flags: [ centered ] }
+	sprite effect_burning_3: { flags: [ centered ] }
+	sprite effect_burning_4: { flags: [ centered ] }
+	sprite effect_jul_hat_green: { flags: [ ] }
+	sprite effect_jul_hat_blue: { flags: [ ] }
+	sprite effect_jul_hat_purple: { flags: [ ] }
+	sprite effect_jul_hat_red: { flags: [ ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }
@@ -95,6 +110,28 @@ sprites:
 	sprite effect_disruption_0: { flags: [ centered ] }
 	sprite effect_disruption_1: { flags: [ centered ] }
 	sprite effect_disruption_2: { flags: [ centered ] }
+	sprite effect_judgement_for_all: { flags: [ centered ] }
+	sprite effect_frag_0: { flags: [ centered ] }
+	sprite effect_frag_1: { flags: [ centered ] }
+	sprite effect_frag_2: { flags: [ centered ] }	
+	sprite effect_expl_2_0: { flags: [ centered ] }
+	sprite effect_expl_2_1: { flags: [ centered ] }
+	sprite effect_expl_2_2: { flags: [ centered ] }
+	sprite effect_expl_2_3: { flags: [ centered ] }
+	sprite effect_expl_2_4: { flags: [ centered ] }
+	sprite effect_expl_2_5: { flags: [ centered ] }
+	sprite effect_expl_3_0: { flags: [ centered ] }
+	sprite effect_expl_3_1: { flags: [ centered ] }
+	sprite effect_expl_3_2: { flags: [ centered ] }
+	sprite effect_expl_3_3: { flags: [ centered ] }
+	sprite effect_expl_3_4: { flags: [ centered ] }
+	sprite effect_expl_3_5: { flags: [ centered ] }
+	sprite effect_expl_3_6: { flags: [ centered ] }
+	sprite effect_expl_3_7: { flags: [ centered ] }
+	sprite effect_expl_3_8: { flags: [ centered ] }
+	sprite effect_expl_3_9: { flags: [ centered ] }
+	sprite effect_expl_3_10: { flags: [ centered ] }
+	sprite effect_expl_3_11: { flags: [ centered ] }
 
 	cursor: { position: [ 0 44 ] }
 	size: { width: 16 height: 16 }
@@ -160,6 +197,7 @@ sprites:
 	sprite effect_pink_lightning_1: { flags: [ centered ] }
 	sprite effect_pink_lightning_2: { flags: [ centered ] }
 	sprite effect_web_projectile: { flags: [ centered ] }
+	sprite effect_arrow_poison: { flags: [ centered ] }
 	
 	cursor: { position: [ 0 67 ] }
 	size: { width: 14 height: 14 }

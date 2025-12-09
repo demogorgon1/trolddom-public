@@ -1,0 +1,98 @@
+#pragma once
+
+namespace tpublic
+{
+
+	namespace RealmModifier
+	{
+
+		enum Id : uint8_t
+		{
+			INVALID_ID,
+
+			ID_HARDCORE_MODE,
+			ID_XP_MULTIPLIER,
+			ID_UNLIMITED_PROFESSIONS,
+			ID_EASY_ELITES,
+			NUM_IDS
+		};
+
+		struct Info
+		{
+			enum Type : uint8_t
+			{
+				INVALID_TYPE,
+
+				TYPE_FLAG,
+				TYPE_MULTIPLIER
+			};
+
+			// Helpers
+			size_t 
+			GetValidOptionIndex(
+				const char*	aString) const
+			{
+				std::string_view t(aString);
+				for(size_t i = 0; i < m_validOptions.size(); i++)
+				{
+					if(t == m_validOptions[i])
+						return i;
+				}
+				return SIZE_MAX;
+			}
+
+			// Public data
+			const char*					m_string;
+			const char*					m_displayName;
+			Type						m_type;
+			std::vector<const char*>	m_validOptions;
+			const char*					m_description;
+			const char*					m_default;
+			bool						m_hidden;
+		};
+
+		// IMPORTANT: Must match Id enum
+		static const Info INFO[] =
+		{
+			{ NULL, NULL, Info::INVALID_TYPE, {}, NULL, NULL, false },
+
+			{ "hardcore_mode",				"Hardcore Mode",			Info::TYPE_FLAG,		{ "true", "false" },						"Permanent death.",									"false",	false },
+			{ "xp_multiplier",				"XP Gain",					Info::TYPE_MULTIPLIER,	{ "50%", "100%", "150%", "200%", "300%" },	"XP gained from kills and quests.",					"100%",		true },
+			{ "unlimited_professions",		"Unlimited Professions",	Info::TYPE_FLAG,		{ "true", "false" },						"You can learn any number of primary professions.",	"false",	false },
+			{ "easy_elites",				"Easy Elites",				Info::TYPE_FLAG,		{ "true", "false" },						"Elite enemies are easier to kill.",				"false",	false },
+		};
+
+		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
+
+		inline constexpr const Info*
+		GetInfo(
+			Id				aId)
+		{
+			assert((uint32_t)aId < (uint32_t)NUM_IDS);
+			return &INFO[aId];
+		}
+
+		inline constexpr bool
+		ValidateId(
+			Id				aId)
+		{
+			return (uint32_t)aId >= 1 && (uint32_t)aId < (uint32_t)NUM_IDS;
+		}
+
+		inline constexpr Id
+		StringToId(
+			const char*		aString)
+		{
+			std::string_view t(aString);
+			for(uint32_t i = 1; i < (uint32_t)NUM_IDS; i++)
+			{
+				if(t == INFO[i].m_string)
+					return (Id)i;
+			}
+			return INVALID_ID;
+		}
+
+
+	}
+
+}

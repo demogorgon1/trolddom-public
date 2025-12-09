@@ -1,0 +1,103 @@
+dialogue_screen .diane:
+{
+	text: 
+	[	
+		"Don't mind me, I'm just stuck in this spider web. I'm probably going to be eaten soon."
+	]		
+	
+	options:
+	[
+		{ text: "Your husband asked me to look for you. Let's go." requirement self<must_have_active_quest>: .rubert_1 script: npc_trigger }		
+	]
+}
+
+entity thalvaron_diane: !NPC
+{
+	_string: "Diane"
+	_sprite: woman_41
+	_sprite_dead: woman_41_dead
+	_dialogue_scripts: [ npc_trigger ]
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .diane: { } }
+	_is_threat_source: true
+	_blocking: false
+	
+	_default_trigger_ability: $ability
+	{
+		flags: [ always_in_range always_in_line_of_sight ]	
+		direct_effect start_route: { route: thalvaron_diane_escort }	
+	}
+	
+	_default_behavior_state: $npc_behavior_state
+	{
+		behavior: patrolling
+		combat_event_pause_ticks: 20
+		despawn_if_lost_player: true
+		patrol_move_interval_ticks: 9
+	}	
+}
+
+map_entity_spawn thalvaron_diane_ambush_1_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_diane_ambush_2_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_diane_ambush_2_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_diane_ambush_3_a: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_diane_ambush_3_b: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_diane_ambush_4_a: { spawn_timer: { only_when_triggered: true } }
+
+!define local DIANE_ESCORT_SPAWN
+{ 
+	spawn_flags: [ no_owner ]
+	npc_target_threat: 20
+	entity: @_entity
+	map_entity_spawn: @_map_entity_spawn
+}	
+
+route thalvaron_diane_escort: 
+{ 
+	trigger<1>: { chat: { type: say text: "What?! My husband is just chilling, while I'm getting eaten by eight-legged freaks?!" } }
+	
+	trigger<10>: 
+	{ 
+		ability: $ability @thalvaron_diane_escort_1
+		{
+			direct_effect spawn_entity: !DIANE_ESCORT_SPAWN { _entity: thalvaron_thalyssian_spider_27 _map_entity_spawn: thalvaron_diane_ambush_1_a }
+		}		
+	}
+
+	trigger<30>: 
+	{ 
+		ability: $ability @thalvaron_diane_escort_2
+		{
+			direct_effect spawn_entity: !DIANE_ESCORT_SPAWN { _entity: thalvaron_thalyssian_spider_27 _map_entity_spawn: thalvaron_diane_ambush_2_a }
+			direct_effect spawn_entity: !DIANE_ESCORT_SPAWN { _entity: thalvaron_thalyssian_spider_27 _map_entity_spawn: thalvaron_diane_ambush_2_b }
+		}		
+	}
+
+	trigger<80>: 
+	{ 
+		ability: $ability @thalvaron_diane_escort_3
+		{
+			direct_effect spawn_entity: !DIANE_ESCORT_SPAWN { _entity: thalvaron_thalyssian_spider_27 _map_entity_spawn: thalvaron_diane_ambush_3_a }
+			direct_effect spawn_entity: !DIANE_ESCORT_SPAWN { _entity: thalvaron_thalyssian_spider_27 _map_entity_spawn: thalvaron_diane_ambush_3_b }
+		}		
+	}
+
+	trigger<120>: 
+	{ 
+		ability: $ability @thalvaron_diane_escort_4
+		{
+			direct_effect spawn_entity: !DIANE_ESCORT_SPAWN { _entity: thalvaron_thalyssian_spider_27 _map_entity_spawn: thalvaron_diane_ambush_4_a }
+		}		
+	}
+	
+	trigger<180>: { chat: { type: yell text: "Rubert! Get out of the water! Now!" } event: true }
+	trigger<max>: { despawn: true }
+	
+	origin_map_entity_spawn: thalvaron_diane
+}
+
+

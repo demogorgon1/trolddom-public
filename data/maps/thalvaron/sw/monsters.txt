@@ -1264,7 +1264,7 @@ map_entity_spawn thalvaron_krask:
 		_sprite: scorpion_3 
 		_sprite_dead: scorpion_3_dead
 		_weapon_damage: 1.4
-		_health: 6.8
+		_resource_health: 4.1
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true

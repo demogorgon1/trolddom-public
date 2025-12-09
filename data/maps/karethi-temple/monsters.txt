@@ -1,0 +1,202 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<karethi_temple_default_patrol>: .patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<karethi_temple_default_patrol>: .patrol
+	behavior: do_nothing
+}
+
+npc_behavior_state .patrol:
+{
+	behavior: patrolling
+}
+
+#############################################################################
+# Boss 1
+
+map_entity_spawn .boss_1_melee_trash: 
+{ 
+	entity .stalker: { spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_1_melee_trash_skeletal_guard: 
+{ 
+	entity .skeletal_guard: { spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_1_caster_trash_skeletal_priest: 
+{ 
+	entity .skeletal_priest: { spawn_condition: { if_not: .boss_1_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 2
+
+map_entity_spawn .boss_2_melee_trash_skeletal_guard: 
+{ 
+	entity .skeletal_guard: { spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_2_caster_trash_skeletal_priest: 
+{ 
+	entity .skeletal_priest: { spawn_condition: { if_not: .boss_2_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 3
+
+map_entity_spawn .boss_3_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_3_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 4
+
+map_entity_spawn .boss_4_melee_trash: 
+{ 
+	#entity .melee_a: { level: 30 spawn_condition: { if_not: .boss_4_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Boss 5
+
+map_entity_spawn .boss_5_melee_trash_skeletal_guard: 
+{ 
+	entity .skeletal_guard: { spawn_condition: { if_not: .boss_5_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .boss_5_caster_trash_skeletal_priest: 
+{ 
+	entity .skeletal_priest: { spawn_condition: { if_not: .boss_5_killed } } 	
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+#############################################################################
+# Monsters
+
+# Stalkers 
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.1
+		_resource_health: 0.9
+		_elite: true
+		_level: 30
+		_string: "Temple Stalker"		
+		_abilities: 
+		[ 
+			{ id: npc_charge_rend } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .stalker: !NPC { _sprite: stalker_4 _sprite_dead: stalker_4_dead  }
+}
+
+# Melee skeletons
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 1.0
+		_resource_health: 1.2
+		_elite: true
+		_level: 30
+		_string: "Skeletal Guard"		
+		_abilities: 
+		[ 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_guard: !NPC { _sprite: skeleton_13 _sprite_dead: skeleton_13_dead  }
+}
+
+# Healer skeletons
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_weapon_damage: 0.7
+		_resource_health: 0.7
+		_elite: true
+		_level: 30
+		_string: "Skeletal Priest"		
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_curse target: random_player }
+			{ id: npc_attack } 
+		]
+	}
+
+	entity .skeletal_priest: !NPC { _sprite: skeleton_caster_2 _sprite_dead: skeleton_caster_2_dead  }
+}
+
+# Tentacle monsters
+{
+	${
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive
+	}
+
+	entity .tentacle_monster_1: !NPC 
+	{ 
+		_sprite: tentacle_monster_2 _sprite_dead: tentacle_monster_2_dead  
+		_weapon_damage: 1.1
+		_resource_health: 1.71
+		_level: 30
+		_string: "Void Spawn"		
+		_abilities: 
+		[ 
+			{ id: npc_curse target: random_player }
+			{ id: npc_attack } 
+		]		
+	}
+	
+	entity .tentacle_monster_2: !NPC 
+	{ 
+		_sprite: tentacle_monster _sprite_dead: tentacle_monster_dead  
+		_weapon_damage: 0.7
+		_resource_health: 0.84
+		_elite: true
+		_level: 30
+		_string: "Void Spawn"		
+		_abilities: 
+		[ 
+			{ id: npc_chain_lightning target: random_player }
+		]		
+	}
+}
+

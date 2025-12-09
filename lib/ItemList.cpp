@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Item.h>
+
 #include <tpublic/ItemList.h>
 #include <tpublic/Manifest.h>
 
@@ -87,6 +89,10 @@ namespace tpublic
 		{
 			Entry t;
 			t.m_item = aItemInstance;
+
+			if (aItemData->m_itemBinding == ItemBinding::ID_WHEN_PICKED_UP && !t.m_item.IsSoulbound())
+				t.m_item.SetSoulbound();
+
 			m_entries.push_back(t);
 			m_version++;
 			return true;

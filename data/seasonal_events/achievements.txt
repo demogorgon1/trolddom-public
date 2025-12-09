@@ -1,0 +1,6 @@
+achievement_category .seasonal_events: { string: "Seasonal Events" order_key: 10000 }
+
+achievement jul_red_hat: { sort_key: 1 category: .seasonal_events string: "Red Winter Hat" description: "Wear a Red Winter Hat." points: 10 priority: 0  icon: icon_jul_hat_red stat_trigger red_winter_hats_worn: 1 no_progress_values: true }
+achievement jul_green_hat: { sort_key: 2 category: .seasonal_events string: "Green Winter Hat" description: "Wear a Green Winter Hat." points: 10 priority: 0  icon: icon_jul_hat_green stat_trigger green_winter_hats_worn: 1 no_progress_values: true }
+achievement jul_blue_hat: { sort_key: 3 category: .seasonal_events string: "Blue Winter Hat" description: "Wear a Blue Winter Hat." points: 10 priority: 0  icon: icon_jul_hat_blue stat_trigger blue_winter_hats_worn: 1 no_progress_values: true }
+achievement jul_purple_hat: { sort_key: 4 category: .seasonal_events string: "Purple Winter Hat" description: "Wear a Purple Winter Hat." points: 10 priority: 0  icon: icon_jul_hat_purple stat_trigger purple_winter_hats_worn: 1 no_progress_values: true }

@@ -2,6 +2,7 @@
 
 #include <tpublic/Data/Item.h>
 
+#include <tpublic/ItemMetrics.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic::Data
@@ -19,7 +20,7 @@ namespace tpublic::Data
 			const AddedStat& addedStat = m_addedStats[i];
 
 			AddedStat replacementStat;
-			if (aManifest->m_itemMetrics.m_invalidStats.ShouldReplaceStat(m_itemType, m_equipmentSlots, addedStat.m_id, addedStat.m_value, replacementStat.m_id, replacementStat.m_value))
+			if (aManifest->m_itemMetrics->m_invalidStats.ShouldReplaceStat(m_itemType, m_equipmentSlots, addedStat.m_id, addedStat.m_value, replacementStat.m_id, replacementStat.m_value))
 			{
 				// Budget weights are just transfered directly while raw stats need to be converted based on cost
 				if (addedStat.m_isBudgetWeight)

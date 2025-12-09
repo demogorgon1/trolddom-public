@@ -41,6 +41,7 @@ item .gob_fulbro_1_quest_item:
 	loot_groups: [ .gob_fulbro_1_quest_item ]
 	flags: [ not_sellable unique ]
 	string: "Half-Digested Leg"
+	quest: .gob_fulbro_1
 }
 
 objective .gob_fulbro_1:

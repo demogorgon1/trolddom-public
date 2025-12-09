@@ -1,5 +1,6 @@
 #pragma once
 
+#include "FloatCurve.h"
 #include "IReader.h"
 #include "IWriter.h"
 #include "SourceNode.h"
@@ -27,6 +28,8 @@ namespace tpublic
 					m_additionalExtraStashSlotPriceMultiplier = aChild->GetFloat();
 				else if(aChild->m_name == "demo_maps")
 					aChild->GetIdSet(DataType::ID_MAP, m_demoMaps);
+				else if(aChild->m_name == "honor_kill_curve")
+					m_honorKillCurve = FloatCurve(aChild);
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 			});
@@ -41,6 +44,7 @@ namespace tpublic
 			aStream->WriteUInt(m_maxExtraStashSlots);
 			aStream->WriteFloat(m_additionalExtraStashSlotPriceMultiplier);
 			aStream->WriteUIntSet(m_demoMaps);
+			m_honorKillCurve.ToStream(aStream);
 		}
 
 		bool
@@ -56,6 +60,8 @@ namespace tpublic
 			if (!aStream->ReadFloat(m_additionalExtraStashSlotPriceMultiplier))
 				return false;
 			if (!aStream->ReadUIntSet(m_demoMaps))
+				return false;
+			if(!m_honorKillCurve.FromStream(aStream))
 				return false;
 			return true;
 		}
@@ -83,6 +89,7 @@ namespace tpublic
 		uint32_t						m_maxExtraStashSlots = 0;
 		float							m_additionalExtraStashSlotPriceMultiplier = 0.0f;
 		std::unordered_set<uint32_t>	m_demoMaps;
+		FloatCurve						m_honorKillCurve;
 	};
 
 }

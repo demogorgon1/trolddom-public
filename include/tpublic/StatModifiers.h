@@ -82,7 +82,7 @@ namespace tpublic
 					aStats.m_stats[i] = m_modifiers[i].value().Calculate(aStats.m_stats[i]);
 					
 					if(aStats.m_stats[i] != oldValue)
-						aAdded.m_stats[i] = aStats.m_stats[i] - oldValue;
+						aAdded.m_stats[i] += aStats.m_stats[i] - oldValue;
 				}
 			}
 		}
@@ -101,6 +101,24 @@ namespace tpublic
 					thisModifier = Modifier(otherModifier.value(), aMultiplier);
 				else if(thisModifier.has_value() && otherModifier.has_value())
 					thisModifier.value().Combine(otherModifier.value(), aMultiplier);
+			}
+		}
+
+		void
+		Add(
+			Stat::Id				aStatId,
+			const Modifier&			aModifier)
+		{
+			std::optional<Modifier>& t = m_modifiers[aStatId];
+
+			if(!t.has_value())
+			{
+				t = aModifier;
+			}
+			else
+			{
+				t->m_add += aModifier.m_add;
+				t->m_addPercent += aModifier.m_addPercent;
 			}
 		}
 

@@ -86,7 +86,7 @@ item bag_brown_bag:
 	icon: icon_brown_bag_2
 	rarity: uncommon
 	string: "Brown Bag" 
-	bag_slots: 6
+	bag_slots: 8
 	level_range: [ 5 10 ]
 }
 
@@ -100,7 +100,7 @@ item bag_blue_bag:
 	icon: icon_blue_bag_1
 	rarity: uncommon
 	string: "Blue Bag" 
-	bag_slots: 6
+	bag_slots: 8
 	level_range: [ 5 10 ]
 }
 
@@ -114,7 +114,7 @@ item bag_green_bag:
 	icon: icon_green_bag_2
 	rarity: uncommon
 	string: "Green Bag" 
-	bag_slots: 6
+	bag_slots: 8
 	level_range: [ 5 10 ]
 }
 
@@ -128,7 +128,7 @@ item bag_purple_bag:
 	icon: icon_purple_bag_2
 	rarity: uncommon
 	string: "Purple Bag" 
-	bag_slots: 6
+	bag_slots: 8
 	level_range: [ 5 10 ]
 }
 
@@ -142,8 +142,8 @@ item bag_large_brown_bag:
 	icon: icon_large_brown_bag
 	rarity: uncommon
 	string: "Large Brown Bag" 
-	bag_slots: 8
-	level_range: [ 11 20 ]
+	bag_slots: 10
+	level_range: [ 11 25 ]
 }
 
 item bag_large_blue_bag:
@@ -156,8 +156,8 @@ item bag_large_blue_bag:
 	icon: icon_large_blue_bag
 	rarity: uncommon
 	string: "Large Blue Bag" 
-	bag_slots: 8
-	level_range: [ 11 20 ]
+	bag_slots: 10
+	level_range: [ 11 25 ]
 }
 
 item bag_large_red_bag:
@@ -170,6 +170,34 @@ item bag_large_red_bag:
 	icon: icon_large_red_bag
 	rarity: uncommon
 	string: "Large Red Bag" 
-	bag_slots: 8
-	level_range: [ 11 20 ]
+	bag_slots: 10
+	level_range: [ 11 25 ]
+}
+
+item bag_brown_knapsack:
+{
+	equipment_slots: [ bag_1 bag_2 bag_3 ]
+	binds: when_equipped
+	loot_groups: [ world_drops_uncommon ]
+	type: miscellaneous
+	required_level: 1
+	icon: icon_knapsack_1
+	rarity: uncommon
+	string: "Brown Knapsack" 
+	bag_slots: 12
+	level_range: [ 26 30 ]
+}
+
+item bag_green_knapsack:
+{
+	equipment_slots: [ bag_1 bag_2 bag_3 ]
+	binds: when_equipped
+	loot_groups: [ world_drops_uncommon ]
+	type: miscellaneous
+	required_level: 1
+	icon: icon_knapsack_2
+	rarity: uncommon
+	string: "Green Knapsack" 
+	bag_slots: 12
+	level_range: [ 26 30 ]
 }

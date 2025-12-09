@@ -1,4 +1,9 @@
 # Base 
+cooldown grenade:
+{
+	duration: 200
+}
+
 ability potion:
 {
 	flags: [ target_self item ]
@@ -382,7 +387,7 @@ aura consumable_durgan_ale (elixir):
 
 ability consumable_durgan_ale (elixir): 	
 {
-	string: "Ironbrew Stout"
+	string: "Durgan Ale"
 	description: "Increases your Constitution by 1 and decreases your Dexterity by 1 for 20 minutes. You can only have the effect of one elixir at a time."
 	icon: icon_mug_2
 	direct_effect apply_aura: { aura: consumable_durgan_ale }
@@ -396,6 +401,36 @@ item consumable_durgan_ale (elixir):
 	icon: icon_mug_2
 	string: "Durgan Ale"
 	use_ability: consumable_durgan_ale
+}
+
+#####################################################
+# Bottle of Rum
+
+aura consumable_bottle_of_rum (elixir):
+{
+	string: "Bottle of Rum"
+	icon: icon_bottle_1
+	duration: 12000
+	stat_modifiers: { constitution: { add: 10 } dexterity: { add: -10 } }
+}
+
+ability consumable_bottle_of_rum (elixir): 	
+{
+	string: "Bottle of Rum"
+	description: "Increases your Constitution by 10 and decreases your Dexterity by 10 for 20 minutes. You can only have the effect of one elixir at a time."
+	icon: icon_bottle_1
+	direct_effect apply_aura: { aura: consumable_bottle_of_rum }
+	consume_items: { consumable_bottle_of_rum: 1 }
+	required_level: 20
+}
+
+item consumable_bottle_of_rum (elixir):
+{
+	binds: when_picked_up
+	icon: icon_bottle_1
+	flavor: "Pirate-grade."
+	string: "Bottle of Rum"
+	use_ability: consumable_bottle_of_rum
 }
 
 #####################################################
@@ -446,7 +481,7 @@ ability consumable_strong_rejuvenation_potion (potion):
 {
 	string: "Strong Rejuvenation Potion"
 	description: "Restores 290 health and mana."
-	icon: icon_purple_potion
+	icon: icon_purple_potion_2
 	direct_effect heal: { function: 290 }
 	direct_effect modify_resource: { resource: mana function: 290 }	
 	consume_items: { consumable_strong_rejuvenation_potion: 1 }
@@ -599,3 +634,515 @@ item consumable_mana_salve:
 	}
 }
 
+#####################################################
+# Invisibility Potion
+
+aura consumable_invisibility_potion:
+{
+	string: "Invisibility"
+	type: buff
+	icon: icon_potion_4
+	duration: 150
+	description: "Non-allies are unlikely to notice you. Stay out of open areas to reduce likelihood of detection."
+	flags: [ unique cancel_on_damage no_source_needed ]
+	
+	aura_effect stealth: 
+	{
+		flags: [ cancel_aura_on_fade ] 
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}
+}
+
+ability consumable_invisibility_potion (potion):
+{
+	string: "Invisibility Potion"
+	description: "Makes you invisible for 15 seconds."
+	icon: icon_potion_4
+	direct_effect apply_aura: { aura: consumable_invisibility_potion }
+	consume_items: { consumable_invisibility_potion: 1 }
+	required_level: 16
+}
+
+item consumable_invisibility_potion (potion):
+{
+	icon: icon_potion_4
+	string: "Invisibility Potion"
+	use_ability: consumable_invisibility_potion
+	level_range: [ 16 30 ]
+}
+
+#####################################################
+# Rage Potion
+
+ability consumable_rage_potion (potion):	
+{
+	string: "Rage Potion"
+	description: "Generates 40 rage."
+	icon: icon_potion_5
+	direct_effect modify_resource: { resource: rage function: 40 }
+	consume_items: { consumable_rage_potion: 1 }
+	required_level: 15
+}
+
+item consumable_rage_potion (potion):
+{
+	icon: icon_potion_5
+	string: "Rage Potion"
+	use_ability: consumable_rage_potion
+	level_range: [ 16 30 ]
+}
+
+#####################################################
+# Common Protection Potion Aura
+
+!define local PROTECTION_POTION
+{	
+	string: @_string
+	description: @_description
+	type: buff
+	duration: 150
+	flags: [ unique charged magic ]	
+	icon: @_icon
+	charges: @_damage
+	aura_effect absorb: { type_mask: @_types }	
+}
+
+#####################################################
+# Fire Protection Potion
+
+ability consumable_fire_protection_potion (potion):	
+{
+	string: "Fire Protection Potion"
+	description: "Absorbs 1000 Fire damage. Lasts 15 seconds."
+	icon: icon_potion_6
+	consume_items: { consumable_fire_protection_potion: 1 }
+	required_level: 20
+	direct_effect apply_aura:
+	{ 
+		aura: $aura !PROTECTION_POTION 
+		{ 
+			_string: "Fire Protection Potion" 
+			_description: "Absorbs Fire damage."
+			_icon: icon_potion_6
+			_damage: 1000
+			_types: [ fire ]
+		} 
+	}	
+}
+
+item consumable_fire_protection_potion (potion):
+{
+	icon: icon_potion_6
+	string: "Fire Protection Potion"
+	use_ability: consumable_fire_protection_potion
+}
+
+#####################################################
+# Frost Protection Potion
+
+ability consumable_frost_protection_potion (potion):	
+{
+	string: "Frost Protection Potion"
+	description: "Absorbs 1000 Frost damage. Lasts 15 seconds."
+	icon: icon_potion_7
+	consume_items: { consumable_frost_protection_potion: 1 }
+	required_level: 20
+	direct_effect apply_aura:
+	{ 
+		aura: $aura !PROTECTION_POTION 
+		{ 
+			_string: "Frost Protection Potion" 
+			_description: "Absorbs Frost damage."
+			_icon: icon_potion_7
+			_damage: 1000
+			_types: [ frost ]
+		} 
+	}	
+}
+
+item consumable_frost_protection_potion (potion):
+{
+	icon: icon_potion_7
+	string: "Frost Protection Potion"
+	use_ability: consumable_frost_protection_potion
+}
+
+#####################################################
+# Arcane Protection Potion
+
+ability consumable_arcane_protection_potion (potion):	
+{
+	string: "Arcane Protection Potion"
+	description: "Absorbs 1000 Arcane damage. Lasts 15 seconds."
+	icon: icon_potion_8
+	consume_items: { consumable_arcane_protection_potion: 1 }
+	required_level: 20
+	direct_effect apply_aura:
+	{ 
+		aura: $aura !PROTECTION_POTION 
+		{ 
+			_string: "Arcane Protection Potion" 
+			_description: "Absorbs Arcane damage."
+			_icon: icon_potion_8
+			_damage: 1000
+			_types: [ arcane ]
+		} 
+	}	
+}
+
+item consumable_arcane_protection_potion (potion):
+{
+	icon: icon_potion_8
+	string: "Arcane Protection Potion"
+	use_ability: consumable_arcane_protection_potion
+}
+
+#####################################################
+# Unholy Protection Potion
+
+ability consumable_unholy_protection_potion (potion):	
+{
+	string: "Unholy Protection Potion"
+	description: "Absorbs 1000 Unholy damage. Lasts 15 seconds."
+	icon: icon_potion_9
+	consume_items: { consumable_unholy_protection_potion: 1 }
+	required_level: 20
+	direct_effect apply_aura:
+	{ 
+		aura: $aura !PROTECTION_POTION 
+		{ 
+			_string: "Unholy Protection Potion" 
+			_description: "Absorbs Unholy damage."
+			_icon: icon_potion_9
+			_damage: 1000
+			_types: [ unholy ]
+		} 
+	}	
+}
+
+item consumable_unholy_protection_potion (potion):
+{
+	icon: icon_potion_9
+	string: "Unholy Protection Potion"
+	use_ability: consumable_unholy_protection_potion
+}
+
+#####################################################
+# Holy Protection Potion
+
+ability consumable_holy_protection_potion (potion):	
+{
+	string: "Holy Protection Potion"
+	description: "Absorbs 1000 Holy damage. Lasts 15 seconds."
+	icon: icon_potion_10
+	consume_items: { consumable_holy_protection_potion: 1 }
+	required_level: 20
+	direct_effect apply_aura:
+	{ 
+		aura: $aura !PROTECTION_POTION 
+		{ 
+			_string: "Holy Protection Potion" 
+			_description: "Absorbs Holy damage."
+			_icon: icon_potion_10
+			_damage: 1000
+			_types: [ holy ]
+		} 
+	}	
+}
+
+item consumable_holy_protection_potion (potion):
+{
+	icon: icon_potion_10
+	string: "Holy Protection Potion"
+	use_ability: consumable_holy_protection_potion
+}
+
+#####################################################
+# Poison Protection Potion
+
+ability consumable_poison_protection_potion (potion):	
+{
+	string: "Poison Protection Potion"
+	description: "Absorbs 1000 Poison damage. Lasts 15 seconds."
+	icon: icon_potion_11
+	consume_items: { consumable_poison_protection_potion: 1 }
+	required_level: 20
+	direct_effect apply_aura:
+	{ 
+		aura: $aura !PROTECTION_POTION 
+		{ 
+			_string: "Poison Protection Potion" 
+			_description: "Absorbs Poison damage."
+			_icon: icon_potion_11
+			_damage: 1000
+			_types: [ poison ]
+		} 
+	}	
+}
+
+item consumable_poison_protection_potion (potion):
+{
+	icon: icon_potion_11
+	string: "Poison Protection Potion"
+	use_ability: consumable_poison_protection_potion
+}
+
+#####################################################
+# Fragmentation Grenade
+
+item consumable_fragmentation_grenade:
+{
+	icon: icon_grenade_1
+	string: "Fragmentation Grenade"
+	stack: 20	
+	item_level: 10
+
+	use_ability: $ability [ icon string ]
+	{
+		description: "Throw to destroy your enemies."
+		consume_items: { consumable_fragmentation_grenade: 1 }
+		required_level: 10
+		flags: [ item target_aoe target_aoe_hostile offensive ]
+		range: 8
+		aoe_cap: 6
+		aoe_radius: 2		
+		cast_time: 10
+		cooldowns: [ global grenade ]	
+		states: [ default in_combat ]
+		speed: 6
+		sound_effects: { resolve: [ explosion_1 explosion_2 ] }		
+
+		projectile: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_rock ]
+				flags: [ attached no_rotation no_scaling ]
+				count: 1		
+			}
+		}
+		
+		target_particle_system: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_expl_2_0 effect_expl_2_1 effect_expl_2_2 effect_expl_2_3 effect_expl_2_4 effect_expl_2_5 ]
+				sprite_interval: 110
+				flags: [ attached no_loop ]
+				duration: 660
+				count: 1		
+				scale: 2
+				alpha: 1
+				fade_out: 80
+			}
+			
+			particle:
+			{
+				sprites: [ effect_frag_0 effect_frag_1 effect_frag_2 ]
+				sprite_interval: 50
+				flags: [ attached no_loop ]
+				duration: 180
+				count: 1		
+				scale: 2.2
+				alpha: 1
+			}			
+		}		
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: physical
+			spread: 0.4
+			function: 600			
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Concussion"
+				description: "Stunned."
+				icon: icon_stun		
+				type: debuff
+				duration: 15	
+				flags: [ unique incapacitation ]
+				aura_effect stun: { }
+				particle_system: knock
+				priority: !AURA_PRIORITY_CC{}	
+				diminishing_effect: stun
+			}			
+		}
+	}
+}
+
+#####################################################
+# Incendiary Grenade
+
+item consumable_incendiary_grenade:
+{
+	icon: icon_grenade_3
+	string: "Incendiary Grenade"
+	stack: 20	
+	item_level: 10
+
+	use_ability: $ability [ icon string ]
+	{
+		description: "Throw to burn your enemies."
+		consume_items: { consumable_incendiary_grenade: 1 }
+		required_level: 10
+		flags: [ item target_aoe target_aoe_hostile offensive ]
+		range: 8
+		aoe_cap: 6
+		aoe_radius: 2		
+		cast_time: 10
+		cooldowns: [ global grenade ]	
+		states: [ default in_combat ]
+		speed: 6
+		sound_effects: { resolve: [ explosion_1 explosion_2 ] }		
+
+		projectile: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_rock ]
+				flags: [ attached no_rotation no_scaling ]
+				count: 1		
+			}
+		}
+		
+		target_particle_system: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_expl_3_0 effect_expl_3_1 effect_expl_3_2 effect_expl_3_3 effect_expl_3_4 effect_expl_3_5
+                           effect_expl_3_6 effect_expl_3_7 effect_expl_3_8 effect_expl_3_9 effect_expl_3_10 effect_expl_3_11 ]
+				sprite_interval: 90
+				flags: [ attached no_loop ]
+				duration: 1080
+				count: 1		
+				scale: 2
+				alpha: 1
+				fade_out: 60
+			}		
+		}		
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: fire
+			spread: 0.4
+			function: 420			
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Incendiary Grenade"
+				description: "Burning."
+				icon: icon_fire		
+				type: debuff
+				duration: based_on_effects
+				flags: [ unique_per_source ]
+				particle_system: burning
+				aura_effect repeat: 
+				{ 
+					update_interval: 10
+					update_count: 6
+					ability: $ability [ icon string ]
+					{
+						string: "Incendiary Grenade"
+						icon: icon_fire	
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]						
+						direct_effect damage:
+						{
+							damage_type: fire
+							function: 90
+							spread: !DEFAULT_SPREAD{}
+							direct: false
+						}
+					}
+				}								
+			}			
+		}
+	}
+}
+
+#####################################################
+# Frost Grenade
+
+item consumable_frost_grenade:
+{
+	icon: icon_grenade_2
+	string: "Frost Grenade"
+	stack: 20	
+	item_level: 10
+
+	use_ability: $ability [ icon string ]
+	{
+		description: "Throw to freeze your enemies."
+		consume_items: { consumable_frost_grenade: 1 }
+		required_level: 10
+		flags: [ item target_aoe target_aoe_hostile offensive ]
+		range: 8
+		aoe_cap: 6
+		aoe_radius: 2		
+		cast_time: 10
+		cooldowns: [ global grenade ]	
+		states: [ default in_combat ]
+		speed: 6
+		sound_effects: { resolve: [ explosion_1 explosion_2 ] }		
+
+		projectile: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_rock ]
+				flags: [ attached no_rotation no_scaling ]
+				count: 1		
+			}
+		}
+		
+		target_particle_system: $particle_system
+		{
+			particle:
+			{
+				sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+				sprite_interval: 125
+				flags: [ attached blend_add no_loop ]
+				duration: 400
+				count: 1		
+				scale: 2.5
+				alpha: 0.6
+				fade_out: 200
+			}
+		}		
+		
+		direct_effect damage:
+		{
+			flags: [ can_be_critical ]
+			damage_type: frost
+			spread: 0.4
+			function: 480			
+		}
+		
+		direct_effect apply_aura:
+		{
+			aura: $aura [ string icon ]
+			{
+				description: "Immobilized."
+				type: debuff
+				duration: 60	
+				flags: [ unique magic incapacitation ]
+				aura_effect immobilize: { }
+				particle_system: improved_frost_explosion	
+				diminishing_effect: root				
+			}
+		}
+	}
+}

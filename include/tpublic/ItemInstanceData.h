@@ -1,9 +1,13 @@
 #pragma once
 
-#include "Data/Item.h"
-
 #include "ItemInstance.h"
 #include "Stat.h"
+#include "UIntRange.h"
+
+namespace tpublic::Data
+{
+	struct Item;
+}
 
 namespace tpublic
 {

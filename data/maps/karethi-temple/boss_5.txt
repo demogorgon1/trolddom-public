@@ -1,0 +1,154 @@
+############################################################
+# Loot
+
+loot_group karethi_temple_boss_5_recipes: {}
+
+loot_group .boss_5: {}
+
+loot_table .boss_5:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message karethi_temple: "Nehzura will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_5 } }			
+		{ possibility: { weight: 10 } possibility: { weight: 1 loot_group: karethi_temple_boss_5_recipes } }
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 31
+		_loot_group: .boss_5
+	}		
+	
+	item karethi_temple_5_1: !BOSS_DROP_2H_AXE { _string: "Axe of the Void" _icon: icon_axe_11 _strength: 2 _constitution: 1 _budget_bias: -20 _phys_crit: 2 _weapon_cooldown: 38 }			
+	item karethi_temple_5_2: !BOSS_DROP_1H_SWORD { _string: "Blade of Nehzura" _icon: icon_sword_19 _strength: 1 _constitution: 2 _budget_bias: -10 _parry: 1 _weapon_cooldown: 24 }			
+	item karethi_temple_5_3: !BOSS_DROP_2H_STAFF { _string: "Otherworld Staff" _icon: icon_staff_15 _spell_damage: 3 _wisdom: 2 _constitution: 1 }			
+	item karethi_temple_5_4: !BOSS_DROP_1H_KNIFE { _string: "Emerald Blade Dagger" _icon: icon_knife_6 _strength: 2 _dexterity: 3 _weapon_cooldown: 18 }			
+	item karethi_temple_5_5: !BOSS_DROP_1H_MACE { _string: "Scepter of the Unknown Entity" _icon: icon_mace_18 _wisdom: 2 _healing: 3 _mana_per_5: 1 }			
+}
+
+############################################################
+# Boss
+
+zone .boss_5:
+{
+}
+
+encounter .boss_5:
+{
+	main_entities: [ karethi_temple_boss_5 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_5_spawn_1
+		possible_entities: [ .tentacle_monster_1 ]
+		entity_count: 1
+		interval: [ 80 90 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: karethi_temple_boss_5
+			value: 95			
+		}
+	}		
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_5_spawn_2
+		possible_entities: [ .tentacle_monster_2 ]
+		entity_count: 1
+		interval: [ 150 160 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: karethi_temple_boss_5
+			value: 75	
+		}
+	}			
+}
+
+entity karethi_temple_boss_5: !NPC 
+{ 
+	_string: "Nehzura" 
+	_level: 31
+	_elite: true
+	_faction: monsters 
+	_sprite: giant_demon_4
+	_sprite_dead: giant_demon_4_dead 
+	_weapon_damage: 1.1
+	_resource_health: 4.5
+	_loot_table: .boss_5
+	_creature_type: demon
+	_encounter: .boss_5
+	_zone: .boss_5
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			id: npc_arcane_explosion
+		}	
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_5_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_5:
+{
+	entity karethi_temple_boss_5: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_5_killed
+		}
+	}
+}
+
+entity .boss_5_door: 
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			unlock_map_triggers: [ .boss_2_killed .boss_3_killed .boss_4_killed ]
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+map_entity_spawn .boss_5_door: { entity .boss_5_door: { } spawn_timer: { despawn_required: true } }
+
+map_entity_spawn .boss_5_spawn_1: { }
+map_entity_spawn .boss_5_spawn_2: { }

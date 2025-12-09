@@ -1,63 +1,65 @@
-loot_group world_drops_cloth: {}
-loot_group world_drops_junk: {}
-loot_group world_drops_consumable: {}
-loot_group world_drops_uncommon: {}
-loot_group world_drops_rare: {}
-loot_group world_drops_epic: {}
+loot_group world_drops_cloth: { oracle: { everywhere: true } }
+loot_group world_drops_junk: { oracle: { everywhere: true } }
+loot_group world_drops_consumable: { oracle: { everywhere: true } }
+loot_group world_drops_uncommon: { oracle: { everywhere: true } }
+loot_group world_drops_rare: { oracle: { everywhere: true } }
+loot_group world_drops_epic: { oracle: { everywhere: true } }
 
-loot_group world_drops_uncommon_weapons_and_shields: {}
-loot_group world_drops_rare_weapons_and_shields: {}
-loot_group world_drops_epic_weapons_and_shields: {}
-loot_group world_drops_uncommon_armor_and_jewelry: {}
-loot_group world_drops_rare_armor_and_jewelry: {}
-loot_group world_drops_epic_armor_and_jewelry: {}
+loot_group world_drops_uncommon_weapons_and_shields: { oracle: { everywhere: true } }
+loot_group world_drops_rare_weapons_and_shields: { oracle: { everywhere: true } }
+loot_group world_drops_epic_weapons_and_shields: { oracle: { everywhere: true } }
+loot_group world_drops_uncommon_armor_and_jewelry: { oracle: { everywhere: true } }
+loot_group world_drops_rare_armor_and_jewelry: { oracle: { everywhere: true } }
+loot_group world_drops_epic_armor_and_jewelry: { oracle: { everywhere: true } }
 
-loot_group world_drops_uncommon_recipe_random: {}
-loot_group world_drops_rare_recipe_random: {}
+loot_group world_drops_uncommon_recipe_random: { oracle: { everywhere: true } }
+loot_group world_drops_rare_recipe_random: { oracle: { everywhere: true } }
 
-loot_group world_drops_uncommon_recipe: {}
-loot_group world_drops_rare_recipe: {}
+loot_group world_drops_uncommon_recipe: { oracle: { everywhere: true } }
+loot_group world_drops_rare_recipe: { oracle: { everywhere: true } }
 
-loot_group skeletons: {}
-loot_group skeletons_uncommon: {}
-loot_group zombies: {}
-loot_group zombies_uncommon: {}
-loot_group wolves: {}
-loot_group wolves_uncommon: {}
-loot_group deer: {}
-loot_group deer_uncommon: {}
-loot_group bears: {}
-loot_group bears_uncommon: {}
-loot_group boars: {}
-loot_group boars_uncommon: {}
-loot_group crabs: {}
-loot_group crabs_uncommon: {}
-loot_group earth_elementals: {}
-loot_group earth_elementals_uncommon: {}
-loot_group owlbears: {}
-loot_group owlbears_uncommon: {}
-loot_group wood_elementals: {}
-loot_group wood_elementals_uncommon: {}
-loot_group lizards: {}
-loot_group lizards_uncommon: {}
-loot_group oozes: {}
-loot_group oozes_uncommon: {}
-loot_group lions: {}
-loot_group lions_uncommon: {}
-loot_group demons: {}
-loot_group demons_uncommon: {}
-loot_group nature_elementals: {}
-loot_group nature_elementals_uncommon: {}
-loot_group spiders: {}
-loot_group spiders_uncommon: {}
-loot_group birds: {}
-loot_group birds_uncommon: {}
-loot_group snakes: {}
-loot_group snakes_uncommon: {}
-loot_group crocodiles: {}
-loot_group crocodiles_uncommon: {}
-loot_group ghosts: {}
-loot_group ghosts_uncommon: {}
+loot_group skeletons: { oracle: { source_plural: "Skeletons" } }
+loot_group skeletons_uncommon: { oracle: { source_plural: "Skeletons" } }
+loot_group zombies: { oracle: { source_plural: "Zombies and ghouls" } }
+loot_group zombies_uncommon: { oracle: { source_plural: "Zombies and ghouls" } }
+loot_group wolves: { oracle: { source_plural: "Wolves" } }
+loot_group wolves_uncommon: { oracle: { source_plural: "Wolves" } }
+loot_group deer: { oracle: { source_plural: "Deer" } }
+loot_group deer_uncommon: { oracle: { source_plural: "Deer" } }
+loot_group bears: { oracle: { source_plural: "Bears" } }
+loot_group bears_uncommon: { oracle: { source_plural: "Bears" } }
+loot_group boars: { oracle: { source_plural: "Boars" } }
+loot_group boars_uncommon: { oracle: { source_plural: "Boars" } }
+loot_group crabs: { oracle: { source_plural: "Crabs" } }
+loot_group crabs_uncommon: { oracle: { source_plural: "Crabs" } }
+loot_group earth_elementals: { oracle: { source_plural: "Earth elementals" } }
+loot_group earth_elementals_uncommon: { oracle: { source_plural: "Earth elementals" } }
+loot_group owlbears: { oracle: { source_plural: "Owlbears" } }
+loot_group owlbears_uncommon: { oracle: { source_plural: "Owlbears" } }
+loot_group wood_elementals: { oracle: { source_plural: "Wood elementals" } }
+loot_group wood_elementals_uncommon: { oracle: { source_plural: "Wood elementals" } }
+loot_group lizards: { oracle: { source_plural: "Lizards" } }
+loot_group lizards_uncommon: { oracle: { source_plural: "Lizards" } }
+loot_group oozes: { oracle: { source_plural: "Oozes" } }
+loot_group oozes_uncommon: { oracle: { source_plural: "Oozes" } }
+loot_group lions: { oracle: { source_plural: "Large cats" } }
+loot_group lions_uncommon: { oracle: { source_plural: "Large cats" } }
+loot_group demons: { oracle: { source_plural: "Demons" } }
+loot_group demons_uncommon: { oracle: { source_plural: "Demons" } }
+loot_group nature_elementals: { oracle: { source_plural: "Nature elementals" } }
+loot_group nature_elementals_uncommon: { oracle: { source_plural: "Nature elementals" } }
+loot_group spiders: { oracle: { source_plural: "Spiders" } }
+loot_group spiders_uncommon: { oracle: { source_plural: "Spiders" } }
+loot_group birds: { oracle: { source_plural: "Birds" } }
+loot_group birds_uncommon: { oracle: { source_plural: "Birds" } }
+loot_group snakes: { oracle: { source_plural: "Snakes" } }
+loot_group snakes_uncommon: { oracle: { source_plural: "Snakes" } }
+loot_group crocodiles: { oracle: { source_plural: "Crocodiles" } }
+loot_group crocodiles_uncommon: { oracle: { source_plural: "Crocodiles" } }
+loot_group ghosts: { oracle: { source_plural: "Ghosts" } }
+loot_group ghosts_uncommon: { oracle: { source_plural: "Ghosts" } }
+loot_group fire_elementals: { oracle: { source_plural: "Fire elementals" } }
+loot_group fire_elementals_uncommon: { oracle: { source_plural: "Fire elementals" } }
 
 !define WORLD_DROPS
 {
@@ -99,6 +101,22 @@ loot_group ghosts_uncommon: {}
 	possibility<must_be_elite>: { weight: 100 loot_group: world_drops_uncommon }	
 	possibility<must_be_elite>: { weight: 60 loot_group: world_drops_uncommon_recipe_random }		
 	possibility<must_be_elite>: { weight: 50 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_be_elite>: { weight: 150 loot_group: world_drops_rare }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+}
+
+!define WORLD_DROPS_VERY_RARE
+{
+	possibility<must_not_be_elite>: { weight: 100 loot_group: world_drops_uncommon }	
+	possibility<must_not_be_elite>: { weight: 30 loot_group: world_drops_uncommon_recipe_random }		
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_uncommon_recipe }	
+	possibility<must_not_be_elite>: { weight: 50 loot_group: world_drops_rare }	
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
+	possibility<must_not_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
+	possibility<must_not_be_elite>: { weight: 1 loot_group: world_drops_epic }	
+
 	possibility<must_be_elite>: { weight: 150 loot_group: world_drops_rare }	
 	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe_random }	
 	possibility<must_be_elite>: { weight: 25 loot_group: world_drops_rare_recipe }	
@@ -248,8 +266,15 @@ loot_group ghosts_uncommon: {}
 !define WORLD_DROPS_GHOSTS
 {
 	possibility: { weight: 20 }
-	possibility: { weight: 15 loot_group: ghosts creature_types: [ beast ] }
-	possibility: { weight: 5 loot_group: ghosts_uncommon creature_types: [ beast ] }
+	possibility: { weight: 15 loot_group: ghosts creature_types: [ undead ] }
+	possibility: { weight: 5 loot_group: ghosts_uncommon creature_types: [ undead ] }
+}
+
+!define WORLD_DROPS_FIRE_ELEMENTALS
+{
+	possibility: { weight: 20 }
+	possibility: { weight: 15 loot_group: fire_elementals creature_types: [ elemental ] }
+	possibility: { weight: 5 loot_group: fire_elementals_uncommon creature_types: [ elemental ] }
 }
 
 loot_table default_humanoid: 
@@ -448,5 +473,14 @@ loot_table default_ghost:
 	[
 		!WORLD_DROPS {}
 		!WORLD_DROPS_GHOSTS{}
+	]
+}
+
+loot_table default_fire_elementals:
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_FIRE_ELEMENTALS{}
 	]
 }

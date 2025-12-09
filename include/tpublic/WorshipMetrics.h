@@ -1,10 +1,12 @@
 #pragma once
 
+#include <tpublic/Data/Item.h>
+
 #include "Image.h"
 #include "IReader.h"
 #include "ItemInstanceData.h"
 #include "IWriter.h"
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {

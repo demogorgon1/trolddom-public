@@ -1,0 +1,260 @@
+map_player_spawn .player_spawn:
+{
+}
+
+map_portal .exit:
+{
+	animation: !HOLE_PORTAL_ANIMATION{}
+	map: thalvaron
+	spawn: thalvaron_karethi_temple_exit
+}
+
+route karethi_temple_default_patrol: 
+{ 
+}
+
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+map_cliff .dummy_cliff_3: { cliff_style: dummy elevation: 3 }
+map_cliff .dummy_cliff_3_ramp: { cliff_style: dummy elevation: 3 ramp: true }
+map_cliff .dummy_cliff_4: { cliff_style: dummy elevation: 4 }
+map_cliff .dummy_cliff_4_ramp: { cliff_style: dummy elevation: 4 ramp: true }
+map_cliff .dummy_cliff_5: { cliff_style: dummy elevation: 5 }
+map_cliff .dummy_cliff_5_ramp: { cliff_style: dummy elevation: 5 ramp: true }
+map_cliff .dummy_cliff_6: { cliff_style: dummy elevation: 6 }
+map_cliff .dummy_cliff_6_ramp: { cliff_style: dummy elevation: 6 ramp: true }
+map_cliff .dummy_cliff_7: { cliff_style: dummy elevation: 7 }
+map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
+
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_palette .stuff:
+{
+	player_spawn .player_spawn: [ 0 0 255 ]
+	
+	portal .exit: [ 0 253 0 ]	
+	
+	entity_spawn mining: [ 200 200 200 ]
+	entity_spawn herbalism: [ 0 255 0 ]
+	entity_spawn holy_altar: [ 0 0 40 ]	
+	entity_spawn underworld_shrine: [ 0 0 80 ]	
+	entity_spawn furnace: [ 100 43 66 ]		
+	entity_spawn anvil: [ 150 43 66 ]		
+	entity_spawn fireplace: [ 250 43 66 ]		
+	entity_spawn fireplace_unlit: [ 250 243 66 ]		
+	entity_spawn bonfire: [ 251 43 66 ]		
+	entity_spawn default_chest: [ 40 143 66 ]		
+	entity_spawn cauldron: [ 43 113 166 ]		
+	entity_spawn bonfire_unlit: [ 144 59 20 ]
+	entity_spawn target_dummy: [ 139 201 21 ]	
+		
+	entity_spawn .boss_1: [ 255 0 0 ]
+	entity_spawn .boss_2: [ 255 0 64 ]
+	entity_spawn .boss_2_b: [ 255 228 0 ]
+	entity_spawn .boss_3: [ 255 64 0 ]
+	entity_spawn .boss_4: [ 255 0 128 ]
+	entity_spawn .boss_5: [ 255 128 0 ]
+	
+	entity_spawn .boss_1_melee_trash: [ 120 48 77 ]
+	entity_spawn .boss_1_caster_trash_skeletal_priest: [ 30 18 209 ]
+	entity_spawn .boss_1_melee_trash_skeletal_guard: [ 230 18 209 ]
+	entity_spawn .boss_2_caster_trash_skeletal_priest: [ 30 118 209 ]
+	entity_spawn .boss_2_melee_trash_skeletal_guard: [ 230 118 209 ]	
+	entity_spawn .boss_5_caster_trash_skeletal_priest: [ 130 118 109 ]
+	entity_spawn .boss_5_melee_trash_skeletal_guard: [ 130 118 9 ]	
+	entity_spawn .boss_5_door: [ 104 99 82 ]
+	
+	entity_spawn .boss_3_spawn: [ 76 55 146 ]
+	entity_spawn .boss_5_spawn_1: [ 174 92 88 ]
+	entity_spawn .boss_5_spawn_2: [ 174 192 88 ]
+}
+
+map_palette .levels:
+{
+	level<30>: [ 255 0 255 ]
+	level<31>: [ 0 255 255 ]
+}
+
+map_palette .routes:
+{
+	route karethi_temple_default_patrol: [ 39 103 53 ]
+}
+
+map_palette .doodads:
+{
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
+	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
+	doodad hole: [ 104 49 146 ]
+	doodad dark_stairs_left: [ 144 49 146 ]
+	doodad dark_stairs_center: [ 104 41 146 ]
+	doodad dark_stairs_right: [ 104 42 246 ]
+}
+
+map_palette .subzones:
+{
+	sub_zone .boss_1: [ 175 255 219 ]
+	sub_zone .boss_2: [ 175 224 255 ]
+	sub_zone .boss_3: [ 183 175 255 ]
+	sub_zone .boss_4: [ 255 175 227 ]
+	sub_zone .boss_5: [ 212 132 56 ]
+}
+
+map_palette .cliffs:
+{
+	cliff .dummy_cliff_1: [ 197 169 134 ]
+	cliff .dummy_cliff_1_ramp: [ 197 142 8 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 51 197 8 ]	
+
+	cliff .dummy_cliff_3: [ 184 234 169 ]
+	cliff .dummy_cliff_3_ramp: [ 8 197 142 ]	
+	
+	cliff .dummy_cliff_4: [ 169 192 234 ]
+	cliff .dummy_cliff_4_ramp: [ 8 51 197 ]	
+
+	cliff .dummy_cliff_5: [ 234 169 179 ]
+	cliff .dummy_cliff_5_ramp: [ 155 8 197 ]	
+
+	cliff .dummy_cliff_6: [ 255 62 93 ]
+	cliff .dummy_cliff_6_ramp: [ 197 8 39 ]		
+}
+
+map karethi_temple:
+{
+	string: "Karethi Temple"
+	type: private
+	reset: manual
+	default_tile: rocks
+	default_player_spawn: .player_spawn
+	default_exit_portal: .exit
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 35	
+	auto_doodads: true
+	level: 30
+	max_players: 5
+	max_minions: 1
+	openable_elite: true
+	
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"karethi-temple-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"karethi-temple-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"karethi-temple-levels.png"
+		}
+
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"karethi-temple-cover.png"
+			cover: 		true
+		}		
+		
+		{ 
+			palettes: 	[ .routes ]
+			source:		"karethi-temple-routes.png"
+		}				
+
+		{ 
+			palettes: 	[ .doodads ]
+			source:		"karethi-temple-doodads.png"
+		}								
+		
+		{ 
+			palettes: 	[ .subzones ]
+			source:		"karethi-temple-subzones.png"
+		}										
+		
+		{ 
+			palettes: 	[ .cliffs ]
+			source:		"karethi-temple-cliffs.png"
+		}										
+	]
+	
+	script:
+	{
+		condition trigger_not_set: .boss_1_killed
+		condition entity_state: { entity_spawn: .boss_1 state: dead }		
+		run: { set_trigger: .boss_1_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .boss_2_killed
+		condition entity_state: { entity_spawn: .boss_2 state: dead }		
+		run: { set_trigger: .boss_2_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .boss_3_killed
+		condition entity_state: { entity_spawn: .boss_3 state: dead }		
+		run: { set_trigger: .boss_3_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .boss_4_killed
+		condition entity_state: { entity_spawn: .boss_4 state: dead }		
+		run: { set_trigger: .boss_4_killed }
+	}	
+
+	script:
+	{
+		condition trigger_not_set: .boss_5_killed
+		condition entity_state: { entity_spawn: .boss_5 state: dead }		
+		run: { set_trigger: .boss_5_killed }
+	}	
+
+}
+ 

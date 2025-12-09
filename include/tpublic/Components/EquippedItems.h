@@ -86,6 +86,20 @@ namespace tpublic
 					return (itemTypeInfo->m_flags & aFlags) == aFlags;
 				}
 
+				bool 
+				HasEquippedItemFlags(
+					const Manifest*		aManifest,
+					EquipmentSlot::Id	aEquipmentSlotId,
+					uint32_t			aFlags) const
+				{
+					const ItemInstance& item = m_items[aEquipmentSlotId];
+					if(!item.IsSet())
+						return false;
+
+					const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+					return (itemData->m_flags & aFlags) == aFlags;
+				}
+
 				bool
 				HasEquippedSpecificItem(
 					uint32_t			aItemId) const

@@ -1,0 +1,58 @@
+dialogue_screen .egon_riddle:
+{
+	text: 
+	[	
+		"Impressed with my little slice of the world? You should be."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .egon_riddle_1 }
+	]
+}
+
+entity thalvaron_egon_riddle: !NPC
+{
+	_string: "Egon Riddle"
+	_sprite: man_2
+	_sprite_dead: man_2_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .egon_riddle: { } }
+}
+
+############################################################
+# Quest 1
+
+quest .egon_riddle_1:
+{
+	string: "Expedition to Urthonak Keep"
+
+	text:
+	[
+		"Seek out Sandra Riddle in Urthonak Keep to the south."
+	]
+	
+	description: 
+	[
+		"I don't know how much you're aware of the Riddle business organization, but we're always looking for new ventures. Soon this jungle will be colonized by people from out west and we'll be sitting on"
+		"most of the land rights. Isn't it amazing? Yes it is.\n"
+		"\n"
+		"Anyway, I sent a party of adventurers led by my daughter, Sandra, down south to the lands of Urthon. It's quite barren, compared to here, but it's a site of an ancient civilization centered around"
+		"Urthonak Keep. I think that's where they headed. They've been away for a few weeks now. Their job is to look for things that might be profitable and I wonder what progress they've made.\n"
+		"\n"
+		"You should seek them out and offer your services. I'm sure you can make a coin or two as well."
+	]
+
+	completion:
+	[
+		"Welcome to the dump."
+	]
+	
+	level: 28
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+}

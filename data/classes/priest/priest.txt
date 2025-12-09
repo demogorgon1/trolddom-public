@@ -1,11 +1,58 @@
 class priest:
 {
-	version: 1
+	version: 3
 	
 	string: "Priest"	
 	description: "Become a follower of the faith."
+	icon: icon_priest_2
 	
 	systems: [ combat health_regen mana_regen ]
+	
+	customization:
+	{
+		body:
+		{
+			armor_style none:   { sprite: priest_naked sprite_dead: priest_naked_dead sprite_mounted: priest_naked_mounted sprites_walk: [ priest_naked_walk_1 priest_naked_walk_2 ] }
+			armor_style brown:  { sprite: priest       sprite_dead: priest_dead       sprite_mounted: priest_mounted       sprites_walk: [ priest_walk_1       priest_walk_2 ] }
+			armor_style green:  { sprite: priest_2     sprite_dead: priest_2_dead     sprite_mounted: priest_2_mounted     sprites_walk: [ priest_2_walk_1     priest_2_walk_2 ] }
+			armor_style cyan:   { sprite: priest_3     sprite_dead: priest_3_dead     sprite_mounted: priest_3_mounted     sprites_walk: [ priest_3_walk_1     priest_3_walk_2 ] }
+			armor_style red:    { sprite: priest_4     sprite_dead: priest_4_dead     sprite_mounted: priest_4_mounted     sprites_walk: [ priest_4_walk_1     priest_4_walk_2 ] }
+			armor_style purple: { sprite: priest_5     sprite_dead: priest_5_dead     sprite_mounted: priest_5_mounted     sprites_walk: [ priest_5_walk_1     priest_5_walk_2 ] }
+			armor_style black:  { sprite: priest_6     sprite_dead: priest_6_dead     sprite_mounted: priest_6_mounted     sprites_walk: [ priest_6_walk_1     priest_6_walk_2 ] }
+			armor_style white:  { sprite: priest_7     sprite_dead: priest_7_dead     sprite_mounted: priest_7_mounted     sprites_walk: [ priest_7_walk_1     priest_7_walk_2 ] }
+			armor_style yellow: { sprite: priest_8     sprite_dead: priest_8_dead     sprite_mounted: priest_8_mounted     sprites_walk: [ priest_8_walk_1     priest_8_walk_2 ] }		
+		}
+		
+		body:
+		{
+			armor_style none:   { sprite: priest_naked_body_2 sprite_dead: priest_naked_dead_body_2 sprite_mounted: priest_naked_mounted_body_2 sprites_walk: [ priest_naked_walk_1_body_2 priest_naked_walk_2_body_2 ] }
+			armor_style brown:  { sprite: priest_body_2       sprite_dead: priest_dead_body_2       sprite_mounted: priest_mounted_body_2       sprites_walk: [ priest_walk_1_body_2       priest_walk_2_body_2 ] }
+			armor_style green:  { sprite: priest_2_body_2     sprite_dead: priest_2_dead_body_2     sprite_mounted: priest_2_mounted_body_2     sprites_walk: [ priest_2_walk_1_body_2     priest_2_walk_2_body_2 ] }
+			armor_style cyan:   { sprite: priest_3_body_2     sprite_dead: priest_3_dead_body_2     sprite_mounted: priest_3_mounted_body_2     sprites_walk: [ priest_3_walk_1_body_2     priest_3_walk_2_body_2 ] }
+			armor_style red:    { sprite: priest_4_body_2     sprite_dead: priest_4_dead_body_2     sprite_mounted: priest_4_mounted_body_2     sprites_walk: [ priest_4_walk_1_body_2     priest_4_walk_2_body_2 ] }
+			armor_style purple: { sprite: priest_5_body_2     sprite_dead: priest_5_dead_body_2     sprite_mounted: priest_5_mounted_body_2     sprites_walk: [ priest_5_walk_1_body_2     priest_5_walk_2_body_2 ] }
+			armor_style black:  { sprite: priest_6_body_2     sprite_dead: priest_6_dead_body_2     sprite_mounted: priest_6_mounted_body_2     sprites_walk: [ priest_6_walk_1_body_2     priest_6_walk_2_body_2 ] }
+			armor_style white:  { sprite: priest_7_body_2     sprite_dead: priest_7_dead_body_2     sprite_mounted: priest_7_mounted_body_2     sprites_walk: [ priest_7_walk_1_body_2     priest_7_walk_2_body_2 ] }
+			armor_style yellow: { sprite: priest_8_body_2     sprite_dead: priest_8_dead_body_2     sprite_mounted: priest_8_mounted_body_2     sprites_walk: [ priest_8_walk_1_body_2     priest_8_walk_2_body_2 ] }		
+		}		
+		
+		hair: { }
+		hair: { sprite: priest_hair_1 sprite_dead: priest_dead_hair_1 sprite_mounted: priest_mounted_hair_1 sprites_walk: [ priest_walk_1_hair_1 priest_walk_2_hair_1 ] }
+		hair: { sprite: priest_hair_2 sprite_dead: priest_dead_hair_2 sprite_mounted: priest_mounted_hair_2 sprites_walk: [ priest_walk_1_hair_2 priest_walk_2_hair_2 ] }
+		hair: { sprite: priest_hair_3 sprite_dead: priest_dead_hair_3 sprite_mounted: priest_mounted_hair_3 sprites_walk: [ priest_walk_1_hair_3 priest_walk_2_hair_3 ] }
+		hair: { sprite: priest_hair_4 sprite_dead: priest_dead_hair_4 sprite_mounted: priest_mounted_hair_4 sprites_walk: [ priest_walk_1_hair_4 priest_walk_2_hair_4 ] }
+		
+		beard: { }
+		beard: { sprite: priest_beard_1 sprite_dead: priest_dead_beard_1 sprite_mounted: priest_mounted_beard_1 sprites_walk: [ priest_walk_1_beard_1 priest_walk_2_beard_1 ] }
+		beard: { sprite: priest_beard_2 sprite_dead: priest_dead_beard_2 sprite_mounted: priest_mounted_beard_2 sprites_walk: [ priest_walk_1_beard_2 priest_walk_2_beard_2 ] }
+		beard: { sprite: priest_beard_3 sprite_dead: priest_dead_beard_3 sprite_mounted: priest_mounted_beard_3 sprites_walk: [ priest_walk_1_beard_3 priest_walk_2_beard_3 ] }
+		beard: { sprite: priest_beard_4 sprite_dead: priest_dead_beard_4 sprite_mounted: priest_mounted_beard_4 sprites_walk: [ priest_walk_1_beard_4 priest_walk_2_beard_4 ] }
+		beard: { sprite: priest_beard_5 sprite_dead: priest_dead_beard_5 sprite_mounted: priest_mounted_beard_5 sprites_walk: [ priest_walk_1_beard_5 priest_walk_2_beard_5 ] }	
+
+		default: { body: 0 hair: 1 beard: 2 hair_color: 5 beard_color: 5 }
+		
+		!CUSTOMIZATION_COLORS{}
+	}	
 	
 	armor_style none:   { sprite: priest_naked sprite_dead: priest_naked_dead sprite_mounted: priest_naked_mounted sprites_walk: [ priest_naked_walk_1 priest_naked_walk_2 ] }	
 	armor_style brown:  { sprite: priest       sprite_dead: priest_dead       sprite_mounted: priest_mounted       sprites_walk: [ priest_walk_1       priest_walk_2 ] }
@@ -21,7 +68,8 @@ class priest:
 	weapon_sprites weapon_1h_mace:  { sprite: priest_mace_1h  mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_mace_1h  priest_walk_2_mace_1h ] }
 	weapon_sprites weapon_1h_knife: { sprite: priest_knife_1h mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_knife_1h priest_walk_2_knife_1h ] }
 	weapon_sprites weapon_2h_staff: { sprite: priest_staff    mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_staff    priest_walk_2_staff ] }
-		
+	fishing_sprites:				{ sprite: priest_fishing  mounted_offset: [ 0 -2 ] sprites_walk: [ priest_walk_1_fishing  priest_walk_2_fishing ] }
+				
 	armor_decoration: { sprite: priest_decoration sprite_dead: priest_decoration_dead sprites_walk: [ priest_decoration_walk_1 priest_decoration_walk_2 ] }
 		
 	remains: [ player_remains_1 player_remains_2 player_remains_3 ]

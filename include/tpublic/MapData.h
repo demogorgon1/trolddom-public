@@ -8,7 +8,8 @@
 #include "MapGeneratorFactory.h"
 #include "MapInfo.h"
 #include "MapType.h"
-#include "Parser.h"
+#include "SourceContext.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
@@ -873,6 +874,11 @@ namespace tpublic
 								const Vec2&				aPosition) const;
 		const PlayerSpawn*	GetPlayerSpawn(
 								uint32_t				aMapPlayerSpawnId) const;
+		void				GetWalkableFloodFillPositions(
+								const Vec2&				aPosition,
+								uint32_t				aMinSteps,
+								uint32_t				aMaxSteps,
+								std::vector<Vec2>&		aOut) const;
 		
 		// Public data
 		MapType::Id									m_type;
@@ -902,6 +908,7 @@ namespace tpublic
 		std::vector<uint32_t>						m_realmBalanceIds;
 		std::vector<PointOfInterest>				m_pointsOfInterest;
 		std::optional<WorldMap>						m_worldMap;
+		bool										m_built;
 	
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;
 		

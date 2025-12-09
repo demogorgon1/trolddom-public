@@ -1,14 +1,17 @@
 #pragma once
 
-#include "../Data/Ability.h"
-#include "../Data/AbilityModifier.h"
-
 #include "../CastInProgress.h"
 #include "../ComponentBase.h"
 #include "../LootRule.h"
 #include "../MoveSpeed.h"
 #include "../Rarity.h"
 #include "../Resource.h"
+
+namespace tpublic::Data
+{
+	struct Ability;
+	struct AbilityModifier;
+}
 
 namespace tpublic
 {
@@ -136,295 +139,46 @@ namespace tpublic
 				});
 			}
 
-			void
-			AddResourceMax(
-				uint32_t				aResourceId,
-				uint32_t				aValue)
-			{
-				for(ResourceEntry& t : m_resources)
-				{
-					if(t.m_id == aResourceId)
-					{
-						t.m_max += aValue;
-						return;
-					}
-				}
-				m_resources.push_back({ aResourceId, 0, aValue });
-			}
-
-			uint32_t
-			GetResourcePercentage(
-				uint32_t				aResourceId) const
-			{
-				for (const ResourceEntry& t : m_resources)
-				{
-					if(t.m_id == aResourceId && t.m_max > 0)
-						return (100 * t.m_current) / t.m_max;
-				}
-				return 0;
-			}
-
-			uint32_t
-			GetResource(
-				uint32_t				aResourceId,
-				uint32_t*				aOutMax = NULL) const
-			{
-				for (const ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-					{
-						if(aOutMax != NULL)
-							*aOutMax = t.m_max;
-						
-						return t.m_current;
-					}
-				}
-				return 0;
-			}
-
-			uint32_t
-			GetResourceMax(
-				uint32_t				aResourceId) const
-			{
-				for (const ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-						return t.m_max;
-				}
-				return 0;
-			}
-
-			ResourceEntry*
-			GetResourceEntry(
-				uint32_t				aResourceId)
-			{
-				for (ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-						return &t;
-				}
-				return NULL;
-			}
-
-			const ResourceEntry*
-			GetResourceEntry(
-				uint32_t				aResourceId) const
-			{
-				for (const ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-						return &t;
-				}
-				return NULL;
-			}
-
-			void
-			SetResourceToMax(
-				uint32_t				aResourceId)
-			{
-				for (ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-					{
-						t.m_current = t.m_max;
-						return;
-					}
-				}
-			}
-
-			bool
-			GetResourceIndex(
-				uint32_t				aResourceId,
-				size_t&					aOut) const
-			{
-				size_t i = 0;
-				for (const ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-					{
-						aOut = i;
-						return true;
-					}
-					i++;
-				}
-				return false;
-			}
-
-			bool
-			GetSecondaryResourceIndex(
-				size_t&					aOut) const
-			{
-				// Secondary resource is the first one that's not health
-				size_t i = 0;
-				for (const ResourceEntry& t : m_resources)
-				{
-					if (t.m_id != Resource::ID_HEALTH)
-					{
-						aOut = i;
-						return true;
-					}
-					i++;
-				}
-				return false;
-			}
-
-			void
-			SetResource(
-				uint32_t				aResourceId,
-				uint32_t				aValue)
-			{
-				for (ResourceEntry& t : m_resources)
-				{
-					if (t.m_id == aResourceId)
-					{
-						t.m_current = aValue;
-						return;
-					}
-				}
-			}
-
-			bool
-			HasResourcesForAbility(
-				const Data::Ability*								aAbility,
-				const std::vector<const Data::AbilityModifier*>*	aModifiers,
-				uint32_t											aBaseMana,
-				float												aCostMultiplier = 1.0f) const
-			{
-				for(uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
-				{
-					int32_t cost = (int32_t)aAbility->m_resourceCosts[resourceId];
-
-					if(aModifiers != NULL && cost != 0)
-					{
-						for (const Data::AbilityModifier* modifier : *aModifiers)
-						{
-							if (modifier->m_modifyResourceCost.has_value() && modifier->m_modifyResourceCost->m_resourceId == resourceId)
-								cost += modifier->m_modifyResourceCost->m_value;
-						}						
-					}
-
-					if (resourceId == (uint32_t)Resource::ID_MANA)
-					{
-						// Mana cost is always as percentage of base mana
-						cost = ((int32_t)aBaseMana * cost) / 100;
-					}
-
-					if(cost > 0 && aCostMultiplier != 1.0f)
-						cost = (int32_t)((float)cost * aCostMultiplier);
-
-					if(cost > 0 && (uint32_t)cost > GetResource(resourceId))
-						return false;
-				}
-				return true;
-			}
-
-			bool
-			SubtractResourcesForAbility(
-				const Data::Ability*								aAbility,
-				const std::vector<const Data::AbilityModifier*>*	aModifiers,
-				uint32_t											aBaseMana,
-				float												aCostMultiplier = 1.0f)
-			{
-				for (uint32_t resourceId = 1; resourceId < (uint32_t)Resource::NUM_IDS; resourceId++)
-				{
-					uint32_t cost = aAbility->m_resourceCosts[resourceId];
-
-					if(aModifiers != NULL && cost != 0)
-					{
-						for (const Data::AbilityModifier* modifier : *aModifiers)
-						{
-							if (modifier->m_modifyResourceCost.has_value() && modifier->m_modifyResourceCost->m_resourceId == resourceId)
-								cost += modifier->m_modifyResourceCost->m_value;
-						}						
-					}
-
-					if (resourceId == (uint32_t)Resource::ID_MANA)
-					{
-						// Mana cost is always as percentage of base mana
-						cost = ((int32_t)aBaseMana * cost) / 100;
-					}
-
-					if (cost > 0 && aCostMultiplier != 1.0f)
-						cost = (int32_t)((float)cost * aCostMultiplier);
-
-					if(cost > 0)
-					{
-						size_t index;
-						if(!GetResourceIndex(resourceId, index))
-							return false;
-
-						if(m_resources[index].m_current < cost)
-							return false;
-
-						m_resources[index].m_current -= cost;						
-					}				
-				}
-
-				return true;
-			}
-
-			void
-			SetResurrectResources()
-			{				
-				for (ResourceEntry& t : m_resources)
-				{
-					const Resource::Info* resourceInfo = Resource::GetInfo((Resource::Id)t.m_id);
-					t.m_current = resourceInfo->m_resurrectValue;
-				}
-			}
-
-			void
-			SetDefaultResources()
-			{
-				for (ResourceEntry& t : m_resources)
-				{
-					const Resource::Info* resourceInfo = Resource::GetInfo((Resource::Id)t.m_id);
-
-					if(resourceInfo->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
-						t.m_current = t.m_max;
-					else
-						t.m_current = 0;
-				}
-			}
-
-			void
-			SetLevelUpResources()
-			{
-				for (ResourceEntry& t : m_resources)
-				{
-					const Resource::Info* resourceInfo = Resource::GetInfo((Resource::Id)t.m_id);
-
-					if(resourceInfo->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
-						t.m_current = t.m_max;
-				}
-			}
-
-			bool
-			SetZeroResources()
-			{
-				bool changed = false;
-				for (ResourceEntry& t : m_resources)
-				{
-					if(t.m_current > 0)
-					{
-						changed = true;
-						t.m_current = 0;
-					}
-				}
-				return changed;
-			}
-
-			bool
-			IsOneOfCreatureTypes(
-				const std::vector<uint32_t>&	aCreatureTypeIds) const
-			{
-				for(uint32_t id : aCreatureTypeIds)
-				{
-					if(m_creatureTypeId == id)
-						return true;
-				}
-				return false;
-			}
+			void					AddResourceMax(
+										uint32_t											aResourceId,
+										uint32_t											aValue);
+			uint32_t				GetResourcePercentage(
+										uint32_t											aResourceId) const;
+			uint32_t				GetResource(
+										uint32_t											aResourceId,
+										uint32_t*											aOutMax = NULL) const;
+			uint32_t				GetResourceMax(
+										uint32_t											aResourceId) const;
+			ResourceEntry*			GetResourceEntry(
+										uint32_t											aResourceId);
+			const ResourceEntry*	GetResourceEntry(
+										uint32_t											aResourceId) const;
+			void					SetResourceToMax(
+										uint32_t											aResourceId);
+			bool					GetResourceIndex(
+										uint32_t											aResourceId,
+										size_t&												aOut) const;
+			bool					GetSecondaryResourceIndex(
+										size_t&												aOut) const;
+			void					SetResource(
+										uint32_t											aResourceId,
+										uint32_t											aValue);
+			bool					HasResourcesForAbility(
+										const Data::Ability*								aAbility,
+										const std::vector<const Data::AbilityModifier*>*	aModifiers,
+										uint32_t											aBaseMana,
+										float												aCostMultiplier = 1.0f) const;
+			bool					SubtractResourcesForAbility(
+										const Data::Ability*								aAbility,
+										const std::vector<const Data::AbilityModifier*>*	aModifiers,
+										uint32_t											aBaseMana,
+										float												aCostMultiplier = 1.0f);
+			void					SetResurrectResources();
+			void					SetDefaultResources();
+			void					SetLevelUpResources();
+			bool					SetZeroResources();
+			bool					IsOneOfCreatureTypes(
+										const std::vector<uint32_t>&						aCreatureTypeIds) const;
 
 			void
 			Reset()
@@ -454,6 +208,7 @@ namespace tpublic
 				m_doNotZeroResources = false;
 				m_pvpCombatEvent = false;
 				m_lastPVPCombatEventTick = 0;
+				m_easyElite = false;
 			}
 
 			// Helpers
@@ -491,6 +246,7 @@ namespace tpublic
 			bool							m_doNotZeroResources = false;
 			bool							m_pvpCombatEvent = false;
 			int32_t							m_lastPVPCombatEventTick = 0;
+			bool							m_easyElite = false;
 		};
 
 	}

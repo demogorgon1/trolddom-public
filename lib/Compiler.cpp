@@ -3,6 +3,7 @@
 #include <tpublic/Data/Map.h>
 #include <tpublic/Data/Tag.h>
 
+#include <tpublic/AbilityMetrics.h>
 #include <tpublic/AuraEffectFactory.h>
 #include <tpublic/AutoDoodads.h>
 #include <tpublic/Compiler.h>
@@ -10,12 +11,23 @@
 #include <tpublic/Compression.h>
 #include <tpublic/DataErrorHandling.h>
 #include <tpublic/DebugPrintTimer.h>
+#include <tpublic/DefaultSoundEffects.h>
 #include <tpublic/DirectEffectFactory.h>
 #include <tpublic/Document.h>
+#include <tpublic/ItemMetrics.h>
 #include <tpublic/MemoryWriter.h>
+#include <tpublic/MiscMetrics.h>
+#include <tpublic/NPCMetrics.h>
 #include <tpublic/ObjectiveTypeFactory.h>
 #include <tpublic/PerfTimer.h>
+#include <tpublic/PlayerComponents.h>
+#include <tpublic/ProfessionMetrics.h>
+#include <tpublic/QuestMetrics.h>
+#include <tpublic/ReputationMetrics.h>
+#include <tpublic/TileLayering.h>
 #include <tpublic/Tokenizer.h>
+#include <tpublic/WorshipMetrics.h>
+#include <tpublic/XPMetrics.h>
 
 #include "FileWriter.h"
 #include "GenerationJob.h"
@@ -56,7 +68,8 @@ namespace tpublic
 		const char*							aPersistentIdTablePath,
 		const char*							aDataOutputPath,
 		const char*							aGeneratedSourceOutputPath,
-		Compression::Level					aCompressionLevel)
+		Compression::Level					aCompressionLevel,
+		const char*							aOnlyBuildMap)
 	{
 		uint32_t buildFingerprint = _GetInputFingerprint(aParseRootPaths);
 		uint32_t currentBuildFingerprint = _GetCurrentBuildFingerprint(aDataOutputPath);
@@ -142,13 +155,16 @@ namespace tpublic
 
 			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
 				Data::Map* aMap)
-			{
-				printf("Building map '%s'...\n", aMap->m_name.c_str());
+			{			
+				if(aOnlyBuildMap == NULL || aOnlyBuildMap[0] == '\0' || aMap->m_name == aOnlyBuildMap)
+				{
+					printf("Building map '%s'...\n", aMap->m_name.c_str());
 
-				aMap->m_data->Build(m_manifest, &autoDoodads, &workQueue);
+					aMap->m_data->Build(m_manifest, &autoDoodads, &workQueue);
 
-				aMap->m_data->ConstructMapPathData(m_manifest, &workQueue);
-				aMap->m_data->ConstructMapRouteData(m_manifest, &workQueue);
+					aMap->m_data->ConstructMapPathData(m_manifest, &workQueue);
+					aMap->m_data->ConstructMapRouteData(m_manifest, &workQueue);
+				}
 				return true;
 			});			
 		}
@@ -387,51 +403,51 @@ namespace tpublic
 	{
 		if (aNode->m_name == "player_components")
 		{
-			m_manifest->m_playerComponents.FromSource(aNode);
+			m_manifest->m_playerComponents->FromSource(aNode);
 		}
 		else if (aNode->m_name == "xp_metrics")
 		{
-			m_manifest->m_xpMetrics.FromSource(aNode);
+			m_manifest->m_xpMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "item_metrics")
 		{
-			m_manifest->m_itemMetrics.FromSource(aNode);
+			m_manifest->m_itemMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "npc_metrics")
 		{
-			m_manifest->m_npcMetrics.FromSource(aNode);
+			m_manifest->m_npcMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "misc_metrics")
 		{
-			m_manifest->m_miscMetrics.FromSource(aNode);
+			m_manifest->m_miscMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "reputation_metrics")
 		{
-			m_manifest->m_reputationMetrics.FromSource(aNode);
+			m_manifest->m_reputationMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "quest_metrics")
 		{
-			m_manifest->m_questMetrics.FromSource(aNode);
+			m_manifest->m_questMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "profession_metrics")
 		{
-			m_manifest->m_professionMetrics.FromSource(aNode);
+			m_manifest->m_professionMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "ability_metrics")
 		{
-			m_manifest->m_abilityMetrics.FromSource(aNode);
+			m_manifest->m_abilityMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "worship_metrics")
 		{
-			m_manifest->m_worshipMetrics.FromSource(aNode);
+			m_manifest->m_worshipMetrics->FromSource(aNode);
 		}
 		else if (aNode->m_name == "default_sound_effects")
 		{
-			m_manifest->m_defaultSoundEffects.FromSource(aNode);
+			m_manifest->m_defaultSoundEffects->FromSource(aNode);
 		}
 		else if (aNode->m_name == "tile_layering")
 		{
-			m_manifest->m_tileLayering.FromSource(aNode);
+			m_manifest->m_tileLayering->FromSource(aNode);
 		}
 		else if (aNode->m_name == "sprites")
 		{

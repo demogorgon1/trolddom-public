@@ -422,6 +422,10 @@ namespace tpublic
 						{
 							m_spawnTimer.FromSource(aChild);
 						}
+						else if(aChild->m_name == "debug_color")
+						{
+							m_debugColor = Image::RGBA(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_entity_spawn' item.");
@@ -436,6 +440,7 @@ namespace tpublic
 			{
 				aStream->WriteObjectPointers(m_entities);
 				m_spawnTimer.ToStream(aStream);
+				aStream->WriteOptionalPOD(m_debugColor);
 			}
 
 			bool
@@ -446,6 +451,8 @@ namespace tpublic
 					return false;
 				if(!m_spawnTimer.FromStream(aStream))
 					return false;
+				if(!aStream->ReadOptionalPOD(m_debugColor))
+					return false;
 				return true;
 			}
 
@@ -453,6 +460,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<Entity>>									m_entities;
 			int32_t																	m_minSpawnDelayTicks = 5 * 10; // 5 seconds
 			SpawnTimer																m_spawnTimer;
+			std::optional<Image::RGBA>												m_debugColor;
 		};
 
 	}

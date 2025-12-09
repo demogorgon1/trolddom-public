@@ -1,7 +1,11 @@
 #pragma once
 
+#include <tpublic/Data/Aura.h>
+
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../Image.h"
+#include "../Manifest.h"
 
 namespace tpublic
 {
@@ -69,7 +73,8 @@ namespace tpublic
 				FIELD_COLOR_EFFECT,
 				FIELD_COLOR_WEAPON_GLOW,
 				FIELD_MOUNT_ID,
-				FIELD_OVERRIDE_SPRITE_ID
+				FIELD_OVERRIDE_SPRITE_ID,
+				FIELD_HEAD_EFFECT_SPRITE_ID
 			};
 			
 			static void
@@ -82,6 +87,7 @@ namespace tpublic
 				aSchema->DefineCustomOptionalPODNoSource<Image::RGBA>(FIELD_COLOR_WEAPON_GLOW, offsetof(VisibleAuras, m_colorWeaponGlow));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_MOUNT_ID, NULL, offsetof(VisibleAuras, m_mountId));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_OVERRIDE_SPRITE_ID, NULL, offsetof(VisibleAuras, m_overrideSpriteId));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEAD_EFFECT_SPRITE_ID, NULL, offsetof(VisibleAuras, m_headEffectSpriteId));
 			}
 
 			bool 
@@ -96,6 +102,34 @@ namespace tpublic
 				return false;
 			}
 
+			bool			
+			HasAuraFlags(
+				const Manifest*		aManifest,
+				uint32_t			aFlags) const
+			{
+				for (const Entry& entry : m_entries)
+				{
+					const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry.m_auraId);
+					if((aura->m_flags & aFlags) == aFlags)
+						return true;
+				}
+
+				return false;
+			}
+
+			bool 
+			HasAuraWithSource(
+				uint32_t			aAuraId,
+				uint32_t			aEntityInstanceId) const
+			{
+				for(const Entry& t : m_entries)
+				{
+					if(t.m_auraId == aAuraId && t.m_entityInstanceId == aEntityInstanceId)
+						return true;
+				}
+				return false;
+			}
+
 			void
 			Reset()
 			{
@@ -105,6 +139,7 @@ namespace tpublic
 				m_colorWeaponGlow.reset();
 				m_mountId = 0;
 				m_overrideSpriteId = 0;
+				m_headEffectSpriteId = 0;
 
 				m_seq = 0;
 			}
@@ -121,6 +156,7 @@ namespace tpublic
 			std::optional<Image::RGBA>	m_colorWeaponGlow;
 			uint32_t					m_mountId = 0;
 			uint32_t					m_overrideSpriteId = 0;
+			uint32_t					m_headEffectSpriteId = 0;
 
 			// Internal
 			uint32_t					m_seq = 0;

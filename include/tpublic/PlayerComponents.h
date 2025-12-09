@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "IReader.h"
 #include "IWriter.h"
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {

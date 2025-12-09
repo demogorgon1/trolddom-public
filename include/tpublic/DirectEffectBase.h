@@ -4,8 +4,8 @@
 #include "DirectEffect.h"
 #include "IReader.h"
 #include "IWriter.h"
-#include "Parser.h"
 #include "Requirement.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
@@ -14,6 +14,12 @@ namespace tpublic
 	{
 		struct CombatPublic;
 		struct CombatPrivate;
+	}
+
+	namespace Data
+	{
+		struct Ability;
+		struct Item;
 	}
 
 	class AbilityModifierList;
@@ -52,7 +58,7 @@ namespace tpublic
 
 		bool
 		FromSourceBase(
-			const SourceNode*										aSource)
+			const SourceNode*											aSource)
 		{
 			if(aSource->m_name == "flags")
 			{
@@ -91,7 +97,7 @@ namespace tpublic
 
 		void	
 		ToStreamBase(	
-			IWriter*												aStream) const 
+			IWriter*													aStream) const 
 		{
 			aStream->WriteUInt(m_flags);
 			aStream->WriteUInt(m_probability);
@@ -102,7 +108,7 @@ namespace tpublic
 		
 		bool	
 		FromStreamBase(
-			IReader*												aStream) 
+			IReader*													aStream) 
 		{
 			if (!aStream->ReadUInt(m_flags))
 				return false;
@@ -119,39 +125,47 @@ namespace tpublic
 
 		// Virtual methods
 		virtual void			FromSource(
-									const SourceNode*				/*aSource*/) { assert(false); }
+									const SourceNode*					/*aSource*/) { assert(false); }
 		virtual void			ToStream(
-									IWriter*						/*aStream*/) const { assert(false); }
+									IWriter*							/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
-									IReader*						/*aStream*/) { assert(false); return true; }
+									IReader*							/*aStream*/) { assert(false); return true; }
+		virtual void			Validate(
+									const DataErrorHandling::DebugInfo&	/*aDebugInfo*/,
+									const Manifest*						/*aManifest*/,
+									const Data::Ability*				/*aAbility*/) const { }
 		virtual Result			Resolve(
-									int32_t							/*aTick*/,
-									std::mt19937&					/*aRandom*/,
-									const Manifest*					/*aManifest*/,
-									CombatEvent::Id					/*aId*/,
-									uint32_t						/*aAbilityId*/,
-									const SourceEntityInstance&		/*aSourceEntityInstance*/,
-									EntityInstance*					/*aSource*/,
-									EntityInstance*					/*aTarget*/,
-									const Vec2&						/*aAOETarget*/,
-									const ItemInstanceReference&	/*aItem*/,
-									IResourceChangeQueue*			/*aCombatResultQueue*/,
-									IAuraEventQueue*				/*aAuraEventQueue*/,
-									IEventQueue*					/*aEventQueue*/,
-									const IWorldView*				/*aWorldView*/) { return Result(); }
+									int32_t								/*aTick*/,
+									std::mt19937&						/*aRandom*/,
+									const Manifest*						/*aManifest*/,
+									CombatEvent::Id						/*aId*/,
+									uint32_t							/*aAbilityId*/,
+									const SourceEntityInstance&			/*aSourceEntityInstance*/,
+									EntityInstance*						/*aSource*/,
+									EntityInstance*						/*aTarget*/,
+									const Vec2&							/*aAOETarget*/,
+									const ItemInstanceReference&		/*aItem*/,
+									IResourceChangeQueue*				/*aCombatResultQueue*/,
+									IAuraEventQueue*					/*aAuraEventQueue*/,
+									IEventQueue*						/*aEventQueue*/,
+									const IWorldView*					/*aWorldView*/) { return Result(); }
 		virtual bool			CalculateToolTipDamage(
-									const EntityInstance*			/*aEntityInstance*/,
-									const AbilityModifierList*		/*aAbilityModifierList*/,
-									uint32_t						/*aAbilityId*/,
-									UIntRange&						/*aOutDamage*/,
-									DirectEffect::DamageType&		/*aOutDamageType*/) const { return false; }
+									const Manifest*						/*aManifest*/,
+									const EntityInstance*				/*aEntityInstance*/,
+									const AbilityModifierList*			/*aAbilityModifierList*/,
+									uint32_t							/*aAbilityId*/,
+									UIntRange&							/*aOutDamage*/,
+									DirectEffect::DamageType&			/*aOutDamageType*/) const { return false; }
 		virtual bool			CalculateToolTipHeal(
-									const EntityInstance*			/*aEntityInstance*/,
-									const AbilityModifierList*		/*aAbilityModifierList*/,
-									uint32_t						/*aAbilityId*/,
-									UIntRange&						/*aOutHeal*/) const { return false; }
+									const Manifest*						/*aManifest*/,
+									const EntityInstance*				/*aEntityInstance*/,
+									const AbilityModifierList*			/*aAbilityModifierList*/,
+									uint32_t							/*aAbilityId*/,
+									UIntRange&							/*aOutHeal*/) const { return false; }
 		virtual uint32_t		GetToolTipItemId(
-									const Manifest*					/*aManifest*/) const { return 0; }
+									const Manifest*						/*aManifest*/) const { return 0; }
+		virtual void			PostProcessOnUseItem(
+									Data::Item*							/*aItem*/) const { }
 
 		// Public data
 		uint32_t					m_flags = 0;		

@@ -24,8 +24,12 @@ namespace tpublic
 						const Components::CombatPublic*	aCombatPublic,
 						Components::CombatPrivate*		aCombatPrivate,
 						Components::MinionPrivate*		aMinionPrivate,
-						Components::NPC*				aNPC);
-
+						Components::NPC*				aNPC,
+						bool							aUpdate);
+		void		MakeEliteEasy(
+						const NPCMetrics*				aNPCMetrics,
+						Components::CombatPublic*		aCombatPublic,
+						Components::CombatPrivate*		aCombatPrivate);
 	}
 
 }

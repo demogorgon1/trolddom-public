@@ -80,6 +80,7 @@ loot_table .wolf:
 		_dexterity: 2
 		_budget_bias: -10
 		_phys_crit: 1
+		_type: armor_cloth
 	}
 }
 

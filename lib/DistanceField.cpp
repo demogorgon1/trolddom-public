@@ -249,7 +249,27 @@ namespace tpublic
 		{
 			for(int32_t x = 0; x < m_width; x++)
 			{
-				if(m_data[i] > aValue && m_data[i] != UINT32_MAX)
+				uint32_t v = m_data[i];
+				if(v > aValue && v != UINT32_MAX)
+					aOut.push_back({ x, y });
+				i++;
+			}
+		}
+	}
+
+	void		
+	DistanceField::GetPositionsInRange(
+		uint32_t										aMin,
+		uint32_t										aMax,
+		std::vector<Vec2>&								aOut) const
+	{
+		int32_t i = 0;
+		for(int32_t y = 0; y < m_height; y++)
+		{
+			for(int32_t x = 0; x < m_width; x++)
+			{
+				uint32_t v = m_data[i];
+				if(v >= aMin && v <= aMax && v != UINT32_MAX)
 					aOut.push_back({ x, y });
 				i++;
 			}

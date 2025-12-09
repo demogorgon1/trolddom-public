@@ -152,6 +152,7 @@ entity tirnwood_thicket_zyxtharion: !NPC
 				{
 					damage_type: fire
 					function: 80
+					spread: !DEFAULT_SPREAD{}						
 				}
 				
 				direct_effect spawn_entity:
@@ -242,6 +243,7 @@ entity .zyxtharion_void_zone: !NPC_VOID_ZONE
 				{
 					damage_type: fire
 					function: 225
+					spread: !DEFAULT_SPREAD{}						
 				}	
 			}
 			target: self

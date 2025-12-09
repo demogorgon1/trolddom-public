@@ -235,11 +235,11 @@ objective .laura_tokins_2:
 
 quest .laura_tokins_2:
 {
-	string: "Ravenreach Abbey"
+	string: "Shadowthorn Abbey"
 
 	text:
 	[
-		"Venture through the dark woods in the east to Ravenreach Abbery, pick flowers, and return them to Laura Tokins in Ravenreach."
+		"Venture through the dark woods in the east to Shadowthorn Abbey, pick flowers, and return them to Laura Tokins in Ravenreach."
 	]
 	
 	description: 

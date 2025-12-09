@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/CombatPublic.h>
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Cooldown.h>
 
 #include <tpublic/DirectEffects/Interrupt.h>

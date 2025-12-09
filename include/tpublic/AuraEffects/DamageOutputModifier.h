@@ -28,15 +28,19 @@ namespace tpublic
 
 			// AuraEffectBase implementation
 			int32_t			FilterDamageOutput(
-								const Manifest*				aManifest,
-								const EntityInstance*		aSource,
-								const EntityInstance*		aTarget,
-								DirectEffect::DamageType	aDamageType,
-								int32_t						aDamage) const override;
+								const Manifest*								aManifest,
+								const EntityInstance*						aSource,
+								const EntityInstance*						aTarget,
+								DirectEffect::DamageType					aDamageType,
+								int32_t										aDamage,
+								uint32_t									aAbilityId) const override;
+			bool			IsFilter() const override;
+			void			ForEachToolTipMultiplier(
+								std::function<void(ToolTipMultiplier&)>		aCallback) const override;
 
 			void
 			FromSource(
-				const SourceNode*		aSource) override
+				const SourceNode*											aSource) override
 			{
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
@@ -47,17 +51,18 @@ namespace tpublic
 						{
 							aChild->GetArray()->ForEachChild([&](
 								const SourceNode* aFlag)
+							{
+								if (aFlag->IsIdentifier("all"))
 								{
-									if (aFlag->IsIdentifier("all"))
-									{
-										m_typeMask = UINT32_MAX;
-									}
-									else
-									{
-										DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
-										m_typeMask |= 1 << (uint32_t)damageType;
-									}
-								});
+									m_typeMask = UINT32_MAX;
+								}
+								else
+								{
+									DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
+									TP_VERIFY(damageType != DirectEffect::INVALID_DAMAGE_TYPE, aFlag->m_debugInfo, "'%s' is not a valid damage type.", aFlag->GetIdentifier());
+									m_typeMask |= 1 << (uint32_t)damageType;
+								}
+							});
 						}
 						else if (aChild->m_name == "multiplier")
 						{
@@ -73,6 +78,10 @@ namespace tpublic
 						{
 							m_multiplierDenominator = aChild->GetInt32();
 							TP_VERIFY(m_multiplierDenominator != 0, aChild->m_debugInfo, "Multiplier denominator can't be zero.");
+						}
+						else if(aChild->m_name == "apply_to_abilities")
+						{
+							aChild->GetIdArray(DataType::ID_ABILITY, m_applyToAbilityIds);
 						}
 						else
 						{
@@ -90,6 +99,7 @@ namespace tpublic
 				aStream->WriteUInt(m_typeMask);
 				aStream->WriteInt(m_multiplierNumerator);
 				aStream->WriteInt(m_multiplierDenominator);
+				aStream->WriteUInts(m_applyToAbilityIds);
 			}
 
 			bool
@@ -104,6 +114,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadInt(m_multiplierDenominator))
 					return false;
+				if(!aStream->ReadUInts(m_applyToAbilityIds))
+					return false;
 				return true;
 			}
 
@@ -116,6 +128,7 @@ namespace tpublic
 				t->m_typeMask = m_typeMask;
 				t->m_multiplierNumerator = m_multiplierNumerator;
 				t->m_multiplierDenominator = m_multiplierDenominator;
+				t->m_applyToAbilityIds = m_applyToAbilityIds;
 
 				return t;
 			}
@@ -124,6 +137,7 @@ namespace tpublic
 			uint32_t					m_typeMask = 0;
 			int32_t						m_multiplierNumerator = 1;
 			int32_t						m_multiplierDenominator = 1;
+			std::vector<uint32_t>		m_applyToAbilityIds;
 		};
 
 	}

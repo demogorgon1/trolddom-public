@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ComponentBase.h"
+#include "../ToolTipMultiplier.h"
 
 namespace tpublic
 {
@@ -19,7 +20,8 @@ namespace tpublic
 
 			enum Field : uint32_t
 			{
-				FIELD_ACTIVE
+				FIELD_ACTIVE,
+				FIELD_TOOL_TIP_MULTIPLIERS,
 			};
 
 			static void
@@ -27,6 +29,7 @@ namespace tpublic
 				ComponentSchema*	aSchema)
 			{
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_ACTIVE, NULL, offsetof(AbilityModifiers, m_active));
+				aSchema->DefineCustomObjectsNoSource<ToolTipMultiplier>(FIELD_TOOL_TIP_MULTIPLIERS, offsetof(AbilityModifiers, m_toolTipMultipliers));
 			}
 
 			bool
@@ -45,10 +48,17 @@ namespace tpublic
 			Reset()
 			{
 				m_active.clear();
+				m_toolTipMultipliers.clear();
+
+				m_aurasSeq = 0;
 			}
 
 			// Public data
-			std::vector<uint32_t>	m_active;
+			std::vector<uint32_t>				m_active;
+			std::vector<ToolTipMultiplier>		m_toolTipMultipliers;
+			
+			// Internal
+			uint32_t							m_aurasSeq = 0;
 		};
 
 	}

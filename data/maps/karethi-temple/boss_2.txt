@@ -1,0 +1,241 @@
+############################################################
+# Loot
+
+loot_group .boss_2: {}
+
+loot_table .boss_2:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message karethi_temple: "Blaztek will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_2  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_2
+	}		
+	
+	item karethi_temple_2_1: !BOSS_DROP_LEGS { _string: "Leggings of Blaztek" _icon: icon_mail_pants_1 _type: armor_cloth _wisdom: 3 _healing: 1 _mana_per_5: 2}	
+	item karethi_temple_2_2: !BOSS_DROP_BACK { _string: "Cape of the Twin Guardian" _icon: icon_cape_5 _type: armor_cloth _budget_bias: -10 _spell_crit: 1 _wisdom: 1 _spell_damage: 2 }	
+	item karethi_temple_2_3: !BOSS_DROP_WRISTS { _string: "Slaktek's Bracers" _icon: icon_bracers_3 _type: armor_plate _constitution: 2 _strength: 1 _budget_bias: -20 _block: 1 _parry: 1 }	
+	item karethi_temple_2_4: !BOSS_DROP_LEGS { _string: "Twin Guardian Leggings" _icon: icon_mail_pants_1 _type: armor_cloth _spell_damage: 3 _wisdom: 1 }		
+}
+
+############################################################
+# Boss
+
+zone .boss_2:
+{
+}
+
+encounter .boss_2:
+{
+	main_entities: [ karethi_temple_boss_2 karethi_temple_boss_2_b ]	
+	
+	script:
+	{
+		condition main_entities_must_have_less_health_than: 8
+		action block_npc_abilities: [ .blaztek_bind_spirit .slaktek_bind_spirit .full_heal ]
+		action cancel_auras: [ .blaztek_spirit_bound .slaktek_spirit_bound ]
+	}	
+}
+
+ability .blaztek_bind_spirit:
+{
+	string: "Bind Spirit"
+	range: 0
+	flags: [ target_self ]
+	states: [ spawning default in_combat ]
+	icon: icon_throw_rock
+	direct_effect apply_aura:
+	{
+		aura: .blaztek_spirit_bound
+	}				
+}	
+			
+aura .blaztek_spirit_bound:
+{
+	string: "Spirit Bound"
+	description: "Bound to Slaktek."
+	flags: [ unique indefinite ]
+	icon: icon_skull_1	
+	type: buff
+	aura_effect immortality: 
+	{ 
+	}
+}
+
+ability .slaktek_bind_spirit:
+{
+	string: "Bind Spirit"
+	range: 0
+	flags: [ target_self ]
+	states: [ spawning default in_combat ]
+	icon: icon_throw_rock
+	direct_effect apply_aura:
+	{
+		aura: .slaktek_spirit_bound
+	}				
+}	
+			
+aura .slaktek_spirit_bound:
+{
+	string: "Spirit Bound"
+	description: "Bound to Blaztek."
+	flags: [ unique indefinite ]
+	icon: icon_skull_1	
+	type: buff
+	aura_effect immortality: 
+	{ 
+	}
+}
+
+ability .full_heal:
+{
+	string: "Restore Spirit"
+	range: 0
+	cast_time: 10
+	cooldowns: [ global ]
+	flags: [ spell target_self ]
+	states: [ in_combat ]
+	icon: icon_throw_rock
+	delay: 3
+	target_particle_system: heal
+
+	direct_effect heal:
+	{
+		function: 100
+		max_health_percentage: true
+	}
+}
+
+entity karethi_temple_boss_2: !NPC 
+{ 
+	_string: "Blaztek" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: skeleton_caster_4
+	_sprite_dead: skeleton_caster_4_dead 
+	_weapon_damage: 0.6
+	_resource_health: 2.2
+	_loot_table: .boss_2
+	_creature_type: undead
+	_encounter: .boss_2
+	_zone: .boss_2
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			target: self
+			requirement self<must_not_have_aura>: .blaztek_spirit_bound
+			id: .blaztek_bind_spirit			
+		}
+		
+		{
+			target: self
+			id: .full_heal
+			requirement self<must_have_aura>: .blaztek_spirit_bound
+			requirement self<must_have_less_health_than>: 1
+		}
+	
+		{
+			id: npc_heal
+			target: low_health_friend_or_self
+		}	
+
+		{
+			id: npc_curse
+			target: random_player
+			requirement self<must_have_less_health_than>: 80
+		}	
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+entity karethi_temple_boss_2_b: !NPC 
+{ 
+	_string: "Slaktek" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: skeleton_caster_7
+	_sprite_dead: skeleton_caster_7_dead 
+	_weapon_damage: 1.0
+	_resource_health: 2.2
+	_creature_type: undead
+	_encounter: .boss_2
+	_zone: .boss_2
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			target: self
+			requirement self<must_not_have_aura>: .slaktek_spirit_bound
+			id: .slaktek_bind_spirit			
+		}
+		
+		{
+			target: self
+			id: .full_heal
+			requirement self<must_have_aura>: .slaktek_spirit_bound
+			requirement self<must_have_less_health_than>: 1
+		}
+		
+		{
+			id: npc_whirlwind
+			requirement self<must_have_less_health_than>: 80
+		}	
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_2_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_2:
+{
+	entity karethi_temple_boss_2: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_2_killed
+		}
+	}
+}
+
+map_entity_spawn .boss_2_b:
+{
+	entity karethi_temple_boss_2_b: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_2_killed
+		}
+	}
+}

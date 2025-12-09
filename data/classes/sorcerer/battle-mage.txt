@@ -15,21 +15,117 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_armor: "G"
 		talent sorcerer_battle_mage_arcane_strength: "H"
 		talent sorcerer_battle_mage_overpower: "I"
+		talent sorcerer_battle_mage_staff_mastery: "J"
+		talent sorcerer_battle_mage_blink: "K"
 		sprite talent_tree_down_arrow: "d"						
-		sprite talent_tree_left_arrow: "l"						
+		sprite talent_tree_left_arrow: "l"				
+		sprite talent_tree_down: "|"			
 	}
 	
 	map:
 	[
-		"..A.B.."
+		"..A.B.J"
 		"....d.."
 		"ElC.D.G"
-		"..d...."
-		"..F.H.."
+		"..d.|.."
+		"..F.|.H"
+		"....|.d"
+		"....|.I"
 		"....d.."
-		"....I.."
+		"....K.."
 	]
 	
+}
+
+###############################################################################
+# Blink
+
+talent sorcerer_battle_mage_blink:
+{
+	string: "Blink"
+	icon: icon_blink
+	talent_tree_points_required: 20
+	prerequisites: [ sorcerer_battle_mage_swiftness ]
+	points:
+	[
+		{ ability: blink }
+	]
+}
+
+ability blink:
+{
+	string: "Blink"
+	description: "Teleports you to a random nearby location."	
+	cooldowns: [ global spell_arcane_lockout ]		
+	cooldown: $cooldown { duration: 80 }
+	flags: [ spell target_self ]
+	states: [ default in_combat ]
+	icon: icon_blink
+	talent_tree: sorcerer_battle_mage
+	resource_cost mana: 16
+	source_particle_system: teleport
+
+	direct_effect move:
+	{
+		destination: target_nearby_random
+		move_flags: [ ] 
+		max_steps: 6
+		min_steps: 3
+	}	
+}
+
+###############################################################################
+# Staff Mastery
+
+talent sorcerer_battle_mage_staff_mastery:
+{
+	string: "Staff Mastery"
+	icon: icon_staff_1
+	points:
+	[
+		{ aura: sorcerer_battle_mage_staff_mastery_1 }
+		{ aura: sorcerer_battle_mage_staff_mastery_2 }
+		{ aura: sorcerer_battle_mage_staff_mastery_3 }
+	]
+}
+
+aura sorcerer_battle_mage_staff_mastery_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your physical damage done with staves by 12%."
+	aura_effect damage_output_modifier:
+	{	
+		requirement self<must_have_item_type_equipped>: weapon_2h_staff
+		multiplier: 1.12
+		type_mask: [ physical ]
+	}
+}
+
+aura sorcerer_battle_mage_staff_mastery_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your physical damage done with staves by 24%."
+	aura_effect damage_output_modifier:
+	{	
+		requirement self<must_have_item_type_equipped>: weapon_2h_staff
+		multiplier: 1.24
+		type_mask: [ physical ]
+	}
+}
+
+aura sorcerer_battle_mage_staff_mastery_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your physical damage done with staves by 36%."
+	aura_effect damage_output_modifier:
+	{	
+		requirement self<must_have_item_type_equipped>: weapon_2h_staff
+		multiplier: 1.36
+		type_mask: [ physical ]
+	}
 }
 
 ###############################################################################
@@ -219,7 +315,7 @@ ability void_blade_storm:
 	description: "Inflicts $damage$ damage on up to 3 nearby enemies."
 	range: 1	
 	cooldowns: [ global void_blade_storm spell_arcane_lockout ]
-	flags: [ melee target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	flags: [ melee offensive target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_void_blade_storm
 	delay: 3
@@ -365,7 +461,8 @@ ability wizard_strike:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.65 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }											
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.65 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }											
+		spread: !DEFAULT_SPREAD{}
 	}		
 }
 
@@ -419,7 +516,7 @@ ability_modifier improved_power_shield_5:
 	duration: 300
 	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b a: 5.5 b: 28 x: level }		
+	charges: { expression: a_mul_x_plus_b a: 1.04 x: spell_damage b: [ [ 1 28 ] [ 30 193 ] ] }		
 	particle_system: power_shield
 	aura_effect absorb: { }	
 	<exists _multiplier> aura_effect damage_input_modifier:
@@ -487,7 +584,7 @@ ability power_shield:
 	
 	direct_effect apply_aura:
 	{
-		must_not_have_ability_modifiers: [ improved_power_shield_1 improved_power_shield_2 improved_power_shield_3 ]
+		must_not_have_ability_modifiers: [ improved_power_shield_1 improved_power_shield_2 improved_power_shield_3 improved_power_shield_4 improved_power_shield_5 ]
 		aura: power_shield
 	}
 	

@@ -1,0 +1,86 @@
+dialogue_screen .tyron_dialogue:
+{
+	text: 
+	[	
+		"What brings you up here? Rare for us to have visitors."
+	]		
+	
+	options:
+	[
+		{ quest: .tyron_1 }
+	]
+}
+
+entity thalvaron_tyron: !NPC
+{
+	_string: "Tyron"
+	_dialogue_root: $dialogue_root { .tyron_dialogue: { } }
+	_sprite: man_76
+	_sprite_dead: man_76_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .tyron_1_quest_item: { }
+
+item .tyron_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .tyron_1_quest_item ]		
+	string: "Juicy Claw" 
+	icon: icon_claw_2
+	stack: 12
+	item_level: 24
+	quest: .tyron_1
+	flags: [ not_sellable ]
+}
+
+objective .tyron_1:
+{
+	string: "Juicy Claws"
+	collect_items: { item: .tyron_1_quest_item count: 12 }
+}
+
+{
+	${ _level: 24 }
+	item .tyron_1_a: !QUEST_REWARD_HEAD{ _string: "Heirloom Helmet" _icon: icon_helmet_5 _constitution: 2 _strength: 3 _dexterity: 1 _type: armor_mail }
+	item .tyron_1_b: !QUEST_REWARD_BACK{ _string: "Woodman's Cloak" _icon: icon_cloth_shirt_4 _wisdom: 3 _constitution: 2 _spirit: 1 _type: armor_cloth }
+}
+
+quest .tyron_1:
+{
+	string: "Northern Delicacy"
+
+	text:
+	[
+		"Hunt crabs on the beach and return their claws to Tyron."
+	]
+	
+	description: 
+	[
+		"We live off the land up here and have been doing it for a while. Don't really interact much with others, but we can always use a little help. If you don't have anything better to do, you can go"
+		"grab me some claws from the crabs that roam the beach. They make a mean soup.\n"
+		"\n"
+		"Oh, and watch out for the wolves."		
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Yummy. They'll go straight into the pot."
+	]
+
+	objectives: [ .tyron_1 ]
+	level: 24	
+	reward_one_item: [ .tyron_1_a .tyron_1_b ]
+}

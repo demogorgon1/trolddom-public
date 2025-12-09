@@ -15,24 +15,49 @@ talent_tree sorcerer_elemental:
 		talent sorcerer_elemental_storm: "G"
 		talent sorcerer_elemental_infusion: "H"
 		talent sorcerer_elemental_shield: "I"
+		talent sorcerer_elemental_improved_ice_lance: "J"
+		talent sorcerer_elemental_shell: "K"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"						
 		sprite talent_tree_down: "|"		
 		sprite talent_tree_horizontal: "-"		
 		sprite talent_tree_right_to_down: "x"		
+		sprite talent_tree_t: "t"
 	}
 	
 	map:
 	[
-		"x-A.B.G"
-		"d.|.d.."
-		"F.|.DrE"
-		"..d...."
-		"..C.I.."
-		"....d.."
-		"....H.."
+		"x-A.B.G.."
+		"d.|.d...."
+		"F.|.D-trE"
+		"..d...d.."
+		"..C.I.J.."
+		"....d...."
+		"....H...."
+		"....d...."
+		"....K...."
 	]
 	
+}
+
+###############################################################################
+# Storm
+
+talent sorcerer_elemental_improved_ice_lance:
+{
+	string: "Improved Ice Lance"
+	talent_tree_points_required: 10
+	prerequisites: [ sorcerer_elemental_freeze_for_all ]
+	icon: icon_ice_lance
+	points: 
+	[
+		{ ability_modifier: sorcerer_elemental_improved_ice_lance }
+	]
+}
+
+ability_modifier sorcerer_elemental_improved_ice_lance:
+{
+	description: "Ice Lance has a 20% chance to root the target for 6 seconds."
 }
 
 ###############################################################################
@@ -58,40 +83,115 @@ aura sorcerer_elemental_shield_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 6%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.94 }
+	description: "Reduces damage taken by fire and frost effects by 6%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.94 }
 }
 
 aura sorcerer_elemental_shield_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 12%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.88 }
+	description: "Reduces damage taken by fire and frost effects by 12%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.88 }
 }
 
 aura sorcerer_elemental_shield_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 18%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.82 }
+	description: "Reduces damage taken by fire and frost effects by 18%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.82 }
 }
 
 aura sorcerer_elemental_shield_4:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 24%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.76 }
+	description: "Reduces damage taken by fire and frost effects by 24%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.76 }
 }
 
 aura sorcerer_elemental_shield_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Reduces damage taken by fire and cold effects by 30%."
-	aura_effect damage_input_modifier: { type_mask: [ cold fire ] multiplier: 0.70 }
+	description: "Reduces damage taken by fire and frost effects by 30%."
+	aura_effect damage_input_modifier: { type_mask: [ frost fire ] multiplier: 0.70 }
+}
+
+###############################################################################
+# Shell
+
+talent sorcerer_elemental_shell:
+{
+	string: "Shell"
+	icon: icon_shell
+	prerequisites: [ sorcerer_elemental_infusion ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: shell }
+	]
+}
+
+cooldown shell:
+{
+	duration: 600
+}
+
+aura shell:
+{
+	string: "Shell"
+	description: "Protected."
+	type: buff
+	icon: icon_shell
+	duration: 60
+	flags: [ unique magic ]
+	aura_effect stun: { }
+	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier_num: 0 }
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_shell_0 effect_shell_1 effect_shell_2 ]
+			flags: [ attached ]
+			sprite_interval: 150
+			count: 1
+			scale: 1
+			alpha: 0.31
+			fade_in: 500
+			fade_out: 500
+			offset_x: 0.5
+			offset_y: 0.5	
+		}
+	}
+}
+
+ability shell:
+{
+	string: "Shell"
+	description: "Restores 10% of your health and mana and protects you against all damage for 6 seconds, but makes you unable to do anything."
+	range: 1	
+	cooldowns: [ shell ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_shell
+	delay: 3
+	talent_tree: sorcerer_elemental
+		
+	direct_effect apply_aura:
+	{
+		aura: shell
+	}
+	direct_effect heal:
+	{
+		function: { expression: a_mul_x x: health_max a: 0.1 }
+	}
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x x: mana_max a: 0.1 }
+	}
 }
 
 ###############################################################################
@@ -121,7 +221,7 @@ aura elemental_infusion:
 	icon: icon_combustion
 	duration: 200
 	flags: [ unique ]
-	aura_effect damage_output_modifier: { type_mask: [ fire cold ] multiplier: 1.5 }
+	aura_effect damage_output_modifier: { type_mask: [ fire frost ] multiplier: 1.5 }
 	aura_effect resource_cost_modifier: { multiplier: 1.5 }
 }
 
@@ -303,9 +403,10 @@ aura improved_frost_explosion:
 	icon: icon_frost_explosion		
 	type: debuff
 	duration: 50	
-	flags: [ unique magic ]
+	flags: [ unique magic incapacitation ]
 	aura_effect immobilize: { }
 	particle_system: improved_frost_explosion
+	diminishing_effect: root
 }
 
 particle_system improved_frost_explosion:
@@ -492,7 +593,7 @@ ability lake_of_fire_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }											
 	}
 }
 
@@ -559,8 +660,8 @@ ability firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] ] }											
-		
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] [ 30 217 ] ] }											
+		spread: !DEFAULT_SPREAD{}		
 	}
 	
 	direct_effect apply_aura:
@@ -622,7 +723,8 @@ ability fireball:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] [ 30 404 ] ] }											
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect apply_aura:
@@ -684,7 +786,8 @@ ability ice_lance:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] [ 30 198 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect apply_aura:
@@ -692,6 +795,22 @@ ability ice_lance:
 		must_have_ability_modifier: freeze_for_all
 		aura: freeze_for_all
 	}	
+	
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: sorcerer_elemental_improved_ice_lance
+		probability: 20
+		aura: $aura [ string icon ]
+		{
+			description: "Immobilized."
+			type: debuff
+			duration: 60	
+			flags: [ unique magic incapacitation ]
+			aura_effect immobilize: { }
+			particle_system: improved_frost_explosion
+			diminishing_effect: root
+		}
+	}
 }
 
 particle_system ice_lance:
@@ -720,7 +839,7 @@ ability frost_explosion:
 	description: "Inflicts $damage$ damage on up to 3 nearby enemies."
 	range: 1
 	cooldowns: [ global frost_explosion spell_frost_lockout ]
-	flags: [ spell target_self target_aoe target_aoe_hostile ]
+	flags: [ offensive spell target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_frost_explosion
 	talent_tree: sorcerer_elemental
@@ -735,7 +854,8 @@ ability frost_explosion:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect apply_aura:

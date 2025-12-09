@@ -48,12 +48,21 @@ namespace tpublic
 			{
 			}
 
+			bool
+			operator==(
+				const RGBA&							aOther) const
+			{
+				return m_r == aOther.m_r && m_g == aOther.m_g && m_b == aOther.m_b && m_a == aOther.m_a;
+			}
+
 			// Public data
 			uint8_t		m_r;
 			uint8_t		m_g;
 			uint8_t		m_b;
 			uint8_t		m_a;
 		};
+
+		typedef std::function<bool(uint32_t, uint32_t, const RGBA&)> PixelCallback;
 
 		static RGBA	Sepia(
 						const RGBA&					aRGBA,
@@ -137,6 +146,12 @@ namespace tpublic
 						uint32_t*					aOutWidth,
 						uint32_t*					aOutHeight);
 		RGBA		GetAverageColor() const;
+		void		ForEachPixel(
+						uint32_t					aX0,
+						uint32_t					aY0,
+						uint32_t					aX1,
+						uint32_t					aY1,
+						PixelCallback				aCallback) const;
 		void		ToStream(
 						IWriter*					aWriter) const;
 		bool		FromStream(

@@ -1,0 +1,309 @@
+dialogue_screen .ilhuna_greetings:
+{
+	text: 
+	[	
+		"Ssh."
+	]				
+	
+	options:
+	[
+		{ quest<completion_only>: .swirl_tonkins_3 }
+		{ quest: .ilhuna_1 }
+		{ quest: .ilhuna_2 }
+		{ quest: .ilhuna_3 }
+	]
+}
+
+entity .ilhuna: !NPC
+{
+	_string: "Ilhuna"
+	_dialogue_root: $dialogue_root { .ilhuna_greetings: { } }
+	_loot_table: .npc
+	_faction: the_ember_covenant
+	_level: 22
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: woman_5
+	_sprite_dead: woman_5_dead
+}
+	
+############################################################
+# Quest 1
+
+!define local MYSTERIOUS_RIFT
+{
+	string: "Mysterious Rift" 
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: 
+		{ 
+			modifier large: {}
+		}		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ large_orange_gateway_closed_1 large_orange_gateway_closed_2 large_orange_gateway_closed_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: inspect
+			range: 2
+			required_quest: .ilhuna_1
+			requirements: 
+			{
+				requirement self<must_have_item>: .ilhuna_1_quest_item
+			}
+			complete_manual_objective: @_objective
+			chats: [ { type: emote text: "The rift pulses faster." } ]
+		}	
+	}
+}
+
+entity .ilhuna_1_quest_item_a: !MYSTERIOUS_RIFT { _objective: .ilhuna_1_a }
+entity .ilhuna_1_quest_item_b: !MYSTERIOUS_RIFT { _objective: .ilhuna_1_b }
+entity .ilhuna_1_quest_item_c: !MYSTERIOUS_RIFT { _objective: .ilhuna_1_c }
+entity .ilhuna_1_quest_item_d: !MYSTERIOUS_RIFT { _objective: .ilhuna_1_d }
+
+objective .ilhuna_1_a:
+{
+	string: "Inspect First Rift"
+	maps: [ realm_of_fire ]	
+	manual_boolean: { }
+}
+
+objective .ilhuna_1_b:
+{
+	string: "Inspect Second Rift"
+	maps: [ realm_of_fire ]	
+	manual_boolean: { }
+}
+
+objective .ilhuna_1_c:
+{
+	string: "Inspect Third Rift"
+	maps: [ realm_of_fire ]	
+	manual_boolean: { }
+}
+
+objective .ilhuna_1_d:
+{
+	string: "Inspect Fourth Rift"
+	maps: [ realm_of_fire ]	
+	manual_boolean: { }
+}
+
+item .ilhuna_1_quest_item:
+{
+	icon: icon_star_3
+	item_level: 23
+	flags: [ unique not_sellable ]
+	string: "Glowing Amulet"
+	flavor: "Ouch! It's burning hot."
+}
+
+quest .ilhuna_1:
+{
+	string: "Portals from the Nether"
+
+	text:
+	[
+		"Look for portals to the east of the courtyard."
+	]
+	
+	description: 
+	[
+		"The amulet is you gave me is not from this realm. I'm afraid these demons are using them to channeling powers from somewhere else, probably to open portals to bring in reinforcements. The sky to the east"
+		"is lit up by an eerie glow that might be coming from such portals. Please, go and check it out. If you find any portals, take the amulet and see how it reacts to them. Report back to me when you're done."
+	]
+
+	progress:
+	[
+		"Any progress?"
+	]
+	
+	completion:
+	[
+		"This is not good news. A full invasion must be imminent."
+	]
+	
+	quest_items: [ .ilhuna_1_quest_item ]
+	objectives: [ .ilhuna_1_a .ilhuna_1_b .ilhuna_1_c .ilhuna_1_d ]
+	prerequisites: [ .swirl_tonkins_3 ]
+	next_quest: .ilhuna_2
+	level: 23
+}
+
+##########################################################################################
+# Quest 2
+
+item .ilhuna_2_quest_item:
+{
+	string: "Satyr Totem" 
+	icon: icon_effigy
+	loot_groups: [ .ilhuna_2_quest_item ]
+	item_level: 24
+	stack: 8
+	flags: [ not_sellable ]
+}	
+
+objective .ilhuna_2:
+{
+	string: "Satyr Totems"
+	collect_items: { item: .ilhuna_2_quest_item count: 8 }
+}
+
+loot_group .ilhuna_2_quest_item: {}
+
+loot_table .ilhuna_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .ilhuna_2_quest_item }			
+		}		
+	]
+}
+
+entity .ilhuna_2_quest_item:
+{
+	string: "Totem"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ effigy_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .ilhuna_2_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 24
+			required_quest: .ilhuna_2
+		}		
+	}
+}
+
+quest .ilhuna_2:
+{
+	string: "Bastion of Urk"
+
+	text:
+	[
+		"Collect totems in the Bastion of Urk and return them to Ilhuna."
+	]
+	
+	description: 
+	[
+		"They're clearly trying to mount a full invasion of this realm, under the command of the mad wizard. Let me think...\n"
+		"\n"
+		"Well, to the north of here is the Bastion of Urk. It's an ancient fortification that has been taken over by these demons. I'm sure that inside you'll find it littered with their ugly totems. These foul"
+		"artifacts allow them to communicate with each other, like some kind of hive mind. I have a plan that involved a bunch of those totems, so how about you go in there and get me some?"
+	]
+	
+	progress:
+	[
+		"Time is of the essence."
+	]
+	
+	completion:
+	[
+		"Those a some damn ugly totems."
+	]
+
+	prerequisites: [ .ilhuna_1 ]
+	objectives: [ .ilhuna_2 ]
+	level: 24
+	next_quest: .ilhuna_3
+}
+
+##########################################################################################
+# Quest 3
+
+entity .ilhuna_3_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		combat_public: { faction: monsters }
+	}
+}
+
+item .ilhuna_3_quest_item:
+{
+	icon: icon_bundle_1
+	item_level: 24
+	flags: [ not_sellable unique ]
+	string: "Bundle of Totems"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Place on the Satyr Altar."
+		flags: [ target_self item ]
+		states: [ default ]
+		must_have_one_of_nearby_entities: [ .ilhuna_3_quest_item ]
+		cast_time: 20	
+		
+		direct_effect spawn_entity:
+		{
+			spawn_flags: [ no_owner ]
+			npc_target_threat: 20
+			entity: realm_of_fire_satyr_boss
+			map_entity_spawn: .ilhuna_3_quest_item_monster
+		}		
+	}
+}
+
+objective .ilhuna_3:
+{
+	string: "Satyr Commander Slain"
+	
+	maps: [ realm_of_fire ]
+	
+	kill_npc: { entities: [ realm_of_fire_satyr_boss ] count: 1 }	
+}
+
+{
+	${ _level: 24 }
+	item .ilhuna_3_a: !QUEST_REWARD_HEAD{ _string: "Hood of the Warrior Wizard" _icon: icon_cloth_head_1 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+	item .ilhuna_3_b: !QUEST_REWARD_CHEST{ _string: "Magma-Forged Chestguard" _icon: icon_chest_2 _constitution: 1 _strength: 1 _type: armor_plate }
+	item .ilhuna_3_c: !QUEST_REWARD_LEGS{ _string: "Partially Burned Trousers" _icon: icon_mail_pants_2 _spell_damage: 1 _wisdom: 2 _type: armor_cloth }
+}
+
+quest .ilhuna_3:
+{
+	string: "Summoning the Enemy"
+
+	text:
+	[
+		"Bring the bundle of totems to the satyr alter in the east and defeat the demon."
+	]
+	
+	description: 
+	[
+		"Bring these totems to the satyr altar in the east. If you place them there I'm certain it will provoke their commander to show up. Defeat the demon and return to me."
+	]
+	
+	completion:
+	[
+		"Good."
+	]
+
+	prerequisites: [ .ilhuna_2 ]
+	quest_items: [ .ilhuna_3_quest_item ]
+	objectives: [ .ilhuna_3 ]
+	reward_one_item: [ .ilhuna_3_a .ilhuna_3_b .ilhuna_3_c ]
+	level: 24
+}

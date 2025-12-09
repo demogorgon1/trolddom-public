@@ -1,0 +1,585 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<realm_of_fire_default_patrol>: realm_of_fire_default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<realm_of_fire_default_patrol>: realm_of_fire_default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Misc monsters
+
+map_entity_spawn realm_of_fire_lava_worm: 
+{ 
+	entity realm_of_fire_lava_worm: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_magmacrawler: 
+{ 
+	entity realm_of_fire_magmacrawler: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Lava worms
+{
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_earth_elemental
+		_abilities: [ { id: npc_sunder }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_lava_worm: !NPC { _string: "Lava Worm" _sprite: snake_3 _sprite_dead: snake_3_dead _level: 23 }
+}
+
+# Magmacrawler
+{
+	${
+		_string: "Magmacrawler" 
+		_creature_type: beast
+		_faction: monsters
+		_weapon_damage: 1
+		_resource_health: 1.1		
+		_sprite: crab_4 
+		_sprite_dead: crab_4_dead 
+		_abilities: [ { id: npc_attack } ]
+	}
+
+	entity realm_of_fire_magmacrawler: !NPC { _level: 25 }
+}
+
+##########################################################################################
+# Satyrs
+
+map_entity_spawn realm_of_fire_satyr_caster: 
+{ 
+	entity realm_of_fire_satyr_caster_23: {} 
+	entity realm_of_fire_satyr_caster_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_healer: 
+{ 
+	entity realm_of_fire_satyr_healer_23: {} 
+	entity realm_of_fire_satyr_healer_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_guard: 
+{ 
+	entity realm_of_fire_satyr_guard_23: {} 
+	entity realm_of_fire_satyr_guard_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_rogue: 
+{ 
+	entity realm_of_fire_satyr_rogue_23: {} 
+	entity realm_of_fire_satyr_rogue_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_ranged: 
+{ 
+	entity realm_of_fire_satyr_ranged_23: {} 
+	entity realm_of_fire_satyr_ranged_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_satyr_random: 
+{ 
+	entity realm_of_fire_satyr_caster_23: {} 
+	entity realm_of_fire_satyr_caster_24: {} 
+	entity realm_of_fire_satyr_healer_23: {} 
+	entity realm_of_fire_satyr_healer_24: {} 
+	entity realm_of_fire_satyr_rogue_23: {} 
+	entity realm_of_fire_satyr_rogue_24: {} 
+	entity realm_of_fire_satyr_ranged_23: {} 
+	entity realm_of_fire_satyr_ranged_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+loot_table .satyr: 
+{
+	slots:
+	[	
+		{ 
+			possibility:
+			{
+				weight: 4
+			}
+		
+			possibility: 
+			{ 
+				weight: 1
+				loot_group: .swirl_tonkins_3_quest_item 
+				requirement self<must_have_active_quest>: .swirl_tonkins_3 
+			} 
+		}
+		
+		!WORLD_DROPS {}
+		!WORLD_DROPS_DEMONS {}									
+	]	
+}
+
+# Casters
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .satyr		
+		_string: "Satyr Sorcerer" 
+		_sprite: demon_9 
+		_sprite_dead: demon_9_dead 
+		_abilities: [ { id: npc_curse target: random_player }{ id: npc_firebolt }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_satyr_caster_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_caster_24: !NPC { _level: 24 }
+}
+
+# Healer
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .satyr		
+		_string: "Satyr Firesoother" 
+		_sprite: demon_12 
+		_sprite_dead: demon_12_dead
+		_abilities: [ { id: npc_heal target: low_health_friend_or_self }{ id: npc_firebolt }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_satyr_healer_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_healer_24: !NPC { _level: 24 }
+}
+
+# Ranged
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .satyr		
+		_string: "Satyr Sorcerer" 
+		_sprite: demon_8 
+		_sprite_dead: demon_8_dead 
+		_abilities: [ { id: npc_shoot }{ id: npc_attack } ]
+	}
+
+	entity realm_of_fire_satyr_ranged_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_ranged_24: !NPC { _level: 24 }
+}
+
+# Rogue
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .satyr		
+		_string: "Satyr Rogue" 
+		_sprite: demon_7
+		_sprite_dead: demon_7_dead 
+		_abilities: [ { id: npc_attack }{ id: npc_rend }]
+		_resource_health: 0.8
+		_weapon_damage: 1.2
+	}
+
+	entity realm_of_fire_satyr_rogue_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_rogue_24: !NPC { _level: 24 }
+}
+
+# Guard
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .satyr		
+		_string: "Satyr Guard" 
+		_sprite: demon_11
+		_sprite_dead: demon_11_dead 
+		_abilities: [ { id: npc_attack } ]
+		_resource_health: 1.2
+		_weapon_damage: 0.8
+	}
+
+	entity realm_of_fire_satyr_guard_23: !NPC { _level: 23 }
+	entity realm_of_fire_satyr_guard_24: !NPC { _level: 24 }
+}
+
+# Boss
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: default_demon		
+		_string: "Commander Ripthork" 
+		_sprite: demon_10
+		_sprite_dead: demon_10_dead 
+		_abilities: [ { id: npc_rend }{ id: npc_mortal_strike_non_instant }{ id: npc_attack } ]
+		_resource_health: 1.9
+		_weapon_damage: 1.1
+	}
+
+	entity realm_of_fire_satyr_boss: !NPC { _level: 24 }
+}
+
+##########################################################################################
+# Elementals
+
+map_entity_spawn realm_of_fire_enslaved_fire_elemental: 
+{ 
+	entity realm_of_fire_enslaved_fire_elemental: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_magma_elemental: 
+{ 
+	entity realm_of_fire_magma_elemental_a: {} 
+	entity realm_of_fire_magma_elemental_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_fire_elemental: 
+{ 
+	entity realm_of_fire_fire_elemental_a: {} 
+	entity realm_of_fire_fire_elemental_b: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Enslaved fire elemental
+{
+	loot_group .enslaved_fire_elemental: {}
+
+	item .enslaved_fire_elemental_quest_item:
+	{
+		string: "Elemental Binding" 
+		icon: icon_ring_9
+		loot_groups: [ .enslaved_fire_elemental ]
+		item_level: 24
+		flags: [ not_sellable unique ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: .enslaved_fire_elemental
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: .enslaved_fire_elemental }
+			requirement self<must_not_have_active_quest>: { id: .enslaved_fire_elemental }
+		}
+	}	
+
+	quest .enslaved_fire_elemental:
+	{
+		string: "Elemental Binding"
+
+		text:
+		[
+			"Bring the elemental binding to Swirl Tonkins."
+		]
+		
+		description: 
+		[
+			"Swirl Tonkins might be interested in this item. Better bring it to him and see what he can make of it."
+		]
+		
+		completion:
+		[
+			"Oh. You got this from a giant fire elemental inside the bastion?"
+		]
+
+		level: 24		
+		quest_items: [ .enslaved_fire_elemental_quest_item ]
+	}
+	
+	${		
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility: 
+					{ 
+						loot_group: .enslaved_fire_elemental
+						requirement self<must_not_have_active_quest>: .enslaved_fire_elemental
+						requirement self<must_not_have_completed_quest>: .enslaved_fire_elemental
+						requirement self<must_not_have_item>: .enslaved_fire_elemental_quest_item
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_FIRE_ELEMENTALS {}									
+			]			
+		}
+		_string: "Enslaved Fire Elemental" 
+		_sprite: giant_fire_elemental_1
+		_sprite_dead: giant_fire_elemental_1_dead 
+		_abilities: [ { id: npc_attack } ]
+		_resource_health: 2
+		_weapon_damage: 0.85
+		_large: true
+		_zone: .altar_of_urt
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true		
+	}
+
+	entity realm_of_fire_enslaved_fire_elemental: !NPC { _level: 24 }
+}
+
+# Magma elementals
+{
+	${		
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_string: "Magma Elemental" 				
+		_resource_health: 1.1
+		_weapon_damage: 0.9
+		_level: 25
+		_faction: minions_of_voraghul
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility:
+					{
+						weight: 1
+					}
+				
+					possibility: 
+					{ 
+						weight: 2
+						loot_group: .swirl_tonkins_4_quest_item 
+						requirement self<must_have_active_quest>: .swirl_tonkins_4
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_EARTH_ELEMENTALS {}									
+			]	
+		}
+	}
+
+	entity realm_of_fire_magma_elemental_a: !NPC { _sprite: fire_elemental_4 _sprite_dead: fire_elemental_4_dead _abilities: [ { id: npc_attack } ] }
+	entity realm_of_fire_magma_elemental_b: !NPC { _sprite: fire_elemental_3 _sprite_dead: fire_elemental_3_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
+}
+
+# Fire Elemental
+{
+	${		
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short		 			
+		_resource_health: 1.1
+		_weapon_damage: 0.9
+		_level: 25
+		_faction: minions_of_voraghul
+		_loot_table: $loot_table
+		{
+			slots:
+			[	
+				{ 
+					possibility:
+					{
+						weight: 1
+					}
+				
+					possibility: 
+					{ 
+						weight: 2
+						loot_group: .swirl_tonkins_5_quest_item 
+						requirement self<must_have_active_quest>: .swirl_tonkins_5
+					} 
+				}
+				
+				!WORLD_DROPS {}
+				!WORLD_DROPS_FIRE_ELEMENTALS {}									
+			]	
+		}
+	}
+
+	entity realm_of_fire_fire_elemental_a: !NPC { _string: "Blaze Warden" _sprite: fire_elemental_1 _sprite_dead: fire_elemental_1_dead _abilities: [ { id: npc_attack } ] }
+	entity realm_of_fire_fire_elemental_b: !NPC { _string: "Flamecaster" _sprite: fire_elemental_2 _sprite_dead: fire_elemental_2_dead _abilities: [ { id: npc_fireball } { id: npc_attack } ] }
+}
+
+##########################################################################################
+# Wizard
+
+map_entity_spawn realm_of_fire_wizard: 
+{ 
+	entity realm_of_fire_wizard: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn realm_of_fire_wizard_spawn_1: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_2: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_3: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_4: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_5: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_6: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_7: { spawn_timer: { only_when_triggered: true }	}
+map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_triggered: true }	}
+
+# Wizard himself
+{
+
+	${		
+		_faction: minions_of_voraghul
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_resource_health: 2.6
+		_weapon_damage: 0.7
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true				
+		_abilities: 
+		[ 
+			{
+				requirement self<must_have_less_health_than>: 95	
+				target: random_player
+				barks: 
+				[ 
+					{ type: yell text: "Go away!" flags: [ no_chat_bubble ] } 
+					{ type: yell text: "Burn!" flags: [ no_chat_bubble ] } 
+					{ type: yell text: "Taste my wrath!" flags: [ no_chat_bubble ] } 
+				]		
+				id: $ability @realm_of_fire_wizard_wrath_of_voraghul
+				{
+					string: "Wrath of Voraghul"
+					range: 20				
+					cast_time: 20
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 100 }
+					flags: [ spell offensive target_other target_hostile ]
+					states: [ in_combat ]
+					icon: icon_firebolt
+					delay: 3
+					speed: 6
+					target_particle_system: orange_spell_hit	
+					
+					projectile: $particle_system
+					{
+						particle:
+						{
+							sprites: [ effect_firebolt_b ]
+							flags: [ attached no_rotation no_scaling face_target ]
+							count: 1		
+						}
+					}									
+					
+					direct_effect damage:
+					{
+						requirement target<must_not_have_aura>: .swirl_tonkins_6_infused_rod
+						damage_type: fire
+						function: { expression: a_mul_x a: 0.75 x: health_max entity: target }
+					}					
+					
+					direct_effect damage:
+					{
+						requirement target<must_have_aura>: .swirl_tonkins_6_infused_rod
+						damage_type: fire
+						function: { expression: a_mul_x a: 0.075 x: health_max entity: target }		
+					}										
+				}
+			}
+			
+			{
+				id: $ability @realm_of_fire_wizard_fireball
+				{
+					string: "Fireball"
+					range: 20				
+					cast_time: 25
+					cooldowns: [ spell_fire_lockout global ]
+					flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+					states: [ in_combat ]
+					icon: icon_firebolt
+					delay: 3
+					speed: 6
+					target_particle_system: orange_spell_hit	
+
+					projectile: $particle_system
+					{
+						particle:
+						{
+							sprites: [ effect_fireball ]
+							flags: [ attached no_rotation face_target ]
+							count: 1		
+							scale: 0.5
+						}
+					}
+					
+					direct_effect damage:
+					{
+						damage_type: fire
+						function: 115		
+						spread: !DEFAULT_SPREAD{}						
+					}					
+				}
+			}
+			
+			{ 
+				id: npc_attack 
+			} 
+		]
+		_in_combat_on_enter_ability: $ability
+		{
+			flags: [ always_in_range always_in_line_of_sight ]
+			
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_1 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_2 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_3 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_4 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_5 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_6 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_7 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+			direct_effect spawn_entity: { map_entity_spawn: realm_of_fire_wizard_spawn_8 entity: realm_of_fire_wizard_spawn spawn_flags: [ no_owner source_threat_target detached ] npc_target_threat: 20 } 
+		}
+		_in_combat_barks: [ { type: yell text: "Say hello to my little friends!" flags: [ no_chat_bubble ] } ]		
+		_dead_barks: [ { type: say text: "No... This can't be... This wasn't supposed to happen." flags: [ no_chat_bubble ] } ]		
+	}
+
+	entity realm_of_fire_wizard: !NPC { _string: "Voraghul" _sprite: man_75 _sprite_dead: man_75_dead _level: 26 }
+}
+
+# Crabs
+{
+	${
+		_string: "Lavacrawler" 
+		_creature_type: beast
+		_faction: monsters
+		_weapon_damage: 0.15
+		_resource_health: 0.18
+		_sprite: crab_4 
+		_sprite_dead: crab_4_dead 
+		_abilities: [ { id: npc_attack } ]
+		_despawn_time: { out_of_combat_ticks: 40 }
+		_no_kill_event: true
+	}
+
+	entity realm_of_fire_wizard_spawn: !NPC { _level: 26 }
+}
+

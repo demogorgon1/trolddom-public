@@ -142,6 +142,7 @@ entity durgan_urok_boss_2: !NPC
 						duration: 80
 						flags: [ unique ignore_immunities ]
 						color_effect: [ 255 0 0 ]
+						particle_system: taunt
 						
 						aura_effect move_speed_modifier: { move_speed: slow }							
 						aura_effect taunt: { }						

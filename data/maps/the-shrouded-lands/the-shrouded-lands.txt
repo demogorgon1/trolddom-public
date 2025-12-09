@@ -53,21 +53,21 @@ map_entity_spawn .shroud_crystal:
 	entity shroud_crystal_2: { weight: 1 init_state: default }
 }
 
-zone .underworld_zone: { string: "Altar of the Unseen" }
-zone .light_zone: { string: "Landing of the Dawnbringer" }
-zone .the_fringe: { string: "The Fringe" }
-zone .blasted_wastes: { string: "Blasted Wastes" }
-zone .fortress_of_light: { string: "Fortress of Light" }
-zone .the_sinister_bastion: { string: "The Sinister Bastern" }
-zone .crystal_fields: { string: "Crystal Fields" }
-zone .ghorynth: { string: "Ghorynth" }
+zone .underworld_zone: { string: "Altar of the Unseen" preposition: "at the" }
+zone .light_zone: { string: "Landing of the Dawnbringer" preposition: "around" }
+zone .the_fringe: { string: "The Fringe" preposition: "around" }
+zone .blasted_wastes: { string: "Blasted Wastes" preposition: "at the" }
+zone .fortress_of_light: { string: "Fortress of Light" preposition: "at the" }
+zone .the_sinister_bastion: { string: "The Sinister Bastern" preposition: "at" }
+zone .crystal_fields: { string: "Crystal Fields" preposition: "in the" }
+zone .ghorynth: { string: "Ghorynth" preposition: "in" }
 
-zone .rylions_cave: { string: "Rylion's Cave" }
-zone .the_graveyard: { string: "The Graveyard" }
-zone .drowned_temple: { string: "Drowned Temple" }
-zone .the_black_watch: { string: "The Black Watch" }
-zone .dawnbringer_keep: { string: "Dawnbringer Keep" }
-zone .the_foul_breach: { string: "The Foul Breach" }
+zone .rylions_cave: { string: "Rylion's Cave" preposition: "in" }
+zone .the_graveyard: { string: "The Graveyard" preposition: "at" }
+zone .drowned_temple: { string: "Drowned Temple" preposition: "at the" }
+zone .the_black_watch: { string: "The Black Watch" preposition: "around" }
+zone .dawnbringer_keep: { string: "Dawnbringer Keep" preposition: "around" }
+zone .the_foul_breach: { string: "The Foul Breach" preposition: "around" }
 
 zone .demon_spawn: { }
 

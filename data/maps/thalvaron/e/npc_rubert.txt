@@ -1,0 +1,78 @@
+dialogue_screen .rubert:
+{
+	text: 
+	[	
+		"Get in! The water is amazing!"
+	]		
+	
+	options:
+	[
+		{ quest: .rubert_1 }
+	]
+}
+
+entity thalvaron_rubert: !NPC
+{
+	_string: "Rubert"
+	_sprite: man_85
+	_sprite_dead: man_85_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .rubert: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .rubert_1:
+{
+	string: "Locate Diane"
+	
+	maps: [ thalvaron ]
+	
+	route_npc:
+	{
+		entities: [ thalvaron_diane ]
+	}
+}
+
+{
+	${ _level: 27 }
+	item .rubert_1_a: !QUEST_REWARD_FEET{ _string: "Jungle Boots" _icon: icon_boots_5 _constitution: 1 _wisdom: 4 _spirit: 2 _type: armor_cloth }
+	item .rubert_1_b: !QUEST_REWARD_HEAD{ _string: "Dexterous Head Protection" _icon: icon_helmet_5 _dexterity: 2 _strength: 1 _type: armor_mail }
+}
+
+quest .rubert_1:
+{
+	string: "Where is my Wife?"
+
+	text:
+	[
+		"Find out what's taking Rubert's wife so long."
+	]
+	
+	description: 
+	[
+		"The weather is so nice out here! Are you also here to relax?\n"
+		"\n"
+		"I'm actually here honeymooning with my new wife, Diane. Or, well, she hasn't shown up yet. I wonder what's taking her so long, we were supposed to meet here two days ago. The plan was that she'd"
+		"arrive down at Riddle's Crossing and then hike up here. We love the outdoors! Anyway, maybe you can go look for her? Tell her the water is great!"
+	]
+
+	progress:
+	[
+		"She'll probably show up by herself."
+	]
+	
+	completion:
+	[
+		"Uhm, she doesn't look too happy."		
+	]
+
+	level: 27
+	objectives: [ .rubert_1 ]
+	reward_one_item: [ .rubert_1_a .rubert_1_b ]
+}

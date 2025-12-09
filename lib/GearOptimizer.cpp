@@ -1,6 +1,7 @@
 #include "Pcheader.h"
 
 #include <tpublic/GearOptimizer.h>
+#include <tpublic/ItemInstanceData.h>
 #include <tpublic/Manifest.h>
 
 namespace tpublic
@@ -45,7 +46,7 @@ namespace tpublic
 				if(aItem->m_requiredLevel <= aMaxLevel && 
 					aItem->m_rarity <= aMaxRarity && 
 					(aItem->m_flags & aFlags) == aFlags && 
-					(aItem->m_itemType == ItemType::ID_MISCELLANEOUS || aClass->CanUseItemType(aItem->m_itemType)) && 
+					(aItem->m_itemType == ItemType::ID_MISCELLANEOUS || aItem->m_itemType == ItemType::ID_JEWELRY || aItem->m_itemType == ItemType::ID_TRINKET || aClass->CanUseItemType(aItem->m_itemType)) &&
 					aItem->IsEquippableInSlot(i))
 				{
 					float score = _ScoreItem(aItem, gearOptimization);

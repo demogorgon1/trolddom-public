@@ -1,8 +1,7 @@
 #pragma once
 
-#include <tpublic/Data/Ability.h>
-
 #include "Requirement.h"
+#include "TargetItemRequirements.h"
 
 namespace tpublic
 {
@@ -45,7 +44,7 @@ namespace tpublic
 					bool*												aOutOutOfRange);
 		bool	CheckTargetItemRequirements(
 					const Manifest*										aManifest,
-					const Data::Ability::TargetItemRequirements*		aTargetItemRequirements,
+					const TargetItemRequirements*						aTargetItemRequirements,
 					const ItemProspect*									aTargetItemProspect,
 					uint32_t											aItemId);
 	}

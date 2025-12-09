@@ -61,6 +61,7 @@ ability npc_poison_attack:
 					{
 						damage_type: poison
 						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+						direct: false
 					}				
 				}
 			}
@@ -87,7 +88,7 @@ ability npc_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] [ 30 80 ] ] }
+		function: { expression: x_plus_a x: weapon a: [ [ 1 5 ] [ 10 20 ] [ 20 40 ] [ 30 80 ] ] }		
 	}
 }
 
@@ -121,6 +122,7 @@ ability npc_firebolt:
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		spread: !DEFAULT_SPREAD{}						
 	}
 }
 
@@ -158,6 +160,7 @@ ability npc_fireball:
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
 		function: { expression: a a: [ [ 1 24 ] [ 10 70 ] [ 20 140 ] [ 30 280 ] ] elite_multiplier: 1.7 }
+		spread: !DEFAULT_SPREAD{}						
 	}
 	
 	direct_effect apply_aura:
@@ -187,6 +190,7 @@ ability npc_fireball:
 					{
 						damage_type: fire
 						function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+						direct: false
 					}
 				}
 			}
@@ -223,6 +227,7 @@ ability npc_frostbolt:
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		spread: !DEFAULT_SPREAD{}						
 	}
 	
 	direct_effect apply_aura:
@@ -268,6 +273,7 @@ ability npc_frostbolt_no_cooldown:
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		spread: !DEFAULT_SPREAD{}						
 	}
 	
 	direct_effect apply_aura:
@@ -301,6 +307,7 @@ ability npc_curse_tick:
 	{
 		damage_type: unholy
 		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+		direct: false
 	}
 }
 
@@ -354,6 +361,7 @@ ability npc_poison_bite_tick:
 	{
 		damage_type: poison
 		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+		direct: false
 	}
 }
 
@@ -390,6 +398,7 @@ ability npc_poison_bite:
 		flags: [ can_be_critical ]
 		damage_type: poison
 		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 }
+		spread: !DEFAULT_SPREAD{}						
 	}
 
 	direct_effect apply_aura:
@@ -414,6 +423,7 @@ ability npc_rend_tick:
 	{
 		damage_type: bleed
 		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.5 }
+		direct: false
 	}
 }
 
@@ -632,7 +642,7 @@ ability npc_trap:
 			type: debuff
 			icon: icon_net
 			duration: 40
-			flags: [ unique ]
+			flags: [ unique incapacitation ]
 			aura_effect immobilize: {}
 			particle_system: net_trap
 		}
@@ -697,7 +707,8 @@ ability npc_chain_lightning_tertiary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }	
+		spread: !DEFAULT_SPREAD{}								
 	}			
 }
 
@@ -717,6 +728,7 @@ ability npc_chain_lightning_secondary:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }		
+		spread: !DEFAULT_SPREAD{}						
 	}			
 	
 	direct_effect trigger_ability:
@@ -745,6 +757,7 @@ ability npc_chain_lightning:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }		
+		spread: !DEFAULT_SPREAD{}						
 	}		
 	
 	direct_effect trigger_ability:
@@ -784,7 +797,8 @@ ability npc_arcane_detonation:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }				
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }			
+		spread: !DEFAULT_SPREAD{}							
 	}
 
 	direct_effect damage:
@@ -910,7 +924,8 @@ ability npc_arcane_explosion:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }				
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }		
+		spread: !DEFAULT_SPREAD{}						
 	}
 }
 
@@ -1021,7 +1036,9 @@ ability npc_charge:
 					description: "Stunned."
 					type: debuff
 					duration: 30	
+					flags: [ incapacitation ]
 					aura_effect stun: { }
+					priority: !AURA_PRIORITY_CC{}	
 				}				
 			}
 		}
@@ -1072,6 +1089,7 @@ ability npc_charge_rend:
 							{
 								damage_type: bleed
 								function: { expression: a a: [ [ 1 4 ] [ 10 14 ] [ 20 28 ] [ 30 56 ] ] elite_multiplier: 2.5 }
+								direct: false
 							}
 						}
 					}
@@ -1136,6 +1154,7 @@ ability npc_infection_aura:
 					{
 						damage_type: poison
 						function: { expression: a a: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }			
+						direct: false
 					}
 				}
 			}
@@ -1166,7 +1185,7 @@ ability npc_web:
 			type: debuff
 			icon: icon_spider_web_1
 			duration: 40
-			flags: [ unique ]
+			flags: [ unique incapacitation ]
 			aura_effect immobilize: {}
 			particle_system: web_trap
 		}
@@ -1276,6 +1295,7 @@ ability npc_poison_bolt:
 					{
 						damage_type: poison
 						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+						direct: false
 					}				
 				}
 			}
@@ -1332,6 +1352,7 @@ ability npc_thorn_spit_no_cooldown:
 					{
 						damage_type: bleed
 						function: { expression: a a: [ [ 1 2 ] [ 10 4 ] [ 20 7 ] [ 30 14 ] ] elite_multiplier: 1.8 }
+						direct: false
 					}
 				}
 			}
@@ -1359,6 +1380,7 @@ ability npc_beam_of_petrification:
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
 		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }		
+		spread: !DEFAULT_SPREAD{}						
 	}		
 	
 	direct_effect apply_aura:
@@ -1367,7 +1389,7 @@ ability npc_beam_of_petrification:
 		{
 			description: "Stunned."
 			type: debuff
-			flags: [ magic unique ]
+			flags: [ magic unique incapacitation ]
 			duration: 50	
 			aura_effect stun: { }		
 			color_effect: [ 128 128 128 ]

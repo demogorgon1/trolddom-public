@@ -19,7 +19,8 @@ namespace tpublic
 				INVALID_DESTINATION,
 
 				DESTINATION_TARGET_ADJACENT,
-				DESTINATION_AOE_CENTER
+				DESTINATION_AOE_CENTER,
+				DESTINATION_TARGET_NEARBY_RANDOM
 			};
 
 			enum MoveFlag : uint8_t
@@ -38,6 +39,8 @@ namespace tpublic
 					return DESTINATION_TARGET_ADJACENT;
 				else if (t == "aoe_center")
 					return DESTINATION_AOE_CENTER;
+				else if (t == "target_nearby_random")
+					return DESTINATION_TARGET_NEARBY_RANDOM;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid destination.", aSource->GetIdentifier());
 				return INVALID_DESTINATION;
 			}
@@ -101,6 +104,7 @@ namespace tpublic
 			Destination						m_destination = INVALID_DESTINATION;			
 			uint8_t							m_moveFlags = 0;
 			uint32_t						m_maxSteps = 0;
+			uint32_t						m_minSteps = 0;
 			std::optional<SecondaryAbility>	m_triggerAbilitiesOnResolve;
 			uint32_t						m_mapPlayerSpawnId = 0;
 		};

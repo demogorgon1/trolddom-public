@@ -1,5 +1,7 @@
 #pragma once
 
+#include "UniformDistribution.h"
+
 namespace tpublic
 {
 

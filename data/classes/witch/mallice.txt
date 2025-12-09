@@ -15,6 +15,8 @@ talent_tree witch_malice:
 		talent witch_chain_lightning: "G"
 		talent witch_blood_armor: "H"
 		talent witch_maliciousness: "I"
+		talent witch_malice_improved_witch_bolt: "J"
+		talent witch_malice_pain_and_suffering: "K"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -25,16 +27,119 @@ talent_tree witch_malice:
 	
 	map:
 	[
-		"..A.B-x"
-		"..d...d"
-		"DlC.E.F"
-		"....d.."
-		"..H.G.."
-		"..d...."
-		"..I...."
+		"J.A...B-x"
+		"..d...|.d"
+		"DlC.E.|.F"
+		"....d.|.."
+		"..H.G.|.."
+		"..d...|.."
+		"..I...|.."
+		"......d.."
+		"......K.."
 	]
 	
 }
+
+###############################################################################
+# Pain and Suffering
+
+talent witch_malice_pain_and_suffering:
+{
+	string: "Pain and Suffering"
+	talent_tree_points_required: 20
+	prerequisites: [ witch_improved_curse_of_corruption ]
+	icon: icon_pain_and_suffering
+	points:
+	[
+		{ ability: witch_pain_and_suffering }
+	]
+}
+
+ability witch_pain_and_suffering:
+{
+	string: "Pain and Suffering"
+	description: "Deals $damage$ damage to target enemy afflicted by Curse of Corruption and refreshes it to its full duration."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 80 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_pain_and_suffering
+	talent_tree: witch_malice
+	speed: 7
+	projectile: arcane_missile
+	resource_cost mana: 18
+	target_particle_system: green_spell_hit
+	requirement target<must_have_aura>: curse_of_corruption
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 34 ] [ 10 78 ] [ 20 146 ] [ 30 234 ] ] }															
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{	
+		aura: curse_of_corruption
+	}	
+}
+
+###############################################################################
+# Improved Witch Bolt
+
+talent witch_malice_improved_witch_bolt:
+{
+	string: "Improved Witch Bolt"
+	icon: icon_witch_bolt
+	points:
+	[
+		{ aura: witch_malice_improved_witch_bolt_1 }
+		{ aura: witch_malice_improved_witch_bolt_2 }
+		{ aura: witch_malice_improved_witch_bolt_3 }
+	]
+}
+
+aura witch_malice_improved_witch_bolt_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Witch Bolt by 10%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		apply_to_abilities: [ witch_bolt ]
+		multiplier: 1.1
+	}
+}
+
+aura witch_malice_improved_witch_bolt_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Witch Bolt by 20%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		apply_to_abilities: [ witch_bolt ]
+		multiplier: 1.2
+	}
+}
+
+aura witch_malice_improved_witch_bolt_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases damage done with Witch Bolt by 30%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		apply_to_abilities: [ witch_bolt ]
+		multiplier: 1.3
+	}
+}
+
 
 ###############################################################################
 # Maliciousness
@@ -101,6 +206,8 @@ talent witch_blood_armor:
 		{ aura: witch_blood_armor_1 }
 		{ aura: witch_blood_armor_2 }
 		{ aura: witch_blood_armor_3 }
+		{ aura: witch_blood_armor_4 }
+		{ aura: witch_blood_armor_5 }
 	]
 }
 
@@ -108,24 +215,40 @@ aura witch_blood_armor_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your constitution by 3%."
-	stat_modifiers: { constitution: { add_percent: 3 } }
+	description: "Increases your constitution by 4%."
+	stat_modifiers: { constitution: { add_percent: 4 } }
 }
 
 aura witch_blood_armor_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your constitution by 6%."
-	stat_modifiers: { constitution: { add_percent: 6 } }
+	description: "Increases your constitution by 8%."
+	stat_modifiers: { constitution: { add_percent: 8 } }
 }
 
 aura witch_blood_armor_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your constitution by 9%."
-	stat_modifiers: { constitution: { add_percent: 9 } }
+	description: "Increases your constitution by 12%."
+	stat_modifiers: { constitution: { add_percent: 12 } }
+}
+
+aura witch_blood_armor_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 16%."
+	stat_modifiers: { constitution: { add_percent: 16 } }
+}
+
+aura witch_blood_armor_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your constitution by 20%."
+	stat_modifiers: { constitution: { add_percent: 20 } }
 }
 
 ###############################################################################
@@ -234,7 +357,8 @@ ability witch_bolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 34 ] [ 10 68 ] [ 20 136 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 34 ] [ 10 68 ] [ 20 136 ] [ 30 224 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}	
 	
 	direct_effect apply_aura:
@@ -289,8 +413,9 @@ ability curse_of_corruption_tick:
 		}
 		
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }					
 		flags: [ is_magical ]
+		direct: false
 	}		
 	
 }
@@ -317,7 +442,7 @@ ability curse_of_corruption:
 	description: "Inflicts unholy damage to the target over 10 seconds."
 	range: 6
 	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_curse_of_corruption
 	resource_cost mana: 10
@@ -399,6 +524,7 @@ aura curse_of_attraction:
 	flags: [ unique magic ]
 	sound: spell_14
 	aura_effect taunt: {}	
+	particle_system: taunt
 }
 
 cooldown curse_of_attraction:
@@ -451,7 +577,7 @@ ability doom:
 	description: "Consumes target Weakness and deals $damage$ damage."
 	range: 8
 	cooldowns: [ global spell_unholy_lockout doom ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_doom
 	resource_cost mana: 10
@@ -463,7 +589,8 @@ ability doom:
 		flags: [ can_be_critical is_magical ]
 		conditional_critical_chance_bonus<improved_doom>: 50
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.95 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] [ 30 171 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}	
 	
 	direct_effect remove_aura:
@@ -577,7 +704,7 @@ ability swarm_tick:
 {
 	string: "Swarm"
 	range: 8	
-	flags: [ target_self target_aoe target_aoe_hostile ]
+	flags: [ offensive target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_swarm
 	delay: 3
@@ -589,7 +716,7 @@ ability swarm_tick:
 		requirement target<must_be_hostile>: {}
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 9 ] [ 10 18 ] [ 20 36 ] [ 30 59 ] ] }			
 	}
 }
 
@@ -637,10 +764,12 @@ aura curse_of_inaction:
 	icon: icon_curse_of_inaction		
 	type: debuff
 	duration: 60	
-	flags: [ unique magic ]
+	flags: [ unique magic incapacitation ]
 	sound: spell_14
 	aura_effect stun: { }
 	particle_system: judgement	
+	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 ability curse_of_inaction:
@@ -649,7 +778,7 @@ ability curse_of_inaction:
 	description: "Causes target to be unable to do anything for 6 seconds."
 	range: 6
 	cooldowns: [ global spell_unholy_lockout curse_of_inaction ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_curse_of_inaction
 	resource_cost mana: 13
@@ -723,7 +852,8 @@ ability chain_lightning_tertiary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 15 ] [ 10 30 ] [ 20 60 ] [ 30 99 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}			
 }
 
@@ -742,7 +872,8 @@ ability chain_lightning_secondary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 18 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}			
 	
 	direct_effect trigger_ability:
@@ -773,7 +904,8 @@ ability chain_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.85 b: [ [ 1 32 ] [ 10 64 ] [ 20 128 ] [ 30 211 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}		
 	
 	direct_effect trigger_ability:
@@ -792,5 +924,44 @@ particle_system witch_chain_lightning:
 		flags: [ attached no_rotation ]
 		scale: 0.4
 		count: 1		
+	}
+}
+
+###############################################################################
+# Elemental Destruction
+
+ability witch_elemental_destruction:
+{
+	string: "Elemental Destruction"
+	description: "Deals $damage$ damage to target elemental."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 70 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_elemental_destruction
+	talent_tree: witch_malice
+	speed: 7
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_frostbolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.4
+			count: 1		
+			color_mod: [ 255 64 40 ]
+		}
+	}
+	resource_cost mana: 18
+	target_particle_system: green_spell_hit
+	requirement target<must_be_creature_type>: elemental
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.2 b: [ [ 1 40 ] [ 10 80 ] [ 20 160 ] [ 30 264 ] ] }													
+		spread: !DEFAULT_SPREAD{}
 	}
 }

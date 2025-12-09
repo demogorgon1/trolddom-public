@@ -1,10 +1,9 @@
 #pragma once
 
-#include <tpublic/Data/Ability.h>
-
 #include "../AbilityModifierList.h"
 #include "../Component.h"
 #include "../ComponentBase.h"
+#include "../Customization.h"
 #include "../ErrorNotification.h"
 #include "../EventHistory.h"
 #include "../LootCooldowns.h"
@@ -71,7 +70,9 @@ namespace tpublic
 				FIELD_LATEST_CHARACTER_FIX_ID,
 				FIELD_CLASS_VERSION,
 				FIELD_KNOWS_RIDING,
-				FIELD_LOOT_COOLDOWNS
+				FIELD_LOOT_COOLDOWNS,
+				FIELD_NON_HARDCORE_FLAG,
+				FIELD_CUSTOMIZATION,
 			};
 
 			static void
@@ -91,6 +92,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_CLASS_VERSION, NULL, offsetof(PlayerPrivate, m_classVersion));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_KNOWS_RIDING, NULL, offsetof(PlayerPrivate, m_knowsRiding));
 				aSchema->DefineCustomObjectNoSource<LootCooldowns>(FIELD_LOOT_COOLDOWNS, offsetof(PlayerPrivate, m_lootCooldowns));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NON_HARDCORE_FLAG, NULL, offsetof(PlayerPrivate, m_nonHardcoreFlag));
+				aSchema->DefineCustomOptionalObjectNoSource<Customization>(FIELD_CUSTOMIZATION, offsetof(PlayerPrivate, m_customization));
 
 				aSchema->OnRead<PlayerPrivate>([](
 					PlayerPrivate*				aPlayerPrivate,
@@ -119,6 +122,8 @@ namespace tpublic
 				m_classVersion = 0;
 				m_knowsRiding = false;
 				m_lootCooldowns.Reset();
+				m_nonHardcoreFlag = false;
+				m_customization.reset();
 
 				m_tryEditPlayerWorlds = false;
 				m_recall = false;
@@ -126,11 +131,15 @@ namespace tpublic
 				m_professionSkillUseEvents.clear();
 				m_errorNotification = ErrorNotification::INVALID_ID;
 				m_abilityModifierList = NULL;
-				m_equippedItemTypeFlags = 0;
+				m_equippedItemTypeFlags = UINT16_MAX;
 				m_useAbilityFlags = 0;
 				m_useAbilityExtendedFlags = 0;
 				m_notifyLearnedRiding = false;
 				m_entityCompassEvent.reset();
+				m_pendingMapTransfer.reset();
+				m_mapId = 0;
+				m_highPrioInventoryAdds.clear();
+				m_lootedPVPRift = false;
 			}
 
 			bool
@@ -160,8 +169,11 @@ namespace tpublic
 			uint32_t														m_classVersion = 0;
 			bool															m_knowsRiding = false;
 			LootCooldowns													m_lootCooldowns;
+			bool															m_nonHardcoreFlag = false;
+			std::optional<Customization>									m_customization; 
 
 			// Not serialized, internal
+			uint32_t														m_mapId = 0;
 			bool															m_tryEditPlayerWorlds = false;
 			bool															m_recall = false;
 			uint32_t														m_xpGain = 0;
@@ -180,11 +192,22 @@ namespace tpublic
 
 			const tpublic::AbilityModifierList*								m_abilityModifierList = NULL;
 
-			uint16_t														m_equippedItemTypeFlags = 0;
+			uint16_t														m_equippedItemTypeFlags = UINT16_MAX;
 			uint32_t														m_useAbilityFlags = 0;
 			uint32_t														m_useAbilityExtendedFlags = 0;
 
 			std::vector<uint32_t>											m_incrementCharacterStatIds;
+
+			struct PendingMapTransfer
+			{
+				uint32_t													m_mapId = 0;
+				uint32_t													m_mapPlayerSpawnId = 0;
+			};
+
+			std::optional<PendingMapTransfer>								m_pendingMapTransfer;
+
+			std::vector<tpublic::ItemInstance>								m_highPrioInventoryAdds;
+			bool															m_lootedPVPRift = false;
 		};
 	}
 

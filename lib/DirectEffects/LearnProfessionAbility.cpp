@@ -54,6 +54,21 @@ namespace tpublic::DirectEffects
 		return true;
 	}
 
+	void			
+	LearnProfessionAbility::Validate(
+		const DataErrorHandling::DebugInfo&	aDebugInfo,
+		const Manifest*						aManifest,
+		const Data::Ability*				aAbility) const 
+	{
+		// Make sure the learnt ability and the "on use" ability that triggered this have the same profession skill requirements
+		const Data::Ability* professionAbility = aManifest->GetById<Data::Ability>(m_abilityId);
+
+		TP_VERIFY(aAbility->m_requiredProfession, aDebugInfo, "Ability missing required profession.");
+		TP_VERIFY(professionAbility->m_requiredProfession, aDebugInfo, "Profession ability missing required profession.");
+		TP_VERIFY(professionAbility->m_requiredProfession->m_professionId == aAbility->m_requiredProfession->m_professionId, aDebugInfo, "Ability required profession mismatch.");
+		TP_VERIFY(professionAbility->m_requiredProfession->m_skill == aAbility->m_requiredProfession->m_skill, aDebugInfo, "Ability required profession skill mismatch.");
+	}
+
 	DirectEffectBase::Result
 	LearnProfessionAbility::Resolve(
 		int32_t							/*aTick*/,

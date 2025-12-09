@@ -1,0 +1,170 @@
+dialogue_screen .fritz_dawnstar:
+{
+	text: 
+	[	
+		"Darkness has fallen on these lands."
+	]		
+	
+	options:
+	[
+		{ quest: .fritz_dawnstar_1 }
+		{ quest: .fritz_dawnstar_2 }
+		{ quest<offer_only>: .fritz_dawnstar_3 }
+	]
+}
+
+entity thalvaron_fritz_dawnstar: !NPC
+{
+	_string: "Fritz Dawnstar"
+	_sprite: man_20
+	_sprite_dead: man_20_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fritz_dawnstar: { } }
+}
+
+entity thalvaron_fritz_dawnstar_horse: !NPC
+{
+	_string: "Rilar"
+	_sprite: horse_1
+	_sprite_dead: horse_1_dead	
+	_level: 30
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true
+}
+
+############################################################
+# Quest 1
+
+objective .fritz_dawnstar_1:
+{
+	string: "Graveyard Undead Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_ghoul_a thalvaron_urthon_ghoul_b ]
+		count: 6
+	}
+}
+
+quest .fritz_dawnstar_1:
+{
+	string: "Cleansing The Urthon Burial Grounds"
+
+	text:
+	[
+		"Destroy undead creatures at the burial grounds in northern Urthon."
+	]
+	
+	description: 
+	[
+		"A shadow from the great desert has fallen on these lands. Urthon has long been a desolate, empty place, but the bewitched sands of the south is now blowing through the trees. Evil creatures arise.\n"
+		"\n"
+		"This place must be cleansed! I've personally spotted unholy undead creatures at the old graveyard north west of here, across this bridge. Help put them back in the ground where they came from, will you?"
+	]
+
+	progress:
+	[
+		"The unholy must be destroyed."
+	]
+	
+	completion:
+	[
+		"Good job. Did you see the old tomb in the north westernmost corner of the burial grounds? Well..."
+	]
+	
+	objectives: [ .fritz_dawnstar_1 ]
+	level: 28
+	next_quest: .fritz_dawnstar_2
+}
+
+############################################################
+# Quest 2
+
+objective .fritz_dawnstar_2:
+{
+	string: "John Krellington Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_urthon_necromancer ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 28 }
+	item .fritz_dawnstar_2_a: !QUEST_REWARD_WRISTS{ _string: "Urthon Steel Wristguards" _icon: icon_bracers_6 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .fritz_dawnstar_2_b: !QUEST_REWARD_HEAD{ _string: "Hood of the Necromancer" _icon: icon_head_11 _constitution: 1 _spell_damage: 1 _wisdom: 2 _type: armor_cloth }
+}
+
+quest .fritz_dawnstar_2:
+{
+	string: "The Necromancer"
+
+	text:
+	[
+		"Seek out John Krellington at the Urthon Burial Grounds and kill him."
+	]
+	
+	description: 
+	[
+		"I've heard about, John Krellington, the necromancer, that he might be hiding out in the tomb at the Urthon burial grounds. Undoubtedly he must have had a hand in the raising the dead. Destroy this"
+		"evil man, will you?"
+	]
+
+	progress:
+	[
+		"How someone named John became a necromancer? I really don't know."
+	]
+	
+	completion:
+	[
+		"By the light! Good."
+	]
+	
+	objectives: [ .fritz_dawnstar_2 ]
+	prerequisites: [ .fritz_dawnstar_1 ]
+	reward_one_item: [ .fritz_dawnstar_2_a .fritz_dawnstar_2_b ]
+	level: 28
+}
+
+############################################################
+# Quest 3
+
+quest .fritz_dawnstar_3:
+{
+	string: "The Great Desert"
+
+	text:
+	[
+		"Meet Erik in northern Kareth."
+	]
+	
+	description: 
+	[
+		"With the necromancer defeated, you should head south to the real battlefield of good versus evil. The great desert of Kareth. My holy colleague Erik has set up camp there, at the northern fringes.\n"
+		"\n"
+		"Head straight south across the river and find him. Make haste!"
+	]
+
+	completion:
+	[
+		"Fritz, that old scoundrel. Still chasing necromancers, of course."
+	]
+	
+	reward_xp_multiplier: 0.32
+	reward_cash_multiplier: 0.27
+	prerequisites: [ .fritz_dawnstar_2 ]
+	level: 28
+}
+

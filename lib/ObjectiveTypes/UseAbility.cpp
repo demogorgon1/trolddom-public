@@ -123,6 +123,8 @@ namespace tpublic::ObjectiveTypes
 				m_count = aChild->GetUInt32();
 			else if(aChild->m_name == "ability")
 				m_abilityId = aChild->GetId(DataType::ID_ABILITY);
+			else if(aChild->m_name == "boolean")
+				m_boolean = aChild->GetBool();
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());							
 		});
@@ -135,6 +137,7 @@ namespace tpublic::ObjectiveTypes
 		aWriter->WriteUInts(m_entityIds);
 		aWriter->WriteUInt(m_count);
 		aWriter->WriteUInt(m_abilityId);
+		aWriter->WriteBool(m_boolean);
 	}
 	
 	bool		
@@ -147,6 +150,12 @@ namespace tpublic::ObjectiveTypes
 			return false;
 		if (!aReader->ReadUInt(m_abilityId))
 			return false;
+		if(!aReader->ReadBool(m_boolean))
+			return false;
+
+		if(m_boolean)
+			SetBoolean();
+
 		return true;
 	}
 

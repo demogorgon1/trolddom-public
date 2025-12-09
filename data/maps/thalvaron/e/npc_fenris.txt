@@ -1,0 +1,194 @@
+dialogue_screen .fenris:
+{
+	text: 
+	[	
+		"What brings you to our humble little village?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_ranger_virgil_1 }
+		{ quest: .fenris_1 }
+		{ quest: .fenris_2 }
+		{ quest: .fenris_3 }
+	]
+}
+
+entity thalvaron_fenris: !NPC
+{
+	_string: "Fenris"
+	_sprite: man_80
+	_sprite_dead: man_80_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .fenris: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .fenris_1_quest_item: { }
+
+item .fenris_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .fenris_1_quest_item ]		
+	string: "Tentacle of Fryzilk" 
+	icon: icon_tentacle
+	item_level: 25
+	quest: .fenris_1
+	flags: [ not_sellable unique ]
+}
+
+objective .fenris_1:
+{
+	string: "Tentacle of Fryzilk"
+	collect_items: { item: .fenris_1_quest_item count: 1 }
+}
+
+quest .fenris_1:
+{
+	string: "Trial of the Forbidden Island"
+
+	text:
+	[
+		"Venture north to the Forbidden Island, retrieve a tentacle off Fryzilk, and return to Fenris."
+	]
+	
+	description: 
+	[
+		"If you want me to take you serious you need to prove your worth.\n"
+		"\n"
+		"On the Forbidden Island north of here, deep in its dense forest, resides Fryzilk, a powerful otherworldly entity. Where Fryzilk came from nobody knows, all we know is that its immortal. You can kill it, but"
+		"it will come back to life again eventually. Go there, defeat the beast, and return with one of its many tentacles to prove your deed. Then I'll know you're not useless."
+	]
+	
+	completion:
+	[
+		"Yes, that is indeed one of its tentacles. Now, let's talk about crab men."
+	]
+	
+	progress:
+	[
+		"Have you done the deed?"
+	]
+
+	level: 25
+	objectives: [ .fenris_1 ]
+	next_quest: .fenris_2
+}
+
+############################################################
+# Quest 2
+
+objective .fenris_2:
+{
+	string: "Crab Men Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_crab_man_small_a thalvaron_zilkore_crab_man_small_b ]
+		count: 8
+	}
+}
+
+quest .fenris_2:
+{
+	string: "Ranger Roel Is Right"
+
+	text:
+	[
+		"Kill crab men on the beaches of Zilkore and return to Fenris."
+	]
+	
+	description: 
+	[
+		"You came here with news of crab men, but those news are old. We've indeed been struggling with them around here as well. If you want to help, cleanse the sandy beaches east of here of those foul creatures."
+	]
+
+	progress:
+	[
+		"Did you get all of them? No?"
+	]
+	
+	completion:
+	[
+		"Ah, yes."
+	]
+	
+	objectives: [ .fenris_2 ]
+	prerequisites: [ .fenris_1 ]
+	level: 25
+	next_quest: .fenris_3
+}
+
+############################################################
+# Quest 3
+
+objective .fenris_3_a:
+{
+	string: "Large Crab Man Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_crab_man_boss ]
+		count: 1
+	}
+}
+
+objective .fenris_3_b:
+{
+	string: "More Crab Men Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_zilkore_crab_man_large_a thalvaron_zilkore_crab_man_large_b ]
+		count: 6
+	}
+}
+
+{
+	${ _level: 25 }
+	item .fenris_3_a: !QUEST_REWARD_BACK{ _string: "Zilkore Cloak" _icon: icon_cape_2 _constitution: 1 _wisdom: 4 _type: armor_cloth }
+	item .fenris_3_b: !QUEST_REWARD_NECK{ _string: "Crab Shell Necklace" _icon: icon_necklace_1 _constitution: 1 _block: 1 _budget_bias: -10 }
+}
+
+quest .fenris_3:
+{
+	string: "Finishing the Job"
+
+	text:
+	[
+		"Venture into the cave on the Zilkore beach to the east, kill crab men, and return to Fenris."
+	]
+	
+	description: 
+	[
+		"What now? Seems like we've getting totally overrun by crab men. You might have noticed the sandy cave to the east. I haven't been in there myself after it became infested, but it's definitely crawling with"
+		"more of these creatures. I've also heard rumors of a particularly large crab man somewhere around there. Go kill them all and I'll make it worth your while."
+	]
+
+	progress:
+	[
+		"Nasty creatures, right?"
+	]
+	
+	completion:
+	[
+		"Good job, but I fear we'll never get rid of them."
+	]
+	
+	objectives: [ .fenris_3_a .fenris_3_b ]
+	prerequisites: [ .fenris_2 ]
+	level: 25
+	reward_one_item: [ .fenris_3_a .fenris_3_b ]
+}

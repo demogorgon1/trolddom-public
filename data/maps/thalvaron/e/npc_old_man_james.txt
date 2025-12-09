@@ -1,0 +1,233 @@
+dialogue_screen .old_man_james:
+{
+	text: 
+	[	
+		"South of here you'll find the great Thalyssian Wilds. Only seasoned adventurers should travel there.\n"
+		"\n"
+		"What I did to be stationed this far away from civilization? Let's just say I stepped on some important toes."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .fullay_1 }
+		{ quest: .old_man_james_1 }
+		{ quest: .old_man_james_2 }
+		{ quest: .old_man_james_3 }
+	]
+}
+
+entity thalvaron_old_man_james: !NPC
+{
+	_string: "Old Man James"
+	_sprite: man_83
+	_sprite_dead: man_83_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .old_man_james: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .old_man_james_1:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_east_kobold_a thalvaron_east_kobold_b ]
+		count: 8
+	}
+}
+
+quest .old_man_james_1:
+{
+	string: "Contaminated Water"
+
+	text:
+	[
+		"Follow the path south, cross the river, enter the cave, and hunt kobolds."
+	]
+	
+	description: 
+	[
+		"Ah, kobolds. Constant nuisance for anyone living close to their habitats. I've noticed that the water river has become contaminated and I'm certain it's related to kobold activity. Let's just say that those\n"
+		"little guys aren't known for borrowing their droppings in the ground.\n"
+		"\n"
+		"There is a cave system on the other side of the river. To enter it, you'll need to head south and cross the river at the first opportunity. You'll find a cave which probably is full of kobolds. Kill a bunch of"
+		"them and hopefully they'll scatter and go live somewhere else."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Excellent! Hopefully the water will get better soon."
+	]
+	
+	objectives: [ .old_man_james_1 ]
+	level: 26
+	next_quest: .old_man_james_2
+}
+
+############################################################
+# Quest 2
+
+objective .old_man_james_2:
+{
+	string: "Poison Administered"	
+	maps: [ thalvaron ]	
+	manual_boolean: {}
+}
+
+map_entity_spawn thalvaron_old_man_james_2_spawn_1: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_old_man_james_2_spawn_2: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn thalvaron_old_man_james_2_spawn_3: { spawn_timer: { only_when_triggered: true } }
+
+item .old_man_james_2_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 26
+	icon: icon_green_bottle		
+	string: "Kobold Poison"
+	use_ability: $ability [ icon string ]
+	{
+		description: "Pour into water by Kobold shrine."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]	
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_DRINK_POTION{}	
+		aoe_radius: 7
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_old_man_james_2_quest_item }
+		cast_time: 20	
+		direct_effect simple<activate_trigger>: { }
+		
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20 entity: thalvaron_north_kobold_a map_entity_spawn: thalvaron_old_man_james_2_spawn_1 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20 entity: thalvaron_north_kobold_b map_entity_spawn: thalvaron_old_man_james_2_spawn_2 }			
+		direct_effect spawn_entity: { flags: [ reverse ] spawn_flags: [ no_owner ] npc_target_threat: 20 entity: thalvaron_north_kobold_a map_entity_spawn: thalvaron_old_man_james_2_spawn_3 }			
+	}	
+}
+
+entity thalvaron_old_man_james_2_quest_item:
+{
+	components:
+	{
+		position: { }		
+		visibility: { }		
+		trigger: { lock_out_ticks: 50 trigger_manual_objective: .old_man_james_2 }
+		combat_public: { faction: monsters }
+	}
+}
+
+quest .old_man_james_2:
+{
+	string: "Kobold Extermination"
+
+	text:
+	[
+		"Poison the pool by the kobold effigy and return to Old Man James."
+	]
+	
+	description: 
+	[
+		"I just remembered that a traveling salesman sold some kobold poison. I'm not sure it works. Apparently you just need to pour it in their water source and it should kill them. Maybe it doesn't work.\n"
+		"\n"
+		"There is another cave a bit further east. Again, just follow the river, but go past the crossing you used last time. You'll find the cave I'm talking about across the next crossing. Inside there I've seen"
+		"what looks like some kind of crude religious effigy. What do kobolds worship? Probably something stupid. It's just by a very clear pool of water. I think it might have some kind of significance to these"
+		"creatures. Pour the poison into this pool and see what happens."
+	]
+
+	progress:
+	[
+		"Don't feel bad for kobolds. They're barely sentient."
+	]
+	
+	completion:
+	[
+		"Huh, they didn't like that, did they?"
+	]
+	
+	level: 26
+	quest_items: [ .old_man_james_2_quest_item ]
+	prerequisites: [ .old_man_james_1 ]
+	objectives: [ .old_man_james_2 ]
+}
+
+############################################################
+# Quest 3
+
+objective .old_man_james_3_a:
+{
+	string: "Firbiu Temple Harpies Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_harpy ]
+		count: 5
+	}
+}
+
+objective .old_man_james_3_b:
+{
+	string: "Feruc Temple Harpies Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_harpy_2 ]
+		count: 5
+	}
+}
+
+{
+	${ _level: 26 }
+	item .old_man_james_3_a: !QUEST_REWARD_WAIST{ _string: "Waistband of the Harpy" _icon: icon_cloth_belt_2 _constitution: 3 _wisdom: 2 _healing: 3 _type: armor_cloth }
+	item .old_man_james_3_b: !QUEST_REWARD_WRISTS{ _string: "Bracers of Unrelenting Assault" _icon: icon_plate_bracers_1 _dexterity: 1 _strength: 2 _type: armor_mail }
+}
+
+quest .old_man_james_3:
+{
+	string: "Aerial Assault"
+
+	text:
+	[
+		"Venture into the jungle to the south, locate the Firbiu and Feruc temples, kill harpies, and return to Old Man James."
+	]
+	
+	description: 
+	[
+		"Good job with the kobolds, maybe you handle another problem for me. You hear about harpies? They migrated here recently and they've been making life here quite hard. Not only the noise, but sometimes they"
+		"swoop down when I'm eating, trying to steal my food. They live in the mountains south of here, in the jungle. Yesterday I went down to check it out, but there were too many of them. I found a colony at the"
+		"Firbiu Temple and another one at the Feruc Temple. How about you go clear them out? You seem fairly good at killing critters."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Good job!"
+	]
+	
+	objectives: [ .old_man_james_3_a .old_man_james_3_b ]
+	level: 26
+	reward_one_item: [ .old_man_james_3_a .old_man_james_3_b ]
+	prerequisites: [ .old_man_james_2 ]
+}

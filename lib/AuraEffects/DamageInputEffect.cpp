@@ -7,6 +7,7 @@
 #include <tpublic/Components/Position.h>
 
 #include <tpublic/EntityInstance.h>
+#include <tpublic/Helpers.h>
 #include <tpublic/IResourceChangeQueue.h>
 #include <tpublic/IWorldView.h>
 
@@ -47,7 +48,7 @@ namespace tpublic
 						const Components::CombatPublic* combatPublic = aEntityInstance->GetComponent<Components::CombatPublic>();
 						size_t index;
 						if(combatPublic->GetResourceIndex(Resource::ID_HEALTH, index))
-							aResourceChangeQueue->AddResourceChange(CombatEvent::ID_HIT, DirectEffect::INVALID_DAMAGE_TYPE, aAbilityId, aSourceEntityId, aSourceEntityInstanceId, aEntityInstance->GetEntityInstanceId(), index, aValue, 0, false);
+							aResourceChangeQueue->AddResourceChange(CombatEvent::ID_HIT, DirectEffect::INVALID_DAMAGE_TYPE, aAbilityId, aSourceEntityId, aSourceEntityInstanceId, aEntityInstance->GetEntityInstanceId(), index, aValue, 0, false, false);
 					}
 					break;
 
@@ -56,7 +57,7 @@ namespace tpublic
 						const Components::CombatPublic* combatPublic = aEntityInstance->GetComponent<Components::CombatPublic>();
 						size_t index;
 						if(combatPublic->GetResourceIndex(Resource::ID_MANA, index))
-							aResourceChangeQueue->AddResourceChange(CombatEvent::ID_HIT, DirectEffect::INVALID_DAMAGE_TYPE, aAbilityId, aSourceEntityId, aSourceEntityInstanceId, aEntityInstance->GetEntityInstanceId(), index, aValue, 0, false);
+							aResourceChangeQueue->AddResourceChange(CombatEvent::ID_HIT, DirectEffect::INVALID_DAMAGE_TYPE, aAbilityId, aSourceEntityId, aSourceEntityInstanceId, aEntityInstance->GetEntityInstanceId(), index, aValue, 0, false, false);
 					}
 					break;
 

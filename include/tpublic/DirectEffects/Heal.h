@@ -89,6 +89,7 @@ namespace tpublic
 								IEventQueue*						aEventQueue,
 								const IWorldView*					aWorldView) override;
 			bool			CalculateToolTipHeal(
+								const Manifest*						aManifest,
 								const EntityInstance*				aEntityInstance,
 								const AbilityModifierList*			aAbilityModifierList,
 								uint32_t							aAbilityId,
@@ -98,6 +99,9 @@ namespace tpublic
 			CombatFunction								m_function;
 			bool										m_maxHealthPercentage = false;
 			std::vector<ConditionalCriticalChanceBonus>	m_conditionalCriticalChanceBonuses;
+			float										m_spread = 0.0f;
+			float										m_threatMultiplier = 1.0f;
+			bool										m_direct = true;
 
 			float			_GetCriticalChanceBonus(
 								const Components::AbilityModifiers*	aAbilityModifiers) const;

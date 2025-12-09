@@ -1,0 +1,25 @@
+dialogue_screen .dawn:
+{
+	text: 
+	[	
+		"Greetings, $class$.\n"
+	]		
+	
+	options:
+	[
+	]
+}
+
+entity thalvaron_dawn: !NPC
+{
+	_string: "Dawn"
+	_sprite: woman_47
+	_sprite_dead: woman_47_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .dawn: { } }
+}
+

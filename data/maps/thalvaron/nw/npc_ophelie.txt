@@ -1,0 +1,117 @@
+dialogue_screen .ophelie_dialogue:
+{
+	text: 
+	[	
+		"How is life in the city?"
+	]		
+	
+	options:
+	[
+		{ quest: .ophelie_1 }	
+		{ quest<offer_only>: .ophelie_2 }	
+	]
+}
+
+entity thalvaron_ophelie: !NPC
+{
+	_string: "Ophelie"
+	_dialogue_root: $dialogue_root { .ophelie_dialogue: { } }
+	_sprite: woman_35
+	_sprite_dead: woman_35_dead
+	_level: 20
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+##########################################################################################
+# Quest 1
+
+loot_group .ophelie_1_quest_item: { }
+
+item .ophelie_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .ophelie_1_quest_item ]		
+	string: "Bloody Tusks" 
+	icon: icon_tusk_1
+	item_level: 24
+	quest: .ophelie_1
+	flags: [ not_sellable unique ]
+}
+
+objective .ophelie_1:
+{
+	string: "Bloody Tusks"
+	collect_items: { item: .ophelie_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 24 }
+	item .ophelie_1_a: !QUEST_REWARD_NECK{ _string: "Pigdodger's Necklace" _icon: icon_necklace_2 _dodge_chance: 3 _constitution: 2 _strength: 1 }
+	item .ophelie_1_b: !QUEST_REWARD_FINGER{ _string: "Wooden Ring" _icon: icon_ring_4 _wisdom: 3 _constitution: 2 _spell_damage: 1 }
+}
+
+quest .ophelie_1:
+{
+	string: "Potato Menace"
+
+	text:
+	[
+		"Slay the giant angry boar that is roaming the potato field and return to Ophelie."
+	]
+	
+	description: 
+	[
+		"Did you spot the potato field when you came here? We basically live off crabs and potatoes up here. What I wouldn't give for some real food... Oh, anyway. A giant angry boar has been roaming"
+		"around the potato field recently and I can't go there without getting chased off. What is worse, I think it's eating my potatoes!\n"
+		"\n"
+		"You seem rather resourceful, maybe you can do something about it?"
+	]
+
+	progress:
+	[
+		"It's a big mean oinker, isn't it?"
+	]
+	
+	completion:
+	[
+		"Thank you so much!"
+	]
+
+	objectives: [ .ophelie_1 ]
+	reward_one_item: [ .ophelie_1_a .ophelie_1_b ]
+	level: 24	
+}
+
+##########################################################################################
+# Quest 2
+
+quest .ophelie_2:
+{
+	string: "Junior Chasing Bears in the Woods"
+
+	text:
+	[
+		"Locate Ophelie's son across the river, somewhere along the coast."
+	]
+	
+	description: 
+	[
+		"My son has been out bear hunting in Brior Hills. He left almost a week ago and I'm getting a bit worried. Tyron doesn't seem to care, so maybe you can go check out on him? I'm too busy"
+		"with my potatoes. Why he can't leave the bears alone, I don't know.\n"
+		"\n"
+		"The easiest way to reach Brior Hills is by crossing the river to the west and follow the coast."
+	]
+	
+	completion:
+	[
+		"Mom sent you? Gosh... Can't she leave me alone for a few days?"
+	]
+
+	level: 24	
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.25
+	prerequisites: [ .ophelie_1 ]
+}

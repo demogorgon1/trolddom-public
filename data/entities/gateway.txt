@@ -270,7 +270,9 @@ entity gateway_2:
 
 entity voraghul_portal_closed:
 {
-	string: "Realm of Voraghul"
+	string: "Realm of Voraghul" 
+	
+	systems: [ openable ]
 	
 	components:
 	{
@@ -298,6 +300,172 @@ entity voraghul_portal_closed:
 			range: 1 
 			required_quest: thalvaron_seren_virelith_3
 			complete_manual_objective: thalvaron_seren_virelith_3
+		}	
+		visibility:
+		{
+			requirements: { requirement self<must_not_have_item>: thalvaron_blimcraft_highborne_4_quest_item }
+		}
+	}
+}
+
+entity voraghul_portal_open:
+{
+	string: "Realm of Voraghul" 
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		gateway: 
+		{ 
+			maps: [ { map: trial_of_fire } ]
+			schedule: none
+		}
+		visibility:
+		{
+			requirements: { requirement self<must_have_item>: thalvaron_blimcraft_highborne_4_quest_item }
+		}		
+	}
+}
+
+entity voraghul_portal_rift:
+{
+	string: "Realm of Voraghul" 
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		gateway: 
+		{ 
+			maps: [ { map: realm_of_fire } ]
+			schedule: none
+		}
+	}
+}
+
+entity voraghul_portal_return_portal:
+{
+	string: "Thalvaron" 
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		gateway: 
+		{ 
+			maps: [ { map: thalvaron map_player_spawn: thalvaron_realm_of_fire_return_spawn } ]
+			schedule: none
+		}
+	}
+}
+
+entity thalvaron_jungle_tower_portal:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}						
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_jungle_tower_portal_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
+		}	
+	}
+}
+
+entity thalvaron_jungle_tower_portal_return:
+{
+	string: "Portal"
+	
+	systems: [ openable ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			level: 27
+			trigger_ability: $ability
+			{
+				states: [ default ]                     
+				direct_effect move: { map_player_spawn: thalvaron_jungle_tower_portal_return_spawn move_flags: [ set_teleported affect_target ] }
+			}			
+			instant: true
 		}	
 	}
 }

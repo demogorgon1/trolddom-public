@@ -22,6 +22,25 @@ namespace tpublic
 
 			struct AuraEffectEntry
 			{
+				static void 
+				FromObjectArray(
+					const SourceNode*								aSource,
+					std::vector<std::unique_ptr<AuraEffectEntry>>&	aOut)
+				{
+					aSource->GetArray()->ForEachChild([&](
+						const SourceNode* aChild) 
+					{ 
+						aChild->GetObject()->ForEachChild([&](
+							const SourceNode* aChild2)
+						{
+							if(aChild2->m_tag == "aura_effect")
+								aOut.push_back(std::make_unique<AuraEffectEntry>(aChild2));
+							else 
+								TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
+						});
+					});
+				}
+
 				AuraEffectEntry()
 				{
 
@@ -65,7 +84,7 @@ namespace tpublic
 				}
 
 				// Public data
-				uint32_t							m_auraEffectId;
+				uint32_t							m_auraEffectId = 0;
 				std::unique_ptr<AuraEffectBase>		m_auraEffectBase;
 			};
 
@@ -103,7 +122,13 @@ namespace tpublic
 				FLAG_UNIQUE_PER_SOURCE		= 0x00100000,
 				FLAG_NO_MOUNT				= 0x00200000,
 				FLAG_EFFECTS_AS_CHARGES		= 0x00400000,
-				FLAG_IGNORE_IMMUNITIES		= 0x00800000
+				FLAG_IGNORE_IMMUNITIES		= 0x00800000,
+				FLAG_GLOBAL					= 0x01000000,
+				FLAG_GLOBAL_PLAYER			= 0x02000000,
+				FLAG_ALWAYS_SHOW_CHARGES	= 0x04000000,
+				FLAG_ALWAYS_SHOW_TIMER		= 0x08000000,
+				FLAG_EXTEND_EXISTING		= 0x10000000,
+				FLAG_INCAPACITATION			= 0x20000000
 			};
 
 			static Type
@@ -178,6 +203,18 @@ namespace tpublic
 						flags |= FLAG_EFFECTS_AS_CHARGES;
 					else if (strcmp(string, "ignore_immunities") == 0)
 						flags |= FLAG_IGNORE_IMMUNITIES;
+					else if (strcmp(string, "global") == 0)
+						flags |= FLAG_GLOBAL;
+					else if (strcmp(string, "global_player") == 0)
+						flags |= FLAG_GLOBAL_PLAYER;
+					else if (strcmp(string, "always_show_charges") == 0)
+						flags |= FLAG_ALWAYS_SHOW_CHARGES;
+					else if (strcmp(string, "always_show_timer") == 0)
+						flags |= FLAG_ALWAYS_SHOW_TIMER;
+					else if (strcmp(string, "extend_existing") == 0)
+						flags |= FLAG_EXTEND_EXISTING;
+					else if(strcmp(string, "incapacitation") == 0)
+						flags |= FLAG_INCAPACITATION;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid aura flag.", string);
 				});
@@ -226,10 +263,14 @@ namespace tpublic
 							m_flags |= SourceToFlags(aChild);
 						else if (aChild->m_tag == "aura_effect")
 							m_auraEffects.push_back(std::make_unique<AuraEffectEntry>(aChild));
+						else if (aChild->m_name == "aura_effects")
+							AuraEffectEntry::FromObjectArray(aChild, m_auraEffects);
 						else if (aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "description")
 							m_description = aChild->GetString();
+						else if (aChild->m_name == "extra_description")
+							m_extraDescription = aChild->GetString();
 						else if (aChild->m_name == "max_stack")
 							m_maxStack = aChild->GetUInt32();
 						else if (aChild->m_name == "stat_modifiers")
@@ -250,6 +291,18 @@ namespace tpublic
 							m_colorEffect = Image::RGBA(aChild);
 						else if (aChild->m_name == "color_weapon_glow")
 							m_colorWeaponGlow = Image::RGBA(aChild);
+						else if(aChild->m_name == "stat_conversion")
+							m_statConversions.push_back(Stat::Conversion(aChild));
+						else if(aChild->m_name == "zones")
+							aChild->GetIdArray(DataType::ID_ZONE, m_zoneIds);
+						else if(aChild->m_name == "priority")
+							m_priority = aChild->GetUInt32();
+						else if (aChild->m_name == "diminishing_effect")
+							m_diminishingEffectId = aChild->GetId(DataType::ID_DIMINISHING_EFFECT);
+						else if (aChild->m_name == "head_effect_sprite")
+							m_headEffectSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if (aChild->m_name == "loot_table")
+							m_lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -280,6 +333,13 @@ namespace tpublic
 				aStream->WriteUInt(m_mustNotHaveWorldAuraId);
 				aStream->WriteUInt(m_maxStack);
 				aStream->WriteUInt(m_overrideSpriteId);
+				aStream->WriteObjects(m_statConversions);
+				aStream->WriteString(m_extraDescription);
+				aStream->WriteUInts(m_zoneIds);
+				aStream->WriteUInt(m_priority);
+				aStream->WriteUInt(m_diminishingEffectId);
+				aStream->WriteUInt(m_headEffectSpriteId);
+				aStream->WriteUInt(m_lootTableId);
 			}
 			 
 			bool
@@ -371,6 +431,48 @@ namespace tpublic
 						return false;
 				}
 
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadObjects(m_statConversions))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadString(m_extraDescription))
+						return false;
+				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadUInts(m_zoneIds))
+						return false;
+				}
+
+				if(!aStream->IsEnd())
+				{
+					if(!aStream->ReadUInt(m_priority))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_diminishingEffectId))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_headEffectSpriteId))
+						return false;
+				}
+
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadUInt(m_lootTableId))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -389,6 +491,7 @@ namespace tpublic
 			uint32_t										m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
 			std::unique_ptr<StatModifiers>					m_statModifiers;
+			std::vector<Stat::Conversion>					m_statConversions;
 			CombatFunction									m_charges;
 			uint32_t										m_encounterId = 0;
 			uint32_t										m_particleSystemId = 0;
@@ -401,6 +504,12 @@ namespace tpublic
 			uint32_t										m_mustNotHaveWorldAuraId = 0;
 			uint32_t										m_maxStack = 1;
 			uint32_t										m_overrideSpriteId = 0;
+			std::string										m_extraDescription;
+			std::vector<uint32_t>							m_zoneIds;
+			uint32_t										m_priority = 0;
+			uint32_t										m_diminishingEffectId = 0;
+			uint32_t										m_headEffectSpriteId = 0;
+			uint32_t										m_lootTableId = 0;
 		};
 
 	}

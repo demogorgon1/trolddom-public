@@ -1,5 +1,7 @@
 #include "Pcheader.h"
 
+#include <tpublic/Compiler.h>
+
 int
 main(
 	int		aNumArgs,
@@ -16,7 +18,7 @@ main(
 
 	tpublic::Compiler compiler(&manifest);
 
-	compiler.Build({ "../../data" }, "../../data/_ids.txt", ".", "../../data/generated", tpublic::Compression::LEVEL_FAST);
+	compiler.Build({ "../../data" }, "../../data/_ids.txt", ".", "../../data/generated", tpublic::Compression::LEVEL_FAST, NULL);
 	manifest.Verify();	
 
 	return EXIT_SUCCESS;

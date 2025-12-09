@@ -6,7 +6,6 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "MoveSpeed.h"
-#include "Parser.h"
 #include "Requirements.h"
 #include "Stat.h"
 #include "SourceEntityInstance.h"
@@ -17,6 +16,7 @@ namespace tpublic
 
 	class IResourceChangeQueue;
 	class SecondaryAbility;
+	class ToolTipMultiplier;
 
 	class AuraEffectBase
 	{
@@ -202,79 +202,85 @@ namespace tpublic
 		
 		// Virtual methods
 		virtual void			FromSource(
-									const SourceNode*				/*aSource*/) { assert(false); }
+									const SourceNode*							/*aSource*/) { assert(false); }
 		virtual void			ToStream(
-									IWriter*						/*aStream*/) const { assert(false); }
+									IWriter*									/*aStream*/) const { assert(false); }
 		virtual bool			FromStream(
-									IReader*						/*aStream*/) { assert(false); return true; }
-		virtual bool			OnApplication(									
-									const SourceEntityInstance&		/*aSourceEntityInstance*/,
-									uint32_t						/*aTargetEntityInstanceId*/,
-									SystemBase::Context*			/*aContext*/,
-									const Manifest*					/*aManifest*/) { return true; }
+									IReader*									/*aStream*/) { assert(false); return true; }
+		virtual bool			OnApplication(												
+									const SourceEntityInstance&					/*aSourceEntityInstance*/,
+									uint32_t									/*aTargetEntityInstanceId*/,
+									SystemBase::Context*						/*aContext*/,
+									const Manifest*								/*aManifest*/) { return true; }
 		virtual bool			OnUpdate(
-									const SourceEntityInstance&		/*aSourceEntityInstance*/,
-									uint32_t						/*aTargetEntityInstanceId*/,
-									uint32_t						/*aUpdate*/,
-									SystemBase::Context*			/*aContext*/,
-									const Manifest*					/*aManifest*/) { return false; }
+									const SourceEntityInstance&					/*aSourceEntityInstance*/,
+									uint32_t									/*aTargetEntityInstanceId*/,
+									uint32_t									/*aUpdate*/,
+									SystemBase::Context*						/*aContext*/,
+									const Manifest*								/*aManifest*/) { return false; }
 		virtual void			OnFade(
-									const SourceEntityInstance&		/*aSourceEntityInstance*/,
-									uint32_t						/*aTargetEntityInstanceId*/,
-									SystemBase::Context*			/*aContext*/,
-									const Manifest*					/*aManifest*/) { }
+									const SourceEntityInstance&					/*aSourceEntityInstance*/,
+									uint32_t									/*aTargetEntityInstanceId*/,
+									SystemBase::Context*						/*aContext*/,
+									const Manifest*								/*aManifest*/) { }
 		virtual int32_t			FilterDamageInputOnUpdate(
-									DirectEffect::DamageType		/*aDamageType*/,
-									int32_t							aDamage,
-									uint32_t&						/*aCharges*/,
-									int32_t&						/*aOutAbsorbed*/) { return aDamage; }
+									DirectEffect::DamageType					/*aDamageType*/,
+									int32_t										aDamage,
+									uint32_t&									/*aCharges*/,
+									int32_t&									/*aOutAbsorbed*/) { return aDamage; }
 		virtual AuraEffectBase*	Copy() const { assert(false); return NULL; }
 		virtual int32_t			FilterDamageInput(
-									DirectEffect::DamageType		/*aDamageType*/,
-									int32_t							aDamage) const { return aDamage; }
+									DirectEffect::DamageType					/*aDamageType*/,
+									int32_t										aDamage,
+									uint32_t									/*aAbilityId*/,
+									uint32_t									/*aEntityId*/) const { return aDamage; }
 		virtual int32_t			FilterDamageOutput(
-									const Manifest*					/*aManifest*/,
-									const EntityInstance*			/*aSource*/,
-									const EntityInstance*			/*aTarget*/,
-									DirectEffect::DamageType		/*aDamageType*/,
-									int32_t							aDamage) const { return aDamage; }
+									const Manifest*								/*aManifest*/,
+									const EntityInstance*						/*aSource*/,
+									const EntityInstance*						/*aTarget*/,
+									DirectEffect::DamageType					/*aDamageType*/,
+									int32_t										aDamage,
+									uint32_t									/*aAbilityId*/) const { return aDamage; }
 		virtual int32_t			FilterHealInput(
-									int32_t							aHeal) const { return aHeal; }
+									int32_t										aHeal,
+									uint32_t									/*aAbilityId*/) const { return aHeal; }
 		virtual int32_t			FilterHealOutput(
-									int32_t							aHeal) const { return aHeal; }
+									int32_t										aHeal,
+									uint32_t									/*aAbilityId*/) const { return aHeal; }
 		virtual int32_t			FilterThreat(
-									int32_t							aThreat) const { return aThreat; }
+									int32_t										aThreat,
+									uint32_t									/*aAbilityId*/) const { return aThreat; }
+		virtual bool			IsFilter() const { return false; }
+		virtual void			ForEachToolTipMultiplier(
+									std::function<void(ToolTipMultiplier&)>		/*aCallback*/) const { }
 		virtual float			GetResourceCostMultiplier() const { return 1.0f; }
 		virtual void			OnDamageInput(
-									const EntityInstance*			/*aSource*/,
-									const EntityInstance*			/*aTarget*/,
-									const SourceEntityInstance&		/*aAuraSource*/,
-									DirectEffect::DamageType		/*aDamageType*/,
-									int32_t							/*aDamage*/,
-									CombatEvent::Id					/*aCombatEventId*/,
-									IEventQueue*					/*aEventQueue*/,
-									const IWorldView*				/*aWorldView*/,
-									IResourceChangeQueue*			/*aResourceChangeQueue*/) const { }
+									const EntityInstance*						/*aSource*/,
+									const EntityInstance*						/*aTarget*/,
+									const SourceEntityInstance&					/*aAuraSource*/,
+									DirectEffect::DamageType					/*aDamageType*/,
+									int32_t										/*aDamage*/,
+									CombatEvent::Id								/*aCombatEventId*/,
+									IEventQueue*								/*aEventQueue*/,
+									const IWorldView*							/*aWorldView*/,
+									IResourceChangeQueue*						/*aResourceChangeQueue*/) const { }
 		virtual MoveSpeed::Id	GetMoveSpeedModifier() const { return MoveSpeed::INVALID_ID; }
 		virtual void			OnCombatEvent(
-									const Manifest*					/*aManifest*/,
-									uint32_t						/*aAuraId*/,
-									CombatEventType					/*aType*/,
-									CombatEvent::Id					/*aCombatEventId*/,
-									uint32_t						/*aAbilityId*/,
-									const EntityInstance*			/*aSourceEntityInstance*/,
-									const EntityInstance*			/*aTargetEntityInstance*/,
-									std::mt19937*					/*aRandom*/,
-									IEventQueue*					/*aEventQueue*/) const { }
-		virtual bool			GetStatModifier(
-									Stat::Id						/*aStat*/,
-									uint32_t&						/*aOutNum*/,
-									uint32_t&						/*aOutDenom*/) const { return false; }		
+									const Manifest*								/*aManifest*/,
+									uint32_t									/*aAuraId*/,
+									CombatEventType								/*aType*/,
+									CombatEvent::Id								/*aCombatEventId*/,
+									uint32_t									/*aAbilityId*/,
+									const EntityInstance*						/*aAuraSourceEntityInstance*/,
+									const EntityInstance*						/*aSourceEntityInstance*/,
+									const EntityInstance*						/*aTargetEntityInstance*/,
+									std::mt19937*								/*aRandom*/,
+									IEventQueue*								/*aEventQueue*/) const { }
 		virtual bool			UpdateCastTime(
-									const Manifest*					/*aManifest*/,
-									uint32_t						/*aAbilityId*/,
-									uint32_t&						/*aCharges*/,
-									int32_t&						/*aCastTime*/) { return false; }
+									const Manifest*								/*aManifest*/,
+									uint32_t									/*aAbilityId*/,
+									uint32_t&									/*aCharges*/,
+									int32_t&									/*aCastTime*/) { return false; }
 
 		// Helpers
 		bool					IsImmediate() const { return m_flags & FLAG_IMMEDIATE; }

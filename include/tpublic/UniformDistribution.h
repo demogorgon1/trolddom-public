@@ -27,6 +27,9 @@ namespace tpublic
 		operator()(
 			_RandomGenType&	aRandom) const
 		{
+			if(m_min == m_max)
+				return m_min;
+
 			return Generate(aRandom());
 		}
 

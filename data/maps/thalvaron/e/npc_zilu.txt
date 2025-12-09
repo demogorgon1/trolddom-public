@@ -1,0 +1,26 @@
+dialogue_screen .zilu:
+{
+	text: 
+	[	
+		"Welcome to my woods."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .faolan_1 }
+	]
+}
+
+entity thalvaron_zilu: !NPC
+{
+	_string: "Zilu"
+	_sprite: ghost_4
+	_sprite_dead: ghost_4_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: undead
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .zilu: { } }
+}
+

@@ -3,6 +3,8 @@
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/PlayerPrivate.h>
 
+#include <tpublic/Data/Item.h>
+
 #include <tpublic/DirectEffects/ConsumeAndProduce.h>
 
 #include <tpublic/EntityInstance.h>

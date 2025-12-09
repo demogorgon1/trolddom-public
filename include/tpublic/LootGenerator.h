@@ -53,7 +53,11 @@ namespace tpublic
 							uint32_t									aCreatureTypeId,
 							bool										aElite,
 							const Data::LootTable*						aLootTable,
-							ItemCallback								aItemCallback) const;						
+							ItemCallback								aItemCallback) const;			
+		void			QueryLootGroup(
+							uint32_t									aLootGroupId,
+							uint32_t									aLevel,
+							ItemCallback								aItemCallback) const;
 
 		// Data access
 		const Manifest*	GetManifest() const { return m_manifest; }

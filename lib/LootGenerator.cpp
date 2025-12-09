@@ -6,6 +6,7 @@
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/PlayerPublic.h>
 
+#include <tpublic/Data/Ability.h>
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Item.h>
 #include <tpublic/Data/LootGroup.h>
@@ -14,6 +15,7 @@
 #include <tpublic/EntityInstance.h>
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/NPCMetrics.h>
 #include <tpublic/Requirements.h>
 
 namespace tpublic
@@ -94,7 +96,7 @@ namespace tpublic
 			}
 			else if(aCreatureTypeId == 0 || m_manifest->GetById<tpublic::Data::CreatureType>(aCreatureTypeId)->m_flags & Data::CreatureType::FLAG_CASH_LOOT)
 			{
-				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics.GetLevel(aLevel);
+				const NPCMetrics::Level* npcMetricsLevel = m_manifest->m_npcMetrics->GetLevel(aLevel);
 				if (npcMetricsLevel != NULL)
 				{
 					tpublic::UniformDistribution<uint32_t> distribution(npcMetricsLevel->m_cash.m_min, npcMetricsLevel->m_cash.m_max);
@@ -187,6 +189,21 @@ namespace tpublic
 					aLootable->m_availableLoot.push_back(loot);
 				}
 			}
+			else if (item->DoesStartQuest())
+			{
+				// This item starts a quest. Generate it for anyone who can start it.
+				const Data::Ability* ability = m_manifest->GetById<Data::Ability>(item->m_useAbilityId);
+
+				for (const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
+				{
+					if (Requirements::CheckList(m_manifest, ability->m_requirements, playerEntityInstance, NULL))
+					{
+						const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
+						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, 0); // Player tag character level isn't relevant here
+						aLootable->m_availableLoot.push_back(loot);
+					}
+				}
+			}
 			else
 			{
 				aLootable->m_availableLoot.push_back(loot);
@@ -245,7 +262,7 @@ namespace tpublic
 				accumWeight += possibility.m_weight;
 				Entry& t = entries[entryCount++];
 				t.m_accumWeight = accumWeight;
-				t.m_quantity = possibility.m_quantity;
+				t.m_quantity = possibility.m_quantity.GetRandom(aRandom);
 				t.m_lootGroupId = possibility.m_lootGroupId;
 
 				if(possibility.m_useSpecialLootCooldown && aLootableEntityInstance != NULL)
@@ -262,7 +279,7 @@ namespace tpublic
 
 			if(entryCount > 0)
 			{
-				tpublic::UniformDistribution<uint32_t> distribution(1, accumWeight);
+				UniformDistribution<uint32_t> distribution(1, accumWeight);
 				uint32_t possibilityRoll = distribution(aRandom);
 				uint32_t lootGroupId = 0;
 				uint32_t quantity = 0;
@@ -294,7 +311,7 @@ namespace tpublic
 						{
 							size_t totalItemCount = group->m_defaultLevelBucket.m_itemIds.size() + levelBucket->m_itemIds.size();
 							assert(totalItemCount > 0);
-							tpublic::UniformDistribution<size_t> d(0, totalItemCount - 1);
+							UniformDistribution<size_t> d(0, totalItemCount - 1);
 							size_t roll = d(aRandom);
 							if (roll < group->m_defaultLevelBucket.m_itemIds.size())
 								itemId = group->m_defaultLevelBucket.m_itemIds[roll];
@@ -303,14 +320,14 @@ namespace tpublic
 						}
 						else if (group->m_defaultLevelBucket.m_itemIds.size() > 0)
 						{
-							tpublic::UniformDistribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
+							UniformDistribution<size_t> d(0, group->m_defaultLevelBucket.m_itemIds.size() - 1);
 							size_t roll = d(aRandom);
 							itemId = group->m_defaultLevelBucket.m_itemIds[roll];
 						}
 
 						if (itemId != 0)
 						{
-							tpublic::ItemInstance itemInstance;
+							ItemInstance itemInstance;
 							itemInstance.m_itemId = itemId;
 							itemInstance.m_quantity = quantity;
 							aItemCallback(itemInstance, lootCooldownId);
@@ -318,6 +335,31 @@ namespace tpublic
 					}
 				}
 			}
+		}
+	}
+
+	void			
+	LootGenerator::QueryLootGroup(
+		uint32_t									aLootGroupId,
+		uint32_t									aLevel,
+		ItemCallback								aItemCallback) const
+	{
+		GroupTable::const_iterator i = m_groups.find(aLootGroupId);
+		if (i != m_groups.end())
+		{
+			const Group* group = i->second.get();
+			const LevelBucket* levelBucket = aLevel != 0 ? group->GetLevelBucket(aLevel) : NULL;
+
+			if (levelBucket != NULL)
+			{
+				for(uint32_t itemId : levelBucket->m_itemIds)
+					aItemCallback(ItemInstance{ itemId }, 0);
+			}
+			else if (group->m_defaultLevelBucket.m_itemIds.size() > 0)
+			{
+				for (uint32_t itemId : group->m_defaultLevelBucket.m_itemIds)
+					aItemCallback(ItemInstance{ itemId }, 0);
+			}		
 		}
 	}
 

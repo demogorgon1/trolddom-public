@@ -17,6 +17,7 @@ dialogue_screen .inn_keeper_dialogue:
 	[
 		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .inn_keeper_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
 		{ quest<offer_only>: .inn_keeper_1 }
+		{ quest<offer_only>: .inn_keeper_2 requirement self<must_not_have_completed_quest>: .father_tobias_1 }
 		{ text: "Let me browse your goods." goto: $dialogue_screen !FOOD_VENDOR{} }
 	]
 }
@@ -124,5 +125,32 @@ quest .inn_keeper_1:
 	objectives: [ .inn_keeper_1 ]
 	level: 10	
 	reward_all_items: [ consumable_ironbrew_stout ]
+}
+
+############################################################
+# Quest 2
+
+quest .inn_keeper_2:
+{
+	string: "Trouble at the Temple"
+
+	text:
+	[
+		"Find Father Tobias at the Holy Temple of Valoris."
+	]
+	
+	description: 
+	[
+		"Uhm, if you're looking for things to do, maybe go check out Father Tobias at the Holy Temple of Valoris. He came by earlier today and seemed kinda out of his mind."
+	]
+
+	completion:
+	[
+		"Oh, good you came."
+	]
+
+	reward_cash_multiplier: 0.25
+	reward_xp_multiplier: 0.25
+	level: 23
 }
 

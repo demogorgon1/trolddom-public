@@ -1,0 +1,219 @@
+dialogue_screen .sandra_riddle:
+{
+	text: 
+	[	
+		"Do you brings news from the north?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .egon_riddle_1 }
+		{ quest: .sandra_riddle_1 }
+		{ quest: .sandra_riddle_2 }
+	]
+}
+
+entity thalvaron_sandra_riddle: !NPC
+{
+	_string: "Sandra Riddle"
+	_sprite: woman_42
+	_sprite_dead: woman_42_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .sandra_riddle: { } }
+}
+
+############################################################
+# Quest 1
+
+entity thalvaron_sandra_riddle_1_quest_item: 
+{
+	string: "Untouched Statue" 
+	
+	systems: [ openable ]
+	
+	components:
+	{	
+		position: {}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ loot_2 ] 		
+					z_offset: -3
+				}
+			]		
+		}		
+		openable: 
+		{ 
+			verb: loot
+			level: 28
+			range: 1
+			required_quest: .sandra_riddle_1			
+			despawn: true 			
+			requirements:
+			{
+				requirement self<must_not_have_completed_quest>: .sandra_riddle_1
+			}
+			trigger_ability: $ability
+			{
+				flags: [ always_in_range always_in_line_of_sight ]				
+				direct_effect spawn_entity: { entity: thalvaron_urthonak_ghost spawn_flags: [ no_owner detached ] npc_target_threat: 20 } 
+			}
+			loot_table: $loot_table
+			{
+				slots:
+				[
+					{
+						possibility: { loot_group: .sandra_riddle_1_quest_item }			
+					}		
+				]
+			}
+		}	
+	}
+}
+
+loot_group .sandra_riddle_1_quest_item: {}
+
+item .sandra_riddle_1_quest_item:
+{
+	icon: icon_crown_1
+	item_level: 28
+	loot_groups: [ .sandra_riddle_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Golden Halo"
+	stack: 4
+}
+
+objective .sandra_riddle_1:
+{
+	string: "Golden Halos"	
+	maps: [ thalvaron ]	
+	collect_items: { item: .sandra_riddle_1_quest_item count: 4 }
+}
+
+quest .sandra_riddle_1:
+{
+	string: "Expensive Junk"
+
+	text:
+	[
+		"Collect shiny loot from the statues in Urthonak Keep."
+	]
+	
+	description: 
+	[
+		"My father basically sent me here to loot everything that might be worth something. I don't know if you've noticed, but this place is pretty empty. The only shinies I've seen"
+		"in this keep are the crowns placed on various statues. Only problem is that I think they might be haunted. Maybe you can collect some for me?"
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"I hope you didn't get spooked."
+	]
+
+	objectives: [ .sandra_riddle_1 ]
+	level: 28
+}
+
+############################################################
+# Quest 2
+
+loot_group .sandra_riddle_2_quest_item: {}
+
+item .sandra_riddle_2_quest_item:
+{
+	icon: icon_gold_totem
+	item_level: 28
+	loot_groups: [ .sandra_riddle_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Shiny Loot"
+	quest: .sandra_riddle_2
+	stack: 5
+}
+
+loot_table .sandra_riddle_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .sandra_riddle_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_sandra_riddle_2_quest_item:
+{
+	string: "Shiny Item"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ loot_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .sandra_riddle_2_quest_item
+			verb: pick_up
+			range: 1 
+			level: 28
+			despawn: true 		
+			required_quest: .sandra_riddle_2
+		}		
+	}
+}
+
+objective .sandra_riddle_2:
+{
+	string: "Shiny Items Collected"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .sandra_riddle_2_quest_item count: 5 }
+}
+
+{
+	${ _level: 28 }
+	item .sandra_riddle_2_a: !QUEST_REWARD_1H_KNIFE{ _string: "Sharp Obsidian Knife" _icon: icon_knife_2 _dexterity: 1 _strength: 3 }
+	item .sandra_riddle_2_b: !QUEST_REWARD_2H_STAFF{ _string: "Urthonak Staff of Restoration" _icon: icon_staff_11 _constitution: 1 _wisdom: 2 _healing: 3 }
+}
+
+quest .sandra_riddle_2:
+{
+	string: "More Shiny Items"
+
+	text:
+	[
+		"Travel to the Urthon Burial Grounds, collect loot, and return to Sandra Riddle."
+	]
+	
+	description: 
+	[
+		"West of here are some old burial grounds. I've heard that potentially valuable items are scattered all over the place. I need you go collect some for me. I'll pay."
+	]
+
+	progress:
+	[
+		"Got lost?"
+	]
+	
+	completion:
+	[
+		"Ah, not sure how much those are worth, but whatever."
+	]
+
+	objectives: [ .sandra_riddle_2 ]
+	prerequisites: [ .sandra_riddle_1 ]
+	reward_one_item: [ .sandra_riddle_2_a .sandra_riddle_2_b ]
+	level: 28
+}

@@ -15,20 +15,137 @@ talent_tree paladin_guardian:
 		talent paladin_endurance: "G"
 		talent paladin_holy_reflection: "H"
 		talent paladin_one_handed_weapon_mastery: "I"
+		talent paladin_improved_judgement: "J"
+		talent paladin_judgement_for_all: "K"
+		talent paladin_sanctified_might: "L"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"		
 	}
 	
 	map:
 	[
-		"C.A.E"
-		"..d.d"
-		"..B.D"
-		"..d.."
-		"I.F.G"
-		"....d"
-		"....H"
+		"C.A.E.."
+		"..d.d.."
+		"..B.D.J"
+		"..d...|"
+		"I.F.G.|"
+		"d...d.|"
+		"L...H.|"
+		"......d"
+		"......K"
 	]
+}
+
+###############################################################################
+# Judgement for All
+
+talent paladin_judgement_for_all:
+{
+	string: "Judgement For All"
+	icon: icon_judgement_for_all
+	prerequisites: [ paladin_improved_judgement ]
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: judgement_for_all }
+	]
+}
+
+particle_system judgement_for_all:
+{
+	particle:
+	{
+		sprites: [ effect_judgement_for_all ]
+		flags: [ attached blend_add ]
+		duration: 500
+		count: 1		
+		scale: 1.5
+		alpha: 0.6
+		rotation_rate: 1440
+	}
+}
+
+aura judgement_for_all:
+{
+	string: "Judgement For All"
+	description: "Stunned."
+	icon: icon_stun		
+	type: debuff
+	duration: 40	
+	flags: [ unique magic incapacitation ]
+	aura_effect stun: { }
+	particle_system: judgement
+	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
+}
+
+ability judgement_for_all:
+{
+	string: "Judgement For All"
+	description: "Inflicts $damage$ damage on adjacent enemies, stuns them for 4 seconds, and generates a high amount of threat."
+	range: 1	
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 600 }
+	flags: [ spell offensive target_self target_aoe target_aoe_hostile ]
+	states: [ default in_combat ]
+	icon: icon_judgement_for_all
+	delay: 3
+	aoe_radius: 1
+	aoe_cap: 4
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	resource_cost mana: 20
+	talent_tree: paladin_guardian
+	source_particle_system: judgement_for_all
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: holy
+		function: { expression: a_mul_x x: weapon_normalized a: 1.1 }		
+		threat_multiplier: 3.4
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: judgement_for_all
+	}
+}
+
+###############################################################################
+# Improved Judgement
+
+talent paladin_improved_judgement:
+{
+	string: "Improved Judgement"
+	icon: icon_judge
+	talent_tree_points_required: 5
+	points:
+	[
+		{ ability_modifier: paladin_improved_judgement_1 }
+		{ ability_modifier: paladin_improved_judgement_2 }
+		{ ability_modifier: paladin_improved_judgement_3 }
+	]
+}
+
+ability_modifier paladin_improved_judgement_1:
+{
+	description: "Increases duration of Judgement by 1 second."
+	abilities: [ judgement ]
+	modify_aura_duration: 10
+}
+
+ability_modifier paladin_improved_judgement_2:
+{
+	description: "Increases duration of Judgement by 2 second."
+	abilities: [ judgement ]
+	modify_aura_duration: 20
+}
+
+ability_modifier paladin_improved_judgement_3:
+{
+	description: "Increases duration of Judgement by 3 second."
+	abilities: [ judgement ]
+	modify_aura_duration: 30
 }
 
 ###############################################################################
@@ -59,6 +176,7 @@ aura paladin_one_handed_weapon_mastery_1:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.04
+		type_mask: [ physical ]
 	}
 }
 
@@ -71,6 +189,7 @@ aura paladin_one_handed_weapon_mastery_2:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.08
+		type_mask: [ physical ]
 	}
 }
 
@@ -83,6 +202,7 @@ aura paladin_one_handed_weapon_mastery_3:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.12
+		type_mask: [ physical ]
 	}
 }
 
@@ -95,6 +215,7 @@ aura paladin_one_handed_weapon_mastery_4:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.16
+		type_mask: [ physical ]
 	}
 }
 
@@ -107,6 +228,7 @@ aura paladin_one_handed_weapon_mastery_5:
 	{
 		requirement self<must_not_have_equipped_item_type_flags>: { id: [ two_handed ] }
 		multiplier: 1.20
+		type_mask: [ physical ]
 	}
 }
 
@@ -159,7 +281,7 @@ ability paladin_holy_reflection:
 	{	
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] ] }					
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.3 b: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] [ 30 52 ] ] }					
 		threat_multiplier: 1.35
 	}	
 }
@@ -270,9 +392,11 @@ aura judgement:
 	icon: icon_stun		
 	type: debuff
 	duration: 50	
-	flags: [ unique ]
+	flags: [ unique incapacitation ]
 	aura_effect stun: { }
 	particle_system: judgement
+	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: stun
 }
 
 cooldown judgement:
@@ -333,6 +457,7 @@ aura taunt_2:
 	type: debuff
 	duration: 50	
 	flags: [ unique ]
+	particle_system: taunt
 	
 	aura_effect taunt: 
 	{
@@ -574,16 +699,16 @@ aura paladin_oath_of_protection:
 	flags: [ persist_in_death indefinite unique ]
 	aura_group: paladin_oaths
 	type: buff
-	description: "+50% Threat"
+	description: "+150% Threat"
 	stat_modifiers: { block_chance: { add: 10 } }
 	icon: icon_oath_of_protection
-	aura_effect threat_modifier: { multiplier: 1.5 }
+	aura_effect threat_modifier: { multiplier: 2.5 }
 }
 
 ability paladin_oath_of_protection:
 {
 	string: "Oath of Protection"
-	description: "Increases your chance to block by 10%. Increases threat generated by 50%. You can only have one oath active at a time."
+	description: "Increases your chance to block by 10%. Increases threat generated by 150%. You can only have one oath active at a time."
 	cooldowns: [ global spell_holy_lockout ]
 	flags: [ spell target_self ]
 	states: [ default in_combat ]
@@ -741,7 +866,8 @@ ability consecrate_tick:
 	{
 		flags: [ is_magical ]
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.35 b: [ [ 1 14 ] [ 10 28 ] [ 20 56 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.35 b: [ [ 1 14 ] [ 10 28 ] [ 20 56 ] [ 30 92 ] ] }		
+		threat_multiplier: 2
 	}
 	direct_effect threat:
 	{
@@ -790,3 +916,45 @@ entity consecrate:
 		
 	}
 }
+
+###############################################################################
+# Sanctified Might
+
+talent paladin_sanctified_might:
+{
+	string: "Sanctified Might"
+	icon: icon_sanctified_might
+	prerequisites: [ paladin_one_handed_weapon_mastery ]	
+	talent_tree_points_required: 15
+	points:
+	[
+		{ aura: paladin_sanctified_might_1 }
+		{ aura: paladin_sanctified_might_2 }
+		{ aura: paladin_sanctified_might_3 }
+	]
+}
+
+aura paladin_sanctified_might_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your spell damage by 30% of your Strength."
+	stat_conversion: { from: strength to: spell_damage factor: 0.3 }
+}
+
+aura paladin_sanctified_might_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your spell damage by 60% of your Strength."
+	stat_conversion: { from: strength to: spell_damage factor: 0.6 }	
+}
+
+aura paladin_sanctified_might_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Increases your spell damage by 90% of your Strength."
+	stat_conversion: { from: strength to: spell_damage factor: 0.9 }
+}
+

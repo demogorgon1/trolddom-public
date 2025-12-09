@@ -1,0 +1,92 @@
+############################################################
+# Loot
+
+loot_group .boss_4: {}
+
+loot_table .boss_4:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message karethi_temple: "Lord Klazcep will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_4  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_4
+	}		
+		
+	item karethi_temple_4_1: !BOSS_DROP_NECK { _string: "Forgotten Healer's Necklace" _icon: icon_necklace_13 _constitution: 1 _budget_bias: -10 _spell_crit: 1 _wisdom: 2 _healing: 1 }	
+	item karethi_temple_4_2: !BOSS_DROP_FINGER { _string: "Gold Ring of Death" _icon: icon_ring_15 _wisdom: 1 _constitution: 1 }	
+	item karethi_temple_4_3: !BOSS_DROP_WRISTS { _string: "Dead Wizard's Bracers" _icon: icon_bracers_1 _type: armor_cloth _wisdom: 4 _healing: 1 }	
+	item karethi_temple_4_4: !BOSS_DROP_SHOULDERS { _string: "Mantle of Klazcep" _icon: icon_shoulders_4 _type: armor_cloth _constitution: 3 _wisdom: 1 }	
+
+}
+
+############################################################
+# Boss
+
+zone .boss_4:
+{
+}
+
+encounter .boss_4:
+{
+	main_entities: [ karethi_temple_boss_4 ]	
+}
+
+entity karethi_temple_boss_4: !NPC 
+{ 
+	_string: "Lord Klazcep" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: skeleton_caster_6
+	_sprite_dead: skeleton_caster_6_dead 
+	_weapon_damage: 1
+	_resource_health: 4
+	_loot_table: .boss_4
+	_creature_type: undead
+	_encounter: .boss_4
+	_zone: .boss_4
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_frostbolt
+			target: random_player
+		}
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_4_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_4:
+{
+	entity karethi_temple_boss_4: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_4_killed
+		}
+	}
+}
+

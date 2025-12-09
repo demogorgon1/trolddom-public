@@ -1,0 +1,43 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<.default_patrol>: .default_patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<.default_patrol>: .default_patrol
+	behavior: do_nothing
+}
+
+##########################################################################################
+# Crab Man
+
+map_entity_spawn .crab_man:
+{
+	entity .crab_man: { weight: 1 }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+loot_table .crab_man: 
+{
+	slots:
+	[
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+entity .crab_man: !NPC
+{
+	_string: "Crab Man"
+	_level: 10
+	_faction: monsters
+	_sprite: crab_monster_2
+	_sprite_dead: crab_monster_2_dead
+	_loot_table: .crab_man
+	_creature_type: humanoid
+	_default_behavior_state: .wandering_short
+}
+

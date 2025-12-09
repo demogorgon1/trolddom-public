@@ -1,0 +1,56 @@
+dialogue_screen .troels_ronson:
+{
+	text: 
+	[	
+		"I'm sick... The jungle has gotten into my bones..."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .troels_ronson_1 }
+		{ quest<completion_only>: .brila_stargazer_2 }
+	]
+}
+
+entity thalvaron_troels_ronson: !NPC
+{
+	_string: "Troels Ronson"
+	_sprite: man_77_dead
+	_sprite_dead: man_77_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .troels_ronson: { } }
+}
+
+############################################################
+# Quest 1
+
+quest .troels_ronson_1:
+{
+	string: "Jungle Sickness"
+
+	text:
+	[
+		"Consult Brila at Riddle's Crossing to the east for a cure for Troels Ronson."
+	]
+	
+	description: 
+	[
+		"I think I was bitten by some horrible bug. I can feel my bones melting and my insides turning to mush! I don't think I have much time left!\n"
+		"\n"
+		"Please help! Over at Riddle's Crossing there is an elf by the name of Brila. She's good with potions. Please ask her to conjure something for me!"
+	]
+	
+	completion:
+	[
+		"Melting bones? Yes, that's a typical symptom when you're bitten by the flying squid - a particular nasty bug native to these parts."
+	]
+
+	level: 27
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3
+	next_quest: .brila_stargazer_1
+}

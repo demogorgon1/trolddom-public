@@ -1,0 +1,91 @@
+dialogue_screen .anna_skrald:
+{
+	text: 
+	[	
+		"Uhm, don't tell anyone you saw me out here, okay."
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .bar_patrol_trogor_1 }
+		{ quest: .anna_skrald_1 }
+	]
+}
+
+entity thalvaron_anna_skrald: !NPC
+{
+	_string: "Anna Skrald"
+	_sprite: woman_1
+	_sprite_dead: woman_1_dead
+	_level: 20
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .anna_skrald: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .anna_skrald_1_quest_item: {}
+
+item .anna_skrald_1_quest_item:
+{
+	icon: icon_mace_3
+	item_level: 23
+	loot_groups: [ .anna_skrald_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Lobnorg's Club"
+	quest: .anna_skrald_1
+}
+
+objective .anna_skrald_1:
+{
+	string: "Lobnorg's Club"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .anna_skrald_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 22 }
+	item .anna_skrald_1_a: !QUEST_REWARD_WAIST{ _string: "Smuggler's Belt" _icon: icon_cloth_belt_1 _wisdom: 3 _constitution: 2 _type: armor_cloth }
+	item .anna_skrald_1_b: !QUEST_REWARD_WRISTS{ _string: "Brawler's Wristguard" _icon: icon_bracers_5 _strength: 2 _constitution: 1 _type: armor_plate }
+}
+
+quest .anna_skrald_1:
+{
+	string: "Goblin Raiders"
+
+	text:
+	[
+		"Venture into the woods to the northwest, locate Lobnorg, kill him, and bring his signature club back to Anna Skrald."
+	]
+	
+	description: 
+	[
+		"I prayed to the Light and Powe has delivered! I need urgent help dealing with some pesky goblins that have set up camp in the woods northwest of here. I don't know what hole they've crawled out of to get here"
+		"but they've been interfering with our business.\n"
+		"\n"
+		"They come out at night and steal our shipments! Their leader is a particularly ugly, large goblin going by the name of \"Lobnorg\". I've been told that he's easily identifiable by a large club he drags around"
+		"everywhere. Bring me back his club and I'll reward you."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Good job."
+	]
+	
+	prerequisites: [ .bar_patrol_trogor_1 ]
+	objectives: [ .anna_skrald_1 ]
+	reward_one_item: [ .anna_skrald_1_a .anna_skrald_1_b ]
+	level: 23
+}
+

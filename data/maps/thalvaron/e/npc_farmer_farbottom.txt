@@ -1,0 +1,132 @@
+dialogue_screen .farmer_farbottom:
+{
+	text: 
+	[	
+		"Ah, a visitor! How exciting!"
+	]		
+	
+	options:
+	[
+		{ quest: .farmer_farbottom_1 }
+		{ quest: .farmer_farbottom_2 }
+	]
+}
+
+entity thalvaron_farmer_farbottom: !NPC
+{
+	_string: "Farmer Farbottom"
+	_sprite: man_6
+	_sprite_dead: man_6_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .farmer_farbottom: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .farmer_farbottom_1_quest_item: { }
+
+item .farmer_farbottom_1_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .farmer_farbottom_1_quest_item ]		
+	string: "Very Dry Bones" 
+	icon: icon_bone_2
+	stack: 8
+	item_level: 29
+	quest: .farmer_farbottom_1
+	flags: [ not_sellable ]
+}
+
+objective .farmer_farbottom_1:
+{
+	string: "Very Dry Bones"
+	collect_items: { item: .farmer_farbottom_1_quest_item count: 8 }
+}
+
+quest .farmer_farbottom_1:
+{
+	string: "Undead Fertilizer"
+
+	text:
+	[
+		"Collect bones from skeletons in Kareth and return to Farmer Farbottom."
+	]
+	
+	description: 
+	[
+		"I'm just a humble farmer, trying to grow some vegetables out of this miserable dirt. It's really not doing very good as the soil isn't very good. It really needs to be fertilized. Luckily"
+		"the desert south of here is crawling with skeletons. I figured that maybe their bones can be ground up and used as fertilizer? It's worth a shot, right? Can you go grab me some of their bones?"
+	]
+	
+	completion:
+	[
+		"Ah, that's a lot of bones. I hope it works!"
+	]
+	
+	progress:
+	[
+		"Did you find any undead?"
+	]
+
+	level: 29
+	objectives: [ .farmer_farbottom_1 ]
+}
+
+############################################################
+# Quest 2
+                                 
+objective .farmer_farbottom_2:
+{
+	string: "Kobolds Killed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_lonely_cove_kobold_a thalvaron_lonely_cove_kobold_b thalvaron_lonely_cove_kobold_c ]
+		count: 8
+	}
+}
+
+{
+	${ _level: 29 }
+	item .farmer_farbottom_2_a: !QUEST_REWARD_HANDS{ _string: "Kobold Slayer Gloves" _icon: icon_gloves_2 _constitution: 1 _wisdom: 4 _spell_damage: 2 _type: armor_cloth }
+	item .farmer_farbottom_2_b: !QUEST_REWARD_NECK{ _string: "Kobold Gemstone" _icon: icon_necklace_10 _constitution: 2 _budget_bias: -10 _phys_crit: 1 }
+}
+
+quest .farmer_farbottom_2:
+{
+	string: "Yet Another Kobold Infestation"
+
+	text:
+	[
+		"Hunt kobolds in the cave north of Farmer Farbottom's house and return to him when done."
+	]
+	
+	description: 
+	[
+		"I don't really mind kobolds too much, usually, but they've been a real pest recently. They come out at night and eats my potatoes! I think they hang out in the cave behind my house. The entrance to"
+		"the cave is just to the west of here. Can you go clear out their numbers a bit?"
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"I hope that helps."
+	]
+	
+	objectives: [ .farmer_farbottom_2 ]
+	level: 29
+	reward_one_item: [ .farmer_farbottom_2_a .farmer_farbottom_2_b ]
+}
+
+

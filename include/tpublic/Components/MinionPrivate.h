@@ -123,7 +123,9 @@ namespace tpublic
 				FIELD_ABILITY_PRIO,
 				FIELD_REIMBURSE_ITEM,
 				FIELD_CLASS_MINION,
-				FIELD_STORE_COMBAT_DATA
+				FIELD_STORE_COMBAT_DATA,
+				FIELD_TEMPORARY_MINION,
+				FIELD_REQUIRED_OWNER_AURA
 			};
 
 			static void
@@ -137,6 +139,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REIMBURSE_ITEM, "reimburse_item", offsetof(MinionPrivate, m_reimburseItemId))->SetDataType(DataType::ID_ITEM);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_CLASS_MINION, "class_minion", offsetof(MinionPrivate, m_classMinion));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_STORE_COMBAT_DATA, "store_combat_data", offsetof(MinionPrivate, m_storeCombatData));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_TEMPORARY_MINION, "temporary_minion", offsetof(MinionPrivate, m_temporaryMinion));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_OWNER_AURA, "required_owner_aura", offsetof(MinionPrivate, m_requiredOwnerAuraId))->SetDataType(DataType::ID_AURA);
 			}
 
 			void
@@ -149,6 +153,8 @@ namespace tpublic
 				m_reimburseItemId = 0;
 				m_classMinion = false;
 				m_storeCombatData = false;
+				m_temporaryMinion = false;
+				m_requiredOwnerAuraId = 0;
 
 				m_npcMovement.Reset(0);
 				m_moveCooldownUntilTick = 0;
@@ -171,6 +177,8 @@ namespace tpublic
 			uint32_t							m_reimburseItemId = 0;
 			bool								m_classMinion = false;
 			bool								m_storeCombatData = false;
+			bool								m_temporaryMinion = false;
+			uint32_t							m_requiredOwnerAuraId = 0;
 
 			// Internal
 			NPCMovement							m_npcMovement;

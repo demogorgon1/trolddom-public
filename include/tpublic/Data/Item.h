@@ -30,7 +30,9 @@ namespace tpublic
 				FLAG_VENDOR							= 0x00000004,
 				FLAG_KILL_CONTRIBUTION_LOOT			= 0x00000008,
 				FLAG_QUEST_REWARD					= 0x00000010,
-				FLAG_DUNGEON_LOOT					= 0x00000020
+				FLAG_DUNGEON_LOOT					= 0x00000020,
+				FLAG_FISHING_ROD					= 0x00000040,
+				FLAG_STARTS_QUEST					= 0x00000080,
 			};
 
 			static inline uint32_t
@@ -54,6 +56,10 @@ namespace tpublic
 						flags |= FLAG_QUEST_REWARD;
 					else if (strcmp(identifier, "dungeon_loot") == 0)
 						flags |= FLAG_DUNGEON_LOOT;
+					else if (strcmp(identifier, "fishing_rod") == 0)
+						flags |= FLAG_FISHING_ROD;
+					else if (strcmp(identifier, "starts_quest") == 0)
+						flags |= FLAG_STARTS_QUEST;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -100,9 +106,140 @@ namespace tpublic
 				}
 
 				// Public data
-				Stat::Id			m_id = Stat::Id(0);
-				bool				m_isBudgetWeight = false;
-				uint32_t			m_value = 0;
+				Stat::Id				m_id = Stat::Id(0);
+				bool					m_isBudgetWeight = false;
+				uint32_t				m_value = 0;
+			};
+
+			struct Zone
+			{
+				Zone()
+				{
+
+				}
+
+				Zone(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "map")
+							m_mapId = aChild->GetId(DataType::ID_MAP);
+						else if (aChild->m_name == "zone")
+							m_zoneId = aChild->GetId(DataType::ID_ZONE);
+						else if(aChild->m_name == "loot_groups")
+							aChild->GetIdArray(DataType::ID_ENTITY, m_lootGroupIds);
+						else 
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void 
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WriteUInt(m_mapId);
+					aStream->WriteUInt(m_zoneId);
+					aStream->WriteUInts(m_lootGroupIds);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream)
+				{
+					if (!aStream->ReadUInt(m_mapId))
+						return false;
+					if (!aStream->ReadUInt(m_zoneId))
+						return false;
+					if(!aStream->ReadUInts(m_lootGroupIds))
+						return false;
+					return true;
+				}
+
+				void
+				AddUniqueLootGroupId(
+					uint32_t			aLootGroupId)
+				{
+					for(uint32_t t : m_lootGroupIds)
+					{
+						if(t == aLootGroupId)
+							return;
+					}
+					m_lootGroupIds.push_back(aLootGroupId);
+				}
+
+				// Public data
+				uint32_t				m_mapId = 0;
+				uint32_t				m_zoneId = 0;
+				std::vector<uint32_t>	m_lootGroupIds;
+			};
+
+			struct Oracle
+			{
+				Oracle()
+				{
+
+				}
+
+				Oracle(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "text" && aChild->IsArrayType(SourceNode::TYPE_STRING))
+							aChild->GetStringArray(m_text);
+						else if (aChild->m_name == "text")
+							m_text.push_back(aChild->GetString());
+						else if(aChild->m_name == "zones")
+							aChild->GetObjectArray(m_zones);
+						else 
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+
+				void 
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WriteStrings(m_text);
+					aStream->WriteObjects(m_zones);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream)
+				{
+					if (!aStream->ReadStrings(m_text))
+						return false;
+					if(!aStream->ReadObjects(m_zones))
+						return false;
+					return true;
+				}
+
+				Zone*
+				GetOrCreateZone(
+					uint32_t			aMapId,
+					uint32_t			aZoneId)
+				{
+					for(Zone& t : m_zones)
+					{
+						if(t.m_zoneId == aZoneId && t.m_mapId == aMapId)
+							return &t;
+					}
+
+					Zone n;
+					n.m_mapId = aMapId;
+					n.m_zoneId = aZoneId;
+					m_zones.push_back(n);
+					return &m_zones[m_zones.size() - 1];
+				}
+
+				// Public data
+				std::vector<std::string>	m_text;
+				std::vector<Zone>			m_zones;
 			};
 
 			void
@@ -141,6 +278,7 @@ namespace tpublic
 			bool	IsKillContributionLoot() const { return m_flags & FLAG_KILL_CONTRIBUTION_LOOT; }
 			bool	IsQuestReward() const { return m_flags & FLAG_QUEST_REWARD; }
 			bool	IsDefined() const { return m_iconSpriteId != 0 && !m_string.empty(); }
+			bool	DoesStartQuest() const { return m_flags & FLAG_STARTS_QUEST; }
 
 			// Base implementation
 			void
@@ -269,6 +407,10 @@ namespace tpublic
 						{
 							m_armorStyleVisual = ArmorStyle::Visual(aChild);
 						}
+						else if(aChild->m_name == "oracle")
+						{
+							m_oracle = std::make_unique<Oracle>(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -289,6 +431,16 @@ namespace tpublic
 						m_itemType = ItemType::ID_ARMOR_CLOTH;
 					else
 						m_itemType = ItemType::ID_MISCELLANEOUS;
+				}
+
+				for(uint32_t equipmentSlot : m_equipmentSlots)
+				{
+					const EquipmentSlot::Info* equipmentSlotInfo = EquipmentSlot::GetInfo((EquipmentSlot::Id)equipmentSlot);
+					if(equipmentSlotInfo->m_itemTypes.size() > 0)
+					{
+						bool validItemType = Helpers::FindItem(equipmentSlotInfo->m_itemTypes, m_itemType) != SIZE_MAX;
+						TP_VERIFY(validItemType, aSource->m_debugInfo, "'%s' does not have a valid item type.", aSource->m_name.c_str());
+					}
 				}
 			}
 
@@ -322,6 +474,7 @@ namespace tpublic
 				aStream->WriteUInt(m_questId);
 				aStream->WriteUInt(m_auraId);
 				aStream->WriteUInt(m_tokenCost);
+				aStream->WriteOptionalObjectPointer(m_oracle);
 			}
 
 			bool
@@ -379,6 +532,8 @@ namespace tpublic
 				if (!aStream->ReadUInt(m_auraId))
 					return false;
 				if (!aStream->ReadUInt(m_tokenCost))
+					return false;
+				if(!aStream->ReadOptionalObjectPointer(m_oracle))
 					return false;
 
 				m_lcString = m_string;
@@ -447,6 +602,7 @@ namespace tpublic
 			uint32_t							m_questId = 0;
 			uint32_t							m_auraId = 0;
 			uint32_t							m_tokenCost = 0;
+			std::unique_ptr<Oracle>				m_oracle;
 
 			// Not serialized
 			std::string							m_lcString;

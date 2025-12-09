@@ -8,6 +8,7 @@ pantheon underworld:
 {
 	string: "The Underworld"
 	icon: icon_unholy
+	small_icon: underworld_11x9
 	faction: underworld
 	opposition: light
 	pray_ability: underworld_pray
@@ -78,6 +79,6 @@ ability_modifier underworld_priest:
 {
 	string: "Unholy Condemnation"
 	description: "Spiritual Crisis, Smite and Condemnation does unholy damage."
-	abilities: [ spiritual_crisis smite condemnation ]
+	abilities: [ spiritual_crisis smite condemnation_tick ]
 	modify_damage_type: unholy	
 }

@@ -1,0 +1,79 @@
+dialogue_screen .zislo_2:
+{
+	text: 
+	[	
+		"Human language rusty. My name Zislo, how you doing."
+	]		
+	
+	options:
+	[
+		{ quest<offer_only>: .zislo_1 }
+	]
+}
+
+dialogue_screen .zislo:
+{
+	text: 
+	[	
+		"Kirloa szlo'sbaq mimblokdiloq."
+	]		
+	
+	options:
+	[
+		{ text: "What?" goto: .zislo_2 }
+	]
+}
+
+entity thalvaron_zizlo: !NPC
+{
+	_string: "Zislo"
+	_sprite: lizard_man_2
+	_sprite_dead: lizard_man_2_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .zislo: { } }
+}
+
+############################################################
+# Quest 1
+
+item .zislo_1_quest_item:
+{
+	binds: when_picked_up
+	string: "Strange Figurine" 
+	flavor: "Smells a bit funky."
+	icon: icon_figurine_1
+	quest: .zislo_1
+	item_level: 29
+	flags: [ not_sellable unique ]
+}
+
+quest .zislo_1:
+{
+	string: "Delivery for Flimlock"
+
+	text:
+	[
+		"Deliver the strange figurine to Flimlock."
+	]
+	
+	description: 
+	[
+		"Here. Take this. The great wizard Flimlock."
+	]
+	
+	completion:
+	[
+		"Oh, you met my dear friend Zislo? How is he? Good?\n"
+		"\n"
+		"Lizard people like to send messages to each other in form of figurines. I'll try to figure out what he means by this."
+	]
+	
+	level: 29
+	quest_items: [ .zislo_1_quest_item ]
+	reward_xp_multiplier: 0.3
+	reward_cash_multiplier: 0.3	
+}

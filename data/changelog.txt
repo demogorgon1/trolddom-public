@@ -2,6 +2,491 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.11"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Flaming Weapon and Frostfire enchants deal more damage." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Incapacitating effects and most AOE abilities now trigger combat immediately when used against other players." }
+		{ text: "Toughen Up can only target yourself like intended." }
+		{ text: "Fixed bug that prevent Frostfire enchant from triggering outside melee range." }
+		{ text: "Fixed issue with custom servers and offline mode." }
+		{ text: "Fixed some quest issues." }
+		{ text: "Fixed other minor bugs." }		
+	]
+
+	#######################################################################################
+	heading: "v1.0.10"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "The Jule Consortium needs your help." }
+		{ text: "Character customization." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Divine Shield now scales with healing like intended." }
+		{ text: "Fixed bug where Ferocity, and not Riposte, was shown as a prerequisite for Blade Guard." }
+		{ text: "Fixed minor quest issues." }
+	]
+
+	#######################################################################################
+	heading: "v1.0.9"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Damage-over-time effects no longer interrupt eating or opening." }
+		{ text: "Aura effects and floating combat text only shown for visible entities." }
+		{ text: "Fixed server crash." }
+	]
+
+	#######################################################################################
+	heading: "v1.0.8"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Pantheon: Dominion of Strife." }
+		{ text: "The area east of the Devouring Shroud has opened." }
+		{ text: "New item stats: Hit Chance (reduces chance to miss) and Resilience (reduces chance to be hit by critical strike)." }
+	]
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Stuns, roots, and other incapacitation effects have diminishing returns when used in PVP." }
+		{ text: "You can now tab-target other players and minions if you're all flagged for PVP." }
+		{ text: "Hold ALT to target self when using abilities." }
+		{ text: "It's no longer possible to change equipment while in combat." }
+		{ text: "Opening things will now be interrupted by taking damage." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where summoned entities dropped loot and generated XP." }
+		{ text: "Fixed more minor quest issues." }
+	]
+
+	#######################################################################################
+	heading: "v1.0.7"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Divine Shield now scales with Healing." }
+		{ text: "Food buffs don't apply until after 5 seconds of eating." }
+		{ text: "Party UI shows up to 4 buffs instead of 3 and also prioritizes more important ones." }
+		{ text: "Sending mail no longer requires a subject." }
+		{ text: "Grenades do more damage." }
+		{ text: "New bags drop from higher level enemies." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Vampiric Edge is refreshed rather than reapplied." }
+		{ text: "Fixed another bug that could cause escort NPCs to get stuck." }
+		{ text: "Fixed some minor bugs and UI issues." }
+	]
+
+	#######################################################################################
+	heading: "v1.0.6"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Power Shield now scales with Spell Damage." }
+		{ text: "Spirit travel is now slightly faster." }
+		{ text: "Names of deleted characters can now be reused." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Eating is now interrupted by damage like intended." }
+		{ text: "Fixed Linux compatibility issue." }
+		{ text: "Fixed some minor bugs and UI issues." }
+		{ text: "Key binds for hidden action bars now work like intended." }
+		{ text: "Fixed bug that prevented bosses from dropping tokens in The Shrouded Lands." }
+	]
+	
+	#######################################################################################
+	heading: "v1.0.5"
+
+	text: "New:"
+
+	list:
+	[
+		{ text: "New alchemy and enchanting recipes available at quartermasters." }
+		{ text: "More level 28 to 30 rare and epic items." }		
+		{ text: "Rock Salt can be mined from ore nodes." }		
+	]
+	
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Only nearby party members share looted items and cash." }
+		{ text: "Players will be automatically disconnected after being AFK for more than 10 minutes." }		
+		{ text: "Promoting a new guild leader now needs confirmation." }		
+		{ text: "Guild frame indicates dominant worship pantheon for each member." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[	
+		{ text: "You can now make key binds for all buttons on the first two action bars." }
+		{ text: "Tzun'Kala now drops his key like intended." }
+		{ text: "Fixed bug causing unresponsive escort NPCs." }
+		{ text: "Healing Shield now works when cast on other players like intended." }
+		{ text: "Fixed bug that caused the threat meter to stop working after changing instance." }	
+		{ text: "Hostile AOE now works in player-versus-player combat like intended." }
+		{ text: "Fixed bug where enemies would drop threat when moving." }	
+		{ text: "Fixed a couple more issues with aggro." }	
+		{ text: "Fixed some minor bugs and UI issues." }	
+	]
+
+	#######################################################################################
+	heading: "v1.0.4"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Threat bonus from Bash is now 150% instead of 100%." }
+		{ text: "Base damage of Divine Smite and Reckoning are now slightly larger at low levels." }
+		{ text: "Judgement For All deals more damage and generates more threat." }
+		{ text: "Increased bonus threat from Consecrate." }
+		{ text: "New paladin talent: Sanctified Might. Converts strength into spell damage." }
+		{ text: "Threat bonus from Oath of Protection is now 150% instead of 50%." }		
+		{ text: "New guild features: member notes, last online, and sorting." }		
+		{ text: "Items that can start a quest will drop for all eligible party members." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Server stability issues fixed." }	
+		{ text: "Fixed bug that prevented some percentage based buffs not showing in tool tips." }	
+		{ text: "Fixed bug where party members didn't show up on map if too far away." }	
+		{ text: "Banner of Command now works like intended again." }	
+		{ text: "Whirlwind critical strikes can now trigger Ferocity like intended." }	
+	]
+
+	#######################################################################################
+	heading: "v1.0.3"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Whispers can be initiated by right-clicking on other players in chat." }
+		{ text: "Added option to automatically close chat prompt after sending." }
+		{ text: "Sound volume sliders." }
+		{ text: "Fishing rods now looks different from other staffs." }
+		{ text: "All higher level bags are now larger." }
+	]
+		
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Various quest typos fixed." }
+		{ text: "Holy and Unholy Condemnation now work like intended." }
+		{ text: "Server and network stability issues fixed." }	
+		{ text: "Fixed bug where movement would continue when key was released." }	
+		{ text: "Raise Dead is now limited to only a single minion like intended." }
+		{ text: "Elemental Shield and Elemental Infusion now affects frost damage like intended." }
+		{ text: "Fixed bug where you could sometimes block attacks without having shield equipped." }
+	]
+	
+	#######################################################################################
+	heading: "v1.0.2"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Type /realm or /1 in chat prompt to use global chat. Can be muted in chat frame right-click menu." }
+		{ text: "Ignore list management available through UI or chat commands." }
+		{ text: "Use the <tab> key to cycle through chat channels." }
+		{ text: "Party invites can be sent by right-clicking on other players in chat." }
+	]
+	
+	#######################################################################################
+	heading: "v1.0.1"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "An oracle has moved into a house near the Trade District in Valoris." }
+		{ text: "The Valoris Quartermaster sells a new trinket for Emblems of Triumph." }
+		{ text: "A horrible monster stalks the central Kareth desert." }
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Trainer UI no longer just an empty screen if there isn't anything to train." }
+		{ text: "Fixed bug that could cause the client to crash." }
+		{ text: "Fishing aura no longer creates events in the combat log." }
+		{ text: "Fixed bug that caused some world bosses to have much less health than intended." }
+	]
+
+	#######################################################################################
+	heading: "v1.0.0"
+	
+	text: "Finally leaving Early Access and entering the next phase of the game!"	
+	text: "\n\n"
+}
+
+changelog_old:
+{
+
+	#######################################################################################
+	heading: "v0.5.5"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Level 29+ items can now be disenchanted like intended." }
+		{ text: "Fixed bug where some targeted AOE abilities didn't work." }
+	]
+
+	#######################################################################################
+	heading: "v0.5.4"
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Blacksmithing trainers now teach the smelting of Cindralite Ore." }
+		{ text: "Fixed Kareth Desert Tomb names." }
+		{ text: "Fixed bug where you could learn higher skill profession recipes than intended." } 
+		{ text: "Profession recipes no longer show wrong skill requirement." } 
+	]
+
+	#######################################################################################
+	heading: "v0.5.3"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Dungeons: The Devouring Shroud and Karethi Temple." }		
+		{ text: "Emblems of Triumph can be spent at new shop in the Trade District of Valoris." }
+	]	
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Lots of sprites have been updated." }
+		{ text: "Shrines and chests can be found in the new zones." }
+		{ text: "Zislo and Urgon Lark quest lines continue." }
+	]
+	
+	#######################################################################################
+	heading: "v0.5.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where you'd get teleported out of the new zones." }
+	] 	
+
+	#######################################################################################
+	heading: "v0.5.1"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Rotfang now drops quest item like intended." }
+		{ text: "Fixed bug where non-elite Ignivar would be spawned instead of the elite version." }
+	] 	
+
+	#######################################################################################
+	heading: "v0.5.0"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Level cap raised to 30." }		
+		{ text: "Zones, talents, crafting recipes, enchants, world drops, quests, and more." }
+		{ text: "Talk to Ranger Virgil in Tirnwood Vale or Ranger Ursa at Urthon Gate." }		
+	]	
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Offline mode and custom servers: options for unlimited professions and easy elites." }
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Using certain abilities on yourself no longer keeps you in combat." }
+	] 	
+
+	#######################################################################################
+	heading: "v0.4.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where quest items wouldn't respawn correctly." }
+		{ text: "Piranhas can now be fished in Xandralis like intended." }
+	] 
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Mistveil and Skaldrun Snappers can now be fished in zones up to level 30." }
+		{ text: "It's now more likely to catch something when fishing." }
+	]
+
+	#######################################################################################
+	heading: "v0.4.1"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where some quest rewards lacked item type." }
+		{ text: "Fixed bug where some doors wouldn't open the first time." }
+	] 
+	
+	#######################################################################################
+	heading: "v0.4.0"
+
+	text: "New content:"
+
+	list:
+	[
+		{ text: "Level cap raised to 25." }		
+		{ text: "Seren Virelith quest line continues." }
+		{ text: "Head to the Royal Garden Tavern to pick up a quest leading north of Valoris." }
+		{ text: "Talents, crafting recipes, enchants, world drops, quests, and more." }
+	]	
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Direct damage and heals from spells and abilities will usually be slightly randomized." }
+		{ text: "Witch spell Elemental Destruction unlocks at level 10." }
+	]
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed bug where spells and abilities didn't scale enough after level 20." }
+	]
+	
+	#######################################################################################
+	heading: "v0.3.4"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed crash when dragging equipped item to empty inventory or stash slot." }
+		{ text: "Fixed bug where Demonic Spawn in Tower of Voraghul would despawn immediately." }
+		{ text: "Fixed bug where the quest Chasing Voraghul couldn't be completed." }
+		{ text: "Fixed bug where last tick from damage-over-time and heal-over-time spells didn't resolve." }
+	]
+
+	#######################################################################################
+	heading: "v0.3.3"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "New custom server and offline modes available." }
+		{ text: "Custom server binaries available in install directory." }
+		{ text: "Realm modifier: hardcore mode (only available in custom server and offline modes)." }
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Fixed item stat budget bug. Most items will have more stats now." }
+	]
+
+	#######################################################################################
+	heading: "v0.3.2"
+
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Angered Temple Spirits can now drop Spirit Dust and Ectoplasm." }
+		{ text: "Runecore Sentinel achievement now triggers like intended." }
+		{ text: "Karthul Blackfang now drops Token of Victory like intended." }
+		{ text: "Bloodied Rope drop from Skaldrak now has correct item type." }
+		{ text: "Fixed bug where map would be displayed incorrectly in Gateway worlds." }
+		{ text: "Fixed a couple of crash bugs." }
+		{ text: "Fixed a bug that allowed equipping binds-on-equip items without binding them." }
+		{ text: "Fixed a bug that prevented stash UI updating correctly under some circumstances." }
+	]
+
+	#######################################################################################
+	heading: "v0.3.1"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Enemies spawning during Bone Tyrant and Malrik the Undying fights are no longer elite." }
+	]
+	
+	text: "Issues fixed:"
+	
+	list:
+	[
+		{ text: "Northern gates of Durgan Urok are now open like intended." }
+		{ text: "Item tool tip background slightly darker to make it easier to read." }
+	]
+
+	#######################################################################################
 	heading: "v0.3.0"
 
 	text: "New content:"
@@ -269,405 +754,407 @@ changelog:
 	]	
 }
 
-changelog_old:
-{
-
-	#######################################################################################
-	heading: "v0.1.20"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Damage from Dragon Breath increased. Now scales with Attack Power instead of Spell Damage." }		
-		{ text: "Damage from Poison Bomb reduced." }	
-		{ text: "The attack damage of level 1 to 12 enemies reduced to roughly what it was before previous patch." }
-	]	
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed bug where player armor and weapon damage were much lower than intended." }
-	]
-
-	#######################################################################################
-	heading: "v0.1.19"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Ctrl-right-click on dead enemy to automatically loot everything." }		
-		{ text: "New key binds: select party members, select minions, select target of target, and loot all." }		
-		{ text: "Tab-selection of target can be rebound to other keys." }		
-		{ text: "Bonus weapon damage is now derived from Attack Power instead of Strength." }
-		{ text: "Many melee abilities now base their damage on Attack Power instead of weapon damage." }
-		{ text: "Revised the formula used to calculate favor gained from sacrificing items. UI now shows how much favor will be gained." }
-		{ text: "Kick and Counterspell don't need to wait for the global cooldown to finish, but will trigger it." }
-		{ text: "Increased damage of most offensive spells with a cast time." }
-		{ text: "Ticks from buffs and debuffs don't happen immediately." }
-	]	
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed issue with experimental controller support." }
-		{ text: "Healing Potions and Mana Potions now have vendor values." }
-		{ text: "Players are only eligible for group loot if they were in the group at the time of the kill." }
-	]
-	
-	#######################################################################################
-	heading: "v0.1.18"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Reduced cast time of Curse of Corruption." }
-		{ text: "Increased critical strike chance bonus from Blessing of War." }
-		{ text: "Paladins can now use staves (including fishing rods)." }
-		{ text: "XP from group kills is now calculated based on maximum character level instead of average." }
-		{ text: "You now only get XP from group kills if you contributed to it." }
-		{ text: "Witch minions don't count towards the instance minion limit." }
-		{ text: "Lesser demons have slightly larger teeth." }
-		{ text: "Experimental controller input support (needs to be enabled in options)." }
-	]	
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Blessing of the Defender and Curse of Inaction now work like intended." }
-		{ text: "Fixed bug where Judgement casting time wasn't affected by Relentless Assault." }
-		{ text: "Minion tool tips based on weapon damage now show correct values." }
-		{ text: "Fixed bug where tool tips would show the wrong mana costs." }
-		{ text: "Witch minions no longer die when you change instance or log in." }
-		{ text: "Fixed bug where you'd spawn outside of instance when reconnecting." }
-		{ text: "Fixed some typos and other small bugs." }		
-	]	
-
-	#######################################################################################
-	heading: "v0.1.17"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Two new unlockable classes: witch and paladin." }
-		{ text: "A new type of shrine that is bound to the most popular deity of the previous day." }
-		{ text: "You can now create up to 8 characters per account." }
-	]	
-	
-	#######################################################################################
-	heading: "v0.1.16"
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Fixed some client crashes." }		
-	]	
-
-	#######################################################################################
-	heading: "v0.1.15"
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "It's no longer possible to select a UI scaling option that makes the game unusable." }		
-		{ text: "Fixed some server stability issues." }
-		{ text: "Dead minions that are too far away will be dismissed automatically." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.14"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Added click-to-move with an option to disable it." }
-		{ text: "You can now follow other players." }
-		{ text: "UI scaling option." }
-		{ text: "Wisdom now adds bonus spell damage and healing." }
-		{ text: "Lair of Zuthyg now resets every 12 hours." }
-		{ text: "Updated /who and guild UIs." }
-		{ text: "Quest items can now be picked up by all party members with quest." }
-		{ text: "Option to show floating aura events." }
-	]	
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Healing Conduit now works like intended." }
-		{ text: "Number of action bars is now remembered." }
-		{ text: "Banner of Command now also affects caster when not in a party." }
-		{ text: "Fixed a couple of client crashes." }
-		{ text: "Turned a couple of client crashes into error messages." }
-		{ text: "Ties on the achievement point scoreboard goes to the player who got it first." }
-		{ text: "All dungeon boss loot now binds on pickup like intended." }
-		{ text: "Lake of Fire only damages other players if both caster and target have PVP enabled." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.13"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Zuthyg the Golden has retreated into his lair." }
-		{ text: "Added more rare loot to Zuthyg the Golden (epic quality drops no longer guaranteed)." }
-		{ text: "Bosses are now generally immune to slows, fears, stuns and similar effects." }		
-	]	
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Manually pushing other players works like intended again." }
-		{ text: "Soulbound items can no longer be traded." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.12"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Auction house deposit requirements reduced significantly." }
-		{ text: "Auto-pushing of other players now off by default." }
-		{ text: "Increased damage of serveral Sorcerer abilities." }
-		{ text: "Charge can now be used while in combat." }
-		{ text: "Reduced cooldown and increased duration of Fortify." }
-		{ text: "Banner of Command now only affects enemies already in combat." }
-		{ text: "Bosses will now evade or become enraged if they're moved away from their area." }		
-	]	
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Improved Blessing increases duration of Blessing like intended." }
-		{ text: "Fixed bug where chat frame would stop showing messages." }
-		{ text: "Deity selector UI now wraps like intended." }
-		{ text: "Fixed bug where player worlds wouldn't be saved correctly." }
-		{ text: "Fixed bug when using Charge on a large entity." }
-	]	
-	
-	#######################################################################################
-	heading: "v0.1.11"
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Drag-and-drop to sell items to vendor should now work like intended." }
-	]	
-	
-	#######################################################################################
-	heading: "v0.1.10"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Added a couple more profession recipes." }
-	]	
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Party invites and other similar UI notifications now work again." }
-		{ text: "Fixed issue with threat generated from AOE abilities." }
-	]	
-	
-	#######################################################################################
-	heading: "v0.1.9"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Cooking can now also be done by campfires." }
-	]	
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Fixed bug where consumables could be used at less than required level." }
-	]	
-	
-	#######################################################################################
-	heading: "v0.1.8"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Damage scaling of Sorcerer spells increased to match melee and Priest spells." }
-		{ text: "You can only have one elixir effect and one food effect active at the same time." }
-	]	
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "When reconnecting after logging out or disconnecting, client will reattach to previous entity if possible." }
-		{ text: "Fixed missing armor on Biznorg and Grunthar cloaks." }
-		{ text: "Fixed bug where some UI sounds would still be played when sound effects were turned off." }
-		{ text: "Fixed bug where some talents would stop working after death." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.7"
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Fixed two client crashes." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.6"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "Added option to turn off sound effects." }
-	]	
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Fixed some bugs related to mail and trading." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.5"
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Multiple bugs related to the auction house." }
-		{ text: "Mail UI wasn't refreshed correctly after using the Open All option." }
-	]	
-
-	#######################################################################################
-	heading: "v0.1.4"
-
-	text: "Changes:"
-	
-	list:
-	[		
-		{ text: "More bags." }
-		{ text: "New consumable item that allows you to Spirit Travel immediately." }
-		{ text: "Mercenaries now only stay with you for 15 minutes at most." }
-		{ text: "Non-player entities now also face the direction they're moving." }
-		{ text: "Weapon-damage based instant abilities with short or no cooldown (for example Strike and Rend) have been normalized. In other words, fast weapons now deal more damage while slow ones deal less." }
-		{ text: "Some new cooked food icons (Made by Caleb)." }
-		{ text: "Longer chat messages are now allowed." }
-		{ text: "Items added to existing inventory stacks before creating new ones (Fixed by SirPrimrose)." }
-		{ text: "Lost Satchel quest item should be more visible." }
-	]
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Heals can be critical like intended." }
-		{ text: "Fixed a bunch of UI issues." }
-		{ text: "Fixed a couple client crashes." }
-	]
-
-	#######################################################################################
-	heading: "v0.1.3"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "A band of mercenaries, available for hire, has set up camp outside town." }
-		{ text: "Cultists in the Umbracoth encounter are no longer elite." }
-		{ text: "Added option to toggle energy and rage gains from combat log." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Improved Dwindle works like intended." }
-		{ text: "Fixed quest item drop from Demon Spawn." }
-		{ text: "Fixed client crash when equipping bind-on-equip item from stash." }
-		{ text: "Various UI fixes." }
-		{ text: "Heavy Linen Bandage now works like intended (Fixed by SirPrimrose)." }
-	]
-	
-	#######################################################################################
-	heading: "v0.1.2"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed client crash when trying to make offering at a shrine." }
-		{ text: "Mining ore nodes are more visible." }
-	]
-
-	#######################################################################################
-	heading: "v0.1.1"
-
-	text: "Changes:"
-
-	list:
-	[
-		{ text: "You can now create more than one character when playing the demo." }
-		{ text: "Some UI interactions should be more intuitive." }
-		{ text: "New chat commands: /afk and /dnd" }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Quests where you need to pick up items should work like intended." }
-		{ text: "Fixed a couple of server stability issues." }
-		{ text: "Miscellaneous minor stuff." }
-	]
-
-	#######################################################################################
-	heading: "v0.1.0"
-	
-	text: "Welcome to the demo of Trolddom, only available for a limited time!"	
-
-	list:
-	[
-		{ text: "Play through level 1 to 6 as one of three different classes." }
-		{ text: "Explore Aetheris Isle, do quests, collect loot, and kill monsters." }
-		{ text: "Form a party of fellow adventurers and venture into the deep dungeons under the mountain." }
-		{ text: "Join a guild or try to make gold on the auction house." }
-		{ text: "Lots of other stuff to do." }		
-	]
-	
-	text: "Notes about this demo:"
-	
-	list:
-	[
-		{ text: "You can only have a single character per account." }
-		{ text: "Limited to first 6 levels." }
-		{ text: "Any character progress is carried over to the full version of the game." }
-	]
-
-	text: "Please report any bugs or other issues you encounter using the Bugs and Feedback tool accessible inside the game."
-}
+###################################################################################################################################
+# Hidden
+#changelog_old:
+#{
+#
+#	#######################################################################################
+#	heading: "v0.1.20"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Damage from Dragon Breath increased. Now scales with Attack Power instead of Spell Damage." }		
+#		{ text: "Damage from Poison Bomb reduced." }	
+#		{ text: "The attack damage of level 1 to 12 enemies reduced to roughly what it was before previous patch." }
+#	]	
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed bug where player armor and weapon damage were much lower than intended." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.1.19"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Ctrl-right-click on dead enemy to automatically loot everything." }		
+#		{ text: "New key binds: select party members, select minions, select target of target, and loot all." }		
+#		{ text: "Tab-selection of target can be rebound to other keys." }		
+#		{ text: "Bonus weapon damage is now derived from Attack Power instead of Strength." }
+#		{ text: "Many melee abilities now base their damage on Attack Power instead of weapon damage." }
+#		{ text: "Revised the formula used to calculate favor gained from sacrificing items. UI now shows how much favor will be gained." }
+#		{ text: "Kick and Counterspell don't need to wait for the global cooldown to finish, but will trigger it." }
+#		{ text: "Increased damage of most offensive spells with a cast time." }
+#		{ text: "Ticks from buffs and debuffs don't happen immediately." }
+#	]	
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed issue with experimental controller support." }
+#		{ text: "Healing Potions and Mana Potions now have vendor values." }
+#		{ text: "Players are only eligible for group loot if they were in the group at the time of the kill." }
+#	]
+#	
+#	#######################################################################################
+#	heading: "v0.1.18"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Reduced cast time of Curse of Corruption." }
+#		{ text: "Increased critical strike chance bonus from Blessing of War." }
+#		{ text: "Paladins can now use staves (including fishing rods)." }
+#		{ text: "XP from group kills is now calculated based on maximum character level instead of average." }
+#		{ text: "You now only get XP from group kills if you contributed to it." }
+#		{ text: "Witch minions don't count towards the instance minion limit." }
+#		{ text: "Lesser demons have slightly larger teeth." }
+#		{ text: "Experimental controller input support (needs to be enabled in options)." }
+#	]	
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Blessing of the Defender and Curse of Inaction now work like intended." }
+#		{ text: "Fixed bug where Judgement casting time wasn't affected by Relentless Assault." }
+#		{ text: "Minion tool tips based on weapon damage now show correct values." }
+#		{ text: "Fixed bug where tool tips would show the wrong mana costs." }
+#		{ text: "Witch minions no longer die when you change instance or log in." }
+#		{ text: "Fixed bug where you'd spawn outside of instance when reconnecting." }
+#		{ text: "Fixed some typos and other small bugs." }		
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.17"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Two new unlockable classes: witch and paladin." }
+#		{ text: "A new type of shrine that is bound to the most popular deity of the previous day." }
+#		{ text: "You can now create up to 8 characters per account." }
+#	]	
+#	
+#	#######################################################################################
+#	heading: "v0.1.16"
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Fixed some client crashes." }		
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.15"
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "It's no longer possible to select a UI scaling option that makes the game unusable." }		
+#		{ text: "Fixed some server stability issues." }
+#		{ text: "Dead minions that are too far away will be dismissed automatically." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.14"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Added click-to-move with an option to disable it." }
+#		{ text: "You can now follow other players." }
+#		{ text: "UI scaling option." }
+#		{ text: "Wisdom now adds bonus spell damage and healing." }
+#		{ text: "Lair of Zuthyg now resets every 12 hours." }
+#		{ text: "Updated /who and guild UIs." }
+#		{ text: "Quest items can now be picked up by all party members with quest." }
+#		{ text: "Option to show floating aura events." }
+#	]	
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Healing Conduit now works like intended." }
+#		{ text: "Number of action bars is now remembered." }
+#		{ text: "Banner of Command now also affects caster when not in a party." }
+#		{ text: "Fixed a couple of client crashes." }
+#		{ text: "Turned a couple of client crashes into error messages." }
+#		{ text: "Ties on the achievement point scoreboard goes to the player who got it first." }
+#		{ text: "All dungeon boss loot now binds on pickup like intended." }
+#		{ text: "Lake of Fire only damages other players if both caster and target have PVP enabled." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.13"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Zuthyg the Golden has retreated into his lair." }
+#		{ text: "Added more rare loot to Zuthyg the Golden (epic quality drops no longer guaranteed)." }
+#		{ text: "Bosses are now generally immune to slows, fears, stuns and similar effects." }		
+#	]	
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Manually pushing other players works like intended again." }
+#		{ text: "Soulbound items can no longer be traded." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.12"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Auction house deposit requirements reduced significantly." }
+#		{ text: "Auto-pushing of other players now off by default." }
+#		{ text: "Increased damage of serveral Sorcerer abilities." }
+#		{ text: "Charge can now be used while in combat." }
+#		{ text: "Reduced cooldown and increased duration of Fortify." }
+#		{ text: "Banner of Command now only affects enemies already in combat." }
+#		{ text: "Bosses will now evade or become enraged if they're moved away from their area." }		
+#	]	
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Improved Blessing increases duration of Blessing like intended." }
+#		{ text: "Fixed bug where chat frame would stop showing messages." }
+#		{ text: "Deity selector UI now wraps like intended." }
+#		{ text: "Fixed bug where player worlds wouldn't be saved correctly." }
+#		{ text: "Fixed bug when using Charge on a large entity." }
+#	]	
+#	
+#	#######################################################################################
+#	heading: "v0.1.11"
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Drag-and-drop to sell items to vendor should now work like intended." }
+#	]	
+#	
+#	#######################################################################################
+#	heading: "v0.1.10"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Added a couple more profession recipes." }
+#	]	
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Party invites and other similar UI notifications now work again." }
+#		{ text: "Fixed issue with threat generated from AOE abilities." }
+#	]	
+#	
+#	#######################################################################################
+#	heading: "v0.1.9"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Cooking can now also be done by campfires." }
+#	]	
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Fixed bug where consumables could be used at less than required level." }
+#	]	
+#	
+#	#######################################################################################
+#	heading: "v0.1.8"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Damage scaling of Sorcerer spells increased to match melee and Priest spells." }
+#		{ text: "You can only have one elixir effect and one food effect active at the same time." }
+#	]	
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "When reconnecting after logging out or disconnecting, client will reattach to previous entity if possible." }
+#		{ text: "Fixed missing armor on Biznorg and Grunthar cloaks." }
+#		{ text: "Fixed bug where some UI sounds would still be played when sound effects were turned off." }
+#		{ text: "Fixed bug where some talents would stop working after death." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.7"
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Fixed two client crashes." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.6"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "Added option to turn off sound effects." }
+#	]	
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Fixed some bugs related to mail and trading." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.5"
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Multiple bugs related to the auction house." }
+#		{ text: "Mail UI wasn't refreshed correctly after using the Open All option." }
+#	]	
+#
+#	#######################################################################################
+#	heading: "v0.1.4"
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[		
+#		{ text: "More bags." }
+#		{ text: "New consumable item that allows you to Spirit Travel immediately." }
+#		{ text: "Mercenaries now only stay with you for 15 minutes at most." }
+#		{ text: "Non-player entities now also face the direction they're moving." }
+#		{ text: "Weapon-damage based instant abilities with short or no cooldown (for example Strike and Rend) have been normalized. In other words, fast weapons now deal more damage while slow ones deal less." }
+#		{ text: "Some new cooked food icons (Made by Caleb)." }
+#		{ text: "Longer chat messages are now allowed." }
+#		{ text: "Items added to existing inventory stacks before creating new ones (Fixed by SirPrimrose)." }
+#		{ text: "Lost Satchel quest item should be more visible." }
+#	]
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Heals can be critical like intended." }
+#		{ text: "Fixed a bunch of UI issues." }
+#		{ text: "Fixed a couple client crashes." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.1.3"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "A band of mercenaries, available for hire, has set up camp outside town." }
+#		{ text: "Cultists in the Umbracoth encounter are no longer elite." }
+#		{ text: "Added option to toggle energy and rage gains from combat log." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Improved Dwindle works like intended." }
+#		{ text: "Fixed quest item drop from Demon Spawn." }
+#		{ text: "Fixed client crash when equipping bind-on-equip item from stash." }
+#		{ text: "Various UI fixes." }
+#		{ text: "Heavy Linen Bandage now works like intended (Fixed by SirPrimrose)." }
+#	]
+#	
+#	#######################################################################################
+#	heading: "v0.1.2"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed client crash when trying to make offering at a shrine." }
+#		{ text: "Mining ore nodes are more visible." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.1.1"
+#
+#	text: "Changes:"
+#
+#	list:
+#	[
+#		{ text: "You can now create more than one character when playing the demo." }
+#		{ text: "Some UI interactions should be more intuitive." }
+#		{ text: "New chat commands: /afk and /dnd" }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Quests where you need to pick up items should work like intended." }
+#		{ text: "Fixed a couple of server stability issues." }
+#		{ text: "Miscellaneous minor stuff." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.1.0"
+#	
+#	text: "Welcome to the demo of Trolddom, only available for a limited time!"	
+#
+#	list:
+#	[
+#		{ text: "Play through level 1 to 6 as one of three different classes." }
+#		{ text: "Explore Aetheris Isle, do quests, collect loot, and kill monsters." }
+#		{ text: "Form a party of fellow adventurers and venture into the deep dungeons under the mountain." }
+#		{ text: "Join a guild or try to make gold on the auction house." }
+#		{ text: "Lots of other stuff to do." }		
+#	]
+#	
+#	text: "Notes about this demo:"
+#	
+#	list:
+#	[
+#		{ text: "You can only have a single character per account." }
+#		{ text: "Limited to first 6 levels." }
+#		{ text: "Any character progress is carried over to the full version of the game." }
+#	]
+#
+#	text: "Please report any bugs or other issues you encounter using the Bugs and Feedback tool accessible inside the game."
+#}

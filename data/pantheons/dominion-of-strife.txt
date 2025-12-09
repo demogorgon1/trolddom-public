@@ -1,0 +1,754 @@
+faction dominion_of_strife:
+{
+	string: "Dominion of Strife"
+	flags: [ friendly reputation pantheon ]
+	reputation_from_pvp_kill: 24
+}
+
+pantheon dominion_of_strife:
+{
+	string: "Dominion of Strife"
+	icon: icon_strife
+	faction: dominion_of_strife
+	pray_ability: dominion_of_strife_pray
+	pray_favor_multiplier: 0.25
+	notification_string<gained_favor>: "You've gained favor with the dominion of strife."
+	notification_string<lost_favor>: "You've lost favor with the dominion of strife."
+	
+	deity_specifier: "a"
+	deity_description: "a deity of the Dominion of Strife"
+	shrine_display_name_prefix: "Shrine of "
+	
+	player_levels:
+	[
+		"Outsider"
+		"Neutral"
+		"Bladebearer"
+		"Ravager"
+		"Warbringer"
+		"Champion"		
+	]
+	
+	deity_levels:
+	[
+		"Harbinger"
+		"Warshade"
+		"Wrathbringer"
+		"Bloodlord"
+		"Warlord"
+		"Warmaster"
+	]
+}
+
+ability dominion_of_strife_pray:
+{
+	string: "Pray to The Dominion of Strife"
+	description: "Gain a blessing from your deity."
+	cast_time: 20
+	cooldown: $cooldown { duration: 1200 }
+	flags: [ late_cooldown_trigger target_self always_in_range ]
+	states: [ default ]
+	icon: icon_strife
+	direct_effect simple<pray>: dominion_of_strife
+}
+
+################################################################################################
+# Player kill aura
+
+aura dominion_of_strife_buff:
+{
+	string: "Bloodsoaked"
+	description: "Honoring the Dominion of Strife. Only on the battleground."
+	duration: 36000 # 1 hour
+	type: buff
+	max_stack: 100
+	icon: icon_bloodsoaked
+	flags: [ unique always_show_timer ]
+	zones: [ thalvaron_ancient_battleground thalvaron_welks_cave ]
+}
+
+ability dominion_of_strife_kill_trigger:
+{
+	direct_effect apply_aura:
+	{
+		aura: dominion_of_strife_buff
+	}
+}
+
+################################################################################################
+# Rift
+
+entity dominion_of_strife_rift:
+{
+	string: "Rift"
+	
+	systems: [ pvp_rift ]
+	
+	components:
+	{
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ spawning ] 
+					frames: [ red_gateway_closed_1 red_gateway_closed_2 red_gateway_closed_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+				
+				{ 
+					states: [ default ] 
+					frames: [ red_gateway_1 red_gateway_2 red_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+		pvp_rift:
+		{
+			aura: dominion_of_strife_buff
+			primary_item: item_badge_of_honor
+			secondary_item: item_emblem_of_triumph
+			faction: dominion_of_strife
+			pantheon: dominion_of_strife
+			announcement_default_deity: dominion_of_strife_deity_1
+			announcement_range: 225
+		}
+	}
+}
+
+################################################################################################
+# Aura effects
+
+!define local PVP_DAMAGE_REDUCTION
+{
+	aura_effect damage_input_modifier: { type_mask: [ all ] multiplier: 0.5 pvp: true }
+}
+
+################################################################################################
+# Shrine macro
+
+!define local SHRINE
+{
+	systems: [ shrine ]
+	components:
+	{
+		shrine: { pantheon: dominion_of_strife deity: @_deity can_be_desecrated: false }
+		display_name: { }
+		position: { }		
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ dominion_of_strife_shrine_1 dominion_of_strife_shrine_2 dominion_of_strife_shrine_3 dominion_of_strife_shrine_4 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+				
+				{ 
+					states: [ despawning ] 
+					frames: [ dominion_of_strife_shrine_used ] 		
+					z_offset: -3
+				}				
+			]		
+		}		
+	}
+}
+
+################################################################################################
+# Deity - Kaelrath
+
+!define local DOMINION_OF_STRIFE_DEITY_1_AURA
+{
+	string: "Blessing of Kaelrath"
+	icon: icon_strife
+	duration: 18000
+	type: buff
+	flags: [ unique blessing hide_description ]
+	<exists _effects> aura_effects: @_effects 
+	<exists _description> description: @_description
+	<exists _stat_modifiers> stat_modifiers: @_stat_modifiers
+	extra_description: "-50% damage from other players"	
+}
+
+entity dominion_of_strife_deity_1_shrine: !SHRINE { _deity: dominion_of_strife_deity_1 }
+
+deity dominion_of_strife_deity_1:
+{
+	string: "Kaelrath"
+	title: "Ever-Burning"
+	title_suffix: " the Duelist"
+	tags:
+	[	
+		warlike
+		stupid
+		grandiose
+	]
+	pantheon: dominion_of_strife
+	announcement_now: "Come and get it! Fight for it!"
+	announcement_soon: "Get ready!"
+	announcement_winner: "A flawless strike! {} stands triumphant!"
+	
+	blessing_aura: $aura @domion_of_strife_deity_1_0 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "-50% damage from other players"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_1 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+1% Parry Chance"
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }	
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_2 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+1% Dodge Chance"
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }			
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_3 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+1% Block Chance" 
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }			
+			block_chance: { add: 1 }			
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_4 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+1% Critical Strike Chance (Physical)"
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }						
+			block_chance: { add: 1 }		
+			phys_crit_chance: { add: 1 }
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_5 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+5 Constitution" 
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }	
+			block_chance: { add: 1 }		
+			phys_crit_chance: { add: 1 }	
+			constitution: { add: 5 }
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_6 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+5 Dexterity" 
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }	
+			block_chance: { add: 1 }	
+			phys_crit_chance: { add: 1 }	
+			constitution: { add: 5 }			
+			dexterity: { add: 5 }			
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_7 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+6 Constitution" 
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }						
+			block_chance: { add: 1 }
+			phys_crit_chance: { add: 1 }		
+			constitution: { add: 11 }	
+			dexterity: { add: 5 }						
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_8 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+6 Dexterity" 
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }						
+			block_chance: { add: 1 }
+			phys_crit_chance: { add: 1 }	
+			constitution: { add: 11 }			
+			dexterity: { add: 11 }			
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_1_9 !DOMINION_OF_STRIFE_DEITY_1_AURA 
+	{ 
+		_description: "+10 Constitution" 
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{
+			parry_chance: { add: 1 }
+			dodge_chance: { add: 1 }
+			block_chance: { add: 1 }
+			phys_crit_chance: { add: 1 }		
+			constitution: { add: 21 }	
+			dexterity: { add: 11 }			
+		}
+	}
+	
+}
+
+################################################################################################
+# Deity - Vorynth
+
+!define local DOMINION_OF_STRIFE_DEITY_2_AURA
+{
+	string: "Blessing of Vorynth"
+	icon: icon_strife
+	duration: 18000
+	type: buff
+	flags: [ unique blessing hide_description ]
+	<exists _effects> aura_effects: @_effects 
+	<exists _description> description: @_description
+	<exists _stat_modifiers> stat_modifiers: @_stat_modifiers
+	extra_description: "-50% damage from other players"	
+}
+
+entity dominion_of_strife_deity_2_shrine: !SHRINE { _deity: dominion_of_strife_deity_2 }
+
+deity dominion_of_strife_deity_2:
+{
+	string: "Vorynth"
+	title: "Warmage"
+	title_suffix: " the Spellcleaver"
+	tags:
+	[	
+		grandiose
+		wizard
+		warlike
+	]
+	pantheon: dominion_of_strife
+	announcement_now: "The rift has opened! Lay waste!"
+	announcement_soon: "The rift stirs!"
+	announcement_winner: "Behold! {} is victorious!"
+	
+	blessing_aura: $aura @domion_of_strife_deity_2_0 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "-50% damage from other players"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_1 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+1% Dodge Chance"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_2 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+1% Spell Haste"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_3 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+1% Critical Strike Chance (Spells)"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }		
+			spell_crit_chance: { add: 1 }		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_4 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+5 Health Per 5 Seconds"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }					
+			spell_crit_chance: { add: 1 }		
+			health_per_5: { add: 5 }		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_5 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+6 Mana Per 5 Seconds"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }					
+			spell_crit_chance: { add: 1 }		
+			health_per_5: { add: 5 }		
+			mana_per_5: { add: 6 }		
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_6 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+6 Wisdom"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }					
+			spell_crit_chance: { add: 1 }	
+			health_per_5: { add: 5 }		
+			mana_per_5: { add: 6 }		
+			wisdom: { add: 6 }
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_7 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+7 Constitution"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }					
+			spell_crit_chance: { add: 1 }		
+			health_per_5: { add: 5 }		
+			mana_per_5: { add: 6 }		
+			wisdom: { add: 6 }		
+			constitution: { add: 7 } 
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_8 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+10 Spell Damage"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }					
+			spell_crit_chance: { add: 1 }		
+			health_per_5: { add: 5 }		
+			mana_per_5: { add: 6 }		
+			wisdom: { add: 6 }
+			constitution: { add: 7 } 
+			spell_damage: { add: 10 } 
+		}
+	}
+
+	blessing_aura: $aura @domion_of_strife_deity_2_9 !DOMINION_OF_STRIFE_DEITY_2_AURA 
+	{ 
+		_description: "+10 Constitution"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			dodge_chance: { add: 1 }		
+			spell_haste: { add: 1 }					
+			spell_crit_chance: { add: 1 }		
+			health_per_5: { add: 5 }		
+			mana_per_5: { add: 6 }		
+			wisdom: { add: 6 }
+			constitution: { add: 17 } 
+			spell_damage: { add: 10 } 
+		}
+	}
+	
+}
+
+################################################################################################
+# Deity - Serathiel
+
+!define local DOMINION_OF_STRIFE_DEITY_3_AURA
+{
+	string: "Blessing of Serathiel"
+	icon: icon_strife
+	duration: 18000
+	type: buff
+	flags: [ unique blessing hide_description ]
+	<exists _effects> aura_effects: @_effects 
+	<exists _description> description: @_description
+	<exists _stat_modifiers> stat_modifiers: @_stat_modifiers
+	extra_description: "-50% damage from other players"	
+}
+
+entity dominion_of_strife_deity_3_shrine: !SHRINE { _deity: dominion_of_strife_deity_3 }
+
+deity dominion_of_strife_deity_3:
+{
+	string: "Serathiel"
+	title: "Matron"
+	title_suffix: " the Highborne"
+	tags:
+	[
+		grandiose
+		warlike
+		healer
+	]
+	pantheon: dominion_of_strife
+	announcement_now: "It is time! Blessed be the victor!"
+	announcement_soon: "Sharpen your blades, mortals! Soon!"
+	announcement_winner: "Resilience prevails! {} has claimed my blessing!"
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_0 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "-50% damage from other players"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_1 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+1% Parry Chance"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 1 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_2 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+4 Mana Per 5 Seconds"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 1 }
+			mana_per_5: { add: 4 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_3 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+5 Healing"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 1 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_4 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+1% Spell Haste"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 1 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+			spell_haste: { add: 1 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_5 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+2% Parry Chance"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{	
+			parry_chance: { add: 3 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+			spell_haste: { add: 1 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_6 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+10 Health Per 5 Seconds"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 3 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+			spell_haste: { add: 1 }
+			health_per_5: { add: 10 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_7 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+8 Constitution"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 3 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+			spell_haste: { add: 1 }
+			health_per_5: { add: 10 }
+			constitution: { add: 8 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_8 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+10 Wisdom"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 3 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+			spell_haste: { add: 1 }
+			health_per_5: { add: 10 }
+			constitution: { add: 8 }
+			wisdom: { add: 10 }
+		}
+	}
+	
+	blessing_aura: $aura @domion_of_strife_deity_3_9 !DOMINION_OF_STRIFE_DEITY_3_AURA 
+	{ 
+		_description: "+10 Constitution"		
+		_effects: 
+		[ 
+			!PVP_DAMAGE_REDUCTION{} 
+		]
+		_stat_modifiers: 
+		{		
+			parry_chance: { add: 3 }
+			mana_per_5: { add: 4 }
+			healing: { add: 5 }
+			spell_haste: { add: 1 }
+			health_per_5: { add: 10 }
+			constitution: { add: 18 }
+			wisdom: { add: 10 }
+		}
+	}
+	
+	
+}

@@ -78,12 +78,12 @@ namespace tpublic::Systems
 		int32_t ticksSinceLastUpdate = aContext->m_tick - environment->m_lastUpdateTick;
 
 		if (ticksSinceLastUpdate >= environment->m_tickInterval && environment->m_abilityId != 0 && owner != NULL)
-		{
+		{			
 			const Data::Ability* ability = GetManifest()->GetById<Data::Ability>(environment->m_abilityId);
 
 			SourceEntityInstance sourceEntityInstance = owner->m_ownerSourceEntityInstance.IsSet() ? owner->m_ownerSourceEntityInstance : SourceEntityInstance{ aEntityInstanceId, 0 };
 			
-			if(ability->TargetAOE() && ability->TargetSelf())
+			if(ability->TargetAOE())
 			{
 				// This is a self targeted AOE ability
 				aContext->m_eventQueue->EventQueueAbility(

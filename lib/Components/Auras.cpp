@@ -2,10 +2,35 @@
 
 #include <tpublic/Components/Auras.h>
 
+#include <tpublic/Data/Aura.h>
+
 #include <tpublic/Helpers.h>
+#include <tpublic/IWorldView.h>
+#include <tpublic/Manifest.h>
+#include <tpublic/ToolTipMultiplier.h>
 
 namespace tpublic::Components
 {
+
+	uint32_t			
+	Auras::GetLootTableId(
+		std::mt19937&								aRandom,
+		const Manifest*								aManifest) const
+	{
+		std::vector<uint32_t> lootTableIds;
+		
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+			if(aura->m_lootTableId != 0)
+				lootTableIds.push_back(aura->m_lootTableId);
+		}
+
+		if(lootTableIds.empty())
+			return 0;
+
+		return Helpers::RandomItem(aRandom, lootTableIds);
+	}
 
 	bool
 	Auras::HasEffect(
@@ -49,6 +74,35 @@ namespace tpublic::Components
 		return false;
 	}
 
+	bool			
+	Auras::HasAuraFlags(
+		const Manifest*								aManifest,
+		uint32_t									aFlags) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			const Data::Aura* aura = aManifest->GetById<Data::Aura>(entry->m_auraId);
+			if((aura->m_flags & aFlags) == aFlags)
+				return true;
+		}
+
+		return false;
+	}
+
+	bool			
+	Auras::HasAuraWithSource(
+		uint32_t									aAuraId,
+		uint32_t									aEntityInstanceId) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			if (entry->m_auraId == aAuraId && entry->m_sourceEntityInstance.m_entityInstanceId == aEntityInstanceId)
+				return true;
+		}
+
+		return false;
+	}
+
 	Auras::Entry* 
 	Auras::GetAura(
 		uint32_t									aAuraId)
@@ -56,6 +110,20 @@ namespace tpublic::Components
 		for (std::unique_ptr<Entry>& entry : m_entries)
 		{
 			if (entry->m_auraId == aAuraId)
+				return entry.get();
+		}
+
+		return NULL;
+	}
+
+	const Auras::Entry* 
+	Auras::GetAuraWithSource(
+		uint32_t									aAuraId,
+		uint32_t									aEntityInstanceId) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			if (entry->m_auraId == aAuraId && entry->m_sourceEntityInstance.m_entityInstanceId == aEntityInstanceId)
 				return entry.get();
 		}
 
@@ -130,16 +198,19 @@ namespace tpublic::Components
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
-		int32_t										aDamage) const
+		int32_t										aDamage,
+		uint32_t									aAbilityId) const
 	{
 		int32_t damage = aDamage;
+
+		uint32_t sourceEntityId = aSource != NULL ? aSource->GetEntityId() : UINT32_MAX; // FIXME: a bit weird to not use 0 in this case, but it's a special case for players...
 
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					damage = effect->FilterDamageInput(aDamageType, damage);
+					damage = effect->FilterDamageInput(aDamageType, damage, aAbilityId, sourceEntityId);
 			}
 		}
 						
@@ -152,7 +223,8 @@ namespace tpublic::Components
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
-		int32_t										aDamage) const
+		int32_t										aDamage,
+		uint32_t									aAbilityId) const
 	{
 		int32_t damage = aDamage;
 
@@ -161,7 +233,7 @@ namespace tpublic::Components
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage);
+					damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage, aAbilityId);
 			}
 		}
 						
@@ -173,7 +245,8 @@ namespace tpublic::Components
 		const Manifest*								aManifest,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
-		int32_t										aHeal) const
+		int32_t										aHeal,
+		uint32_t									aAbilityId) const
 	{
 		int32_t heal = aHeal;
 
@@ -182,7 +255,7 @@ namespace tpublic::Components
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					heal = effect->FilterHealInput(heal);
+					heal = effect->FilterHealInput(heal, aAbilityId);
 			}
 		}
 
@@ -195,7 +268,8 @@ namespace tpublic::Components
 		const Manifest*								aManifest,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
-		int32_t										aHeal) const
+		int32_t										aHeal,
+		uint32_t									aAbilityId) const
 	{
 		int32_t heal = aHeal;
 
@@ -204,7 +278,7 @@ namespace tpublic::Components
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					heal = effect->FilterHealOutput(heal);
+					heal = effect->FilterHealOutput(heal, aAbilityId);
 			}
 		}
 
@@ -216,7 +290,8 @@ namespace tpublic::Components
 		const Manifest*								aManifest,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
-		int32_t										aThreat) const
+		int32_t										aThreat,
+		uint32_t									aAbilityId) const
 	{
 		int32_t threat = aThreat;
 
@@ -225,11 +300,25 @@ namespace tpublic::Components
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if (effect->CheckRequirements(aManifest, aSource, aTarget))
-					threat = effect->FilterThreat(threat);
+					threat = effect->FilterThreat(threat, aAbilityId);
 			}
 		}
 
 		return threat;
+	}
+
+	bool			
+	Auras::IsFilter() const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+			{
+				if(effect->IsFilter())
+					return true;
+			}
+		}
+		return false;
 	}
 
 	float			
@@ -255,16 +344,61 @@ namespace tpublic::Components
 		CombatEvent::Id								aCombatEventId,
 		uint32_t									aAbilityId,
 		std::mt19937*								aRandom,
-		IEventQueue*								aEventQueue) const
+		IEventQueue*								aEventQueue,
+		const IWorldView*							aWorldView) const
 	{
+		// This is quite horrible. We pass on aEventQueue, which can potentially trigger changes in this component. Entries could be removed. 
+
+		// This is a horrible workaround
+		struct EntryEffectPair
+		{
+			const Entry*			m_entry = NULL;
+			const AuraEffectBase*	m_effect = NULL;
+		};
+
+		static const size_t MAX_ENTRY_EFFECT_PAIRS = 256;
+		size_t numEntryEffectPairs = 0;
+		EntryEffectPair entryEffectPairs[MAX_ENTRY_EFFECT_PAIRS];		
+
 		for (const std::unique_ptr<Entry>& entry : m_entries)
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aSource, aTarget) && numEntryEffectPairs < MAX_ENTRY_EFFECT_PAIRS)
+					entryEffectPairs[numEntryEffectPairs++] = { entry.get(), effect.get() };
+			}
+		}
+
+		for(size_t i = 0; i < numEntryEffectPairs; i++)
+		{
+			const EntryEffectPair& t = entryEffectPairs[i];
+
+			bool stillExists = false;
+
+			for (const std::unique_ptr<Entry>& entry : m_entries)
+			{
+				if(entry.get() == t.m_entry)
 				{
-					effect->OnCombatEvent(aManifest, entry->m_auraId, aType, aCombatEventId, aAbilityId, aSource, aTarget, aRandom, aEventQueue);
+					for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+					{
+						if(effect.get() == t.m_effect)
+						{
+							stillExists = true;
+							break;
+						}
+					}
+
+					if (stillExists)
+						break;
 				}
+			}
+
+			if(stillExists)
+			{
+				// FIXME: might need an option to also need seq to match
+				const EntityInstance* auraSourceEntityInstance = aWorldView->WorldViewSingleEntityInstance(t.m_entry->m_sourceEntityInstance.m_entityInstanceId);
+
+				t.m_effect->OnCombatEvent(aManifest, t.m_entry->m_auraId, aType, aCombatEventId, aAbilityId, auraSourceEntityInstance, aSource, aTarget, aRandom, aEventQueue);
 			}
 		}
 	}
@@ -308,6 +442,23 @@ namespace tpublic::Components
 			m_seq++;
 
 		return damage;
+	}
+
+	void			
+	Auras::GetToolTipMultipliers(
+		std::vector<ToolTipMultiplier>&				aOut) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
+			{
+				effect->ForEachToolTipMultiplier([&](
+					ToolTipMultiplier& aToolTipMultiplier)
+				{
+					aOut.push_back(std::move(aToolTipMultiplier));
+				});
+			}
+		}
 	}
 
 	bool			
@@ -355,6 +506,44 @@ namespace tpublic::Components
 		}
 
 		return removed > 0;
+	}
+
+	bool			
+	Auras::ConsumeAura(
+		const Manifest*								aManifest,
+		uint32_t									aAuraId,
+		uint32_t									aSourceEntityInstanceId)
+	{
+		for(size_t i = 0; i < m_entries.size(); i++)
+		{
+			std::unique_ptr<Entry>& entry = m_entries[i];
+			if(entry->m_auraId == aAuraId && (entry->m_sourceEntityInstance.m_entityInstanceId == aSourceEntityInstanceId || aSourceEntityInstanceId == 0))
+			{
+				const Data::Aura* aura = aManifest->GetById<tpublic::Data::Aura>(aAuraId);
+				bool shouldRemove = false;
+
+				m_seq++;
+
+				if(aura->m_flags & Data::Aura::FLAG_CHARGED && entry->m_charges > 0)
+				{
+					entry->m_charges--;
+
+					if(entry->m_charges == 0)
+						shouldRemove = true;
+				}
+				else
+				{
+					shouldRemove = true;
+				}
+
+				if(shouldRemove)
+					Helpers::RemoveCyclicFromVector(m_entries, i);
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	bool			

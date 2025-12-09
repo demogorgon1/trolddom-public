@@ -73,6 +73,10 @@ namespace tpublic
 			ID_HOVER_TEXT,
 			ID_RANDOM_ITEM_VENDOR,
 			ID_CRITTER,
+			ID_SURVIVAL_INFO,
+			ID_PVP_RIFT,
+			ID_RECENT_PVP_KILLS,
+			ID_DIMINISHING_EFFECTS,
 
 			NUM_IDS
 		};
@@ -143,7 +147,11 @@ namespace tpublic
 			"kill_contribution",
 			"hover_text",
 			"random_item_vendor",
-			"critter"
+			"critter",
+			"survival_info",
+			"pvp_rift",
+			"recent_pvp_kills",
+			"diminishing_effects"
 		};
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

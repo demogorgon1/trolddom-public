@@ -18,6 +18,7 @@
 #include <tpublic/Data/Deity.h>
 #include <tpublic/Data/DialogueRoot.h>
 #include <tpublic/Data/DialogueScreen.h>
+#include <tpublic/Data/DiminishingEffect.h>
 #include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/Emote.h>
 #include <tpublic/Data/Encounter.h>
@@ -50,6 +51,7 @@
 #include <tpublic/Data/Quest.h>
 #include <tpublic/Data/RealmBalance.h>
 #include <tpublic/Data/Route.h>
+#include <tpublic/Data/SeasonalEvent.h>
 #include <tpublic/Data/Sound.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/SurvivalScript.h>
@@ -64,14 +66,39 @@
 #include <tpublic/Data/WorldMap.h>
 #include <tpublic/Data/Zone.h>
 
+#include <tpublic/AbilityMetrics.h>
+#include <tpublic/DefaultSoundEffects.h>
 #include <tpublic/Document.h>
+#include <tpublic/ItemMetrics.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/MiscMetrics.h>
+#include <tpublic/NPCMetrics.h>
+#include <tpublic/PlayerComponents.h>
+#include <tpublic/ProfessionMetrics.h>
+#include <tpublic/QuestMetrics.h>
+#include <tpublic/ReputationMetrics.h>
+#include <tpublic/TileLayering.h>
+#include <tpublic/WorshipMetrics.h>
+#include <tpublic/XPMetrics.h>
 
 namespace tpublic
 {
 	
 	Manifest::Manifest()
 	{
+		m_abilityMetrics = std::make_unique<AbilityMetrics>();
+		m_defaultSoundEffects = std::make_unique<DefaultSoundEffects>();
+		m_itemMetrics = std::make_unique<ItemMetrics>();
+		m_miscMetrics = std::make_unique<MiscMetrics>();
+		m_npcMetrics = std::make_unique<NPCMetrics>();
+		m_playerComponents = std::make_unique<PlayerComponents>();
+		m_professionMetrics = std::make_unique<ProfessionMetrics>();
+		m_questMetrics = std::make_unique<QuestMetrics>();
+		m_reputationMetrics = std::make_unique<ReputationMetrics>();
+		m_tileLayering = std::make_unique<TileLayering>();
+		m_worshipMetrics = std::make_unique<WorshipMetrics>();
+		m_xpMetrics = std::make_unique<XPMetrics>();
+
 		RegisterDataContainer<Data::Ability>();
 		RegisterDataContainer<Data::AbilityList>();
 		RegisterDataContainer<Data::AbilityModifier>();
@@ -89,6 +116,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Deity>();
 		RegisterDataContainer<Data::DialogueRoot>();
 		RegisterDataContainer<Data::DialogueScreen>();
+		RegisterDataContainer<Data::DiminishingEffect>();
 		RegisterDataContainer<Data::Doodad>();
 		RegisterDataContainer<Data::Emote>();
 		RegisterDataContainer<Data::Encounter>();
@@ -121,6 +149,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Quest>();
 		RegisterDataContainer<Data::RealmBalance>();
 		RegisterDataContainer<Data::Route>();
+		RegisterDataContainer<Data::SeasonalEvent>();
 		RegisterDataContainer<Data::Sound>();
 		RegisterDataContainer<Data::Sprite>();
 		RegisterDataContainer<Data::SurvivalScript>();
@@ -162,19 +191,19 @@ namespace tpublic
 			m_containers[i]->ToStream(aStream);
 		}
 
-		m_playerComponents.ToStream(aStream);
-		m_xpMetrics.ToStream(aStream);
-		m_itemMetrics.ToStream(aStream);
-		m_npcMetrics.ToStream(aStream);
-		m_questMetrics.ToStream(aStream);
-		m_professionMetrics.ToStream(aStream);
-		m_abilityMetrics.ToStream(aStream);
+		m_playerComponents->ToStream(aStream);
+		m_xpMetrics->ToStream(aStream);
+		m_itemMetrics->ToStream(aStream);
+		m_npcMetrics->ToStream(aStream);
+		m_questMetrics->ToStream(aStream);
+		m_professionMetrics->ToStream(aStream);
+		m_abilityMetrics->ToStream(aStream);
 		m_wordList.ToStream(aStream);
-		m_worshipMetrics.ToStream(aStream);
-		m_miscMetrics.ToStream(aStream);
-		m_reputationMetrics.ToStream(aStream);
-		m_defaultSoundEffects.ToStream(aStream);
-		m_tileLayering.ToStream(aStream);
+		m_worshipMetrics->ToStream(aStream);
+		m_miscMetrics->ToStream(aStream);
+		m_reputationMetrics->ToStream(aStream);
+		m_defaultSoundEffects->ToStream(aStream);
+		m_tileLayering->ToStream(aStream);
 		aStream->WriteOptionalObjectPointer(m_changelog);
 		aStream->WriteOptionalObjectPointer(m_changelogOld);
 		aStream->WriteUInt(m_baseTileBorderPatternSpriteId);
@@ -191,31 +220,31 @@ namespace tpublic
 				return false;
 		}
 
-		if (!m_playerComponents.FromStream(aStream))
+		if (!m_playerComponents->FromStream(aStream))
 			return false;
-		if (!m_xpMetrics.FromStream(aStream))
+		if (!m_xpMetrics->FromStream(aStream))
 			return false;
-		if (!m_itemMetrics.FromStream(aStream))
+		if (!m_itemMetrics->FromStream(aStream))
 			return false;
-		if (!m_npcMetrics.FromStream(aStream))
+		if (!m_npcMetrics->FromStream(aStream))
 			return false;
-		if (!m_questMetrics.FromStream(aStream))
+		if (!m_questMetrics->FromStream(aStream))
 			return false;
-		if (!m_professionMetrics.FromStream(aStream))
+		if (!m_professionMetrics->FromStream(aStream))
 			return false;
-		if (!m_abilityMetrics.FromStream(aStream))
+		if (!m_abilityMetrics->FromStream(aStream))
 			return false;
 		if (!m_wordList.FromStream(aStream))
 			return false;
-		if (!m_worshipMetrics.FromStream(aStream))
+		if (!m_worshipMetrics->FromStream(aStream))
 			return false;
-		if (!m_miscMetrics.FromStream(aStream))
+		if (!m_miscMetrics->FromStream(aStream))
 			return false;
-		if (!m_reputationMetrics.FromStream(aStream))
+		if (!m_reputationMetrics->FromStream(aStream))
 			return false;
-		if (!m_defaultSoundEffects.FromStream(aStream))
+		if (!m_defaultSoundEffects->FromStream(aStream))
 			return false;
-		if (!m_tileLayering.FromStream(aStream))
+		if (!m_tileLayering->FromStream(aStream))
 			return false;
 		if(!aStream->ReadOptionalObjectPointer(m_changelog))
 			return false;

@@ -29,6 +29,7 @@ namespace tpublic
 	AutoDoodads::GenerateDoodads(
 		uint32_t											aSeed,
 		const uint32_t*										aTileMap,
+		const uint32_t*										aCoverTileMap,
 		const Vec2&											aSize,
 		const Vec2&											aRegionPosition,
 		const Vec2&											aRegionSize,		
@@ -62,7 +63,19 @@ namespace tpublic
 						const std::vector<const Data::Doodad*>* possibleDoodads = i->second.get();
 						for (const Data::Doodad* possibleDoodad : *possibleDoodads)
 						{
-							if(possibleDoodad->m_spriteIds.size() > 0 && DoodadPlacement::Check(aTileMap, aSize, possibleDoodad, position, aOutCoverageMap))
+							bool canPlace = true;
+
+							if(possibleDoodad->m_noCover && aCoverTileMap != NULL)
+							{
+								uint32_t coverTileSpriteId = aCoverTileMap[x + y * aSize.m_x];
+								if(coverTileSpriteId != 0)
+									canPlace = false;
+							}
+
+							if(canPlace)
+								canPlace = possibleDoodad->m_spriteIds.size() > 0 && DoodadPlacement::Check(aTileMap, aSize, possibleDoodad, position, aOutCoverageMap);
+
+							if(canPlace)
 							{
 								assert(possibleDoodad->m_autoProbability.has_value());
 								uint32_t randomValue = (uint32_t)Hash::Splitmix_2_32(aSeed + possibleDoodad->m_id, position.GetHash32());

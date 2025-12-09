@@ -1,0 +1,133 @@
+############################################################
+# Loot
+
+loot_group .boss_5: {}
+
+loot_table .boss_5:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message the_devouring_shroud: "Tzun'Kala will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_5  } }		
+		{ possibility: { loot_group: .key } }
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 31
+		_loot_group: .boss_5
+	}		
+	
+	item the_devouring_shroud_5_1: !BOSS_DROP_SHIELD { _string: "Bulwark of Tzun'Kala" _icon: icon_shield_11 _constitution: 1 _budget_bias: -10 _dodge_chance: 1 }			
+	item the_devouring_shroud_5_2: !BOSS_DROP_1H_KNIFE { _string: "Dagger of the Shroud" _icon: icon_knife_7 _spell_damage: 2 _wisdom: 1 _budget_bias: -20 _spell_crit: 2 }			
+	item the_devouring_shroud_5_3: !BOSS_DROP_BOW { _string: "Facepiercer" _icon: icon_bow_3 _dexterity: 2 _constitution: 1 _budget_bias: -10 _phys_crit: 1 }			
+	item the_devouring_shroud_5_4: !BOSS_DROP_2H_SWORD { _string: "Blade of the Lizard King" _icon: icon_sword_20 _strength: 1 _constitution: 1 _dexterity: 1 _budget_bias: -10 _phys_crit: 1 _weapon_cooldown: 34 }			
+	item the_devouring_shroud_5_5: !BOSS_DROP_2H_STAFF { _string: "Pale Bone Staff" _icon: icon_staff_16 _healing: 3 _constitution: 2 }			
+}
+
+############################################################
+# Boss
+
+zone .boss_5:
+{
+}
+
+encounter .boss_5:
+{
+	main_entities: [ the_devouring_shroud_boss_5 ]	
+}
+
+entity the_devouring_shroud_boss_5: !NPC 
+{ 
+	_string: "Tzun'Kala" 
+	_level: 31
+	_elite: true
+	_faction: monsters 
+	_sprite: lizard_man_7
+	_sprite_dead: lizard_man_7_dead 
+	_weapon_damage: 1.1
+	_resource_health: 4.2
+	_loot_table: .boss_5
+	_creature_type: humanoid
+	_encounter: .boss_5
+	_zone: .boss_5
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_in_combat_barks: [ { type: yell text: "Tzun'Kala z'ork!" flags: [ no_chat_bubble ] } ]	
+
+	_abilities: 
+	[
+		{
+			target: self			
+			requirement self<must_have_less_health_than>: 30
+			id: $ability
+			{
+				string: "Frenzy"
+				cast_time: 10
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 120 }
+				flags: [ target_self ]
+				icon: icon_stuff 
+
+				direct_effect apply_aura:
+				{	
+					aura: $aura [ icon string ]
+					{
+						type: buff
+						duration: 100
+						flags: [ unique ]
+						color_effect: [ 255 0 0 ]
+
+						stat_modifiers:
+						{
+							attack_haste: { add: 50 } 
+						}
+					}
+				}
+			}			
+		}
+
+		{
+			requirement self<must_have_less_health_than>: 80
+			id: npc_curse
+			target: random_player
+		}
+		
+		{
+			requirement self<must_have_less_health_than>: 95					
+			id: npc_rend
+			target: random_player
+		}
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_5_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_5:
+{
+	entity the_devouring_shroud_boss_5: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_5_killed
+		}
+	}
+}
+
+

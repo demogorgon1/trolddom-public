@@ -55,6 +55,13 @@ namespace tpublic
 				{
 					aPosition->m_positionFlags |= POSITION_FLAG_DEMO_ONLY;
 				});
+
+				aSchema->AddSourceModifier<Position>("large", [](
+					Position*			aPosition,
+					const SourceNode*	/*aSource*/)
+				{
+					aPosition->m_positionFlags |= POSITION_FLAG_LARGE;
+				});
 			}
 
 			void
@@ -66,6 +73,7 @@ namespace tpublic
 				m_lastMoveTick = 0;
 				m_detached = false;
 				m_updatedOnServer = false;
+				m_blockingEntityInstanceId = 0;
 			}
 
 			// Helpers
@@ -102,6 +110,7 @@ namespace tpublic
 			int32_t		m_lastMoveTick = 0;
 			bool		m_detached = false;
 			bool		m_updatedOnServer = false;
+			uint32_t	m_blockingEntityInstanceId = 0;
 		};
 	}
 

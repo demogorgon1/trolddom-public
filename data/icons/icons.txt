@@ -2,6 +2,7 @@
 !define local ICON_UNCOMMON_5 { min_rarity: uncommon min_level: 5 }
 !define local ICON_UNCOMMON_11 { min_rarity: uncommon min_level: 11 }
 !define local ICON_UNCOMMON_14 { min_rarity: uncommon min_level: 14 }
+!define local ICON_UNCOMMON_26 { min_rarity: uncommon min_level: 26 }
 
 sprites:
 {
@@ -816,7 +817,161 @@ sprites:
 	sprite icon_magic_dust_4 : { tags: [ icon ] }
 	sprite icon_blue_fire : { tags: [ icon ] }
 	sprite icon_dancing_weapon : { tags: [ icon ] }
+	sprite icon_ashveil : { tags: [ icon ] }
+	sprite icon_cindralite_ore : { tags: [ icon ] }
+	sprite icon_cindralite_ingot : { tags: [ icon ] }
+	sprite icon_elemental_fire : { tags: [ icon ] }
+	sprite icon_enchanted_coal : { tags: [ icon ] }
+	sprite icon_ring_15 : { tags: [ icon ] }
+	sprite icon_rod_2 : { tags: [ icon ] }
 	
+	cursor: { position: [ 0 720 ] }	
+	sprite icon_stone_2 : { tags: [ icon ] }
+	sprite icon_envelope_1 : { tags: [ icon ] }
+	sprite icon_crystal_3 : { tags: [ icon ] }
+	sprite icon_fishing_rod_2 : { tags: [ icon ] }
+	sprite icon_lava_shrimp : { tags: [ icon ] }
+	sprite icon_lava_shrimp_cooked : { tags: [ icon ] }
+	sprite icon_claw_6 : { tags: [ icon ] }
+	sprite icon_insect_leg_3 : { tags: [ icon ] }
+	sprite icon_rock_2 : { tags: [ icon ] }
+	sprite icon_dirt_1 : { tags: [ icon ] }
+	sprite icon_strike_2 : { tags: [ icon ] }
+	sprite icon_spiritual_justice : { tags: [ icon ] }
+	sprite icon_stun_2 : { tags: [ icon ] }
+	sprite icon_holy_assault : { tags: [ icon ] }
+	sprite icon_icy_bones : { tags: [ icon ] }
+	sprite icon_corpse_explosion : { tags: [ icon ] }	
+
+	cursor: { position: [ 0 736 ] }	
+	sprite icon_potion_4 : { tags: [ icon ] }
+	sprite icon_potion_5 : { tags: [ icon ] }
+	sprite icon_elemental_destruction : { tags: [ icon ] }
+	sprite icon_key_2 : { tags: [ icon ] }
+	sprite icon_bone_2 : { tags: [ icon ] }
+	sprite icon_stinger_2 : { tags: [ icon ] }
+	sprite icon_sand_orchid : { tags: [ icon ] }
+	sprite icon_figurine_1 : { tags: [ icon ] }
+	sprite icon_pony : { tags: [ icon ] }
+	sprite icon_bottle_1 : { tags: [ icon ] }
+	sprite icon_map_1 : { tags: [ icon ] }
+	sprite icon_mushroom_3 : { tags: [ icon ] }
+	sprite icon_bottle_2 : { tags: [ icon ] }
+	sprite icon_talon_1 : { tags: [ icon ] }
+	sprite icon_talon_2 : { tags: [ icon ] }
+	sprite icon_herbs_5 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 752 ] }	
+	sprite icon_bottle_3 : { tags: [ icon ] }
+	sprite icon_junk_1 : { tags: [ icon ] }
+	sprite icon_scales_3 : { tags: [ icon ] }
+	sprite icon_exotic_fruit : { tags: [ icon ] }
+	sprite icon_cyclone : { tags: [ icon ] }
+	sprite icon_assassination : { tags: [ icon ] }
+	sprite icon_accuracy : { tags: [ icon ] }
+	sprite icon_provocation : { tags: [ icon ] }
+	sprite icon_healing_shield : { tags: [ icon ] }
+	sprite icon_mass_hysteria : { tags: [ icon ] }
+	sprite icon_swiftstrike : { tags: [ icon ] }
+	sprite icon_ponder : { tags: [ icon ] }
+	sprite icon_shell : { tags: [ icon ] }
+	sprite icon_blink : { tags: [ icon ] }
+	sprite icon_vindicate : { tags: [ icon ] }
+	sprite icon_judgement_for_all : { tags: [ icon ] }
+
+	cursor: { position: [ 0 768 ] }	
+	sprite icon_guardian_angel : { tags: [ icon ] }
+	sprite icon_pain_and_suffering: { tags: [ icon ] }
+	sprite icon_demon_lord: { tags: [ icon ] }
+	sprite icon_extinguish: { tags: [ icon ] }
+	sprite icon_helmet_6: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_helmet_7: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_helmet_8: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_helmet_9: { tags: [ icon head armor_plate armor_mail ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_head_12: { tags: [ icon head armor_mail armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_head_13: { tags: [ icon head armor_mail armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_head_14: { tags: [ icon head armor_mail armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_7: { tags: [ icon chest armor_mail armor_plate ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_8: { tags: [ icon chest armor_mail armor_plate ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_9: { tags: [ icon chest armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_chest_10: { tags: [ icon chest armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+
+	cursor: { position: [ 0 784 ] }	
+	sprite icon_pants_4: { tags: [ icon legs armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_pants_5: { tags: [ icon legs armor_cloth ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_sword_17: { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_sword_18: { tags: [ icon weapon_1h_sword weapon_2h_sword ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_staff_13: { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_staff_14: { tags: [ icon weapon_2h_staff ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_mace_16: { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_mace_17: { tags: [ icon weapon_1h_mace weapon_2h_mace ] icon_meta_data: !ICON_UNCOMMON_26{} }
+	sprite icon_sand_1: { tags: [ icon ] }
+	sprite icon_emerald_1: { tags: [ icon ] }
+	sprite icon_bottle_4: { tags: [ icon ] }
+	sprite icon_potion_6: { tags: [ icon ] }
+	sprite icon_potion_7: { tags: [ icon ] }
+	sprite icon_potion_8: { tags: [ icon ] }
+	sprite icon_potion_9: { tags: [ icon ] }
+	sprite icon_potion_10: { tags: [ icon ] }
+	
+	cursor: { position: [ 0 800 ] }	
+	sprite icon_potion_11: { tags: [ icon ] }
+	sprite icon_vampiric_edge: { tags: [ icon ] }
+	sprite icon_the_devouring_shroud: { tags: [ icon ] }
+	sprite icon_karethi_temple: { tags: [ icon ] }
+	sprite icon_token_3: { tags: [ icon ] }
+	sprite icon_key_3: { tags: [ icon ] }
+	sprite icon_axe_11: { tags: [ icon ] }
+	sprite icon_sword_19: { tags: [ icon ] }
+	sprite icon_staff_15: { tags: [ icon ] }
+	sprite icon_knife_6: { tags: [ icon ] }
+	sprite icon_mace_18: { tags: [ icon ] }
+	sprite icon_shield_11: { tags: [ icon ] }
+	sprite icon_knife_7: { tags: [ icon ] }
+	sprite icon_bow_3: { tags: [ icon ] }
+	sprite icon_sword_20: { tags: [ icon ] }
+	sprite icon_staff_16: { tags: [ icon ] }
+	
+	cursor: { position: [ 0 816 ] }	
+	sprite icon_banner_2: { tags: [ icon ] }
+	sprite icon_sanctified_might: { tags: [ icon ] }
+	sprite icon_rock_salt: { tags: [ icon ] }
+	sprite icon_blasting_salt: { tags: [ icon ] }
+	sprite icon_grenade_1: { tags: [ icon ] }
+	sprite icon_grenade_2: { tags: [ icon ] }
+	sprite icon_grenade_3: { tags: [ icon ] }
+	sprite icon_strife: { tags: [ icon ] }
+	sprite icon_bloodsoaked: { tags: [ icon ] }
+	sprite icon_knapsack_1: { tags: [ icon ] }
+	sprite icon_knapsack_2: { tags: [ icon ] }
+	sprite icon_token_4: { tags: [ icon ] }
+	sprite icon_trinket_1: { tags: [ icon ] }
+	sprite icon_ring_16: { tags: [ icon ] }
+	sprite icon_ring_17: { tags: [ icon ] }
+	sprite icon_necklace_17: { tags: [ icon ] }
+	
+	cursor: { position: [ 0 832 ] }	
+	sprite icon_cape_7: { tags: [ icon ] }
+	sprite icon_cape_8: { tags: [ icon ] }
+	sprite icon_cape_9: { tags: [ icon ] }
+	sprite icon_rock_3: { tags: [ icon ] }
+	sprite icon_black_horse: { tags: [ icon ] }
+	sprite icon_bracers_7: { tags: [ icon ] }
+	sprite icon_bracers_8: { tags: [ icon ] }
+	sprite icon_bone_3: { tags: [ icon ] }
+	sprite icon_fighter_2: { tags: [ icon ] }
+	sprite icon_priest_2: { tags: [ icon ] }
+	sprite icon_sorcerer_2: { tags: [ icon ] }
+	sprite icon_witch_2: { tags: [ icon ] }
+	sprite icon_paladin_2: { tags: [ icon ] }
+	sprite icon_witch_2_locked: { tags: [ icon ] }
+	sprite icon_paladin_2_locked: { tags: [ icon ] }
+	sprite icon_jul_hat_red: { tags: [ icon ] }
+
+	cursor: { position: [ 0 848 ] }	
+	sprite icon_jul_hat_green: { tags: [ icon ] }
+	sprite icon_jul_hat_blue: { tags: [ icon ] }
+	sprite icon_jul_hat_purple: { tags: [ icon ] }
 }
 
 

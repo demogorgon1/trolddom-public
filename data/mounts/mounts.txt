@@ -12,6 +12,7 @@
 	{
 		sprite: @_sprite
 		walk_sprites: @_walk_sprites
+		<exists _y_offset> y_offset: @_y_offset
 	}
 
 	!define local MOUNT_AURA
@@ -98,65 +99,112 @@
 
 	###############################################################################
 	# Brown Horse
+	{
+		${
+			_string: "Brown Horse"
+			_description: "Summons or dismisses a rideable horse."
+			_icon: icon_brown_horse
+			_id: brown_horse
+			_sprite: brown_horse_0
+			_walk_sprites: [ brown_horse_1 brown_horse_0 brown_horse_2 brown_horse_0 ]
+			_creature_type: beast
+			_cost: 20000
+			_level: 20	
+		}
 
-	${
-		_string: "Brown Horse"
-		_description: "Summons or dismisses a rideable horse."
-		_icon: icon_brown_horse
-		_id: brown_horse
-		_sprite: brown_horse_0
-		_walk_sprites: [ brown_horse_1 brown_horse_0 brown_horse_2 brown_horse_0 ]
-		_creature_type: beast
-		_cost: 20000
-		_level: 20	
+		mount brown_horse: !MOUNT{}
+		aura brown_horse: !MOUNT_AURA{}
+		ability brown_horse: !MOUNT_ABILITY{}
+		entity brown_horse: !MOUNT_ENTITY{}
+		item mount_brown_horse: !MOUNT_ITEM{}
 	}
-
-	mount brown_horse: !MOUNT{}
-	aura brown_horse: !MOUNT_AURA{}
-	ability brown_horse: !MOUNT_ABILITY{}
-	entity brown_horse: !MOUNT_ENTITY{}
-	item mount_brown_horse: !MOUNT_ITEM{}
 
 	###############################################################################
 	# Dark Brown Horse
+	{
+		${
+			_string: "Dark Brown Horse"
+			_description: "Summons or dismisses a rideable horse."
+			_icon: icon_dark_brown_horse
+			_id: dark_brown_horse
+			_sprite: dark_brown_horse_0
+			_walk_sprites: [ dark_brown_horse_1 dark_brown_horse_0 dark_brown_horse_2 dark_brown_horse_0 ]
+			_creature_type: beast
+			_cost: 300000
+			_level: 20	
+		}
 
-	${
-		_string: "Dark Brown Horse"
-		_description: "Summons or dismisses a rideable horse."
-		_icon: icon_dark_brown_horse
-		_id: dark_brown_horse
-		_sprite: dark_brown_horse_0
-		_walk_sprites: [ dark_brown_horse_1 dark_brown_horse_0 dark_brown_horse_2 dark_brown_horse_0 ]
-		_creature_type: beast
-		_cost: 300000
-		_level: 20	
+		mount dark_brown_horse: !MOUNT{}
+		aura dark_brown_horse: !MOUNT_AURA{}
+		ability dark_brown_horse: !MOUNT_ABILITY{}
+		entity dark_brown_horse: !MOUNT_ENTITY{}
+		item mount_dark_brown_horse: !MOUNT_ITEM{}
 	}
-
-	mount dark_brown_horse: !MOUNT{}
-	aura dark_brown_horse: !MOUNT_AURA{}
-	ability dark_brown_horse: !MOUNT_ABILITY{}
-	entity dark_brown_horse: !MOUNT_ENTITY{}
-	item mount_dark_brown_horse: !MOUNT_ITEM{}
-
+	
 	###############################################################################
 	# Gray Horse
+	{
+		${
+			_string: "Gray Horse"
+			_description: "Summons or dismisses a rideable horse."
+			_icon: icon_gray_horse
+			_id: gray_horse
+			_sprite: gray_horse_0
+			_walk_sprites: [ gray_horse_1 gray_horse_0 gray_horse_2 gray_horse_0 ]
+			_creature_type: beast
+			_cost: 300000
+			_level: 20	
+		}
 
-	${
-		_string: "Gray Horse"
-		_description: "Summons or dismisses a rideable horse."
-		_icon: icon_gray_horse
-		_id: gray_horse
-		_sprite: gray_horse_0
-		_walk_sprites: [ gray_horse_1 gray_horse_0 gray_horse_2 gray_horse_0 ]
-		_creature_type: beast
-		_cost: 300000
-		_level: 20	
+		mount gray_horse: !MOUNT{}
+		aura gray_horse: !MOUNT_AURA{}
+		ability gray_horse: !MOUNT_ABILITY{}
+		entity gray_horse: !MOUNT_ENTITY{ _wandering: true }
+		item mount_gray_horse: !MOUNT_ITEM{}
 	}
 
-	mount gray_horse: !MOUNT{}
-	aura gray_horse: !MOUNT_AURA{}
-	ability gray_horse: !MOUNT_ABILITY{}
-	entity gray_horse: !MOUNT_ENTITY{ _wandering: true }
-	item mount_gray_horse: !MOUNT_ITEM{}
+	###############################################################################
+	# Pony
+	{
+		${
+			_string: "Pony"
+			_description: "Summons or dismisses a rideable pony."
+			_icon: icon_pony
+			_id: pony
+			_sprite: pony_0
+			_walk_sprites: [ pony_1 pony_0 pony_2 pony_0 ]
+			_creature_type: beast
+			_cost: 300000
+			_level: 20	
+			_y_offset: 1
+		}
 
+		mount pony: !MOUNT{}
+		aura pony: !MOUNT_AURA{}
+		ability pony: !MOUNT_ABILITY{}
+		entity pony: !MOUNT_ENTITY{ _wandering: true }
+		item mount_pony: !MOUNT_ITEM{}
+	}
+
+	###############################################################################
+	# Black Horse
+	{
+		${
+			_string: "Black Horse"
+			_description: "Summons or dismisses a rideable horse."
+			_icon: icon_black_horse
+			_id: black_horse
+			_sprite: black_horse_0
+			_walk_sprites: [ black_horse_1 black_horse_0 black_horse_2 black_horse_0 ]
+			_creature_type: beast
+			_cost: 300000
+			_level: 20	
+		}
+
+		mount black_horse: !MOUNT{}
+		aura black_horse: !MOUNT_AURA{}
+		ability black_horse: !MOUNT_ABILITY{}
+		entity black_horse: !MOUNT_ENTITY{ _wandering: true }
+		item mount_black_horse: !MOUNT_ITEM{}
+	}
 }

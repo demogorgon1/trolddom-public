@@ -4,7 +4,6 @@
 #include "ComponentBase.h"
 #include "ComponentPool.h"
 #include "ComponentSchema.h"
-#include "Parser.h"
 
 namespace tpublic
 {

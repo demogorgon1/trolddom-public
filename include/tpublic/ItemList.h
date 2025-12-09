@@ -1,12 +1,16 @@
 #pragma once
 
 #include "Data/Ability.h"
-#include "Data/Item.h"
 
 #include "ErrorNotification.h"
 #include "ItemInstance.h"
 #include "IReader.h"
 #include "IWriter.h"
+
+namespace tpublic::Data
+{
+	struct Item;
+}
 
 namespace tpublic
 {

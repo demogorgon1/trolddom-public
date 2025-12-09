@@ -25,6 +25,7 @@ item weapon_blacksmithing_hammer:
 item weapon_fishing_rod:
 {
 	type: weapon_2h_staff
+	flags: [ fishing_rod ]
 	equipment_slots: [ main_hand ]
 	required_level: 1
 	item_level: 1
@@ -88,6 +89,15 @@ item item_brontium_ingot:
 	icon: icon_brontium_ingot
 	string: "Brontium Ingot"
 	stack: 20	
+	tags: [ blacksmithing ]
+}
+
+item item_cindralite_ingot:
+{
+	item_level: 20
+	icon: icon_cindralite_ingot
+	string: "Cindralite Ingot"
+	stack: 20
 	tags: [ blacksmithing ]
 }
 

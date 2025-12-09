@@ -50,13 +50,11 @@ namespace tpublic::Helpers
 		if(length + appendLength <= maxLength)
 		{
 			memcpy(aBuffer + length, aAppend, appendLength);
-			length += appendLength;
 		}
 		else if(length < maxLength)
 		{
 			appendLength = maxLength - length;
 			memcpy(aBuffer + length, aAppend, appendLength);
-			length = maxLength;
 		}
 	}
 

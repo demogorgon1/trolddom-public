@@ -15,6 +15,8 @@ talent_tree witch_necromancy:
 		talent witch_chill_touch: "G"
 		talent witch_bone_armor: "H"
 		talent witch_corpse_explosion: "I"
+		talent witch_icy_bones: "J"
+		talent witch_extinguish: "K"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -26,14 +28,116 @@ talent_tree witch_necromancy:
 
 	map:
 	[
-		"A...G.."
-		"......."
-		"E.D.BrC"
-		"..d...."
-		"..F.H.."
-		"....d.."
-		"....I.."
+		"G.E.A.."
+		"d......"
+		"JlD.BrC"
+		"..d...|"
+		"..F.H.|"
+		"....d.|"
+		"....I.|"
+		"......d"
+		"......K"
 	]	
+}
+
+###############################################################################
+# Extinguish
+
+talent witch_extinguish:
+{
+	string: "Extinguish"
+	talent_tree_points_required: 20
+	prerequisites: [ witch_improved_soul_leak ]
+	icon: icon_extinguish
+	points:
+	[
+		{ ability: extinguish }
+	]
+}
+
+particle_system extinguish:
+{
+	particle:
+	{
+		sprites: [ effect_arcane_missile ]
+		flags: [ attached no_rotation no_scaling ]
+		count: 1		
+		color_mod: [ 0 0 0 ]
+	}
+}
+
+ability extinguish:
+{
+	string: "Extinguish"
+	description: "Deals $damage$ damage to target. Restores 20% of your health and mana if this kills the target."
+	range: 8
+	cooldowns: [ global spell_unholy_lockout ]
+	cooldown: $cooldown { duration: 100 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ default in_combat ]
+	icon: icon_extinguish
+	talent_tree: witch_necromancy
+	speed: 7
+	projectile: extinguish
+	resource_cost mana: 18
+	target_particle_system: green_spell_hit
+	
+	kill_trigger_ability<self>: $ability [ icon string ]
+	{
+		states: [ default in_combat ]
+		flags: [ always_in_range always_in_line_of_sight no_delay ]
+		
+		direct_effect modify_resource:
+		{	
+			resource: health
+			function: { expression: a_mul_x a: 0.20 x: health_max entity: source }
+		}
+		
+		direct_effect modify_resource:
+		{	
+			resource: mana
+			function: { expression: a_mul_x a: 0.20 x: mana_max entity: source }
+		}		
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: unholy
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 32 ] [ 10 72 ] [ 20 136 ] [ 30 214 ] ] }															
+		spread: !DEFAULT_SPREAD{}
+	}
+}
+
+###############################################################################
+# Icy Bones
+
+talent witch_icy_bones:
+{
+	string: "Icy Bones"
+	icon: icon_icy_bones
+	prerequisites: [ witch_chill_touch witch_raise_dead ]
+	talent_tree_points_required: 5
+	points:
+	[
+		{ ability_modifier: witch_icy_bones }
+	]		
+}
+
+ability_modifier witch_icy_bones:
+{	
+	description: "Undead minion melee attacks slow target for 3 seconds."
+}
+
+aura witch_icy_bones:
+{
+	string: "Icy Bones"
+	description: "Reduced movement speed."
+	icon: icon_icy_bones
+	type: debuff
+	duration: 30
+	flags: [ unique magic ]					
+	aura_effect move_speed_modifier: { move_speed: slow }
 }
 
 ###############################################################################
@@ -42,7 +146,7 @@ talent_tree witch_necromancy:
 talent witch_corpse_explosion:
 {
 	string: "Corpse Explosion"
-	icon: icon_raise_dead
+	icon: icon_corpse_explosion
 	prerequisites: [ witch_bone_armor ]
 	talent_tree_points_required: 15
 	points:
@@ -70,7 +174,7 @@ particle_system corpse_explosion:
 ability corpse_explosion_tick:
 {
 	string: "Corpse Explosion"
-	flags: [ target_self target_aoe target_aoe_hostile ]
+	flags: [ target_aoe target_aoe_hostile ]
 	delay: 3
 	aoe_radius: 2
 	target_particle_system: corpse_explosion
@@ -79,7 +183,7 @@ ability corpse_explosion_tick:
 		flags: [ can_be_critical is_magical ]
 		requirement target<must_not_be_in_state>: dead
 		damage_type: unholy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.65 b: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] [ 30 132 ] ] }													
 	}
 }
 
@@ -123,8 +227,9 @@ ability corpse_explosion:
 	cooldowns: [ global spell_unholy_lockout ]
 	flags: [ spell target_aoe target_aoe_always_self interruptable ]
 	aoe_radius: 0
+	aoe_cap: 1
 	states: [ default in_combat ]
-	icon: icon_raise_dead
+	icon: icon_corpse_explosion
 	resource_cost mana: 20
 	talent_tree: witch_necromancy
 	cast_time: 20
@@ -138,7 +243,7 @@ ability corpse_explosion:
 		must_have_one_at_target:
 		[
 			{
-				creature_types: [ undead humanoid beast ]
+				creature_types: [ undead humanoid beast demon ]
 				entity_states: [ dead ]
 			}
 			
@@ -362,7 +467,6 @@ talent witch_enfeeblement:
 {
 	string: "Enfeeblement"
 	icon: icon_enfeeblement
-	talent_tree_points_required: 5
 	points:
 	[
 		{ ability: enfeeblement }
@@ -397,7 +501,7 @@ ability enfeeblement:
 	description: "Slows target casts and melee attacks for 30 seconds."
 	range: 7
 	cooldowns: [ global spell_unholy_lockout enfeeblement ]
-	flags: [ spell target_other target_hostile ]
+	flags: [ offensive spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_enfeeblement
 	resource_cost mana: 12
@@ -429,8 +533,9 @@ ability raise_dead:
 	description: "Raises a dead humanoid or undead to fight for you."
 	range: 7
 	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ spell target_aoe target_aoe_always_self interruptable minion_summon class_minion_summon ]
+	flags: [ spell target_aoe interruptable minion_summon class_minion_summon ]
 	aoe_radius: 0
+	aoe_cap: 1
 	states: [ default in_combat ]
 	icon: icon_raise_dead
 	resource_cost mana: 12
@@ -927,8 +1032,10 @@ aura shackle_undeath:
 	icon: icon_shackle_undeath
 	type: debuff
 	duration: 200
-	flags: [ unique magic cancel_on_damage single_target ]
+	flags: [ unique magic cancel_on_damage single_target incapacitation ]
 	aura_effect stun: { }
+	priority: !AURA_PRIORITY_CC{}	
+	diminishing_effect: cc
 }
 
 particle_system shackle_undeath:

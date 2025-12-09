@@ -1,0 +1,130 @@
+############################################################
+# Loot
+
+loot_group .boss_4: {}
+
+loot_table .boss_4:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message the_devouring_shroud: "Ixtli will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_4  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_4
+	}			
+
+	item the_devouring_shroud_4_1: !BOSS_DROP_CHEST { _string: "Robe of the Soothsayer" _icon: icon_cloth_shirt_5 _type: armor_cloth _healing: 3 _constitution: 1 _wisdom: 2 }	
+	item the_devouring_shroud_4_2: !BOSS_DROP_SHOULDERS { _string: "Mantle of Destruction" _icon: icon_cloth_shoulders_1 _type: armor_cloth _constitution: 1 _wisdom: 3 _spell_damage: 2 }	
+	item the_devouring_shroud_4_3: !BOSS_DROP_CHEST { _string: "Jungle-Forged Steel Armor" _icon: icon_chest_2 _type: armor_plate _constitution: 1 _budget_bias: -20 _block: 1 _dodge: 1 }	
+	item the_devouring_shroud_4_4: !BOSS_DROP_HANDS { _string: "Gloves of the Shadow Priest" _icon: icon_cloth_hands_1 _type: armor_cloth _spell_damage: 1 _wisdom: 2 _budget_bias: -10 _spell_crit: 1 }	
+	
+}
+
+############################################################
+# Boss
+
+zone .boss_4:
+{
+}
+
+encounter .boss_4:
+{
+	main_entities: [ the_devouring_shroud_boss_4 ]	
+}
+
+entity the_devouring_shroud_boss_4: !NPC 
+{ 
+	_string: "Ixtli" 
+	_guild_name: "High Priest"
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: lizard_man_6
+	_sprite_dead: lizard_man_6_dead 
+	_weapon_damage: 1.26
+	_resource_health: 3.9
+	_loot_table: .boss_4
+	_creature_type: humanoid
+	_encounter: .boss_4
+	_zone: .boss_4
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_in_combat_barks: [ { type: yell text: "Y'ruk z'erk!" flags: [ no_chat_bubble ] } ]	
+
+	_abilities: 
+	[
+		{
+			requirement self<must_have_less_health_than>: 95					
+			target: random_player
+			
+			id: $ability
+			{
+				string: "Chain Lightning"
+				range: 9
+				cast_time: 25
+				cooldowns: [ global spell_arcane_lockout ]
+				cooldown: $cooldown { duration: 70 }
+				flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+				states: [ default in_combat ]
+				icon: icon_chain_lightning
+				speed: 9
+				projectile: npc_chain_lightning
+				resource_cost mana: 20
+				target_particle_system: purple_spell_hit
+				
+				direct_effect damage:
+				{
+					flags: [ can_be_critical is_magical ]
+					damage_type: nature
+					function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 4 }		
+					spread: !DEFAULT_SPREAD{}						
+				}		
+				
+				direct_effect trigger_ability:
+				{
+					ability: npc_chain_lightning_secondary
+					target: random_nearby
+				}
+			}
+		}
+	
+		{
+			requirement self<must_have_less_health_than>: 70
+			target: low_health_friend_or_self
+			id: npc_heal
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_4_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_4:
+{
+	entity the_devouring_shroud_boss_4: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_4_killed
+		}
+	}
+}
+

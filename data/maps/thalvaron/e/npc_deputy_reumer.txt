@@ -1,0 +1,77 @@
+dialogue_screen .deputy_reumer:
+{
+	text: 
+	[	
+		"Argh! The mosquitoes!"
+	]		
+	
+	options:
+	[
+		{ quest: .deputy_reumer_1 }
+	]
+}
+
+entity thalvaron_deputy_reumer: !NPC
+{
+	_string: "Deputy Reumer"
+	_sprite: man_13
+	_sprite_dead: man_13_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .deputy_reumer: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .deputy_reumer_1:
+{
+	string: "Mirefiends Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_mirefiend_lurker thalvaron_mirefiend_dweller ]
+		count: 8
+	}
+}
+
+{
+	${ _level: 27 }
+	item .deputy_reumer_1_a: !QUEST_REWARD_BACK{ _string: "Mirefiend Skin Cape" _icon: icon_cape_5 _constitution: 1 _wisdom: 2 _spell_damage: 1 _type: armor_cloth }
+	item .deputy_reumer_1_b: !QUEST_REWARD_WAIST{ _string: "Warstride Girdle" _icon: icon_kobold_tail _dexterity: 1 _strength: 3 _type: armor_mail }
+}
+
+quest .deputy_reumer_1:
+{
+	string: "Swamp Monsters"
+
+	text:
+	[
+		"Kill monsters in the swamp to the south."
+	]
+	
+	description: 
+	[
+		"I have no idea what these creatures are or how they came to be, but they're too many of them. They're some kind of humanoid creeps walking around the swamp. If you get too close to them, they'll"
+		"attack you and try to kill you. What's up with them? Please help me getting rid of them. If we ever want to civilize this place, they must go."
+	]
+
+	progress:
+	[
+		"Too many mosquitoes? I agree."
+	]
+	
+	completion:
+	[
+		"Hopefully they don't reproduce very fast."
+	]
+	
+	objectives: [ .deputy_reumer_1 ]
+	level: 27
+	reward_one_item: [ .deputy_reumer_1_a .deputy_reumer_1_b ]
+}

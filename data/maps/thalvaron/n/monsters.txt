@@ -1084,15 +1084,15 @@ loot_table .hounds_and_wolves:
 		_level: 16
 		_faction: monsters
 		_creature_type: beast
-		_default_behavior_state: .wandering_short				
-		_loot_table: .hounds_and_wolves 
+		_default_behavior_state: .wandering_short						
 		_weapon_damage: 1.2 
 		_resource_health: 1.3
 		_abilities: [ { id: npc_rend } { id: npc_attack } ]
 	}
 
-	entity thalvaron_night_hound: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead  }
-	entity thalvaron_night_hound_minion: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead _despawn_on_leave_combat: true }
+	entity thalvaron_night_hound: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead _loot_table: .hounds_and_wolves }
+	entity thalvaron_night_hound_minion: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead _despawn_on_leave_combat: true _loot_table: .hounds_and_wolves }
+	entity thalvaron_night_hound_minion_no_xp: !NPC { _string: "Night Hound" _sprite: wolf_5 _sprite_dead: wolf_5_dead _despawn_on_leave_combat: true _no_kill_event: true }
 }
 
 # Mountain Troll
@@ -1299,7 +1299,7 @@ loot_table .hounds_and_wolves:
 		direct_effect spawn_entity:
 		{
 			map_entity_spawn: thalvaron_vampire_boss_minion_1
-			entity: thalvaron_night_hound_minion
+			entity: thalvaron_night_hound_minion_no_xp
 			spawn_flags: [ no_owner ]
 			npc_target_threat: 20
 		}
@@ -1307,7 +1307,7 @@ loot_table .hounds_and_wolves:
 		direct_effect spawn_entity:
 		{
 			map_entity_spawn: thalvaron_vampire_boss_minion_2
-			entity: thalvaron_night_hound_minion
+			entity: thalvaron_night_hound_minion_no_xp
 			spawn_flags: [ no_owner ]
 			npc_target_threat: 20
 		}		
@@ -1330,6 +1330,7 @@ loot_table .hounds_and_wolves:
 			damage_type: poison
 			function: 48
 			requirement target<must_not_have_aura>: .damon_arkwright_3_quest_item
+			direct: false
 		}
 
 		direct_effect damage:
@@ -1337,6 +1338,7 @@ loot_table .hounds_and_wolves:
 			damage_type: poison
 			function: 9
 			requirement target<must_have_aura>: .damon_arkwright_3_quest_item
+			direct: false
 		}
 	}
 
@@ -1982,7 +1984,7 @@ map_entity_spawn thalvaron_throgar:
 		_sprite: wolf_7 
 		_sprite_dead: wolf_7_dead
 		_weapon_damage: 1.5
-		_health: 6.6
+		_resource_health: 4.1
 		_immune_to_stun: true
 		_immune_to_immobilize: true
 		_immune_to_slow: true

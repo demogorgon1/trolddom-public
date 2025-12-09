@@ -2,6 +2,7 @@
 
 #include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Tag.h>
+#include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/WordGenerator.h>
 
 #include <tpublic/GenerateWord.h>

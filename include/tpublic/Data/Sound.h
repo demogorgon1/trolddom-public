@@ -36,6 +36,8 @@ namespace tpublic
 							m_streamed = aChild->GetBool();
 						else if (aChild->m_name == "cooldown_ms")
 							m_cooldownMS = aChild->GetUInt32();
+						else if (aChild->m_name == "volume")
+							m_volume = aChild->GetFloat();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -48,6 +50,7 @@ namespace tpublic
 			{
 				aWriter->WriteBool(m_streamed);
 				aWriter->WriteUInt(m_cooldownMS);
+				aWriter->WriteFloat(m_volume);
 			}
 			
 			bool
@@ -58,12 +61,15 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_cooldownMS))
 					return false;
+				if (!aReader->ReadFloat(m_volume))
+					return false;
 				return true;
 			}
 
 			// Public data			
 			bool				m_streamed = false;
 			uint32_t			m_cooldownMS = 80;
+			float				m_volume = 1.0f;
 			std::string			m_source; // Not serialized
 		};
 

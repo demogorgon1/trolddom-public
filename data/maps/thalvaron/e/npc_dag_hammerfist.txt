@@ -1,0 +1,143 @@
+dialogue_screen .dag_hammerfest:
+{
+	text: 
+	[	
+		"If you're heading south, don't forget to bring a drink or two."
+	]		
+	
+	options:
+	[
+		{ quest: .dag_hammerfest_1 }
+		{ quest: .dag_hammerfest_2 }
+	]
+}
+
+entity thalvaron_dag_hammerfest: !NPC
+{
+	_string: "Dag Hammerfest"
+	_sprite: dwarf_23
+	_sprite_dead: dwarf_23_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .dag_hammerfest: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .dag_hammerfest_1_quest_item: {}
+
+item .dag_hammerfest_1_quest_item:
+{
+	icon: icon_talon_1
+	item_level: 29
+	loot_groups: [ .dag_hammerfest_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Stalker Claw"
+	quest: .dag_hammerfest_1
+	stack: 8
+}
+
+objective .dag_hammerfest_1:
+{
+	string: "Stalker Claws"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .dag_hammerfest_1_quest_item count: 8 }
+}
+
+quest .dag_hammerfest_1:
+{
+	string: "Vicious Desert Creatures"
+
+	text:
+	[
+		"Collect claws from fledgling stalkers in the desert."
+	]
+	
+	description: 
+	[
+		"I came from up north because I heard about these weird creatures that live in this desert. I'm not really sure what they are, but they're some type of wild bipedal beast. Instead of arms they have sharp spikes"
+		"they use to impale their prey. What do they even hunt? I don't know. Anyway, I'm interested in these peculiar spikes, claws, or whatever you'll call them. Can you collect some for me? You'll find them all over"
+		"the Kareth desert."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"Interesting! Are they as sharp as they look?"
+	]
+
+	objectives: [ .dag_hammerfest_1 ]
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+loot_group .dag_hammerfest_2_quest_item: {}
+
+item .dag_hammerfest_2_quest_item:
+{
+	icon: icon_talon_2
+	item_level: 30
+	loot_groups: [ .dag_hammerfest_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Superior Stalker Claw"
+	quest: .dag_hammerfest_2	
+}
+
+objective .dag_hammerfest_2:
+{
+	string: "Superior Stalker Claw"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .dag_hammerfest_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 30 }
+	item .dag_hammerfest_2_a: !QUEST_REWARD_HEAD{ _string: "Desert Wanderer's Hood" _icon: icon_head_10 _constitution: 1 _healing: 2 _spirit: 1 _type: armor_cloth }
+	item .dag_hammerfest_2_b: !QUEST_REWARD_BACK{ _string: "Cape of the Stalker" _icon: icon_cape_1 _constitution: 2 _strength: 1 _parry_chance: 1 _budget_bias: -10 _type: armor_cloth }
+}
+
+quest .dag_hammerfest_2:
+{
+	string: "Icing of the Cake"
+
+	text:
+	[
+		"Retrieve a claw of the large stalker in a cave south of the oasis to the south."
+	]
+	
+	description: 
+	[
+		"The claws you brought me were very nice, but they clearly came from juvenile creatures. I've heard rumors of a larger specimen being spotted in a cave near the oasis to the south. Somewhere south of it,"
+		"in the mountains at the far side of the desert. Can you bring me back the claw of that one? Thanks in advance."
+	]
+
+	progress:
+	[
+		"Getting too hot?"
+	]
+	
+	completion:
+	[
+		"Amazing. I'll take it back to Durgan Tharok and study it."
+	]
+
+	prerequisites: [ .dag_hammerfest_1 ]
+	objectives: [ .dag_hammerfest_2 ]
+	reward_one_item: [ .dag_hammerfest_2_a .dag_hammerfest_2_b ]
+	level: 30
+}
+

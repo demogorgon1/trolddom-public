@@ -131,6 +131,21 @@ particle_system net_trap:
 	}
 }
 
+particle_system burning:
+{
+	particle:
+	{
+		sprites: [ effect_burning_0 effect_burning_1 effect_burning_2 effect_burning_3 effect_burning_4 ]
+		flags: [ attached ]
+		count: 1
+		scale: 1
+		alpha: 0.7
+		offset_x: 0.5
+		offset_y: 0.5	
+		sprite_interval: 80
+	}
+}
+
 particle_system web_trap:
 {
 	particle:

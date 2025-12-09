@@ -64,7 +64,7 @@ namespace tpublic
 				FIELD_VERSION,
 				FIELD_TIME_STAMP,
 				FIELD_ANYONE_CAN_LOOT,
-				FIELD_SPECIAL_LOOT_COOLDOWN_ID
+				FIELD_SPECIAL_LOOT_COOLDOWN_ID,
 			};
 
 			static void
@@ -131,6 +131,8 @@ namespace tpublic
 				m_version = 0;
 				m_anyoneCanLoot = false;
 				m_specialLootCooldownId = 0;
+
+				m_extraLootTableId = 0;
 			}
 
 			// Public data
@@ -143,6 +145,9 @@ namespace tpublic
 			uint64_t					m_timeStamp = 0;
 			uint32_t					m_version = 0;	
 			uint32_t					m_specialLootCooldownId = 0;
+
+			// Internal
+			uint32_t					m_extraLootTableId = 0;
 		};
 	}
 

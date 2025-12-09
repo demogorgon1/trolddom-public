@@ -80,6 +80,25 @@ sprites:
 	sprite gs_stone_wall_e: { }
 	sprite gs_stone_wall_s: { }	
 	
+	cursor: { position: [ 0 64 ] }
+
+	sprite desert_wall_w_e: { }
+	sprite desert_wall_n_s: { }
+	sprite desert_wall_w_s: { }
+	sprite desert_wall_e_s: { }
+	sprite desert_wall_n_e: { }
+	sprite desert_wall_w_n: { }
+	sprite desert_wall_w_e_s: { }
+	sprite desert_wall_w_e_n: { }
+	sprite desert_wall_w_n_s: { }
+	sprite desert_wall_e_n_s: { }
+	sprite desert_wall_w_e_n_s: { }
+	sprite desert_wall: { }
+	sprite desert_wall_n: { }
+	sprite desert_wall_w: { }
+	sprite desert_wall_e: { }
+	sprite desert_wall_s: { }	
+		
 }
 
 wall stone_wall:
@@ -179,5 +198,30 @@ wall gs_stone_wall:
         gs_stone_wall_e_n_s		
         gs_stone_wall_w_n_s
         gs_stone_wall_w_e_n_s
+	]
+}
+
+wall desert_wall:
+{
+	flags: [ block_line_of_sight ]
+
+	sprites: 
+	[ 
+        desert_wall
+		desert_wall_e
+		desert_wall_w	
+		desert_wall_w_e
+		desert_wall_n
+        desert_wall_n_e
+        desert_wall_w_n
+        desert_wall_w_e_n
+		desert_wall_s
+        desert_wall_e_s
+	    desert_wall_w_s
+        desert_wall_w_e_s		
+		desert_wall_n_s
+        desert_wall_e_n_s		
+        desert_wall_w_n_s
+        desert_wall_w_e_n_s
 	]
 }

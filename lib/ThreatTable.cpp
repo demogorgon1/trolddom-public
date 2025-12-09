@@ -65,6 +65,8 @@ namespace tpublic
 
 			entry->m_key = aSourceEntityInstance;
 			entry->m_threat = aThreat;
+			if(entry->m_threat < 0)
+				entry->m_threat = 0;
 
 			Entry* insertBefore = _FindHighestLessThan(aThreat);
 			if(insertBefore != NULL)
@@ -81,15 +83,19 @@ namespace tpublic
 
 		if(aTick > m_tick)
 			m_tick = aTick;
+
+		FastValidate();
 	}
 
-	void			
+	int32_t
 	ThreatTable::Multiply(
 		int32_t						aTick,
 		const SourceEntityInstance& aSourceEntityInstance,
 		float						aFactor)
 	{
 		assert(aFactor > 0.0f);
+
+		int32_t returnValue = INT32_MAX;
 
 		Table::iterator i = m_table.find(aSourceEntityInstance);
 		if (i != m_table.end())
@@ -104,10 +110,16 @@ namespace tpublic
 				threatChange = (int32_t)((float)entry->m_threat * (aFactor - 1.0f));
 
 			_Add(entry, threatChange);
+
+			returnValue = threatChange;
 		}
 
 		if (aTick > m_tick)
 			m_tick = aTick;
+
+		FastValidate();
+
+		return returnValue;
 	}
 
 	void			
@@ -121,15 +133,24 @@ namespace tpublic
 			Table::iterator i = m_table.find(aSourceEntityInstanceq);
 			if (i != m_table.end())
 				entry = i->second;
-			
-			if(entry != m_head && entry != NULL)
+
+			assert(m_table.size() > 0);
+
+			if (entry != m_head)
 			{
-				int32_t topThreat = m_head->m_threat;
+				int32_t topThreat = m_head->m_threat + 1;
 
-				entry->m_threat = topThreat;
+				if(entry == NULL)
+				{
+					Add(aTick, aSourceEntityInstanceq, topThreat);
+				}
+				else if(entry->m_threat < m_head->m_threat)
+				{
+					entry->m_threat = topThreat;
 
-				_Detach(entry);
-				_InsertBefore(entry, m_head);
+					_Detach(entry);
+					_InsertBefore(entry, m_head);
+				}
 			}
 		}
 		else
@@ -139,6 +160,8 @@ namespace tpublic
 
 		if (aTick > m_tick)
 			m_tick = aTick;
+
+		FastValidate();
 	}
 
 	void	
@@ -152,6 +175,8 @@ namespace tpublic
 
 			m_table.erase(i);
 		}
+
+		FastValidate();
 	}
 
 	void			
@@ -208,14 +233,24 @@ namespace tpublic
 		uint32_t								aSeed)
 	{
 		std::vector<Entry*> tmp;
-		for (Entry* t = m_head; t != NULL; t = t->m_next)
+
+		Entry* t = m_head;
+
+		while(t != NULL)
 		{
+			Entry* next = t->m_next;
+
 			t->m_next = NULL;
 			t->m_prev = NULL;
+			
 			tmp.push_back(t);
+
+			t = next;
 		}
+
 		m_head = NULL;
 		m_tail = NULL;
+
 		uint32_t r = aSeed;
 
 		while(tmp.size() > 0)
@@ -244,6 +279,57 @@ namespace tpublic
 	{
 		for (const Entry* t = GetTop(); t != NULL; t = t->m_next)
 			aOutEntityInstanceIds.push_back(t->m_key.m_entityInstanceId);
+	}
+
+	void			
+	ThreatTable::Validate() const
+	{
+		FastValidate();
+
+		int32_t prevThreat = INT32_MAX;
+		std::unordered_set<SourceEntityInstance, SourceEntityInstance::Hasher> entitySet;
+
+		for (const Entry* t = GetTop(); t != NULL; t = t->m_next)
+		{
+			assert(!entitySet.contains(t->m_key));
+			assert(t->m_threat <= prevThreat);
+			TP_UNUSED(prevThreat);
+
+			entitySet.insert(t->m_key);
+			prevThreat = t->m_threat;
+		}
+
+		assert(entitySet.size() == m_table.size());
+	}
+
+	void			
+	ThreatTable::FastValidate() const
+	{
+		if(m_head == NULL)
+		{
+			assert(m_tail == NULL);
+			assert(m_table.size() == 0);
+		}
+		else
+		{
+			assert(m_head->m_prev == NULL);
+		}
+		
+		if(m_tail == NULL)
+		{
+			assert(m_head == NULL);
+			assert(m_table.size() == 0);
+		}
+		else
+		{
+			assert(m_tail->m_next == NULL);
+		}
+
+		if(m_table.size() == 0)
+		{
+			assert(m_head == NULL);
+			assert(m_tail == NULL);
+		}
 	}
 
 	//------------------------------------------------------------------------------

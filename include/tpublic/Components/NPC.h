@@ -489,6 +489,11 @@ namespace tpublic
 				FIELD_DISPLAY_NAME_WHEN_DEAD,
 				FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE,
 				FIELD_NO_KILL_EVENT,
+				FIELD_GLOBAL_AURA,
+				FIELD_AGGRO_RANGE_BIAS,
+				FIELD_COMBAT_MOVE_INTERVAL_TICKS,
+				FIELD_NO_COMBAT_TAG,
+				FIELD_HAS_HEAD_ANCHOR
 			};
 
 			static void
@@ -517,6 +522,11 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_STRING, FIELD_DISPLAY_NAME_WHEN_DEAD, "display_name_when_dead", offsetof(NPC, m_displayNameWhenDead));
 				aSchema->Define(ComponentSchema::TYPE_UINT8, FIELD_INACTIVE_ENCOUNTER_DESPAWN_STATE, "inactive_encounter_despawn_state", offsetof(NPC, m_inactiveEncounterDespawnState))->SetFlags(ComponentSchema::FLAG_ENTITY_STATE);
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_KILL_EVENT, "no_kill_event", offsetof(NPC, m_noKillEvent));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_GLOBAL_AURA, "global_aura", offsetof(NPC, m_globalAuraId))->SetDataType(DataType::ID_AURA);
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_AGGRO_RANGE_BIAS, "aggro_range_bias", offsetof(NPC, m_aggroRangeBias));
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_COMBAT_MOVE_INTERVAL_TICKS, "combat_move_interval_ticks", offsetof(NPC, m_combatMoveIntervalTicks));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_COMBAT_TAG, "no_combat_tag", offsetof(NPC, m_noCombatTag));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_HAS_HEAD_ANCHOR, "has_head_anchor", offsetof(NPC, m_hasHeadAnchor));
 			}
 
 			const StateEntry*
@@ -556,6 +566,11 @@ namespace tpublic
 				m_displayNameWhenDead.clear();
 				m_inactiveEncounterDespawnState = EntityState::INVALID_ID;
 				m_noKillEvent = false;
+				m_globalAuraId = 0;
+				m_aggroRangeBias = 0;
+				m_combatMoveIntervalTicks = 2;
+				m_noCombatTag = false;
+				m_hasHeadAnchor = false;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -577,6 +592,7 @@ namespace tpublic
 				m_handledRouteTriggerIndices.clear();
 				m_effectiveRouteId = 0;
 				m_patrolResetAfterLeavingCombat = false;
+				m_moveFailureAccum = 0;
 			}
 
 			// Public data			
@@ -602,6 +618,11 @@ namespace tpublic
 			std::string									m_displayNameWhenDead;
 			EntityState::Id								m_inactiveEncounterDespawnState = EntityState::INVALID_ID;
 			bool										m_noKillEvent = false;
+			uint32_t									m_globalAuraId = 0;
+			int32_t										m_aggroRangeBias = 0;
+			int32_t										m_combatMoveIntervalTicks = 2;
+			bool										m_noCombatTag = false;
+			bool										m_hasHeadAnchor = false;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;
@@ -622,6 +643,7 @@ namespace tpublic
 			uint32_t									m_effectiveRouteId = 0;
 			Vec2										m_lastTargetPosition;
 			bool										m_patrolResetAfterLeavingCombat = false;
+			uint32_t									m_moveFailureAccum = 0;
 
 			struct SpawnWithTarget
 			{

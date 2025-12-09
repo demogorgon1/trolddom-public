@@ -13,6 +13,22 @@ profession mining<primary>:
 	}
 
 	#############################################################################
+	# Rock Salt
+	{
+		${
+			_icon: icon_rock_salt
+			_item_string: "Rock Salt"
+			_loot_groups: [ .mining_rock_salt ]
+			_rarity: common
+			_item_level: 1
+			_value_multiplier: 10
+		}
+
+		loot_group .mining_rock_salt: { }
+		item item_rock_salt: !GATHER_ITEM { }
+	}
+
+	#############################################################################
 	# Verdigrisite
 	{
 		${
@@ -97,6 +113,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_copper } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_verdigrisite } possibility: { weight: 1 loot_group: .mining_roseate } } 
+				{ possibility: { weight: 8 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 
 			] 
 		}
 		item item_copper_ore: !GATHER_ITEM { }
@@ -124,6 +141,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_iron } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+				{ possibility: { weight: 8 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 				
 			] 
 		}
 		item item_iron_ore: !GATHER_ITEM { }
@@ -151,6 +169,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_azuryte } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+				{ possibility: { weight: 7 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
 			] 
 		}
 		item item_azuryte_ore: !GATHER_ITEM { }
@@ -177,8 +196,9 @@ profession mining<primary>:
 		{ 
 			slots: 
 			[ 
-				{ possibility: { loot_group: .mining_gold } } 
+				{ possibility: { loot_group: .mining_gold } } 				
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+				{ possibility: { weight: 6 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
 			] 
 		}
 		item item_gold_ore: !GATHER_ITEM { }
@@ -206,6 +226,7 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_mithril } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+				{ possibility: { weight: 5 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 								
 			] 
 		}
 		item item_mithril_ore: !GATHER_ITEM { }
@@ -233,10 +254,39 @@ profession mining<primary>:
 			[ 
 				{ possibility: { loot_group: .mining_brontium } } 
 				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: .mining_azure_mirage_stone } possibility: { weight: 1 loot_group: .mining_amethystine } } 
+				{ possibility: { weight: 5 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 												
 			] 
 		}
 		item item_brontium_ore: !GATHER_ITEM { }
 		entity mining_brontium_vein: !GATHER_ENTITY { }
+	}
+
+	#############################################################################
+	# Cindralite
+	{
+		${
+			_icon: icon_cindralite_ore
+			_item_string: "Cindralite Ore"
+			_entity_string: "Cindralite Vein"
+			_loot_groups: [ .mining_cindralite ]
+			_loot_table: .mining_cindralite
+			_profession_skill: 85
+			_sprite: cindralite_vein
+			_item_level: 20
+		}
+
+		loot_group .mining_cindralite: { }
+		loot_table .mining_cindralite: 
+		{ 
+			slots: 
+			[ 
+				{ possibility: { loot_group: .mining_cindralite } } 
+				{ possibility: { weight: 30 } possibility: { weight: 2 loot_group: fire_elementals } possibility: { weight: 1 loot_group: fire_elementals_uncommon } }
+				{ possibility: { weight: 5 } possibility: { weight: 1 loot_group: .mining_rock_salt } } 												
+			] 
+		}
+		item item_cindralite_ore: !GATHER_ITEM { }
+		entity mining_cindralite_vein: !GATHER_ENTITY { }
 	}
 
 }

@@ -24,10 +24,30 @@
 
 	direct_effect spawn_entity:
 	{
+		requirement self<must_not_have_aura>: emblem_of_triumph_trinket
+	
 		spawn_flags: [ no_owner ]
 		entity: @_entity
 		init_state: spawning
 	}
+	
+	direct_effect spawn_entity:
+	{
+		requirement self<must_have_aura>: emblem_of_triumph_trinket
+	
+		spawn_flags: [ no_owner source_level ]
+		entity: @_entity_level_match
+		init_state: spawning
+				
+		refresh_npc_metrics: 
+		{
+			weapon_damage: @_weapon_damage
+			health: @_resource_health
+			armor: @_armor
+			
+			update: true # Refresh stats even if already defined
+		}
+	}	
 }
 
 ##############################################################################
@@ -37,12 +57,13 @@
 		_item_name: "Mercenary Contract: Barbarian"
 		_ability: .mercenary_contract_barbarian
 		_entity: .mercenary_contract_barbarian
+		_entity_level_match: .mercenary_contract_barbarian_level_match
 		_name_template: .mercenary_contract_barbarian		
 		_ability_consume: { mercenary_contract_barbarian: 1 }
 		_reimburse_item: mercenary_contract_barbarian
 		_level: 6	
 		_cost: 1100
-		_has_rage: true
+		_has_rage: true		
 		_weapon_damage: 1.2
 		_resource_health: 0.8
 		_armor: 0.7
@@ -165,6 +186,7 @@
 
 	ability .mercenary_contract_barbarian: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_barbarian: !MINION{}
+	entity .mercenary_contract_barbarian_level_match: !MINION{ _store_combat_data: true _required_owner_aura: emblem_of_triumph_trinket } 
 	item mercenary_contract_barbarian: !MERCENARY_CONTRACT_ITEM{}
 }
 
@@ -175,6 +197,7 @@
 		_item_name: "Mercenary Contract: Shieldmaiden"
 		_ability: .mercenary_contract_shield_maiden
 		_entity: .mercenary_contract_shield_maiden
+		_entity_level_match: .mercenary_contract_shield_maiden_level_match
 		_name_template: .mercenary_contract_shield_maiden
 		_ability_consume: { mercenary_contract_shield_maiden: 1 }
 		_reimburse_item: mercenary_contract_shield_maiden
@@ -297,6 +320,7 @@
 	
 	ability .mercenary_contract_shield_maiden: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_shield_maiden: !MINION{}
+	entity .mercenary_contract_shield_maiden_level_match: !MINION{ _store_combat_data: true _required_owner_aura: emblem_of_triumph_trinket }
 	item mercenary_contract_shield_maiden: !MERCENARY_CONTRACT_ITEM{}
 }
 
@@ -307,6 +331,7 @@
 		_item_name: "Mercenary Contract: Cleric"
 		_ability: .mercenary_contract_cleric
 		_entity: .mercenary_contract_cleric
+		_entity_level_match: .mercenary_contract_cleric_level_match
 		_name_template: .mercenary_contract_cleric
 		_ability_consume: { mercenary_contract_cleric: 1 }
 		_reimburse_item: mercenary_contract_cleric
@@ -414,7 +439,7 @@
 		{
 			flags: [ can_be_critical is_magical ]
 			damage_type: fire
-			function: { expression: a a: [ [ 1 6 ] [ 10 11 ] ] }			
+			function: { expression: a a: [ [ 1 6 ] [ 10 11 ] [ 20 22 ] [ 30 33 ] ] }			
 		}					
 	}
 	
@@ -435,12 +460,14 @@
 
 		direct_effect heal:
 		{	
-			function: { expression: a a: [ [ 1 8 ] [ 10 19 ] ] }		
+			function: { expression: a a: [ [ 1 8 ] [ 10 19 ] [ 20 110 ] [ 30 147 ] ] }		
+			spread: !DEFAULT_SPREAD{}						
 		}		
 	}
 	
 	ability .mercenary_contract_cleric: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_cleric: !MINION{}
+	entity .mercenary_contract_cleric_level_match: !MINION{ _store_combat_data: true _required_owner_aura: emblem_of_triumph_trinket }
 	item mercenary_contract_cleric: !MERCENARY_CONTRACT_ITEM{}
 }
 
@@ -451,6 +478,7 @@
 		_item_name: "Mercenary Contract: Assassin"
 		_ability: .mercenary_contract_assassin
 		_entity: .mercenary_contract_assassin
+		_entity_level_match: .mercenary_contract_assassin_level_match
 		_name_template: .mercenary_contract_assassin		
 		_ability_consume: { mercenary_contract_assassin: 1 }
 		_reimburse_item: mercenary_contract_assassin
@@ -616,6 +644,7 @@
 		{
 			damage_type: bleed
 			function: 32
+			direct: false
 		}
 	}
 
@@ -626,19 +655,22 @@
 		icon: icon_rage		
 		type: debuff
 		duration: based_on_effects
-		flags: [ unique ]
+		flags: [ unique incapacitation ]
 		aura_effect stun: { }
+		priority: !AURA_PRIORITY_CC{}	
 		particle_system: knock		
 		aura_effect repeat: 
 		{ 
 			update_interval: 10
 			update_count: 4
 			ability: .mercenary_contract_assassin_backstab_tick
-		}				
+		}		
+		diminishing_effect: stun			
 	}
 
 	ability .mercenary_contract_assassin: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_assassin: !MINION{}
+	entity .mercenary_contract_assassin_level_match: !MINION{  _store_combat_data: true _required_owner_aura: emblem_of_triumph_trinket }
 	item mercenary_contract_assassin: !MERCENARY_CONTRACT_ITEM{}
 }
 
@@ -649,6 +681,7 @@
 		_item_name: "Mercenary Contract: Coinaxe"
 		_ability: .mercenary_contract_dwarven_coinaxe
 		_entity: .mercenary_contract_dwarven_coinaxe
+		_entity_level_match: .mercenary_contract_dwarven_coinaxe_level_match
 		_name_template: .mercenary_contract_dwarven_coinaxe
 		_ability_consume: { mercenary_contract_dwarven_coinaxe: 1 }
 		_reimburse_item: mercenary_contract_dwarven_coinaxe
@@ -771,6 +804,7 @@
 	
 	ability .mercenary_contract_dwarven_coinaxe: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_dwarven_coinaxe: !MINION{}
+	entity .mercenary_contract_dwarven_coinaxe_level_match: !MINION{ _store_combat_data: true _required_owner_aura: emblem_of_triumph_trinket }
 	item mercenary_contract_dwarven_coinaxe: !MERCENARY_CONTRACT_ITEM{}
 }
 
@@ -781,6 +815,7 @@
 		_item_name: "Mercenary Contract: Warden"
 		_ability: .mercenary_contract_elf_warden
 		_entity: .mercenary_contract_elf_warden
+		_entity_level_match: .mercenary_contract_elf_warden_level_match
 		_name_template: .mercenary_contract_elf_warden
 		_ability_consume: { mercenary_contract_elf_warden: 1 }
 		_reimburse_item: mercenary_contract_elf_warden
@@ -904,11 +939,13 @@
 
 		direct_effect heal:
 		{	
-			function: 95
+			function: { expression: a a: [ [ 20 95 ] [ 30 123 ] ] }		
+			spread: !DEFAULT_SPREAD{}				
 		}		
 	}
 	
 	ability .mercenary_contract_elf_warden: !MERCENARY_CONTRACT_ABILITY{}
 	entity .mercenary_contract_elf_warden: !MINION{}
+	entity .mercenary_contract_elf_warden_level_match: !MINION{ _store_combat_data: true _required_owner_aura: emblem_of_triumph_trinket }
 	item mercenary_contract_elf_warden: !MERCENARY_CONTRACT_ITEM{}
 }

@@ -31,6 +31,12 @@ namespace tpublic::DirectEffects
 					m_maxHealthPercentage = aChild->GetBool();
 				else if (aChild->m_name == "conditional_critical_chance_bonus")
 					m_conditionalCriticalChanceBonuses.push_back(ConditionalCriticalChanceBonus(aChild));
+				else if (aChild->m_name == "spread")
+					m_spread = aChild->GetFloat();
+				else if (aChild->m_name == "threat_multiplier")
+					m_threatMultiplier = aChild->GetFloat();
+				else if (aChild->m_name == "direct")
+					m_direct = aChild->GetBool();
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 			}
@@ -45,6 +51,9 @@ namespace tpublic::DirectEffects
 		m_function.ToStream(aStream);
 		aStream->WriteBool(m_maxHealthPercentage);
 		aStream->WriteObjects(m_conditionalCriticalChanceBonuses);
+		aStream->WriteFloat(m_spread);
+		aStream->WriteFloat(m_threatMultiplier);
+		aStream->WriteBool(m_direct);
 	}
 			
 	bool	
@@ -58,6 +67,12 @@ namespace tpublic::DirectEffects
 		if (!aStream->ReadBool(m_maxHealthPercentage))
 			return false;
 		if(!aStream->ReadObjects(m_conditionalCriticalChanceBonuses))
+			return false;
+		if (!aStream->ReadFloat(m_spread))
+			return false;
+		if (!aStream->ReadFloat(m_threatMultiplier))
+			return false;
+		if(!aStream->ReadBool(m_direct))
 			return false;
 		return true;
 	}
@@ -85,7 +100,15 @@ namespace tpublic::DirectEffects
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		uint32_t heal = (uint32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget);
+		float realHeal = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget);
+
+		if (m_spread > 0.0f)
+		{
+			std::uniform_real_distribution<float> spread(realHeal * (1.0f - m_spread), realHeal * (1.0f + m_spread));
+			realHeal = spread(aRandom);
+		}
+
+		uint32_t heal = (uint32_t)realHeal;
 
 		if(m_maxHealthPercentage)
 		{	
@@ -112,11 +135,11 @@ namespace tpublic::DirectEffects
 
 		Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 		if (sourceAuras != NULL)
-			heal = sourceAuras->FilterHealOutput(aManifest, aSource, aTarget, heal);
+			heal = sourceAuras->FilterHealOutput(aManifest, aSource, aTarget, heal, aAbilityId);
 
 		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		if(targetAuras != NULL)
-			heal = targetAuras->FilterHealInput(aManifest, aSource, aTarget, heal);
+			heal = targetAuras->FilterHealInput(aManifest, aSource, aTarget, heal, aAbilityId);
 
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
@@ -131,7 +154,8 @@ namespace tpublic::DirectEffects
 				healthResourceIndex,
 				(int32_t)heal,
 				0,
-				false);
+				false,
+				m_direct);
 
 			// Anyone on the target's threat target list should gain threat from this
 			const Components::ThreatSource* targetThreatSource = aTarget->GetComponent<Components::ThreatSource>();
@@ -142,10 +166,10 @@ namespace tpublic::DirectEffects
 				if(result == CombatEvent::ID_CRITICAL)
 					threat = (threat * 3) / 2;
 
+				threat = (int32_t)((float)threat * m_threatMultiplier);
+
 				for(std::unordered_map<uint32_t, int32_t>::const_iterator i = targetThreatSource->m_targets.cbegin(); i != targetThreatSource->m_targets.cend(); i++)
-				{
-					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick);
-				}
+					aEventQueue->EventQueueThreat(aSourceEntityInstance, i->first, threat, aTick, aAbilityId);
 			}
 		}
 
@@ -154,12 +178,32 @@ namespace tpublic::DirectEffects
 
 	bool			
 	Heal::CalculateToolTipHeal(
+		const Manifest*				aManifest,
 		const EntityInstance*		aEntityInstance,
 		const AbilityModifierList*	/*aAbilityModifierList*/,
-		uint32_t					/*aAbilityId*/,
+		uint32_t					aAbilityId,
 		UIntRange&					aOutHeal) const 
 	{
-		m_function.ToRange(NULL, NULL, 1.0f, aEntityInstance, aOutHeal);
+		float multiplier = 1.0f;
+
+		const Components::AbilityModifiers* abilityModifiers = aEntityInstance->GetComponent<Components::AbilityModifiers>();
+		if (abilityModifiers != NULL)
+			multiplier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_HEAL_OUTPUT, aAbilityId, DirectEffect::INVALID_DAMAGE_TYPE, aManifest, aEntityInstance);
+
+		m_function.ToRange(NULL, NULL, multiplier, aEntityInstance, aOutHeal);
+
+		if (m_spread > 0.0f)
+		{
+			aOutHeal.m_min = (uint32_t)((float)aOutHeal.m_min * (1.0f - m_spread));
+			aOutHeal.m_max = (uint32_t)((float)aOutHeal.m_max * (1.0f + m_spread));
+
+			if (aOutHeal.m_min == 0)
+				aOutHeal.m_min = 1;
+
+			if (aOutHeal.m_max == 0)
+				aOutHeal.m_max = 1;
+		}
+
 		return true;
 	}
 

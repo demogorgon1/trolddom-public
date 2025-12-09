@@ -1,0 +1,109 @@
+############################################################
+# Loot
+
+loot_group .boss_3: {}
+
+loot_table .boss_3:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message karethi_temple: "Commander Hizua will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_3  } }		
+		{ possibility: { loot_group: thalvaron_urgon_lark_4_quest_item requirement self<must_have_active_quest>: thalvaron_urgon_lark_4 } }
+		
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_3
+	}		
+		
+	item karethi_temple_3_1: !BOSS_DROP_HEAD { _string: "Hood of Blasting" _icon: icon_chest_7 _type: armor_cloth _spell_damage: 2 _constitution: 1 _wisdom: 3 }	
+	item karethi_temple_3_2: !BOSS_DROP_HEAD { _string: "Helmet of Hizua" _icon: icon_plate_helmet_1 _type: armor_plate _strength: 3 _constitution: 1 _dexterity: 2 }	
+	item karethi_temple_3_3: !BOSS_DROP_LEGS { _string: "Phalanx Legplates" _icon: icon_plate_legs_1 _type: armor_plate _constitution: 3 _dexterity: 1 _strength: 4 }	
+	item karethi_temple_3_4: !BOSS_DROP_BACK { _string: "Desert Assassin's Cape" _icon: icon_cape_4 _type: armor_cloth _constitution: 1 dexterity: 1 _budget_bias: 10 _phys_crit: 1 }			
+}
+
+############################################################
+# Boss
+
+zone .boss_3:
+{
+}
+
+encounter .boss_3:
+{
+	main_entities: [ karethi_temple_boss_3 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_3_spawn
+		possible_entities: [ .skeletal_priest ]
+		entity_count: 1
+		interval: [ 130 140 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: karethi_temple_boss_3
+			value: 70			
+		}
+	}	
+}
+
+entity karethi_temple_boss_3: !NPC 
+{ 
+	_string: "Commander Hizua" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: skeleton_boss_2
+	_sprite_dead: skeleton_boss_2_dead 
+	_weapon_damage: 1.2
+	_resource_health: 4
+	_loot_table: .boss_3
+	_creature_type: undead
+	_encounter: .boss_3
+	_zone: .boss_3
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			id: npc_fire_attack
+		}
+		
+		{
+			id: npc_attack
+		}		
+	]	
+	
+}
+
+map_trigger .boss_3_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_3:
+{
+	entity karethi_temple_boss_3: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_3_killed
+		}
+	}
+}
+
+map_entity_spawn .boss_3_spawn:
+{
+}

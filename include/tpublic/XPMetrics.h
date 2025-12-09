@@ -2,7 +2,7 @@
 
 #include "IReader.h"
 #include "IWriter.h"
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
@@ -35,7 +35,7 @@ namespace tpublic
 			}
 
 			// Public data
-			uint8_t			m_color[3];
+			uint8_t			m_color[3] = { 0 };
 		};
 
 		XPMetrics()

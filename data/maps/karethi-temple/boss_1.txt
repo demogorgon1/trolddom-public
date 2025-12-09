@@ -1,0 +1,97 @@
+############################################################
+# Loot
+
+loot_group .boss_1: {}
+
+loot_table .boss_1:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message karethi_temple: "Tzahar the Endless Talon will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_1  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_1
+	}		
+
+	item karethi_temple_1_1: !BOSS_DROP_HEAD { _string: "Scorpion Skin Visage" _icon: icon_head_12 _type: armor_cloth _healing: 1 _wisdom: 3 _spirit: 2 }	
+	item karethi_temple_1_2: !BOSS_DROP_WRISTS { _string: "Bands of the Spellweaver" _icon: icon_bracers_2 _type: armor_cloth _constitution: 4 _wisdom: 3 }	
+	item karethi_temple_1_3: !BOSS_DROP_SHOULDERS { _string: "Black Carapace Pauldrons" _icon: icon_shoulders_8 _type: armor_plate _strength: 3 _dexterity: 1 _budget_bias: 10 _phys_crit: 1 }	
+	item karethi_temple_1_4: !BOSS_DROP_HANDS { _string: "Sandy Gloves" _icon: icon_mail_gloves_2 _type: armor_cloth _healing: 1 _wisdom: 3 _mana_per_5: 2 }	
+
+}
+
+############################################################
+# Boss
+
+zone .boss_1:
+{
+}
+
+encounter .boss_1:
+{
+	main_entities: [ karethi_temple_boss_1 ]	
+}
+
+entity karethi_temple_boss_1: !NPC 
+{ 
+	_string: "Tzahar the Endless Talon" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: stalker_3
+	_sprite_dead: stalker_3_dead 
+	_weapon_damage: 0.9
+	_resource_health: 3.6
+	_loot_table: .boss_1
+	_creature_type: beast
+	_encounter: .boss_1
+	_zone: .boss_1
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_abilities: 
+	[
+		{
+			target: random_player
+			id: npc_mortal_strike_non_instant
+		}	
+	
+		{
+			target: random_player		
+			id: npc_rend						
+		}	
+		
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_1_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_1:
+{
+	entity karethi_temple_boss_1: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_1_killed
+		}
+	}
+}
+

@@ -209,11 +209,12 @@ aura .malrik_the_undying:
 		_faction: monsters
 		_creature_type: undead
 		_default_behavior_state: .passive		
-		_elite: true
+		_elite: false
 		_encounter: .malrik_the_undying
 		_zone: .malrik_the_undying	
 		_out_of_zone_action: { use: enrage }
 		_inactive_encounter_despawn: true		
+		_no_kill_event: true
 	}
 
 	{

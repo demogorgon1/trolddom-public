@@ -1,0 +1,168 @@
+dialogue_screen .welter_greetings:
+{
+	text: 
+	[	
+		"You wondering why I'm fishing in the lava?"
+	]				
+	
+	options:
+	[
+		{ quest: .werner_1 }
+		{ quest<offer_only>: realm_of_fire_werner_2 }
+	]
+}
+
+entity .welter: !NPC
+{
+	_string: "Welter"
+	_dialogue_root: $dialogue_root { .welter_greetings: { } }
+	_loot_table: .npc
+	_faction: the_ember_covenant
+	_level: 22
+	_creature_type: humanoid
+	_not_pushable: true
+	_sprite: man_78
+	_sprite_dead: man_78_dead
+}
+	
+##########################################################################################
+# Quest 1
+
+item .werner_1_quest_item:
+{
+	string: "Basalt Crystal" 
+	icon: icon_crystal_3
+	loot_groups: [ .werner_1_quest_item ]
+	item_level: 25
+	stack: 8
+	flags: [ not_sellable ]
+}	
+
+objective .werner_1:
+{
+	string: "Basalt Crystals"
+	collect_items: { item: .werner_1_quest_item count: 8 }
+}
+
+loot_group .werner_1_quest_item: {}
+
+loot_table .werner_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .werner_1_quest_item }			
+		}		
+	]
+}
+
+!define local BASALT_CRYSTAL_ENTITY
+{
+	string: "Basalt Crystal"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ @_sprite ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .werner_1_quest_item
+			verb: pick
+			range: 1 
+			despawn: true 			
+			level: 25
+			required_quest: .werner_1
+		}		
+	}
+}
+
+entity .welter_1_quest_item_a: !BASALT_CRYSTAL_ENTITY { _sprite: crystal_3 }
+entity .welter_1_quest_item_b: !BASALT_CRYSTAL_ENTITY { _sprite: crystal_4 }
+
+item realm_of_fire_fishing_rod:
+{ 
+	type: weapon_2h_staff
+	flags: [ fishing_rod ]
+	equipment_slots: [ main_hand ]
+	item_level: 25
+	binds: when_picked_up
+	icon: icon_fishing_rod_2
+	rarity: uncommon
+	use_ability: fishing
+	string: "Enchanted Fishing Rod"
+	weapon_cooldown: 20		
+}
+
+quest .werner_1:
+{
+	string: "Hot Crystals"
+
+	text:
+	[
+		"Collect crystals and return them to Welter."
+	]
+	
+	description: 
+	[
+		"Maybe you've noticed some red crystals sticking out of the ground around here? I need them for a special project. If you get me a bunch I'll teach you the secrets of the elusive lava shrimp."
+	]
+	
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"Ah... Those are going to come in handy.\n"
+		"\n"
+		"Alright, you want to catch the lava shrimp? Use this enchanted fishing pole. Don't worry about how it works. Just trust me."
+	]
+
+	objectives: [ .werner_1 ]
+	reward_all_items: [ realm_of_fire_fishing_rod ]
+	level: 25
+}
+
+##########################################################################################
+# Quest 2
+
+objective .werner_2:
+{
+	string: "Lava Shrimps"
+	collect_items: { item: item_lava_shrimp count: 6 }
+}
+
+quest realm_of_fire_werner_2:
+{
+	string: "Shrimps on the Grill"
+
+	text:
+	[
+		"Catch some lava shrimp and bring them to Monsieur Armand at the Royal Garden Tavern in Valoris."
+	]
+	
+	description: 
+	[
+		"You want to know how to prepare lava shrimp for eating? Huh? Why? I keep them as pets... They're fiercely loyal and you can teach them tricks!\n"
+		"\n"
+		"But, uhm, I guess you can take a handful of them to Monsieur Armand at the Royal Garden Tavern in Valoris. Maybe he can come up with some kind of recipe."
+	]
+	
+	progress:
+	[
+		"I'm busy!"
+	]
+	
+	completion:
+	[
+		"What... Is that? How interesting! Where did you find them? Hmm. Ah, I know just the recipe!"
+	]
+
+	prerequisites: [ .werner_1 ]
+	objectives: [ .werner_2 ]
+	reward_all_items: [ recipe_hot_grilled_shrimp consumable_hot_grilled_shrimp ]
+	level: 25
+}
+

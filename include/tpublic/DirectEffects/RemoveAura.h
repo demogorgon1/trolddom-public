@@ -55,6 +55,7 @@ namespace tpublic
 			uint32_t				m_auraId = 0;
 			uint32_t				m_auraGroupId = 0;
 			bool					m_targetSelf = false;
+			bool					m_removeAll = false;
 		};
 
 	}

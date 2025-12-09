@@ -3,6 +3,7 @@
 #include "IReader.h"
 #include "IWriter.h"
 #include "SourceNode.h"
+#include "UniformDistribution.h"
 
 namespace tpublic
 {
@@ -10,6 +11,14 @@ namespace tpublic
 	class UIntRange
 	{
 	public:
+		static bool
+		ValidateSourceNode(
+			const SourceNode*		aSource)
+		{
+			return (aSource->m_children.size() == 2 && aSource->IsArrayType(SourceNode::TYPE_NUMBER)) ||
+				aSource->m_type == SourceNode::TYPE_NUMBER;
+		}
+
 		UIntRange()
 		{
 

@@ -4,7 +4,7 @@
 
 #include <tpublic/Image.h>
 #include <tpublic/Manifest.h>
-#include <tpublic/Parser.h>
+#include <tpublic/SourceNode.h>
 #include <tpublic/SpriteInfo.h>
 
 namespace tpublic

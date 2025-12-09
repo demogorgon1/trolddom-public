@@ -35,7 +35,27 @@ namespace tpublic
 				{
 					if(!FromSourceBase(aChild))
 					{
-						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						if (aChild->m_name == "type_mask")
+						{
+							aChild->GetArray()->ForEachChild([&](
+								const SourceNode* aFlag)
+							{
+								if (aFlag->IsIdentifier("all"))
+								{
+									m_typeMask = UINT32_MAX;
+								}
+								else
+								{
+									DirectEffect::DamageType damageType = DirectEffect::StringToDamageType(aFlag->GetIdentifier());
+									TP_VERIFY(damageType != DirectEffect::INVALID_DAMAGE_TYPE, aFlag->m_debugInfo, "'%s' is not a valid damage type.", aFlag->GetIdentifier());
+									m_typeMask |= 1 << (uint32_t)damageType;
+								}
+							});
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
 					}
 				});
 			}
@@ -45,6 +65,8 @@ namespace tpublic
 				IWriter*												aStream) const override
 			{
 				ToStreamBase(aStream);
+
+				aStream->WritePOD(m_typeMask);
 			}
 
 			bool
@@ -52,6 +74,9 @@ namespace tpublic
 				IReader*												aStream) override
 			{
 				if(!FromStreamBase(aStream))
+					return false;
+
+				if(!aStream->ReadPOD(m_typeMask))
 					return false;
 				return true;
 			}
@@ -61,6 +86,8 @@ namespace tpublic
 			{
 				Absorb* t = new Absorb();
 				t->CopyBase(this);
+
+				t->m_typeMask = m_typeMask;
 				return t;
 			}
 
@@ -69,6 +96,9 @@ namespace tpublic
 								int32_t									aDamage,
 								uint32_t&								aCharges,
 								int32_t&								aOutAbsorbed) override;
+		
+			// Public data
+			uint32_t				m_typeMask = 0;
 		};
 
 	}

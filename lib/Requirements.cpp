@@ -1,14 +1,17 @@
 #include "Pcheader.h"
 
 #include <tpublic/Components/ActiveQuests.h>
+#include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/CompletedQuests.h>
 #include <tpublic/Components/EquippedItems.h>
 #include <tpublic/Components/Inventory.h>
+#include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
 #include <tpublic/Components/Reputation.h>
+#include <tpublic/Components/SurvivalInfo.h>
 #include <tpublic/Components/VisibleAuras.h>
 #include <tpublic/Components/ZoneDiscovery.h>
 
@@ -21,6 +24,8 @@
 #include <tpublic/ItemProspect.h>
 #include <tpublic/IWorldView.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/ReputationMetrics.h>
+#include <tpublic/WorshipMetrics.h>
 
 namespace tpublic
 {
@@ -59,7 +64,7 @@ namespace tpublic
 						return false;
 
 					bool shouldBeDisciple = aRequirement->m_type == Requirement::TYPE_MUST_BE_DISCIPLE;
-					bool isDisciple = reputation->GetReputation(aRequirement->m_id) >= aManifest->m_worshipMetrics.m_discipleLevel;
+					bool isDisciple = reputation->GetReputation(aRequirement->m_id) >= aManifest->m_worshipMetrics->m_discipleLevel;
 
 					if(shouldBeDisciple != isDisciple)
 						return false;
@@ -69,6 +74,13 @@ namespace tpublic
 				{
 					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
 					if(combatPublic == NULL || combatPublic->m_level < aRequirement->m_id)
+						return false;
+				}
+				break;
+			case Requirement::TYPE_MUST_BE_LOWER_THAN_LEVEL:
+				{
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic == NULL || combatPublic->m_level >= aRequirement->m_id)
 						return false;
 				}
 				break;
@@ -106,7 +118,29 @@ namespace tpublic
 						return false;
 
 					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
-					bool isEquipped = (playerPrivate->m_equippedItemTypeFlags & (uint16_t)aRequirement->m_id) == (uint16_t)aRequirement->m_id;
+
+					uint16_t flags = playerPrivate->m_equippedItemTypeFlags;
+
+					if(flags == UINT16_MAX)
+					{
+						// Unknown flags, must look at equipment
+						const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+
+						flags = 0;					
+
+						for (uint32_t i = 1; i < (uint32_t)EquipmentSlot::NUM_IDS; i++)
+						{
+							const ItemInstance& item = equippedItems->m_slots.m_items[i];
+							if (item.IsSet())
+							{
+								const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+								const ItemType::Info* itemTypeInfo = ItemType::GetInfo(itemData->m_itemType);
+								flags |= itemTypeInfo->m_flags;
+							}
+						}
+					}
+						
+					bool isEquipped = (flags & (uint16_t)aRequirement->m_id) == (uint16_t)aRequirement->m_id;
 					bool shouldBeEquipped = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_EQUIPPED_ITEM_TYPE_FLAGS;
 					if(isEquipped != shouldBeEquipped)
 						return false;
@@ -164,12 +198,46 @@ namespace tpublic
 			case Requirement::TYPE_MUST_HAVE_AURA:
 			case Requirement::TYPE_MUST_NOT_HAVE_AURA:
 				{
-					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
-					bool hasAura = visibleAuras->HasAura(aRequirement->m_id);
-					if (aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA && !hasAura)
-						return false;
-					else if (aRequirement->m_type == Requirement::TYPE_MUST_NOT_HAVE_AURA && hasAura)
-						return false;
+					bool shouldHaveAura = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA;
+					bool hasAura = false;
+
+					if (aManifest->GetById<Data::Aura>(aRequirement->m_id)->m_type == Data::Aura::TYPE_HIDDEN)
+					{
+						// Hidden auras must be checked in the server-side only component
+						const Components::Auras* auras = entity->GetComponent<Components::Auras>();
+						hasAura = auras != NULL && auras->HasAura(aRequirement->m_id);
+					}
+					else
+					{
+						const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+						hasAura = visibleAuras->HasAura(aRequirement->m_id);
+					}
+
+					if(shouldHaveAura != hasAura)
+						return false;						
+				}
+				break;					
+
+			case Requirement::TYPE_MUST_NOT_HAVE_SOURCE_AURA:
+				if(aSelf != NULL)
+				{
+					bool shouldHaveAura = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA;
+					bool hasAura = false;
+
+					if (aManifest->GetById<Data::Aura>(aRequirement->m_id)->m_type == Data::Aura::TYPE_HIDDEN)
+					{
+						// Hidden auras must be checked in the server-side only component
+						const Components::Auras* auras = entity->GetComponent<Components::Auras>();
+						hasAura = auras != NULL && auras->HasAuraWithSource(aRequirement->m_id, aSelf->GetEntityInstanceId());
+					}
+					else
+					{
+						const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+						hasAura = visibleAuras->HasAuraWithSource(aRequirement->m_id, aSelf->GetEntityInstanceId());
+					}
+
+					if(shouldHaveAura != hasAura)
+						return false;						
 				}
 				break;					
 
@@ -434,7 +502,7 @@ namespace tpublic
 
 					if(aRequirement->m_type == Requirement::TYPE_MUST_HAVE_REPUTATION_LEVEL)
 					{
-						uint32_t levelIndex = aManifest->m_reputationMetrics.GetLevelIndexFromReputation(factionReputation);
+						uint32_t levelIndex = aManifest->m_reputationMetrics->GetLevelIndexFromReputation(factionReputation);
 						if(levelIndex < aRequirement->m_value)
 							return false;							
 					}
@@ -456,6 +524,91 @@ namespace tpublic
 					bool mustKnowRiding = aRequirement->m_type == Requirement::TYPE_MUST_KNOW_RIDING;
 
 					if(playerPrivate->m_knowsRiding != mustKnowRiding)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_STARTED_SURVIVAL:
+			case Requirement::TYPE_MUST_NOT_HAVE_STARTED_SURVIVAL:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::SurvivalInfo* survivalInfo = entity->GetComponent<Components::SurvivalInfo>();
+					bool shouldBeStarted = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_STARTED_SURVIVAL;
+					bool isStarted = survivalInfo->m_state == Survival::STATE_STARTED;
+
+					if (shouldBeStarted != isStarted)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_BE_ON_MAP:
+			case Requirement::TYPE_MUST_NOT_BE_ON_MAP:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::PlayerPrivate* playerPrivate = entity->GetComponent<Components::PlayerPrivate>();
+
+					bool shouldBeOnMap = aRequirement->m_type == Requirement::TYPE_MUST_BE_ON_MAP;
+					bool isOnMap = playerPrivate->m_mapId == aRequirement->m_id;
+
+					if(shouldBeOnMap != isOnMap)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_FISHING_ROD_EQUIPPED:
+				{
+					if (!entity->IsPlayer())
+						return false;
+
+					const Components::EquippedItems* equippedItems = entity->GetComponent<Components::EquippedItems>();
+					bool isEquipped = false;
+
+					const ItemInstance& item = equippedItems->m_slots.m_items[EquipmentSlot::ID_MAIN_HAND];
+					if(item.IsSet())
+					{
+						const Data::Item* itemData = aManifest->GetById<Data::Item>(item.m_itemId);
+						if(itemData->m_flags & Data::Item::FLAG_FISHING_ROD)
+							isEquipped = true;
+					}
+
+					if(!isEquipped)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_HAVE_AURA_FLAGS:
+				{
+					bool shouldHaveAuraFlags = aRequirement->m_type == Requirement::TYPE_MUST_HAVE_AURA_FLAGS;
+					bool hasAuraFlags = false;
+
+					const Components::VisibleAuras* visibleAuras = entity->GetComponent<Components::VisibleAuras>();
+					hasAuraFlags = visibleAuras->HasAuraFlags(aManifest, aRequirement->m_id);
+
+					if(shouldHaveAuraFlags != hasAuraFlags)
+						return false;						
+				}
+				break;					
+
+			case Requirement::TYPE_MUST_BE_ELITE:
+			case Requirement::TYPE_MUST_NOT_BE_ELITE:
+				{
+					bool shouldBeElite = aRequirement->m_type == Requirement::TYPE_MUST_BE_ELITE;					
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					bool isElite = combatPublic != NULL && combatPublic->IsElite();
+
+					if(shouldBeElite != isElite)
+						return false;
+				}
+				break;
+
+			case Requirement::TYPE_MUST_BE_NPC_WITH_HEAD_ANCHOR:
+				{
+					const Components::NPC* npc = entity->GetComponent<Components::NPC>();
+					if(npc == NULL || !npc->m_hasHeadAnchor)
 						return false;
 				}
 				break;
@@ -610,7 +763,7 @@ namespace tpublic
 		bool	
 		CheckTargetItemRequirements(
 			const Manifest*									aManifest,
-			const Data::Ability::TargetItemRequirements*	aTargetItemRequirements,
+			const TargetItemRequirements*					aTargetItemRequirements,
 			const ItemProspect*								aTargetItemProspect,
 			uint32_t										aItemId)
 		{

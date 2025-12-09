@@ -1,0 +1,141 @@
+############################################################
+# Loot
+
+loot_group .boss_1: {}
+
+loot_table .boss_1:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message the_devouring_shroud: "Clawed Colossus will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .boss_1  } }			
+		!WORLD_DROPS{}		
+	]	
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_loot_group: .boss_1
+	}		
+	
+	item the_devouring_shroud_1_1: !BOSS_DROP_WAIST { _string: "Lost Fisherman's Belt" _icon: icon_mail_belt_1 _type: armor_cloth _healing: 1 _wisdom: 3 _constitution: 2 }	
+	item the_devouring_shroud_1_2: !BOSS_DROP_CHEST { _string: "Rotting Wizard's Gown" _icon: icon_cloth_shirt_2 _type: armor_cloth _wisdom: 5 _constitution: 2 _budget_bias: -10 _spell_crit: 1 }	
+	item the_devouring_shroud_1_3: !BOSS_DROP_NECK { _string: "Enchanted Seaweed Necklace" _icon: icon_hair_1 _constitution: 1 }	
+	item the_devouring_shroud_1_4: !BOSS_DROP_HANDS { _string: "Berserker Gauntlets" _icon: icon_gloves_4 _type: armor_plate _strength: 1 _constitution: 1 _dexterity: 1 }	
+	
+}
+
+############################################################
+# Boss
+
+zone .boss_1:
+{
+}
+
+encounter .boss_1:
+{
+	main_entities: [ the_devouring_shroud_boss_1 ]	
+	
+	spawn:
+	{
+		map_entity_spawn: .boss_1_spawn
+		possible_entities: [ .crab_non_elite ]
+		entity_count: 1
+		interval: [ 70 100 ]
+		
+		condition<entity_health_less_than>:
+		{
+			id: the_devouring_shroud_boss_1
+			value: 80			
+		}
+	}		
+}
+
+entity the_devouring_shroud_boss_1: !NPC 
+{ 
+	_string: "Clawed Colossus" 
+	_level: 30
+	_elite: true
+	_faction: monsters 
+	_sprite: giga_crab_2
+	_sprite_dead: giga_crab_2_dead 
+	_weapon_damage: 1.6
+	_resource_health: 4
+	_loot_table: .boss_1
+	_creature_type: humanoid
+	_encounter: .boss_1
+	_zone: .boss_1
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_large: true
+
+	_abilities: 
+	[
+		{
+			target: random_player
+			id: $ability
+			{
+				string: "Acid Spit"
+				range: 7
+				cast_time: 20
+				cooldowns: [ global ]
+				cooldown: $cooldown { duration: 80 }
+				flags: [ offensive target_other target_hostile can_miss interruptable ]
+				states: [ in_combat ]
+				icon: icon_poison
+				delay: 3
+				target_particle_system: green_spell_hit
+				projectile: npc_acid_spit
+
+				direct_effect apply_aura:
+				{
+					aura: $aura [ string icon ]
+					{
+						type: debuff
+						duration: 150
+						flags: [ unique poison ]
+						stat_modifiers: { armor: { add_percent: -30 } }					
+					}
+				}
+				
+				direct_effect damage:
+				{
+					damage_type: poison
+					function: 400
+					spread: !DEFAULT_SPREAD{}
+				}	
+			}
+		}
+	
+		{
+			id: npc_attack
+		}
+	]	
+	
+}
+
+map_trigger .boss_1_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .boss_1:
+{
+	entity the_devouring_shroud_boss_1: 
+	{ 
+		spawn_condition:
+		{	
+			if_not: .boss_1_killed
+		}
+	}
+}
+
+map_entity_spawn .boss_1_spawn:
+{
+}

@@ -1,0 +1,207 @@
+dialogue_screen .trader_joseph:
+{
+	text: 
+	[	
+		"What can I do for you?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: .fullay_2 }
+		{ quest: .trader_joseph_1 }
+		{ quest: .trader_joseph_2 }
+		{ text: "Let me browse your goods." goto: $dialogue_screen !TRADE_SUPPLIES{} }
+	]
+}
+
+entity thalvaron_trader_joseph: !NPC
+{
+	_string: "Trader Joseph"
+	_guild_name: "Local Entrepreneur"
+	_sprite: man_5
+	_sprite_dead: man_5_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .trader_joseph: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .trader_joseph_1_quest_item: {}
+
+item .trader_joseph_1_quest_item:
+{
+	icon: icon_exotic_fruit
+	item_level: 26
+	loot_groups: [ .trader_joseph_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Mango"
+	quest: .trader_joseph_1
+	stack: 5
+}
+
+loot_table .trader_joseph_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .trader_joseph_1_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_trader_joseph_1_quest_item:
+{
+	string: "Mango"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ mango_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .trader_joseph_1_quest_item
+			verb: pick_up
+			range: 1 
+			level: 26
+			despawn: true 		
+			required_quest: .trader_joseph_1
+		}		
+	}
+}
+
+objective .trader_joseph_1:
+{
+	string: "Mangoes Gathered"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trader_joseph_1_quest_item count: 5 }
+}
+
+quest .trader_joseph_1:
+{
+	string: "Exotic Fruit Company"
+
+	text:
+	[
+		"Collect mangoes in the jungle west of New Thalissar and return to Trader Joseph."
+	]
+	
+	description: 
+	[
+		"My main source of income is acquiring items here and shipping them off to Valoris. Recently I send off a batch of exotic fruit called \"mangoes\" and they were really popular. I need more! Only problem"
+		"is that they're quite hard to collect because of all the poisonous animals and meat eating plants. Anyway, if you're up for the task you'll find plenty of these fruits in the jungle west of here."
+	]
+
+	progress:
+	[
+		"If you got bitten by a caterpillar you got 24 hours to live."
+	]
+	
+	completion:
+	[
+		"Ah, these look nice. Probably will be quite mushy by the time I get them to Valoris. If only they could be cooled down, somehow."
+	]
+
+	objectives: [ .trader_joseph_1 ]
+	level: 26
+}
+
+############################################################
+# Quest 2
+
+loot_group .trader_joseph_2_quest_item: {}
+
+item .trader_joseph_2_quest_item:
+{
+	icon: icon_banana
+	item_level: 27
+	loot_groups: [ .trader_joseph_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Swamp Banana"
+	quest: .trader_joseph_2
+	stack: 6
+}
+
+loot_table .trader_joseph_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .trader_joseph_2_quest_item }			
+		}		
+	]
+}
+
+entity thalvaron_trader_joseph_2_quest_item:
+{
+	string: "Swamp Banana"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ banana_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			loot_table: .trader_joseph_2_quest_item
+			verb: pick_up
+			range: 1 
+			level: 27
+			despawn: true 		
+			required_quest: .trader_joseph_2
+		}		
+	}
+}
+
+objective .trader_joseph_2:
+{
+	string: "Swamp Bananas Gathered"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .trader_joseph_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 27 }
+	item .trader_joseph_2_a: !QUEST_REWARD_NECK{ _string: "Mossy Necklace of Healing" _icon: icon_necklace_4 _constitution: 1 _mana_per_5: 3 _healing: 2 }
+	item .trader_joseph_2_b: !QUEST_REWARD_FINGER{ _string: "Ring of Brawling" _icon: icon_ring_14 _constitution: 1 _strength: 2 }
+}
+
+quest .trader_joseph_2:
+{
+	string: "More Exotic Fruit Business"
+
+	text:
+	[
+		"Collect bananas in the Verdant Mire and return to Trader Joseph."
+	]
+	
+	description: 
+	[
+		"Mangoes aren't the only exotic fruit I export. Swamp bananas are also really popular in Valoris. I guess you know the drill? Go collect some and I'll pay you. You can find them growing all over the"
+		"Verdant Mire south of here."
+	]
+
+	progress:
+	[
+		"How is it going?"
+	]
+	
+	completion:
+	[
+		"Well, well, well. Here, let me pay you."
+	]
+
+	objectives: [ .trader_joseph_2 ]
+	prerequisites: [ .trader_joseph_1 ]
+	reward_one_item: [ .trader_joseph_2_a .trader_joseph_2_b ]
+	level: 27
+}

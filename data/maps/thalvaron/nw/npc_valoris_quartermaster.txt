@@ -4,6 +4,7 @@ dialogue_screen .valoris_quartermaster_vendor:
 	sell valoris_wrists_2: { quantity: 1 reputation_level_requirement valoris: !HONORED_REPUTATION_LEVEL{} }	
 	sell valoris_ring_1: { quantity: 1 reputation_level_requirement valoris: !REVERED_REPUTATION_LEVEL{} }	
 	sell valoris_ring_2: { quantity: 1 reputation_level_requirement valoris: !REVERED_REPUTATION_LEVEL{} }	
+	sell formula_enchant_weapon_dancing_weapon: { quantity: 1 reputation_level_requirement valoris: !EXALTED_REPUTATION_LEVEL{} cost: 50000 }
 }
 
 dialogue_screen .valoris_quartermaster_dialogue:

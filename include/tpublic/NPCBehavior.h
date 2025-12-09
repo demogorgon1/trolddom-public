@@ -15,6 +15,7 @@ namespace tpublic
 			ID_USE_ABILITY,
 			ID_PATROLLING,
 			ID_SURVIVAL_WAVE,
+			ID_SURVIVAL_BOSS,
 
 			NUM_IDS
 		};
@@ -28,7 +29,8 @@ namespace tpublic
 			"wandering",
 			"use_ability",
 			"patrolling",
-			"survival_wave"
+			"survival_wave",
+			"survival_boss"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

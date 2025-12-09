@@ -26,6 +26,12 @@ namespace tpublic
 			ID_BANDAGES_CRAFTED,
 			ID_MEALS_PREPARED,
 			ID_FISH_CAUGHT,
+			ID_AREAS_DISCOVERED,
+			ID_PVP_RIFTS_LOOTED,
+			ID_RED_WINTER_HATS_WORN,
+			ID_GREEN_WINTER_HATS_WORN,
+			ID_BLUE_WINTER_HATS_WORN,
+			ID_PURPLE_WINTER_HATS_WORN,
 
 			NUM_IDS
 		};
@@ -42,18 +48,24 @@ namespace tpublic
 		{
 			{ NULL, NULL, ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
 
-																						// The priority of saving stats after an update
-			{ "cash_looted",		"Cash looted: {%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
-			{ "total_kills",		"Total kills: %zu",									ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
-			{ "quests_completed",	"Quests completed: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY },
-			{ "time_played",		"Time played: {@%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
-			{ "max_uncommon_equip", "Maximum number of uncommon items equipped: %zu",	ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
-			{ "max_rare_equip",		"Maximum number of rare items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
-			{ "max_epic_equip",		"Maximum number of epic items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
-			{ "total_pvp_kills",	"Total player kills: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
-			{ "bandages_crafted",	"Total bandages crafted: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
-			{ "meals_prepared",		"Total meals prepared: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
-			{ "fish_caught",		"Total fish caught: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY }
+																								// The priority of saving stats after an update
+			{ "cash_looted",				"Cash looted: {%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "total_kills",				"Total kills: %zu",									ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "quests_completed",			"Quests completed: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_MEDIUM_PRIORITY },
+			{ "time_played",				"Time played: {@%zu}",								ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "max_uncommon_equip",			"Maximum number of uncommon items equipped: %zu",	ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "max_rare_equip",				"Maximum number of rare items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "max_epic_equip",				"Maximum number of epic items equipped: %zu",		ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "total_pvp_kills",			"Total player kills: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "bandages_crafted",			"Total bandages crafted: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "meals_prepared",				"Total meals prepared: %zu",						ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "fish_caught",				"Total fish caught: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "areas_discovered",			"Areas discovered: %zu",							ComponentBase::PENDING_PERSISTENCE_UPDATE_NONE },
+			{ "pvp_rifts_looted",			"Rifts looted: %zu",								ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "red_winter_hats_worn",		NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "green_winter_hats_worn",		NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "blue_winter_hats_worn",		NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "purple_winter_hats_worn",	NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);

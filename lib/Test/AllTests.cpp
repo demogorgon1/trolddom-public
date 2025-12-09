@@ -6,6 +6,7 @@ namespace tpublic::Test
 	void		TestComponents();
 	void		TestCompression();
 	void		TestUniformDistribution();
+	void		TestThreatTable();
 
 	void		
 	AllTests()
@@ -13,6 +14,7 @@ namespace tpublic::Test
 		TestComponents();
 		TestCompression();
 		TestUniformDistribution();
+		TestThreatTable();
 	}
 
 }

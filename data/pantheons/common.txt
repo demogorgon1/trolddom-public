@@ -1,1 +1,11 @@
 achievement_category worship: { string: "Worship" order_key: 4 }
+
+sprites: 
+{
+	source: "small-icons.png"
+	
+	size: { width: 11 height: 9 }
+	
+	sprite underworld_11x9: {}
+	sprite light_11x9: {}
+}

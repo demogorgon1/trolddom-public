@@ -13,6 +13,7 @@ player_components:
 	completed_quests
 	deity_discovery
 	deity_relations
+	diminishing_effects
 	display_name
 	equipped_items	
 	guild_name
@@ -29,9 +30,11 @@ player_components:
 	player_world_stash
 	position
 	recent_achievements
+	recent_pvp_kills
 	reputation
 	spirit_stone_discovery
 	stash
+	survival_info
 	talents
 	threat_source
 	trade

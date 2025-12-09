@@ -889,3 +889,534 @@ loot_table .arcane_monster:
 
 	entity thalvaron_arcane_apparition: !NPC { _string: "Arcane Apparition" _sprite: arcane_caster_1 _sprite_dead: arcane_caster_1_dead _abilities: [ { id: npc_attack } { id: npc_chain_lightning } ] }
 }
+
+##########################################################################################
+# North wildlife
+
+map_entity_spawn thalvaron_north_wolf: 
+{ 
+	entity thalvaron_north_wolf_23: {} 
+	entity thalvaron_north_wolf_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_boar: 
+{ 
+	entity thalvaron_north_boar: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_crab: 
+{ 
+	entity thalvaron_north_crab: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_bear_24: 
+{ 
+	entity thalvaron_north_bear_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_deer_24: 
+{ 
+	entity thalvaron_north_deer_24: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Wolf
+{
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_wolf
+	}
+
+	entity thalvaron_north_wolf_23: !NPC { _level: 23 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+	entity thalvaron_north_wolf_24: !NPC { _level: 24 _string: "Northgrove Wolf" _sprite: wolf_1 _sprite_dead: wolf_1_dead _abilities: [ { id: npc_rend }{ id: npc_attack } ] }
+}
+
+# Bear
+{
+
+	loot_table .north_bear: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .junior_1_quest_item
+					requirement self<must_have_active_quest>: { id: .junior_1 } 
+					requirement self<must_not_have_completed_quest>: { id: .junior_1 } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_BEARS {}
+		]	
+	}	
+	
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_bear
+	}
+
+	entity thalvaron_north_bear_24: !NPC { _level: 24 _string: "Hill Bear" _sprite: bear _sprite_dead: bear_dead _abilities: [ { id: npc_sunder }{ id: npc_attack } ] }
+}
+
+# Deer
+{
+
+	${
+		_faction: wildlife
+		_creature_type: beast
+		_weapon_damage: 1
+		_resource_health: 1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_deer
+	}
+	
+	entity thalvaron_north_deer_24: !NPC { _string: "Deer" _sprite: deer _sprite_dead: deer_dead _level: 24 }
+}
+
+# Boar
+{
+	loot_table .north_boar: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .ophelie_1_quest_item 
+					requirement self<must_have_active_quest>: { id: .ophelie_1 } 
+					requirement self<must_not_have_completed_quest>: { id: .ophelie_1 } 
+					requirement self<must_not_have_item>: { id: .ophelie_1_quest_item } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_BOARS {}
+		]	
+	}	
+
+	${		
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1.1
+		_resource_health: 1.9
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_boar
+	}
+
+	entity thalvaron_north_boar: !NPC { _level: 24 _string: "Angry Boar" _sprite: boar _sprite_dead: boar_dead _abilities: [ { id: npc_charge }{ id: npc_attack } ] }
+}
+
+# Neutral crabs
+{
+	loot_table .north_crab: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: 
+				{ 
+					loot_group: .tyron_1_quest_item 
+					quantity: 2
+					requirement self<must_have_active_quest>: { id: .tyron_1 } 
+					requirement self<must_not_have_completed_quest>: { id: .tyron_1 } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+			!WORLD_DROPS_CRABS {}
+		]	
+	}	
+	
+	${		
+		_faction: wildlife
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: .north_crab
+	}
+
+	entity thalvaron_north_crab: !NPC { _string: "Giant Mud Crab" _sprite: crab_1 _sprite_dead: crab_1_dead _level: 24 _abilities: [ { id: npc_sunder }{ id: npc_attack } ]}
+}
+
+##########################################################################################
+# Crabmen
+
+map_entity_spawn thalvaron_north_crabman: 
+{ 
+	entity thalvaron_north_crabman_melee: {} 
+	entity thalvaron_north_crabman_caster: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_north_crabman_boss: 
+{ 
+	entity thalvaron_north_crabman_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Melee
+{
+	${
+		_level: 24
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crabman_melee: !NPC { _string: "Crabman Warrior" _sprite: crab_monster_3 _sprite_dead: crab_monster_3_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Caster
+{
+	${
+		_level: 24
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 0.8
+		_resource_health: 0.75
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crabman_caster: !NPC { _string: "Crabman Soothsayer" _sprite: crab_caster_3 _sprite_dead: crab_caster_3_dead _abilities: [ { id: npc_frostbolt_no_cooldown } { id: npc_attack } ] }
+}
+
+# Boss
+{
+	${
+		_level: 24
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.95
+		_default_behavior_state: .wandering_short
+		_loot_table: default_crab
+	}
+
+	entity thalvaron_north_crabman_boss: !NPC { _string: "Thunderclaw" _sprite: crab_caster_boss_2 _sprite_dead: crab_caster_boss_2_dead _abilities: [ { id: npc_chain_lightning } { id: npc_attack } ] }
+}
+
+##########################################################################################
+# Goblins
+
+map_entity_spawn thalvaron_goblin: 
+{ 
+	entity thalvaron_goblin_melee: {} 
+	entity thalvaron_goblin_ranged: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_goblin_healer: 
+{ 
+	entity thalvaron_goblin_healer: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_goblin_boss: 
+{ 
+	entity thalvaron_goblin_boss: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_goblin_tunneler:
+{
+	spawn_timer: { only_when_triggered: true }
+}
+
+# Melee
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_goblin_melee: !NPC { _string: "Goblin Bandit" _sprite: goblin _sprite_dead: goblin_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Ranged
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1
+		_resource_health: 0.65
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+	}
+
+	entity thalvaron_goblin_ranged: !NPC { _string: "Goblin Poacher" _sprite: goblin_bowman_1 _sprite_dead: goblin_bowman_1_dead _abilities: [ { id: npc_shoot } { id: npc_attack } ] }
+}
+
+# Healer
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 0.8
+		_resource_health: 0.65
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_abilities: 
+		[ 
+			{ id: npc_heal target: low_health_friend_or_self } 
+			{ id: npc_firebolt } 
+			{ id: npc_attack } 
+		]
+	}
+
+	entity thalvaron_goblin_healer: !NPC { _string: "Goblin Shaman" _sprite: goblin_shaman _sprite_dead: goblin_shaman_dead }
+}
+
+# Tunneler 
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 0.9
+		_resource_health: 1.3
+		_default_behavior_state: .passive
+		_loot_table: default_humanoid
+		_in_combat_barks: [ { type: yell text: "It was made for me! This is my hole!" flags: [ no_chat_bubble ] } ]				
+	}
+
+	entity thalvaron_goblin_tunneler: !NPC { _string: "Goblin Tunneler" _sprite: goblin_6 _sprite_dead: goblin_6_dead _abilities: [ { id: npc_attack } ] }
+}
+
+# Boss
+{
+	
+	loot_group .goblin_boss_quest_item: { }
+
+	item .goblin_boss_quest_item:
+	{
+		loot_groups: [ .goblin_boss_quest_item ]		
+		string: "Lobnorg's Ear" 
+		icon: icon_ear_2
+		item_level: 23
+		flags: [ unique not_sellable ]
+		use_ability: $ability [ string icon ]
+		{
+			description: "This item starts a quest."
+			flags: [ target_self item ]
+			direct_effect simple<start_quest>: .goblin_boss_quest_item
+			states: [ default in_combat ]
+			requirement self<must_not_have_completed_quest>: { id: .goblin_boss_quest_item }
+			requirement self<must_not_have_active_quest>: { id: .goblin_boss_quest_item }
+		}
+		
+		binds: when_picked_up
+	}
+	
+	quest .goblin_boss_quest_item:
+	{
+		string: "Lobnorg's Ear"
+
+		text:
+		[
+			"Bring Lobnorg's ear to Captain Jerrington outside the Eastgate district in Valoris."
+		]
+		
+		description: 
+		[
+			"The city guard might be interested in the fact that goblins have set up camp just north of the city. Captain Jerrington should be informed."
+		]
+		
+		completion:
+		[
+			"Goblins? Up in Northgrove? How did you even get there?"
+		]
+
+		level: 23
+		reward_xp_multiplier: 0.25
+		reward_cash_multiplier: 0.25
+	}
+
+	loot_table .goblin_boss: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .anna_skrald_1_quest_item requirement self<must_have_active_quest>: { id: .anna_skrald_1 } } 
+			}
+
+			{ 
+				possibility: 
+				{ 
+					loot_group: .goblin_boss_quest_item 
+					requirement self<must_not_have_active_quest>: { id: .goblin_boss_quest_item } 
+					requirement self<must_not_have_completed_quest>: { id: .goblin_boss_quest_item } 
+				} 
+			}
+			
+			!WORLD_DROPS {}		
+		]	
+	}	
+
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: humanoid
+		_weapon_damage: 1.1
+		_resource_health: 1.5
+		_default_behavior_state: .passive
+		_loot_table: .goblin_boss
+	}
+
+	entity thalvaron_goblin_boss: !NPC { _string: "Lobnorg" _sprite: goblin_boss _sprite_dead: goblin_boss_dead _abilities: [ { id: npc_whirlwind } { id: npc_attack } ] }
+}
+
+##########################################################################################
+# Catacombs
+
+map_entity_spawn thalvaron_catacombs_skeleton: { entity thalvaron_catacombs_skeleton: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_1: { 	entity thalvaron_catacombs_boss_1: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_2: { 	entity thalvaron_catacombs_boss_2: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_3: { 	entity thalvaron_catacombs_boss_3: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_4: { 	entity thalvaron_catacombs_boss_4: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_5: { 	entity thalvaron_catacombs_boss_5: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_catacombs_boss_6: { 	entity thalvaron_catacombs_boss_6: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Entrance skeletons 
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: undead
+		_weapon_damage: 0.7
+		_resource_health: 1.1
+		_default_behavior_state: .passive
+		_loot_table: default_skeleton
+	}
+
+	entity thalvaron_catacombs_skeleton: !NPC 
+	{ 
+		_string: "Risen Skeleton" _sprite: skeleton_7 _sprite_dead: skeleton_7_dead 
+		_abilities: 
+		[ 
+			{ 
+				id: npc_attack
+			} 
+		] 
+	}
+}
+
+# Named skeletons
+{
+	${
+		_level: 23
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_aggro_range_bias: -2
+	}
+
+	!define local CATACOMBS_BOSS_LOOT_TABLE
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: @_loot_group requirement self<must_have_active_quest>: { id: .father_tobias_2 } } 
+			}
+
+			!WORLD_DROPS {}	
+		]	
+	}		
+
+	entity thalvaron_catacombs_boss_1: !NPC 
+	{ 
+		_string: "Lady Brior" _sprite: skeleton_9 _sprite_dead: skeleton_9_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_a }
+		_weapon_damage: 0.9
+		_resource_health: 1.2
+		_abilities: 
+		[ 
+			{ id: npc_curse } 
+			{ id: npc_attack } 
+		] 		
+	}
+	
+	entity thalvaron_catacombs_boss_2: !NPC 
+	{ 
+		_string: "Lord Erston" _sprite: skeleton_5 _sprite_dead: skeleton_5_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_b }
+		_weapon_damage: 1.2
+		_resource_health: 1.4
+		_abilities: 
+		[ 
+			{ id: npc_mortal_strike_non_instant } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_3: !NPC 
+	{ 
+		_string: "Count Ukos" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_c }
+		_weapon_damage: 0.9
+		_resource_health: 1.2
+		_abilities: 
+		[ 
+			{ id: npc_chain_lightning } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_4: !NPC 
+	{ 
+		_string: "Prince Gerth" _sprite: skeleton_10 _sprite_dead: skeleton_10_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_d }
+		_weapon_damage: 1.1
+		_resource_health: 1.1
+		_abilities: 
+		[ 
+			{ id: npc_froststrike } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_5: !NPC 
+	{ 
+		_string: "Commander Banntor" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_e }
+		_weapon_damage: 1
+		_resource_health: 1.6
+		_abilities: 
+		[ 
+			{ id: npc_rend } 
+			{ id: npc_attack } 
+		] 		
+	}
+
+	entity thalvaron_catacombs_boss_6: !NPC 
+	{ 
+		_string: "Miss Turhast" _sprite: skeleton_8 _sprite_dead: skeleton_8_dead _loot_table: $loot_table !CATACOMBS_BOSS_LOOT_TABLE { _loot_group: .father_tobias_quest_item_2_f }
+		_weapon_damage: 0.8
+		_resource_health: 1.1
+		_abilities: 
+		[ 
+			{ id: npc_frostbolt } 
+			{ id: npc_attack } 
+		] 		
+	}
+	
+}

@@ -26,4 +26,10 @@ achievement quests_5: { category: general string: "Master Adventurer" descriptio
 
 achievement multi_level_10: { category: general string: "Leveling the Playing Field" description: "Reach level 10 as a Fighter, a Priest, and a Sorcerer." points: 20 need_achievements: [ fighter_level_10 priest_level_10 sorcerer_level_10 ] icon: icon_road account_wide: true }
 achievement multi_level_20: { category: general string: "Leveling the Playing Field Even More" description: "Reach level 20 as all classes." points: 20 need_achievements: [ fighter_level_20 priest_level_20 sorcerer_level_20 paladin_level_20 witch_level_20 ] icon: icon_road account_wide: true root: multi_level_10 }
+achievement multi_level_30: { category: general string: "Leveling the Playing Field Again" description: "Reach level 30 as all classes." points: 20 need_achievements: [ fighter_level_30 priest_level_30 sorcerer_level_30 paladin_level_30 witch_level_30 ] icon: icon_road account_wide: true root: multi_level_30 }
 
+achievement exploration_1: { category: general string: "Apprentice Explorer" description: "Discover 10 areas." points: 10 priority: 0 stat_trigger areas_discovered: 10 icon: icon_map_1 }
+achievement exploration_2: { category: general string: "Journeyman Explorer" description: "Discover 50 areas." points: 10 priority: 0 stat_trigger areas_discovered: 50 icon: icon_map_1 root: exploration_1 }
+achievement exploration_3: { category: general string: "Expert Explorer" description: "Discover 100 areas." points: 10 priority: 0 stat_trigger areas_discovered: 100 icon: icon_map_1 root: exploration_1 }
+achievement exploration_4: { category: general string: "Artisan Explorer" description: "Discover 200 areas." points: 10 priority: 0 stat_trigger areas_discovered: 200 icon: icon_map_1 root: exploration_1 }
+achievement exploration_5: { category: general string: "Master Explorer" description: "Discover 400 areas." points: 10 priority: 0 stat_trigger areas_discovered: 400 icon: icon_map_1 root: exploration_1 }

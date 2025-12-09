@@ -3,7 +3,7 @@
 #include "Hash.h"
 #include "IReader.h"
 #include "IWriter.h"
-#include "Parser.h"
+#include "SourceNode.h"
 
 namespace tpublic
 {
@@ -35,6 +35,8 @@ namespace tpublic
 			ID_MANA_PER_5_SECONDS,
 			ID_ATTACK_POWER,
 			ID_STEALTH,
+			ID_RESILIENCE,
+			ID_HIT,
 
 			NUM_IDS
 		};
@@ -75,6 +77,8 @@ namespace tpublic
 			{ "mana_per_5",				"MP5",			"Mana Per 5 Seconds",						NULL,																	1.0f,	false,	false },
 			{ "attack_power",			"AP",			"Attack Power",								NULL,																	2.0f,	false,	false },
 			{ "stealth",				"STEALTH",		"Stealth",									"Decreases likelihood of detection when stealthed.",					10.0f,	false,	false },
+			{ "resilience",				"RES",			"Resilience",								"Reduces your chance of being hit by a critical strike by %u%%.",		10.0f,	true,	false },
+			{ "hit_chance",				"HIT",			"Hit Chance",								"Improves your chance to hit by %u%%.",									10.0f,	true,	false },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
@@ -247,6 +251,58 @@ namespace tpublic
 
 			// Public data
 			float		m_stats[NUM_IDS] = { 0 };
+		};
+
+		struct Conversion
+		{
+			Conversion()
+			{
+
+			}
+
+			Conversion(
+				const SourceNode*	aSource)
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if (aChild->m_name == "from")
+						m_fromStatId = StringToId(aChild->GetIdentifier());
+					else if (aChild->m_name == "to")
+						m_toStatId = StringToId(aChild->GetIdentifier());
+					else if (aChild->m_name == "factor")
+						m_factor = aChild->GetFloat();
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
+
+			void
+			ToStream(
+				IWriter*			aStream) const 
+			{
+				aStream->WritePOD(m_fromStatId);
+				aStream->WritePOD(m_toStatId);
+				aStream->WriteFloat(m_factor);
+			}
+
+			bool
+			FromStream(
+				IReader*			aStream) 
+			{
+				if (!aStream->ReadPOD(m_fromStatId))
+					return false;
+				if (!aStream->ReadPOD(m_toStatId))
+					return false;
+				if (!aStream->ReadFloat(m_factor))
+					return false;
+				return true;
+			}
+
+			// Public data
+			Id			m_fromStatId = INVALID_ID;
+			Id			m_toStatId = INVALID_ID;
+			float		m_factor = 0;
 		};
 
 	};

@@ -40,6 +40,12 @@ namespace tpublic
 
 		}
 
+		void
+		SetBoolean()
+		{
+			m_flags |= FLAG_BOOLEAN;
+		}
+
 		// Virtual interface
 		virtual void					FromSource(
 											const SourceNode*		aSource) = 0;

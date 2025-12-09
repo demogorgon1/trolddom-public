@@ -1,0 +1,248 @@
+dialogue_screen .urgon_lark:
+{
+	text: 
+	[	
+		"Maybe one day I'll be a real paladin. Right?"
+	]		
+	
+	options:
+	[
+		{ quest: .urgon_lark_1 }
+		{ quest: .urgon_lark_2 }
+		{ quest: .urgon_lark_3 }
+		{ quest: thalvaron_urgon_lark_4 }
+	]
+}
+
+entity thalvaron_urgon_lark: !NPC
+{
+	_string: "Urgon Lark"
+	_sprite: man_90
+	_sprite_dead: man_90_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_root: $dialogue_root { .urgon_lark: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .urgon_lark_1:
+{
+	string: "Crocodiles Slain"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_desert_crocodile ]
+		count: 3
+	}
+}
+
+quest .urgon_lark_1:
+{
+	string: "Delegated Crocodile Hunt"
+
+	text:
+	[
+		"Slay crocodiles around the oasis and return to Urgon Lark."
+	]
+	
+	description: 
+	[
+		"Joana is a great paladin and also my boss. She's supposed to delegate important holy work to me, but it seems like she won't trust me. She's giving me all these silly tasks that have nothing"
+		"to do with fighting the forces of evil. Like, she told me to deal with the crocodile problem. They seem to be annoying her. Whatever, I'll just delegate the task to you if you want it.\n"
+		"\n"
+		"Can you go kill a few crocodiles around the oasis?"
+	]
+
+	progress:
+	[
+		"This place isn't too bad, I guess."
+	]
+	
+	completion:
+	[
+		"Nice, but if she asks, I'm the one who killed the crocodiles."
+	]
+	
+	objectives: [ .urgon_lark_1 ]
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+loot_group .urgon_lark_2_quest_item: { }
+
+item .urgon_lark_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .urgon_lark_2_quest_item ]		
+	string: "Emerald Phalanx Helmet" 
+	icon: icon_plate_helmet_1
+	stack: 6
+	item_level: 29
+	quest: .urgon_lark_2
+	flags: [ not_sellable ]
+}
+
+objective .urgon_lark_2:
+{
+	string: "Emerald Phalanx Helmets"
+	collect_items: { item: .urgon_lark_2_quest_item count: 6 }
+}
+
+quest .urgon_lark_2:
+{
+	string: "The Emerald Phalanx"
+
+	text:
+	[
+		"Collect helmets from the undead Emerald Phalanx of eastern Karath."
+	]
+	
+	description: 
+	[
+		"Finally, I got my first holy task! Only problem is that it involves venturing into the desert. It's much more comfortable here at the oasis, especially after we got rid of the crocodiles.\n"
+		"\n"
+		"Maybe you can do my job? Joana told me about the Emerald Phalanx, and ancient military unit of the empire that once reigned these lands. They were known by the green helmet they wore on their heads."
+		"Some of the Emerald Phalanx has risen from the dead and now roam the desert as unholy monstrosities. My boss wants a bunch of their helmets. Can you bring them to me? That would be nice.\n"
+		"\n"
+		"You'll find these skeletons in the east."
+	]
+
+	progress:
+	[
+		"Too much sand, am I right?"
+	]
+	
+	completion:
+	[
+		"Excellent, I'll bring them to Joana and see what she has to say."
+	]
+	
+	objectives: [ .urgon_lark_2 ]
+	prerequisites: [ .urgon_lark_1 ]
+	level: 29
+}
+
+############################################################
+# Quest 3
+
+objective .urgon_lark_3:
+{
+	string: "Priest of Karethis Destroyed"
+	
+	maps: [ thalvaron ]
+	
+	kill_npc:
+	{
+		entities: [ thalvaron_kareth_skeleton_priest ]
+		count: 4
+	}
+}
+
+{
+	${ _level: 30 }
+	item .urgon_lark_3_a: !QUEST_REWARD_CHEST{ _string: "Garment of the Karethi Priest" _icon: icon_cloth_shirt_6 _constitution: 1 _wisdom: 2 _healing: 1 _type: armor_cloth }
+	item .urgon_lark_3_b: !QUEST_REWARD_BACK{ _string: "Sandslayer Cloak" _icon: icon_cape_6 _constitution: 2 _strength: 6 _type: armor_cloth }
+	item .urgon_lark_3_c: !QUEST_REWARD_FINGER{ _string: "Ancient Wizard's Gem" _icon: icon_ring_13 _constitution: 1 _spell_damage: 3 _wisdom: 2 }
+}
+
+quest .urgon_lark_3:
+{
+	string: "The Desert Temple"
+
+	text:
+	[
+		"Travel east to the temple, slay the priests, and return to Urgon Lark."
+	]
+	
+	description: 
+	[
+		"My boss was very pleased with the helmets. Good job! I might get a promotion soon.\n"
+		"\n"
+		"To the east of here is an ancient temple. It's full of undeath. In there some of the temple priests have come back from the dead. It would be to the benefit of the cause if you go and destroy them."
+	]
+
+	progress:
+	[
+		"It's over there, to the east. Behind all the sand."
+	]
+	
+	completion:
+	[
+		"Praised be the light. Wasn't expecting you to come back alive from this. Here take this as a reward."
+	]
+	
+	objectives: [ .urgon_lark_3 ]
+	prerequisites: [ .urgon_lark_2 ]
+	reward_one_item: [ .urgon_lark_3_a .urgon_lark_3_b ]
+	level: 30
+}
+                                                  
+############################################################
+# Quest 4
+
+loot_group thalvaron_urgon_lark_4_quest_item: { }
+
+item .urgon_lark_4_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ thalvaron_urgon_lark_4_quest_item ]		
+	string: "Commander Hizua's Shield" 
+	icon: icon_shield_10
+	item_level: 30
+	quest: thalvaron_urgon_lark_4
+	flags: [ not_sellable unique ]
+}
+
+objective .urgon_lark_4:
+{
+	string: "Commander Hizua's Shield"
+	collect_items: { item: .urgon_lark_4_quest_item count: 1 }
+}
+
+{
+	${ _level: 30 _rarity: rare }
+	item .urgon_lark_4_a: !QUEST_REWARD_FINGER{ _string: "Ring of Unrelenting Strength" _icon: icon_ring_1 _strength: 1 }
+	item .urgon_lark_4_b: !QUEST_REWARD_FINGER{ _string: "Ring of Unrelenting Wisdom" _icon: icon_ring_2 _wisdom: 1 }
+}
+
+quest thalvaron_urgon_lark_4:
+{
+	string: "Commander Hizua"
+
+	text:
+	[
+		"Venture deeper into the the Temple of Karethi, locate Commander Hizua, and return his shield to Urgon Lark."
+	]
+	
+	description: 
+	[
+		"The Temple of Karethi is a large complex and deeper inside you'll encounter more dangerous types of undeath. One of these monstrosities are the remains of the once great"
+		"Command Hizua, leader of the Emerald Phalanx. He is said to possess a shield with unique properties. Properties the order of the Light is very interested in. I need you to"
+		"locate this monster, destroy it, and return its shield to me."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"You survived? Excellent. You work here is over."
+	]
+	
+	objectives: [ .urgon_lark_4 ]
+	prerequisites: [ .urgon_lark_3 ]
+	level: 30
+	type: dungeon
+	reward_one_item: [ .urgon_lark_4_a .urgon_lark_4_b ]
+}
