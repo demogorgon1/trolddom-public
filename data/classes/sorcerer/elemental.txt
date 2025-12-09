@@ -568,7 +568,7 @@ ability lake_of_fire:
 	description: "Spawns a lake of fire that lasts for 6 seconds, causing damage to any enemy that stands in it."	
 	range: 8
 	cast_time: 25
-	flags: [ spell target_aoe interruptable ]
+	flags: [ spell target_aoe interruptable late_cooldown_trigger ]
 	states: [ default in_combat ]
 	icon: icon_lake_of_fire
 	cooldowns: [ global lake_of_fire spell_fire_lockout ]	

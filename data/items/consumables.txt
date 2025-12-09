@@ -906,7 +906,7 @@ item consumable_fragmentation_grenade:
 		description: "Throw to destroy your enemies."
 		consume_items: { consumable_fragmentation_grenade: 1 }
 		required_level: 10
-		flags: [ item target_aoe target_aoe_hostile offensive ]
+		flags: [ item target_aoe target_aoe_hostile offensive late_cooldown_trigger ]
 		range: 8
 		aoe_cap: 6
 		aoe_radius: 2		
@@ -994,7 +994,7 @@ item consumable_incendiary_grenade:
 		description: "Throw to burn your enemies."
 		consume_items: { consumable_incendiary_grenade: 1 }
 		required_level: 10
-		flags: [ item target_aoe target_aoe_hostile offensive ]
+		flags: [ item target_aoe target_aoe_hostile offensive late_cooldown_trigger ]
 		range: 8
 		aoe_cap: 6
 		aoe_radius: 2		
@@ -1088,7 +1088,7 @@ item consumable_frost_grenade:
 		description: "Throw to freeze your enemies."
 		consume_items: { consumable_frost_grenade: 1 }
 		required_level: 10
-		flags: [ item target_aoe target_aoe_hostile offensive ]
+		flags: [ item target_aoe target_aoe_hostile offensive late_cooldown_trigger ]
 		range: 8
 		aoe_cap: 6
 		aoe_radius: 2		

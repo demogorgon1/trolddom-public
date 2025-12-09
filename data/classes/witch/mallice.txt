@@ -683,7 +683,7 @@ ability swarm:
 	description: "Inflicts enemies in the targeted area with a swarm of insects for 8 seconds."	
 	range: 8
 	cast_time: 20
-	flags: [ spell target_aoe interruptable ]
+	flags: [ spell target_aoe interruptable late_cooldown_trigger ]
 	states: [ default in_combat ]
 	icon: icon_swarm
 	cooldowns: [ global swarm spell_unholy_lockout ]	
