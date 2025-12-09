@@ -683,7 +683,7 @@ ability inner_peace:
 	description: "Restores 50% of your health."
 	cooldowns: [ global spell_healing_lockout ]
 	cooldown: $cooldown { duration: 1800 }
-	flags: [ spell target_other target_self target_friendly interruptable ]
+	flags: [ spell target_self ]
 	states: [ default in_combat ]
 	icon: icon_special_11
 	resource_cost mana: 13
