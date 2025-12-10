@@ -358,7 +358,7 @@ ability disenchant:
 		_description: "Enchants item to increase Constitution by 2."
 		_item: enchant_shield_major_constitution
 		_produce: { enchant_shield_major_constitution: 1 } 
-		_materials: { reagent_arcane_essence: 4 reagent_mystery_crystal: 1 reagent_paper: 1 }
+		_materials: { reagent_arcane_essence: 4 reagent_arcane_crystal: 1 reagent_paper: 1 }
 		_skill: 55
 		_target_item_requirements: { item_types: [ shield ] }
 		_id: enchant_shield_major_constitution	
@@ -422,7 +422,7 @@ ability disenchant:
 		_description: "Enchants item to increase Mana Per 5 Seconds by 4."
 		_item: enchant_cloak_restoration
 		_produce: { enchant_cloak_restoration: 1 } 
-		_materials: { reagent_arcane_essence: 6 item_life_core: 2 reagent_paper: 1 }
+		_materials: { reagent_arcane_essence: 3 reagent_arcane_crystal: 2 item_life_core: 2 reagent_paper: 1 }
 		_skill: 60
 		_target_item_requirements: { equipment_slots: [ back ] }
 		_id: enchant_cloak_restoration
@@ -454,7 +454,7 @@ ability disenchant:
 		_description: "Enchants item to increase Spirit by 1."
 		_item: enchant_bracers_spirit
 		_produce: { enchant_bracers_spirit: 1 } 
-		_materials: { reagent_arcane_essence: 4 reagent_paper: 1 }
+		_materials: { reagent_arcane_essence: 4 reagent_arcane_crystal: 1 reagent_paper: 1 }
 		_skill: 60
 		_target_item_requirements: { equipment_slots: [ wrists ] }
 		_id: enchant_bracers_spirit
