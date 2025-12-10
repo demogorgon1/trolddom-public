@@ -264,6 +264,20 @@ namespace tpublic
 	}
 
 	void
+	SourceNode::GetUniqueIdArray(
+		DataType::Id				aDataType,
+		std::vector<uint32_t>&		aOut) const
+	{
+		TP_VERIFY(m_type == TYPE_ARRAY, m_debugInfo, "Not an array.");
+		for (const std::unique_ptr<SourceNode>& child : m_children)
+		{
+			uint32_t id = m_sourceContext->m_persistentIdTable->GetId(child->m_debugInfo, aDataType, child->GetIdentifier());
+			if(Helpers::FindItem(aOut, id) == SIZE_MAX)
+				aOut.push_back(id);
+		}
+	}
+
+	void
 	SourceNode::GetIdSet(
 		DataType::Id					aDataType,
 		std::unordered_set<uint32_t>&	aOut) const

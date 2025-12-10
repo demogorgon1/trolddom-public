@@ -63,6 +63,64 @@ namespace tpublic
 	}
 
 	void	
+	Compiler::SetBase(
+		const char*							aBasePath)
+	{
+		m_basePath = aBasePath;
+
+		// Load base manifest
+		{
+			std::string baseManifestPath = m_basePath + "/manifest.bin";
+			std::vector<uint8_t> compressed;
+
+			{
+				bool ok = Helpers::LoadFile(baseManifestPath.c_str(), compressed);
+				TP_CHECK(ok, "Failed to load manifest: %s", baseManifestPath.c_str());					
+			}
+
+			if(!compressed.empty())
+			{
+				std::vector<uint8_t> uncompressed;
+
+				{
+					bool ok = Compression::Unpack(&compressed[0], compressed.size(), uncompressed);
+					TP_CHECK(ok, "Failed to uncompress manifest: %s", baseManifestPath.c_str());
+				}
+
+				struct Context : public IReader
+				{
+				public:
+												Context(const SourceContext* aSourceContext) : m_sourceContext(aSourceContext) {}
+					virtual						~Context() {}
+
+					// IReader implementation
+					bool						IsEnd() const override					 { assert(false); return false; }
+					size_t						Read(void*, size_t) override			 { assert(false); return 0; }
+					const AuraEffectFactory*	GetAuraEffectFactory() const override	 { return m_sourceContext->m_auraEffectFactory.get(); }
+					const ComponentManager*		GetComponentManager() const override	 { return m_sourceContext->m_componentManager.get(); }
+					const DirectEffectFactory*	GetDirectEffectFactory() const override  { return m_sourceContext->m_directEffectFactory.get(); }
+					const MapGeneratorFactory*	GetMapGeneratorFactory() const override	 { return m_sourceContext->m_mapGeneratorFactory.get(); }
+					const ObjectiveTypeFactory* GetObjectiveTypeFactory() const override { return m_sourceContext->m_objectiveTypeFactory.get(); }
+
+					// Public data
+					const SourceContext* m_sourceContext;
+				};
+
+				Context context(&m_sourceContext);
+
+				VectorIO::Reader reader(uncompressed, &context);
+
+				{
+					bool ok = m_manifest->FromStream(&reader);
+					TP_CHECK(ok, "Failed to read manifest: %s", baseManifestPath.c_str());
+				}
+			}
+
+			m_manifest->PrepareAsBase(m_sourceContext.m_componentManager.get()); // Some things needs to be reset and defined again
+		}		
+	}
+
+	void	
 	Compiler::Build(
 		const std::vector<std::string>&		aParseRootPaths,
 		const char*							aPersistentIdTablePath,
@@ -144,7 +202,9 @@ namespace tpublic
 		{
 			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);			
 
-			m_sourceContext.m_persistentIdTable->ValidateAndPrune([&](
+			bool validateOnly = !m_basePath.empty();
+
+			m_sourceContext.m_persistentIdTable->ValidateAndPrune(validateOnly, [&](
 				const char*							aDataTypeString,
 				const char*							aName, 
 				const DataErrorHandling::DebugInfo& aDebugInfo)
@@ -175,6 +235,12 @@ namespace tpublic
 		// Build sprite sheets
 		{
 			DebugPrintTimer timer("build sprite sheets");
+
+			if(!m_basePath.empty())
+			{
+				std::string baseSpritesPath = m_basePath + "/sprites.bin";
+				spriteSheetBuilder.AddBaseSprites(m_manifest, baseSpritesPath.c_str());
+			}
 
 			spriteSheetBuilder.Build();
 			spriteSheetBuilder.UpdateManifestData();
@@ -235,9 +301,12 @@ namespace tpublic
 			PostProcessWorldMaps::Run(m_manifest);
 		}
 
-		// Run generation jobs
-		for(std::unique_ptr<GenerationJob>& generationJob : generationJobs)
-			generationJob->Run(m_manifest, aGeneratedSourceOutputPath);
+		if(aGeneratedSourceOutputPath != NULL && aGeneratedSourceOutputPath[0] != '\0')
+		{
+			// Run generation jobs
+			for (std::unique_ptr<GenerationJob>& generationJob : generationJobs)
+				generationJob->Run(m_manifest, aGeneratedSourceOutputPath);
+		}
 
 		// Export JSON manifest
 		{
@@ -497,6 +566,7 @@ namespace tpublic
 			std::unique_ptr<DataQueueItem> t = std::make_unique<DataQueueItem>();
 			t->m_base = m_manifest->m_containers[dataType]->GetBaseByName(m_sourceContext.m_persistentIdTable.get(), aNode->m_name.c_str());
 			t->m_base->m_debugInfo = aNode->m_debugInfo;
+			t->m_base->m_componentManager = m_sourceContext.m_componentManager.get();
 			t->m_source = aNode;
 
 			TP_VERIFY(!m_dataSourceTable.contains(t->m_base), aNode->m_debugInfo, "'%s' already defined.", aNode->m_name.c_str());
@@ -551,8 +621,7 @@ namespace tpublic
 				for(const SourceNode* source : sources)
 					t->m_base->FromSource(source);
 
-				t->m_base->m_defined = true;
-				t->m_base->m_componentManager = m_sourceContext.m_componentManager.get();
+				t->m_base->m_defined = true;				
 			}
 			catch (BuildError& e)
 			{

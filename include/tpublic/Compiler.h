@@ -18,6 +18,8 @@ namespace tpublic
 					Manifest*											aManifest);
 				~Compiler();
 
+		void	SetBase(
+					const char*											aBasePath);
 		void	Build(
 					const std::vector<std::string>&						aParseRootPaths,
 					const char*											aPersistentIdTablePath,
@@ -27,6 +29,8 @@ namespace tpublic
 					const char*											aOnlyBuildMap);
 
 	private:
+
+		std::string												m_basePath;
 
 		struct BuildError
 		{

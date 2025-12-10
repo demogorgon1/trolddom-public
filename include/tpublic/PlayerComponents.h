@@ -20,6 +20,8 @@ namespace tpublic
 		FromSource(
 			const SourceNode*	aSource)
 		{
+			m_components.clear();
+
 			aSource->GetArray()->ForEachChild([&](
 				const SourceNode* aChild)
 			{

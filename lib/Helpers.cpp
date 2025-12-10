@@ -155,6 +155,62 @@ namespace tpublic::Helpers
 		return true;
 	}
 
+	bool		
+	LoadFile(
+		const char*					aPath,
+		std::vector<uint8_t>&		aOut)
+	{
+		FILE* f = fopen(aPath, "rb");
+		if (f == NULL)
+			return false;
+
+		{
+			int result = fseek(f, 0, SEEK_END);
+			if(result != 0)
+			{
+				fclose(f);
+				return false;
+			}
+		}
+
+		size_t fileSize = 0;
+
+		{
+			long result = ftell(f);
+			if(result < 0)
+			{
+				fclose(f);
+				return false;
+			}
+
+			fileSize = (size_t)result;
+		}
+
+		{
+			int result = fseek(f, 0, SEEK_SET);
+			if (result != 0)
+			{
+				fclose(f);
+				return false;
+			}
+		}
+
+		aOut.resize(fileSize);
+
+		if(fileSize > 0)
+		{
+			size_t result = fread(&aOut[0], 1, fileSize, f);
+			if(result != fileSize)
+			{
+				fclose(f);
+				return false;
+			}
+		}
+
+		fclose(f);
+		return true;
+	}
+
 	void
 	TrimString(
 		std::string&				aString)

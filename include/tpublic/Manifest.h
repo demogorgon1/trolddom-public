@@ -62,6 +62,8 @@ namespace tpublic
 			virtual void			PrepareRuntime(
 										uint8_t									aRuntime,
 										const Manifest*							aManifest) = 0;
+			virtual void			PrepareAsBase(
+										const ComponentManager*					aComponentManager) = 0;
 			virtual void			ToStream(
 										IWriter*								aStream) const = 0;
 			virtual bool			FromStream(	
@@ -106,7 +108,36 @@ namespace tpublic
 				assert(!m_hasUnnamedEntries);
 
 				typename std::unordered_map<std::string, _T*>::iterator it = m_nameTable.find(aName);
-				if(it == m_nameTable.end())
+
+				bool exists = it != m_nameTable.end();
+
+				if(exists && it->second->m_base)
+				{
+					// This is a base and we should overwrite it with a blank definition
+					std::string name = it->second->m_name;
+					uint32_t id = it->second->m_id;
+
+					bool removed = false;
+
+					for(size_t i = 0; i < m_entries.size(); i++)
+					{
+						if(m_entries[i]->m_id == id)
+						{
+							Helpers::RemoveCyclicFromVector(m_entries, i);
+							removed = true;
+							break;
+						}
+					}
+
+					assert(removed);
+
+					m_idTable.erase(id);
+					m_nameTable.erase(it);
+
+					exists = false;
+				}
+
+				if(!exists)
 				{
 					if(aPersistentIdTable == NULL)
 						return NULL;
@@ -230,26 +261,28 @@ namespace tpublic
 				return t;
 			}
 
-			void
+			bool
 			ForEach(
 				std::function<bool(_T*)>										aCallback)
 			{
 				for (std::unique_ptr<_T>& t : m_entries)
 				{
 					if(!aCallback(t.get()))
-						break;
+						return false;
 				}
+				return true;
 			}
 
-			void
+			bool
 			ForEach(
 				std::function<bool(const _T*)>									aCallback) const
 			{
 				for (const std::unique_ptr<_T>& t : m_entries)
 				{
 					if (!aCallback(t.get()))
-						break;
+						return false;
 				}
+				return true;
 			}
 
 			// IDataContainer implementation
@@ -274,6 +307,19 @@ namespace tpublic
 			{
 				for (const std::unique_ptr<_T>& t : m_entries)
 					t->PrepareRuntime(aRuntime, aManifest);
+			}
+
+			void
+			PrepareAsBase(
+				const ComponentManager*											aComponentManager) override
+			{
+				// So they can be redefined
+				for (const std::unique_ptr<_T>& t : m_entries)
+				{
+					t->m_defined = false;
+					t->m_base = true;
+					t->m_componentManager = aComponentManager;
+				}
 			}
 
 			void
@@ -363,6 +409,8 @@ namespace tpublic
 						IReader*						aStream);
 		void		PrepareRuntime(
 						uint8_t							aRuntime);
+		void		PrepareAsBase(
+						const ComponentManager*			aComponentManager);
 		const char*	GetNameByTypeAndId(
 						DataType::Id					aDataTypeId,
 						uint32_t						aId) const;
@@ -441,6 +489,14 @@ namespace tpublic
 			const char*									aName) const
 		{
 			return GetContainer<_T>()->TryGetExistingIdByName(aName);
+		}
+
+		template <typename _T>
+		bool
+		ForEach(
+			std::function<bool(const _T*)>				aCallback)const 
+		{
+			return GetContainer<_T>()->ForEach(aCallback);
 		}
 
 		// Global non-itemized data

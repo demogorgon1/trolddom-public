@@ -145,6 +145,8 @@ namespace tpublic
 			{
 				if(aChild->m_name == "levels")
 				{
+					m_levels.clear();
+
 					aChild->GetArray()->ForEachChild([&](
 						const SourceNode* aItem)
 					{

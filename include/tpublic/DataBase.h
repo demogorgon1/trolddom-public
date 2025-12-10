@@ -26,6 +26,7 @@ namespace tpublic
 		
 		DataBase()
 			: m_defined(false)
+			, m_base(false)
 			, m_id(0)
 			, m_componentManager(NULL)
 		{
@@ -42,7 +43,7 @@ namespace tpublic
 		VerifyBase() const
 		{
 			TP_VERIFY_STRING_ID(m_name, m_debugInfo);
-			TP_VERIFY(m_defined, m_debugInfo, "'%s' not defined.", m_name.c_str());
+			TP_VERIFY(m_defined || m_base, m_debugInfo, "'%s' not defined.", m_name.c_str());
 			TP_VERIFY(m_id != 0, m_debugInfo, "'%s' has no id.", m_name.c_str());
 		}
 
@@ -71,7 +72,7 @@ namespace tpublic
 		ToStreamBase(
 			IWriter*							aStream) const
 		{
-			assert(m_defined);
+			assert(m_defined || m_base);
 
 			aStream->WriteString(m_name);
 			aStream->WriteUInt(m_id);
@@ -141,6 +142,7 @@ namespace tpublic
 		uint32_t									m_id;
 		std::vector<uint32_t>						m_tagIds;
 		bool										m_defined;
+		bool										m_base;
 		std::optional<DataErrorHandling::DebugInfo>	m_debugInfo;
 		const ComponentManager*						m_componentManager;
 	};

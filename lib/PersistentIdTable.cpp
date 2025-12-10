@@ -160,6 +160,7 @@ namespace tpublic
 
 	void			
 	PersistentIdTable::ValidateAndPrune(
+		bool															aValidateOnly,
 		UndefinedCallback												aUndefinedCallback)
 	{
 		for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
@@ -196,11 +197,18 @@ namespace tpublic
 
 					j++;
 				}
-				else
+				else 
 				{
 					// No longer defined or referenced - can be pruned
-					numPruned++;
-					t.m_table.erase(j++);
+					if (!aValidateOnly)
+					{
+						numPruned++;
+						t.m_table.erase(j++);
+					}
+					else
+					{
+						j++;
+					}
 				}
 			}
 

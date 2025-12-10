@@ -48,7 +48,7 @@ namespace tpublic
 	{
 		if(!std::filesystem::exists(Helpers::Format("%s/opusenc.exe", aToolsPath)))
 		{
-			printf("WARNING: opusenc.exe not found in %s, not building sound data.", aToolsPath);
+			printf("WARNING: opusenc.exe not found in %s, not building sound data.\n", aToolsPath);
 			return;
 		}
 
