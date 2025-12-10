@@ -10,10 +10,12 @@ changelog:
 	[
 		{ text: "Character sheet shows chance to miss." }		
 		{ text: "The self-cast modifier key (ALT) will cause targeted AOE abilities to target your location." }		
-		{ text: "Cooldown of targeted AOE abilities will not trigger before cast is canceled." }		
+		{ text: "Cooldown of targeted AOE abilities will not trigger if cast is canceled." }		
 		{ text: "Spawn rate of quest items have been increased." }		
 		{ text: "Power Shield no longer triggers global cooldown." }		
 		{ text: "Teleport is instant." }		
+		{ text: "Frost Explosion roots enemies for 3 seconds." }		
+		{ text: "Improved Frost Explosion roots enemies for 6 seconds and does 30% more damage." }		
 		{ text: "Random item vendors have more items." }		
 	]
 
@@ -25,6 +27,8 @@ changelog:
 		{ text: "Inner Peace can only target caster like intended." }
 		{ text: "Fixed quest bug (thanks davicustv)." }		
 		{ text: "The minions of John Krellington no longer give XP when killed." }
+		{ text: "Various custom server/offline mode issues fixed." }
+		{ text: "Fixed movement hiccups after being teleported." }
 	]
 
 	#######################################################################################
