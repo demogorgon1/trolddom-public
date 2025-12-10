@@ -69,8 +69,8 @@ main(
 		printf("\n");
 		printf("options:\n");
 		printf("  -base <path>      Extend existing data. Path should contain files: manifest.bin and sprites.bin.\n");
-		printf("  -ids <path>       Path to persistent id table file. Typically _ids.txt in tpublic repo.\n");
-		printf("  -output <path>    Where to write data. Defaults to current directory.\n");
+		printf("  -ids <path>       Path to persistent id table file. Typically you want to use _ids.txt in tpublic repo.\n");
+		printf("  -output <path>    Where to write data. Defaults to ./custom.\n");
 		printf("  -gen <path>       Output generated source to this path. If not specified, no source will be generated.\n");
 		exit(EXIT_FAILURE);
 	}
