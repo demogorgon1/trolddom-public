@@ -972,6 +972,9 @@ sprites:
 	sprite icon_jul_hat_green: { tags: [ icon ] }
 	sprite icon_jul_hat_blue: { tags: [ icon ] }
 	sprite icon_jul_hat_purple: { tags: [ icon ] }
+	sprite icon_skull_4: { tags: [ icon ] }
+	sprite icon_aetheris_stronghold_heroic: { tags: [ icon ] }
+	
 }
 
 

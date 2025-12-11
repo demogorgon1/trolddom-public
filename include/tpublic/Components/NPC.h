@@ -493,7 +493,9 @@ namespace tpublic
 				FIELD_AGGRO_RANGE_BIAS,
 				FIELD_COMBAT_MOVE_INTERVAL_TICKS,
 				FIELD_NO_COMBAT_TAG,
-				FIELD_HAS_HEAD_ANCHOR
+				FIELD_HAS_HEAD_ANCHOR,
+				FIELD_HEROIC_HEALTH_MULTIPLIER,
+				FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER
 			};
 
 			static void
@@ -527,6 +529,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_COMBAT_MOVE_INTERVAL_TICKS, "combat_move_interval_ticks", offsetof(NPC, m_combatMoveIntervalTicks));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_NO_COMBAT_TAG, "no_combat_tag", offsetof(NPC, m_noCombatTag));
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_HAS_HEAD_ANCHOR, "has_head_anchor", offsetof(NPC, m_hasHeadAnchor));
+				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_HEROIC_HEALTH_MULTIPLIER, "heroic_health_multiplier", offsetof(NPC, m_heroicHealthMultiplier));
+				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER, "heroic_weapon_damage_multiplier", offsetof(NPC, m_heroicWeaponDamagerMultiplier));
 			}
 
 			const StateEntry*
@@ -571,6 +575,8 @@ namespace tpublic
 				m_combatMoveIntervalTicks = 2;
 				m_noCombatTag = false;
 				m_hasHeadAnchor = false;
+				m_heroicHealthMultiplier = 1.0f;
+				m_heroicWeaponDamagerMultiplier = 1.0f;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -593,6 +599,7 @@ namespace tpublic
 				m_effectiveRouteId = 0;
 				m_patrolResetAfterLeavingCombat = false;
 				m_moveFailureAccum = 0;
+				m_heroic = false;
 			}
 
 			// Public data			
@@ -623,6 +630,8 @@ namespace tpublic
 			int32_t										m_combatMoveIntervalTicks = 2;
 			bool										m_noCombatTag = false;
 			bool										m_hasHeadAnchor = false;
+			float										m_heroicHealthMultiplier = 1.0f;
+			float										m_heroicWeaponDamagerMultiplier = 1.0f;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;
@@ -653,6 +662,7 @@ namespace tpublic
 
 			std::optional<SpawnWithTarget>				m_spawnWithTarget;
 			std::unordered_set<uint32_t>				m_handledRouteTriggerIndices;
+			bool										m_heroic = false;
 		};
 	}
 

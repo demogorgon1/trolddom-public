@@ -7,11 +7,24 @@ loot_table .ignorg:
 {
 	slots:
 	[
-		{ possibility: { loot_group: .ignorg  } }			
+		{ possibility: { loot_group: .ignorg } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	
 }
+
+loot_group .ignorg_heroic: {}
+
+loot_table .ignorg_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .ignorg_heroic } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
 
 ############################################################
 # Boss
@@ -33,9 +46,10 @@ entity dungeon_1_ignorg: !NPC
 	_faction: monsters 
 	_sprite: goblin_boss 
 	_sprite_dead: goblin_boss_dead 
-	_weapon_damage: 1.2 
+	_weapon_damage: 3.2 
 	_resource_health: 3 
 	_loot_table: .ignorg
+	_loot_table_heroic: .ignorg_heroic
 	_creature_type: humanoid
 	_encounter: .ignorg
 	_zone: .ignorg
@@ -43,6 +57,9 @@ entity dungeon_1_ignorg: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	
+	_heroic_weapon_damage: 4.3
+	_heroic_resource_health: 7.8
 
 	_abilities: 
 	[

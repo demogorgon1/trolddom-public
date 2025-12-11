@@ -126,6 +126,8 @@ namespace tpublic
 							m_accountWide = aChild->GetBool();
 						else if (aChild->m_name == "available_in_front_end")
 							m_availableInFrontEnd = aChild->GetBool();
+						else if (aChild->m_name == "heroic")
+							m_heroic = aChild->GetBool();
 						else if (aChild->m_name == "category")
 							m_categoryId = aChild->GetId(DataType::ID_ACHIEVEMENT_CATEGORY);
 						else if (aChild->m_name == "root")
@@ -171,6 +173,7 @@ namespace tpublic
 				aStream->WriteUInt(m_killTriggerEntityTagId);
 				aStream->WriteBool(m_availableInFrontEnd);
 				aStream->WriteUInt(m_killTriggerMustBeAliveEntityId);
+				aStream->WriteBool(m_heroic);
 			}
 
 			bool
@@ -211,6 +214,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_killTriggerMustBeAliveEntityId))
 					return false;
+				if (!aStream->ReadBool(m_heroic))
+					return false;
 				return true;
 			}
 
@@ -241,6 +246,7 @@ namespace tpublic
 			bool								m_noProgressValues = false;
 			bool								m_accountWide = false;
 			bool								m_availableInFrontEnd = false;
+			bool								m_heroic = false;
 		};
 
 	}

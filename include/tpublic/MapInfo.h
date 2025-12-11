@@ -117,6 +117,11 @@ namespace tpublic
 				m_openableElite = aItem->GetBool();
 				return true;
 			}
+			else if (aItem->m_name == "heroic_mode_available")
+			{
+				m_heroicModeAvailable = aItem->GetBool();
+				return true;
+			}
 			else if (aItem->m_name == "survival_script")
 			{
 				m_survivalScriptId = aItem->GetId(DataType::ID_SURVIVAL_SCRIPT);
@@ -148,6 +153,7 @@ namespace tpublic
 			aWriter->WriteBool(m_allowSpiritTravel);
 			aWriter->WriteBool(m_openableElite);
 			aWriter->WriteUInt(m_survivalScriptId);
+			aWriter->WriteBool(m_heroicModeAvailable);
 		}
 
 		bool
@@ -192,6 +198,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_survivalScriptId))
 				return false;
+			if (!aReader->ReadBool(m_heroicModeAvailable))
+				return false;
 			return true;
 		}
 
@@ -215,6 +223,7 @@ namespace tpublic
 		bool										m_allowSpiritTravel = true;
 		bool										m_openableElite = false;
 		uint32_t									m_survivalScriptId = 0;
+		bool										m_heroicModeAvailable = false;
 	};
 
 }

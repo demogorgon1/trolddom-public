@@ -41,6 +41,7 @@
 #include <tpublic/Requirements.h>
 #include <tpublic/StealthUtils.h>
 #include <tpublic/WorldInfoMap.h>
+#include <tpublic/XPMetrics.h>
 
 namespace tpublic::Systems
 {
@@ -96,14 +97,38 @@ namespace tpublic::Systems
 		int32_t					/*aTick*/)
 	{		
 		Components::NPC* npc = GetComponent<Components::NPC>(aComponents);
+
+		const NPCMetrics::Level* heroicLevel = NULL;
 	
 		// Initialize resources		
 		{
 			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
 
+			if (GetData()->m_heroic)
+			{
+				uint32_t newHeroicLevel = GetManifest()->m_xpMetrics->m_maxLevel;
+				if(combatPublic->m_level < newHeroicLevel)
+					combatPublic->m_level = newHeroicLevel;
+
+				const NPCMetrics* npcMetrics = GetManifest()->m_npcMetrics.get();
+				heroicLevel = npcMetrics->GetLevel(combatPublic->m_level);
+
+				npc->m_heroic = true;
+			}
+
 			for (const Components::NPC::ResourceEntry& resource : npc->m_resources.m_entries)
 			{
-				combatPublic->AddResourceMax(resource.m_id, resource.m_max);
+				uint32_t resourceMax = resource.m_max;
+
+				if(heroicLevel != NULL)
+				{
+					resourceMax = heroicLevel->m_baseResource[resource.m_id];
+
+					if((Resource::Id)resource.m_id == Resource::ID_HEALTH)
+						resourceMax = (uint32_t)((float)resourceMax * npc->m_heroicHealthMultiplier * heroicLevel->m_eliteResource[resource.m_id]);
+				}
+
+				combatPublic->AddResourceMax(resource.m_id, resourceMax);
 
 				const Resource::Info* info = Resource::GetInfo((Resource::Id)resource.m_id);
 				if (info->m_flags & Resource::FLAG_DEFAULT_TO_MAX)
@@ -111,6 +136,17 @@ namespace tpublic::Systems
 			}
 
 			combatPublic->SetDirty();
+		}
+
+		// If heroic update weapon damage and armor
+		if(heroicLevel != NULL)
+		{
+			Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+
+			combatPrivate->m_weaponDamageRangeMin = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_min * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
+			combatPrivate->m_weaponDamageRangeMax = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_max * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
+
+			combatPrivate->m_armor = heroicLevel->m_baseArmor;
 		}
 
 		// Remember spawn position, set position size flag if needed
@@ -223,6 +259,9 @@ namespace tpublic::Systems
 				if(lootable->m_playerTag.IsSet())
 				{
 					lootable->m_extraLootTableId = auras->GetLootTableId(*aContext->m_random, GetManifest());
+
+					if(npc->m_heroic && lootable->m_heroicLootTableId != 0)
+						lootable->m_lootTableId = lootable->m_heroicLootTableId;
 
 					const MapData* mapData = aContext->m_worldView->WorldViewGetMapData();
 					if(lootable->m_lootTableId != 0 || mapData->m_mapInfo.m_mapLootTableIds.size() > 0 || lootable->m_extraLootTableId != 0)

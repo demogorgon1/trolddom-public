@@ -15,6 +15,18 @@ loot_table .zarvok:
 	]	
 }
 
+loot_group .zarvok_heroic: {}
+
+loot_table .zarvok_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .zarvok_heroic  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
 ############################################################
 # Boss
 
@@ -38,6 +50,7 @@ entity dungeon_1_zarvok: !NPC
 	_weapon_damage: 2
 	_resource_health: 3.5
 	_loot_table: .zarvok
+	_loot_table_heroic: .zarvok_heroic
 	_creature_type: humanoid
 	_encounter: .final
 	_zone: .final
@@ -45,6 +58,9 @@ entity dungeon_1_zarvok: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+
+	_heroic_weapon_damage: 4
+	_heroic_resource_health: 11.4
 
 	_abilities: 
 	[
@@ -72,9 +88,13 @@ entity dungeon_1_gribble: !NPC
 	_encounter: .final
 	_zone: .final
 	_out_of_zone_action: { evade: true }
+	
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+
+	_heroic_weapon_damage: 1.1
+	_heroic_resource_health: 4.4
 
 	_abilities: 
 	[
@@ -165,16 +185,37 @@ ability .gribble:
 	
 	direct_effect damage:
 	{
+		requirement self<must_not_be_heroic>: {}
+	
 		damage_type: fire
 		function: { expression: a a: 55 }	
 		spread: !DEFAULT_SPREAD{}		
 	}
+
+	direct_effect damage:
+	{
+		requirement self<must_be_heroic>: {}
 	
+		damage_type: fire
+		function: { expression: a a: 455 }	
+		spread: !DEFAULT_SPREAD{}		
+	}
+
 	direct_effect spawn_entity:
 	{
+		requirement self<must_not_be_heroic>: {}
+		
 		spawn_flags: [ at_target ]
 		entity: .gribble_fire		
 	}
+	
+	direct_effect spawn_entity:
+	{
+		requirement self<must_be_heroic>: {}
+		
+		spawn_flags: [ at_target ]
+		entity: .gribble_fire_heroic	
+	}	
 }
 
 ability .gribble_fire_tick:
@@ -202,6 +243,57 @@ entity .gribble_fire:
 			tick_interval: 10
 			duration: 300 
 			ability: .gribble_fire_tick
+		}		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}				
+			]			
+		}
+		
+	}
+}
+
+ability .gribble_fire_tick_heroic:
+{
+	string: "Fire"
+	flags: [ offensive always_in_range always_in_line_of_sight ]
+	icon: icon_fire
+	direct_effect damage:
+	{
+		damage_type: fire
+		function: { expression: a a: 523 }													
+	}
+}
+
+entity .gribble_fire_heroic:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 10
+			duration: 600 
+			ability: .gribble_fire_tick_heroic
 		}		
 		sprite: 
 		{ 

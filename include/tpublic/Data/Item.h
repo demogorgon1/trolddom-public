@@ -33,6 +33,7 @@ namespace tpublic
 				FLAG_DUNGEON_LOOT					= 0x00000020,
 				FLAG_FISHING_ROD					= 0x00000040,
 				FLAG_STARTS_QUEST					= 0x00000080,
+				FLAG_HEROIC							= 0x00000100
 			};
 
 			static inline uint32_t
@@ -60,6 +61,8 @@ namespace tpublic
 						flags |= FLAG_FISHING_ROD;
 					else if (strcmp(identifier, "starts_quest") == 0)
 						flags |= FLAG_STARTS_QUEST;
+					else if (strcmp(identifier, "heroic") == 0)
+						flags |= FLAG_HEROIC;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -279,6 +282,7 @@ namespace tpublic
 			bool	IsQuestReward() const { return m_flags & FLAG_QUEST_REWARD; }
 			bool	IsDefined() const { return m_iconSpriteId != 0 && !m_string.empty(); }
 			bool	DoesStartQuest() const { return m_flags & FLAG_STARTS_QUEST; }
+			bool	IsHeroic() const { return m_flags & FLAG_HEROIC; }
 
 			// Base implementation
 			void

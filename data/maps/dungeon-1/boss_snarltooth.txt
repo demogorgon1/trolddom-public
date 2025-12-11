@@ -12,6 +12,17 @@ loot_table .snarltooth:
 	]	
 }
 
+loot_group .snarltooth_heroic: {}
+
+loot_table .snarltooth_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .snarltooth_heroic  } }			
+		!WORLD_DROPS{}
+	]	
+}
+
 ############################################################
 # Boss
 
@@ -49,6 +60,7 @@ entity dungeon_1_snarltooth: !NPC
 	_weapon_damage: 1.5
 	_resource_health: 3.4 
 	_loot_table: .snarltooth
+	_loot_table_heroic: .snarltooth_heroic
 	_creature_type: humanoid
 	_encounter: .snarltooth
 	_zone: .snarltooth
@@ -56,6 +68,9 @@ entity dungeon_1_snarltooth: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	
+	_heroic_weapon_damage: 4.4
+	_heroic_resource_health: 9.5	
 	
 	_abilities: 
 	[
@@ -128,7 +143,7 @@ entity .snarltooth_spawn: !NPC
 	_faction: monsters 
 	_sprite: wolf_1
 	_sprite_dead: wolf_1_dead
-	_weapon_damage: 1
+	_weapon_damage: 2
 	_resource_health: 1
 	_creature_type: beast
 	_encounter: .snarltooth

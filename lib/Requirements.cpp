@@ -605,6 +605,18 @@ namespace tpublic
 				}
 				break;
 
+			case Requirement::TYPE_MUST_BE_HEROIC:
+			case Requirement::TYPE_MUST_NOT_BE_HEROIC:
+				{
+					bool shouldBeHeroic = aRequirement->m_type == Requirement::TYPE_MUST_BE_HEROIC;
+					const Components::NPC* npc = entity->GetComponent<Components::NPC>();
+					bool isHeroic = npc != NULL && npc->m_heroic;
+
+					if(shouldBeHeroic != isHeroic)
+						return false;
+				}
+				break;
+
 			case Requirement::TYPE_MUST_BE_NPC_WITH_HEAD_ANCHOR:
 				{
 					const Components::NPC* npc = entity->GetComponent<Components::NPC>();

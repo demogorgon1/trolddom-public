@@ -4,6 +4,13 @@ changelog:
 	#######################################################################################
 	heading: "v1.0.12"
 
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Heroic: Aetheris Stronghold." }
+	]
+
 	text: "Changes:"
 	
 	list:
@@ -31,6 +38,7 @@ changelog:
 		{ text: "Inner Peace can only target caster like intended." }
 		{ text: "Fixed quest bug (thanks davicustv)." }		
 		{ text: "The minions of John Krellington no longer give XP when killed." }
+		{ text: "Fixed bug where some spells unintentionally couldn't be interrupted." }
 		{ text: "Various custom server/offline mode issues fixed." }
 		{ text: "Fixed movement hiccups after being teleported." }
 		{ text: "Fixed bug where sometimes key binds on hidden action bars wouldn't work." }
