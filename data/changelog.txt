@@ -17,6 +17,10 @@ changelog:
 		{ text: "Frost Explosion roots enemies for 3 seconds." }		
 		{ text: "Improved Frost Explosion roots enemies for 6 seconds and does 30% more damage." }		
 		{ text: "Random item vendors have more items." }		
+		{ text: "Some enchanting recipes now require Arcane Crystals." }		
+		{ text: "Increased damage of Firebolt, Fireball, and Void Blast." }		
+		{ text: "Slightly decreased damage of Ice Lance." }		
+		
 	]
 
 	text: "Issues Fixed:"
@@ -29,6 +33,7 @@ changelog:
 		{ text: "The minions of John Krellington no longer give XP when killed." }
 		{ text: "Various custom server/offline mode issues fixed." }
 		{ text: "Fixed movement hiccups after being teleported." }
+		{ text: "Fixed bug where sometimes key binds on hidden action bars wouldn't work." }
 	]
 
 	#######################################################################################

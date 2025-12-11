@@ -660,7 +660,7 @@ ability firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.92 b: [ [ 1 32 ] [ 10 65 ] [ 20 132 ] [ 30 217 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.93 b: [ [ 1 32 ] [ 10 65 ] [ 20 142 ] [ 30 235 ] ] }											
 		spread: !DEFAULT_SPREAD{}		
 	}
 	
@@ -723,7 +723,7 @@ ability fireball:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.5 b: [ [ 1 55 ] [ 10 120 ] [ 20 245 ] [ 30 404 ] ] }											
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.65 b: [ [ 1 55 ] [ 10 120 ] [ 20 255 ] [ 30 424 ] ] }											
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -786,7 +786,7 @@ ability ice_lance:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 30 ] [ 10 60 ] [ 20 120 ] [ 30 198 ] ] }													
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.93 b: [ [ 1 30 ] [ 10 60 ] [ 20 130 ] [ 30 220 ] ] }													
 		spread: !DEFAULT_SPREAD{}
 	}
 	

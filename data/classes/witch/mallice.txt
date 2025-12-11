@@ -442,7 +442,7 @@ ability curse_of_corruption:
 	description: "Inflicts unholy damage to the target over 10 seconds."
 	range: 6
 	cooldowns: [ global spell_unholy_lockout ]
-	flags: [ offensive spell target_other target_hostile ]
+	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_curse_of_corruption
 	resource_cost mana: 10
@@ -577,7 +577,7 @@ ability doom:
 	description: "Consumes target Weakness and deals $damage$ damage."
 	range: 8
 	cooldowns: [ global spell_unholy_lockout doom ]
-	flags: [ offensive spell target_other target_hostile ]
+	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_doom
 	resource_cost mana: 10
@@ -683,7 +683,7 @@ ability swarm:
 	description: "Inflicts enemies in the targeted area with a swarm of insects for 8 seconds."	
 	range: 8
 	cast_time: 20
-	flags: [ spell target_aoe interruptable late_cooldown_trigger ]
+	flags: [ spell target_aoe interruptable ]
 	states: [ default in_combat ]
 	icon: icon_swarm
 	cooldowns: [ global swarm spell_unholy_lockout ]	
@@ -704,7 +704,7 @@ ability swarm_tick:
 {
 	string: "Swarm"
 	range: 8	
-	flags: [ offensive target_aoe target_aoe_hostile ]
+	flags: [ target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_swarm
 	delay: 3
@@ -778,7 +778,7 @@ ability curse_of_inaction:
 	description: "Causes target to be unable to do anything for 6 seconds."
 	range: 6
 	cooldowns: [ global spell_unholy_lockout curse_of_inaction ]
-	flags: [ offensive spell target_other target_hostile ]
+	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_curse_of_inaction
 	resource_cost mana: 13

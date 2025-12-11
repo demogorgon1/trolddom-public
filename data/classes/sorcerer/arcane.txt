@@ -209,7 +209,7 @@ ability void_blast:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] [ 30 247 ] ] }	
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.2 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] [ 30 348 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 	}	
 }
