@@ -25,8 +25,7 @@ changelog:
 		{ text: "Improved Frost Explosion roots enemies for 6 seconds and does 30% more damage." }		
 		{ text: "Random item vendors have more items." }		
 		{ text: "Some enchanting recipes now require Arcane Crystals (thanks BountieHuntre)." }		
-		{ text: "Increased damage of Firebolt, Fireball, and Void Blast." }		
-		{ text: "Slightly decreased damage of Ice Lance." }		
+		{ text: "Buffed Firebolt, Fireball, and Void Blast. Nerfed Ice Lance." }		
 		
 	]
 
@@ -38,7 +37,7 @@ changelog:
 		{ text: "Inner Peace can only target caster like intended." }
 		{ text: "Fixed quest bug (thanks davicustv)." }		
 		{ text: "The minions of John Krellington no longer give XP when killed." }
-		{ text: "Fixed bug where some spells unintentionally couldn't be interrupted." }
+		{ text: "Fixed bug where some NPC spells unintentionally couldn't be interrupted." }
 		{ text: "Various custom server/offline mode issues fixed." }
 		{ text: "Fixed movement hiccups after being teleported." }
 		{ text: "Fixed bug where sometimes key binds on hidden action bars wouldn't work." }
