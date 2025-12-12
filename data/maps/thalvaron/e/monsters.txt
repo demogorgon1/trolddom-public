@@ -881,6 +881,7 @@ map_entity_spawn thalvaron_urthon_necromancer: { entity thalvaron_urthon_necroma
 	}
 
 	entity thalvaron_urthon_skeleton: !NPC { _string: "Skeleton" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
+	entity thalvaron_urthon_skeleton_no_xp: !NPC { _string: "Skeleton" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _no_kill_event: true }	
 }
 
 # Necromancer
@@ -912,7 +913,7 @@ map_entity_spawn thalvaron_urthon_necromancer: { entity thalvaron_urthon_necroma
 					direct_effect spawn_entity:
 					{
 						spawn_flags: [ no_owner ]
-						entity: thalvaron_urthon_skeleton
+						entity: thalvaron_urthon_skeleton_no_xp
 					}					
 				}
 			}						

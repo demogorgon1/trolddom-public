@@ -209,7 +209,7 @@ ability void_blast:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.1 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] [ 30 247 ] ] }	
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.2 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] [ 30 348 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 	}	
 }
@@ -439,9 +439,8 @@ ability teleport:
 	string: "Teleport"
 	description: "Transports yourself to the target destination."
 	range: 10
-	cast_time: 15
 	cooldowns: [ global teleport spell_arcane_lockout ]
-	flags: [ spell target_aoe target_aoe_always_self interruptable ]
+	flags: [ spell target_aoe target_aoe_always_self interruptable late_cooldown_trigger ]
 	states: [ default in_combat ]
 	icon: icon_teleport
 	resource_cost mana: 20

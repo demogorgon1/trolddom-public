@@ -16,6 +16,8 @@ namespace tpublic
 		FromSource(
 			const SourceNode*			aSource)
 		{
+			m_tiles.clear();
+
 			aSource->GetIdArray(DataType::ID_SPRITE, m_tiles);
 		}
 

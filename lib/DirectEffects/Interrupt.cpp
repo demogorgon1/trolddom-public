@@ -71,12 +71,21 @@ namespace tpublic::DirectEffects
 
 			if(ability->IsInterruptable())
 			{
+				bool triggeredLockout = false;
+
 				for (uint32_t cooldownId : ability->m_cooldowns)
 				{
 					const Data::Cooldown* cooldown = aManifest->GetById<Data::Cooldown>(cooldownId);
 					if (cooldown->m_trigger == Data::Cooldown::TRIGGER_INTERRUPT && aSource != NULL)
+					{
 						aEventQueue->EventQueueInterrupt(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), cooldownId, m_lockoutTicks);
+
+						triggeredLockout = true;
+					}
 				}
+
+				if (!triggeredLockout && aSource != NULL)
+					aEventQueue->EventQueueInterrupt(aSource->GetEntityInstanceId(), aTarget->GetEntityInstanceId(), 0, 0);
 			}
 		}
 

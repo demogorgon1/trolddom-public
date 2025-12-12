@@ -96,7 +96,7 @@ namespace tpublic
 				{
 					Id id = StringToId(aNode->m_name.c_str());
 					TP_VERIFY(id != INVALID_ID, aNode->m_debugInfo, "'%s' is not a valid sound effect.", aNode->m_name.c_str());
-					aNode->GetIdArray(DataType::ID_SOUND, m_sounds[id]);
+					aNode->GetUniqueIdArray(DataType::ID_SOUND, m_sounds[id]);
 				});
 			}
 

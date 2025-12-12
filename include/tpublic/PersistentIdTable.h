@@ -23,6 +23,7 @@ namespace tpublic
 							const char*														aPath);
 		void			Save();
 		void			ValidateAndPrune(
+							bool															aValidateOnly,
 							UndefinedCallback												aUndefinedCallback);
 
 	private:

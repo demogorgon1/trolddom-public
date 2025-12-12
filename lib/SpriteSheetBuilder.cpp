@@ -3,6 +3,7 @@
 #include <map>
 
 #include <tpublic/Compression.h>
+#include <tpublic/SpriteData.h>
 
 #include "SpriteSheetBuilder.h"
 
@@ -314,6 +315,45 @@ namespace tpublic
 	}
 
 	void	
+	SpriteSheetBuilder::AddBaseSprites(
+		Manifest*				aManifest,
+		const char*				aPath)
+	{
+		SpriteData baseSpriteData;
+		
+		{
+			bool ok = baseSpriteData.Load(aPath);
+			TP_CHECK(ok, "Failed to load base sprite data: %s", aPath);
+		}
+
+		std::vector<std::unique_ptr<Data::Sprite>>& sprites = aManifest->GetContainer<Data::Sprite>()->m_entries;
+
+		for(std::unique_ptr<Data::Sprite>& sprite : sprites)
+		{
+			if(sprite->m_base && !sprite->m_defined)
+			{
+				assert(!m_spriteTable.contains(sprite->m_name));
+
+				// This sprite is in the base, but hasn't been redefined. We need to copy it over.
+				Sprite* copySprite = _CreateSprite(NULL, sprite->m_name.c_str(), sprite->m_width * sprite->m_height);
+
+				TP_CHECK((size_t)sprite->m_spriteSheetIndex < baseSpriteData.m_sheets.size(), "Invalid base sprite sheet index for '%s'.", sprite->m_name.c_str());
+				std::unique_ptr<SpriteData::Sheet>& sheet = baseSpriteData.m_sheets[sprite->m_spriteSheetIndex];
+
+				TP_CHECK((size_t)sprite->m_index < sheet->m_sprites.size(), "Invalid base sprite index for '%s'.", sprite->m_name.c_str());
+				SpriteData::Sprite& sheetSprite = sheet->m_sprites[sprite->m_index];
+
+				TP_CHECK(sprite->m_width == sheetSprite.m_width && sprite->m_height == sheetSprite.m_height, "Base sprite size mismatch for '%s'.", sprite->m_name.c_str());
+				copySprite->m_image.Allocate(sprite->m_width, sprite->m_height);
+				memcpy(copySprite->m_image.GetData(), sheetSprite.m_rgba, copySprite->m_image.GetSize());
+
+				copySprite->m_info = sprite->m_info;
+				copySprite->m_data = sprite.get();
+			}
+		}		
+	}
+
+	void	
 	SpriteSheetBuilder::Build()
 	{
 		// Sort sprites by size, largest first
@@ -495,8 +535,7 @@ namespace tpublic
 		}
 		else
 		{
-			assert(aNode != NULL);
-			TP_VERIFY(m_spriteTable.find(aName) == m_spriteTable.end(), aNode->m_debugInfo, "Sprite name '%s' already in use.", aName);
+			TP_VERIFY(aNode == NULL || m_spriteTable.find(aName) == m_spriteTable.end(), aNode->m_debugInfo, "Sprite name '%s' already in use.", aName);
 			sprite = new Sprite(aName, aSize);
 			m_spriteTable[aName] = std::unique_ptr<Sprite>(sprite);
 		}

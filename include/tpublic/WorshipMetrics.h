@@ -66,6 +66,10 @@ namespace tpublic
 		FromSource(
 			const SourceNode*			aSource)
 		{
+			m_levels.clear();
+			m_deityPowerRankPercentiles.clear();
+			m_levelColors.clear();
+
 			aSource->ForEachChild([&](
 				const SourceNode* aChild)
 			{

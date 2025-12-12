@@ -47,6 +47,9 @@ namespace tpublic
 		bool		LoadTextFile(
 						const char*							aPath,
 						std::vector<std::string>&			aOut);
+		bool		LoadFile(
+						const char*							aPath,
+						std::vector<uint8_t>&				aOut);
 		void		TrimString(
 						std::string&						aString);
 		void		GetRandomStatWeights(

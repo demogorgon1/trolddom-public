@@ -267,6 +267,22 @@ namespace tpublic
 		}
 	}
 
+	void		
+	Manifest::PrepareAsBase(
+		const ComponentManager*						aComponentManager)
+	{
+		// Some things can't get updated and needs to be redifined
+		m_wordList.m_dataChunks.clear();
+		m_wordList.m_tagTable.clear();
+
+		// Flag all data objects as undefined (so we won't complain about redefining them)
+		for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+		{
+			assert(m_containers[i] != NULL);
+			m_containers[i]->PrepareAsBase(aComponentManager);			
+		}
+	}
+
 	const char* 
 	Manifest::GetNameByTypeAndId(
 		DataType::Id								aDataTypeId,

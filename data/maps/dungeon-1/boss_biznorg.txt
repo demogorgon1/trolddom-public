@@ -14,6 +14,20 @@ loot_table .biznorg:
 	]	
 }
 
+loot_group .biznorg_heroic: {}
+
+loot_table .biznorg_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message dungeon_1: "Biznorg will not drop Emblem of Triumph for {}." } } }		 
+		{ possibility: { loot_group: eldrin_the_enchanter_quest_item_2 requirement self<must_have_active_quest>: { id: eldrin_the_enchanter_2 } } }
+		{ possibility: { loot_group: .biznorg_heroic } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
 ############################################################
 # Boss
 
@@ -37,6 +51,7 @@ entity dungeon_1_biznorg: !NPC
 	_weapon_damage: 0.8 
 	_resource_health: 3 
 	_loot_table: .biznorg
+	_loot_table_heroic: .biznorg_heroic
 	_creature_type: humanoid
 	_encounter: .biznorg
 	_zone: .biznorg
@@ -44,6 +59,9 @@ entity dungeon_1_biznorg: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	
+	_heroic_weapon_damage: 3.9
+	_heroic_resource_health: 8
 	
 	_abilities: 
 	[
@@ -104,8 +122,19 @@ ability .biznorg:
 	
 	direct_effect damage:
 	{
+		requirement self<must_not_be_heroic>: {}
+		
 		damage_type: fire
 		function: { expression: a a: 75 }															
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect damage:
+	{
+		requirement self<must_be_heroic>: {}
+		
+		damage_type: fire
+		function: { expression: a a: 830 }															
 		spread: !DEFAULT_SPREAD{}
 	}
 }

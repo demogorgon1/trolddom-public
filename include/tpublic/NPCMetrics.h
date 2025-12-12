@@ -152,6 +152,7 @@ namespace tpublic
 				}
 				else if(aChild->m_name == "aggro_ranges")
 				{
+					m_aggroRanges.clear();
 					aChild->GetUIntArray(m_aggroRanges);
 				}
 				else if(aChild->m_name == "aggro_range_base_level_difference")
@@ -245,10 +246,8 @@ namespace tpublic
 				m_levels.resize(i + 1);
 
 			std::unique_ptr<Level>& t = m_levels[i];
-			if(t)
-				return NULL; // Already exists
-
-			t = std::make_unique<Level>();
+			if(!t)				
+				t = std::make_unique<Level>();
 
 			return t.get();
 		}

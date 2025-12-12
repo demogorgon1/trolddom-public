@@ -80,6 +80,9 @@ namespace tpublic
 		void				GetIdArray(
 								DataType::Id							aDataType,
 								std::vector<uint32_t>&					aOut) const;
+		void				GetUniqueIdArray(
+								DataType::Id							aDataType,
+								std::vector<uint32_t>&					aOut) const;
 		void				GetIdSet(
 								DataType::Id							aDataType,
 								std::unordered_set<uint32_t>&			aOut) const;

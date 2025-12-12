@@ -235,6 +235,10 @@ namespace tpublic
 			m_type = TYPE_MUST_BE_LOWER_THAN_LEVEL;
 		else if(typeString == "must_be_npc_with_head_anchor")
 			m_type = TYPE_MUST_BE_NPC_WITH_HEAD_ANCHOR;
+		else if (typeString == "must_be_heroic")
+			m_type = TYPE_MUST_BE_HEROIC;
+		else if (typeString == "must_not_be_heroic")
+			m_type = TYPE_MUST_NOT_BE_HEROIC;
 		else
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

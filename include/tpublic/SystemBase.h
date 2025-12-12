@@ -34,6 +34,7 @@ namespace tpublic
 			const Manifest*			m_manifest = NULL;
 			uint32_t				m_mapId = 0;
 			uint32_t				m_mapSeed = 0;
+			bool					m_heroic = false;
 		};
 
 		SystemBase(

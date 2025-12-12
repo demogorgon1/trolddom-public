@@ -22,6 +22,9 @@ namespace tpublic
 
 		void	AddSprites(
 					const SourceNode*		aSource);
+		void	AddBaseSprites(	
+					Manifest*				aManifest,
+					const char*				aPath);
 		void	Build();
 		void	ExportPreliminaryManifestData(
 					PersistentIdTable*		aPersistentIdTable,

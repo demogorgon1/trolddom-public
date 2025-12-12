@@ -1,6 +1,8 @@
 ############################################################
 # Loot
 
+loot_group .grunthar: {}
+
 loot_table .grunthar:
 {
 	slots:
@@ -11,10 +13,22 @@ loot_table .grunthar:
 	]	
 }
 
+loot_group .grunthar_heroic: {}
+
+loot_table .grunthar_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message dungeon_1: "Grunthar will not drop Emblem of Triumph for {}." } } }		 		
+		{ possibility: { loot_group: .grunthar_heroic } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
 ############################################################
 # Boss
-
-loot_group .grunthar: {}
 
 zone .grunthar:
 {
@@ -36,6 +50,7 @@ entity dungeon_1_grunthar: !NPC
 	_weapon_damage: 2.3
 	_resource_health: 4.5 
 	_loot_table: .grunthar
+	_loot_table_heroic: .grunthar_heroic
 	_creature_type: humanoid
 	_encounter: .grunthar
 	_zone: .grunthar
@@ -43,6 +58,9 @@ entity dungeon_1_grunthar: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	
+	_heroic_weapon_damage: 4.8
+	_heroic_resource_health: 10
 	
 	_abilities: 
 	[
@@ -119,6 +137,47 @@ aura .grunthar:
 	}
 }
 
+ability .grunthar_tick_heroic:
+{
+	string: "Earthquake"
+	flags: [ target_self target_aoe target_aoe_hostile ]
+	icon: icon_stuff
+	delay: 3
+	aoe_radius: 10
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }	
+
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a a: 180 }													
+	}
+	
+	source_visual<tile_shake>:
+	{
+		radius: 10
+		flags: [ line_of_sight ]
+		duration: 17
+		amount: 1
+	}		
+}
+
+aura .grunthar_heroic:
+{
+	string: "Earthquake"
+	icon: icon_stuff		
+	type: buff
+	duration: based_on_effects
+	flags: [ unique channeled ]
+
+	aura_effect repeat:
+	{
+		update_interval: 15
+		update_count: 4
+		ability: .grunthar_tick_heroic
+	}
+}
+
 cooldown .grunthar:
 {
 	duration: 200
@@ -134,7 +193,16 @@ ability .grunthar:
 
 	direct_effect apply_aura:
 	{	
+		requirement self<must_not_be_heroic>: {}
+	
 		aura: .grunthar
+	}
+
+	direct_effect apply_aura:
+	{	
+		requirement self<must_be_heroic>: {}
+	
+		aura: .grunthar_heroic
 	}
 }
 

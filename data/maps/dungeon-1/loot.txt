@@ -107,6 +107,133 @@ item dungeon_1_mail_bracers_1:
 	stat_weight dexterity: 1					
 }
 
+item dungeon_1_axe_1_heroic:
+{
+	string: "Goblin Cleaver"
+	weapon_cooldown: 20
+	type: weapon_1h_axe
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_axe_3
+	rarity: rare
+	binds: when_picked_up	
+	flags: [ heroic ]
+	
+	stat_weight strength: 2
+	stat_weight constitution: 1
+}
+
+item dungeon_1_cloth_feet_1_heroic:
+{
+	string: "Wizard's Slippers"
+	type: armor_cloth
+	equipment_slots: [ feet ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_feet_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_feet_1_heroic:
+{
+	string: "Skeletal Sabatons"
+	type: armor_mail
+	equipment_slots: [ feet ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_feet_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_plate_feet_1_heroic:
+{
+	string: "Warrior's Footguards"
+	type: armor_plate
+	equipment_slots: [ feet ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_feet_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1				
+}
+
+item dungeon_1_plate_bracers_1_heroic:
+{
+	string: "Warrior's Wristguards"
+	type: armor_plate
+	equipment_slots: [ wrists ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_bracers_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_cloth_bracers_1_heroic:
+{
+	string: "Wizard's Bracers"
+	type: armor_cloth
+	equipment_slots: [ wrists ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_bracers_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_bracers_1_heroic:
+{
+	string: "Skeletal Wristguards"
+	type: armor_mail
+	equipment_slots: [ wrists ]
+	loot_groups: [ .ignorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_bracers_3
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1					
+}
+
 ############################################################
 # Grunthar
 
@@ -180,6 +307,96 @@ item dungeon_1_cloth_head_1:
 	icon: icon_cloth_head_1
 	rarity: rare
 	binds: when_picked_up
+	
+	stat_weight wisdom: 1
+	stat_weight spirit: 1		
+}
+
+item dungeon_1_mace_1_heroic:
+{
+	string: "Skull Crusher"
+	weapon_cooldown: 22
+	type: weapon_1h_mace
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .grunthar_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mace_5
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1 
+}
+
+item dungeon_1_cape_2_heroic:
+{
+	string: "Cape of the Lost Hero"
+	equipment_slots: [ back ]
+	loot_groups: [ .grunthar_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cape_4
+	rarity: rare
+	binds: when_picked_up
+	type: armor_cloth
+	flags: [ heroic ]
+	
+	stat_weight dexterity: 1	
+	stat_weight constitution: 1			
+}
+
+item dungeon_1_plate_helmet_1_heroic:
+{
+	string: "Warrior's Faceguard"
+	type: armor_plate
+	equipment_slots: [ head ]
+	loot_groups: [ .grunthar_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_helmet_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1
+	stat_weight constitution: 1
+}
+
+item dungeon_1_mail_head_1_heroic:
+{
+	string: "Skeletal Skullmask"
+	type: armor_mail
+	equipment_slots: [ head ]
+	loot_groups: [ .grunthar_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_head_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	
+	stat_weight strength: 1
+	stat_weight dexterity: 1			
+}
+
+item dungeon_1_cloth_head_1_heroic:
+{
+	string: "Wizard's Hood"
+	type: armor_cloth
+	equipment_slots: [ head ]
+	loot_groups: [ .grunthar_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_head_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
 	
 	stat_weight wisdom: 1
 	stat_weight spirit: 1		
@@ -344,6 +561,184 @@ item dungeon_1_neck_1:
 	stat_weight constitution: 1	
 }
 
+item dungeon_1_sword_1_heroic:
+{
+	string: "Ancient Longsword"
+	weapon_cooldown: 20
+	type: weapon_1h_sword
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_sword_7
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	budget_bias: -10
+	
+	stat parry_chance: 1
+	stat_weight dexterity: 1
+}
+
+item dungeon_1_knife_1_heroic:
+{
+	string: "Snakeblade"
+	weapon_cooldown: 15
+	type: weapon_1h_knife
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_sword_8
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight dexterity: 3
+}
+
+item dungeon_1_staff_1_heroic:
+{
+	string: "Glowing Staff of the Druid"
+	weapon_cooldown: 20
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_staff_2
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1
+	stat_weight spirit: 2	
+	stat_weight healing: 3
+}
+
+item dungeon_1_staff_2_heroic:
+{
+	string: "Nemesis Staff"
+	weapon_cooldown: 20
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_staff_3
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight constitution: 1
+	stat_weight wisdom: 2	
+	stat_weight spell_damage: 3	
+}
+
+item dungeon_1_axe_2_heroic:
+{
+	string: "Lord's Battle Axe"
+	weapon_cooldown: 34
+	type: weapon_2h_axe
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_axe_4
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	budget_bias: -10
+	stat phys_crit_chance: 1
+	stat_weight strength: 1
+	stat_weight constitution: 1
+}
+
+item dungeon_1_plate_chest_1_heroic:
+{
+	string: "Warrior's Chestguard"
+	type: armor_plate
+	equipment_slots: [ chest ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_chest_2
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight constitution: 1	
+}
+
+item dungeon_1_cloth_shirt_1_heroic:
+{
+	string: "Wizard's Robe"
+	type: armor_cloth
+	equipment_slots: [ chest ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_shirt_5
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1
+	stat_weight spell_damage: 1			
+}
+
+item dungeon_1_mail_shirt_1_heroic:
+{
+	string: "Skeletal Hauberk"
+	type: armor_mail
+	equipment_slots: [ chest ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_shirt_3
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_ring_1_heroic:
+{
+	string: "Golden Loop"
+	equipment_slots: [ finger_1 finger_2 ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_ring_6
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight constitution: 1
+}
+
+item dungeon_1_neck_1_heroic:
+{
+	string: "Ancient Sapphire"
+	equipment_slots: [ neck ]
+	loot_groups: [ .zarvok_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_necklace_3
+	rarity: epic
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1	
+	stat_weight constitution: 1	
+}
+
 ############################################################
 # Biznorg
 
@@ -424,6 +819,94 @@ item dungeon_1_cape_1:
 	binds: when_picked_up
 	type: armor_cloth
 	
+	stat_weight spirit: 1		
+	stat_weight wisdom: 1		
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_staff_3_heroic:
+{
+	string: "Eldertree Walking Stick"
+	weapon_cooldown: 20
+	type: weapon_2h_staff
+	equipment_slots: [ main_hand ]
+	loot_groups: [ .biznorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_staff_4
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 2
+	stat_weight spirit: 1		
+	stat_weight spell_damage: 3
+}
+
+item dungeon_1_plate_shoulders_1_heroic:
+{
+	string: "Warrior's Shoulderguards"
+	type: armor_plate
+	equipment_slots: [ shoulders ]
+	loot_groups: [ .biznorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_shoulders_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_cloth_shoulders_1_heroic:
+{
+	string: "Wizard's Mantle"
+	type: armor_cloth
+	equipment_slots: [ shoulders ]
+	loot_groups: [ .biznorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_shoulders_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_shoulders_1_heroic:
+{
+	string: "Skeletal Mantle"
+	type: armor_mail
+	equipment_slots: [ shoulders ]
+	loot_groups: [ .biznorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_shoulders_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_cape_1_heroic:
+{
+	string: "Cloak of Biznorg"
+	equipment_slots: [ back ]
+	loot_groups: [ .biznorg_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cape_3
+	rarity: rare
+	binds: when_picked_up
+	type: armor_cloth
+	flags: [ heroic ]
 	stat_weight spirit: 1		
 	stat_weight wisdom: 1		
 	stat_weight constitution: 1		
@@ -513,6 +996,92 @@ item dungeon_1_mail_hands_1:
 	stat_weight dexterity: 1					
 }
 
+item dungeon_1_sword_2_heroic:
+{
+	string: "Demonic Slicer"
+	weapon_cooldown: 20
+	type: weapon_1h_sword
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .umbracoth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_sword_9
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1
+}
+
+item dungeon_1_shield_1_heroic:
+{
+	string: "Demonic Shield"
+	type: shield
+	equipment_slots: [ off_hand ]
+	loot_groups: [ .umbracoth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_shield_4
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	budget_bias: -10
+	stat block_chance: 1
+	stat_weight constitution: 1
+}
+
+item dungeon_1_plate_hands_1_heroic:
+{
+	string: "Warrior's Handguards"
+	type: armor_plate
+	equipment_slots: [ hands ]
+	loot_groups: [ .umbracoth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_hands_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_cloth_hands_1_heroic:
+{
+	string: "Wizard's Gloves"
+	type: armor_cloth
+	equipment_slots: [ hands ]
+	loot_groups: [ .umbracoth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_hands_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_hands_1_heroic:
+{
+	string: "Skeletal Grasp"
+	type: armor_mail
+	equipment_slots: [ hands ]
+	loot_groups: [ .umbracoth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_hands_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight dexterity: 1					
+}
+
 ############################################################
 # Snarltooth
 
@@ -587,6 +1156,92 @@ item dungeon_1_knife_2:
 	rarity: rare
 	binds: when_picked_up
 	
+	budget_bias: -10
+	stat_weight constitution: 1
+	stat phys_crit_chance: 1
+}
+
+item dungeon_1_plate_legs_1_heroic:
+{
+	string: "Warrior's Legguards"
+	type: armor_plate
+	equipment_slots: [ legs ]
+	loot_groups: [ .snarltooth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_plate_legs_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight constitution: 1	
+}
+
+item dungeon_1_cloth_legs_1_heroic:
+{
+	string: "Wizard's Leggings"
+	type: armor_cloth
+	equipment_slots: [ legs ]
+	loot_groups: [ .snarltooth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_cloth_legs_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight wisdom: 1
+	stat_weight spirit: 1			
+}
+
+item dungeon_1_mail_legs_1_heroic:
+{
+	string: "Skeletal Greaves"
+	type: armor_mail
+	equipment_slots: [ legs ]
+	loot_groups: [ .snarltooth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_mail_legs_1
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1
+	stat_weight dexterity: 1				
+}
+
+item dungeon_1_neck_2_heroic:
+{
+	string: "Corrupted Heirloom"
+	equipment_slots: [ neck ]
+	loot_groups: [ .snarltooth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_necklace_4
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
+	stat_weight strength: 1	
+	stat_weight constitution: 1		
+}
+
+item dungeon_1_knife_2_heroic:
+{
+	string: "Broken Fang of Snarltooth"
+	weapon_cooldown: 20
+	type: weapon_1h_knife
+	equipment_slots: [ main_hand off_hand ]
+	loot_groups: [ .snarltooth_heroic ]
+	required_level: 30
+	item_level: 32
+	level_range: 30
+	icon: icon_knife_3
+	rarity: rare
+	binds: when_picked_up
+	flags: [ heroic ]
 	budget_bias: -10
 	stat_weight constitution: 1
 	stat phys_crit_chance: 1

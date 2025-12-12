@@ -24,7 +24,7 @@ entity thalvaron_random_vendor_4: !NPC
 	_not_pushable: true	
 	_random_item_vendor: 
 	{ 
-		item_count: 6
+		item_count: 8
 		refresh_ticks: 50 
 		replacement_ticks: 36000 # 1 hour
 		level: 30

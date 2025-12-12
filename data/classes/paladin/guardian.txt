@@ -841,7 +841,7 @@ ability consecrate:
 	description: "Consecrates the ground for 15 seconds. This does damage and extra threat to affected enemies."	
 	range: 7
 	cast_time: 10
-	flags: [ spell target_aoe interruptable ]
+	flags: [ spell target_aoe interruptable late_cooldown_trigger ]
 	states: [ default in_combat ]
 	icon: icon_consecrate
 	cooldowns: [ global consecrate spell_holy_lockout ]	

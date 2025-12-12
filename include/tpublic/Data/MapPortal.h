@@ -33,6 +33,8 @@ namespace tpublic
 							m_frameInterval = aChild->GetUInt32();
 						else if(aChild->m_name == "color")
 							m_color = Image::RGBA(aChild);
+						else if (aChild->m_name == "heroic_color")
+							m_heroicColor = Image::RGBA(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
 					});
@@ -45,6 +47,7 @@ namespace tpublic
 					aWriter->WriteUInts(m_frames);
 					aWriter->WriteUInt(m_frameInterval);
 					aWriter->WritePOD(m_color);
+					aWriter->WritePOD(m_heroicColor);
 				}
 
 				bool
@@ -57,6 +60,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadPOD(m_color))
 						return false;
+					if (!aReader->ReadPOD(m_heroicColor))
+						return false;
 					return true;
 				}
 
@@ -64,6 +69,7 @@ namespace tpublic
 				std::vector<uint32_t>		m_frames;
 				uint32_t					m_frameInterval = 100;
 				Image::RGBA					m_color = { 255, 255, 255, 255 };
+				Image::RGBA					m_heroicColor = { 255, 255, 255, 255 };
 			};
 
 			void

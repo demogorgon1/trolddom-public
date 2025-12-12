@@ -575,7 +575,7 @@ ability power_shield:
 {
 	string: "Power Shield"
 	description: "Absorbs damage for up to 30 seconds."
-	cooldowns: [ global power_shield spell_arcane_lockout ]
+	cooldowns: [ power_shield spell_arcane_lockout ]
 	resource_cost mana: 28
 	flags: [ target_self ]
 	states: [ default in_combat ]	

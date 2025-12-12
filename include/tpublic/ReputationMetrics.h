@@ -79,6 +79,8 @@ namespace tpublic
 				}
 				else if(aChild->m_name == "levels")
 				{
+					m_levels.clear();
+
 					aChild->ForEachChild([&](
 						const SourceNode* aLevelEntry)
 					{

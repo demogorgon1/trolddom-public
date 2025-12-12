@@ -766,7 +766,7 @@ ability resurrection_2:
 	range: 7
 	cast_time: 50
 	cooldowns: [ global spell_healing_lockout ]
-	flags: [ spell target_aoe target_aoe_friendly interruptable ]
+	flags: [ spell target_aoe target_aoe_friendly interruptable late_cooldown_trigger ]
 	states: [ default ]
 	icon: icon_resurrection_2
 	resource_cost mana: 25

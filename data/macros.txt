@@ -53,6 +53,7 @@
 		lootable : 
 		{ 
 			<exists _loot_table> loot_table: @_loot_table
+			<exists _loot_table_heroic> heroic_loot_table: @_loot_table_heroic
 			<exists _kill_contribution and _kill_contribution> anyone_can_loot: true
 			<exists _special_loot_cooldown> special_loot_cooldown: @_special_loot_cooldown
 		}
@@ -144,6 +145,8 @@
 			<exists _global_aura> global_aura: @_global_aura
 			<exists _combat_move_interval_ticks> combat_move_interval_ticks: @_combat_move_interval_ticks
 			<exists _no_combat_tag and _no_combat_tag> no_combat_tag: @_no_combat_tag
+			<exists _heroic_weapon_damage> heroic_weapon_damage_multiplier: @_heroic_weapon_damage
+			<exists _heroic_resource_health> heroic_health_multiplier: @_heroic_resource_health
 		}		
 		sprite<static>: 
 		{ 

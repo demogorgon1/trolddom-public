@@ -90,9 +90,15 @@ namespace tpublic
 					const SourceNode* aChild)
 				{
 					if (aChild->m_tag == "item_type")
-						m_itemTypes.push_back(std::make_unique<InvalidStatsItemType>(aChild));
+					{
+						std::unique_ptr<InvalidStatsItemType> t = std::make_unique<InvalidStatsItemType>(aChild);
+						RemoveItemType(t->m_itemTypeId);
+						m_itemTypes.push_back(std::move(t));
+					}
 					else
+					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
 				});
 			}
 
@@ -122,6 +128,20 @@ namespace tpublic
 						return t.get();
 				}
 				return NULL;
+			}
+
+			void
+			RemoveItemType(
+				ItemType::Id			aItemTypeId)
+			{
+				for (size_t i = 0; i < m_itemTypes.size(); i++)
+				{
+					if (m_itemTypes[i]->m_itemTypeId == aItemTypeId)
+					{
+						Helpers::RemoveCyclicFromVector(m_itemTypes, i);
+						return;
+					}
+				}
 			}
 
 			bool
