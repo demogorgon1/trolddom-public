@@ -18,6 +18,8 @@ loot_table .umbracoth_heroic:
 {
 	slots:
 	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message dungeon_1: "Umbracoth will not drop Emblem of Triumph for {}." } } }		 		
 		{ possibility: { loot_group: .umbracoth_heroic } }
 		!WORLD_DROPS{}
 	]
@@ -293,6 +295,7 @@ entity .umbracoth_spawn: !NPC
 	_zone: .umbracoth
 	_out_of_zone_action: { use: enrage }
 	_inactive_encounter_despawn: true
+	_combat_move_interval_ticks: 3
 	
 	_heroic_weapon_damage: 4.3
 	_heroic_resource_health: 0.7

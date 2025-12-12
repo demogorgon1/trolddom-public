@@ -21489,6 +21489,7 @@ ability jul_hat_rare_2 34486
 ability __maps_dungeon_1_gribble_fire_tick_heroic 34487
 ability __maps_dungeon_1_grunthar_tick_heroic 34488
 ability __maps_dungeon_1_umbracoth_tick_heroic 34489
+ability dark_wolf 34490
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -23539,6 +23540,7 @@ entity thalvaron_dawn 2133
 entity jul_nisse 2134
 entity thalvaron_urthon_skeleton_no_xp 2135
 entity __maps_dungeon_1_gribble_fire_heroic 2136
+entity dark_wolf 2137
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -30619,6 +30621,13 @@ sprite icon_skull_4 5905
 sprite icon_aetheris_stronghold_heroic 5906
 sprite __unnamed_851__ 5907
 sprite __unnamed_850__ 5908
+sprite dark_wolf_0 5909
+sprite dark_wolf_1 5910
+sprite dark_wolf_2 5911
+sprite icon_dark_wolf 5912
+sprite __unnamed_852__ 5913
+sprite icon_light_wolf 5914
+sprite __unnamed_853__ 5915
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -62849,6 +62858,7 @@ item dungeon_1_cloth_legs_1_heroic 52167
 item dungeon_1_mail_legs_1_heroic 52168
 item dungeon_1_neck_2_heroic 52169
 item dungeon_1_knife_2_heroic 52170
+item mount_dark_wolf 52171
 aura knock 1
 aura dont_touch_me_bro 2
 aura immortality 3
@@ -65511,6 +65521,7 @@ aura _ability_jul_hat_rare_2_direct_effect_apply_aura_aura 4717
 aura frost_explosion 4718
 aura __maps_dungeon_1_grunthar_heroic 4719
 aura __maps_dungeon_1_umbracoth_heroic 4720
+aura dark_wolf 4721
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -66191,6 +66202,7 @@ loot_group __maps_dungeon_1_grunthar_heroic 362
 loot_group __maps_dungeon_1_ignorg_heroic 363
 loot_group __maps_dungeon_1_snarltooth_heroic 364
 loot_group __maps_dungeon_1_umbracoth_heroic 365
+loot_group dark_wolf 366
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -69431,6 +69443,7 @@ mount dark_brown_horse 2
 mount gray_horse 3
 mount pony 4
 mount black_horse 5
+mount dark_wolf 6
 realm_balance the_shrouded_lands_light 1
 realm_balance the_shrouded_lands_underworld 2
 control_point_state the_shrouded_lands_neutral 1
@@ -69859,6 +69872,12 @@ loot_cooldown _loot_table___maps_the_devouring_shroud_boss_4_slots_possibility_l
 loot_cooldown _loot_table___maps_the_devouring_shroud_boss_5_slots_possibility_loot_cooldown 419
 loot_cooldown _loot_table___maps_thalvaron_e_sand_golem_slots_possibility_loot_cooldown 420
 loot_cooldown _loot_table___maps_the_devouring_shroud_boss_6_slots_possibility_loot_cooldown 421
+loot_cooldown _loot_table___maps_dungeon_1_biznorg_heroic_slots_possibility_loot_cooldown 422
+loot_cooldown _loot_table___maps_dungeon_1_zarvok_heroic_slots_possibility_loot_cooldown 423
+loot_cooldown _loot_table___maps_dungeon_1_grunthar_heroic_slots_possibility_loot_cooldown 424
+loot_cooldown _loot_table___maps_dungeon_1_ignorg_heroic_slots_possibility_loot_cooldown 425
+loot_cooldown _loot_table___maps_dungeon_1_snarltooth_heroic_slots_possibility_loot_cooldown 426
+loot_cooldown _loot_table___maps_dungeon_1_umbracoth_heroic_slots_possibility_loot_cooldown 427
 critter _entity_seagull_components_critter_critter 1
 critter _entity_duck_components_critter_critter 2
 critter _entity_chicken_components_critter_critter 3

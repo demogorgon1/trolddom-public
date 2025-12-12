@@ -19,6 +19,8 @@ loot_table .grunthar_heroic:
 {
 	slots:
 	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message dungeon_1: "Grunthar will not drop Emblem of Triumph for {}." } } }		 		
 		{ possibility: { loot_group: .grunthar_heroic } }			
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}

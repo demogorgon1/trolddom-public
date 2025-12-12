@@ -55,6 +55,8 @@
 		string: @_string
 		use_ability: @_id
 		cost: @_cost	
+		<exists _loot_groups> loot_groups: @_loot_groups
+		<exists _level_range> level_range: @_level_range
 	}
 
 	!define local MOUNT_ENTITY
@@ -207,4 +209,31 @@
 		entity black_horse: !MOUNT_ENTITY{ _wandering: true }
 		item mount_black_horse: !MOUNT_ITEM{}
 	}
+	
+	###############################################################################
+	# Dark Wolf
+	{
+		${
+			_string: "Dark Wolf"
+			_description: "Summons or dismisses a rideable wolf."
+			_icon: icon_dark_wolf
+			_id: dark_wolf
+			_sprite: dark_wolf_0
+			_walk_sprites: [ dark_wolf_1 dark_wolf_0 dark_wolf_2 dark_wolf_0 ]
+			_creature_type: beast
+			_cost: 300000
+			_level: 20	
+			_y_offset: 1
+			_loot_groups: [ dark_wolf ]
+			_level_range: 30 # Drops from level 30 boss
+		}
+
+		mount dark_wolf: !MOUNT{}
+		aura dark_wolf: !MOUNT_AURA{}
+		ability dark_wolf: !MOUNT_ABILITY{}
+		entity dark_wolf: !MOUNT_ENTITY{ _wandering: true }
+		item mount_dark_wolf: !MOUNT_ITEM{}
+		loot_group dark_wolf: {} # drops from snarltooth
+	}
+	
 }

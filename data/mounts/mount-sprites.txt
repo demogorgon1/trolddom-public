@@ -21,4 +21,9 @@ sprites:
 	sprite black_horse_1: { }
 	sprite black_horse_2: { }
 
+	cursor: { position: [ 0 16 ] }
+	sprite dark_wolf_0: { }
+	sprite dark_wolf_1: { }
+	sprite dark_wolf_2: { }
+
 }

@@ -18,7 +18,10 @@ loot_table .snarltooth_heroic:
 {
 	slots:
 	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message dungeon_1: "Snarltooth will not drop Emblem of Triumph for {}." } } }		 		
 		{ possibility: { loot_group: .snarltooth_heroic  } }			
+		{ possibility: { loot_group: dark_wolf  } }			
 		!WORLD_DROPS{}
 	]	
 }

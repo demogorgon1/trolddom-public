@@ -20,6 +20,8 @@ loot_table .biznorg_heroic:
 {
 	slots:
 	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message dungeon_1: "Biznorg will not drop Emblem of Triumph for {}." } } }		 
 		{ possibility: { loot_group: eldrin_the_enchanter_quest_item_2 requirement self<must_have_active_quest>: { id: eldrin_the_enchanter_2 } } }
 		{ possibility: { loot_group: .biznorg_heroic } }			
 		!WORLD_DROPS{}
