@@ -46,4 +46,5 @@
 	frames: [ effect_instance_portal_hole_0 effect_instance_portal_hole_1 effect_instance_portal_hole_2 ] 
 	frame_interval: 200 
 	color: [ 200 0 100 200 ] 
+	heroic_color: [ 220 120 0 200 ] 	
 }
