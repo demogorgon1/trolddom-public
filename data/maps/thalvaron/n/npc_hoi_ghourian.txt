@@ -200,7 +200,7 @@ quest .hoi_ghourian_3:
 
 	text:
 	[
-		"Go south, across the river by the mountains, and collect spider silk and eggs."
+		"Go south, across the river by the mountains, and collect lizard fire bladders."
 	]
 	
 	description: 
