@@ -141,12 +141,12 @@ namespace tpublic::Systems
 		// If heroic update weapon damage and armor
 		if(heroicLevel != NULL)
 		{
-			Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
 
-			combatPrivate->m_weaponDamageRangeMin = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_min * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
-			combatPrivate->m_weaponDamageRangeMax = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_max * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
+			combatPublic->m_overrideWeaponDamageRangeMin = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_min * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
+			combatPublic->m_overrideWeaponDamageRangeMax = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_max * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
 
-			combatPrivate->m_armor = heroicLevel->m_baseArmor;
+			combatPublic->m_overrideArmor = heroicLevel->m_baseArmor;
 		}
 
 		// Remember spawn position, set position size flag if needed

@@ -21490,6 +21490,7 @@ ability __maps_dungeon_1_gribble_fire_tick_heroic 34487
 ability __maps_dungeon_1_grunthar_tick_heroic 34488
 ability __maps_dungeon_1_umbracoth_tick_heroic 34489
 ability dark_wolf 34490
+ability npc_frenzy 34491
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -65522,6 +65523,7 @@ aura frost_explosion 4718
 aura __maps_dungeon_1_grunthar_heroic 4719
 aura __maps_dungeon_1_umbracoth_heroic 4720
 aura dark_wolf 4721
+aura npc_frenzy 4722
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -68772,6 +68774,7 @@ cooldown _ability__item_pvp_trinket_1_use_ability_cooldown 206
 cooldown _ability_the_devouring_shroud_6_frenzy_cooldown 208
 cooldown _ability_the_devouring_shroud_6_infection_cooldown 209
 cooldown _ability_the_devouring_shroud_6_thorn_spit_cooldown 210
+cooldown npc_frenzy 211
 sound fantastic_a 1
 sound button_1 2
 sound switch_1 3

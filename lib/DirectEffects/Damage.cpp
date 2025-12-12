@@ -223,8 +223,12 @@ namespace tpublic::DirectEffects
 
 		if(damageType == DirectEffect::DAMAGE_TYPE_PHYSICAL && targetCombatPrivate != NULL)
 		{
+			uint32_t armor = targetCombatPrivate->m_armor;
+			if(targetCombatPublic->m_overrideArmor != 0)
+				armor = targetCombatPublic->m_overrideArmor;
+
 			// Damage reduction from armor
-			float damageMultiplier = 1.0f - (float)targetCombatPrivate->m_armor / (float)(targetCombatPrivate->m_armor + 400 + 85 * sourceCombatPublic->m_level);
+			float damageMultiplier = 1.0f - (float)armor / (float)(armor + 400 + 85 * sourceCombatPublic->m_level);
 			damage = (uint32_t)((float)damage * damageMultiplier);
 		}
 

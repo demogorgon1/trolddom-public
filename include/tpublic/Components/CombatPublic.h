@@ -209,6 +209,9 @@ namespace tpublic
 				m_pvpCombatEvent = false;
 				m_lastPVPCombatEventTick = 0;
 				m_easyElite = false;
+				m_overrideWeaponDamageRangeMin = 0;
+				m_overrideWeaponDamageRangeMax = 0;
+				m_overrideArmor = 0;
 			}
 
 			// Helpers
@@ -247,6 +250,11 @@ namespace tpublic
 			bool							m_pvpCombatEvent = false;
 			int32_t							m_lastPVPCombatEventTick = 0;
 			bool							m_easyElite = false;
+
+			// FIXME: hack
+			uint32_t						m_overrideWeaponDamageRangeMin = 0;
+			uint32_t						m_overrideWeaponDamageRangeMax = 0;
+			uint32_t						m_overrideArmor = 0;
 		};
 
 	}
