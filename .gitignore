@@ -3,4 +3,5 @@ attic/
 data/maps/test.png
 data/_ids.txt
 generated/
+custom/
 .idea/
