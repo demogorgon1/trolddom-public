@@ -147,6 +147,7 @@
 			<exists _no_combat_tag and _no_combat_tag> no_combat_tag: @_no_combat_tag
 			<exists _heroic_weapon_damage> heroic_weapon_damage_multiplier: @_heroic_weapon_damage
 			<exists _heroic_resource_health> heroic_health_multiplier: @_heroic_resource_health
+			<exists _required_seasonal_event> required_seasonal_event: @_required_seasonal_event
 		}		
 		sprite<static>: 
 		{ 

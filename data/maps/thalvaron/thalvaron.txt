@@ -157,6 +157,8 @@ zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" }
 zone .tower_of_tyrion: { string: "Tower of Tyrion" preposition: "at" }
 zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true }
 zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
+zone .the_frozen_borderlands: { string: "The Frozen Borderlands" preposition: "in" }
+zone .crash_site: { string: "Crash Site" preposition: "at the" top_zone: .the_frozen_borderlands }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -174,6 +176,35 @@ npc_behavior_state thalvaron_default_patrol:
 {
 	behavior: patrolling
 }
+
+!define local DOOR
+{
+	string: "North Gate"
+	
+	<exists _openable and _openable> systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		<exists _openable and _openable> openable: 
+		{
+			sound: inventory_1			
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_2 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_2 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+entity .north_gate: !DOOR { }
+
+map_entity_spawn .north_gate: { entity .north_gate: { } spawn_timer: { despawn_required: true } }
 
 map_portal thalvaron_lich_tower_entrance: {	animation: !DEFAULT_PORTAL_ANIMATION{} map: lich_tower }
 map_portal thalvaron_valoris_insurgency_entrance: { animation: !DEFAULT_PORTAL_ANIMATION{} map: valoris_insurgency }
@@ -387,6 +418,7 @@ map_entity_spawn thalvaron_gerhard_frostmane: { entity thalvaron_gerhard_frostma
 map_entity_spawn thalvaron_keanu_horton: { entity thalvaron_keanu_horton: { init_state: default } }
 map_entity_spawn thalvaron_gray_horse: { entity gray_horse: { init_state: default } }
 map_entity_spawn thalvaron_pinto_starleaf: { entity thalvaron_pinto_starleaf: { init_state: default } }
+map_entity_spawn thalvaron_block_manson: { entity thalvaron_block_manson: { init_state: default } }
 
 # SW
 map_entity_spawn thalvaron_brian_riddle: { entity thalvaron_brian_riddle: { init_state: default } }
@@ -557,6 +589,7 @@ map_palette .stuff:
 	entity_spawn dominion_of_strife_deity_3_shrine: [ 49 87 184 ]
 	entity_spawn dominion_of_strife_rift: [ 93 91 104 ]
 	entity_spawn jul_nisse: [ 40 192 91 ]
+	entity_spawn .north_gate: [ 120 94 11 ]
 		
 	player_spawn .player_spawn: [ 0 0 255 ]
 	player_spawn thalvaron_wizard_realm_spawn: [ 42 157 85 ]
@@ -589,6 +622,7 @@ map_palette .stuff:
 	wall fence: [ 64 128 140 ]
 	wall wood_wall: [ 164 128 140 ]
 	wall desert_wall: [ 190 175 95 ]
+	wall gs_stone_wall: [ 128 158 128 ]
 	
 	# NW
 	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
@@ -914,6 +948,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_throgar: [ 30 107 93 ]
 	entity_spawn thalvaron_pinto_starleaf: [ 34 94 245 ]
 	entity_spawn thalvaron_gray_horse: [ 134 94 245 ]
+	entity_spawn thalvaron_demonic_scavenger: [ 38 73 105 ]
+	entity_spawn thalvaron_mordargh_the_soul_drinker: [ 138 53 105 ]
+	entity_spawn thalvaron_block_manson: [ 97 84 171 ]
 
 	# SW
 	entity_spawn thalvaron_brian_riddle: [ 66 88 99 ]
@@ -1317,6 +1354,8 @@ map_palette .zones:
 	zone .flinks_hideout: [ 64 26 159 ]
 	zone .tower_of_tyrion: [ 29 166 206 ]
 	zone .kobold_caves: [ 211 103 14 ]
+	zone .the_frozen_borderlands: [ 184 177 129 ]
+	zone .crash_site: [ 168 129 184 ]
 }
 
 map_palette .sub_zones:

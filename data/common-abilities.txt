@@ -269,3 +269,18 @@ aura enraged:
 		type_mask: [ all ]
 	}
 }
+
+aura blacked_out:
+{
+	string: "Blacked Out"
+	description: "Huh?"
+	type: debuff
+	icon: icon_bottle_5
+	duration: 200
+	flags: [ blacked_out unique ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: slow
+	}	
+}

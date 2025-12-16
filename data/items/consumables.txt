@@ -1146,3 +1146,62 @@ item consumable_frost_grenade:
 		}
 	}
 }
+
+#####################################################
+# Glögg
+
+aura consumable_glogg (elixir):
+{
+	string: "Glögg"
+	icon: icon_hot_drink_1
+	duration: 12000
+	stat_modifiers: { constitution: { add: 2 } dexterity: { add: -2 } }
+}
+
+ability consumable_glogg (elixir): 	
+{
+	string: "Glögg"
+	description: "Increases your Constitution by 2 and decreases your Dexterity by 2 for 20 minutes. You can only have the effect of one elixir at a time."
+	icon: icon_hot_drink_1
+	direct_effect apply_aura: { aura: consumable_glogg }
+	consume_items: { consumable_glogg: 1 }
+	required_level: 1
+}
+
+item consumable_glogg (elixir):
+{
+	binds: when_picked_up
+	icon: icon_hot_drink_1
+	string: "Glögg"
+	use_ability: consumable_glogg
+}
+
+#####################################################
+# Schnaps
+
+aura consumable_schnaps (elixir):
+{
+	string: "Schnaps"
+	icon: icon_bottle_5
+	duration: 12000
+	stat_modifiers: { constitution: { add: 10 } dexterity: { add: -10 } }
+}
+
+ability consumable_schnaps (elixir): 	
+{
+	string: "Schnaps"
+	description: "Increases your Constitution by 10 and decreases your Dexterity by 10 for 20 minutes. Loss of senses might occur. You can only have the effect of one elixir at a time."
+	icon: icon_bottle_5
+	direct_effect apply_aura: { aura: consumable_schnaps }
+	direct_effect apply_aura: { aura: blacked_out }
+	consume_items: { consumable_schnaps: 1 }
+	required_level: 1
+}
+
+item consumable_schnaps (elixir):
+{
+	binds: when_picked_up
+	icon: icon_bottle_5
+	string: "Schnaps"
+	use_ability: consumable_schnaps
+}

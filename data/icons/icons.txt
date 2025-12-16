@@ -976,6 +976,11 @@ sprites:
 	sprite icon_aetheris_stronghold_heroic: { tags: [ icon ] }
 	sprite icon_light_wolf: { tags: [ icon ] }
 	sprite icon_dark_wolf: { tags: [ icon ] }
+	sprite icon_jul_voucher_gold: { tags: [ icon ] }
+	sprite icon_jul_voucher: { tags: [ icon ] }
+	sprite icon_hot_drink_1: { tags: [ icon ] }
+	sprite icon_bottle_5: { tags: [ icon ] }
+	sprite icon_reindeer: { tags: [ icon ] }
 	
 }
 

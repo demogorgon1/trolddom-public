@@ -78,7 +78,8 @@ namespace tpublic
 					TYPE_IF_NOT,
 					TYPE_ENCOUNTER_NOT_ACTIVE,
 					TYPE_REALM_BALANCE_ABOVE,
-					TYPE_NO_NEARBY_ENTITY
+					TYPE_NO_NEARBY_ENTITY,
+					TYPE_SEASONAL_EVENT_ACTIVE
 				};
 
 				struct SubCondition
@@ -119,6 +120,11 @@ namespace tpublic
 							m_type = TYPE_NO_NEARBY_ENTITY;
 							m_dataType = DataType::ID_ENTITY;
 							hasValue = true;
+						}
+						else if (aNode->m_name == "seasonal_event_active")
+						{
+							m_type = TYPE_SEASONAL_EVENT_ACTIVE;
+							m_dataType = DataType::ID_SEASONAL_EVENT;
 						}
 						else
 						{

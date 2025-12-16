@@ -74,7 +74,7 @@ map_entity_spawn herbalism:
 	entity herbalism_emberbloom: { level: [ 11 16 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_sunweave: { level: [ 14 19 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_sylmarel: { level: [ 17 28 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
-	entity herbalism_frostbloom: { level: [ 11 20 ] weight: 4 init_state: default must_have_tile_flags: [ tile_snow ] } 
+	entity herbalism_frostbloom: { level: [ 11 30 ] weight: 4 init_state: default must_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_sand_orchid: { level: [ 28 30 ] weight: 4 init_state: default must_have_tile_flags: [ tile_desert ] } 
 }
 
@@ -207,3 +207,14 @@ map_entity_spawn dominion_of_strife_rift:
 	entity dominion_of_strife_rift: { weight: 1 init_state: spawning }	
 }
 
+map_entity_spawn jul_tree:
+{
+	entity jul_tree: 
+	{ 
+		init_state: default 
+		spawn_condition:
+		{
+			seasonal_event_active: jul_main
+		}				
+	}	
+}

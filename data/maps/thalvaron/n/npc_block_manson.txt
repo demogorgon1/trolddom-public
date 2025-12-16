@@ -1,0 +1,211 @@
+dialogue_screen .block_manson_dialogue:
+{
+	text: 
+	[	
+		"Can you feel the unholy energy in the air? Isn't it just marvelous?"
+	]		
+	
+	options:
+	[
+		{ quest<completion_only>: thalvaron_nisse_4 }
+		{ quest: .block_manson_1 }
+		{ quest: .block_manson_2 }
+		{ quest<offer_only>: thalvaron_block_manson_3 }
+		
+		{ 
+			text: "Have you seen something strange crashing down from the sky around here?" script: trigger 
+			goto: $dialogue_screen
+			{
+				text: [ "Oh... You're talking about how Mordargh blasted that weird thing out of the sky? Haha, that was amazing! What a spectacular show!" ]
+				options:
+				[
+					{ text: "Mordargh?" goto: .block_manson_dialogue_2 }
+				]
+			}
+			requirement self<must_have_active_quest>: thalvaron_nisse_4
+		}
+	]
+}
+
+dialogue_screen .block_manson_dialogue_2:
+{
+	text: 
+	[	
+		"A greater demon that came from the north recently. Better not step on his toes." 
+	]	
+}	
+
+dialogue_root .block_manson_dialogue:
+{
+	.block_manson_dialogue: { }
+}
+
+entity thalvaron_block_manson: !NPC
+{
+	_string: "Block Manson"
+	_dialogue_root: .block_manson_dialogue	
+	_faction: npcs
+	_sprite: man_99
+	_sprite_dead: man_99_dead
+	_level: 30
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+	_dialogue_scripts: [ trigger ]
+}
+
+############################################################
+# Quest 1
+
+objective .block_manson_1:
+{
+	string: "Demonic Shards"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .block_manson_1_quest_item count: 8 }
+}
+
+loot_group .block_manson_1_quest_item: {}
+
+item .block_manson_1_quest_item:
+{
+	icon: icon_crystal_3
+	item_level: 30
+	loot_groups: [ .block_manson_1_quest_item ]
+	flags: [ not_sellable ]
+	stack: 8
+	string: "Demonic Shard"
+	quest: .block_manson_1
+	flavor: "Nothing juicy about this."
+}
+
+quest .block_manson_1:
+{
+	string: "Scavenging the Scavengers"
+
+	text:
+	[
+		"Kill Scavengers at the crash site to the west, collect their shards, and return to Block Manson."
+	]
+	
+	description: 
+	[
+		"I know what you're probably looking for and I might be able to help you get it. First I need you to do something for me, though.\n"
+		"\n"
+		"The weird object crashed to the west of here and immediately caught the attention of the demonic entities. They're scavenging for something at the site. I don't really care what they're"
+		"looking for, but those juicy demons are covered in crystal shards I'd really love to get my hands on. Bring me a bunch of those and then I'll talk."
+	]
+
+	progress:
+	[
+		"Back already?"
+	]
+	
+	completion:
+	[
+		"Ah... Yes!"
+	]
+
+	objectives: [ .block_manson_1 ]
+	level: 30
+	prerequisites: [ thalvaron_nisse_4 ]
+}
+
+############################################################
+# Quest 2
+
+objective .block_manson_2:
+{
+	string: "Heart of Mordargh"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .block_manson_2_quest_item count: 1 }
+}
+
+loot_group .block_manson_2_quest_item: {}
+
+item .block_manson_2_quest_item:
+{
+	icon: icon_crystal_2
+	item_level: 30
+	loot_groups: [ .block_manson_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Heart of Mordargh"
+	quest: .block_manson_2
+}
+
+quest .block_manson_2:
+{
+	string: "Mordargh the Soul Drinker"
+
+	text:
+	[
+		"Defeat Mordargh and return his heart to Block Manson."
+	]
+	
+	description: 
+	[
+		"That was some nice crystals you brought me...\n"
+		"\n"
+		"Alright... I'm pretty sure the demon Mordargh, also known as the Soul Drinker, took some kind of document from the crash site. He grabbed it with his demonic claws and ran away laughing, or something like that."
+		"I think you need to kill him to get it back. While you're at it, maybe you can cut out his heart and bring it back to me?\n"
+		"\n"
+		"He has taken up residence in a cave to the north east of here."
+	]
+
+	progress:
+	[
+		"No heart?"
+	]
+	
+	completion:
+	[
+		"Mmh..."
+	]
+
+	objectives: [ .block_manson_2 ]
+	level: 30
+	prerequisites: [ .block_manson_1 ]
+}
+
+############################################################
+# Quest 3
+
+item .block_manson_3_quest_item:
+{
+	icon: icon_scroll_2
+	item_level: 30
+	flags: [ not_sellable unique ]
+	string: "The Document"
+	flavor: "Seems like it's encrypted."
+	quest: thalvaron_block_manson_3
+}
+
+quest thalvaron_block_manson_3:
+{
+	string: "The Document"
+
+	text:
+	[
+		"Return the document to the Jule Consortium employee."
+	]
+	
+	description: 
+	[
+		"When you left before I, uhm, found this document outside in the trees. Is that what you were looking for? Here, take it. Now leave me alone."
+	]
+	
+	completion:
+	[
+		"Uhh... Didn't expect you to come back alive. Was it cold? I see you got something for me. Here, take this and hand it over to the big man when you see him. He'll give you something for your troubles.\n"
+		"\n"
+		"You'll find him on the island of Aetheris for the festivities. If he's not there already, he'll show up later. He's very busy, you know."
+	]
+
+	level: 30
+	quest_items: [ .block_manson_3_quest_item ]
+	prerequisites: [ .block_manson_2 ]
+	
+}

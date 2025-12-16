@@ -225,6 +225,9 @@ namespace tpublic::Systems
 		if(despawnAfterTicks != 0 && (uint32_t)aTicksInState > despawnAfterTicks)
 			return EntityState::ID_DESPAWNING;
 
+		if(npc->m_requiredSeasonalEventId != 0 && !aContext->m_worldView->WorldViewIsSeasonalEventActive(npc->m_requiredSeasonalEventId))
+			return EntityState::ID_DESPAWNING;
+
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);
 
 		if (npc->m_canDie && aEntityState != EntityState::ID_DEAD && combat->GetResource(Resource::ID_HEALTH) == 0 && !auras->HasEffect(AuraEffect::ID_IMMORTALITY, NULL))

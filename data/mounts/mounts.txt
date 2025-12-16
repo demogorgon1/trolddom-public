@@ -235,5 +235,27 @@
 		item mount_dark_wolf: !MOUNT_ITEM{}
 		loot_group dark_wolf: {} # drops from snarltooth
 	}
-	
+
+	###############################################################################
+	# Reindeer
+	{
+		${
+			_string: "Reindeer"
+			_description: "Summons or dismisses a rideable reindeer."
+			_icon: icon_reindeer
+			_id: reindeer
+			_sprite: reindeer_0
+			_walk_sprites: [ reindeer_1 reindeer_0 reindeer_2 reindeer_0 ]
+			_creature_type: beast
+			_cost: 300000
+			_level: 20	
+		}
+
+		mount reindeer: !MOUNT{}
+		aura reindeer: !MOUNT_AURA{}
+		ability reindeer: !MOUNT_ABILITY{}
+		entity reindeer: !MOUNT_ENTITY{ _wandering: true }
+		item mount_reindeer: !MOUNT_ITEM{}
+	}
+
 }
