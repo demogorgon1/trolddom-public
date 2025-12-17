@@ -17,6 +17,7 @@ changelog:
 	list:
 	[
 		{ text: "Aetheris Stronghold: Gribble's fire doesn't do damage immediately when spawning." }		
+		{ text: "Removed the modding utility from the Steam deployment as it was triggering some people's anti virus programs, for some reason." }		
 	]
 
 	text: "Issues Fixed:"
