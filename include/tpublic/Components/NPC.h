@@ -495,7 +495,8 @@ namespace tpublic
 				FIELD_NO_COMBAT_TAG,
 				FIELD_HAS_HEAD_ANCHOR,
 				FIELD_HEROIC_HEALTH_MULTIPLIER,
-				FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER
+				FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER,
+				FIELD_REQUIRED_SEASONAL_EVENT_ID,
 			};
 
 			static void
@@ -531,6 +532,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_HAS_HEAD_ANCHOR, "has_head_anchor", offsetof(NPC, m_hasHeadAnchor));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_HEROIC_HEALTH_MULTIPLIER, "heroic_health_multiplier", offsetof(NPC, m_heroicHealthMultiplier));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER, "heroic_weapon_damage_multiplier", offsetof(NPC, m_heroicWeaponDamagerMultiplier));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_SEASONAL_EVENT_ID, "required_seasonal_event", offsetof(NPC, m_requiredSeasonalEventId))->SetDataType(DataType::ID_SEASONAL_EVENT);
 			}
 
 			const StateEntry*
@@ -577,6 +579,7 @@ namespace tpublic
 				m_hasHeadAnchor = false;
 				m_heroicHealthMultiplier = 1.0f;
 				m_heroicWeaponDamagerMultiplier = 1.0f;
+				m_requiredSeasonalEventId = 0;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -632,6 +635,7 @@ namespace tpublic
 			bool										m_hasHeadAnchor = false;
 			float										m_heroicHealthMultiplier = 1.0f;
 			float										m_heroicWeaponDamagerMultiplier = 1.0f;
+			uint32_t									m_requiredSeasonalEventId = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

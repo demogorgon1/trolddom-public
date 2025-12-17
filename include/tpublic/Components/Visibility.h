@@ -72,7 +72,7 @@ namespace tpublic
 			}
 
 			// Public data
-			Requirements					m_requirements;
+			Requirements					m_requirements;			
 		};
 	}
 

@@ -121,6 +121,7 @@ sprites:
 	size: { width: 32 height: 32 } sprite large_statue: { }
 	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
 	size: { width: 80 height: 80 } sprite ground_mark_2: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite crash_site: { }
 	
 	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
 	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
@@ -308,6 +309,13 @@ doodad potted_plant_4:
 	sprites: [ doodad_potted_plant_4 ]
 	map_palette<"x">: { occupy: true } map: [ "x"
                                               "x" ]
+}
+
+doodad crash_site:
+{
+	sprites: [ crash_site ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
 }
 
 doodad crates: { sprites: [ doodad_crates_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }

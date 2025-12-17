@@ -2,6 +2,34 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.13"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Heroic: Valoris Insurgency." }
+		{ text: "Another quest offered by the Jule Consortium." }
+	]
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Aetheris Stronghold: Gribble's fire doesn't do damage immediately when spawning." }		
+		{ text: "Removed the modding utility from the Steam deployment as it was triggering some people's anti virus programs, for some reason." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed a couple UI bugs." }
+		{ text: "Items obtained in heroic difficulty dungeons can now be disenchanted like intended." }
+		{ text: "Chests in heroic difficulty dungeons now has max level loot." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.12"
 
 	text: "New:"

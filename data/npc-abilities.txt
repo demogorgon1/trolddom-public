@@ -173,6 +173,80 @@ ability npc_fireball:
 			type: debuff
 			duration: based_on_effects
 			flags: [ unique magic ]
+			particle_system: burning
+
+			aura_effect repeat:
+			{
+				update_interval: 20
+				update_count: 6
+					
+				ability: $ability [ string icon ]
+				{
+					# string: "Fireball" 
+					# icon: icon_firebolt
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+
+					direct_effect damage:
+					{
+						damage_type: fire
+						function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+						direct: false
+					}
+				}
+			}
+		}
+	}
+}
+
+cooldown npc_fireball_2:
+{
+	duration: 120
+}
+
+ability npc_fireball_2:
+{
+	string: "Fireball"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global spell_fire_lockout npc_fireball_2 ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_firebolt
+	speed: 6
+	resource_cost mana: 8
+	target_particle_system: orange_spell_hit	
+
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_fireball ]
+			flags: [ attached no_rotation face_target ]
+			count: 1		
+			scale: 0.5
+		}
+	}
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: fire
+		function: { expression: a a: [ [ 1 24 ] [ 10 70 ] [ 20 140 ] [ 30 280 ] ] elite_multiplier: 2 }
+		spread: !DEFAULT_SPREAD{}						
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: $aura [ string icon ]
+		{
+			#string: "Fireball"
+			#icon: icon_firebolt
+			description: "Burning."
+			type: debuff
+			duration: based_on_effects
+			flags: [ unique magic ]
+			particle_system: burning
 
 			aura_effect repeat:
 			{
@@ -227,6 +301,53 @@ ability npc_frostbolt:
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
 		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		spread: !DEFAULT_SPREAD{}						
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Frostbolt"
+			icon: icon_ice_lance
+			description: "Reduced movement speed."
+			type: debuff
+			duration: 80
+			flags: [ unique magic ]			
+			aura_effect move_speed_modifier: { move_speed: very_slow }
+		}
+	}
+}
+
+ability npc_frostbolt_2:
+{
+	string: "Frostbolt"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global spell_frost_lockout ]
+	cooldown: $cooldown { duration: 70 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_ice_lance
+	speed: 6
+	resource_cost mana: 8
+
+	projectile: $particle_system 
+	{
+		particle:
+		{
+			sprites: [ effect_frostbolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.4
+			count: 1
+		}
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: frost
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 2.7 }
 		spread: !DEFAULT_SPREAD{}						
 	}
 	
@@ -1428,5 +1549,91 @@ ability npc_frenzy:
 	direct_effect apply_aura:
 	{	
 		aura: npc_frenzy
+	}
+}
+
+ability npc_drain_life:
+{
+	string: "Drain Life"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 60 }
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_drain_life
+	delay: 3
+	target_particle_system: green_spell_hit
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_witch_bolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.52
+			count: 1		
+		}
+	}	
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical leech ]
+		damage_type: unholy
+		function: { expression: a_mul_x x: weapon a: 0.9 }
+		spread: !DEFAULT_SPREAD{}						
+	}	
+}
+
+cooldown npc_curse_stacking:
+{
+	duration: 80
+}
+
+ability npc_curse_stacking_tick:
+{
+	string: "Curse of Suffering"
+	icon: icon_holy_condemnation
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+
+	direct_effect damage:
+	{
+		damage_type: unholy
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 2 }
+		direct: false
+	}
+}
+
+aura npc_curse_stacking:
+{
+	string: "Curse of Suffering"
+	description: "Cursed."
+	type: debuff
+	icon: icon_holy_condemnation
+	duration: based_on_effects
+	flags: [ magic ]
+
+	aura_effect repeat:
+	{
+		update_interval: 20
+		update_count: 20
+		ability: npc_curse_tick
+	}
+}
+
+ability npc_curse_stacking:
+{
+	string: "Curse of Suffering"
+	range: 7
+	cast_time: 15
+	cooldowns: [ global npc_curse_stacking ]
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_holy_condemnation
+	delay: 3
+
+	direct_effect apply_aura:
+	{
+		aura: npc_curse_stacking
 	}
 }

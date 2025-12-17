@@ -147,6 +147,7 @@
 			<exists _no_combat_tag and _no_combat_tag> no_combat_tag: @_no_combat_tag
 			<exists _heroic_weapon_damage> heroic_weapon_damage_multiplier: @_heroic_weapon_damage
 			<exists _heroic_resource_health> heroic_health_multiplier: @_heroic_resource_health
+			<exists _required_seasonal_event> required_seasonal_event: @_required_seasonal_event
 		}		
 		sprite<static>: 
 		{ 
@@ -266,6 +267,7 @@
 	flags: [ dungeon_loot ]
 	
 	<exists _item_level> item_level: @_item_level
+	<exists _level_range> level_range: @_level_range
 	
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura
@@ -273,6 +275,7 @@
 	<exists _budget_bias> budget_bias: @_budget_bias
 	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
 	<exists _use_ability> use_ability: @_use_ability
+	<exists _heroic and _heroic> flags: [ heroic ]
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon		

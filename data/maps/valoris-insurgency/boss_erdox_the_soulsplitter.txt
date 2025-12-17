@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .erdox_the_soulsplitter: {}
+loot_group .erdox_the_soulsplitter_heroic: {}
 
 loot_table .erdox_the_soulsplitter:
 {
@@ -15,7 +16,17 @@ loot_table .erdox_the_soulsplitter:
 	]	
 }
 
-
+loot_table .erdox_the_soulsplitter_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Erdox the Soulsplitter will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .erdox_the_soulsplitter_heroic  } }					
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
 
 {
 	${
@@ -80,6 +91,72 @@ loot_table .erdox_the_soulsplitter:
 	}
 }
 
+{
+	${
+		_rarity: epic
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .erdox_the_soulsplitter_heroic
+		_heroic: true
+	}
+	
+	item valoris_insurgency_25_heroic: !BOSS_DROP_CHEST
+	{
+		_string: "Robe of the Soulsplitter"
+		_type: armor_cloth
+		_icon: icon_robe_2
+		_constitution: 1
+		_spell_damage: 3
+		_wisdom: 2
+	}
+	
+	item valoris_insurgency_26_heroic: !BOSS_DROP_NECK
+	{
+		_string: "Pendant of Evil"
+		_icon: icon_necklace_1
+		_constitution: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_27_heroic: !BOSS_DROP_FEET
+	{
+		_string: "Dark Elven Slippers"
+		_type: armor_cloth
+		_icon: icon_boots_1
+		_constitution: 2
+		_wisdom: 3
+		_spell_damage: 1
+	}
+	
+	item valoris_insurgency_28_heroic: !BOSS_DROP_1H_KNIFE
+	{
+		_string: "Dark Blade of Wrath"
+		_icon: icon_knife_1
+		_constitution: 1
+		_dexterity: 2
+		_weapon_cooldown: 18
+	}
+	
+	item valoris_insurgency_29_heroic: !BOSS_DROP_LEGS
+	{
+		_string: "Worn Pants of the Wizard"
+		_type: armor_cloth
+		_icon: icon_pants_2
+		_wisdom: 1
+		_constitution: 1
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_30_heroic: !BOSS_DROP_NECK
+	{
+		_string: "Pendant of Strength"
+		_icon: icon_necklace_2
+		_constitution: 1
+		_strength: 2
+	}
+}
+
 ############################################################
 # Boss
 
@@ -111,11 +188,22 @@ entity valoris_insurgency_erdox_the_soulsplitter: !NPC
 	_immune_to_immobilize: true
 	_immune_to_slow: true
 
+	_heroic_weapon_damage: 4.6
+	_heroic_resource_health: 16.8
+	_loot_table_heroic: .erdox_the_soulsplitter_heroic
+	
 	_abilities: 
 	[
 		{
 			id: npc_curse
 			target: random_player
+			requirement self<must_not_be_heroic>: {}
+		}	
+		
+		{
+			id: npc_curse_stacking
+			target: random_player
+			requirement self<must_be_heroic>: {}
 		}	
 		
 		{

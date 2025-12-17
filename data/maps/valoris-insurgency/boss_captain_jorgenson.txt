@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .captain_jorgenson: {}
+loot_group .captain_jorgenson_heroic: {}
 
 loot_table .captain_jorgenson:
 {
@@ -10,6 +11,18 @@ loot_table .captain_jorgenson:
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
 		  map_message valoris_insurgency: "Captain Jorgenson will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .captain_jorgenson  } }					
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+loot_table .captain_jorgenson_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Captain Jorgenson will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .captain_jorgenson_heroic  } }					
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	
@@ -86,6 +99,80 @@ loot_table .captain_jorgenson:
 	}
 }
 
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .captain_jorgenson_heroic
+		_heroic: true		
+	}
+	
+	item valoris_insurgency_1_heroic: !BOSS_DROP_WRISTS
+	{
+		_string: "Ember Veil Armguards"
+		_type: armor_mail
+		_icon: icon_bracers_1
+		_strength: 2
+		_dexterity: 3
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_2_heroic: !BOSS_DROP_HANDS
+	{
+		_string: "Lost Gloves of Wernox"
+		_type: armor_cloth
+		_icon: icon_gloves_5
+		_spell_damage: 3
+		_wisdom: 2
+		_constitution: 1
+	}
+	
+	item valoris_insurgency_3_heroic: !BOSS_DROP_LEGS
+	{
+		_string: "Armored Greaves"
+		_type: armor_plate
+		_icon: icon_mail_legs_1
+		_constitution: 3
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+	
+	item valoris_insurgency_4_heroic: !BOSS_DROP_1H_SWORD
+	{
+		_string: "Fierce Scimitar"
+		_icon: icon_knife_4
+		_constitution: 1
+		_strength: 2
+		_budget_bias: -10
+		_phys_crit: 1
+		_weapon_cooldown: 24
+	}
+	
+	item valoris_insurgency_5_heroic: !BOSS_DROP_1H_SWORD
+	{
+		_string: "Conjurer's Short Sword"
+		_icon: icon_sword_10
+		_constitution: 1
+		_budget_bias: -10
+		_spell_crit: 1
+		_spell_damage: 2
+		_weapon_cooldown: 20
+	}
+	
+	item valoris_insurgency_6_heroic: !BOSS_DROP_SHIELD
+	{
+		_string: "Captain's Bulwark"
+		_icon: icon_shield_2
+		_strength: 1
+		_constitution: 2
+		_budget_bias: -5		
+		_block: 1
+	}
+}
+
 ############################################################
 # Boss
 
@@ -116,6 +203,10 @@ entity valoris_insurgency_captain_jorgenson: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+	
+	_heroic_weapon_damage: 3.9
+	_heroic_resource_health: 11.5
+	_loot_table_heroic: .captain_jorgenson_heroic
 
 	_abilities: 
 	[

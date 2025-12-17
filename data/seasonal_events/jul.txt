@@ -1,3 +1,8 @@
+seasonal_event jul_main:
+{
+	period: { month: december range: [ 24 31 ] }
+}
+
 seasonal_event jul: 
 {
 	period: { month: december range: [ 1 31 ] }
@@ -144,6 +149,91 @@ aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat
 	item jul_hat_rare_2: !ITEM { _ability: jul_hat_rare_2 }	
 }
 
+item jul_voucher:
+{
+	string: "Jule Voucher"
+	type: miscellaneous
+	item_level: 1
+	flags: [ not_sellable ]
+	stack: 100
+	icon: icon_jul_voucher
+	rarity: uncommon
+	binds: when_picked_up
+}
+
+item jul_voucher_gold:
+{
+	string: "Golden Jule Voucher"
+	type: miscellaneous
+	item_level: 1
+	flags: [ not_sellable ]
+	stack: 100
+	icon: icon_jul_voucher_gold
+	rarity: uncommon
+	binds: when_picked_up
+}
+
+!define local VOUCHER_PRICE 
+{ 
+	quantity: 1 
+	item_cost<[ jul_voucher jul_voucher_currency ]>: @_count 	
+}	
+
+!define local GOLD_VOUCHER_PRICE 
+{ 
+	quantity: 1 
+	item_cost<[ jul_voucher_gold jul_gold_voucher_currency ]>: @_count 	
+}	
+
+############################################################
+# Big Man NPC
+
+dialogue_screen .big_man_vendor:
+{
+	sell consumable_glogg: !VOUCHER_PRICE{ _count: 1 }	
+	sell consumable_schnaps: !VOUCHER_PRICE{ _count: 2 }	
+	sell mount_reindeer: !GOLD_VOUCHER_PRICE{ _count: 1 }	
+}
+
+dialogue_screen .big_man_dialogue:
+{
+	text: 
+	[	
+		"Ho, ho. Ho. Got any of them vouchers?"
+	]
+	
+	options:
+	[
+		{ goto: .big_man_vendor text: "Let me browse your goods." }
+	]
+}
+
+map_entity_spawn jul_big_man:
+{
+	entity jul_big_man: 
+	{ 
+		init_state: default 
+		
+		spawn_condition:
+		{
+			seasonal_event_active: jul_main
+		}			
+	}
+}
+
+entity jul_big_man: !NPC
+{
+	_string: "Big Man"
+	_dialogue_root: $dialogue_root { .big_man_dialogue: {} }
+	_faction: jul_consortium
+	_sprite: man_100
+	_sprite_dead: man_100_dead	
+	_level: 30
+	_creature_type: humanoid
+	_not_pushable: true		
+	_required_seasonal_event: jul_main
+}
+
 ############################################################
 # Nisse NPC
 
@@ -164,13 +254,24 @@ dialogue_screen .nisse_dialogue:
 	[
 		{ quest: .nisse_1 }
 		{ quest: .nisse_2 }
+		{ quest: .nisse_3 }
+		{ quest<offer_only>: thalvaron_nisse_4 }
+		{ quest<completion_only>: thalvaron_block_manson_3 }
 		{ text: "Are you a gnome?" goto: $dialogue_screen { text: [ "Rude." ] } }
 	]
 }
 
 map_entity_spawn jul_nisse:
 {
-	entity jul_nisse: { weight: 1 init_state: default }
+	entity jul_nisse: 
+	{ 
+		init_state: default 
+		
+		spawn_condition:
+		{
+			seasonal_event_active: jul
+		}					
+	}
 }
 
 entity jul_nisse: !NPC
@@ -183,6 +284,7 @@ entity jul_nisse: !NPC
 	_level: 30
 	_creature_type: humanoid
 	_not_pushable: true	
+	_required_seasonal_event: jul
 }
 
 objective .nisse_1:
@@ -261,3 +363,133 @@ quest .nisse_2:
 	reward_reputation_multiplier: 5
 }
 
+objective .nisse_3_a:
+{
+	string: "Blue Winter Hat"	
+	collect_items: { item: jul_hat_rare_1 count: 1 }
+}
+
+objective .nisse_3_b:
+{
+	string: "Purple Winter Hat"	
+	collect_items: { item: jul_hat_rare_2 count: 1 }
+}
+
+quest .nisse_3:
+{
+	string: "Serious Business"
+
+	text:
+	[
+		"Recover a Blue Winter Hat and a Purple Winter Hat and return them to the Nisse."
+	]
+	
+	description: 
+	[
+		"This could be challenging... but if you really want to prove yourself to the Consortium... Bring back some of our lost executive winter hats. They're blue and purple. If you can do that, then"
+		"I might have a more serious job for you afterwards."
+	]
+
+	progress:
+	[
+		"Yeah?"
+	]
+	
+	completion:
+	[
+		"Very helpful."
+	]
+	
+	objectives: [ .nisse_3_a .nisse_3_b ]
+	level: 30
+	reward_xp_multiplier: 0
+	reward_cash_multiplier: 0
+	reward_reputation_multiplier: 6
+	next_quest: thalvaron_nisse_4
+}
+
+objective .nisse_4:
+{
+	string: "Find someone who witnessed the crash"
+	
+	maps: [ thalvaron ]
+	
+	dialogue_trigger:
+	{
+		entities: [ thalvaron_block_manson ]
+	}
+}
+
+quest thalvaron_nisse_4:
+{
+	string: "Investigating the Crash"
+
+	text:
+	[
+		"Head to the Northern Pass in Thalvaron, find a way to the Frozen Borderlands, and look for someone who witnessed the crash."
+	]
+	
+	description: 
+	[
+		"We've come to the conclusion that something bad happened somewhere north of Iceveil Highlands. One of our deliveries crashed in a place known as the Frozen Borderlands. Have you ever been there? It's horribly cold. No sensible nisse"
+		"would ever set his foot up there. A brave $class$ like you might? Maybe you can head up there and recover some very important cargo? If you really want to impress the big man when he show up later for"
+		"the Jule festivities, you should definitely help us.\n"
+		"\n"
+		"What cargo? Well... Let's just say it's an important document. I don't know what happened, but I let's sincerely hope that it's still up there somewhere. Otherwise it's bad news for a lot of people, let's"
+		"just put it like that.\n"
+		"\n"
+		"I suggest that you go there and look for someone who witnessed the crash."
+	]
+
+	progress:
+	[
+		"What?"
+	]
+	
+	completion:
+	[
+		"Anyway, I might be able to help you..."
+	]
+
+	level: 30
+	prerequisites: [ .nisse_3 ]  
+	objectives: [ .nisse_4 ]
+}
+
+############################################################
+# Voucher Nisse NPC
+
+dialogue_screen .voucher_nisse_vendor:
+{
+	sell jul_voucher: { cost: 1000 }		
+	sell jul_voucher: { reputation_level_requirement jul_consortium: !FRIENDLY_REPUTATION_LEVEL{} cost: 800 }		
+	sell jul_voucher: { reputation_level_requirement jul_consortium: !HONORED_REPUTATION_LEVEL{} cost: 600 }		
+	sell jul_voucher: { reputation_level_requirement jul_consortium: !REVERED_REPUTATION_LEVEL{} cost: 400 }		
+	sell jul_voucher: { reputation_level_requirement jul_consortium: !EXALTED_REPUTATION_LEVEL{} cost: 200 }		
+}
+
+map_entity_spawn jul_voucher_nisse:
+{
+	entity jul_voucher_nisse: 
+	{ 
+		init_state: default 
+		
+		spawn_condition:
+		{
+			seasonal_event_active: jul_main
+		}					
+	}
+}
+
+entity jul_voucher_nisse: !NPC
+{
+	_string: "Nisse"
+	_dialogue_root: $dialogue_root { .voucher_nisse_vendor: {} }
+	_faction: jul_consortium
+	_sprite: gnome_3
+	_sprite_dead: gnome_3_dead	
+	_level: 30
+	_creature_type: humanoid
+	_not_pushable: true	
+	_required_seasonal_event: jul_main
+}

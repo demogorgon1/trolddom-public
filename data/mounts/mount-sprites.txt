@@ -25,5 +25,8 @@ sprites:
 	sprite dark_wolf_0: { }
 	sprite dark_wolf_1: { }
 	sprite dark_wolf_2: { }
+	sprite reindeer_0: { }
+	sprite reindeer_1: { }
+	sprite reindeer_2: { }
 
 }

@@ -141,12 +141,12 @@ namespace tpublic::Systems
 		// If heroic update weapon damage and armor
 		if(heroicLevel != NULL)
 		{
-			Components::CombatPrivate* combatPrivate = GetComponent<Components::CombatPrivate>(aComponents);
+			Components::CombatPublic* combatPublic = GetComponent<Components::CombatPublic>(aComponents);
 
-			combatPrivate->m_weaponDamageRangeMin = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_min * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
-			combatPrivate->m_weaponDamageRangeMax = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_max * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
+			combatPublic->m_overrideWeaponDamageRangeMin = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_min * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
+			combatPublic->m_overrideWeaponDamageRangeMax = (uint32_t)((float)heroicLevel->m_baseWeaponDamage.m_max * npc->m_heroicWeaponDamagerMultiplier * heroicLevel->m_eliteWeaponDamage);
 
-			combatPrivate->m_armor = heroicLevel->m_baseArmor;
+			combatPublic->m_overrideArmor = heroicLevel->m_baseArmor;
 		}
 
 		// Remember spawn position, set position size flag if needed
@@ -223,6 +223,9 @@ namespace tpublic::Systems
 		uint32_t despawnAfterTicks = state != NULL ? state->m_despawnAfterTicks : 0;
 
 		if(despawnAfterTicks != 0 && (uint32_t)aTicksInState > despawnAfterTicks)
+			return EntityState::ID_DESPAWNING;
+
+		if(npc->m_requiredSeasonalEventId != 0 && !aContext->m_worldView->WorldViewIsSeasonalEventActive(npc->m_requiredSeasonalEventId))
 			return EntityState::ID_DESPAWNING;
 
 		const Data::Faction* faction = GetManifest()->GetById<Data::Faction>(combat->m_factionId);

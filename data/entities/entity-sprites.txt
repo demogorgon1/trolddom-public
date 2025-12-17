@@ -1086,6 +1086,9 @@ sprites:
 	sprite carnivorous_plant_6: { dead: carnivorous_plant_6_dead }
 	sprite woman_47: { dead: woman_47_dead }
 	sprite gnome_2: { dead: gnome_2_dead }
+	sprite man_99: { dead: man_99_dead }
+	sprite man_100: { dead: man_100_dead }
+	sprite gnome_3: { dead: gnome_2_dead }
 
 	cursor: { position: [ 0 944 ] }
 	sprite lizard_man_9_dead: { }		
@@ -1101,6 +1104,9 @@ sprites:
 	sprite carnivorous_plant_6_dead: { }	
 	sprite woman_47_dead: { }	
 	sprite gnome_2_dead: { }	
+	sprite man_99_dead: { }	
+	sprite man_100_dead: { }	
+	sprite gnome_3_dead: { }	
 	
 }
 
@@ -1337,7 +1343,10 @@ sprites:
 	sprite red_gateway_closed_1: { }
 	sprite red_gateway_closed_2: { }
 	sprite red_gateway_closed_3: { }
-		
+	
+	cursor: { position: [ 0 144 ] }
+	sprite jul_tree: { }
+	
 }
 
 sprites:

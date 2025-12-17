@@ -5,6 +5,13 @@ npc_behavior_state .wandering_short:
 	max_range: 1
 }
 
+npc_behavior_state .wandering_long:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 3
+}
+
 npc_behavior_state .passive:
 {
 	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
@@ -344,6 +351,7 @@ map_entity_spawn thalvaron_deer_north:
 	entity thalvaron_deer_14: { level: 14 } 
 	entity thalvaron_deer_15: { level: 15 } 
 	entity thalvaron_deer_16: { level: 16 } 
+	entity thalvaron_deer_30: { level: 30 } 
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
@@ -361,6 +369,7 @@ map_entity_spawn thalvaron_deer_north:
 	entity thalvaron_deer_14: !NPC { _string: "Iceveil Deer" _sprite: deer_2 _sprite_dead: deer_2_dead _level: 14 }
 	entity thalvaron_deer_15: !NPC { _string: "Ghost Tailed Deer" _sprite: deer_3 _sprite_dead: deer_3_dead _level: 15 }
 	entity thalvaron_deer_16: !NPC { _string: "Ghost Tailed Deer" _sprite: deer_3 _sprite_dead: deer_3_dead _level: 16 }
+	entity thalvaron_deer_30: !NPC { _string: "Reindeer" _sprite: deer_3 _sprite_dead: deer_3_dead _level: 30 }
 }
 
 ##########################################################################################
@@ -1999,4 +2008,87 @@ map_entity_spawn thalvaron_throgar:
 
 	entity thalvaron_throgar: !NPC { }
 
+}
+
+##########################################################################################
+# Frozen Borderlands
+
+map_entity_spawn thalvaron_demonic_scavenger: 
+{ 
+	entity thalvaron_demonic_scavenger: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_mordargh_the_soul_drinker: 
+{ 
+	entity thalvaron_mordargh_the_soul_drinker: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Demonic Scavengers
+{
+	loot_table .demonic_scavenger: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .block_manson_1_quest_item requirement self<must_have_active_quest>: { id: .block_manson_1 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_DEMONS {}
+		]	
+	}
+		
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .wandering_long
+		_loot_table: .demonic_scavenger
+		_weapon_damage: 1.3
+		_resource_health: 1.5
+		_abilities:
+		[
+			{ id: npc_curse requirement self<must_have_less_health_than>: 50 target: random_player }
+			{ id: npc_attack }
+		]		
+	}
+
+	entity thalvaron_demonic_scavenger: !NPC { _string: "Demonic Scavenger" _sprite: demon_2 _sprite_dead: demon_2_dead }
+}
+
+# Mordargh
+{
+	loot_table .mordargh_the_soul_drinker: 
+	{
+		slots:
+		[	
+			{ 
+				possibility: { loot_group: .block_manson_2_quest_item requirement self<must_have_active_quest>: { id: .block_manson_2 } } 
+			}
+			
+			!WORLD_DROPS {}
+			!WORLD_DROPS_DEMONS {}
+		]	
+	}
+		
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .mordargh_the_soul_drinker
+		_weapon_damage: 1.4
+		_resource_health: 2.2
+		_in_combat_barks: [ { type: yell text: "I will feast on you!" flags: [ no_chat_bubble ] } ]	
+		_abilities:
+		[
+			{ id: npc_frenzy target: self requirement self<must_have_less_health_than>: 25 barks: [ { type: yell text: "Feel my wrath!" flags: [ no_chat_bubble ] } ] }
+			{ id: npc_drain_life target: random_player }
+			{ id: npc_attack }
+		]
+	}
+
+	entity thalvaron_mordargh_the_soul_drinker: !NPC { _string: "Mordargh the Soul Drinker" _sprite: demon_1 _sprite_dead: demon_1_dead }
 }

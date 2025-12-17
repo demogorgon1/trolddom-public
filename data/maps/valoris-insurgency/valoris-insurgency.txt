@@ -183,6 +183,7 @@ map valoris_insurgency:
 	max_players: 5
 	max_minions: 1
 	openable_elite: true
+	heroic_mode_available: true
 		
 	layers:
 	[

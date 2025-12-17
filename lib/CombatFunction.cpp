@@ -140,11 +140,17 @@ namespace tpublic
 				break;
 
 			case CombatFunction::INPUT_WEAPON:
+				if(aCombatPublic != NULL && aCombatPublic->m_overrideWeaponDamageRangeMin != 0 && aCombatPublic->m_overrideWeaponDamageRangeMax != 0)
+					return (float)_SampleUIntRange(aRandomSource, aCombatPublic->m_overrideWeaponDamageRangeMin, aCombatPublic->m_overrideWeaponDamageRangeMax);
+
 				if(aCombatPrivate != NULL)
 					return (float)_SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax);
 				break;
 
 			case CombatFunction::INPUT_WEAPON_AVERAGE:
+				if (aCombatPublic != NULL && aCombatPublic->m_overrideWeaponDamageRangeMin != 0 && aCombatPublic->m_overrideWeaponDamageRangeMax != 0)
+					return (float)(aCombatPublic->m_overrideWeaponDamageRangeMin + aCombatPublic->m_overrideWeaponDamageRangeMax) * 0.5f;
+
 				if (aCombatPrivate != NULL)
 					return (float)(aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) * 0.5f; 
 				break;
@@ -160,11 +166,17 @@ namespace tpublic
 				break;
 
 			case CombatFunction::INPUT_WEAPON_NORMALIZED:
+				if (aCombatPrivate != NULL && aCombatPublic != NULL && aCombatPublic->m_overrideWeaponDamageRangeMin != 0 && aCombatPublic->m_overrideWeaponDamageRangeMax != 0)
+					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPublic->m_overrideWeaponDamageRangeMin, aCombatPublic->m_overrideWeaponDamageRangeMax));
+
 				if(aCombatPrivate != NULL)
 					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax));
 				break;
 
 			case CombatFunction::INPUT_WEAPON_AVERAGE_NORMALIZED:
+				if (aCombatPrivate != NULL && aCombatPublic != NULL && aCombatPublic->m_overrideWeaponDamageRangeMin != 0 && aCombatPublic->m_overrideWeaponDamageRangeMax != 0)
+					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPublic->m_overrideWeaponDamageRangeMin + aCombatPublic->m_overrideWeaponDamageRangeMax) / 2);
+
 				if (aCombatPrivate != NULL)
 					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) / 2);
 				break;

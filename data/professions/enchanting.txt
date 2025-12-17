@@ -109,8 +109,8 @@ item reagent_arcane_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string
 item reagent_dream_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Dream Essence" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_dust_3 _loot_group: .reagent_essence }
 item reagent_dream_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Dream Crystal" _level: 15 _level_range: [ 15 21 ] _icon: icon_magic_crystal_3 _loot_group: .reagent_crystal }
 
-item reagent_void_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Void Essence" _level: 22 _level_range: [ 22 31 ] _icon: icon_magic_dust_4 _loot_group: .reagent_essence }
-item reagent_void_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Void Crystal" _level: 22 _level_range: [ 22 31 ] _icon: icon_magic_crystal_4 _loot_group: .reagent_crystal }
+item reagent_void_essence: !ENCHANTING_REAGENT_ITEM{ _rarity: common _string: "Void Essence" _level: 22 _level_range: [ 22 32 ] _icon: icon_magic_dust_4 _loot_group: .reagent_essence }
+item reagent_void_crystal: !ENCHANTING_REAGENT_ITEM{ _rarity: uncommon _string: "Void Crystal" _level: 22 _level_range: [ 22 32 ] _icon: icon_magic_crystal_4 _loot_group: .reagent_crystal }
 
 #####################################################
 # Disenchant
