@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .wernox: {}
+loot_group .wernox_heroic: {}
 
 loot_table .wernox:
 {
@@ -10,6 +11,18 @@ loot_table .wernox:
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
 		  map_message valoris_insurgency: "Wernox will not drop Token of Victory for {}." } } }		
 		{ possibility: { loot_group: .wernox  } }				
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+
+loot_table .wernox_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message valoris_insurgency: "Wernox will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .wernox_heroic  } }					
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 	]	
@@ -82,6 +95,77 @@ loot_table .wernox:
 	}
 }
 
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .wernox_heroic
+		_heroic: true
+	}
+	
+	item valoris_insurgency_13_heroic: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Cane of Wernox"
+		_icon: icon_staff_8
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 3
+		_weapon_cooldown: 24
+	}
+	
+	item valoris_insurgency_14_heroic: !BOSS_DROP_FINGER
+	{
+		_string: "Malignant Band of Magic"
+		_icon: icon_ring_7
+		_constitution: 1
+		_wisdom: 3
+		_spell_damage: 2
+	}
+	
+	item valoris_insurgency_15_heroic: !BOSS_DROP_FEET
+	{
+		_string: "Swiftstrike Striders"
+		_type: armor_cloth
+		_icon: icon_slippers_2
+		_constitution: 2
+		_dexterity: 3
+		_strength: 1
+	}
+	
+	item valoris_insurgency_16_heroic: !BOSS_DROP_CHEST
+	{
+		_string: "Soothsayer's Garment"
+		_type: armor_cloth
+		_icon: icon_robe_4
+		_wisdom: 3		
+		_spirit: 2	
+		_healing: 1
+	}
+	
+	item valoris_insurgency_17_heroic: !BOSS_DROP_FINGER
+	{
+		_string: "Circle of Pain"
+		_icon: icon_ring_8
+		_strength: 1
+		_dexterity: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item valoris_insurgency_18_heroic: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Rebel Guard Pauldrons"
+		_type: armor_plate
+		_icon: icon_shoulders_5
+		_constitution: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+}
+
 ############################################################
 # Boss
 
@@ -113,16 +197,20 @@ entity valoris_insurgency_wernox: !NPC
 	_immune_to_immobilize: true
 	_immune_to_slow: true
 
+	_heroic_weapon_damage: 3.9
+	_heroic_resource_health: 12.8
+	_loot_table_heroic: .wernox_heroic
+
 	_abilities: 
 	[
 		{
-			id: npc_fireball
+			id: npc_fireball_2
 			target: random_player
 			requirement self<must_have_less_health_than>: 90
 		}
 	
 		{
-			id: npc_frostbolt
+			id: npc_frostbolt_2
 			target: random_player
 			requirement self<must_have_less_health_than>: 95
 		}

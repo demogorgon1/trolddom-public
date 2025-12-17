@@ -267,6 +267,7 @@
 	flags: [ dungeon_loot ]
 	
 	<exists _item_level> item_level: @_item_level
+	<exists _level_range> level_range: @_level_range
 	
 	<exists _type> type: @_type
 	<exists _item_aura> aura: @_item_aura
@@ -274,6 +275,7 @@
 	<exists _budget_bias> budget_bias: @_budget_bias
 	<exists _weapon_cooldown> weapon_cooldown: @_weapon_cooldown
 	<exists _use_ability> use_ability: @_use_ability
+	<exists _heroic and _heroic> flags: [ heroic ]
 
 	<exists _rarity> rarity: @_rarity
 	<!exists _rarity> rarity: uncommon		

@@ -8,6 +8,7 @@ changelog:
 	
 	list:
 	[
+		{ text: "Heroic: Valoris Insurgency." }
 		{ text: "Another quest offered by the Jule Consortium." }
 	]
 
@@ -23,6 +24,8 @@ changelog:
 	list:
 	[
 		{ text: "Fixed a couple UI bugs." }
+		{ text: "Items obtained in heroic difficulty dungeons can now be disenchanted like intended." }
+		{ text: "Chests in heroic difficulty dungeons now has max level loot." }
 	]
 
 	#######################################################################################

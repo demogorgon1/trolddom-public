@@ -981,6 +981,7 @@ sprites:
 	sprite icon_hot_drink_1: { tags: [ icon ] }
 	sprite icon_bottle_5: { tags: [ icon ] }
 	sprite icon_reindeer: { tags: [ icon ] }
+	sprite icon_valoris_insurgency_heroic: { tags: [ icon ] }
 	
 }
 
