@@ -50,7 +50,7 @@
 		required_level: @_level
 		rarity: rare
 		icon: @_icon
-		flags: [ unique ]
+		flags: [ unique not_sellable ]
 		binds: when_picked_up
 		string: @_string
 		use_ability: @_id

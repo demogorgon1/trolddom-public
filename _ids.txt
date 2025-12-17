@@ -21494,6 +21494,7 @@ ability npc_frenzy 34491
 ability consumable_glogg 34492
 ability consumable_schnaps 34493
 ability reindeer 34494
+ability npc_drain_life 34495
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -23553,6 +23554,7 @@ entity jul_tree 2142
 entity jul_big_man 2143
 entity reindeer 2144
 entity jul_voucher_nisse 2145
+entity thalvaron_deer_30 2146
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -66396,6 +66398,7 @@ particle_system _ability__item_consumable_frost_grenade_use_ability_projectile 9
 particle_system _ability__item_consumable_frost_grenade_use_ability_target_particle_system 93
 particle_system _ability_the_devouring_shroud_6_infection_source_particle_system 94
 particle_system _ability_the_devouring_shroud_6_thorn_spit_projectile 95
+particle_system _ability_npc_drain_life_projectile 96
 dialogue_screen __maps_open_world_brom_mining 31
 dialogue_screen __maps_open_world_brom_greetings 32
 dialogue_screen __maps_open_world_brom_trainer 33
@@ -68854,6 +68857,7 @@ cooldown _ability_the_devouring_shroud_6_frenzy_cooldown 208
 cooldown _ability_the_devouring_shroud_6_infection_cooldown 209
 cooldown _ability_the_devouring_shroud_6_thorn_spit_cooldown 210
 cooldown npc_frenzy 211
+cooldown _ability_npc_drain_life_cooldown 212
 sound fantastic_a 1
 sound button_1 2
 sound switch_1 3

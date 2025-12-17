@@ -31,7 +31,7 @@ dialogue_screen .block_manson_dialogue_2:
 {
 	text: 
 	[	
-		"A greater demon that came from the north recently. Better not step on his toes." 
+		"A demon that came from the north recently. Better not step on his toes." 
 	]	
 }	
 
@@ -189,7 +189,7 @@ quest thalvaron_block_manson_3:
 
 	text:
 	[
-		"Return the document to the Jule Consortium employee."
+		"Return the document to a Jule Consortium employee."
 	]
 	
 	description: 
@@ -207,5 +207,5 @@ quest thalvaron_block_manson_3:
 	level: 30
 	quest_items: [ .block_manson_3_quest_item ]
 	prerequisites: [ .block_manson_2 ]
-	
+	reward_all_items: [ jul_voucher_gold ]
 }

@@ -426,14 +426,14 @@ quest thalvaron_nisse_4:
 
 	text:
 	[
-		"Head to the Northern Pass in Thalvaron, find away to the Frozen Borderlands, and look for someone who witnessed the crash."
+		"Head to the Northern Pass in Thalvaron, find a way to the Frozen Borderlands, and look for someone who witnessed the crash."
 	]
 	
 	description: 
 	[
 		"We've come to the conclusion that something bad happened somewhere north of Iceveil Highlands. One of our deliveries crashed in a place known as the Frozen Borderlands. Have you ever been there? It's horribly cold. No sensible nisse"
 		"would ever set his foot up there. A brave $class$ like you might? Maybe you can head up there and recover some very important cargo? If you really want to impress the big man when he show up later for"
-		"the winter festivities, you should definitely help us.\n"
+		"the Jule festivities, you should definitely help us.\n"
 		"\n"
 		"What cargo? Well... Let's just say it's an important document. I don't know what happened, but I let's sincerely hope that it's still up there somewhere. Otherwise it's bad news for a lot of people, let's"
 		"just put it like that.\n"

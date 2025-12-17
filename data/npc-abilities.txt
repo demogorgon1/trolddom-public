@@ -1430,3 +1430,35 @@ ability npc_frenzy:
 		aura: npc_frenzy
 	}
 }
+
+ability npc_drain_life:
+{
+	string: "Drain Life"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global ]
+	cooldown: $cooldown { duration: 60 }
+	flags: [ offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_drain_life
+	delay: 3
+	target_particle_system: green_spell_hit
+	projectile: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_witch_bolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.52
+			count: 1		
+		}
+	}	
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical leech ]
+		damage_type: unholy
+		function: { expression: a_mul_x x: weapon a: 0.9 }
+		spread: !DEFAULT_SPREAD{}						
+	}	
+}
