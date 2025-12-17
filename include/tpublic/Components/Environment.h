@@ -21,7 +21,8 @@ namespace tpublic
 			{
 				FIELD_TICK_INTERVAL,
 				FIELD_DURATION,
-				FIELD_ABILITY
+				FIELD_ABILITY,
+				FIELD_DELAY
 			};
 
 			static void
@@ -31,6 +32,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_TICK_INTERVAL, "tick_interval", offsetof(Environment, m_tickInterval));
 				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_DURATION, "duration", offsetof(Environment, m_duration));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ABILITY, "ability", offsetof(Environment, m_abilityId))->SetDataType(DataType::ID_ABILITY);
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_DELAY, "delay", offsetof(Environment, m_delay));
 			}
 
 			void
@@ -39,6 +41,7 @@ namespace tpublic
 				m_tickInterval = 5;
 				m_duration = 10;
 				m_abilityId = 0;
+				m_delay = 8;
 
 				m_lastUpdateTick = 0;
 				m_despawnTick = 0;
@@ -47,7 +50,8 @@ namespace tpublic
 			// Public data
 			int32_t			m_tickInterval = 5;
 			int32_t			m_duration = 10;
-			uint32_t		m_abilityId = 0;			
+			uint32_t		m_abilityId = 0;	
+			int32_t			m_delay = 8;
 
 			// Not serialized
 			int32_t			m_lastUpdateTick = 0;

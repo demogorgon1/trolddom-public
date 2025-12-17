@@ -70,6 +70,9 @@ namespace tpublic::Systems
 		if(aContext->m_tick > environment->m_despawnTick && environment->m_duration != 0)
 			return EntityState::ID_DESPAWNING;
 
+		if(environment->m_delay > 0 && aEntityState == EntityState::ID_DEFAULT && aTicksInState < environment->m_delay)
+			return EntityState::CONTINUE;
+
 		const Components::Position* position = GetComponent<Components::Position>(aComponents);
 		assert(position != NULL);
 

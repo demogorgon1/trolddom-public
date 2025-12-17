@@ -245,6 +245,7 @@ entity .gribble_fire:
 			tick_interval: 10
 			duration: 300 
 			ability: .gribble_fire_tick
+			delay: 8
 		}		
 		sprite: 
 		{ 
@@ -296,6 +297,7 @@ entity .gribble_fire_heroic:
 			tick_interval: 10
 			duration: 600 
 			ability: .gribble_fire_tick_heroic
+			delay: 8
 		}		
 		sprite: 
 		{ 

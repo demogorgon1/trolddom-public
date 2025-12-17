@@ -11,6 +11,20 @@ changelog:
 		{ text: "Another quest offered by the Jule Consortium." }
 	]
 
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Aetheris Stronghold: Gribble's fire doesn't do damage immediately when spawning." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed a couple UI bugs." }
+	]
+
 	#######################################################################################
 	heading: "v1.0.12"
 
