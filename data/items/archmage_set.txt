@@ -1,0 +1,149 @@
+# ============================================================================
+# ARCHMAGE SET - 4 Piece Epic Caster Set
+# 2-Piece: On Spell Crit → Arcane Surge (+15% spell damage for 10 sec)
+# 4-Piece: +15% Spell Damage (permanent)
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Set Tracker Aura
+# ----------------------------------------------------------------------------
+aura archmage_set_tracker:
+{
+    type: hidden
+    flags: [ persist_in_death unique ]
+    
+    # 2-piece bonus: On spell crit, trigger Arcane Surge
+    aura_effect combat_event_trigger:
+    {
+        requirement self<must_have_item_equipped>: archmage_hood
+        requirement self<must_have_item_equipped>: archmage_robe
+        combat_event<source>: critical
+        combat_event_ability_mask: [ spell ]
+        ability<self>: archmage_2pc_proc
+    }
+    
+    # 4-piece bonus: +15% spell damage
+    aura_effect damage_output_modifier:
+    {
+        requirement self<must_have_item_equipped>: archmage_hood
+        requirement self<must_have_item_equipped>: archmage_robe
+        requirement self<must_have_item_equipped>: archmage_gloves
+        requirement self<must_have_item_equipped>: archmage_sandals
+        multiplier: 1.15
+        type_mask: [ fire frost arcane holy nature ]
+    }
+}
+
+# ----------------------------------------------------------------------------
+# 2-Piece Proc Ability (triggered on spell crit)
+# ----------------------------------------------------------------------------
+ability archmage_2pc_proc:
+{
+    string: "Arcane Surge"
+    flags: [ target_self ]
+    states: [ default in_combat ]
+    icon: icon_special_1
+    
+    direct_effect apply_aura:
+    {
+        aura: archmage_2pc_buff
+    }
+}
+
+# ----------------------------------------------------------------------------
+# 2-Piece Proc Buff
+# ----------------------------------------------------------------------------
+aura archmage_2pc_buff:
+{
+    string: "Arcane Surge"
+    description: "Spell damage increased by 15%."
+    type: buff
+    icon: icon_special_1
+    duration: 100       # 10 seconds (10 ticks per second)
+    flags: [ unique ]
+    
+    aura_effect damage_output_modifier:
+    {
+        multiplier: 1.15
+        type_mask: [ fire frost arcane holy nature ]
+    }
+}
+
+# ----------------------------------------------------------------------------
+# Set Pieces
+# ----------------------------------------------------------------------------
+item archmage_hood:
+{
+    string: "Archmage's Hood"
+    flavor: "(2) Set: Spell crits trigger Arcane Surge. (4) Set: +15% Spell Damage."
+    
+    type: armor_cloth
+    equipment_slots: [ head ]
+    
+    required_level: 20
+    rarity: epic
+    icon: icon_wizard_hat_5
+    binds: when_picked_up
+    
+    stat_weight wisdom: 2
+    stat_weight spirit: 1
+    
+    aura: archmage_set_tracker
+}
+
+item archmage_robe:
+{
+    string: "Archmage's Robe"
+    flavor: "(2) Set: Spell crits trigger Arcane Surge. (4) Set: +15% Spell Damage."
+    
+    type: armor_cloth
+    equipment_slots: [ chest ]
+    
+    required_level: 20
+    rarity: epic
+    icon: icon_robe_4
+    binds: when_picked_up
+    
+    stat_weight wisdom: 2
+    stat_weight spirit: 1
+    
+    aura: archmage_set_tracker
+}
+
+item archmage_gloves:
+{
+    string: "Archmage's Gloves"
+    flavor: "(2) Set: Spell crits trigger Arcane Surge. (4) Set: +15% Spell Damage."
+    
+    type: armor_cloth
+    equipment_slots: [ hands ]
+    
+    required_level: 20
+    rarity: epic
+    icon: icon_gloves_1
+    binds: when_picked_up
+    
+    stat_weight wisdom: 2
+    stat_weight spirit: 1
+    
+    aura: archmage_set_tracker
+}
+
+item archmage_sandals:
+{
+    string: "Archmage's Sandals"
+    flavor: "(2) Set: Spell crits trigger Arcane Surge. (4) Set: +15% Spell Damage."
+    
+    type: armor_cloth
+    equipment_slots: [ feet ]
+    
+    required_level: 20
+    rarity: epic
+    icon: icon_boots_1
+    binds: when_picked_up
+    
+    stat_weight wisdom: 2
+    stat_weight spirit: 1
+    
+    aura: archmage_set_tracker
+}
