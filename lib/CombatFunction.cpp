@@ -2,6 +2,7 @@
 
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
+#include <tpublic/Components/MinionPublic.h>
 
 #include <tpublic/CombatFunction.h>
 #include <tpublic/EntityInstance.h>
@@ -74,11 +75,30 @@ namespace tpublic
 			return (aDamage * (uint32_t)20) / (uint32_t)aCooldown;
 		}
 
+		const Components::CombatPrivate*
+		_GetOwnerCombatPrivate(
+			const IWorldView*					aWorldView,	
+			const EntityInstance*				aEntityInstance)
+		{
+			if(aWorldView != NULL)
+			{
+				const Components::MinionPublic* minionPublic = aEntityInstance->GetComponent<Components::MinionPublic>();
+				if (minionPublic != NULL && minionPublic->m_ownerEntityInstanceId != 0)
+				{
+					const EntityInstance* ownerEntityInstance = aWorldView->WorldViewSingleEntityInstance(minionPublic->m_ownerEntityInstanceId);
+					if (ownerEntityInstance != NULL)
+						return ownerEntityInstance->GetComponent<Components::CombatPrivate>();
+				}
+			}
+			return NULL;
+		}
+
 		float
 		_GetInput(
 			const Manifest*						/*aManifest*/,
 			const IWorldView*					aWorldView,
 			CombatFunction::RandomSource		aRandomSource,
+			const EntityInstance*				aEntityInstance,
 			const Components::CombatPublic*		aCombatPublic,
 			const Components::CombatPrivate*	aCombatPrivate,
 			CombatFunction::Input				aInput)
@@ -134,9 +154,47 @@ namespace tpublic
 					return (float)aCombatPrivate->m_spellDamage;
 				break;
 
+			case CombatFunction::INPUT_BLOCK_VALUE:
+				if(aCombatPrivate != NULL)
+					return (float)aCombatPrivate->m_blockValue;
+				break;
+
+			case CombatFunction::INPUT_OWNER_SPELL_DAMAGE:
+				if(aEntityInstance != NULL)
+				{
+					const Components::CombatPrivate* ownerCombatPrivate = _GetOwnerCombatPrivate(aWorldView, aEntityInstance);
+					if(ownerCombatPrivate != NULL)
+						return (float)ownerCombatPrivate->m_spellDamage;
+					else
+						return 0.0f;
+				}
+				break;
+
+			case CombatFunction::INPUT_OWNER_HEALING:
+				if(aEntityInstance != NULL)
+				{
+					const Components::CombatPrivate* ownerCombatPrivate = _GetOwnerCombatPrivate(aWorldView, aEntityInstance);
+					if(ownerCombatPrivate != NULL)
+						return (float)ownerCombatPrivate->m_healing;
+					else
+						return 0.0f;
+				}
+				break;
+
 			case CombatFunction::INPUT_HEALING:
 				if (aCombatPrivate != NULL)
 					return (float)aCombatPrivate->m_healing;
+				break;
+
+			case CombatFunction::INPUT_MINION_WEAPON:
+				if(aEntityInstance != NULL)
+				{
+					const Components::MinionPublic* minionPublic = aEntityInstance->GetComponent<Components::MinionPublic>();
+					if(minionPublic != NULL && minionPublic->m_toolTipWeaponDamageBase.has_value()) 
+						return (float)_SampleUIntRange(aRandomSource, minionPublic->m_toolTipWeaponDamageBase->m_min, minionPublic->m_toolTipWeaponDamageBase->m_max); // FIXME: don't do this on server
+					else if(aCombatPrivate != NULL)
+						return (float)_SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax);
+				}
 				break;
 
 			case CombatFunction::INPUT_WEAPON:
@@ -197,6 +255,7 @@ namespace tpublic
 		const IWorldView*					aWorldView,
 		CombatFunction::RandomSource		aRandomSource,
 		float								aMultiplier,
+		const EntityInstance*				aEntityInstance,
 		const Components::CombatPublic*		aCombatPublic,
 		const Components::CombatPrivate*	aCombatPrivate) const
 	{
@@ -209,23 +268,24 @@ namespace tpublic
 			break;
 
 		case EXPRESSION_A_MUL_X:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_y);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + 
+				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y);
 			break;
 
 		case EXPRESSION_X_PLUS_A:
-			output = _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x) + _GetA(aCombatPublic, this);
+			output = _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + _GetA(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_X:
-			output = _GetInput(aManifest, aWorldView, aRandomSource, aCombatPublic, aCombatPrivate, m_x);
+			output = _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x);
 			break;
 
 		default:
@@ -273,6 +333,7 @@ namespace tpublic
 			aWorldView,
 			aRandomSource, 
 			aMultiplier,
+			aEntityInstance,
 			aEntityInstance->GetComponent<Components::CombatPublic>(),
 			aEntityInstance->GetComponent<Components::CombatPrivate>());
 	}

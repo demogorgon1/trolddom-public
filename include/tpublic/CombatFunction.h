@@ -81,7 +81,11 @@ namespace tpublic
 			INPUT_WEAPON_NORMALIZED,
 			INPUT_WEAPON_AVERAGE_NORMALIZED,
 			INPUT_ATTACK_POWER,
-			INPUT_PVP_CONTROL_POINTS
+			INPUT_PVP_CONTROL_POINTS,
+			INPUT_OWNER_SPELL_DAMAGE,
+			INPUT_OWNER_HEALING,
+			INPUT_MINION_WEAPON,
+			INPUT_BLOCK_VALUE,
 		};
 
 		enum Entity : uint8_t
@@ -148,8 +152,16 @@ namespace tpublic
 				return INPUT_WEAPON_AVERAGE_NORMALIZED;
 			else if (t == "attack_power")
 				return INPUT_ATTACK_POWER;
+			else if (t == "block_value")
+				return INPUT_BLOCK_VALUE;
 			else if(t == "pvp_control_points")
 				return INPUT_PVP_CONTROL_POINTS;
+			else if(t == "owner_spell_damage")
+				return INPUT_OWNER_SPELL_DAMAGE;
+			else if (t == "owner_healing")
+				return INPUT_OWNER_HEALING;
+			else if (t == "minion_weapon")
+				return INPUT_MINION_WEAPON;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}
@@ -302,6 +314,7 @@ namespace tpublic
 						const IWorldView*					aWorldView,
 						RandomSource						aRandomSource,
 						float								aMultiplier,
+						const EntityInstance*				aEntityInstance,
 						const Components::CombatPublic*		aCombatPublic,
 						const Components::CombatPrivate*	aCombatPrivate) const;
 		float		EvaluateEntityInstance(

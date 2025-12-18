@@ -119,6 +119,7 @@ namespace tpublic
 								const EntityInstance*				aEntityInstance,
 								const AbilityModifierList*			aAbilityModifierList,
 								uint32_t							aAbilityId,
+								const IWorldView*					aWorldView,
 								UIntRange&							aOutDamage,
 								DirectEffect::DamageType&			aOutDamageType) const override;
 

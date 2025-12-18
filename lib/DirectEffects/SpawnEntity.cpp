@@ -271,6 +271,7 @@ namespace tpublic::DirectEffects
 			Components::CombatPublic* combatPublic = spawnedEntity->GetComponent<Components::CombatPublic>();
 			Components::CombatPrivate* combatPrivate = spawnedEntity->GetComponent<Components::CombatPrivate>();
 			Components::MinionPrivate* minionPrivate = spawnedEntity->GetComponent<Components::MinionPrivate>();
+			Components::MinionPublic* minionPublic = spawnedEntity->GetComponent<Components::MinionPublic>();
 			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
 
 			ApplyNPCMetrics::Process(
@@ -281,6 +282,9 @@ namespace tpublic::DirectEffects
 				minionPrivate,
 				npc,
 				m_refreshNPCMetrics->m_update);
+
+			if(minionPublic != NULL)
+				minionPublic->m_toolTipWeaponDamageBase = UIntRange(combatPrivate->m_weaponDamageRangeMin, combatPrivate->m_weaponDamageRangeMax);
 		}
 
 		if(m_spawnFlags & SPAWN_FLAG_DESPAWN_SOURCE)

@@ -65619,6 +65619,8 @@ aura reindeer 4726
 aura npc_curse_stacking 4727
 aura _ability_npc_fireball_2_direct_effect_apply_aura_aura 4728
 aura _ability_npc_frostbolt_2_direct_effect_apply_aura_aura 4729
+aura reckoning 4730
+aura void_blast 4731
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11

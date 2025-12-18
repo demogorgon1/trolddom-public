@@ -185,8 +185,8 @@ namespace tpublic
 				FIELD_COOLDOWNS,
 				FIELD_ABILITIES,
 				FIELD_DURATION_SECONDS,
-				FIELD_SPAWN_TIMESTAMP
-
+				FIELD_SPAWN_TIMESTAMP,
+				FIELD_TOOL_TIP_WEAPON_DAMAGE_BASE
 			};
 
 			static void
@@ -201,6 +201,7 @@ namespace tpublic
 				aSchema->DefineCustomObjects<Ability>(FIELD_ABILITIES, "abilities", offsetof(MinionPublic, m_abilities));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_DURATION_SECONDS, "duration_seconds", offsetof(MinionPublic, m_durationSeconds));
 				aSchema->Define(ComponentSchema::TYPE_UINT64, FIELD_SPAWN_TIMESTAMP, NULL, offsetof(MinionPublic, m_spawnTimeStamp));
+				aSchema->DefineCustomOptionalObjectNoSource<UIntRange>(FIELD_TOOL_TIP_WEAPON_DAMAGE_BASE, offsetof(MinionPublic, m_toolTipWeaponDamageBase));
 			}
 
 			void
@@ -214,6 +215,7 @@ namespace tpublic
 				m_abilities.clear();
 				m_durationSeconds = 0;
 				m_spawnTimeStamp = 0;
+				m_toolTipWeaponDamageBase.reset();
 
 				m_ownerThreatTargetEntityInstanceId = 0;
 			}
@@ -326,17 +328,18 @@ namespace tpublic
 			}
 
 			// Public data
-			uint32_t				m_ownerEntityInstanceId = 0;
-			uint32_t				m_currentMinionModeId = 0;
-			std::vector<uint32_t>	m_minionModeIds;
-			std::vector<Command>	m_commands;
-			Cooldowns				m_cooldowns;
-			std::vector<Ability>	m_abilities;
-			uint32_t				m_durationSeconds = 0;
-			uint64_t				m_spawnTimeStamp = 0;
+			uint32_t					m_ownerEntityInstanceId = 0;
+			uint32_t					m_currentMinionModeId = 0;
+			std::vector<uint32_t>		m_minionModeIds;
+			std::vector<Command>		m_commands;
+			Cooldowns					m_cooldowns;
+			std::vector<Ability>		m_abilities;
+			uint32_t					m_durationSeconds = 0;
+			uint64_t					m_spawnTimeStamp = 0;
+			std::optional<UIntRange>	m_toolTipWeaponDamageBase;
 
 			// Internal
-			uint32_t				m_ownerThreatTargetEntityInstanceId = 0;
+			uint32_t					m_ownerThreatTargetEntityInstanceId = 0;
 		};
 	}
 
