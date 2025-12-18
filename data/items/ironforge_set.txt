@@ -1,0 +1,64 @@
+# ============================================================================
+# IRONFORGE SET - 2 Piece Bonus: +8% Physical Damage
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Set Tracker Aura
+# ----------------------------------------------------------------------------
+aura ironforge_set_tracker:
+{
+    type: hidden
+    flags: [ persist_in_death unique ]
+    
+    aura_effect damage_output_modifier:
+    {
+        requirement self<must_have_item_equipped>: ironforge_helm
+        requirement self<must_have_item_equipped>: ironforge_chest
+        multiplier: 1.08
+        type_mask: [ physical ]
+    }
+}
+
+# ----------------------------------------------------------------------------
+# Set Piece 1: Helm
+# ----------------------------------------------------------------------------
+item ironforge_helm:
+{
+    string: "Ironforge Warhelm"
+    flavor: "Part of the Ironforge set. (2) Set: +8% physical damage."
+    
+    type: armor_plate
+    equipment_slots: [ head ]
+    
+    required_level: 10
+    rarity: rare
+    icon: icon_helmet_1
+    binds: when_picked_up
+    
+    stat_weight strength: 2
+    stat_weight constitution: 1
+    
+    aura: ironforge_set_tracker
+}
+
+# ----------------------------------------------------------------------------
+# Set Piece 2: Chest
+# ----------------------------------------------------------------------------
+item ironforge_chest:
+{
+    string: "Ironforge Breastplate"
+    flavor: "Part of the Ironforge set. (2) Set: +8% physical damage."
+    
+    type: armor_plate
+    equipment_slots: [ chest ]
+    
+    required_level: 10
+    rarity: rare
+    icon: icon_chest_1
+    binds: when_picked_up
+    
+    stat_weight strength: 2
+    stat_weight constitution: 1
+    
+    aura: ironforge_set_tracker
+}
