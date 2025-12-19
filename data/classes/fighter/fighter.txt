@@ -183,9 +183,9 @@ class fighter:
 		dex_ranged_damage_max: [ 4 3 ]
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
-		dex_to_parry: [ 1 25 ]
-		str_to_parry: [ 1 40 ]
-		con_to_health: [ 10 1 ]		
+		dex_to_parry: [ 1 20 ]
+		str_to_parry: [ 1 60 ]
+		con_to_health: [ 12 1 ]		
 		spi_to_health_regen: [ 1 1 ]
 		str_to_block_value: [ 1 20 ]
 		str_to_attack_power: [ 4 1 ]
@@ -232,6 +232,14 @@ class fighter:
 		dexterity: 0.5
 		constitution: 0.25
 	}
+	
+	gear_optimization tank<{ weapon_dps_weight: 1.0 }>:
+	{	
+		strength: 0.25
+		dexterity: 1.0
+		constitution: 2
+	}
+	
 }  
 
 ###############################################################################

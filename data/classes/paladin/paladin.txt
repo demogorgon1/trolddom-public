@@ -127,10 +127,10 @@ class paladin:
 	{
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
-		dex_to_parry: [ 1 25 ]
-		str_to_parry: [ 1 40 ]
-		wis_to_mag_crit: [ 1 30 ]
-		con_to_health: [ 10 1 ]
+		dex_to_parry: [ 1 20 ]
+		str_to_parry: [ 1 60 ]
+		wis_to_mag_crit: [ 1 25 ]
+		con_to_health: [ 12 1 ]
 		wis_to_mana: [ 10 1 ]
 		spi_to_mana_regen_per_5_sec: [ 3 2 ]
 		spi_to_health_regen: [ 1 1 ]
@@ -187,6 +187,13 @@ class paladin:
 		healing: 1.0
 		wisdom: 0.5
 		mana_per_5: 0.25
+	}
+
+	gear_optimization tank<{ weapon_dps_weight: 1.0 }>:
+	{	
+		strength: 0.25
+		dexterity: 1
+		constitution: 2
 	}
 	
 	replace_ability attack: paladin_attack

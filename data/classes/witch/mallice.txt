@@ -350,7 +350,7 @@ ability witch_bolt:
 	talent_tree: witch_malice
 	speed: 8
 	projectile: witch_bolt
-	resource_cost mana: 14
+	resource_cost mana: 16
 	target_particle_system: green_spell_hit
 	
 	direct_effect damage:
@@ -445,7 +445,7 @@ ability curse_of_corruption:
 	flags: [ spell target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_curse_of_corruption
-	resource_cost mana: 10
+	resource_cost mana: 15
 	talent_tree: witch_malice
 	speed: 7
 	projectile: curse_of_corruption
