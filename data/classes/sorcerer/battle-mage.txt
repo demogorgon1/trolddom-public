@@ -17,22 +17,24 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_overpower: "I"
 		talent sorcerer_battle_mage_staff_mastery: "J"
 		talent sorcerer_battle_mage_blink: "K"
+		talent sorcerer_battle_mage_shielded_by_strength: "L"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"				
+		sprite talent_tree_right_arrow: "r"				
 		sprite talent_tree_down: "|"			
 	}
 	
 	map:
 	[
-		"..A.B.J"
-		"....d.."
-		"ElC.D.G"
-		"..d.|.."
-		"..F.|.H"
-		"....|.d"
-		"....|.I"
-		"....d.."
-		"....K.."
+		"..A.B.J.."
+		"....d...."
+		"ElC.D.G.."
+		"..d.|...."
+		"..F.|.HrL"
+		"....|.d.."
+		"....|.I.."
+		"....d...."
+		"....K...."
 	]
 	
 }
@@ -376,6 +378,26 @@ aura sorcerer_battle_critical_thinking_3:
 }
 
 ###############################################################################
+# Shielded by Strength
+
+talent sorcerer_battle_mage_shielded_by_strength:
+{
+	string: "Shielded by Strength"
+	icon: icon_token_2
+	talent_tree_points_required: 10
+	prerequisites: [ sorcerer_battle_mage_arcane_strength ]
+	points:
+	[
+		{ ability_modifier: shielded_by_strength }
+	]
+}
+
+ability_modifier shielded_by_strength:
+{
+	description: "Strength increases damage absorbed by Power Shield."
+}
+
+###############################################################################
 # Swiftness
 
 talent sorcerer_battle_mage_swiftness:
@@ -526,11 +548,35 @@ ability_modifier improved_power_shield_5:
 	}
 }
 
+!define local POWER_SHIELD_STRENGTH
+{	
+	string: "Power Shield"
+	description: "Absorbs damage."
+	type: buff
+	duration: 300
+	flags: [ unique charged magic ]	
+	icon: icon_mage_shield
+	charges: { expression: a_mul_x_plus_b_mul_y_plus_c a: 1.04 x: spell_damage b: 1 y: strength c: [ [ 1 28 ] [ 30 193 ] ] }		
+	particle_system: power_shield
+	aura_effect absorb: { }	
+	<exists _multiplier> aura_effect damage_input_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: @_multiplier
+	}
+}
+
 aura improved_power_shield_1: !POWER_SHIELD { _multiplier: 0.92 }
 aura improved_power_shield_2: !POWER_SHIELD { _multiplier: 0.84 }
 aura improved_power_shield_3: !POWER_SHIELD { _multiplier: 0.76 }
 aura improved_power_shield_4: !POWER_SHIELD { _multiplier: 0.68 }
 aura improved_power_shield_5: !POWER_SHIELD { _multiplier: 0.60 }
+
+aura improved_power_shield_1_strength: !POWER_SHIELD_STRENGTH { _multiplier: 0.92 }
+aura improved_power_shield_2_strength: !POWER_SHIELD_STRENGTH { _multiplier: 0.84 }
+aura improved_power_shield_3_strength: !POWER_SHIELD_STRENGTH { _multiplier: 0.76 }
+aura improved_power_shield_4_strength: !POWER_SHIELD_STRENGTH { _multiplier: 0.68 }
+aura improved_power_shield_5_strength: !POWER_SHIELD_STRENGTH { _multiplier: 0.60 }
 
 ###############################################################################
 # Charging Combat
@@ -584,38 +630,80 @@ ability power_shield:
 	
 	direct_effect apply_aura:
 	{
-		must_not_have_ability_modifiers: [ improved_power_shield_1 improved_power_shield_2 improved_power_shield_3 improved_power_shield_4 improved_power_shield_5 ]
+		must_not_have_ability_modifiers: [ improved_power_shield_1 improved_power_shield_2 improved_power_shield_3 improved_power_shield_4 improved_power_shield_5 shielded_by_strength ]
 		aura: power_shield
+	}
+
+	direct_effect apply_aura:
+	{
+		must_not_have_ability_modifiers: [ improved_power_shield_1 improved_power_shield_2 improved_power_shield_3 improved_power_shield_4 improved_power_shield_5 ]
+		must_have_ability_modifier: shielded_by_strength
+		aura: power_shield_strength
 	}
 	
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_power_shield_1
+		must_not_have_ability_modifiers: [ shielded_by_strength ]
 		aura: improved_power_shield_1
 	}
 
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_power_shield_2
+		must_not_have_ability_modifiers: [ shielded_by_strength ]
 		aura: improved_power_shield_2
 	}
 
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_power_shield_3
+		must_not_have_ability_modifiers: [ shielded_by_strength ]
 		aura: improved_power_shield_3
 	}
 
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_power_shield_4
+		must_not_have_ability_modifiers: [ shielded_by_strength ]
 		aura: improved_power_shield_4
 	}
 
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_power_shield_5
+		must_not_have_ability_modifiers: [ shielded_by_strength ]
 		aura: improved_power_shield_5
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifiers: [ improved_power_shield_1 shielded_by_strength ]
+		aura: improved_power_shield_1_strength
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifiers: [ improved_power_shield_2 shielded_by_strength ]
+		aura: improved_power_shield_2_strength
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifiers: [ improved_power_shield_3 shielded_by_strength ]
+		aura: improved_power_shield_3_strength
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifiers: [ improved_power_shield_4 shielded_by_strength ]
+		aura: improved_power_shield_4_strength
+	}
+
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifiers: [ improved_power_shield_5 shielded_by_strength ]
+		aura: improved_power_shield_5_strength
 	}
 	
 	direct_effect apply_aura:
@@ -626,6 +714,7 @@ ability power_shield:
 }
 
 aura power_shield: !POWER_SHIELD{ _multiplier: 1.0 }
+aura power_shield_strength: !POWER_SHIELD{ _multiplier: 1.0 }
 
 particle_system power_shield:
 {
