@@ -93,7 +93,7 @@ class priest:
 	{
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
-		dex_to_parry: [ 1 20 ]
+		dex_to_parry: [ 1 25 ]
 		str_to_parry: [ 1 60 ]
 		wis_to_mag_crit: [ 1 25 ]
 		con_to_health: [ 12 1 ]

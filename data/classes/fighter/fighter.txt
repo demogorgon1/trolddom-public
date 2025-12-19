@@ -183,7 +183,7 @@ class fighter:
 		dex_ranged_damage_max: [ 4 3 ]
 		dex_to_phys_crit: [ 1 20 ]
 		dex_to_dodge: [ 1 20 ]
-		dex_to_parry: [ 1 20 ]
+		dex_to_parry: [ 1 25 ]
 		str_to_parry: [ 1 60 ]
 		con_to_health: [ 12 1 ]		
 		spi_to_health_regen: [ 1 1 ]
