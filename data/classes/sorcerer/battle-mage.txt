@@ -382,7 +382,7 @@ aura sorcerer_battle_critical_thinking_3:
 
 talent sorcerer_battle_mage_shielded_by_strength:
 {
-	string: "Shielded by Strength"
+	string: "Shielded By Strength"
 	icon: icon_token_2
 	talent_tree_points_required: 10
 	prerequisites: [ sorcerer_battle_mage_arcane_strength ]
