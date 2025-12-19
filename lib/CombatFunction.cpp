@@ -35,6 +35,16 @@ namespace tpublic
 			return aCombatFunction->m_b;
 		}
 
+		float
+		_GetC(
+			const Components::CombatPublic*		aCombatPublic,
+			const CombatFunction*				aCombatFunction)
+		{
+			if(aCombatFunction->m_cLevelCurve.IsSet())
+				return (float)aCombatFunction->m_cLevelCurve.Sample(aCombatPublic->m_level);
+			return aCombatFunction->m_c;
+		}
+
 		uint32_t
 		_SampleUIntRange(	
 			CombatFunction::RandomSource		aRandomSource,
@@ -278,6 +288,12 @@ namespace tpublic
 		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y:
 			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + 
 				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y);
+			break;
+
+		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y_PLUS_C:
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) +
+				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y) +
+				_GetC(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_X_PLUS_A:

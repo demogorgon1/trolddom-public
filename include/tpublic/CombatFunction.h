@@ -59,7 +59,8 @@ namespace tpublic
 			EXPRESSION_A_MUL_X_PLUS_B,
 			EXPRESSION_X_PLUS_A,
 			EXPRESSION_X,
-			EXPRESSION_A_MUL_X_PLUS_B_MUL_Y
+			EXPRESSION_A_MUL_X_PLUS_B_MUL_Y,
+			EXPRESSION_A_MUL_X_PLUS_B_MUL_Y_PLUS_C
 		};
 
 		enum Input : uint8_t
@@ -113,6 +114,8 @@ namespace tpublic
 				return EXPRESSION_X_PLUS_A;
 			else if (t == "x")
 				return EXPRESSION_X;
+			else if (t == "a_mul_x_plus_b_mul_y_plus_c")
+				return EXPRESSION_A_MUL_X_PLUS_B_MUL_Y_PLUS_C;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid expression.", aSource->GetIdentifier());
 			return INVALID_EXPRESSION;
 		}
@@ -227,6 +230,13 @@ namespace tpublic
 						else
 							m_bLevelCurve = UIntCurve<uint32_t>(aChild);
 					}
+					else if (aChild->m_name == "c")
+					{
+						if (aChild->m_type == SourceNode::TYPE_NUMBER)
+							m_c = aChild->GetFloat();
+						else
+							m_cLevelCurve = UIntCurve<uint32_t>(aChild);
+					}
 					else if (aChild->m_name == "spread")
 					{
 						m_spread = aChild->GetFloat();
@@ -251,6 +261,9 @@ namespace tpublic
 		ToStream(
 			IWriter*							aWriter) const
 		{
+			aWriter->WritePOD<uint8_t>(0xFF); // This marks extended new format
+			aWriter->WritePOD<uint8_t>(1); // Format tag
+
 			aWriter->WritePOD(m_expression);
 			aWriter->WritePOD(m_x);
 			aWriter->WriteFloat(m_a);
@@ -261,12 +274,29 @@ namespace tpublic
 			aWriter->WriteFloat(m_eliteMultiplier);
 			aWriter->WritePOD(m_y);
 			aWriter->WritePOD(m_entity);
+			aWriter->WriteFloat(m_c);
+			m_cLevelCurve.ToStream(aWriter);
 		}
 
 		bool
 		FromStream(
 			IReader*							aReader)
 		{
+			uint8_t version = 0;
+
+			{
+				uint8_t mark;
+				if(aReader->Peek(&mark, 1) != 1)
+					return false;
+				if(mark == 0xFF)
+				{
+					if (!aReader->ReadPOD(mark)) // Skip
+						return false;
+					if(!aReader->ReadPOD(version))
+						return false;
+				}
+			}
+
 			if (!aReader->ReadPOD(m_expression))
 				return false;
 			if (!aReader->ReadPOD(m_x))
@@ -281,22 +311,18 @@ namespace tpublic
 				return false;
 			if (!m_bLevelCurve.FromStream(aReader))
 				return false;
+			if (!aReader->ReadFloat(m_eliteMultiplier))
+				return false;
+			if (!aReader->ReadPOD(m_y))
+				return false;
+			if(!aReader->ReadPOD(m_entity))
+				return false;
 
-			if(!aReader->IsEnd())
+			if(version >= 1)
 			{
-				if (!aReader->ReadFloat(m_eliteMultiplier))
+				if (!aReader->ReadFloat(m_c))
 					return false;
-			}
-
-			if(!aReader->IsEnd())
-			{
-				if (!aReader->ReadPOD(m_y))
-					return false;
-			}
-
-			if(!aReader->IsEnd())
-			{
-				if(!aReader->ReadPOD(m_entity))
+				if (!m_cLevelCurve.FromStream(aReader))
 					return false;
 			}
 
@@ -343,11 +369,13 @@ namespace tpublic
 		Input					m_y = INVALID_INPUT;
 		float					m_a = 0.0f;
 		float					m_b = 0.0f;
+		float					m_c = 0.0f;
 		float					m_spread = 0.0f;
 		float					m_eliteMultiplier = 1.0f;
 		Entity					m_entity = ENTITY_SOURCE;
 
 		UIntCurve<uint32_t>		m_aLevelCurve;
 		UIntCurve<uint32_t>		m_bLevelCurve;
+		UIntCurve<uint32_t>		m_cLevelCurve;
 	};
 }

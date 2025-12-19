@@ -39,4 +39,13 @@ namespace tpublic
 		return toCopy;
 	}
 
+	size_t		
+	MemoryReader::Peek(
+		void*				aBuffer,
+		size_t				aBufferSize) const
+	{
+		size_t toCopy = Base::Min(aBufferSize, m_remaining);
+		memcpy(aBuffer, m_p, toCopy);
+		return toCopy;
+	}
 }
