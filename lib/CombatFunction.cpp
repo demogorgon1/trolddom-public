@@ -3,6 +3,7 @@
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/MinionPublic.h>
+#include <tpublic/Components/PlayerPublic.h>
 
 #include <tpublic/CombatFunction.h>
 #include <tpublic/EntityInstance.h>
@@ -167,6 +168,14 @@ namespace tpublic
 			case CombatFunction::INPUT_BLOCK_VALUE:
 				if(aCombatPrivate != NULL)
 					return (float)aCombatPrivate->m_blockValue;
+				break;
+
+			case CombatFunction::INPUT_STRENGTH:
+				if (aEntityInstance != NULL && aEntityInstance->IsPlayer())
+				{
+					const Components::PlayerPublic* playerPublic = aEntityInstance->GetComponent<Components::PlayerPublic>();
+					return playerPublic->m_stats.m_stats[Stat::ID_STRENGTH];
+				}
 				break;
 
 			case CombatFunction::INPUT_OWNER_SPELL_DAMAGE:

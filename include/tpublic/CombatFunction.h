@@ -87,6 +87,7 @@ namespace tpublic
 			INPUT_OWNER_HEALING,
 			INPUT_MINION_WEAPON,
 			INPUT_BLOCK_VALUE,
+			INPUT_STRENGTH,
 		};
 
 		enum Entity : uint8_t
@@ -165,6 +166,8 @@ namespace tpublic
 				return INPUT_OWNER_HEALING;
 			else if (t == "minion_weapon")
 				return INPUT_MINION_WEAPON;
+			else if (t == "strength")
+				return INPUT_STRENGTH;
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid input.", aSource->GetIdentifier());
 			return INVALID_INPUT;
 		}

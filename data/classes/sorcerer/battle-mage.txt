@@ -556,7 +556,7 @@ ability_modifier improved_power_shield_5:
 	duration: 300
 	flags: [ unique charged magic ]	
 	icon: icon_mage_shield
-	charges: { expression: a_mul_x_plus_b_mul_y_plus_c a: 1.04 x: spell_damage b: 1 y: strength c: [ [ 1 28 ] [ 30 193 ] ] }		
+	charges: { expression: a_mul_x_plus_b_mul_y_plus_c a: 1.04 x: spell_damage b: 1.04 y: strength c: [ [ 1 28 ] [ 30 193 ] ] }		
 	particle_system: power_shield
 	aura_effect absorb: { }	
 	<exists _multiplier> aura_effect damage_input_modifier:

@@ -24836,6 +24836,7 @@ talent witch_guardian_demon 176
 talent witch_malice_pain_and_suffering 177
 talent witch_extinguish 178
 talent paladin_sanctified_might 179
+talent sorcerer_battle_mage_shielded_by_strength 180
 talent_tree fighter_protection 1
 talent_tree fighter_subtlety 2
 talent_tree fighter_combat 3
@@ -65621,6 +65622,12 @@ aura _ability_npc_fireball_2_direct_effect_apply_aura_aura 4728
 aura _ability_npc_frostbolt_2_direct_effect_apply_aura_aura 4729
 aura reckoning 4730
 aura void_blast 4731
+aura improved_power_shield_1_strength 4732
+aura improved_power_shield_2_strength 4733
+aura improved_power_shield_3_strength 4734
+aura improved_power_shield_4_strength 4735
+aura improved_power_shield_5_strength 4736
+aura power_shield_strength 4737
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -69248,6 +69255,7 @@ ability_modifier paladin_improved_judgement_2 131
 ability_modifier paladin_improved_judgement_3 132
 ability_modifier paladin_holy_assault 133
 ability_modifier witch_icy_bones 134
+ability_modifier shielded_by_strength 135
 encounter __maps_dungeon_1_umbracoth 1
 encounter __maps_dungeon_1_ignorg 2
 encounter __maps_dungeon_1_biznorg 3

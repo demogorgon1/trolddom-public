@@ -2,6 +2,79 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.14"
+
+	text: "All Classes:"
+
+	list:
+	[
+		{ text: "1% chance to parry for every 60 points of Strength (40 before)." }
+		{ text: "1% spell critical strike chance for every 25 points of Wisdom (30 before)." }
+		{ text: "12 maximum health for every point of Constitution (10 before)." }
+	]
+
+	text: "Paladin:"
+
+	list:
+	[
+		{ text: "Vindicate damage is now based on Attack Power instead of Spell Damage and has reduced mana cost." }
+		{ text: "Piercing Strike and Exorcism have reduced mana cost." }
+		{ text: "Divine Smite does more damage and has reduced mana cost." }
+		{ text: "Holy Storm does additional damage and has reduced mana cost." }
+		{ text: "Reckoning now deals Holy damage, has increased bonus damage, and applies a stacking debuff that increases Holy damage taken." }
+		{ text: "Bonus threat from Holy Reflection increased greatly." }
+		{ text: "Oat of Protection threat bonus increased from 150% to 200%." }
+		{ text: "Increased damage and threat bonus of Consecrate." }
+		{ text: "Guardian Angel now scales with Healing." }
+	]
+	
+	text: "Priest:"
+
+	list:
+	[
+		{ text: "Increased damage bonus from Improved Spiritual Crisis." }
+		{ text: "Spiritual Crisis, Smite, Creeping Guilt, and Condemnation deal more damage." }
+		{ text: "Eternal Shine increases stats by 4% instead of 2%." }
+	]
+	
+   	text: "Sorcerer:"
+
+	list:
+	[
+		{ text: "Void Blast deals more damage and gives caster a stacking buff that increases all Arcane damage." }
+		{ text: "Increased mana cost of Arcane Missile and Void Blast." }
+		{ text: "Void Blade Storm and Wizard strike deal more damage." }
+		{ text: "Doubled the amount of Attack Power sorcerers get from each point of Strength and Dexterity." }
+		{ text: "New talent Shielded By Strength makes Power Shield absorb additional damage based on Strength." }
+	]
+	
+	text: "Fighter:"
+
+	list:
+	[
+		{ text: "Shield Crush damage is now based on Block Value instead of Attack Power and has greatly increased bonus threat." }
+		{ text: "Bash threat bonus increased from 150% to 200%." }
+		{ text: "Each stack of Ferocity increases critical strike chance by 5% instead of 10%." }
+	]
+	
+   	text: "Witch:"
+
+	list:
+	[
+		{ text: "Heal Demon now scales off Spell Damage instead of Healing." }
+		{ text: "Increased mana cost of Witch Bolt and Curse of Corruption." }
+		{ text: "All demon and undead minion attacks and spells now scale off Spell Damage." }
+	]		
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Server stability improved." }
+		{ text: "Fixed bug that prevented demo players from entering some maps." }
+	]
+	
+	#######################################################################################
 	heading: "v1.0.13"
 
 	text: "New:"
@@ -112,6 +185,11 @@ changelog:
 		{ text: "Fixed bug where Ferocity, and not Riposte, was shown as a prerequisite for Blade Guard." }
 		{ text: "Fixed minor quest issues." }
 	]
+
+}
+
+changelog_old:
+{
 
 	#######################################################################################
 	heading: "v1.0.9"
@@ -337,495 +415,494 @@ changelog:
 	text: "\n\n"
 }
 
-changelog_old:
-{
-
-	#######################################################################################
-	heading: "v0.5.5"
-
-	text: "Issues Fixed:"
-	
-	list:
-	[
-		{ text: "Level 29+ items can now be disenchanted like intended." }
-		{ text: "Fixed bug where some targeted AOE abilities didn't work." }
-	]
-
-	#######################################################################################
-	heading: "v0.5.4"
-
-	text: "Issues Fixed:"
-	
-	list:
-	[
-		{ text: "Blacksmithing trainers now teach the smelting of Cindralite Ore." }
-		{ text: "Fixed Kareth Desert Tomb names." }
-		{ text: "Fixed bug where you could learn higher skill profession recipes than intended." } 
-		{ text: "Profession recipes no longer show wrong skill requirement." } 
-	]
-
-	#######################################################################################
-	heading: "v0.5.3"
-
-	text: "New content:"
-
-	list:
-	[
-		{ text: "Dungeons: The Devouring Shroud and Karethi Temple." }		
-		{ text: "Emblems of Triumph can be spent at new shop in the Trade District of Valoris." }
-	]	
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Lots of sprites have been updated." }
-		{ text: "Shrines and chests can be found in the new zones." }
-		{ text: "Zislo and Urgon Lark quest lines continue." }
-	]
-	
-	#######################################################################################
-	heading: "v0.5.2"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed bug where you'd get teleported out of the new zones." }
-	] 	
-
-	#######################################################################################
-	heading: "v0.5.1"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Rotfang now drops quest item like intended." }
-		{ text: "Fixed bug where non-elite Ignivar would be spawned instead of the elite version." }
-	] 	
-
-	#######################################################################################
-	heading: "v0.5.0"
-
-	text: "New content:"
-
-	list:
-	[
-		{ text: "Level cap raised to 30." }		
-		{ text: "Zones, talents, crafting recipes, enchants, world drops, quests, and more." }
-		{ text: "Talk to Ranger Virgil in Tirnwood Vale or Ranger Ursa at Urthon Gate." }		
-	]	
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Offline mode and custom servers: options for unlimited professions and easy elites." }
-	]
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Using certain abilities on yourself no longer keeps you in combat." }
-	] 	
-
-	#######################################################################################
-	heading: "v0.4.2"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed bug where quest items wouldn't respawn correctly." }
-		{ text: "Piranhas can now be fished in Xandralis like intended." }
-	] 
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Mistveil and Skaldrun Snappers can now be fished in zones up to level 30." }
-		{ text: "It's now more likely to catch something when fishing." }
-	]
-
-	#######################################################################################
-	heading: "v0.4.1"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed bug where some quest rewards lacked item type." }
-		{ text: "Fixed bug where some doors wouldn't open the first time." }
-	] 
-	
-	#######################################################################################
-	heading: "v0.4.0"
-
-	text: "New content:"
-
-	list:
-	[
-		{ text: "Level cap raised to 25." }		
-		{ text: "Seren Virelith quest line continues." }
-		{ text: "Head to the Royal Garden Tavern to pick up a quest leading north of Valoris." }
-		{ text: "Talents, crafting recipes, enchants, world drops, quests, and more." }
-	]	
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Direct damage and heals from spells and abilities will usually be slightly randomized." }
-		{ text: "Witch spell Elemental Destruction unlocks at level 10." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed bug where spells and abilities didn't scale enough after level 20." }
-	]
-	
-	#######################################################################################
-	heading: "v0.3.4"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed crash when dragging equipped item to empty inventory or stash slot." }
-		{ text: "Fixed bug where Demonic Spawn in Tower of Voraghul would despawn immediately." }
-		{ text: "Fixed bug where the quest Chasing Voraghul couldn't be completed." }
-		{ text: "Fixed bug where last tick from damage-over-time and heal-over-time spells didn't resolve." }
-	]
-
-	#######################################################################################
-	heading: "v0.3.3"
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "New custom server and offline modes available." }
-		{ text: "Custom server binaries available in install directory." }
-		{ text: "Realm modifier: hardcore mode (only available in custom server and offline modes)." }
-	]
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed item stat budget bug. Most items will have more stats now." }
-	]
-
-	#######################################################################################
-	heading: "v0.3.2"
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Angered Temple Spirits can now drop Spirit Dust and Ectoplasm." }
-		{ text: "Runecore Sentinel achievement now triggers like intended." }
-		{ text: "Karthul Blackfang now drops Token of Victory like intended." }
-		{ text: "Bloodied Rope drop from Skaldrak now has correct item type." }
-		{ text: "Fixed bug where map would be displayed incorrectly in Gateway worlds." }
-		{ text: "Fixed a couple of crash bugs." }
-		{ text: "Fixed a bug that allowed equipping binds-on-equip items without binding them." }
-		{ text: "Fixed a bug that prevented stash UI updating correctly under some circumstances." }
-	]
-
-	#######################################################################################
-	heading: "v0.3.1"
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Enemies spawning during Bone Tyrant and Malrik the Undying fights are no longer elite." }
-	]
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Northern gates of Durgan Urok are now open like intended." }
-		{ text: "Item tool tip background slightly darker to make it easier to read." }
-	]
-
-	#######################################################################################
-	heading: "v0.3.0"
-
-	text: "New content:"
-
-	list:
-	[
-		{ text: "Level cap raised to 22." }		
-		{ text: "Zones: Skaldrun and Xandralis." }
-		{ text: "Dungeon: Durgan Urok." }
-		{ text: "Crafting recipes, enchants, world drops, quests, and more." }
-	]	
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Blocking now has a base damage reduction of 30%, increased by block value." }
-		{ text: "Item budget cost of block chance reduced." }
-	]
-
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Fixed bug that could prevent quest indicators over NPCs from appearing correctly." }	
-		{ text: "Fixed bug that could break enchants when dying." }	
-	]
-	
-	#######################################################################################
-	heading: "v0.2.10"
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Irza and Draethor the Beholder got new abilities." }
-	]
-	
-	text: "Issues fixed:"
-
-	list:
-	[
-		{ text: "Fixed client crash caused by talents UI." }	
-		{ text: "Some server stability issues fixed." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.9"
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Possible fix of bug where you'd die right after transfering to another map." }
-		{ text: "Fixed bug that would happen whenever someone fished." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.8"
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "A server stability issue is being investigated." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.7"
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Increased bonuses from Pickled Toesnapper, Steamed Trout, Seared Bass, Spicy Perch Fillet, and Mistveil Balls." }
-		{ text: "Cloth (except capes), mail armor, and two-handed weapons can no longer give block value or block chance bonuses." }
-		{ text: "Two-handed swords, maces, and axes can no longer give caster bonuses." }
-	]
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Removed extra Spirit Stone from Durgan Tharok." }
-		{ text: "Fixed some minor bugs." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.6"
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Added option to disable FPS throttling for smoother graphics." }
-		{ text: "Added option to switch between Direct3D 9, Direct3D 11, and OpenGL rendering." }
-		{ text: "Opening chests, picking herbs, etc, will now break stealth." }
-	]
-	
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "FPS should be higher in general." }
-		{ text: "Fixed bug where the quest Elderwood Mushrooms would disappear from NPC dialogue." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.5"
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
-		{ text: "Ferocity can now stack to a maximum of 5." }
-		{ text: "Ferocity is now a single point talent. All fighters have had their talent points reset." }
-		{ text: "Bash threat bonus increased from 50% to 100%." }
-		{ text: "The following buffs and debuffs are now unique per caster: Banner of Command, Poison Bomb, Envenom, Rend, Intervention of Wrath, Cleanse, Creeping Guilt, Condemnation, Blessing, Curse of Corruption, and Soul Leak." }
-		{ text: "Threat meter can be enabled by right-clicking in combat log." }
-		{ text: "Crocodiles can now drop Menacing Jaws." }
-		{ text: "Infected Deer and Infected Boars can now also drop deer and boar items." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Quest rewards from Sheila Urkins now have armor (thanks sithpl)." }
-		{ text: "Fixed bug that caused dead escort NPCs to take too long to respawn." }
-		{ text: "Ranks 4 and 5 of Improved Soul Leak and Improved Curse of Corruption should now work like intended." }
-		{ text: "Having the same enchant on both weapons while dual wielding now works like intended." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.4"
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Escorted NPCs will stop walking while the player is in combat." }
-		{ text: "New world map (still no scrolling, sorry)." }
-		{ text: "Intervention of Wrath, Spiritual Surge, Overpower, Elemental Infusion, and Maliciousness are no longer on the global cooldown (thanks sithpl)." }
-		{ text: "Jewelry can now be disenchanted." }
-		{ text: "Mounting and dismounting is no longer on the global cooldown." }
-		{ text: "Dungeon bosses now reset their Token of Victory cooldown at the same time for everyone." }
-		{ text: "/roll gives a random number between 1 and 100. /roll X between 1 and X. /roll X-Y between X and Y." }
-		{ text: "New enchants for cloaks." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Fixed bug where certain quest objectives, like escorting an NPC, wouldn't be triggered for all group members." }	
-		{ text: "Several fixes by sithpl: Spiritual Surge no longer melee range only, Gash Hewitt's Cloak now has armor, and the quest The Best Deal Ever works again." }
-		{ text: "More consistent enchanting reagent icons." }
-		{ text: "Fixed wrong icons on a lot of items." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.3"
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
-		{ text: "Melee enemies can now push less dangerous enemies out of their way to get to their target." }
-		{ text: "Holy Reflection now generates more threat and will also trigger on blocks (thanks sithpl)." }
-		{ text: "Tirnwood Thorns now binds when picked up." }
-		{ text: "Non-boss enemy health levels reduced slightly in Valoris Insurgency, Tower of Indulath, and Tirnwood Thicket." }
-		{ text: "Priests have figured out how to use one-handed maces." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Natural Remedy now works like intended." }	
-		{ text: "Witch talent Improved Drain Life now works like intended." }
-		{ text: "Fixed bug that caused some passive talents and auras to malfunction after logging out." }
-		{ text: "Minions now work in The Shrouded Lands." }
-		{ text: "Fixed missing food buffs, item types and some wrong icons (also thanks sithpl)." }
-		{ text: "The quest Delivery to the City can now be turned in at Mathew's Emporium." }
-		{ text: "Robe of the Soulsplitter is now made of cloth like intended." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.2"
-
-	text: "New:"
-	
-	list:
-	[
-		{ text: "Completed quests show up on the map." }
-		{ text: "Two new enchants for chest armor." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Removed extra spirit stones." }	
-		{ text: "Added missing stashes." }
-		{ text: "Increased the distance you can get from escorted NPC before despawn." }
-		{ text: "Fishing available in all of The Shrouded Lands like intended." }
-		{ text: "Items that increase critical strike chance with spells now work correctly." }
-		{ text: "Fixed some minor bugs." }
-		{ text: "Elite guards in The Shrouded Lands can no longer be pushed around." }
-		{ text: "Some elites can no longer be easily kited far away from their original location." }
-		{ text: "Reagents for certain enchants changed to be more level appropriate." }
-		{ text: "Quest list is now scrollable." }
-	]
-
-	#######################################################################################
-	heading: "v0.2.1"
-
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "Guards in Valoris can now help you find things." }
-	]
-
-	text: "Issues fixed:"
-	
-	list:
-	[
-		{ text: "Herbalism and mining in Thalvaron now works like intended." }	
-		{ text: "Recently added food items no longer consume entire stack when eaten." }
-		{ text: "Fixed bug where you couldn't loot chests while in a party." }
-	]
-	
-	#######################################################################################
-	heading: "v0.2.0"
-
-	text: "New content:"
-
-	list:
-	[
-		{ text: "Level cap raised to 20." }		
-		{ text: "Tons of new quests, zones, dungeons, talents, minions, and a lot more." }
-		{ text: "New professions: enchanting and tailoring." }
-	]	
-	
-	text: "Changes:"
-	
-	list:
-	[
-		{ text: "All talent points have been reset due to talent tree changes." }
-		{ text: "Buffs can be canceled by right clicking." }
-		{ text: "Real-time and historical fight details (damage per second, etc) can be accessed by right clicking in combat log." }
-		{ text: "A new quest tracking interface can be enabled in the quest log." }
-		{ text: "Two new equipment slots for trinkets." }
-	]
-		
-	text: "Issues fixed:"
-		
-	list:		
-	[
-		{ text: "Fixed bug that allowed paladins to spam Divine Shield." }
-		{ text: "Fixed bug where you couldn't use right-click to move items from inventory to stash." }
-	]	
-}
-
 ###################################################################################################################################
 # Hidden
+#changelog_old:
+#{
+#
+#	#######################################################################################
+#	heading: "v0.5.5"
+#
+#	text: "Issues Fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Level 29+ items can now be disenchanted like intended." }
+#		{ text: "Fixed bug where some targeted AOE abilities didn't work." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.5.4"
+#
+#	text: "Issues Fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Blacksmithing trainers now teach the smelting of Cindralite Ore." }
+#		{ text: "Fixed Kareth Desert Tomb names." }
+#		{ text: "Fixed bug where you could learn higher skill profession recipes than intended." } 
+#		{ text: "Profession recipes no longer show wrong skill requirement." } 
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.5.3"
+#
+#	text: "New content:"
+#
+#	list:
+#	[
+#		{ text: "Dungeons: The Devouring Shroud and Karethi Temple." }		
+#		{ text: "Emblems of Triumph can be spent at new shop in the Trade District of Valoris." }
+#	]	
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Lots of sprites have been updated." }
+#		{ text: "Shrines and chests can be found in the new zones." }
+#		{ text: "Zislo and Urgon Lark quest lines continue." }
+#	]
+#	
+#	#######################################################################################
+#	heading: "v0.5.2"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed bug where you'd get teleported out of the new zones." }
+#	] 	
+#
+#	#######################################################################################
+#	heading: "v0.5.1"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Rotfang now drops quest item like intended." }
+#		{ text: "Fixed bug where non-elite Ignivar would be spawned instead of the elite version." }
+#	] 	
+#
+#	#######################################################################################
+#	heading: "v0.5.0"
+#
+#	text: "New content:"
+#
+#	list:
+#	[
+#		{ text: "Level cap raised to 30." }		
+#		{ text: "Zones, talents, crafting recipes, enchants, world drops, quests, and more." }
+#		{ text: "Talk to Ranger Virgil in Tirnwood Vale or Ranger Ursa at Urthon Gate." }		
+#	]	
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Offline mode and custom servers: options for unlimited professions and easy elites." }
+#	]
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Using certain abilities on yourself no longer keeps you in combat." }
+#	] 	
+#
+#	#######################################################################################
+#	heading: "v0.4.2"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed bug where quest items wouldn't respawn correctly." }
+#		{ text: "Piranhas can now be fished in Xandralis like intended." }
+#	] 
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Mistveil and Skaldrun Snappers can now be fished in zones up to level 30." }
+#		{ text: "It's now more likely to catch something when fishing." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.4.1"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed bug where some quest rewards lacked item type." }
+#		{ text: "Fixed bug where some doors wouldn't open the first time." }
+#	] 
+#	
+#	#######################################################################################
+#	heading: "v0.4.0"
+#
+#	text: "New content:"
+#
+#	list:
+#	[
+#		{ text: "Level cap raised to 25." }		
+#		{ text: "Seren Virelith quest line continues." }
+#		{ text: "Head to the Royal Garden Tavern to pick up a quest leading north of Valoris." }
+#		{ text: "Talents, crafting recipes, enchants, world drops, quests, and more." }
+#	]	
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Direct damage and heals from spells and abilities will usually be slightly randomized." }
+#		{ text: "Witch spell Elemental Destruction unlocks at level 10." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed bug where spells and abilities didn't scale enough after level 20." }
+#	]
+#	
+#	#######################################################################################
+#	heading: "v0.3.4"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed crash when dragging equipped item to empty inventory or stash slot." }
+#		{ text: "Fixed bug where Demonic Spawn in Tower of Voraghul would despawn immediately." }
+#		{ text: "Fixed bug where the quest Chasing Voraghul couldn't be completed." }
+#		{ text: "Fixed bug where last tick from damage-over-time and heal-over-time spells didn't resolve." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.3.3"
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "New custom server and offline modes available." }
+#		{ text: "Custom server binaries available in install directory." }
+#		{ text: "Realm modifier: hardcore mode (only available in custom server and offline modes)." }
+#	]
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed item stat budget bug. Most items will have more stats now." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.3.2"
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Angered Temple Spirits can now drop Spirit Dust and Ectoplasm." }
+#		{ text: "Runecore Sentinel achievement now triggers like intended." }
+#		{ text: "Karthul Blackfang now drops Token of Victory like intended." }
+#		{ text: "Bloodied Rope drop from Skaldrak now has correct item type." }
+#		{ text: "Fixed bug where map would be displayed incorrectly in Gateway worlds." }
+#		{ text: "Fixed a couple of crash bugs." }
+#		{ text: "Fixed a bug that allowed equipping binds-on-equip items without binding them." }
+#		{ text: "Fixed a bug that prevented stash UI updating correctly under some circumstances." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.3.1"
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Enemies spawning during Bone Tyrant and Malrik the Undying fights are no longer elite." }
+#	]
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Northern gates of Durgan Urok are now open like intended." }
+#		{ text: "Item tool tip background slightly darker to make it easier to read." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.3.0"
+#
+#	text: "New content:"
+#
+#	list:
+#	[
+#		{ text: "Level cap raised to 22." }		
+#		{ text: "Zones: Skaldrun and Xandralis." }
+#		{ text: "Dungeon: Durgan Urok." }
+#		{ text: "Crafting recipes, enchants, world drops, quests, and more." }
+#	]	
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Blocking now has a base damage reduction of 30%, increased by block value." }
+#		{ text: "Item budget cost of block chance reduced." }
+#	]
+#
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Fixed bug that could prevent quest indicators over NPCs from appearing correctly." }	
+#		{ text: "Fixed bug that could break enchants when dying." }	
+#	]
+#	
+#	#######################################################################################
+#	heading: "v0.2.10"
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Irza and Draethor the Beholder got new abilities." }
+#	]
+#	
+#	text: "Issues fixed:"
+#
+#	list:
+#	[
+#		{ text: "Fixed client crash caused by talents UI." }	
+#		{ text: "Some server stability issues fixed." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.9"
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Possible fix of bug where you'd die right after transfering to another map." }
+#		{ text: "Fixed bug that would happen whenever someone fished." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.8"
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "A server stability issue is being investigated." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.7"
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Increased bonuses from Pickled Toesnapper, Steamed Trout, Seared Bass, Spicy Perch Fillet, and Mistveil Balls." }
+#		{ text: "Cloth (except capes), mail armor, and two-handed weapons can no longer give block value or block chance bonuses." }
+#		{ text: "Two-handed swords, maces, and axes can no longer give caster bonuses." }
+#	]
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Removed extra Spirit Stone from Durgan Tharok." }
+#		{ text: "Fixed some minor bugs." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.6"
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Added option to disable FPS throttling for smoother graphics." }
+#		{ text: "Added option to switch between Direct3D 9, Direct3D 11, and OpenGL rendering." }
+#		{ text: "Opening chests, picking herbs, etc, will now break stealth." }
+#	]
+#	
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "FPS should be higher in general." }
+#		{ text: "Fixed bug where the quest Elderwood Mushrooms would disappear from NPC dialogue." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.5"
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Increased item level of loot from Zyxtharion and Eldros the Evergrowing." }
+#		{ text: "Ferocity can now stack to a maximum of 5." }
+#		{ text: "Ferocity is now a single point talent. All fighters have had their talent points reset." }
+#		{ text: "Bash threat bonus increased from 50% to 100%." }
+#		{ text: "The following buffs and debuffs are now unique per caster: Banner of Command, Poison Bomb, Envenom, Rend, Intervention of Wrath, Cleanse, Creeping Guilt, Condemnation, Blessing, Curse of Corruption, and Soul Leak." }
+#		{ text: "Threat meter can be enabled by right-clicking in combat log." }
+#		{ text: "Crocodiles can now drop Menacing Jaws." }
+#		{ text: "Infected Deer and Infected Boars can now also drop deer and boar items." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Quest rewards from Sheila Urkins now have armor (thanks sithpl)." }
+#		{ text: "Fixed bug that caused dead escort NPCs to take too long to respawn." }
+#		{ text: "Ranks 4 and 5 of Improved Soul Leak and Improved Curse of Corruption should now work like intended." }
+#		{ text: "Having the same enchant on both weapons while dual wielding now works like intended." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.4"
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Escorted NPCs will stop walking while the player is in combat." }
+#		{ text: "New world map (still no scrolling, sorry)." }
+#		{ text: "Intervention of Wrath, Spiritual Surge, Overpower, Elemental Infusion, and Maliciousness are no longer on the global cooldown (thanks sithpl)." }
+#		{ text: "Jewelry can now be disenchanted." }
+#		{ text: "Mounting and dismounting is no longer on the global cooldown." }
+#		{ text: "Dungeon bosses now reset their Token of Victory cooldown at the same time for everyone." }
+#		{ text: "/roll gives a random number between 1 and 100. /roll X between 1 and X. /roll X-Y between X and Y." }
+#		{ text: "New enchants for cloaks." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Fixed bug where certain quest objectives, like escorting an NPC, wouldn't be triggered for all group members." }	
+#		{ text: "Several fixes by sithpl: Spiritual Surge no longer melee range only, Gash Hewitt's Cloak now has armor, and the quest The Best Deal Ever works again." }
+#		{ text: "More consistent enchanting reagent icons." }
+#		{ text: "Fixed wrong icons on a lot of items." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.3"
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Black Beast's Growl ability now increases threat by 100% instead of 50%." }
+#		{ text: "Melee enemies can now push less dangerous enemies out of their way to get to their target." }
+#		{ text: "Holy Reflection now generates more threat and will also trigger on blocks (thanks sithpl)." }
+#		{ text: "Tirnwood Thorns now binds when picked up." }
+#		{ text: "Non-boss enemy health levels reduced slightly in Valoris Insurgency, Tower of Indulath, and Tirnwood Thicket." }
+#		{ text: "Priests have figured out how to use one-handed maces." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Natural Remedy now works like intended." }	
+#		{ text: "Witch talent Improved Drain Life now works like intended." }
+#		{ text: "Fixed bug that caused some passive talents and auras to malfunction after logging out." }
+#		{ text: "Minions now work in The Shrouded Lands." }
+#		{ text: "Fixed missing food buffs, item types and some wrong icons (also thanks sithpl)." }
+#		{ text: "The quest Delivery to the City can now be turned in at Mathew's Emporium." }
+#		{ text: "Robe of the Soulsplitter is now made of cloth like intended." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.2"
+#
+#	text: "New:"
+#	
+#	list:
+#	[
+#		{ text: "Completed quests show up on the map." }
+#		{ text: "Two new enchants for chest armor." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Removed extra spirit stones." }	
+#		{ text: "Added missing stashes." }
+#		{ text: "Increased the distance you can get from escorted NPC before despawn." }
+#		{ text: "Fishing available in all of The Shrouded Lands like intended." }
+#		{ text: "Items that increase critical strike chance with spells now work correctly." }
+#		{ text: "Fixed some minor bugs." }
+#		{ text: "Elite guards in The Shrouded Lands can no longer be pushed around." }
+#		{ text: "Some elites can no longer be easily kited far away from their original location." }
+#		{ text: "Reagents for certain enchants changed to be more level appropriate." }
+#		{ text: "Quest list is now scrollable." }
+#	]
+#
+#	#######################################################################################
+#	heading: "v0.2.1"
+#
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "Guards in Valoris can now help you find things." }
+#	]
+#
+#	text: "Issues fixed:"
+#	
+#	list:
+#	[
+#		{ text: "Herbalism and mining in Thalvaron now works like intended." }	
+#		{ text: "Recently added food items no longer consume entire stack when eaten." }
+#		{ text: "Fixed bug where you couldn't loot chests while in a party." }
+#	]
+#	
+#	#######################################################################################
+#	heading: "v0.2.0"
+#
+#	text: "New content:"
+#
+#	list:
+#	[
+#		{ text: "Level cap raised to 20." }		
+#		{ text: "Tons of new quests, zones, dungeons, talents, minions, and a lot more." }
+#		{ text: "New professions: enchanting and tailoring." }
+#	]	
+#	
+#	text: "Changes:"
+#	
+#	list:
+#	[
+#		{ text: "All talent points have been reset due to talent tree changes." }
+#		{ text: "Buffs can be canceled by right clicking." }
+#		{ text: "Real-time and historical fight details (damage per second, etc) can be accessed by right clicking in combat log." }
+#		{ text: "A new quest tracking interface can be enabled in the quest log." }
+#		{ text: "Two new equipment slots for trinkets." }
+#	]
+#		
+#	text: "Issues fixed:"
+#		
+#	list:		
+#	[
+#		{ text: "Fixed bug that allowed paladins to spam Divine Shield." }
+#		{ text: "Fixed bug where you couldn't use right-click to move items from inventory to stash." }
+#	]	
+#}
 #changelog_old:
 #{
 #
