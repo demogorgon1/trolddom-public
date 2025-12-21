@@ -182,6 +182,7 @@ namespace tpublic::DirectEffects
 		const EntityInstance*		aEntityInstance,
 		const AbilityModifierList*	/*aAbilityModifierList*/,
 		uint32_t					aAbilityId,
+		const IWorldView*			aWorldView,
 		UIntRange&					aOutHeal) const 
 	{
 		float multiplier = 1.0f;
@@ -190,7 +191,7 @@ namespace tpublic::DirectEffects
 		if (abilityModifiers != NULL)
 			multiplier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_HEAL_OUTPUT, aAbilityId, DirectEffect::INVALID_DAMAGE_TYPE, aManifest, aEntityInstance);
 
-		m_function.ToRange(NULL, NULL, multiplier, aEntityInstance, aOutHeal);
+		m_function.ToRange(aManifest, aWorldView, multiplier, aEntityInstance, aOutHeal);
 
 		if (m_spread > 0.0f)
 		{

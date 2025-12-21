@@ -192,10 +192,22 @@ talent sorcerer_arcane_void_blast:
 	]
 }
 
+aura void_blast:
+{
+	string: "Void Blast"
+	description: "Dealing increased arcane damage."
+	icon: icon_special_6
+	flags: [ unique effects_as_charges silent ]
+	type: buff
+	duration: 100
+	max_stack: 10
+	aura_effect damage_output_modifier: { type_mask: [ arcane ] multiplier: 1.05 }
+}
+
 ability void_blast:
 {
 	string: "Void Blast"
-	description: "Deals $damage$ damage to target."	
+	description: "Deals $damage$ damage to target. Increases your arcane damage by 5% for 10 seconds. Stacks up to 8 times."	
 	range: 7
 	cast_time: 20
 	cooldowns: [ global spell_arcane_lockout ]		
@@ -203,15 +215,21 @@ ability void_blast:
 	states: [ default in_combat ]
 	icon: icon_special_6
 	talent_tree: sorcerer_arcane
-	resource_cost mana: 28
+	resource_cost mana: 30
 
 	direct_effect damage:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.2 b: [ [ 1 35 ] [ 10 75 ] [ 20 150 ] [ 30 348 ] ] }	
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 1.2 b: [ [ 1 35 ] [ 10 75 ] [ 20 155 ] [ 30 358 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 	}	
+	
+	direct_effect apply_aura:
+	{
+		flags: [ self ]
+		aura: void_blast
+	}
 }
 
 ###############################################################################
@@ -656,7 +674,7 @@ ability arcane_missile:
 	talent_tree: sorcerer_arcane
 	speed: 9
 	projectile: arcane_missile
-	resource_cost mana: 20
+	resource_cost mana: 22
 	
 	direct_effect damage:
 	{

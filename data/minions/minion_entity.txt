@@ -30,7 +30,7 @@
 			level: @_level
 			creature_type: @_creature_type			
 		}			
-		combat_private<static>:
+		combat_private:
 		{
 			physical_critical_strike_chance: 5
 			dodge_chance: 5

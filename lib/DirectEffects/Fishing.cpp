@@ -187,6 +187,7 @@ namespace tpublic::DirectEffects
 							splashOpenable->m_lootTableId = lootTableId;
 							splashOpenable->m_requiredProfessionSkill = skillRequired;
 							splashOpenable->m_level = level;
+							splashOpenable->m_ownerEntityInstanceId = aSource->GetEntityInstanceId();
 						}
 					}
 				}
