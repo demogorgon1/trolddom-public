@@ -12,7 +12,7 @@ changelog:
 		{ text: "1% spell critical strike chance for every 25 points of Wisdom (30 before)." }
 		{ text: "12 maximum health for every point of Constitution (10 before)." }
 		{ text: "1 Spell Damage and Healing for every 6 points of Wisdom (8 before)." }
-		{ text: "Off-hand weapon attacks are now a separate combat event." }
+		{ text: "Off-hand weapon attacks are now separate combat events." }
 	]
 
 	text: "Paladin:"
