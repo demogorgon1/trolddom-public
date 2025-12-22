@@ -2,7 +2,7 @@ ability witch_attack:
 {
 	string: "Attack"
 	description: "Deals $damage$ damage to target."
-	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon ]	
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon extra_off_hand ]	
 	states: [ default in_combat ]
 	delay: 3
 	icon: icon_fist
@@ -177,7 +177,7 @@ class witch:
 		wis_to_mana: [ 10 1 ]
 		spi_to_mana_regen_per_5_sec: [ 3 2 ]
 		spi_to_health_regen: [ 1 1 ]
-		wis_to_spell_damage: [ 1 8 ]
+		wis_to_spell_damage: [ 1 6 ]
 		str_to_attack_power: [ 2 1 ]
 		dex_to_attack_power: [ 2 1 ]
 		attack_power_to_dps: [ 1 10 ]

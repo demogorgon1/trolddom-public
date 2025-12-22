@@ -69,7 +69,8 @@ namespace tpublic
 								IResourceChangeQueue*			aCombatResultQueue,
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
-								const IWorldView*				aWorldView) override;
+								const IWorldView*				aWorldView,
+								bool							aOffHand) override;
 
 			// Public data
 			std::vector<uint32_t>	m_auraIds;

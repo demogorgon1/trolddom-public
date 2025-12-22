@@ -84,7 +84,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				/*aWorldView*/,
+		bool							/*aOffHand*/)
 	{				
 		aEventQueue->EventQueueLearnProfessionAbility(aTarget->GetEntityInstanceId(), m_professionId, m_abilityId);
 		return Result();	

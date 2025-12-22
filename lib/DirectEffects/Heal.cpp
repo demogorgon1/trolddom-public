@@ -92,7 +92,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				aWorldView) 
+		const IWorldView*				aWorldView,
+		bool							aOffHand) 
 	{
 		const Components::CombatPrivate* sourceCombatPrivate = aSource != NULL ? aSource->GetComponent<Components::CombatPrivate>() : NULL;
 		const Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
@@ -100,7 +101,7 @@ namespace tpublic::DirectEffects
 		if(sourceCombatPrivate == NULL || targetCombatPublic == NULL)
 			return Result();
 
-		float realHeal = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget);
+		float realHeal = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget, aOffHand);
 
 		if (m_spread > 0.0f)
 		{
@@ -191,7 +192,7 @@ namespace tpublic::DirectEffects
 		if (abilityModifiers != NULL)
 			multiplier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_HEAL_OUTPUT, aAbilityId, DirectEffect::INVALID_DAMAGE_TYPE, aManifest, aEntityInstance);
 
-		m_function.ToRange(aManifest, aWorldView, multiplier, aEntityInstance, aOutHeal);
+		m_function.ToRange(aManifest, aWorldView, multiplier, aEntityInstance, false, aOutHeal);
 
 		if (m_spread > 0.0f)
 		{

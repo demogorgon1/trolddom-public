@@ -48,7 +48,8 @@ namespace tpublic
 								IResourceChangeQueue*			aResourceChangeQueue,
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
-								const IWorldView*				aWorldView) override;
+								const IWorldView*				aWorldView,
+								bool							aOffHand) override;
 
 			// Public data
 			Resource::Id	m_resourceId = Resource::INVALID_ID;

@@ -82,7 +82,8 @@ namespace tpublic
 			IResourceChangeQueue*			/*aCombatResultQueue*/,
 			IAuraEventQueue*				/*aAuraEventQueue*/,
 			IEventQueue*					/*aEventQueue*/,
-			const IWorldView*				/*aWorldView*/)
+			const IWorldView*				/*aWorldView*/,
+			bool							/*aOffHand*/)
 		{
 			if(m_consumeSourceItemId != 0 || m_produceSourceItemId != 0)
 			{

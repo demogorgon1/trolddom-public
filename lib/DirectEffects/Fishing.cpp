@@ -61,7 +61,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				aWorldView) 
+		const IWorldView*				aWorldView,
+		bool							/*aOffHand*/)
 	{		
 		const tpublic::Components::Position* position = aTarget->GetComponent<tpublic::Components::Position>();
 		const tpublic::MapData* map = aWorldView->WorldViewGetMapData();

@@ -104,7 +104,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					/*aEventQueue*/,
-		const IWorldView*				aWorldView) 
+		const IWorldView*				aWorldView,
+		bool							aOffHand) 
 	{
 		EntityInstance* target = m_targetSelf ? aSource : aTarget;
 
@@ -123,7 +124,7 @@ namespace tpublic::DirectEffects
 					aSource->GetEntityInstanceId(),
 					target->GetEntityInstanceId(),
 					resourceIndex,
-					(int32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget),
+					(int32_t)m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, 1.0f, aSource, aTarget, aOffHand),
 					0,
 					m_silent,
 					m_direct);

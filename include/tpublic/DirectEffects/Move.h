@@ -98,7 +98,8 @@ namespace tpublic
 								IResourceChangeQueue*			aCombatResultQueue,
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
-								const IWorldView*				aWorldView) override;
+								const IWorldView*				aWorldView,
+								bool							aOffHand) override;
 
 			// Public data
 			Destination						m_destination = INVALID_DESTINATION;			

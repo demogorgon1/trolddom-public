@@ -78,7 +78,8 @@ namespace tpublic
 				EXTENDED_FLAG_CAN_TARGET_EVADING		= 0x00000200,
 				EXTENDED_FLAG_TEMPORARY_MINION_SUMMON	= 0x00000400,
 				EXTENDED_FLAG_CONSUME_ANY_AURA			= 0x00000800,
-				EXTENDED_FLAG_CAN_USE_STUNNED			= 0x00001000
+				EXTENDED_FLAG_CAN_USE_STUNNED			= 0x00001000,
+				EXTENDED_FLAG_EXTRA_OFF_HAND			= 0x00002000
 			};
 
 			static inline Resource::Id
@@ -190,6 +191,8 @@ namespace tpublic
 						*aOutExtendedFlags |= EXTENDED_FLAG_CONSUME_ANY_AURA;
 					else if (strcmp(identifier, "can_use_stunned") == 0 && aOutExtendedFlags != NULL)
 						*aOutExtendedFlags |= EXTENDED_FLAG_CAN_USE_STUNNED;
+					else if (strcmp(identifier, "extra_off_hand") == 0 && aOutExtendedFlags != NULL)
+						*aOutExtendedFlags |= EXTENDED_FLAG_EXTRA_OFF_HAND;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid ability flag.", identifier);
 				});
@@ -507,6 +510,7 @@ namespace tpublic
 			bool CanTargetEvading() const { return m_extendedFlags & EXTENDED_FLAG_CAN_TARGET_EVADING; }
 			bool CanConsumeAnyAura() const { return m_extendedFlags & EXTENDED_FLAG_CONSUME_ANY_AURA; }
 			bool CanUseStunned() const { return m_extendedFlags & EXTENDED_FLAG_CAN_USE_STUNNED; }
+			bool HasExtraOffHand() const { return m_extendedFlags & EXTENDED_FLAG_EXTRA_OFF_HAND; }
 
 			bool 
 			IsUsableInState(

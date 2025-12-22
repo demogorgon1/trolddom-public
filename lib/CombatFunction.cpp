@@ -112,7 +112,8 @@ namespace tpublic
 			const EntityInstance*				aEntityInstance,
 			const Components::CombatPublic*		aCombatPublic,
 			const Components::CombatPrivate*	aCombatPrivate,
-			CombatFunction::Input				aInput)
+			CombatFunction::Input				aInput,
+			bool								aIsOffHandAttack)
 		{
 			switch(aInput)
 			{
@@ -221,7 +222,12 @@ namespace tpublic
 					return (float)_SampleUIntRange(aRandomSource, aCombatPublic->m_overrideWeaponDamageRangeMin, aCombatPublic->m_overrideWeaponDamageRangeMax);
 
 				if(aCombatPrivate != NULL)
-					return (float)_SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax);
+				{
+					if(aIsOffHandAttack)
+						return (float)_SampleUIntRange(aRandomSource, aCombatPrivate->m_offHandDamageRangeMin, aCombatPrivate->m_offHandDamageRangeMax);
+					else
+						return (float)_SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax);
+				}
 				break;
 
 			case CombatFunction::INPUT_WEAPON_AVERAGE:
@@ -229,7 +235,12 @@ namespace tpublic
 					return (float)(aCombatPublic->m_overrideWeaponDamageRangeMin + aCombatPublic->m_overrideWeaponDamageRangeMax) * 0.5f;
 
 				if (aCombatPrivate != NULL)
-					return (float)(aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) * 0.5f; 
+				{
+					if(aIsOffHandAttack)
+						return (float)(aCombatPrivate->m_offHandDamageRangeMin + aCombatPrivate->m_offHandDamageRangeMax) * 0.5f;
+					else
+						return (float)(aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) * 0.5f;
+				}
 				break;
 
 			case CombatFunction::INPUT_RANGED:
@@ -247,7 +258,12 @@ namespace tpublic
 					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPublic->m_overrideWeaponDamageRangeMin, aCombatPublic->m_overrideWeaponDamageRangeMax));
 
 				if(aCombatPrivate != NULL)
-					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax));
+				{
+					if(aIsOffHandAttack)
+						return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPrivate->m_offHandDamageRangeMin, aCombatPrivate->m_offHandDamageRangeMax));
+					else
+						return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, _SampleUIntRange(aRandomSource, aCombatPrivate->m_weaponDamageRangeMin, aCombatPrivate->m_weaponDamageRangeMax));
+				}
 				break;
 
 			case CombatFunction::INPUT_WEAPON_AVERAGE_NORMALIZED:
@@ -255,7 +271,12 @@ namespace tpublic
 					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPublic->m_overrideWeaponDamageRangeMin + aCombatPublic->m_overrideWeaponDamageRangeMax) / 2);
 
 				if (aCombatPrivate != NULL)
-					return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) / 2);
+				{
+					if(aIsOffHandAttack)
+						return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPrivate->m_offHandDamageRangeMin + aCombatPrivate->m_offHandDamageRangeMax) / 2);
+					else
+						return (float)_NormalizeWeaponDamage(aCombatPrivate->m_weaponCooldown, (aCombatPrivate->m_weaponDamageRangeMin + aCombatPrivate->m_weaponDamageRangeMax) / 2);
+				}
 				break;
 
 			default:
@@ -276,7 +297,8 @@ namespace tpublic
 		float								aMultiplier,
 		const EntityInstance*				aEntityInstance,
 		const Components::CombatPublic*		aCombatPublic,
-		const Components::CombatPrivate*	aCombatPrivate) const
+		const Components::CombatPrivate*	aCombatPrivate,
+		bool								aIsOffHandAttack) const
 	{
 		float output = 0.0f;
 
@@ -287,30 +309,30 @@ namespace tpublic
 			break;
 
 		case EXPRESSION_A_MUL_X:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x, aIsOffHandAttack);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + _GetB(aCombatPublic, this);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x, aIsOffHandAttack) + _GetB(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + 
-				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y);
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x, aIsOffHandAttack) +
+				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y, aIsOffHandAttack);
 			break;
 
 		case EXPRESSION_A_MUL_X_PLUS_B_MUL_Y_PLUS_C:
-			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) +
-				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y) +
+			output = _GetA(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x, aIsOffHandAttack) +
+				_GetB(aCombatPublic, this) * _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_y, aIsOffHandAttack) +
 				_GetC(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_X_PLUS_A:
-			output = _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x) + _GetA(aCombatPublic, this);
+			output = _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x, aIsOffHandAttack) + _GetA(aCombatPublic, this);
 			break;
 
 		case EXPRESSION_X:
-			output = _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x);
+			output = _GetInput(aManifest, aWorldView, aRandomSource, aEntityInstance, aCombatPublic, aCombatPrivate, m_x, aIsOffHandAttack);
 			break;
 
 		default:
@@ -351,7 +373,8 @@ namespace tpublic
 		const IWorldView*					aWorldView,
 		CombatFunction::RandomSource		aRandomSource,
 		float								aMultiplier,
-		const EntityInstance*				aEntityInstance) const
+		const EntityInstance*				aEntityInstance,
+		bool								aIsOffHandAttack) const
 	{
 		return Evaluate(
 			aManifest,
@@ -360,7 +383,8 @@ namespace tpublic
 			aMultiplier,
 			aEntityInstance,
 			aEntityInstance->GetComponent<Components::CombatPublic>(),
-			aEntityInstance->GetComponent<Components::CombatPrivate>());
+			aEntityInstance->GetComponent<Components::CombatPrivate>(),
+			aIsOffHandAttack);
 	}
 
 	float		
@@ -370,7 +394,8 @@ namespace tpublic
 		RandomSource						aRandomSource,
 		float								aMultiplier,
 		const EntityInstance*				aSourceEntityInstance,
-		const EntityInstance*				aTargetEntityInstance) const
+		const EntityInstance*				aTargetEntityInstance,
+		bool								aIsOffHandAttack) const
 	{
 		const EntityInstance* entityInstance = NULL;
 		switch(m_entity)
@@ -379,7 +404,7 @@ namespace tpublic
 		case ENTITY_TARGET: entityInstance = aTargetEntityInstance; break;
 		default:			return 0.0f;
 		}
-		return EvaluateEntityInstance(aManifest, aWorldView, aRandomSource, aMultiplier, entityInstance);
+		return EvaluateEntityInstance(aManifest, aWorldView, aRandomSource, aMultiplier, entityInstance, aIsOffHandAttack);
 	}
 
 	void		
@@ -388,10 +413,11 @@ namespace tpublic
 		const IWorldView*					aWorldView,
 		float								aMultiplier,
 		const EntityInstance*				aEntityInstance,
+		bool								aIsOffHandAttack,
 		UIntRange&							aOut) const
 	{
-		aOut.m_min = (uint32_t)EvaluateEntityInstance(aManifest, aWorldView, RandomSource(RandomSource::TYPE_MIN), aMultiplier, aEntityInstance);
-		aOut.m_max = (uint32_t)EvaluateEntityInstance(aManifest, aWorldView, RandomSource(RandomSource::TYPE_MAX), aMultiplier, aEntityInstance);
+		aOut.m_min = (uint32_t)EvaluateEntityInstance(aManifest, aWorldView, RandomSource(RandomSource::TYPE_MIN), aMultiplier, aEntityInstance, aIsOffHandAttack);
+		aOut.m_max = (uint32_t)EvaluateEntityInstance(aManifest, aWorldView, RandomSource(RandomSource::TYPE_MAX), aMultiplier, aEntityInstance, aIsOffHandAttack);
 	}
 
 }
