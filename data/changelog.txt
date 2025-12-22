@@ -73,6 +73,7 @@ changelog:
 		{ text: "Server stability improved." }
 		{ text: "Fixed bug that prevented demo players from entering some maps." }
 		{ text: "You can no longer steal fish from other players." }
+		{ text: "Chests in heroic difficulty dungeons now has max level loot. For real this time." }
 	]
 	
 	#######################################################################################
