@@ -36,7 +36,7 @@ changelog:
 	list:
 	[
 		{ text: "Increased damage bonus from Improved Spiritual Crisis." }
-		{ text: "Spiritual Crisis, Smite, Creeping Guilt, and Condemnation deal more damage." }	
+		{ text: "Spiritual Crisis, Smite, Creeping Guilt, Dragon Crush, and Condemnation deal more damage." }	
 		{ text: "Eternal Shine increases stats by 4% instead of 2%." }
 		{ text: "New ability Counterkick unlocked by talent." }
 		{ text: "Dragon Breath now instant damage to target and damage-over-time to nearby enemies." }
