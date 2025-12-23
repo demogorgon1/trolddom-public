@@ -21500,6 +21500,9 @@ ability npc_frostbolt_2 34497
 ability npc_curse_stacking_tick 34498
 ability npc_curse_stacking 34499
 ability _aura__ability_npc_fireball_2_direct_effect_apply_aura_aura_aura_effect_repeat_ability 34500
+ability priest_dragon_counterkick 34501
+ability _aura_priest_dragon_counterkick_aura_effect_combat_event_trigger_ability 34502
+ability dragon_breath_damage_over_time_tick 34503
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -24837,6 +24840,7 @@ talent witch_malice_pain_and_suffering 177
 talent witch_extinguish 178
 talent paladin_sanctified_might 179
 talent sorcerer_battle_mage_shielded_by_strength 180
+talent priest_dragon_counterkick 181
 talent_tree fighter_protection 1
 talent_tree fighter_subtlety 2
 talent_tree fighter_combat 3
@@ -30680,6 +30684,8 @@ sprite gnome_3 5937
 sprite gnome_3_dead 5938
 sprite icon_valoris_insurgency_heroic 5939
 sprite __unnamed_859__ 5940
+sprite icon_kick_2 5941
+sprite __unnamed_860__ 5942
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -65500,7 +65506,6 @@ aura spiritual_crisis_3 4593
 aura improved_inner_peace_1 4594
 aura improved_inner_peace_2 4595
 aura improved_inner_peace_3 4596
-aura _ability_dragon_breath_tick_direct_effect_apply_aura_aura 4598
 aura sorcerer_battle_mage_staff_mastery_1 4599
 aura sorcerer_battle_mage_staff_mastery_2 4600
 aura sorcerer_battle_mage_staff_mastery_3 4601
@@ -65628,6 +65633,10 @@ aura improved_power_shield_3_strength 4734
 aura improved_power_shield_4_strength 4735
 aura improved_power_shield_5_strength 4736
 aura power_shield_strength 4737
+aura priest_dragon_counterkick 4738
+aura priest_dragon_counterkick_trigger 4739
+aura dragon_breath_damage_over_time 4740
+aura dragon_breath_knockout 4741
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -68928,6 +68937,8 @@ cooldown _ability_npc_drain_life_cooldown 212
 cooldown npc_fireball_2 213
 cooldown npc_curse_stacking 214
 cooldown _ability_npc_frostbolt_2_cooldown 215
+cooldown _ability_dragon_breath_cooldown 216
+cooldown _ability_priest_dragon_counterkick_cooldown 217
 sound fantastic_a 1
 sound button_1 2
 sound switch_1 3

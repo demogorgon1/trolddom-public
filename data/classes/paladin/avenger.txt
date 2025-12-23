@@ -60,7 +60,7 @@ ability vindicate_trigger:
 	direct_effect damage: 
 	{
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.4 b: [ [ 1 50 ] [ 10 100 ] [ 20 210 ] [ 30 320 ] ] }					
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.45 b: [ [ 1 50 ] [ 10 100 ] [ 20 210 ] [ 30 320 ] ] }					
 		flags: [ is_magical can_be_critical ]
 		spread: !DEFAULT_SPREAD{}	
 	}
@@ -103,7 +103,7 @@ ability vindicate:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_vindicate
-	resource_cost mana: 8
+	resource_cost mana: 7
 	delay: 3
 	talent_tree: paladin_avenger
 	
@@ -302,7 +302,7 @@ ability intervention_of_wrath:
 	states: [ default in_combat ]
 	icon: icon_special_1
 	delay: 3
-	resource_cost mana: 20
+	resource_cost mana: 10
 	talent_tree: paladin_avenger
 	
 	direct_effect apply_aura:
@@ -374,7 +374,7 @@ ability piercing_strike:
 	states: [ default in_combat ]
 	icon: icon_special_2
 	delay: 3
-	resource_cost mana: 12
+	resource_cost mana: 8
 	talent_tree: paladin_avenger
 	melee_particle_system: piercing_strike	
 	
@@ -425,7 +425,7 @@ ability exorcism:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_exorcism
-	resource_cost mana: 11
+	resource_cost mana: 8
 	target_particle_system: exorcism
 	delay: 3
 	talent_tree: paladin_avenger
@@ -470,7 +470,7 @@ ability divine_smite:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_divine_smite
-	resource_cost mana: 11
+	resource_cost mana: 8
 	target_particle_system: divine_smite
 	delay: 3
 	talent_tree: paladin_avenger
@@ -876,7 +876,7 @@ ability holy_storm:
 	aoe_radius: 1
 	aoe_cap: 3
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost mana: 12
+	resource_cost mana: 8
 	talent_tree: paladin_avenger
 	source_particle_system: holy_storm
 
@@ -934,7 +934,7 @@ ability reckoning:
 	states: [ default in_combat ]
 	icon: icon_reckoning
 	delay: 3
-	resource_cost mana: 8
+	resource_cost mana: 5
 	talent_tree: paladin_avenger
 	melee_particle_system: reckoning
 	

@@ -13,6 +13,7 @@ changelog:
 		{ text: "12 maximum health for every point of Constitution (10 before)." }
 		{ text: "1 Spell Damage and Healing for every 6 points of Wisdom (8 before)." }
 		{ text: "Off-hand weapon attacks are now separate combat events." }
+		{ text: "Haste has diminishing returns after around 50%." }
 	]
 
 	text: "Paladin:"
@@ -25,7 +26,7 @@ changelog:
 		{ text: "Holy Storm does additional damage and has reduced mana cost." }
 		{ text: "Reckoning now deals Holy damage, has increased bonus damage, and applies a stacking debuff that increases Holy damage taken." }
 		{ text: "Bonus threat from Holy Reflection increased greatly." }
-		{ text: "Oat of Protection threat bonus increased from 150% to 200%." }
+		{ text: "Oath of Protection threat bonus increased from 150% to 200%." }
 		{ text: "Increased damage and threat bonus of Consecrate." }
 		{ text: "Guardian Angel now scales with Healing." }
 	]
@@ -35,8 +36,10 @@ changelog:
 	list:
 	[
 		{ text: "Increased damage bonus from Improved Spiritual Crisis." }
-		{ text: "Spiritual Crisis, Smite, Creeping Guilt, and Condemnation deal more damage." }
+		{ text: "Spiritual Crisis, Smite, Creeping Guilt, and Condemnation deal more damage." }	
 		{ text: "Eternal Shine increases stats by 4% instead of 2%." }
+		{ text: "New ability Counterkick unlocked by talent." }
+		{ text: "Dragon Breath now instant damage to target and damage-over-time to nearby enemies." }
 	]
 	
    	text: "Sorcerer:"
@@ -66,6 +69,7 @@ changelog:
 		{ text: "Heal Demon now scales off Spell Damage instead of Healing." }
 		{ text: "Increased mana cost of Witch Bolt and Curse of Corruption." }
 		{ text: "All demon and undead minion attacks and spells now scale off Spell Damage." }
+		{ text: "Cooldown of Pain and Suffering reduced by 1 second." }
 	]		
 
 	text: "Issues Fixed:"
@@ -76,6 +80,13 @@ changelog:
 		{ text: "Fixed bug that prevented demo players from entering some maps." }
 		{ text: "You can no longer steal fish from other players." }
 		{ text: "Chests in heroic difficulty dungeons now has max level loot. For real this time." }
+	]
+	
+	text: "Other Changes:"
+	
+	list:
+	[
+		{ text: "Target Dummies are level 30 instead of level 1. Note that this affects physical damage taken due to armor." }
 	]
 	
 	#######################################################################################

@@ -61,7 +61,7 @@ ability witch_pain_and_suffering:
 	description: "Deals $damage$ damage to target enemy afflicted by Curse of Corruption and refreshes it to its full duration."
 	range: 8
 	cooldowns: [ global spell_unholy_lockout ]
-	cooldown: $cooldown { duration: 80 }
+	cooldown: $cooldown { duration: 70 }
 	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
 	states: [ default in_combat ]
 	icon: icon_pain_and_suffering

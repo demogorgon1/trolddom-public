@@ -17,6 +17,7 @@ talent_tree priest_dragon:
 		talent priest_dragon_crush: "I"
 		talent priest_dragon_knockout: "J"
 		talent priest_dragon_swiftstrike: "K"
+		talent priest_dragon_counterkick: "L"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_right_arrow: "r"
@@ -25,17 +26,92 @@ talent_tree priest_dragon:
 	
 	map:
 	[
-		"..A.B.."
-		"..d...."
-		"D.C.ErF"
-		"..|.d.."
-		"H.|.GrJ"
-		"d.|...."
-		"I.|...."
-		"..d...."
-		"..K...."
+		"..A.B...."
+		"..d......"
+		"D.C.ErFrL"
+		"..|.d...."
+		"H.|.GrJ.."
+		"d.|......"
+		"I.|......"
+		"..d......"
+		"..K......"
 	]
 	
+}
+
+###############################################################################
+# Counterkick
+
+talent priest_dragon_counterkick:
+{
+	string: "Counterkick"
+	icon: icon_kick_2
+	prerequisites: [ priest_dragon_fury ]
+	talent_tree_points_required: 5
+	points:
+	[
+		{ aura: priest_dragon_counterkick ability: priest_dragon_counterkick }
+	]
+}
+
+aura priest_dragon_counterkick:
+{
+	flags: [ persist_in_death ]	
+	type: hidden
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event_ability_mask: [ melee ]
+		combat_event<source>: [ dodge parry ]
+		ability<target>: $ability
+		{
+			flags: [ always_in_range always_in_line_of_sight target_hostile target_other ]
+			states: [ default in_combat ]
+			icon: icon_kick_2
+			delay: 2				
+			direct_effect apply_aura:
+			{
+				aura: $aura @priest_dragon_counterkick_trigger
+				{
+					string: "Exposed"
+					description: "Dodged or parried one of your attacks."
+					icon: icon_kick_2
+					flags: [ ]
+					type: debuff
+					duration: 40
+				}
+			}		
+		}
+	}
+}
+
+ability priest_dragon_counterkick:
+{
+	string: "Counterkick"
+	description: "Deals $damage$ to target. Can only be used after an enemy dodges or parries one of your attacks. Can't be dodged or parried."
+	range: 1	
+	flags: [ melee offensive target_other target_hostile can_miss ]
+	states: [ default in_combat ]
+	cooldown: $cooldown { duration: 20 }
+	icon: icon_kick_2
+	delay: 2
+	resource_cost mana: 15
+	talent_tree: priest_dragon
+	melee_particle_system: dragon_crush
+	
+	requirement target<must_have_aura>: priest_dragon_counterkick_trigger	
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.98 b: [ [ 1 40 ] [ 10 82 ] [ 20 160 ] [ 30 280 ] ] }		
+		spread: !DEFAULT_SPREAD{}		
+	}		
+	
+	direct_effect remove_aura:
+	{
+		aura: priest_dragon_counterkick_trigger
+	}
 }
 
 ###############################################################################
@@ -200,7 +276,7 @@ ability dragon_crush:
 	{
 		flags: [ can_be_critical ]
 		damage_type: fire
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.88 b: [ [ 1 26 ] [ 10 52 ] [ 20 104 ] [ 30 171 ] ] }		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.98 b: [ [ 1 28 ] [ 10 56 ] [ 20 112 ] [ 30 191 ] ] }		
 		spread: !DEFAULT_SPREAD{}		
 	}		
 	
@@ -228,21 +304,45 @@ talent priest_dragon_breath:
 ability dragon_breath:
 {
 	string: "Dragon Breath"
-	description: "Deals damage to nearby enemies over 4 seconds."
-	range: 2	
+	description: "Deals $damage$ damage to target and sets surrounding enemies on fire."
+	range: 1	
 	cooldowns: [ global spell_fire_lockout ]
+	cooldown: $cooldown { duration: 120 }
 	flags: [ spell offensive target_other target_hostile ]
 	states: [ default in_combat ]
 	icon: icon_dragon_breath
 	delay: 3
 	resource_cost mana: 20
 	talent_tree: priest_dragon
-	cast_time: 20
+	
+	direct_effect damage:
+	{	
+		damage_type: fire		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.8 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
+		flags: [ is_magical ]
+		spread: !DEFAULT_SPREAD{}		
+	}	
 	
 	direct_effect apply_aura:
 	{
 		aura: dragon_breath
 	}
+}
+
+ability dragon_breath_damage_over_time_tick:
+{
+	string: "Dragon Breath"
+	icon: icon_dragon_breath		
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{	
+		damage_type: fire		
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.3 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
+		flags: [ is_magical ]
+		spread: !DEFAULT_SPREAD{}		
+	}		
 }
 
 ability dragon_breath_tick:
@@ -251,21 +351,32 @@ ability dragon_breath_tick:
 	icon: icon_dragon_breath		
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight target_aoe target_aoe_hostile ]
-	aoe_cap: 4
-	aoe_radius: 2
-		
-	direct_effect damage:
-	{	
-		damage_type: fire		
-		function: { expression: a_mul_x_plus_b x: attack_power a: 0.4 b: [ [ 1 10 ] [ 10 20 ] [ 20 40 ] [ 30 66 ] ] }		
-		flags: [ is_magical ]
-		spread: !DEFAULT_SPREAD{}		
-	}	
+	aoe_cap: 3
+	aoe_radius: 1	
+
+	direct_effect apply_aura:
+	{
+		aura: $aura @dragon_breath_damage_over_time
+		{
+			string: "Dragon Breath"
+			icon: icon_dragon_breath		
+			type: debuff
+			duration: based_on_effects
+			flags: [ unique silent magic ]
+			particle_system: burning
+			aura_effect repeat: 
+			{ 
+				update_interval: 15
+				update_count: 6
+				ability: dragon_breath_damage_over_time_tick			
+			}			
+		}
+	}
 
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: priest_dragon_knockout
-		aura: $aura 
+		aura: $aura @dragon_breath_knockout
 		{
 			string: "Knockout"
 			description: "Reduced movement speed."
@@ -285,13 +396,13 @@ aura dragon_breath:
 {
 	string: "Dragon Breath"
 	icon: icon_dragon_breath		
-	type: debuff
+	type: hidden
 	duration: based_on_effects
-	flags: [ unique channeled ]
+	flags: [ unique silent ]
 	aura_effect repeat: 
 	{ 
-		update_interval: 10
-		update_count: 4
+		update_interval: 0
+		update_count: 1
 		ability: dragon_breath_tick				
 	}		
 }
