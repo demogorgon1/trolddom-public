@@ -170,6 +170,8 @@ namespace tpublic
 				Sprite* sprite = _CreateSprite(aNode, aNode->m_name.c_str(), width * height);
 				sourceImage.Extract(offsetX, offsetY, width, height, sprite->m_image);		
 
+				m_sizeStats[Vec2((int32_t)width, (int32_t)height)]++;
+
 				sprite->m_info.m_averageColor = sprite->m_image.GetAverageColor();
 
 				if(sourceOverlayImage.HasData())

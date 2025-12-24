@@ -16,6 +16,7 @@ ability potion:
 item potion:
 {
 	stack: 10	
+	type: consumable
 }
 
 ability healing_potion (potion):
@@ -35,7 +36,7 @@ ability mana_potion (potion):
 }
  
 item mana_potion (potion):
-{
+{	
 	loot_groups: [ world_drops_consumable ]
 }
 
@@ -50,6 +51,7 @@ ability elixir:
 item elixir:
 {
 	stack: 10
+	type: consumable
 }
 
 aura elixir:

@@ -80,6 +80,7 @@ changelog:
 		{ text: "Fixed bug that prevented demo players from entering some maps." }
 		{ text: "You can no longer steal fish from other players." }
 		{ text: "Chests in heroic difficulty dungeons now has max level loot. For real this time." }
+		{ text: "Sorting by level in /who results and guild member list works correctly." }
 	]
 	
 	text: "Other Changes:"
@@ -87,6 +88,7 @@ changelog:
 	list:
 	[
 		{ text: "Target Dummies are level 30 instead of level 1. Note that this affects physical damage taken due to armor." }
+		{ text: "Potions and elixirs are now classified as consumables on the auction house." }
 	]
 	
 	#######################################################################################
