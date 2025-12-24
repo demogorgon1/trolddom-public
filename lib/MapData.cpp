@@ -3,6 +3,7 @@
 #include <tpublic/Data/CliffStyle.h>
 #include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/MapCliff.h>
+#include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Wall.h>
@@ -431,6 +432,28 @@ namespace tpublic
 				{
 					m_doodads[aTile.m_position] = aTile.m_spriteId;
 				});
+			}
+
+			{
+				DebugPrintTimer debugPrintTimer("points of interest");
+
+				for(const EntitySpawn& entitySpawn : m_entitySpawns)
+				{
+					if(entitySpawn.m_mapEntitySpawnId != 0)
+					{
+						const Data::MapEntitySpawn* mapEntitySpawn = aManifest->GetById<Data::MapEntitySpawn>(entitySpawn.m_mapEntitySpawnId);
+						if(mapEntitySpawn->m_pointOfInterest)
+						{
+							PointOfInterest t;
+							t.m_type = POINT_OF_INTEREST_TYPE_GENERIC;
+							t.m_mapEntitySpawnId = entitySpawn.m_mapEntitySpawnId;							
+							if(mapEntitySpawn->m_entities.size() == 1)
+								t.m_entityId = mapEntitySpawn->m_entities[0]->m_entityId;
+							t.m_position = { entitySpawn.m_x, entitySpawn.m_y };
+							m_pointsOfInterest.push_back(t);
+						}
+					}
+				}
 			}
 
 			m_built = true;

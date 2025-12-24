@@ -1,6 +1,8 @@
 #include "Pcheader.h"
 
+#include <tpublic/Data/Entity.h>
 #include <tpublic/Data/Map.h>
+#include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/Tag.h>
 
 #include <tpublic/AbilityMetrics.h>
@@ -320,6 +322,72 @@ namespace tpublic
 			std::string path = aDataOutputPath;
 			path += "/manifest.json";
 			jsonManifest.Export(path.c_str());
+		}
+
+		// Export JSON map data
+		{
+			DebugPrintTimer timer("export json map data");
+
+			std::string basePath = aDataOutputPath;
+			basePath += "/json-map-data";
+
+			{
+				std::error_code ec;
+				std::filesystem::create_directory(basePath, ec);
+			}
+
+			m_manifest->GetContainer<tpublic::Data::Map>()->ForEach([&](
+				Data::Map* aMap)
+			{	
+				if(aMap->m_data->m_pointsOfInterest.size() > 0)
+				{
+					std::string path = Helpers::Format("%s/map-%s.json", basePath.c_str(), aMap->m_name.c_str());
+					FileWriter f(path.c_str());
+
+					f.PrintF("{\r\n");
+					f.PrintF("\t\"map_x_size\": %d,\r\n", aMap->m_data->m_width);
+					f.PrintF("\t\"map_y_size\": %d,\r\n", aMap->m_data->m_height);
+					f.PrintF("\t\"points_of_interest\":\r\n\t[");
+
+					bool isFirst = true;
+
+					for(const MapData::PointOfInterest& t : aMap->m_data->m_pointsOfInterest)
+					{
+						if(t.m_type == MapData::POINT_OF_INTEREST_TYPE_GENERIC)
+						{
+							const Data::MapEntitySpawn* mapEntitySpawn = t.m_mapEntitySpawnId != 0 ? m_manifest->GetById<Data::MapEntitySpawn>(t.m_mapEntitySpawnId) : 0;
+							const Data::Entity* entity = t.m_entityId != 0 ? m_manifest->GetById<Data::Entity>(t.m_entityId) : 0;
+
+							f.PrintF("%s\t\t{", isFirst ? "\r\n" : ",\r\n");
+
+							std::vector<std::pair<std::string, std::string>> items;
+
+							items.push_back({ "x", Helpers::Format("%d", t.m_position.m_x) });
+							items.push_back({ "y", Helpers::Format("%d", t.m_position.m_y) });
+
+							if (entity != NULL)
+								items.push_back({ "entity", entity->m_name });
+							
+							if(mapEntitySpawn != NULL)
+								items.push_back({ "map_entity_spawn", mapEntitySpawn->m_name });
+
+							for(size_t i = 0; i < items.size(); i++)
+							{
+								const std::pair<std::string, std::string>& item = items[i];
+								f.PrintF(" \"%s\": \"%s\"%s", item.first.c_str(), item.second.c_str(), i + 1 < items.size() ? "," : "");
+							}
+
+							f.PrintF(" }");
+
+							isFirst = false;
+						}
+					}
+
+					f.PrintF("\r\n\t]\r\n");
+					f.PrintF("}\r\n");
+				}				
+				return true;
+			});		
 		}
 
 		// Export manifest 
