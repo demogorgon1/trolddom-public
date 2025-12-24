@@ -81,6 +81,7 @@ changelog:
 		{ text: "You can no longer steal fish from other players." }
 		{ text: "Chests in heroic difficulty dungeons now has max level loot. For real this time." }
 		{ text: "Sorting by level in /who results and guild member list works correctly." }
+		{ text: "Fixed bug that could cause you to be in combat after respawning." }
 	]
 	
 	text: "Other Changes:"
