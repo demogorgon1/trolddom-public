@@ -432,6 +432,10 @@ namespace tpublic
 						{
 							m_debugColor = Image::RGBA(aChild);
 						}
+						else if (aChild->m_name == "point_of_interest")
+						{
+							m_pointOfInterest = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "Invalid 'map_entity_spawn' item.");
@@ -447,6 +451,7 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_entities);
 				m_spawnTimer.ToStream(aStream);
 				aStream->WriteOptionalPOD(m_debugColor);
+				aStream->WriteBool(m_pointOfInterest);
 			}
 
 			bool
@@ -459,6 +464,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalPOD(m_debugColor))
 					return false;
+				if(!aStream->ReadBool(m_pointOfInterest))
+					return false;
 				return true;
 			}
 
@@ -467,6 +474,7 @@ namespace tpublic
 			int32_t																	m_minSpawnDelayTicks = 5 * 10; // 5 seconds
 			SpawnTimer																m_spawnTimer;
 			std::optional<Image::RGBA>												m_debugColor;
+			bool																	m_pointOfInterest = false;
 		};
 
 	}

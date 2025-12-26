@@ -92,7 +92,8 @@ namespace tpublic
 			IResourceChangeQueue*			/*aCombatResultQueue*/,
 			IAuraEventQueue*				/*aAuraEventQueue*/,
 			IEventQueue*					aEventQueue,
-			const IWorldView*				aWorldView)
+			const IWorldView*				aWorldView,
+			bool							/*aOffHand*/)
 		{
 			if(m_moveFlags & MOVE_FLAG_AFFECT_TARGET)
 				aSource = aTarget;

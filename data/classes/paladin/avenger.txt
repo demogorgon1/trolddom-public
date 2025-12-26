@@ -60,7 +60,7 @@ ability vindicate_trigger:
 	direct_effect damage: 
 	{
 		damage_type: holy
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 1 b: [ [ 1 50 ] [ 10 100 ] [ 20 200 ] [ 30 300 ] ] }					
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.45 b: [ [ 1 50 ] [ 10 100 ] [ 20 210 ] [ 30 320 ] ] }					
 		flags: [ is_magical can_be_critical ]
 		spread: !DEFAULT_SPREAD{}	
 	}
@@ -103,7 +103,7 @@ ability vindicate:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_vindicate
-	resource_cost mana: 12
+	resource_cost mana: 7
 	delay: 3
 	talent_tree: paladin_avenger
 	
@@ -302,7 +302,7 @@ ability intervention_of_wrath:
 	states: [ default in_combat ]
 	icon: icon_special_1
 	delay: 3
-	resource_cost mana: 20
+	resource_cost mana: 10
 	talent_tree: paladin_avenger
 	
 	direct_effect apply_aura:
@@ -374,7 +374,7 @@ ability piercing_strike:
 	states: [ default in_combat ]
 	icon: icon_special_2
 	delay: 3
-	resource_cost mana: 15
+	resource_cost mana: 8
 	talent_tree: paladin_avenger
 	melee_particle_system: piercing_strike	
 	
@@ -425,7 +425,7 @@ ability exorcism:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_exorcism
-	resource_cost mana: 12
+	resource_cost mana: 8
 	target_particle_system: exorcism
 	delay: 3
 	talent_tree: paladin_avenger
@@ -470,7 +470,7 @@ ability divine_smite:
 	flags: [ spell offensive target_other target_hostile interruptable ]
 	states: [ default in_combat ]
 	icon: icon_divine_smite
-	resource_cost mana: 12
+	resource_cost mana: 8
 	target_particle_system: divine_smite
 	delay: 3
 	talent_tree: paladin_avenger
@@ -479,7 +479,7 @@ ability divine_smite:
 	{	
 		damage_type: holy
 		flags: [ can_be_critical is_magical ]
-		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 23 ] [ 10 36 ] [ 20 72 ] [ 30 118 ] ] }			
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.7 b: [ [ 1 34 ] [ 10 54 ] [ 20 108 ] [ 30 177 ] ] }			
 		spread: !DEFAULT_SPREAD{}
 	}		
 }
@@ -876,7 +876,7 @@ ability holy_storm:
 	aoe_radius: 1
 	aoe_cap: 3
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
-	resource_cost mana: 20
+	resource_cost mana: 8
 	talent_tree: paladin_avenger
 	source_particle_system: holy_storm
 
@@ -884,7 +884,7 @@ ability holy_storm:
 	{
 		flags: [ can_be_critical ]
 		damage_type: holy
-		function: { expression: x x: weapon_normalized }		
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 10 ] [ 10 18 ] [ 20 30 ] [ 30 58 ] ] }		
 		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
 		resolve_cancel_aura: paladin_holy_assault		
 	}
@@ -912,27 +912,44 @@ particle_system reckoning:
 	}
 }
 
+aura reckoning:
+{
+	string: "Reckoning"
+	description: "Taking increased holy damage."
+	icon: icon_reckoning
+	flags: [ unique effects_as_charges silent ]
+	type: debuff
+	duration: 100
+	max_stack: 5
+	aura_effect damage_input_modifier: { type_mask: [ holy ] multiplier: 1.06 }
+}
+
 ability reckoning:
 {
 	string: "Reckoning"
-	description: "Deals $damage$ damage to target."
+	description: "Deals $damage$ damage to target. Causes target to take increased holy damage."
 	range: 1	
 	cooldowns: [ global reckoning ]
 	flags: [ spell melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_reckoning
 	delay: 3
-	resource_cost mana: 15
+	resource_cost mana: 5
 	talent_tree: paladin_avenger
 	melee_particle_system: reckoning
 	
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
-		damage_type: physical
-		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 20 ] [ 10 32 ] [ 20 48 ] [ 30 79 ] ] }
+		damage_type: holy
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 21 ] [ 10 36 ] [ 20 60 ] [ 30 118 ] ] }
 		aura_conditional_critical_chance_bonus<paladin_holy_assault>: 100
 		resolve_cancel_aura: paladin_holy_assault		
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: reckoning
 	}
 	
 	direct_effect apply_aura: !PALADIN_AVENGER_APPLY_INTERVENTION_OF_WRATH_DEBUFF{}

@@ -62,7 +62,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				/*aWorldView*/,
+		bool							/*aOffHand*/)
 	{				
 		const Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 		if(targetCombatPublic->m_castInProgress.has_value())

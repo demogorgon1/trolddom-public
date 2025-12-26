@@ -44,6 +44,7 @@ namespace tpublic
 		m_details = aWorldInfoMap->m_details;
 		m_topLevelCells = aWorldInfoMap->m_topLevelCells;
 		m_topLevelCellsSize = aWorldInfoMap->m_topLevelCellsSize;
+		m_setFlags = aWorldInfoMap->m_setFlags;
 		
 		for(ZoneOutlineTable::const_iterator i = aWorldInfoMap->m_zoneOutlineTable.cbegin(); i != aWorldInfoMap->m_zoneOutlineTable.cend(); i++)
 		{
@@ -111,7 +112,11 @@ namespace tpublic
 								detailsEntry->m_subZoneId = aSubZoneMap[j + i * aWidth];
 
 							if (aFlagsMap != NULL)
+							{
 								detailsEntry->m_flags = aFlagsMap[j + i * aWidth];
+
+								m_setFlags |= detailsEntry->m_flags;
+							}
 
 							if (topLevelCellEntry.has_value())
 							{
@@ -241,6 +246,8 @@ namespace tpublic
 			aWriter->WriteUInt(i->first);
 			i->second->ToStream(aWriter);
 		}
+
+		aWriter->WritePOD(m_setFlags);
 	}
 	
 	bool			
@@ -294,7 +301,17 @@ namespace tpublic
 			}
 		}
 
+		if(!aReader->ReadPOD(m_setFlags))
+			return false;
+
 		return true;
+	}
+
+	bool					
+	WorldInfoMap::CheckAnyFlags(
+		uint8_t				aFlags) const
+	{
+		return (m_setFlags & aFlags) != 0;
 	}
 
 	//--------------------------------------------------------------------------

@@ -152,6 +152,8 @@ namespace tpublic
 									IWriter*			aWriter) const;
 		bool					FromStream(
 									IReader*			aReader);
+		bool					CheckAnyFlags(
+									uint8_t				aFlags) const;
 	
 	private:
 
@@ -234,6 +236,8 @@ namespace tpublic
 		Vec2						m_topLevelCellsSize;
 
 		Entry						m_blankEntry;
+
+		uint8_t						m_setFlags = 0;
 
 		typedef std::unordered_map<uint32_t, std::unique_ptr<ZoneOutline>> ZoneOutlineTable;
 		ZoneOutlineTable			m_zoneOutlineTable;

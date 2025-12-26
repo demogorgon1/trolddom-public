@@ -90,7 +90,8 @@ namespace tpublic
 			IResourceChangeQueue*			/*aCombatResultQueue*/,
 			IAuraEventQueue*				/*aAuraEventQueue*/,
 			IEventQueue*					/*aEventQueue*/,
-			const IWorldView*				/*aWorldView*/)
+			const IWorldView*				/*aWorldView*/,
+			bool							/*aOffHand*/)
 		{
 			EntityInstance* target = m_targetSelf ? aSource : aTarget;
 			Components::Auras* targetAuras = target != NULL ? target->GetComponent<Components::Auras>() : NULL;

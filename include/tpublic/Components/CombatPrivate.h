@@ -53,7 +53,9 @@ namespace tpublic
 				FIELD_PRIVATE_FLAGS,
 				FIELD_ATTACK_POWER,
 				FIELD_RESOURCE_COST_MULTIPLIER,
-				FIELD_RESILIENCE
+				FIELD_RESILIENCE,
+				fIELD_OFFHAND_DAMAGE_RANGE_MIN,
+				fIELD_OFFHAND_DAMAGE_RANGE_MAX
 			};
 
 			static void
@@ -87,6 +89,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ATTACK_POWER, "attack_power", offsetof(CombatPrivate, m_attackPower));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_RESOURCE_COST_MULTIPLIER, "resource_cost_multiplier", offsetof(CombatPrivate, m_resourceCostMultiplier));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_RESILIENCE, "resilience", offsetof(CombatPrivate, m_resilience));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, fIELD_OFFHAND_DAMAGE_RANGE_MIN, "weapon_damage_range_min", offsetof(CombatPrivate, m_offHandDamageRangeMin));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, fIELD_OFFHAND_DAMAGE_RANGE_MAX, "weapon_damage_range_max", offsetof(CombatPrivate, m_offHandDamageRangeMax));
 
 				aSchema->AddSourceModifier<CombatPrivate>("immune_to_stun", [](
 					CombatPrivate*		aCombatPrivate,
@@ -147,6 +151,8 @@ namespace tpublic
 				m_attackPower = 0;
 				m_resourceCostMultiplier = 1.0f;
 				m_resilience = 0.0f;
+				m_offHandDamageRangeMin = 0;
+				m_offHandDamageRangeMax = 0;
 
 				m_easyElite = false;
 			}
@@ -186,6 +192,8 @@ namespace tpublic
 			uint8_t								m_privateFlags = 0;
 			float								m_resourceCostMultiplier = 1.0f;
 			float								m_resilience = 0.0f;
+			uint32_t							m_offHandDamageRangeMin = 0;
+			uint32_t							m_offHandDamageRangeMax = 0;
 
 			// Server only
 			bool								m_easyElite = false;

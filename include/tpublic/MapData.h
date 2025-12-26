@@ -723,7 +723,8 @@ namespace tpublic
 		{
 			INVALID_POINT_OF_INTEREST_TYPE,
 			
-			POINT_OF_INTEREST_TYPE_QUEST_GIVER
+			POINT_OF_INTEREST_TYPE_QUEST_GIVER,
+			POINT_OF_INTEREST_TYPE_GENERIC
 		};
 
 		struct PointOfInterest
@@ -737,6 +738,7 @@ namespace tpublic
 				aWriter->WriteUInts(m_questIds);
 				aWriter->WriteUInt(m_entityId);
 				aWriter->WriteUInt(m_dialogueRootId);
+				aWriter->WriteUInt(m_mapEntitySpawnId);
 			}
 
 			bool
@@ -753,6 +755,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_dialogueRootId))
 					return false;
+				if (!aReader->ReadUInt(m_mapEntitySpawnId))
+					return false;
 				return true;
 			}
 
@@ -762,6 +766,7 @@ namespace tpublic
 			uint32_t				m_dialogueRootId = 0;
 			uint32_t				m_entityId = 0;
 			std::vector<uint32_t>	m_questIds;
+			uint32_t				m_mapEntitySpawnId = 0;
 		};
 
 		struct WorldMap

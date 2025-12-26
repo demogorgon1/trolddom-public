@@ -45,6 +45,16 @@ namespace tpublic::VectorIO
 			return toCopy;
 		}
 
+		size_t
+		Peek(
+			void*							aBuffer,
+			size_t							aBufferSize) const override
+		{
+			size_t toCopy = aBufferSize <= m_remaining ? aBufferSize : m_remaining;
+			memcpy(aBuffer, m_p, toCopy);
+			return toCopy;
+		}
+
 		// Redirect to parent stream (this is awful)
 		const AuraEffectFactory* GetAuraEffectFactory() const override { assert(m_parentStream != NULL); return m_parentStream->GetAuraEffectFactory(); }
 		const ComponentManager* GetComponentManager() const override { assert(m_parentStream != NULL); return m_parentStream->GetComponentManager(); }

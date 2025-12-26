@@ -483,7 +483,7 @@ aura fighter_combat_ferocity:
 {
 	flags: [ persist_in_death ]	
 	type: hidden
-	description: "Your critical strikes increase your critical strike chance by 10% for 10 seconds. Also affects nearby party members. Stacks up to 5 times."
+	description: "Your critical strikes increase your critical strike chance by 5% for 10 seconds. Also affects nearby party members. Stacks up to 5 times."
 	aura_effect combat_event_trigger: 
 	{ 
 		combat_event_ability_mask: [ melee ]
@@ -501,7 +501,7 @@ aura fighter_combat_ferocity_buff:
 	duration: 100
 	stat_modifiers:
 	{
-		phys_crit_chance: { add: 10 }
+		phys_crit_chance: { add: 5 }
 	}
 }
 

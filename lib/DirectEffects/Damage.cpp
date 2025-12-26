@@ -159,7 +159,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aResourceChangeQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				aWorldView) 
+		const IWorldView*				aWorldView,
+		bool							aOffHand)
 	{
 		if(aSource == NULL)
 			return Result();
@@ -178,7 +179,7 @@ namespace tpublic::DirectEffects
 		if(targetCombatPublic == NULL)
 			return Result();
 
-		float realDamage = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget);
+		float realDamage = m_function.EvaluateSourceAndTargetEntityInstances(aManifest, aWorldView, aRandom, _GetDamageModifier(abilityModifiers), aSource, aTarget, aOffHand);
 		if(m_spread > 0.0f)
 		{
 			std::uniform_real_distribution<float> spread(realDamage * (1.0f - m_spread), realDamage * (1.0f + m_spread));
@@ -373,6 +374,7 @@ namespace tpublic::DirectEffects
 		const EntityInstance*				aEntityInstance,
 		const AbilityModifierList*			aAbilityModifierList,
 		uint32_t							aAbilityId,
+		const IWorldView*					aWorldView,
 		UIntRange&							aOutDamage,
 		DirectEffect::DamageType&			aOutDamageType)	const
 	{
@@ -396,7 +398,7 @@ namespace tpublic::DirectEffects
 		if(abilityModifiers != NULL)
 			damageModifier *= ToolTipMultiplier::Resolve(abilityModifiers->m_toolTipMultipliers, ToolTipMultiplier::TYPE_DAMAGE_OUTPUT, aAbilityId, m_damageType, aManifest, aEntityInstance);
 
-		m_function.ToRange(NULL, NULL, damageModifier, aEntityInstance, aOutDamage);
+		m_function.ToRange(aManifest, aWorldView, damageModifier, aEntityInstance, false, aOutDamage);
 
 		if(m_spread > 0.0f)
 		{

@@ -73,7 +73,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			/*aCombatResultQueue*/,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				aWorldView) 
+		const IWorldView*				aWorldView,
+		bool							/*aOffHand*/)
 	{				
 		const Data::Ability* ability = aManifest->GetById<Data::Ability>(m_abilityId);
 		const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();

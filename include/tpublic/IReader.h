@@ -486,6 +486,9 @@ namespace tpublic
 		virtual size_t						Read(
 												void*	aBuffer,
 												size_t	aBufferSize) = 0;
+		virtual size_t						Peek(
+												void*	aBuffer,
+												size_t	aBufferSize) const = 0;
 
 		// FIXME: this is weird, relevant FromStream methods should get these from somewhere else.
 		virtual const AuraEffectFactory*	GetAuraEffectFactory() const { assert(false); return NULL; }

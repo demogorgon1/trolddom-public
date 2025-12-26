@@ -104,6 +104,9 @@ namespace tpublic
 
 		uint32_t							m_nextUnnamedIndex;
 
+		typedef std::unordered_map<Vec2, uint32_t, Vec2::Hasher> SizeStats;
+		SizeStats							m_sizeStats;
+
 		Sprite*	_CreateSprite(
 					const SourceNode*	aNode,
 					const char*			aName,

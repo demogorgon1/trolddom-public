@@ -187,7 +187,7 @@ aura shield_crush:
 ability shield_crush:
 {
 	string: "Shield Crush"
-	description: "Does $damage$ damage to target and causes it to take 10% more physical damage for 10 seconds. Requires shield."
+	description: "Does $damage$ damage to target and causes it to take 10% more physical damage for 10 seconds. Damage is increased by block value. Requires shield."
 	range: 1	
 	cooldowns: [ global shield_crush ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
@@ -202,8 +202,9 @@ ability shield_crush:
 	{	
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 0.42 }			
+		function: { expression: a_mul_x_plus_b x: block_value a: 24 b: [ [ 1 20 ] [ 10 40 ] [ 20 80 ] [ 30 110 ] ] }			
 		spread: !DEFAULT_SPREAD{}
+		threat_multiplier: 2.5
 	}
 		
 	direct_effect apply_aura:
@@ -682,21 +683,21 @@ cooldown bash:
 aura bash:
 {
 	string: "Threatening"
-	description: "Threat generated increased by 150%."
+	description: "Threat generated increased by 200%."
 	type: buff
 	flags: [ unique ]
 	icon: icon_bash
 	duration: 300
 	aura_effect threat_modifier: 
 	{ 
-		multiplier: 2.5
+		multiplier: 3
 	}
 }
 
 ability bash:
 {
 	string: "Bash"
-	description: "Does $damage$ damage to target and increases your threat by 150% for 30 seconds."
+	description: "Does $damage$ damage to target and increases your threat by 200% for 30 seconds."
 	range: 1	
 	cooldowns: [ global bash ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]

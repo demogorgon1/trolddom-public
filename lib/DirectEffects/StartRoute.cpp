@@ -66,7 +66,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aCombatResultQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					/*aEventQueue*/,
-		const IWorldView*				/*aWorldView*/) 
+		const IWorldView*				/*aWorldView*/,
+		bool							/*aOffHand*/)
 	{				
 		if(aSource != NULL && aTarget != NULL)
 		{

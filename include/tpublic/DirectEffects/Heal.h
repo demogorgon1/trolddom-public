@@ -87,12 +87,14 @@ namespace tpublic
 								IResourceChangeQueue*				aResourceChangeQueue,
 								IAuraEventQueue*					aAuraEventQueue,
 								IEventQueue*						aEventQueue,
-								const IWorldView*					aWorldView) override;
+								const IWorldView*					aWorldView,
+								bool								aOffHand) override;
 			bool			CalculateToolTipHeal(
 								const Manifest*						aManifest,
 								const EntityInstance*				aEntityInstance,
 								const AbilityModifierList*			aAbilityModifierList,
 								uint32_t							aAbilityId,
+								const IWorldView*					aWorldView,
 								UIntRange&							aOutHeal) const override;
 
 			// Public data

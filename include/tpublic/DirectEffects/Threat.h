@@ -52,7 +52,8 @@ namespace tpublic
 								IResourceChangeQueue*			aCombatResultQueue,
 								IAuraEventQueue*				aAuraEventQueue,
 								IEventQueue*					aEventQueue,
-								const IWorldView*				aWorldView) override;
+								const IWorldView*				aWorldView,
+								bool							aOffHand) override;
 
 			// Public data
 			ApplyTo					m_applyTo = APPLY_TO_TARGET;

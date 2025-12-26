@@ -124,7 +124,8 @@ namespace tpublic::DirectEffects
 		IResourceChangeQueue*			aCombatResultQueue,
 		IAuraEventQueue*				/*aAuraEventQueue*/,
 		IEventQueue*					aEventQueue,
-		const IWorldView*				aWorldView) 
+		const IWorldView*				aWorldView,
+		bool							/*aOffHand*/)
 	{		
 		EntityInstance* target = (m_flags & DirectEffect::FLAG_SELF) != 0 ? aSource : aTarget;
 

@@ -1,7 +1,7 @@
 entity target_dummy: !NPC
 {
 	_string: "Target Dummy"
-	_level: 1
+	_level: 30
 	_faction: neutral
 	_sprite: target_dummy
 	_sprite_dead: target_dummy_dead 

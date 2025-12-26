@@ -312,18 +312,18 @@ aura eternal_shine:
 	flags: [ unique magic ]
 	stat_modifiers: 
 	{ 
-		strength: { add_percent: 2 } 
-		dexterity: { add_percent: 2 } 
-		wisdom: { add_percent: 2 } 
-		constitution: { add_percent: 2 } 
-		spirit: { add_percent: 2 } 
+		strength: { add_percent: 4 } 
+		dexterity: { add_percent: 4 } 
+		wisdom: { add_percent: 4 } 
+		constitution: { add_percent: 4 } 
+		spirit: { add_percent: 4 } 
 	}
 }
 
 ability eternal_shine:
 {
 	string: "Eternal Shine"
-	description: "Increases target Strength, Dexterity, Wisdom, Constitution, and Spirit by 2% for 20 minutes."
+	description: "Increases target Strength, Dexterity, Wisdom, Constitution, and Spirit by 4% for 20 minutes."
 	range: 7
 	cooldowns: [ global spell_healing_lockout ]
 	flags: [ spell target_other target_self target_friendly ]
