@@ -133,7 +133,7 @@ map dungeon_1:
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35	
+	view_hidden_visibility: 45	
 	auto_doodads: true
 	level: 6
 	max_players: 5

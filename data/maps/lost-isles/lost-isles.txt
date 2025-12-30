@@ -110,7 +110,7 @@ map_entity_spawn .object:
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35			
+	view_hidden_visibility: 45			
 	
 	survival_script: lost_isles
 	seed: @_seed

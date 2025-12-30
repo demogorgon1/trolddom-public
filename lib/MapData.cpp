@@ -717,37 +717,6 @@ namespace tpublic
 		return distance;
 	}
 
-	uint8_t
-	MapData::GetElevation(
-		int32_t					aX,
-		int32_t					aY) const
-	{
-		if (m_elevationMap == NULL || aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
-			return 0;
-
-		return m_elevationMap[aX + aY * m_width];
-	}
-
-	bool	
-	MapData::DoesTileBlockLineOfSight(
-		int32_t					aX,
-		int32_t					aY) const
-	{
-		assert(m_blockLineOfSightBits != NULL);
-		int32_t x = aX - m_x;
-		int32_t y = aY - m_y;
-		if(x < 0 || y < 0 || x >= m_width || y >= m_height)
-			return false;
-	
-		uint32_t i = (uint32_t)(x + y * m_width);
-		uint32_t j = i / 32;
-		uint32_t k = i % 32;
-		if(m_blockLineOfSightBits[j] & (1 << k))
-			return true;
-
-		return false;
-	}
-
 	bool	
 	MapData::IsTileAlwaysObscured(
 		int32_t					aX,

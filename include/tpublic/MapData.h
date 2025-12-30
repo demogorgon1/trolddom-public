@@ -852,12 +852,6 @@ namespace tpublic
 								const Vec2&				aPosition,
 								const Vec2&				aDirection,
 								int32_t					aMaxDistance) const;
-		uint8_t				GetElevation(
-								int32_t					aX,
-								int32_t					aY) const;
-		bool				DoesTileBlockLineOfSight(
-								int32_t					aX,
-								int32_t					aY) const;
 		bool				IsTileAlwaysObscured(
 								int32_t					aX,
 								int32_t					aY) const;
@@ -884,7 +878,34 @@ namespace tpublic
 								uint32_t				aMinSteps,
 								uint32_t				aMaxSteps,
 								std::vector<Vec2>&		aOut) const;
+
+		inline bool
+		DoesTileBlockLineOfSight(
+			int32_t						aX,
+			int32_t						aY) const
+		{
+			int32_t x = aX - m_x;
+			int32_t y = aY - m_y;
+			if (x < 0 || y < 0 || x >= m_width || y >= m_height)
+				return false;
+
+			uint32_t i = (uint32_t)(x + y * m_width);
+			uint32_t j = i / 32;
+			uint32_t k = i % 32;
+			return (m_blockLineOfSightBits[j] & (1 << k)) != 0;
+		}
 		
+		inline uint8_t
+		GetElevation(
+				int32_t					aX,
+				int32_t					aY) const
+		{
+			if (m_elevationMap == NULL || aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
+				return 0;
+
+			return m_elevationMap[aX + aY * m_width];
+		}
+
 		// Public data
 		MapType::Id									m_type;
 		MapType::ResetMode							m_resetMode;
