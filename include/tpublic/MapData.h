@@ -822,62 +822,68 @@ namespace tpublic
 
 							MapData();
 							MapData(
-								const SourceNode*		aSource);
+								const SourceNode*				aSource);
 							~MapData();
 
 		void				Build(
-								const Manifest*			aManifest,
-								const AutoDoodads*		aAutoDoodads,
-								nwork::Queue*			aWorkQueue);
+								const Manifest*					aManifest,
+								const AutoDoodads*				aAutoDoodads,
+								nwork::Queue*					aWorkQueue);
 		void				ConstructMapPathData(
-								const Manifest*			aManifest,
-								nwork::Queue*			aWorkQueue);
+								const Manifest*					aManifest,
+								nwork::Queue*					aWorkQueue);
 		void				ConstructMapRouteData(
-								const Manifest*			aManifest,
-								nwork::Queue*			aWorkQueue);
+								const Manifest*					aManifest,
+								nwork::Queue*					aWorkQueue);
 		void				ToStream(
-								IWriter*				aStream) const;
+								IWriter*						aStream) const;
 		bool				FromStream(
-								IReader*				aStream);
+								IReader*						aStream);
 		void				PrepareRuntime(
-								uint8_t					aRuntime,
-								const Manifest*			aManifest);
+								uint8_t							aRuntime,
+								const Manifest*					aManifest);
 		bool				IsTileWalkable(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		bool				IsTileIndoor(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		int32_t				TraceWalkableTiles(
-								const Vec2&				aPosition,
-								const Vec2&				aDirection,
-								int32_t					aMaxDistance) const;
+								const Vec2&						aPosition,
+								const Vec2&						aDirection,
+								int32_t							aMaxDistance) const;
 		bool				IsTileAlwaysObscured(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		bool				DoesNeighborTileBlockLineOfSight(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		void				CopyFrom(
-								const MapData*			aMapData);
+								const MapData*					aMapData);
 		uint32_t			GetTile(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		void				WriteDebugTileMapPNG(
-								const Manifest*			aManifest,
-								const char*				aPath) const;
+								const Manifest*					aManifest,
+								const char*						aPath) const;
 		uint32_t			GetDoodad(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		uint32_t			GetWall(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		const char*			GetStaticPositionToolTip(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		const PlayerSpawn*	GetPlayerSpawn(
-								uint32_t				aMapPlayerSpawnId) const;
+								uint32_t						aMapPlayerSpawnId) const;
 		void				GetWalkableFloodFillPositions(
-								const Vec2&				aPosition,
-								uint32_t				aMinSteps,
-								uint32_t				aMaxSteps,
-								std::vector<Vec2>&		aOut) const;
+								const Vec2&						aPosition,
+								uint32_t						aMinSteps,
+								uint32_t						aMaxSteps,
+								std::vector<Vec2>&				aOut) const;
+		void				GetWalkableFloodFillPositionsWithCallback(
+								const Vec2&						aPosition,
+								uint32_t						aMinSteps,
+								uint32_t						aMaxSteps,
+								std::function<bool(const Vec2&)> aCallback,
+								std::vector<Vec2>&				aOut) const;
 
 		inline bool
 		DoesTileBlockLineOfSight(

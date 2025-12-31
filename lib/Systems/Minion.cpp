@@ -565,7 +565,7 @@ namespace tpublic::Systems
 									{
 										if (minionPrivate->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
 										{
-											if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, targetPosition->m_position))
+											if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, targetPosition->m_position, false))
 												minionPrivate->m_npcMovement.Reset(aContext->m_tick);
 										}
 
@@ -609,7 +609,7 @@ namespace tpublic::Systems
 							{
 								if (minionPrivate->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
 								{
-									if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, activeCommand->m_targetPosition))
+									if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, activeCommand->m_targetPosition, false))
 										minionPrivate->m_npcMovement.Reset(aContext->m_tick);
 								}
 
@@ -684,7 +684,7 @@ namespace tpublic::Systems
 								{
 									if (minionPrivate->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
 									{
-										if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, healTargetPosition->m_position))
+										if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, healTargetPosition->m_position, false))
 											minionPrivate->m_npcMovement.Reset(aContext->m_tick);
 									}
 
@@ -856,7 +856,7 @@ namespace tpublic::Systems
 							{
 								if (minionPrivate->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
 								{
-									if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, ownerPosition->m_position))
+									if (aContext->m_worldView->WorldViewIsLineWalkable(position->m_position, ownerPosition->m_position, false))
 										minionPrivate->m_npcMovement.Reset(aContext->m_tick);
 								}
 
