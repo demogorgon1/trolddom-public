@@ -717,37 +717,6 @@ namespace tpublic
 		return distance;
 	}
 
-	uint8_t
-	MapData::GetElevation(
-		int32_t					aX,
-		int32_t					aY) const
-	{
-		if (m_elevationMap == NULL || aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
-			return 0;
-
-		return m_elevationMap[aX + aY * m_width];
-	}
-
-	bool	
-	MapData::DoesTileBlockLineOfSight(
-		int32_t					aX,
-		int32_t					aY) const
-	{
-		assert(m_blockLineOfSightBits != NULL);
-		int32_t x = aX - m_x;
-		int32_t y = aY - m_y;
-		if(x < 0 || y < 0 || x >= m_width || y >= m_height)
-			return false;
-	
-		uint32_t i = (uint32_t)(x + y * m_width);
-		uint32_t j = i / 32;
-		uint32_t k = i % 32;
-		if(m_blockLineOfSightBits[j] & (1 << k))
-			return true;
-
-		return false;
-	}
-
 	bool	
 	MapData::IsTileAlwaysObscured(
 		int32_t					aX,
@@ -947,6 +916,45 @@ namespace tpublic
 			{
 				Vec2 nextPosition = { t.m_position.m_x + DIRECTIONS[i].m_x, t.m_position.m_y + DIRECTIONS[i].m_y };
 				if (IsTileWalkable(nextPosition.m_x, nextPosition.m_y) && !visited.contains(nextPosition))
+				{
+					if(t.m_distance >= aMinSteps)
+						aOut.push_back(nextPosition);
+
+					if(t.m_distance < aMaxSteps)
+						queue.push_back({ nextPosition, t.m_distance + 1 });
+				}
+			}
+		}
+	}
+
+	void				
+	MapData::GetWalkableFloodFillPositionsWithCallback(
+		const Vec2&				aPosition,
+		uint32_t				aMinSteps,
+		uint32_t				aMaxSteps,
+		std::function<bool(const Vec2&)> aCallback,
+		std::vector<Vec2>&		aOut) const
+	{
+		struct QueueItem
+		{
+			Vec2		m_position;
+			uint32_t	m_distance = 0;
+		};
+
+		std::vector<QueueItem> queue = { { aPosition, 0 } };
+		std::unordered_set<Vec2, Vec2::Hasher> visited;
+
+		while (!queue.empty())
+		{
+			QueueItem t = queue[queue.size() - 1];
+			queue.resize(queue.size() - 1);
+			visited.insert(t.m_position);
+
+			static const Vec2 DIRECTIONS[4] = { { -1, 0 }, { 1, 0}, { 0, -1 }, { 0, 1 } };
+			for (uint32_t i = 0; i < 4; i++)
+			{
+				Vec2 nextPosition = { t.m_position.m_x + DIRECTIONS[i].m_x, t.m_position.m_y + DIRECTIONS[i].m_y };
+				if (IsTileWalkable(nextPosition.m_x, nextPosition.m_y) && !visited.contains(nextPosition) && aCallback(nextPosition))
 				{
 					if(t.m_distance >= aMinSteps)
 						aOut.push_back(nextPosition);

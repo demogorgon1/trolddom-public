@@ -244,7 +244,7 @@ map the_shrouded_lands:
 	default_fishing_loot_table: .fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35	
+	view_hidden_visibility: 45	
 	has_overview_map: true
 	auto_doodads: true
 	max_players: 80

@@ -36,7 +36,7 @@ player_world_type small_island:
 		
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35	
+	view_hidden_visibility: 45	
 	
 	start_position_entity: standing_stone
 	stash_entity: player_world_stash

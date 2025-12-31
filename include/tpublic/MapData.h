@@ -822,69 +822,96 @@ namespace tpublic
 
 							MapData();
 							MapData(
-								const SourceNode*		aSource);
+								const SourceNode*				aSource);
 							~MapData();
 
 		void				Build(
-								const Manifest*			aManifest,
-								const AutoDoodads*		aAutoDoodads,
-								nwork::Queue*			aWorkQueue);
+								const Manifest*					aManifest,
+								const AutoDoodads*				aAutoDoodads,
+								nwork::Queue*					aWorkQueue);
 		void				ConstructMapPathData(
-								const Manifest*			aManifest,
-								nwork::Queue*			aWorkQueue);
+								const Manifest*					aManifest,
+								nwork::Queue*					aWorkQueue);
 		void				ConstructMapRouteData(
-								const Manifest*			aManifest,
-								nwork::Queue*			aWorkQueue);
+								const Manifest*					aManifest,
+								nwork::Queue*					aWorkQueue);
 		void				ToStream(
-								IWriter*				aStream) const;
+								IWriter*						aStream) const;
 		bool				FromStream(
-								IReader*				aStream);
+								IReader*						aStream);
 		void				PrepareRuntime(
-								uint8_t					aRuntime,
-								const Manifest*			aManifest);
+								uint8_t							aRuntime,
+								const Manifest*					aManifest);
 		bool				IsTileWalkable(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		bool				IsTileIndoor(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		int32_t				TraceWalkableTiles(
-								const Vec2&				aPosition,
-								const Vec2&				aDirection,
-								int32_t					aMaxDistance) const;
-		uint8_t				GetElevation(
-								int32_t					aX,
-								int32_t					aY) const;
-		bool				DoesTileBlockLineOfSight(
-								int32_t					aX,
-								int32_t					aY) const;
+								const Vec2&						aPosition,
+								const Vec2&						aDirection,
+								int32_t							aMaxDistance) const;
 		bool				IsTileAlwaysObscured(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		bool				DoesNeighborTileBlockLineOfSight(
-								int32_t					aX,
-								int32_t					aY) const;
+								int32_t							aX,
+								int32_t							aY) const;
 		void				CopyFrom(
-								const MapData*			aMapData);
+								const MapData*					aMapData);
 		uint32_t			GetTile(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		void				WriteDebugTileMapPNG(
-								const Manifest*			aManifest,
-								const char*				aPath) const;
+								const Manifest*					aManifest,
+								const char*						aPath) const;
 		uint32_t			GetDoodad(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		uint32_t			GetWall(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		const char*			GetStaticPositionToolTip(
-								const Vec2&				aPosition) const;
+								const Vec2&						aPosition) const;
 		const PlayerSpawn*	GetPlayerSpawn(
-								uint32_t				aMapPlayerSpawnId) const;
+								uint32_t						aMapPlayerSpawnId) const;
 		void				GetWalkableFloodFillPositions(
-								const Vec2&				aPosition,
-								uint32_t				aMinSteps,
-								uint32_t				aMaxSteps,
-								std::vector<Vec2>&		aOut) const;
+								const Vec2&						aPosition,
+								uint32_t						aMinSteps,
+								uint32_t						aMaxSteps,
+								std::vector<Vec2>&				aOut) const;
+		void				GetWalkableFloodFillPositionsWithCallback(
+								const Vec2&						aPosition,
+								uint32_t						aMinSteps,
+								uint32_t						aMaxSteps,
+								std::function<bool(const Vec2&)> aCallback,
+								std::vector<Vec2>&				aOut) const;
+
+		inline bool
+		DoesTileBlockLineOfSight(
+			int32_t						aX,
+			int32_t						aY) const
+		{
+			int32_t x = aX - m_x;
+			int32_t y = aY - m_y;
+			if (x < 0 || y < 0 || x >= m_width || y >= m_height)
+				return false;
+
+			uint32_t i = (uint32_t)(x + y * m_width);
+			uint32_t j = i / 32;
+			uint32_t k = i % 32;
+			return (m_blockLineOfSightBits[j] & (1 << k)) != 0;
+		}
 		
+		inline uint8_t
+		GetElevation(
+				int32_t					aX,
+				int32_t					aY) const
+		{
+			if (m_elevationMap == NULL || aX < 0 || aY < 0 || aX >= m_width || aY >= m_height)
+				return 0;
+
+			return m_elevationMap[aX + aY * m_width];
+		}
+
 		// Public data
 		MapType::Id									m_type;
 		MapType::ResetMode							m_resetMode;

@@ -2,6 +2,24 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.15"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "In-game UI overhaul." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed some quest text typos." }
+		{ text: "You can no longer teleport through doors." }
+	]
+	
+	#######################################################################################
 	heading: "v1.0.14"
 
 	text: "All Classes:"

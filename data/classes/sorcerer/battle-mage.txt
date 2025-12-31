@@ -70,7 +70,7 @@ ability blink:
 	direct_effect move:
 	{
 		destination: target_nearby_random
-		move_flags: [ ] 
+		move_flags: [ walkable_path_required ] 
 		max_steps: 6
 		min_steps: 3
 	}	

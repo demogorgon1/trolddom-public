@@ -177,7 +177,7 @@ map valoris_insurgency:
 	default_fishing_loot_table: fish
 	view_attenuation: 0
 	view_attenuation_bias: 0
-	view_hidden_visibility: 35	
+	view_hidden_visibility: 45	
 	auto_doodads: true
 	level: 18
 	max_players: 5

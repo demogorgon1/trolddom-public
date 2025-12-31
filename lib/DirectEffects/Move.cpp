@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/Openable.h>
 #include <tpublic/Components/Position.h>
 
 #include <tpublic/DirectEffects/Move.h>
@@ -137,23 +138,27 @@ namespace tpublic
 					case DESTINATION_AOE_CENTER:				
 						{
 							const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
-							Vec2 d = { aAOETarget.m_x - sourcePosition->m_position.m_x, aAOETarget.m_y - sourcePosition->m_position.m_y };
 
-							IEventQueue::EventQueueMoveRequest t;
-							t.AddToPriorityList(d);
-							t.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
-							t.m_entityInstanceId = aSource->GetEntityInstanceId();
-							t.m_setUpdatedOnServerFlag = true;
+							if(aWorldView->WorldViewIsLineWalkable(sourcePosition->m_position, aAOETarget, true))
+							{
+								Vec2 d = { aAOETarget.m_x - sourcePosition->m_position.m_x, aAOETarget.m_y - sourcePosition->m_position.m_y };
 
-							if(m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
-								t.m_setTeleportedFlag = true;
+								IEventQueue::EventQueueMoveRequest t;
+								t.AddToPriorityList(d);
+								t.m_type = IEventQueue::EventQueueMoveRequest::TYPE_SIMPLE;
+								t.m_entityInstanceId = aSource->GetEntityInstanceId();
+								t.m_setUpdatedOnServerFlag = true;
 
-							aEventQueue->EventQueueMove(t);
+								if (m_moveFlags & MOVE_FLAG_SET_TELEPORTED)
+									t.m_setTeleportedFlag = true;
 
-							// Effect doesn't have a target, but we still want a combat log event
-							Result result;
-							result.m_generateImmediateCombatLogEvent = true;
-							return result;
+								aEventQueue->EventQueueMove(t);
+
+								// Effect doesn't have a target, but we still want a combat log event
+								Result result;
+								result.m_generateImmediateCombatLogEvent = true;
+								return result;
+							}
 						}
 						break;
 
@@ -179,8 +184,30 @@ namespace tpublic
 							const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
 							const Components::Position* sourcePosition = aSource->GetComponent<Components::Position>();
 							
+							std::unordered_set<Vec2, Vec2::Hasher> closedDoors;
+
+							IWorldView::EntityQuery query;
+							query.m_maxDistance = m_maxSteps * 2;
+							query.m_position = sourcePosition->m_position;
+							aWorldView->WorldViewQueryEntityInstances(query, [&](
+								const EntityInstance* aEntityInstance,
+								int32_t /*aDistanceSquared*/) -> bool
+							{
+								const Components::Position* position = aEntityInstance->GetComponent<Components::Position>();
+								if(position->IsBlocking() && aEntityInstance->HasComponent<Components::Openable>())
+									closedDoors.insert(position->m_position);
+								return false;
+							});
+
+							std::function<bool(const Vec2&)> callback = [&](
+								const Vec2& aPosition) -> bool
+							{
+								return !closedDoors.contains(aPosition);
+							};
+
 							std::vector<Vec2> nearbyPositions;
-							aWorldView->WorldViewGetMapData()->GetWalkableFloodFillPositions(targetPosition->m_position, m_minSteps, m_maxSteps, nearbyPositions);
+							aWorldView->WorldViewGetMapData()->GetWalkableFloodFillPositionsWithCallback(targetPosition->m_position, m_minSteps, m_maxSteps, callback, nearbyPositions);
+
 							if(nearbyPositions.size() > 0)
 							{
 								const Vec2& position = Helpers::RandomItem(aRandom, nearbyPositions);
