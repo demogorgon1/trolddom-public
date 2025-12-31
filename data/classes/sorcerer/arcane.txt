@@ -471,7 +471,8 @@ ability teleport:
 	direct_effect move:
 	{			
 		destination: aoe_center
-		move_flags: [ set_teleported ]
+		move_flags: [ set_teleported walkable_path_required ]
+		max_steps: 14
 	}
 	
 	direct_effect apply_aura:

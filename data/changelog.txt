@@ -8,7 +8,15 @@ changelog:
 	
 	list:
 	[
-		{ text: "In-game UI improved." }		
+		{ text: "In-game UI overhaul." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Fixed some quest text typos." }
+		{ text: "You can no longer teleport through doors." }
 	]
 	
 	#######################################################################################

@@ -8,7 +8,6 @@ dialogue_screen .fennian_starleaf_dialogue:
 	options:
 	[
 		{ quest<completion_only>: .nook_morrow_3 }
-		{ quest<completion_only>: .tentacle_monster }
 		{ quest: .fennian_starleaf_1 }
 		{ quest: .fennian_starleaf_2 }
 		{ quest<offer_only>: .fennian_starleaf_3 }
