@@ -122,6 +122,10 @@ sprites:
 	size: { width: 48 height: 48 } sprite fs_ground_mark: { flags: [ tile_walkable ] }
 	size: { width: 80 height: 80 } sprite ground_mark_2: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite crash_site: { }
+	size: { width: 16 height: 32 } sprite slime_1x2_ns_out: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite slime_2x2_ns_out: { flags: [ tile_walkable ] }
+	size: { width: 16 height: 32 } sprite slime_1x2_ns_wall: { flags: [ tile_walkable ] }
+	size: { width: 16 height: 32 } sprite slime_1x2_ns_out_wall: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
 	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
@@ -318,6 +322,34 @@ doodad crash_site:
                                               "xx" ]
 }
 
+doodad slime_1x2_ns_out:
+{
+	sprites: [ slime_1x2_ns_out ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
+}
+
+doodad slime_1x2_ns_wall:
+{
+	sprites: [ slime_1x2_ns_wall ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
+}
+
+doodad slime_1x2_ns_out_wall:
+{
+	sprites: [ slime_1x2_ns_out_wall ]
+	map_palette<"x">: { occupy: true } map: [ "x"
+                                              "x" ]
+}
+
+doodad slime_2x2_ns_out:
+{
+	sprites: [ slime_2x2_ns_out ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
+}
+	
 doodad crates: { sprites: [ doodad_crates_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sack: { sprites: [ doodad_sack_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad table: { sprites: [ doodad_table_1 doodad_table_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }

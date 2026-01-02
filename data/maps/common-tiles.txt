@@ -1413,4 +1413,12 @@ sprites:
 	sprite light_tiles_1_alt_1: { flags: [ tile_walkable ] }
 	sprite light_tiles_1_alt_2: { flags: [ tile_walkable ] }		
 
+	cursor: { position: [ 0 736 ] }
+
+	sprite slime_1: { flags: [ tile_fishable tile_water standalone ] water_floor: slime_base }
+	sprite slime_2: { flags: [ tile_fishable tile_water standalone ] water_floor: slime_base }
+	sprite slime_3: { flags: [ tile_fishable tile_water standalone ] water_floor: slime_base }
+	sprite slime: { flags: [ tile_fishable tile_water tile_no_water_edge ] water_floor: slime_base water_animation: [ slime_1 slime_2 slime_3 ] }
+	sprite slime_base: { flags: [ tile_walkable ] }		
+
 }

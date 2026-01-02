@@ -119,6 +119,8 @@ map_palette .doodads:
 	doodad tombstone: [ 99 99 119 ]
 	doodad statue_angel: [ 199 199 119 ]
 	doodad skull_stick: [ 39 81 167 ]
+	
+	!DEFAULT_DOODAD_PALETTE{}
 }
 
 map_palette .subzones:

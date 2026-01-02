@@ -30686,6 +30686,15 @@ sprite icon_valoris_insurgency_heroic 5939
 sprite __unnamed_859__ 5940
 sprite icon_kick_2 5941
 sprite __unnamed_860__ 5942
+sprite slime_1 5943
+sprite slime_2 5944
+sprite slime_3 5945
+sprite slime 5946
+sprite slime_base 5947
+sprite slime_1x2_ns_out 5948
+sprite slime_1x2_ns_wall 5949
+sprite slime_2x2_ns_out 5950
+sprite slime_1x2_ns_out_wall 5952
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -69136,6 +69145,10 @@ doodad potted_plant_3 78
 doodad potted_plant_4 79
 doodad ground_mark_2 80
 doodad crash_site 81
+doodad slime_1x2_ns_out 82
+doodad slime_1x2_ns_wall 83
+doodad slime_2x2_ns_out 85
+doodad slime_1x2_ns_out_wall 86
 player_world_type small_island 1
 wall stone_wall 1
 wall fence 2
