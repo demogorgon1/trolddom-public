@@ -991,6 +991,8 @@ sprites:
 	sprite icon_shirt_4: { tags: [ icon ] }
 	sprite icon_gloves_6: { tags: [ icon ] }
 	sprite icon_belt_6: { tags: [ icon ] }
+	sprite icon_lich_tower_heroic: { tags: [ icon ] }
+	sprite icon_tirnwood_thicket_heroic: { tags: [ icon ] }
 	
 }
 

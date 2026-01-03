@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .rotfang: {}
+loot_group .rotfang_heroic: {}
 
 loot_table .rotfang:
 {
@@ -11,6 +12,18 @@ loot_table .rotfang:
 		  map_message lich_tower: "Rotfang will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .rotfang }	}	
 		{ possibility: { loot_group: thalvaron_trouli_copperquill_2_quest_item requirement self<must_have_active_quest>: { id: thalvaron_trouli_copperquill_2 } } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_ZOMBIES{}
+	]	
+}
+
+loot_table .rotfang_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Rotfang will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .rotfang_heroic  } }					
 		!WORLD_DROPS{}
 		!WORLD_DROPS_ZOMBIES{}
 	]	
@@ -75,6 +88,67 @@ loot_table .rotfang:
 	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .rotfang_heroic
+		_heroic: true		
+	}
+	
+	item lich_tower_1_heroic: !BOSS_DROP_WRISTS
+	{
+		_string: "Smelly Wrist Rags"
+		_type: armor_cloth
+		_icon: icon_bracers_2
+		_wisdom: 3
+		_spirit: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_2_heroic: !BOSS_DROP_HANDS
+	{
+		_string: "Pestilence Grips"
+		_type: armor_mail
+		_icon: icon_gloves_4
+		_strength: 3
+		_dexterity: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_3_heroic: !BOSS_DROP_LEGS
+	{
+		_string: "Trousers of the Plague"
+		_type: armor_cloth
+		_icon: icon_pants_2
+		_constitution: 1
+		_wisdom: 5
+		_healing: 2
+	}
+	
+	item lich_tower_4_heroic: !BOSS_DROP_NECK
+	{
+		_string: "Bone Fragment Amulet"
+		_icon: icon_necklace_5
+		_constitution: 1
+		_strength: 1
+		_budget_bias: -10
+		_dodge: 1
+	}
+	
+	item lich_tower_5_heroic: !BOSS_DROP_CROSSBOW
+	{
+		_string: "Rotpiercer"
+		_icon: icon_crossbow_1
+		_constitution: 1
+		_dexterity: 2
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+}
 ############################################################
 # Boss
 
@@ -106,6 +180,10 @@ entity lich_tower_rotfang: !NPC
 	_immune_to_immobilize: true
 	_immune_to_slow: true
 	_large: true
+
+	_heroic_weapon_damage: 4.2
+	_heroic_resource_health: 16.3	
+	_loot_table_heroic: .rotfang_heroic
 
 	_abilities: 
 	[

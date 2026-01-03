@@ -19,6 +19,7 @@ changelog:
 		{ text: "Chat and combat log frames can be resized." }		
 		{ text: "Inventory can be resized and moved." }		
 		{ text: "Party frame can be moved." }		
+		{ text: "Some enemy spells do more damage on heroic difficulty." }		
 	]
 
 	text: "Issues Fixed:"

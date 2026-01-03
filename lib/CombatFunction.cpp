@@ -342,6 +342,9 @@ namespace tpublic
 		if(aCombatPublic->IsElite())
 			output *= m_eliteMultiplier;
 
+		if(aWorldView->WorldViewIsHeroic())
+			output *= m_heroicMultiplier;
+
 		if(m_spread > 0.0f)
 		{
 			switch (aRandomSource.m_type)

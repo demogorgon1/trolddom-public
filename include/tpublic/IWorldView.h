@@ -83,6 +83,7 @@ namespace tpublic
 														uint32_t				aAuraId) const = 0;
 		virtual bool								WorldViewIsSeasonalEventActive(
 														uint32_t				aSeasonalEventId) const = 0;
+		virtual bool								WorldViewIsHeroic() const = 0;
 
 	};
 
