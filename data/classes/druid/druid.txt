@@ -1,0 +1,223 @@
+ability druid_attack:
+{
+	string: "Attack"
+	description: "Deals $damage$ damage to target."
+	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon extra_off_hand ]	
+	states: [ default in_combat ]
+	delay: 3
+	icon: icon_fist
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical			
+		function: { expression: x x: weapon }		
+	}
+}
+
+class druid:
+{
+	version: 1
+
+	string: "Druid"	
+	description: "The Forest's Champion"
+	icon: icon_tree
+	
+	systems: [ combat health_regen mana_regen ]
+	
+	customization:
+	{
+		body:
+		{
+			armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprite_mounted: fighter_naked_mounted sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
+			armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprite_mounted: fighter_mounted       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
+			armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprite_mounted: fighter_2_mounted     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
+			armor_style cyan:   { sprite: fighter_3     sprite_dead: fighter_3_dead     sprite_mounted: fighter_3_mounted     sprites_walk: [ fighter_3_walk_1     fighter_3_walk_2 ] }
+			armor_style red:    { sprite: fighter_4     sprite_dead: fighter_4_dead     sprite_mounted: fighter_4_mounted     sprites_walk: [ fighter_4_walk_1     fighter_4_walk_2 ] }
+			armor_style purple: { sprite: fighter_5     sprite_dead: fighter_5_dead     sprite_mounted: fighter_5_mounted     sprites_walk: [ fighter_5_walk_1     fighter_5_walk_2 ] }
+			armor_style black:  { sprite: fighter_6     sprite_dead: fighter_6_dead     sprite_mounted: fighter_6_mounted     sprites_walk: [ fighter_6_walk_1     fighter_6_walk_2 ] }
+			armor_style white:  { sprite: fighter_7     sprite_dead: fighter_7_dead     sprite_mounted: fighter_7_mounted     sprites_walk: [ fighter_7_walk_1     fighter_7_walk_2 ] }
+			armor_style yellow: { sprite: fighter_8     sprite_dead: fighter_8_dead     sprite_mounted: fighter_8_mounted     sprites_walk: [ fighter_8_walk_1     fighter_8_walk_2 ] }						
+		}
+		
+		body:
+		{
+			armor_style none:   { sprite: fighter_naked_body_2 sprite_dead: fighter_naked_dead_body_2 sprite_mounted: fighter_naked_mounted_body_2 sprites_walk: [ fighter_naked_walk_1_body_2 fighter_naked_walk_2_body_2 ] }
+			armor_style brown:  { sprite: fighter_body_2       sprite_dead: fighter_dead_body_2       sprite_mounted: fighter_mounted_body_2       sprites_walk: [ fighter_walk_1_body_2       fighter_walk_2_body_2 ] }
+			armor_style green:  { sprite: fighter_2_body_2     sprite_dead: fighter_2_dead_body_2     sprite_mounted: fighter_2_mounted_body_2     sprites_walk: [ fighter_2_walk_1_body_2     fighter_2_walk_2_body_2 ] }
+			armor_style cyan:   { sprite: fighter_3_body_2     sprite_dead: fighter_3_dead_body_2     sprite_mounted: fighter_3_mounted_body_2     sprites_walk: [ fighter_3_walk_1_body_2     fighter_3_walk_2_body_2 ] }
+			armor_style red:    { sprite: fighter_4_body_2     sprite_dead: fighter_4_dead_body_2     sprite_mounted: fighter_4_mounted_body_2     sprites_walk: [ fighter_4_walk_1_body_2     fighter_4_walk_2_body_2 ] }
+			armor_style purple: { sprite: fighter_5_body_2     sprite_dead: fighter_5_dead_body_2     sprite_mounted: fighter_5_mounted_body_2     sprites_walk: [ fighter_5_walk_1_body_2     fighter_5_walk_2_body_2 ] }
+			armor_style black:  { sprite: fighter_6_body_2     sprite_dead: fighter_6_dead_body_2     sprite_mounted: fighter_6_mounted_body_2     sprites_walk: [ fighter_6_walk_1_body_2     fighter_6_walk_2_body_2 ] }
+			armor_style white:  { sprite: fighter_7_body_2     sprite_dead: fighter_7_dead_body_2     sprite_mounted: fighter_7_mounted_body_2     sprites_walk: [ fighter_7_walk_1_body_2     fighter_7_walk_2_body_2 ] }
+			armor_style yellow: { sprite: fighter_8_body_2     sprite_dead: fighter_8_dead_body_2     sprite_mounted: fighter_8_mounted_body_2     sprites_walk: [ fighter_8_walk_1_body_2     fighter_8_walk_2_body_2 ] }		
+		}		
+		
+		hair: { }
+		hair: { sprite: fighter_hair_1 sprite_dead: fighter_dead_hair_1 sprite_mounted: fighter_mounted_hair_1 sprites_walk: [ fighter_walk_1_hair_1 fighter_walk_2_hair_1 ] }
+		hair: { sprite: fighter_hair_2 sprite_dead: fighter_dead_hair_2 sprite_mounted: fighter_mounted_hair_2 sprites_walk: [ fighter_walk_1_hair_2 fighter_walk_2_hair_2 ] }
+		hair: { sprite: fighter_hair_3 sprite_dead: fighter_dead_hair_3 sprite_mounted: fighter_mounted_hair_3 sprites_walk: [ fighter_walk_1_hair_3 fighter_walk_2_hair_3 ] }
+		hair: { sprite: fighter_hair_4 sprite_dead: fighter_dead_hair_4 sprite_mounted: fighter_mounted_hair_4 sprites_walk: [ fighter_walk_1_hair_4 fighter_walk_2_hair_4 ] }
+		
+		beard: { }
+		beard: { sprite: fighter_beard_1 sprite_dead: fighter_dead_beard_1 sprite_mounted: fighter_mounted_beard_1 sprites_walk: [ fighter_walk_1_beard_1 fighter_walk_2_beard_1 ] }
+		beard: { sprite: fighter_beard_2 sprite_dead: fighter_dead_beard_2 sprite_mounted: fighter_mounted_beard_2 sprites_walk: [ fighter_walk_1_beard_2 fighter_walk_2_beard_2 ] }
+		beard: { sprite: fighter_beard_3 sprite_dead: fighter_dead_beard_3 sprite_mounted: fighter_mounted_beard_3 sprites_walk: [ fighter_walk_1_beard_3 fighter_walk_2_beard_3 ] }
+		beard: { sprite: fighter_beard_4 sprite_dead: fighter_dead_beard_4 sprite_mounted: fighter_mounted_beard_4 sprites_walk: [ fighter_walk_1_beard_4 fighter_walk_2_beard_4 ] }
+		beard: { sprite: fighter_beard_5 sprite_dead: fighter_dead_beard_5 sprite_mounted: fighter_mounted_beard_5 sprites_walk: [ fighter_walk_1_beard_5 fighter_walk_2_beard_5 ] }	
+
+		default: { body: 0 hair: 1 beard: 0 hair_color: 5 beard_color: 5 }
+		
+		!CUSTOMIZATION_COLORS{}
+	}
+	
+	armor_style none:   { sprite: fighter_naked sprite_dead: fighter_naked_dead sprite_mounted: fighter_naked_mounted sprites_walk: [ fighter_naked_walk_1 fighter_naked_walk_2 ] }
+	armor_style brown:  { sprite: fighter       sprite_dead: fighter_dead       sprite_mounted: fighter_mounted       sprites_walk: [ fighter_walk_1       fighter_walk_2 ] }
+	armor_style green:  { sprite: fighter_2     sprite_dead: fighter_2_dead     sprite_mounted: fighter_2_mounted     sprites_walk: [ fighter_2_walk_1     fighter_2_walk_2 ] }
+	armor_style cyan:   { sprite: fighter_3     sprite_dead: fighter_3_dead     sprite_mounted: fighter_3_mounted     sprites_walk: [ fighter_3_walk_1     fighter_3_walk_2 ] }
+	armor_style red:    { sprite: fighter_4     sprite_dead: fighter_4_dead     sprite_mounted: fighter_4_mounted     sprites_walk: [ fighter_4_walk_1     fighter_4_walk_2 ] }
+	armor_style purple: { sprite: fighter_5     sprite_dead: fighter_5_dead     sprite_mounted: fighter_5_mounted     sprites_walk: [ fighter_5_walk_1     fighter_5_walk_2 ] }
+	armor_style black:  { sprite: fighter_6     sprite_dead: fighter_6_dead     sprite_mounted: fighter_6_mounted     sprites_walk: [ fighter_6_walk_1     fighter_6_walk_2 ] }
+	armor_style white:  { sprite: fighter_7     sprite_dead: fighter_7_dead     sprite_mounted: fighter_7_mounted     sprites_walk: [ fighter_7_walk_1     fighter_7_walk_2 ] }
+	armor_style yellow: { sprite: fighter_8     sprite_dead: fighter_8_dead     sprite_mounted: fighter_8_mounted     sprites_walk: [ fighter_8_walk_1     fighter_8_walk_2 ] }
+	
+	weapon_sprites weapon_2h_staff: { sprite: fighter_staff    mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_staff    fighter_walk_2_staff ] }
+	weapon_sprites weapon_2h_mace:  { sprite: fighter_mace_2h  mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_mace_2h  fighter_walk_2_mace_2h ] }
+	weapon_sprites weapon_1h_knife: { sprite: fighter_knife_1h mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_knife_1h fighter_walk_2_knife_1h ] }
+	fishing_sprites:				{ sprite: fighter_fishing  mounted_offset: [ -2 -2 ] sprites_walk: [ fighter_walk_1_fishing  fighter_walk_2_fishing ] }
+	
+	armor_decoration: { sprite: fighter_decoration sprite_dead: fighter_decoration_dead sprites_walk: [ fighter_decoration_walk_1 fighter_decoration_walk_2 ] }
+
+	remains: [ player_remains_1 player_remains_2 player_remains_3 ]
+
+	color_1: [ 34 139 34 ] 
+	color_2: [ 0 100 0 ] 
+	default_attack: druid_attack
+	default_action_bar: [ druid_attack verdant_bolt !DEFAULT_ABILITIES{} ]
+	talent_trees: [ druid_overgrowth druid_kinship druid_savagery ]
+	
+	item_types: [ armor_cloth armor_mail weapon_2h_staff weapon_2h_mace weapon_1h_knife ]
+
+	start_map open_world: [ ]
+	start_equipment main_hand: weapon_gnarly_staff
+	start_equipment chest: chest_tattered_robe
+	start_equipment feet: feet_tattered_slippers
+	start_equipment legs: legs_tattered_pants
+	start_inventory: [ consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread consumable_dry_bread ]
+	
+	stats_conversion:
+	{
+		dex_to_phys_crit: [ 1 25 ]
+		dex_to_dodge: [ 1 35 ]
+		dex_to_parry: [ 1 20 ]
+		str_to_parry: [ 1 50 ]
+		wis_to_mag_crit: [ 1 25 ]
+		con_to_health: [ 12 1 ]
+		wis_to_mana: [ 10 1 ]
+		spi_to_mana_regen_per_5_sec: [ 3 2 ]
+		spi_to_health_regen: [ 1 1 ]
+		wis_to_spell_damage: [ 1 6 ]
+		str_to_attack_power: [ 2 1 ]
+		dex_to_attack_power: [ 2 1 ]
+		attack_power_to_dps: [ 1 10 ]
+	}
+
+	level_progression:
+	[
+		{ level: 1 unlock_abilities: [ druid_attack verdant_bolt !DEFAULT_ABILITIES{} ] stats: { dexterity: 5 strength: 4 wisdom: 6 constitution: 6 spirit: 7 } resource health: { add_max: 70 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
+		{ level: 2 unlock_abilities: [ mend_spirit ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 3 unlock_abilities: [ gift_of_the_untamed ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 4 unlock_abilities: [ sprouting_wound ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 5 unlock_abilities: [ cat_form ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 6 unlock_abilities: [ bear_form ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 7 unlock_abilities: [ call_companion ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 8 unlock_abilities: [ grasping_vines ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 9 unlock_abilities: [ bark_skin ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 10 unlock_abilities: [ travel_form ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 11 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 12 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 13 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 14 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 15 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 16 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 17 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 18 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 19 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 20 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 21 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 22 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 23 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 24 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 25 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 26 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 27 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 28 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 29 unlock_abilities: [ ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 30 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+	]
+	
+	gear_optimization default<{ weapon_dps_weight: 1.0 }>:
+	{	
+		spell_damage: 1.0
+		wisdom: 0.8
+		constitution: 0.25
+	}
+
+		gear_optimization melee<{ weapon_dps_weight: 1.0 }>:
+	{	
+		dexterity: 2.0
+		strength: 1.0
+		constitution: 0.25
+	}
+
+		gear_optimization healing<{ weapon_dps_weight: 0.0 }>:
+	{	
+		healing: 1.0
+		wisdom: 0.5
+		mana_per_5: 0.5
+		spirit: 0.6
+	}
+
+		gear_optimization tank<{ weapon_dps_weight: 1.0 }>:
+	{	
+		strength: 0.25
+		dexterity: 1
+		constitution: 2
+	}
+}
+
+
+###############################################################################
+# Achievements
+
+achievement druid_level_10: 
+{ 
+	category: general 
+	string: "Druid (Level 10)" 
+	description: "Reach level 10 as a Druid." 
+	points: 10 
+	icon: icon_tree
+	no_progress_values: true 
+}
+
+achievement druid_level_20: 
+{ 
+	category: general 
+	string: "Druid (Level 20)" 
+	description: "Reach level 20 as a Druid." 
+	points: 10 
+	icon: icon_tree
+	no_progress_values: true 
+	root: druid_level_10
+}
+
+achievement druid_level_30: 
+{ 
+	category: general 
+	string: "Druid (Level 30)" 
+	description: "Reach level 30 as a Druid." 
+	points: 10 
+	icon: icon_tree
+	no_progress_values: true 
+	root: druid_level_10
+}
