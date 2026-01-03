@@ -59,6 +59,7 @@ map_palette .stuff:
 	entity_spawn .malrik_the_undying_spawn_center: [ 140 59 128 ]
 	entity_spawn .malrik_the_undying_spawn_right: [ 40 159 128 ]
 	entity_spawn .rotfang: [ 255 50 254 ]
+	entity_spawn .boss_6: [ 252 51 54 ]
 	
 	entity_spawn .zombie: [ 94 28 199 ]
 	entity_spawn .bloated_zombie: [ 194 28 199 ]
@@ -130,6 +131,7 @@ map_palette .subzones:
 	sub_zone .bone_tyrant: [ 251 64 94 ]
 	sub_zone .library: [ 255 175 250 ]
 	sub_zone .anatar: [ 175 255 219 ]
+	sub_zone .boss_6: [ 175 28 128 ]
 }
 
 map_palette .cliffs:
@@ -249,5 +251,13 @@ map lich_tower:
 		condition entity_state: { entity_spawn: .rotfang state: dead }		
 		run: { set_trigger: .rotfang_killed }
 	}	
+	
+	script:
+	{
+		condition trigger_not_set: .boss_6_killed
+		condition entity_state: { entity_spawn: .boss_6 state: dead }		
+		run: { set_trigger: .boss_6_killed }
+	}	
+	
 }
  

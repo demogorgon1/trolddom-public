@@ -6,4 +6,6 @@ achievement lich_tower_anatar: { sort_key: 3 category: .lich_tower string: "Anat
 achievement lich_tower_library: { sort_key: 4 category: .lich_tower string: "Arch-Mage Farrux" description: "Slay Arch-Mage Farrux." points: 10 priority: 0 kill_trigger: lich_tower_library icon: icon_skull_1 no_progress_values: true }
 achievement lich_tower_malrik_the_undying: { sort_key: 5 category: .lich_tower string: "Malrik the Undying" description: "Slay Malrik the Undying." points: 10 priority: 0 kill_trigger: lich_tower_malrik_the_undying icon: icon_skull_1 no_progress_values: true }
 
-achievement lich_tower: { category: .lich_tower string: "Tower of Indulath" description: "Finish Tower of Indulath." points: 20 need_achievements: [ lich_tower_rotfang lich_tower_bone_tyrant lich_tower_anatar lich_tower_library lich_tower_malrik_the_undying ] icon: icon_lich_tower }
+achievement lich_tower: { sort_key: 6 category: .lich_tower string: "Tower of Indulath" description: "Finish Tower of Indulath." points: 20 need_achievements: [ lich_tower_rotfang lich_tower_bone_tyrant lich_tower_anatar lich_tower_library lich_tower_malrik_the_undying ] icon: icon_lich_tower }
+
+achievement lich_tower_boss_6: { sort_key: 7 category: .lich_tower string: "Noxious Slime" description: "Slay Noxious Slime." points: 10 priority: 0 kill_trigger: lich_tower_boss_6 icon: icon_skull_1 no_progress_values: true }

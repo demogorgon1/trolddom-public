@@ -1107,6 +1107,14 @@ sprites:
 	sprite man_99_dead: { }	
 	sprite man_100_dead: { }	
 	sprite gnome_3_dead: { }	
+
+	cursor: { position: [ 0 960 ] }
+	sprite slime_ball_1: { dead: slime_ball_1_dead }
+	sprite slime_ball_2: { dead: slime_ball_2_dead }
+
+	cursor: { position: [ 0 976 ] }
+	sprite slime_ball_1_dead: { }	
+	sprite slime_ball_2_dead: { }	
 	
 }
 

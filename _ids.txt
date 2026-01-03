@@ -21503,6 +21503,9 @@ ability _aura__ability_npc_fireball_2_direct_effect_apply_aura_aura_aura_effect_
 ability priest_dragon_counterkick 34501
 ability _aura_priest_dragon_counterkick_aura_effect_combat_event_trigger_ability 34502
 ability dragon_breath_damage_over_time_tick 34503
+ability _aura__item_lich_tower_boss_6_1_aura_aura_effect_combat_event_trigger_ability 34505
+ability npc_poison_detonation 34506
+ability lich_tower_6_slime_spit 34507
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -23563,6 +23566,8 @@ entity jul_big_man 2143
 entity reindeer 2144
 entity jul_voucher_nisse 2145
 entity thalvaron_deer_30 2146
+entity lich_tower_boss_6 2147
+entity __maps_lich_tower_slime_minion 2148
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -24533,6 +24538,7 @@ map_entity_spawn thalvaron_block_manson 1019
 map_entity_spawn jul_tree 1020
 map_entity_spawn jul_big_man 1021
 map_entity_spawn jul_voucher_nisse 1022
+map_entity_spawn __maps_lich_tower_boss_6 1023
 map_player_spawn dungeon_1_exit 9
 map_player_spawn __maps_dungeon_1_player_spawn 12
 map_player_spawn __maps_dungeon_2_player_spawn 13
@@ -30695,6 +30701,22 @@ sprite slime_1x2_ns_out 5948
 sprite slime_1x2_ns_wall 5949
 sprite slime_2x2_ns_out 5950
 sprite slime_1x2_ns_out_wall 5952
+sprite slime_ball_1_dead 5953
+sprite icon_sword_21 5954
+sprite icon_skull_5 5955
+sprite icon_helmet_10 5956
+sprite icon_shirt_4 5957
+sprite icon_gloves_6 5958
+sprite icon_belt_6 5959
+sprite slime_ball_1 5960
+sprite __unnamed_864__ 5961
+sprite __unnamed_861__ 5962
+sprite __unnamed_862__ 5963
+sprite __unnamed_863__ 5964
+sprite __unnamed_865__ 5965
+sprite __unnamed_866__ 5966
+sprite slime_ball_2_dead 5967
+sprite slime_ball_2 5968
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -62964,6 +62986,12 @@ item valoris_insurgency_15_heroic 52206
 item valoris_insurgency_16_heroic 52207
 item valoris_insurgency_17_heroic 52208
 item valoris_insurgency_18_heroic 52209
+item lich_tower_boss_6_1 52210
+item lich_tower_boss_6_2 52211
+item lich_tower_boss_6_3 52212
+item lich_tower_boss_6_4 52213
+item lich_tower_boss_6_5 52214
+item lich_tower_boss_6_6 52215
 aura knock 1
 aura dont_touch_me_bro 2
 aura immortality 3
@@ -65646,6 +65674,7 @@ aura priest_dragon_counterkick 4738
 aura priest_dragon_counterkick_trigger 4739
 aura dragon_breath_damage_over_time 4740
 aura dragon_breath_knockout 4741
+aura _item_lich_tower_boss_6_1_aura 4742
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -66007,6 +66036,7 @@ loot_table __maps_valoris_insurgency_erdox_the_soulsplitter_heroic 415
 loot_table __maps_valoris_insurgency_houndmaster_crane_heroic 416
 loot_table __maps_valoris_insurgency_rufus_the_strong_heroic 417
 loot_table __maps_valoris_insurgency_wernox_heroic 418
+loot_table __maps_lich_tower_boss_6 419
 loot_group world_drops_junk 8
 loot_group world_drops_uncommon 9
 loot_group world_drops_consumable 10
@@ -66341,6 +66371,7 @@ loot_group __maps_valoris_insurgency_erdox_the_soulsplitter_heroic 370
 loot_group __maps_valoris_insurgency_houndmaster_crane_heroic 371
 loot_group __maps_valoris_insurgency_rufus_the_strong_heroic 372
 loot_group __maps_valoris_insurgency_wernox_heroic 373
+loot_group __maps_lich_tower_boss_6 374
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -66384,6 +66415,7 @@ map_trigger __maps_the_devouring_shroud_boss_4_killed 42
 map_trigger __maps_the_devouring_shroud_boss_5_killed 43
 map_trigger __maps_the_devouring_shroud_boss_6_killed 44
 map_trigger __maps_the_devouring_shroud_boss_6_summoned 45
+map_trigger __maps_lich_tower_boss_6_killed 46
 particle_system throw_rock 1
 particle_system firebolt 2
 particle_system whirlwind 3
@@ -66478,6 +66510,8 @@ particle_system _ability_the_devouring_shroud_6_thorn_spit_projectile 95
 particle_system _ability_npc_drain_life_projectile 96
 particle_system _ability_npc_fireball_2_projectile 97
 particle_system _ability_npc_frostbolt_2_projectile 98
+particle_system npc_poison_detonation 99
+particle_system _ability_lich_tower_6_slime_spit_projectile 100
 dialogue_screen __maps_open_world_brom_mining 31
 dialogue_screen __maps_open_world_brom_greetings 32
 dialogue_screen __maps_open_world_brom_trainer 33
@@ -67535,6 +67569,7 @@ zone __maps_the_devouring_shroud_boss_6 244
 zone __maps_thalvaron_kobold_caves 245
 zone __maps_thalvaron_the_frozen_borderlands 246
 zone __maps_thalvaron_crash_site 247
+zone __maps_lich_tower_boss_6 248
 creature_type humanoid 1
 creature_type beast 2
 creature_type undead 3
@@ -68372,6 +68407,7 @@ achievement valoris_insurgency_wernox_heroic 156
 achievement valoris_insurgency_rufus_the_strong_heroic 157
 achievement valoris_insurgency_erdox_the_soulsplitter_heroic 158
 achievement valoris_insurgency_heroic 159
+achievement lich_tower_boss_6 160
 achievement_category general 2
 achievement_category __maps_open_world_open_world 3
 achievement_category __maps_dungeon_1_dungeon_1 4
@@ -68948,6 +68984,7 @@ cooldown npc_curse_stacking 214
 cooldown _ability_npc_frostbolt_2_cooldown 215
 cooldown _ability_dragon_breath_cooldown 216
 cooldown _ability_priest_dragon_counterkick_cooldown 217
+cooldown _ability_lich_tower_6_slime_spit_cooldown 218
 sound fantastic_a 1
 sound button_1 2
 sound switch_1 3
@@ -69318,6 +69355,7 @@ encounter __maps_the_devouring_shroud_boss_3 35
 encounter __maps_the_devouring_shroud_boss_4 36
 encounter __maps_the_devouring_shroud_boss_5 37
 encounter __maps_the_devouring_shroud_boss_6 38
+encounter __maps_lich_tower_boss_6 39
 emote agree 1
 emote beg 2
 emote disagree 3
@@ -70066,6 +70104,7 @@ loot_cooldown _loot_table___maps_valoris_insurgency_erdox_the_soulsplitter_heroi
 loot_cooldown _loot_table___maps_valoris_insurgency_houndmaster_crane_heroic_slots_possibility_loot_cooldown 430
 loot_cooldown _loot_table___maps_valoris_insurgency_rufus_the_strong_heroic_slots_possibility_loot_cooldown 431
 loot_cooldown _loot_table___maps_valoris_insurgency_wernox_heroic_slots_possibility_loot_cooldown 432
+loot_cooldown _loot_table___maps_lich_tower_boss_6_slots_possibility_loot_cooldown 433
 critter _entity_seagull_components_critter_critter 1
 critter _entity_duck_components_critter_critter 2
 critter _entity_chicken_components_critter_critter 3
