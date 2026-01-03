@@ -1,0 +1,1890 @@
+###############################################################################
+# DRUID SAVAGERY TALENT TREE
+# Shapeshifting and feral combat
+###############################################################################
+
+talent_tree druid_savagery:
+{
+	string: "Savagery"
+	description: "Master the primal forms of cat and bear, becoming a fierce melee combatant."
+	icon: icon_claw
+	
+	map_palette:
+	{
+		talent druid_savage_momentum: "A"
+		talent druid_critical_instinct: "B"
+		talent druid_improved_cat_form: "C"
+		talent druid_improved_bear_form: "D"
+		talent druid_thick_hide: "E"
+		talent druid_feral_lunge: "F"
+		talent druid_blood_scent: "G"
+		talent druid_sharpened_claws: "H"
+		talent druid_savage_roar: "I"
+		talent druid_taste_for_blood: "J"
+		talent druid_predatory_instinct: "K"
+		talent druid_survival_instincts: "L"
+		talent druid_primal_rampage: "P"
+
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_down: "|"
+		sprite talent_tree_horizontal: "-"
+		sprite talent_tree_left_to_down: ">"
+		sprite talent_tree_right_arrow: "a"
+	}
+
+	map:
+	[
+		"..A.B.."
+		"......."
+		"C->.DaE"
+		"..d...."
+		"F.H...G"
+		"......d"
+		"L.....J"
+		"......."
+		".K...I."
+		"......."
+		"...P..."
+	]
+}
+
+###############################################################################
+# FORMS - Cat and Bear
+# Thick Hide bonuses are built into the forms themselves via talent auras
+###############################################################################
+
+aura_group druid_forms: { }
+
+cooldown cat_form:
+{
+	duration: 15
+}
+
+cooldown bear_form:
+{
+	duration: 15
+}
+
+aura cat_form:
+{
+	string: "Cat Form"
+	description: "Transformed into a cat. +20% attack speed, +10% movement speed."
+	type: buff
+	icon: icon_cat
+	duration: 0
+	flags: [ unique persist_in_death ]
+	aura_group: druid_forms
+	override_sprite: panther_1
+	
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
+			flags: [ attached blend_add ]
+			sprite_interval: 100
+			count: 1
+			scale: 0.8
+			alpha: 0.4
+			color_mod: [ 50 200 50 ]
+		}
+		
+		particle:
+		{
+			sprites: [ effect_z ]
+			flags: [ attached blend_add ]
+			count: 1
+			scale: 1.2
+			alpha: 0.3
+			color_mod: [ 100 255 100 ]
+		}
+	}
+	
+	stat_modifiers:
+	{
+		attack_haste: { add_percent: 20 }
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: fast
+	}
+}
+
+aura bear_form:
+{
+	string: "Bear Form"
+	description: "Transformed into a bear. +30% armor, +20% constitution."
+	type: buff
+	icon: icon_toughness
+	duration: 0
+	flags: [ unique persist_in_death ]
+	aura_group: druid_forms
+	override_sprite: bear
+	
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
+			flags: [ attached blend_add ]
+			sprite_interval: 100
+			count: 1
+			scale: 0.8
+			alpha: 0.4
+			color_mod: [ 50 200 50 ]
+		}
+		
+		particle:
+		{
+			sprites: [ effect_z ]
+			flags: [ attached blend_add ]
+			count: 1
+			scale: 1.2
+			alpha: 0.3
+			color_mod: [ 100 255 100 ]
+		}
+	}
+	
+	stat_modifiers:
+	{
+		armor: { add_percent: 30 }
+		constitution: { add_percent: 20 }
+	}
+}
+
+ability cat_form:
+{
+	string: "Cat Form"
+	description: "Transform into a cat. +20% attack speed. Enables Claw and Rake."
+	cooldowns: [ global cat_form ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_cat
+	resource_cost mana: 15
+	
+	direct_effect remove_aura:
+	{
+		aura: bear_form
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: cat_form
+	}
+}
+
+ability bear_form:
+{
+	string: "Bear Form"
+	description: "Transform into a bear. +30% armor. Enables Swipe."
+	cooldowns: [ global bear_form ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_toughness
+	resource_cost mana: 15
+	
+	direct_effect remove_aura:
+	{
+		aura: cat_form
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: bear_form
+	}
+}
+
+###############################################################################
+# Travel Form (Level 10)
+
+aura travel_form:
+{
+	string: "Travel Form"
+	description: "Increased movement speed. Cancelled by combat."
+	type: buff
+	icon: icon_charge
+	duration: 0
+	flags: [ unique persist_in_death ]
+	aura_group: druid_forms
+	override_sprite: deer
+	
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
+			flags: [ attached blend_add ]
+			sprite_interval: 100
+			count: 1
+			scale: 0.8
+			alpha: 0.4
+			color_mod: [ 50 200 50 ]
+		}
+		
+		particle:
+		{
+			sprites: [ effect_z ]
+			flags: [ attached blend_add ]
+			count: 1
+			scale: 1.2
+			alpha: 0.3
+			color_mod: [ 100 255 100 ]
+		}
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: fast
+	}
+}
+
+ability travel_form:
+{
+	string: "Travel Form"
+	description: "Transform into a swift creature. Increased movement speed. Out of combat only."
+	cooldowns: [ global ]
+	flags: [ target_self ]
+	states: [ default ]
+	icon: icon_charge
+	resource_cost mana: 5
+	talent_tree: druid_savagery
+	
+	requirement self<must_not_be_in_state>: { id: in_combat }
+
+	direct_effect apply_aura:
+	{
+		aura: travel_form
+	}
+}
+
+###############################################################################
+# BASE CAT ABILITIES
+###############################################################################
+
+ability claw:
+{
+	string: "Claw"
+	description: "Deals $damage$ damage. Requires Cat Form."
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	target_particle_system: purple_spell_hit
+	delay: 3
+	
+	requirement self<must_have_aura>: cat_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.1 }
+		spread: !DEFAULT_SPREAD{}
+	}
+}
+
+cooldown rake:
+{
+	duration: 60
+}
+
+aura rake_bleed:
+{
+	string: "Rake"
+	description: "Bleeding."
+	type: debuff
+	icon: icon_rend
+	duration: 120
+	flags: [ unique ]
+	
+	aura_effect repeat:
+	{
+		update_interval: 20
+		ability<self>: rake_bleed_damage
+	}
+}
+
+ability rake_bleed_damage:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect damage:
+	{
+		damage_type: bleed
+		function: { expression: a_mul_x x: attack_power a: 0.15 }
+		direct: false
+	}
+}
+
+ability rake:
+{
+	string: "Rake"
+	description: "Deals $damage$ damage and applies a bleed. Requires Cat Form."
+	cooldowns: [ global rake ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_rend
+	target_particle_system: purple_spell_hit
+	delay: 3
+	
+	requirement self<must_have_aura>: cat_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.0 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: rake_bleed
+	}
+}
+
+###############################################################################
+# BASE BEAR ABILITIES
+###############################################################################
+
+ability swipe:
+{
+	string: "Swipe"
+	description: "Deals $damage$ damage to enemies in front. Requires Bear Form."
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile target_aoe can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	aoe_radius: 2
+	aoe_cap: 3
+	delay: 4
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.8 }
+		spread: !DEFAULT_SPREAD{}
+	}
+}
+
+###############################################################################
+# TIER 0 (0 pts) - Entry Talents (Savage Momentum, )
+###############################################################################
+
+# Savage Momentum - On-hit heal proc in savage forms
+talent druid_savage_momentum:
+{
+	string: "Savage Momentum"
+	icon: icon_swiftstrike
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: druid_savage_momentum_1 }
+		{ aura: druid_savage_momentum_2 }
+		{ aura: druid_savage_momentum_3 }
+		{ aura: druid_savage_momentum_4 }
+		{ aura: druid_savage_momentum_5 }
+	]
+}
+
+aura savage_momentum_heal:
+{
+	string: "Savage Momentum"
+	description: "Regenerating health from feral combat. Move Speed increased."
+	type: buff
+	icon: icon_swiftstrike
+	duration: 60
+	flags: [ unique ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: fast
+	}
+}
+
+ability savage_momentum_proc_1:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: a_mul_x a: 0.01 x: health_max entity: source }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_momentum_heal
+	}
+}
+
+ability savage_momentum_proc_2:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: a_mul_x a: 0.015 x: health_max entity: source }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_momentum_heal
+	}
+}
+
+ability savage_momentum_proc_3:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: a_mul_x a: 0.02 x: health_max entity: source }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_momentum_heal
+	}
+}
+
+ability savage_momentum_proc_4:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: a_mul_x a: 0.025 x: health_max entity: source }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_momentum_heal
+	}
+}
+
+ability savage_momentum_proc_5:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect modify_resource:
+	{
+		resource: health
+		function: { expression: a_mul_x a: 0.03 x: health_max entity: source }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_momentum_heal
+	}
+}
+
+aura druid_savage_momentum_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "While in a savage form, melee hits have 8% chance to restore 1% HP and grant movement speed."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
+		probability: 8
+		ability<self>: savage_momentum_proc_1
+	}
+}
+
+aura druid_savage_momentum_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "While in a savage form, melee hits have 10% chance to restore 1.5% HP and grant movement speed."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
+		probability: 10
+		ability<self>: savage_momentum_proc_2
+	}
+}
+
+aura druid_savage_momentum_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "While in a savage form, melee hits have 12% chance to restore 2% HP and grant movement speed."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
+		probability: 12
+		ability<self>: savage_momentum_proc_3
+	}
+}
+
+aura druid_savage_momentum_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "While in a savage form, melee hits have 14% chance to restore 2.5% HP and grant movement speed."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
+		probability: 14
+		ability<self>: savage_momentum_proc_4
+	}
+}
+
+aura druid_savage_momentum_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "While in a savage form, melee hits have 16% chance to restore 3% HP and grant movement speed."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
+		probability: 16
+		ability<self>: savage_momentum_proc_5
+	}
+}
+
+# Critical Instinct - Crit chance + mana on crit
+talent druid_critical_instinct:
+{
+	string: "Critical Instinct"
+	icon: icon_crit
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: druid_critical_instinct_1 }
+		{ aura: druid_critical_instinct_2 }
+		{ aura: druid_critical_instinct_3 }
+		{ aura: druid_critical_instinct_4 }
+		{ aura: druid_critical_instinct_5 }
+	]
+}
+
+ability critical_instinct_mana_1:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.01 x: mana_max entity: source }
+	}
+}
+
+ability critical_instinct_mana_2:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.02 x: mana_max entity: source }
+	}
+}
+
+ability critical_instinct_mana_3:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.03 x: mana_max entity: source }
+	}
+}
+
+ability critical_instinct_mana_4:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.04 x: mana_max entity: source }
+	}
+}
+
+ability critical_instinct_mana_5:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect modify_resource:
+	{
+		resource: mana
+		function: { expression: a_mul_x a: 0.05 x: mana_max entity: source }
+	}
+}
+
+aura druid_critical_instinct_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Crit chance +1%. Critical strikes restore 1% base mana."
+	stat_modifiers: { phys_crit_chance: { add: 1 } }
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: critical_instinct_mana_1
+	}
+}
+
+aura druid_critical_instinct_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Crit chance +2%. Critical strikes restore 2% base mana."
+	stat_modifiers: { phys_crit_chance: { add: 2 } }
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: critical_instinct_mana_2
+	}
+}
+
+aura druid_critical_instinct_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Crit chance +3%. Critical strikes restore 3% base mana."
+	stat_modifiers: { phys_crit_chance: { add: 3 } }
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: critical_instinct_mana_3
+	}
+}
+
+aura druid_critical_instinct_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Crit chance +4%. Critical strikes restore 4% base mana."
+	stat_modifiers: { phys_crit_chance: { add: 4 } }
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: critical_instinct_mana_4
+	}
+}
+
+aura druid_critical_instinct_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Crit chance +5%. Critical strikes restore 5% base mana."
+	stat_modifiers: { phys_crit_chance: { add: 5 } }
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: critical_instinct_mana_5
+	}
+}
+
+###############################################################################
+# TIER 5 (5 pts) - Form Improvements
+###############################################################################
+
+# Improved Cat Form - Grants Rip/Ravage/Pounce
+# Note to demogorgon1: Crit bonus built into damage_output_modifier since conditional stat_modifiers not supported **HINT HINT*** :)
+talent druid_improved_cat_form:
+{
+	string: "Improved Cat Form"
+	icon: icon_cat
+	talent_tree_points_required: 5
+	points:
+	[
+		{ aura: druid_improved_cat_form_1 ability: rip }
+		{ aura: druid_improved_cat_form_2 ability: ravage }
+		{ aura: druid_improved_cat_form_3 ability: pounce }
+	]
+}
+
+aura druid_improved_cat_form_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Cat Form: +5% damage. Grants Rip."
+	
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		type_mask: [ physical ]
+		multiplier: 1.05
+	}
+}
+
+aura druid_improved_cat_form_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Cat Form: +10% damage. Grants Ravage."
+	
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		type_mask: [ physical ]
+		multiplier: 1.10
+	}
+}
+
+aura druid_improved_cat_form_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Cat Form: +15% damage. Grants Pounce."
+	
+	aura_effect damage_output_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		type_mask: [ physical ]
+		multiplier: 1.15
+	}
+}
+
+# Improved Bear Form - Grants Lacerate/Maul/Bellow
+# Note: Defensive bonuses via damage_input_modifier since conditional stat_modifiers not supported
+talent druid_improved_bear_form:
+{
+	string: "Improved Bear Form"
+	icon: icon_toughness
+	talent_tree_points_required: 5
+	points:
+	[
+		{ aura: druid_improved_bear_form_1 ability: lacerate }
+		{ aura: druid_improved_bear_form_2 ability: maul }
+		{ aura: druid_improved_bear_form_3 ability: bellow }
+	]
+}
+
+aura druid_improved_bear_form_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Bear Form: +10% damage reduction. Grants Lacerate."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.90
+	}
+}
+
+aura druid_improved_bear_form_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Bear Form: +15% damage reduction. Grants Maul."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.85
+	}
+}
+
+aura druid_improved_bear_form_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Bear Form: +20% damage reduction. Grants Bellow."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.80
+	}
+}
+
+# Thick Hide - Damage reduction in savage forms
+# Note: Using damage_input_modifier since conditional stat_modifiers not supported
+talent druid_thick_hide:
+{
+	string: "Thick Hide"
+	icon: icon_toughness
+	talent_tree_points_required: 5
+	prerequisites: [ druid_improved_bear_form ]
+	points:
+	[
+		{ aura: druid_thick_hide_1 }
+		{ aura: druid_thick_hide_2 }
+		{ aura: druid_thick_hide_3 }
+		{ aura: druid_thick_hide_4 }
+		{ aura: druid_thick_hide_5 }
+	]
+}
+
+aura druid_thick_hide_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage taken reduced by an additional 4% while in Cat or Bear Form."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		multiplier: 0.96
+	}
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.96
+	}
+}
+
+aura druid_thick_hide_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage taken reduced by an additional 6% while in Cat or Bear Form."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		multiplier: 0.94
+	}
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.94
+	}
+}
+
+aura druid_thick_hide_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage taken reduced by an additional 8% while in Cat or Bear Form."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		multiplier: 0.92
+	}
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.92
+	}
+}
+
+aura druid_thick_hide_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage taken reduced by an additional 10% while in Cat or Bear Form."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		multiplier: 0.90
+	}
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.90
+	}
+}
+
+aura druid_thick_hide_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage taken reduced by an additional 12% while in Cat or Bear Form."
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: cat_form
+		multiplier: 0.88
+	}
+	
+	aura_effect damage_input_modifier:
+	{
+		requirement self<must_have_aura>: bear_form
+		multiplier: 0.88
+	}
+}
+
+###############################################################################
+# TIER 5 GRANTED ABILITIES - Cat Form
+###############################################################################
+
+# Rip - Granted by Improved Cat Form R1
+cooldown rip:
+{
+	duration: 80
+}
+
+aura rip_bleed:
+{
+	string: "Rip"
+	description: "Bleeding heavily."
+	type: debuff
+	icon: icon_rend
+	duration: 120
+	flags: [ unique ]
+	
+	aura_effect repeat:
+	{
+		update_interval: 20
+		ability<self>: rip_bleed_damage
+	}
+}
+
+ability rip_bleed_damage:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect damage:
+	{
+		damage_type: bleed
+		function: { expression: a_mul_x x: attack_power a: 0.25 }
+		direct: false
+	}
+}
+
+ability rip:
+{
+	string: "Rip"
+	description: "Deals $damage$ damage and applies a heavy bleed over 12s. Requires Cat Form."
+	cooldowns: [ global rip ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_rend
+	target_particle_system: purple_spell_hit
+	delay: 3
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: cat_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.5 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: rip_bleed
+	}
+}
+
+# Ravage - Granted by Improved Cat Form R2
+cooldown ravage:
+{
+	duration: 100
+}
+
+ability ravage:
+{
+	string: "Ravage"
+	description: "Deals $damage$ damage. Requires Cat Form."
+	cooldowns: [ global ravage ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_claw_2
+	target_particle_system: purple_spell_hit
+	delay: 3
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: cat_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.8 }
+		spread: !DEFAULT_SPREAD{}
+	}
+}
+
+# Pounce - Granted by Improved Cat Form R3
+# Grants stealth, next melee from stealth is guaranteed crit
+cooldown pounce:
+{
+	duration: 300
+}
+
+aura pounce_stealth:
+{
+	string: "Prowl"
+	description: "Stealthed. Next melee attack will critically strike."
+	type: buff
+	icon: icon_stealth
+	duration: 200
+	flags: [ unique ]
+	
+	aura_effect stealth:
+	{
+	}
+}
+
+aura pounce_guaranteed_crit:
+{
+	string: "Pounce"
+	description: "Next melee attack is guaranteed to critically strike."
+	type: buff
+	icon: icon_crit
+	duration: 200
+	flags: [ unique ]
+	
+	stat_modifiers:
+	{
+		phys_crit_chance: { add: 100 }
+	}
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
+		ability<self>: pounce_consume
+	}
+}
+
+ability pounce_consume:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect remove_aura:
+	{
+		aura: pounce_stealth
+	}
+	
+	direct_effect remove_aura:
+	{
+		aura: pounce_guaranteed_crit
+	}
+}
+
+ability pounce:
+{
+	string: "Pounce"
+	description: "Enter stealth for 20s. Your next melee attack is guaranteed to critically strike. Requires Cat Form. Out of combat only."
+	cooldowns: [ global pounce ]
+	flags: [ target_self ]
+	states: [ default ]
+	icon: icon_stealth
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: cat_form
+	requirement self<must_not_be_in_state>: { id: in_combat }
+	
+	direct_effect apply_aura:
+	{
+		aura: pounce_stealth
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: pounce_guaranteed_crit
+	}
+}
+
+###############################################################################
+# TIER 5 GRANTED ABILITIES - Bear Form
+###############################################################################
+
+# Lacerate - Granted by Improved Bear Form R1
+cooldown lacerate:
+{
+	duration: 40
+}
+
+aura lacerate_bleed:
+{
+	string: "Lacerate"
+	description: "Bleeding from laceration."
+	type: debuff
+	icon: icon_rend
+	duration: 150
+	flags: [ magic ]
+	max_stack: 5
+	
+	aura_effect repeat:
+	{
+		update_interval: 30
+		ability<self>: lacerate_bleed_damage
+	}
+}
+
+ability lacerate_bleed_damage:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect damage:
+	{
+		damage_type: bleed
+		function: { expression: a_mul_x x: attack_power a: 0.12 }
+		direct: false
+	}
+}
+
+ability lacerate:
+{
+	string: "Lacerate"
+	description: "Deals $damage$ damage and applies a stacking bleed (max 5). Requires Bear Form."
+	cooldowns: [ global lacerate ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_rend
+	delay: 4
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.9 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: lacerate_bleed
+	}
+}
+
+# Maul - Granted by Improved Bear Form R2
+aura maul_wounded:
+{
+	string: "Wounded"
+	description: "Wounded by Maul."
+	type: debuff
+	icon: icon_hammer_1
+	duration: 100
+	flags: [ unique ]
+}
+
+ability maul:
+{
+	string: "Maul"
+	description: "Deals $damage$ damage and wounds target. Requires Bear Form."
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_hammer_1
+	target_particle_system: purple_spell_hit
+	delay: 4
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.3 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: maul_wounded
+	}
+}
+
+# Bellow - Granted by Improved Bear Form R3
+cooldown bellow:
+{
+	duration: 120
+}
+
+aura bellow_taunt:
+{
+	string: "Bellow"
+	description: "Taunted."
+	type: debuff
+	icon: icon_taunt
+	duration: 60
+	flags: [ unique ]
+	priority: !AURA_PRIORITY_CC{}
+	
+	aura_effect taunt:
+	{
+	}
+}
+
+ability bellow:
+{
+	string: "Bellow"
+	description: "Taunt all enemies within 3 tiles for 6s. Requires Bear Form."
+	cooldowns: [ global bellow ]
+	flags: [ target_self target_aoe target_aoe_always_self ]
+	states: [ default in_combat ]
+	icon: icon_taunt
+	aoe_radius: 3
+	aoe_cap: 8
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect apply_aura:
+	{
+		aura: bellow_taunt
+	}
+}
+
+###############################################################################
+# TIER 10 (10 pts)
+###############################################################################
+
+# Feral Lunge - Charge with root (requires Cat OR Bear form)
+talent druid_feral_lunge:
+{
+	string: "Feral Lunge"
+	icon: icon_charge
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability: feral_lunge_cat ability: feral_lunge_bear }
+	]
+}
+
+cooldown feral_lunge:
+{
+	duration: 150
+}
+
+aura feral_lunge_root:
+{
+	string: "Feral Lunge"
+	description: "Rooted."
+	type: debuff
+	icon: icon_charge
+	duration: 20
+	flags: [ unique ]
+	priority: !AURA_PRIORITY_CC{}
+	
+	aura_effect stun:
+	{
+	}
+}
+
+ability feral_lunge_hit:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.5 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_lunge_root
+	}
+}
+
+ability feral_lunge_cat:
+{
+	string: "Feral Lunge"
+	description: "Charge to target, dealing $damage$ damage and rooting. Requires Cat Form."
+	min_range: 2
+	range: 6
+	cooldowns: [ global feral_lunge ]
+	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: cat_form
+	
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 8
+		trigger_ability_on_resolve<target>: feral_lunge_hit
+	}
+}
+
+ability feral_lunge_bear:
+{
+	string: "Feral Lunge"
+	description: "Charge to target, dealing $damage$ damage and rooting. Requires Bear Form."
+	min_range: 2
+	range: 6
+	cooldowns: [ global feral_lunge ]
+	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 8
+		trigger_ability_on_resolve<target>: feral_lunge_hit
+	}
+}
+
+# Blood Scent - Bleed damage bonus (3 ranks)
+talent druid_blood_scent:
+{
+	string: "Blood Scent"
+	icon: icon_rend
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: druid_blood_scent_1 }
+		{ aura: druid_blood_scent_2 }
+		{ aura: druid_blood_scent_3 }
+	]
+}
+
+aura druid_blood_scent_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Bleed damage +10%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.10
+	}
+}
+
+aura druid_blood_scent_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Bleed damage +20%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.20
+	}
+}
+
+aura druid_blood_scent_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Bleed damage +30%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.30
+	}
+}
+
+# Sharpened Claws - Crit bonus damage (5 ranks)
+talent druid_sharpened_claws:
+{
+	string: "Sharpened Claws"
+	icon: icon_claw
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: druid_sharpened_claws_1 }
+		{ aura: druid_sharpened_claws_2 }
+		{ aura: druid_sharpened_claws_3 }
+		{ aura: druid_sharpened_claws_4 }
+		{ aura: druid_sharpened_claws_5 }
+	]
+}
+
+ability sharpened_claws_bonus_1:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.05 }
+	}
+}
+
+ability sharpened_claws_bonus_2:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.10 }
+	}
+}
+
+ability sharpened_claws_bonus_3:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.15 }
+	}
+}
+
+ability sharpened_claws_bonus_4:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.20 }
+	}
+}
+
+ability sharpened_claws_bonus_5:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	
+	direct_effect damage:
+	{
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.25 }
+	}
+}
+
+aura druid_sharpened_claws_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Melee critical strikes deal 5% AP as bonus physical damage."
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		combat_event_ability_mask: [ melee ]
+		ability<target>: sharpened_claws_bonus_1
+	}
+}
+
+aura druid_sharpened_claws_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Melee critical strikes deal 10% AP as bonus physical damage."
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		combat_event_ability_mask: [ melee ]
+		ability<target>: sharpened_claws_bonus_2
+	}
+}
+
+aura druid_sharpened_claws_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Melee critical strikes deal 15% AP as bonus physical damage."
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		combat_event_ability_mask: [ melee ]
+		ability<target>: sharpened_claws_bonus_3
+	}
+}
+
+aura druid_sharpened_claws_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Melee critical strikes deal 20% AP as bonus physical damage."
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		combat_event_ability_mask: [ melee ]
+		ability<target>: sharpened_claws_bonus_4
+	}
+}
+
+aura druid_sharpened_claws_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Melee critical strikes deal 25% AP as bonus physical damage."
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		combat_event_ability_mask: [ melee ]
+		ability<target>: sharpened_claws_bonus_5
+	}
+}
+
+###############################################################################
+# TIER 15 (15 pts)
+###############################################################################
+
+# Taste for Blood - Consume bleeds for damage + heal
+talent druid_taste_for_blood:
+{
+	string: "Taste for Blood"
+	icon: icon_heal
+	talent_tree_points_required: 15
+	prerequisites: [ druid_blood_scent ]
+	points:
+	[
+		{ ability: taste_for_blood }
+	]
+}
+
+cooldown taste_for_blood:
+{
+	duration: 80
+}
+
+ability taste_for_blood:
+{
+	string: "Taste for Blood"
+	description: "Consume all bleed effects on target, dealing burst damage and healing yourself."
+	cooldowns: [ global taste_for_blood ]
+	flags: [ melee offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_heal
+	talent_tree: druid_savagery
+	delay: 3
+	target_particle_system: purple_spell_hit
+	
+	# Remove all bleed auras
+	direct_effect remove_aura:
+	{
+		aura: rake_bleed
+	}
+	
+	direct_effect remove_aura:
+	{
+		aura: rip_bleed
+	}
+	
+	direct_effect remove_aura:
+	{
+		aura: lacerate_bleed
+	}
+	
+	# Burst damage - scales with attack power
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 1.5 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	# Heal self - triggers a self-targeted ability
+	direct_effect trigger_ability:
+	{
+		ability<self>: taste_for_blood_heal
+	}
+}
+
+ability taste_for_blood_heal:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_heal
+	sound_effects: !SOUND_HEAL{}
+	
+	direct_effect heal:
+	{
+		function: { expression: a_mul_x a: 0.15 x: health_max entity: target }
+	}
+}
+
+# Predatory Instinct - Execute damage bonus
+talent druid_predatory_instinct:
+{
+	string: "Predatory Instinct"
+	icon: icon_crit
+	talent_tree_points_required: 17
+	points:
+	[
+		{ aura: druid_predatory_instinct_1 }
+		{ aura: druid_predatory_instinct_2 }
+		{ aura: druid_predatory_instinct_3 }
+	]
+}
+
+aura druid_predatory_instinct_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Deal 25% more damage to targets below 15% HP."
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_have_less_health_than>: 15
+		type_mask: [ physical ]
+		multiplier: 1.25
+	}
+}
+
+aura druid_predatory_instinct_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Deal 25% more damage to targets below 20% HP."
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_have_less_health_than>: 20
+		type_mask: [ physical ]
+		multiplier: 1.25
+	}
+}
+
+aura druid_predatory_instinct_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Deal 25% more damage to targets below 25% HP."
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_have_less_health_than>: 25
+		type_mask: [ physical ]
+		multiplier: 1.25
+	}
+}
+
+# Survival Instincts - 50% DR for 6s, Bear only, 2min CD
+talent druid_survival_instincts:
+{
+	string: "Survival Instincts"
+	icon: icon_shell
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: survival_instincts }
+	]
+}
+
+cooldown survival_instincts:
+{
+	duration: 1200
+}
+
+aura survival_instincts_buff:
+{
+	string: "Survival Instincts"
+	description: "Damage taken reduced by 50%."
+	type: buff
+	icon: icon_shell
+	duration: 60
+	flags: [ unique ]
+	
+	aura_effect damage_input_modifier:
+	{
+		multiplier: 0.50
+	}
+}
+
+ability survival_instincts:
+{
+	string: "Survival Instincts"
+	description: "Reduce all damage taken by 50% for 6s. Requires Bear Form. 2 minute cooldown."
+	cooldowns: [ global survival_instincts ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_shell
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect apply_aura:
+	{
+		aura: survival_instincts_buff
+	}
+}
+
+# Savage Roar - Physical damage buff
+talent druid_savage_roar:
+{
+	string: "Savage Roar"
+	icon: icon_fury
+	talent_tree_points_required: 17
+	points:
+	[
+		{ ability: savage_roar }
+	]
+}
+
+cooldown savage_roar:
+{
+	duration: 300
+}
+
+aura savage_roar_buff:
+{
+	string: "Savage Roar"
+	description: "Physical damage +15%."
+	type: buff
+	icon: icon_fury
+	duration: 200
+	flags: [ unique ]
+	
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ physical ]
+		multiplier: 1.15
+	}
+}
+
+ability savage_roar:
+{
+	string: "Savage Roar"
+	description: "Increase physical damage by 15% for 20s."
+	cooldowns: [ global savage_roar ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	resource_cost mana: 20
+	talent_tree: druid_savagery
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_roar_buff
+	}
+}
+
+###############################################################################
+# TIER 20 (20 pts) - CAPSTONE
+###############################################################################
+
+talent druid_primal_rampage:
+{
+	string: "Primal Rampage"
+	icon: icon_summon_black_beast
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: primal_rampage }
+	]
+}
+
+cooldown primal_rampage:
+{
+	duration: 600
+}
+
+aura primal_rampage_buff:
+{
+	string: "Primal Rampage"
+	description: "Attack speed +50%, movement speed increased."
+	type: buff
+	icon: icon_fury
+	duration: 150
+	flags: [ unique ]
+	override_sprite: black_beast
+	
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
+			flags: [ attached blend_add ]
+			sprite_interval: 100
+			count: 1
+			scale: 0.8
+			alpha: 0.4
+			color_mod: [ 50 200 50 ]
+		}
+		
+		particle:
+		{
+			sprites: [ effect_z ]
+			flags: [ attached blend_add ]
+			count: 1
+			scale: 1.2
+			alpha: 0.3
+			color_mod: [ 100 255 100 ]
+		}
+	}
+	stat_modifiers:
+	{
+		attack_haste: { add_percent: 50 }
+	}
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: fast
+	}
+}
+
+ability primal_rampage:
+{
+	string: "Primal Rampage"
+	description: "Enter a primal rampage for 15s. Instantly heal 10% HP. +50% attack speed, increased movement."
+	cooldowns: [ global primal_rampage ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_summon_black_beast
+	resource_cost mana: 30
+	talent_tree: druid_savagery
+	sound_effects: !SOUND_HEAL{}
+	
+	direct_effect heal:
+	{
+		function: { expression: a_mul_x a: 0.10 x: health_max entity: target }
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: primal_rampage_buff
+	}
+}
