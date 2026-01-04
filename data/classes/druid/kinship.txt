@@ -58,8 +58,7 @@ aura companion_active:
 	description: "You have an active companion."
 	type: hidden
 	icon: icon_improved_poison_bomb
-	duration: 0
-	flags: [ unique persist_in_death ]
+	flags: [ unique indefinite persist_in_death ]
 }
 
 aura gift_of_the_untamed:
