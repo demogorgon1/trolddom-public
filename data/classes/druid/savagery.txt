@@ -71,8 +71,7 @@ aura cat_form:
 	description: "Transformed into a Panther"
 	type: buff
 	icon: icon_cat
-	duration: 86400000
-	flags: [ unique ]
+	flags: [ unique indefinite persist_in_death ]
 	aura_group: druid_forms
 	override_sprite: panther_1
 	
@@ -102,8 +101,7 @@ aura bear_form:
 	description: "Transformed into a Bear"
 	type: buff
 	icon: icon_toughness
-	duration: 86400000
-	flags: [ unique ]
+	flags: [ unique indefinite persist_in_death ]
 	aura_group: druid_forms
 	override_sprite: bear
 	
@@ -133,12 +131,13 @@ aura bear_form:
 ability cat_form:
 {
 	string: "Cat Form"
-	description: "Transform into a cat. +20% attack speed."
+	description: "Transform into a cat. +20% attack speed. Recast to cancel."
 	cooldowns: [ global cat_form ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_cat
 	resource_cost mana: 15
+	toggle_aura: cat_form
 	
 	direct_effect remove_aura:
 	{
@@ -154,12 +153,13 @@ ability cat_form:
 ability bear_form:
 {
 	string: "Bear Form"
-	description: "Transform into a bear. +30% armor."
+	description: "Transform into a bear. +30% armor. Recast to cancel."
 	cooldowns: [ global bear_form ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_toughness
 	resource_cost mana: 15
+	toggle_aura: bear_form
 	
 	direct_effect remove_aura:
 	{
@@ -178,11 +178,10 @@ ability bear_form:
 aura travel_form:
 {
 	string: "Travel Form"
-	description: "Increased movement speed. Cancelled by combat."
+	description: "Increased movement speed. Cancelled by combat or indoors."
 	type: buff
 	icon: icon_charge
-	flags: [ unique ]
-	duration: 86400000
+	flags: [ unique indefinite cancel_indoor ]
 	aura_group: druid_forms
 	override_sprite: deer
 	
@@ -214,18 +213,44 @@ aura travel_form:
 	{
 		move_speed: fast
 	}
+	
+	# Cancel when you get hit or crit
+	aura_effect combat_event_trigger:
+	{
+		combat_event<target>: [ hit critical ]
+		ability<self>: travel_form_cancel
+	}
+	
+	# Cancel when you hit or crit something
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: [ hit critical ]
+		ability<self>: travel_form_cancel
+	}
+}
+
+ability travel_form_cancel:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect remove_aura:
+	{
+		aura: travel_form
+	}
 }
 
 ability travel_form:
 {
 	string: "Travel Form"
-	description: "Transformed into a swift creature. Increased movement speed."
+	description: "Transform into a swift creature. Increased movement speed. Cannot be used indoors or in combat. Recast to cancel."
 	cooldowns: [ global ]
-	flags: [ target_self ]
+	flags: [ target_self no_indoor ]
 	states: [ default ]
 	icon: icon_charge
 	resource_cost mana: 5
 	talent_tree: druid_savagery
+	toggle_aura: travel_form
 	
 	requirement self<must_not_be_in_state>: { id: in_combat }
 
@@ -284,7 +309,7 @@ aura rake_bleed:
 
 ability rake_bleed_damage:
 {
-	flags: [ target_self always_in_range ]
+	flags: [ offensive target_self always_in_range ]
 	states: [ default in_combat ]
 	
 	direct_effect damage:
@@ -415,7 +440,7 @@ aura primal_swipe_bleed:
 
 ability primal_swipe_bleed_tick:
 {
-	flags: [ target_self always_in_range ]
+	flags: [ offensive target_self always_in_range ]
 	states: [ default in_combat ]
 	
 	direct_effect damage:
@@ -1048,7 +1073,7 @@ aura rip_bleed:
 
 ability rip_bleed_damage:
 {
-	flags: [ target_self always_in_range ]
+	flags: [ offensive target_self always_in_range ]
 	states: [ default in_combat ]
 	
 	direct_effect damage:
@@ -1228,7 +1253,7 @@ aura lacerate_bleed:
 
 ability lacerate_bleed_damage:
 {
-	flags: [ target_self always_in_range ]
+	flags: [ offensive target_self always_in_range ]
 	states: [ default in_combat ]
 	
 	direct_effect damage:

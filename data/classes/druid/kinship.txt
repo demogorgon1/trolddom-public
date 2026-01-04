@@ -96,6 +96,9 @@ ability gift_of_the_untamed:
 	resource_cost mana: 20
 	delay: 2
 	target_particle_system: heal
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 
 	# Base version (applies if no talent)
 	direct_effect apply_aura:
@@ -152,8 +155,54 @@ ability call_companion:
 	
 	direct_effect spawn_entity:
 	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_snake
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.65
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake_hp
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.65
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake_hp
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.65
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake_hp
 		init_state: spawning		
 		
 		refresh_npc_metrics:
@@ -1157,8 +1206,54 @@ ability call_of_the_wild_cat:
 	
 	direct_effect spawn_entity:
 	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_cat
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat_hp
 		init_state: spawning
 		
 		refresh_npc_metrics:
@@ -1192,8 +1287,54 @@ ability call_of_the_wild_wolf:
 	
 	direct_effect spawn_entity:
 	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_wolf
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf_hp
 		init_state: spawning
 		
 		refresh_npc_metrics:
@@ -1227,8 +1368,54 @@ ability call_of_the_wild_bear:
 	
 	direct_effect spawn_entity:
 	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_bear
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear_hp
 		init_state: spawning
 		
 		refresh_npc_metrics:
@@ -1262,6 +1449,7 @@ ability call_of_the_wild_owlbear:
 	
 	direct_effect spawn_entity:
 	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
 		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_owlbear
 		init_state: spawning
@@ -1273,33 +1461,49 @@ ability call_of_the_wild_owlbear:
 			armor: 0.9
 		}
 	}
-}
-
-ability call_companion_snake:
-{
-	string: "Call Companion: Snake"
-	description: "Summon a snake companion."
-	cast_time: 30
-	cooldowns: [ global call_of_the_wild ]
-	flags: [ target_self minion_summon class_minion_summon ]
-	states: [ default in_combat ]
-	icon: icon_improved_poison_bomb
-	resource_cost mana: 25
-	talent_tree: druid_kinship
-	
-	requirement self<must_not_be_in_state>: { id: in_combat }
 	
 	direct_effect spawn_entity:
 	{
+		must_have_ability_modifier: hunting_party_1
 		spawn_flags: [ no_owner source_level ]
-		entity: druid_companion_snake
+		entity: druid_companion_owlbear_hp
 		init_state: spawning
 		
 		refresh_npc_metrics:
 		{
 			weapon_damage: 0.85
-			health: 0.65
-			armor: 1
+			health: 0.7
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_owlbear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.7
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_owlbear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.7
+			armor: 0.9
 		}
 	}
 }

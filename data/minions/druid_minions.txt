@@ -19,10 +19,10 @@
 			_abilities: 
 			[ 
 				{ id: .druid_companion_snake_attack flags: [ auto ] } 
-				{ id: .snake_hunting_party_presence flags: [ auto ] }
+				{ id: .druid_companion_snake_venom_bite flags: [ auto ] target_must_not_have_aura: .druid_companion_snake_venom }
 			]
 			
-			_ability_prio: [ .snake_hunting_party_presence .druid_companion_snake_attack ]
+			_ability_prio: [ .druid_companion_snake_venom_bite .druid_companion_snake_attack ]
 			_class_minion: true
 			_store_combat_data: true
 		}
@@ -81,6 +81,65 @@
 				flags: [ can_be_critical ]
 				damage_type: physical			
 				function: { expression: a_mul_x_plus_b_mul_y a: 1 x: minion_weapon b: 1 y: owner_spell_damage }		
+			}
+		}
+		
+		cooldown .druid_companion_snake_venom_bite:
+		{
+			duration: 80
+		}
+		
+		aura .druid_companion_snake_venom:
+		{
+			string: "Venom"
+			description: "Poisoned, taking nature damage over time."
+			type: debuff
+			icon: icon_improved_poison_bomb
+			duration: 100
+			flags: [ unique magic ]
+			
+			aura_effect repeat:
+			{
+				update_interval: 20
+				update_count: 5
+				ability<self>: .druid_companion_snake_venom_tick
+			}
+		}
+		
+		ability .druid_companion_snake_venom_tick:
+		{
+			flags: [ offensive target_self always_in_range ]
+			states: [ default in_combat ]
+
+			direct_effect damage:
+			{
+				damage_type: nature
+				flags: [ is_magical ]
+				function: { expression: a_mul_x_plus_b a: 0.15 x: owner_spell_damage b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 20 ] ] }
+				direct: false
+			}
+		}
+		
+		ability .druid_companion_snake_venom_bite:
+		{
+			string: "Venom Bite"
+			description: "Deals $damage$ damage and poisons target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_improved_poison_bomb
+			cooldowns: [ .druid_companion_snake_venom_bite ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x a: 0.8 x: minion_weapon }		
+			}
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_snake_venom
 			}
 		}
 		
@@ -152,6 +211,15 @@
 		}
 		
 		entity druid_companion_snake: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_snake_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_snake_attack flags: [ auto ] } 
+				{ id: .druid_companion_snake_venom_bite flags: [ auto ] target_must_not_have_aura: .druid_companion_snake_venom }
+				{ id: .snake_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .snake_hunting_party_presence .druid_companion_snake_venom_bite .druid_companion_snake_attack ]
+		}
 	}
 
 	##############################################################################
@@ -169,11 +237,10 @@
 			_abilities: 
 			[ 
 				{ id: .druid_companion_cat_attack flags: [ auto ] } 
-				{ id: .druid_companion_cat_prowl flags: [ auto ] }
-				{ id: .cat_hunting_party_presence flags: [ auto ] }
+				{ id: .druid_companion_cat_prowl flags: [ auto ] self_must_not_have_aura: .druid_companion_cat_prowl }
 			]
 			
-			_ability_prio: [ .cat_hunting_party_presence .druid_companion_cat_prowl .druid_companion_cat_attack ]
+			_ability_prio: [ .druid_companion_cat_prowl .druid_companion_cat_attack ]
 			_class_minion: true
 			_store_combat_data: true
 		}
@@ -337,6 +404,15 @@
 		}
 		
 		entity druid_companion_cat: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_cat_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_cat_attack flags: [ auto ] } 
+				{ id: .druid_companion_cat_prowl flags: [ auto ] self_must_not_have_aura: .druid_companion_cat_prowl }
+				{ id: .cat_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .cat_hunting_party_presence .druid_companion_cat_prowl .druid_companion_cat_attack ]
+		}
 	}
 
 	##############################################################################
@@ -354,11 +430,10 @@
 			_abilities: 
 			[ 
 				{ id: .druid_companion_wolf_attack flags: [ auto ] } 
-				{ id: .druid_companion_wolf_howl flags: [ auto ] }
-				{ id: .wolf_hunting_party_presence flags: [ auto ] }
+				{ id: .druid_companion_wolf_howl flags: [ auto ] self_must_not_have_aura: .druid_companion_wolf_howl }
 			]
 			
-			_ability_prio: [ .wolf_hunting_party_presence .druid_companion_wolf_howl .druid_companion_wolf_attack ]		
+			_ability_prio: [ .druid_companion_wolf_howl .druid_companion_wolf_attack ]		
 			_class_minion: true
 			_store_combat_data: true
 		}
@@ -523,6 +598,15 @@
 		}
 		
 		entity druid_companion_wolf: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_wolf_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_wolf_attack flags: [ auto ] } 
+				{ id: .druid_companion_wolf_howl flags: [ auto ] self_must_not_have_aura: .druid_companion_wolf_howl }
+				{ id: .wolf_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .wolf_hunting_party_presence .druid_companion_wolf_howl .druid_companion_wolf_attack ]
+		}
 	}
 
 	##############################################################################
@@ -540,11 +624,10 @@
 			_abilities: 
 			[ 
 				{ id: .druid_companion_bear_attack flags: [ auto ] } 
-				{ id: .druid_companion_bear_swipe flags: [ auto ] }
-				{ id: .bear_hunting_party_presence flags: [ auto ] }
+				{ id: .druid_companion_bear_swipe flags: [ auto ] min_neighbor_hostiles: 2 }
 			]
 			
-			_ability_prio: [ .bear_hunting_party_presence .druid_companion_bear_swipe .druid_companion_bear_attack ]		
+			_ability_prio: [ .druid_companion_bear_swipe .druid_companion_bear_attack ]		
 			_class_minion: true
 			_store_combat_data: true
 		}
@@ -698,6 +781,15 @@
 		}
 		
 		entity druid_companion_bear: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_bear_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_bear_attack flags: [ auto ] } 
+				{ id: .druid_companion_bear_swipe flags: [ auto ] min_neighbor_hostiles: 2 }
+				{ id: .bear_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .bear_hunting_party_presence .druid_companion_bear_swipe .druid_companion_bear_attack ]
+		}
 	}
 
 	##############################################################################
@@ -715,11 +807,10 @@
 			_abilities: 
 			[ 
 				{ id: .druid_companion_owlbear_attack flags: [ auto ] } 
-				{ id: .druid_companion_owlbear_screech flags: [ auto ] }
-				{ id: .owlbear_hunting_party_presence flags: [ auto ] }
+				{ id: .druid_companion_owlbear_screech flags: [ auto ] target_must_not_have_aura: .druid_companion_owlbear_screech }
 			]
 			
-			_ability_prio: [ .owlbear_hunting_party_presence .druid_companion_owlbear_screech .druid_companion_owlbear_attack ]		
+			_ability_prio: [ .druid_companion_owlbear_screech .druid_companion_owlbear_attack ]		
 			_class_minion: true
 			_store_combat_data: true
 		}
@@ -884,6 +975,15 @@
 		}
 		
 		entity druid_companion_owlbear: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_owlbear_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_owlbear_attack flags: [ auto ] } 
+				{ id: .druid_companion_owlbear_screech flags: [ auto ] target_must_not_have_aura: .druid_companion_owlbear_screech }
+				{ id: .owlbear_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .owlbear_hunting_party_presence .druid_companion_owlbear_screech .druid_companion_owlbear_attack ]
+		}
 	}
 
 }

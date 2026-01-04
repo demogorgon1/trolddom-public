@@ -99,6 +99,9 @@ ability verdant_bolt:
 	delay: 2
 	target_particle_system: green_spell_hit
 	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
+	
 	# Base damage (no talent)
 	direct_effect damage:
 	{
@@ -256,6 +259,9 @@ ability sprouting_wound:
 	resource_cost mana: 12
 	delay: 2
 	target_particle_system: green_spell_hit
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 
 	# Base version - ONLY if no improved talent
 	direct_effect apply_aura:
@@ -373,6 +379,9 @@ ability grasping_vines:
 	delay: 2
 	talent_tree: druid_overgrowth
 	target_particle_system: green_spell_hit
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 
 	direct_effect apply_aura:
 	{	
@@ -439,6 +448,9 @@ ability mend_spirit:
 	delay: 2
 	target_particle_system: heal
 	sound_effects: !SOUND_HEAL{}
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	direct_effect heal:
 	{
@@ -863,6 +875,9 @@ ability pollinate:
 	resource_cost mana: 20
 	talent_tree: druid_overgrowth
 	target_particle_system: green_spell_hit
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 
 	direct_effect apply_aura:
 	{
@@ -1033,6 +1048,8 @@ ability fungal_network:
 	resource_cost mana: 5
 	talent_tree: druid_overgrowth
 	requirement self<must_have_aura>: fungal_network
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	direct_effect spawn_entity:
 	{
@@ -1057,6 +1074,9 @@ ability cultivate:
 	icon: icon_green_sphere
 	resource_cost mana: 15
 	talent_tree: druid_overgrowth
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	# Base version (no Fungal Network)
 	direct_effect spawn_entity:
@@ -1170,6 +1190,9 @@ ability wild_growth:
 	talent_tree: druid_overgrowth
 	delay: 2
 	sound_effects: !SOUND_HEAL{}
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	direct_effect apply_aura:
 	{
@@ -1315,6 +1338,9 @@ ability efflorescence:
 	talent_tree: druid_overgrowth
 	target_particle_system: heal
 	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
+	
 	direct_effect spawn_entity:
 	{
 		entity: efflorescence_zone
@@ -1350,6 +1376,9 @@ ability verdant_nova:
 	aoe_cap: 8
 	talent_tree: druid_overgrowth
 	target_particle_system: green_spell_hit
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	# Base damage
 	direct_effect damage:
@@ -1417,8 +1446,7 @@ aura grove_keeper_form:
 	description: "Transformed into a Grove Keeper. +25% nature damage, +20% healing."
 	type: buff
 	icon: icon_nature_heart_1
-	duration: 0
-	flags: [ unique persist_in_death ]
+	flags: [ unique indefinite persist_in_death ]
 	aura_group: druid_forms
 	override_sprite: wood_elemental_1
 	
@@ -1461,13 +1489,17 @@ aura grove_keeper_form:
 ability grove_keeper_form:
 {
 	string: "Grove Keeper Form"
-	description: "Transform into a Grove Keeper. +25% nature damage, +20% healing. Use again to cancel."
+	description: "Transform into a Grove Keeper. +25% nature damage, +20% healing. Recast to cancel."
 	cooldowns: [ global grove_keeper_form ]
 	flags: [ spell target_self ]
 	states: [ default in_combat ]
 	icon: icon_nature_heart_1
 	resource_cost mana: 10
 	talent_tree: druid_overgrowth
+	toggle_aura: grove_keeper_form
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	direct_effect apply_aura:
 	{
@@ -1627,6 +1659,9 @@ ability living_grove:
 	icon: icon_nature_heart_1
 	resource_cost mana: 50
 	talent_tree: druid_overgrowth
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
 	
 	direct_effect spawn_entity:
 	{
