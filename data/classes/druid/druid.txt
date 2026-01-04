@@ -126,10 +126,10 @@ class druid:
 	[
 		{ level: 1 unlock_abilities: [ druid_attack verdant_bolt !DEFAULT_ABILITIES{} ] stats: { dexterity: 5 strength: 4 wisdom: 6 constitution: 6 spirit: 7 } resource health: { add_max: 70 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
 		{ level: 2 unlock_abilities: [ mend_spirit ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
-		{ level: 3 unlock_abilities: [ gift_of_the_untamed ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 3 unlock_abilities: [ bear_form primal_swipe ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 4 unlock_abilities: [ sprouting_wound ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
-		{ level: 5 unlock_abilities: [ cat_form ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
-		{ level: 6 unlock_abilities: [ bear_form ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
+		{ level: 5 unlock_abilities: [ cat_form primal_strike] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
+		{ level: 6 unlock_abilities: [ gift_of_the_untamed ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
 		{ level: 7 unlock_abilities: [ call_companion ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 8 unlock_abilities: [ grasping_vines ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }
 		{ level: 9 unlock_abilities: [ bark_skin ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		

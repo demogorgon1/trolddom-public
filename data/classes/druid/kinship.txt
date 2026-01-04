@@ -7,7 +7,7 @@ talent_tree druid_kinship:
 {
 	string: "Kinship"
 	description: "Form powerful bonds with animal companions, enhancing you and your allies abilities."
-	icon: icon_nature_heart_1
+	icon: icon_summon_black_beast
 	
 	map_palette:
 	{
@@ -1142,7 +1142,7 @@ ability call_of_the_wild_cat:
 	cast_time: 30
 	cooldowns: [ global call_of_the_wild ]
 	flags: [ target_self minion_summon class_minion_summon ]
-	states: [ default ]
+	states: [ default in_combat ]
 	icon: icon_claw
 	resource_cost mana: 25
 	talent_tree: druid_kinship
@@ -1157,7 +1157,7 @@ ability call_of_the_wild_cat:
 	
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ source_level ]
+		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_cat
 		init_state: spawning
 		
@@ -1177,7 +1177,7 @@ ability call_of_the_wild_wolf:
 	cast_time: 30
 	cooldowns: [ global call_of_the_wild ]
 	flags: [ target_self minion_summon class_minion_summon ]
-	states: [ default ]
+	states: [ default in_combat ]
 	icon: icon_light_wolf
 	resource_cost mana: 25
 	talent_tree: druid_kinship
@@ -1192,7 +1192,7 @@ ability call_of_the_wild_wolf:
 	
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ source_level ]
+		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_wolf
 		init_state: spawning
 		
@@ -1212,7 +1212,7 @@ ability call_of_the_wild_bear:
 	cast_time: 30
 	cooldowns: [ global call_of_the_wild ]
 	flags: [ target_self minion_summon class_minion_summon ]
-	states: [ default ]
+	states: [ default in_combat ]
 	icon: icon_defend
 	resource_cost mana: 25
 	talent_tree: druid_kinship
@@ -1227,7 +1227,7 @@ ability call_of_the_wild_bear:
 	
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ source_level ]
+		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_bear
 		init_state: spawning
 		
@@ -1247,7 +1247,7 @@ ability call_of_the_wild_owlbear:
 	cast_time: 30
 	cooldowns: [ global call_of_the_wild ]
 	flags: [ target_self minion_summon class_minion_summon ]
-	states: [ default ]
+	states: [ default in_combat ]
 	icon: icon_spirit
 	resource_cost mana: 25
 	talent_tree: druid_kinship
@@ -1262,7 +1262,7 @@ ability call_of_the_wild_owlbear:
 	
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ source_level ]
+		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_owlbear
 		init_state: spawning
 		
@@ -1282,7 +1282,7 @@ ability call_companion_snake:
 	cast_time: 30
 	cooldowns: [ global call_of_the_wild ]
 	flags: [ target_self minion_summon class_minion_summon ]
-	states: [ default ]
+	states: [ default in_combat ]
 	icon: icon_improved_poison_bomb
 	resource_cost mana: 25
 	talent_tree: druid_kinship
@@ -1291,7 +1291,7 @@ ability call_companion_snake:
 	
 	direct_effect spawn_entity:
 	{
-		spawn_flags: [ source_level ]
+		spawn_flags: [ no_owner source_level ]
 		entity: druid_companion_snake
 		init_state: spawning
 		

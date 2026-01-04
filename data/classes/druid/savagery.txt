@@ -68,11 +68,11 @@ cooldown bear_form:
 aura cat_form:
 {
 	string: "Cat Form"
-	description: "Transformed into a cat. +20% attack speed, +10% movement speed."
+	description: "Transformed into a Panther"
 	type: buff
 	icon: icon_cat
-	duration: 0
-	flags: [ unique persist_in_death ]
+	duration: 86400000
+	flags: [ unique ]
 	aura_group: druid_forms
 	override_sprite: panther_1
 	
@@ -83,20 +83,11 @@ aura cat_form:
 			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
 			flags: [ attached blend_add ]
 			sprite_interval: 100
-			count: 1
+			duration: 50
+			count: 3
 			scale: 0.8
 			alpha: 0.4
 			color_mod: [ 50 200 50 ]
-		}
-		
-		particle:
-		{
-			sprites: [ effect_z ]
-			flags: [ attached blend_add ]
-			count: 1
-			scale: 1.2
-			alpha: 0.3
-			color_mod: [ 100 255 100 ]
 		}
 	}
 	
@@ -104,21 +95,15 @@ aura cat_form:
 	{
 		attack_haste: { add_percent: 20 }
 	}
-	
-	aura_effect move_speed_modifier:
-	{
-		move_speed: fast
-	}
 }
-
 aura bear_form:
 {
 	string: "Bear Form"
-	description: "Transformed into a bear. +30% armor, +20% constitution."
+	description: "Transformed into a Bear"
 	type: buff
 	icon: icon_toughness
-	duration: 0
-	flags: [ unique persist_in_death ]
+	duration: 86400000
+	flags: [ unique ]
 	aura_group: druid_forms
 	override_sprite: bear
 	
@@ -129,21 +114,13 @@ aura bear_form:
 			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
 			flags: [ attached blend_add ]
 			sprite_interval: 100
-			count: 1
+			duration: 50
+			count: 3
 			scale: 0.8
 			alpha: 0.4
 			color_mod: [ 50 200 50 ]
 		}
 		
-		particle:
-		{
-			sprites: [ effect_z ]
-			flags: [ attached blend_add ]
-			count: 1
-			scale: 1.2
-			alpha: 0.3
-			color_mod: [ 100 255 100 ]
-		}
 	}
 	
 	stat_modifiers:
@@ -156,7 +133,7 @@ aura bear_form:
 ability cat_form:
 {
 	string: "Cat Form"
-	description: "Transform into a cat. +20% attack speed. Enables Claw and Rake."
+	description: "Transform into a cat. +20% attack speed."
 	cooldowns: [ global cat_form ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
@@ -177,7 +154,7 @@ ability cat_form:
 ability bear_form:
 {
 	string: "Bear Form"
-	description: "Transform into a bear. +30% armor. Enables Swipe."
+	description: "Transform into a bear. +30% armor."
 	cooldowns: [ global bear_form ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
@@ -204,8 +181,8 @@ aura travel_form:
 	description: "Increased movement speed. Cancelled by combat."
 	type: buff
 	icon: icon_charge
-	duration: 0
-	flags: [ unique persist_in_death ]
+	flags: [ unique ]
+	duration: 86400000
 	aura_group: druid_forms
 	override_sprite: deer
 	
@@ -242,7 +219,7 @@ aura travel_form:
 ability travel_form:
 {
 	string: "Travel Form"
-	description: "Transform into a swift creature. Increased movement speed. Out of combat only."
+	description: "Transformed into a swift creature. Increased movement speed."
 	cooldowns: [ global ]
 	flags: [ target_self ]
 	states: [ default ]
@@ -352,7 +329,7 @@ ability rake:
 ability swipe:
 {
 	string: "Swipe"
-	description: "Deals $damage$ damage to enemies in front. Requires Bear Form."
+	description: "Cleave enemies in front of you for $damage$ damage."
 	cooldowns: [ global ]
 	flags: [ melee offensive target_other target_hostile target_aoe can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
@@ -369,6 +346,108 @@ ability swipe:
 		damage_type: physical
 		function: { expression: a_mul_x x: weapon a: 0.8 }
 		spread: !DEFAULT_SPREAD{}
+	}
+}
+
+###############################################################################
+# BASELINE MELEE ABILITIES (No form required)
+# Primal Strike (Level 3) and Primal Swipe (Level 5)
+###############################################################################
+
+# Primal Strike - Setup tool with damage amplification debuff
+aura primal_strike_debuff:
+{
+	string: "Primal Strike"
+	description: "Taking 5% increased damage."
+	type: debuff
+	icon: icon_swiftstrike
+	duration: 80
+	flags: [ unique ]
+	
+	aura_effect damage_input_modifier:
+	{
+		multiplier: 1.05
+	}
+}
+
+ability primal_strike:
+{
+	string: "Primal Strike"
+	description: "Deal $damage$ damage. Target takes 5% more damage for 8 seconds."
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	delay: 3
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.15 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: primal_strike_debuff
+	}
+}
+
+# Primal Swipe - Stacking bleed (up to 3 stacks)
+aura primal_swipe_bleed:
+{
+	string: "Primal Swipe"
+	description: "Bleeding for nature damage."
+	type: debuff
+	icon: icon_rend
+	duration: 120
+	flags: [ ]
+	max_stack: 3
+	
+	aura_effect repeat:
+	{
+		update_interval: 20
+		ability<self>: primal_swipe_bleed_tick
+	}
+}
+
+ability primal_swipe_bleed_tick:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	
+	direct_effect damage:
+	{
+		damage_type: nature
+		function: { expression: a_mul_x x: attack_power a: 0.12 }
+		direct: false
+	}
+}
+
+ability primal_swipe:
+{
+	string: "Primal Swipe"
+	description: "Deal $damage$ damage and apply a stacking bleed (max 3 stacks)."
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
+	states: [ default in_combat ]
+	icon: icon_rend
+	delay: 3
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.9 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: primal_swipe_bleed
 	}
 }
 
@@ -1845,15 +1924,6 @@ aura primal_rampage_buff:
 			color_mod: [ 50 200 50 ]
 		}
 		
-		particle:
-		{
-			sprites: [ effect_z ]
-			flags: [ attached blend_add ]
-			count: 1
-			scale: 1.2
-			alpha: 0.3
-			color_mod: [ 100 255 100 ]
-		}
 	}
 	stat_modifiers:
 	{

@@ -10,8 +10,8 @@
 # 5. Added Improved Sprouting Wound (stacking, +damage, +duration)
 # 6. Added Fungal Network (increases Lifespore count and healing)
 # 7. Removed prerequisite on Cultivate (was requiring Verdant Touch)
-# 8. Fixed Sprouting Wound stacking bug - all versions now share aura_group
-#    for mutual exclusion (improved replaces base automatically)
+# 8. Fixed Sprouting Wound stacking bug - base version now uses
+#    must_not_have_ability_modifiers to prevent replacing stacked auras
 #
 # STANDARD PATTERN: must_have_ability_modifier
 # - Talent grants ability_modifier
@@ -257,27 +257,30 @@ ability sprouting_wound:
 	delay: 2
 	target_particle_system: green_spell_hit
 
-	# Base version (always applies first, may be replaced by improved versions)
+	# Base version - ONLY if no improved talent
 	direct_effect apply_aura:
 	{
+		must_not_have_ability_modifiers: [ improved_sprouting_wound_1 improved_sprouting_wound_2 improved_sprouting_wound_3 ]
 		aura: sprouting_wound
 	}
 	
-	# R1: 2 stacks, +damage, +duration (replaces base via aura_group)
+	# R1: 2 stacks, +damage, +duration
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_sprouting_wound_1
+		must_not_have_ability_modifiers: [ improved_sprouting_wound_2 improved_sprouting_wound_3 ]
 		aura: sprouting_wound_2
 	}
 	
-	# R2: 3 stacks, +damage, +duration (replaces R1 via aura_group)
+	# R2: 3 stacks, +damage, +duration
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_sprouting_wound_2
+		must_not_have_ability_modifiers: [ improved_sprouting_wound_3 ]
 		aura: sprouting_wound_3
 	}
 	
-	# R3: 3 stacks, +damage, +duration (replaces R2 via aura_group)
+	# R3: 3 stacks, +damage, +duration
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_sprouting_wound_3
