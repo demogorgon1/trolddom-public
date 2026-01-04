@@ -850,3 +850,44 @@ item recipe_frost_grenade:
 		}
 	}	
 }
+
+#####################################################
+# Swiftness Potion
+
+ability craft_swiftness_potion: !ALCHEMY_CRAFT
+{
+	_string: "Swiftness Potion"
+	_item: consumable_swiftness_potion
+	_produce: { consumable_swiftness_potion: 1 } 
+	_materials: { item_sand_orchid: 2 item_slime_worms: 2 }
+	_skill: 100
+}
+
+ability .learn_swiftness_potion:
+{
+	string: "Recipe: Swiftness Potion"
+	description: "Teaches you how to make a Swiftness Potion."
+	flags: [ target_self item ]
+	cast_time: 20
+	icon: icon_scroll_1
+	cooldowns: [ global ]	
+	consume_items: { recipe_swiftness_potion: 1 }
+	required_profession<100>: alchemy
+	requirement self<must_not_have_profession_ability>: { id: craft_swiftness_potion }
+	direct_effect learn_profession_ability:
+	{
+		profession: alchemy
+		ability: craft_swiftness_potion
+	}
+}
+
+item recipe_swiftness_potion:
+{
+	type: miscellaneous
+	item_level: 16
+	rarity: uncommon
+	binds: when_picked_up
+	icon: icon_scroll_1
+	string: "Recipe: Swiftness Potion"
+	use_ability: .learn_swiftness_potion
+}

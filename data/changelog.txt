@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Heroic: Tower of Indulath." }		
 		{ text: "Another monster has appeared in the Tower of Indulath." }
+		{ text: "Blimcraft's assistant now sells a couple of new recipes." }
 	]
 
 	text: "Changes:"

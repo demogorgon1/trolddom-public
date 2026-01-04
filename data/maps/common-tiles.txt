@@ -49,23 +49,23 @@ sprites:
 		[ grass_border_1 grass_border_2 grass_border_3 grass_border_4 grass_border_5 grass_border_6 grass_border_7
 		  grass_border_8 grass_border_9 grass_border_10 grass_border_11 grass_border_12 grass_border_13 grass_border_14
 		  grass_border_15 grass_border_16 grass_border_17 ] alt_tiles: [ grass_alt_1 grass_alt_2 ] }	
-	sprite grass_border_1: { }
-	sprite grass_border_2: { }
-	sprite grass_border_3: { }
-	sprite grass_border_4: { }
-	sprite grass_border_5: { }
-	sprite grass_border_6: { }
-	sprite grass_border_7: { }
-	sprite grass_border_8: { }
-	sprite grass_border_9: { }
-	sprite grass_border_10: { }
-	sprite grass_border_11: { }
-	sprite grass_border_12: { }
-	sprite grass_border_13: { }
-	sprite grass_border_14: { }
-	sprite grass_border_15: { }
-	sprite grass_border_16: { }
-	sprite grass_border_17: { }
+	sprite grass_border_1: { alt_tiles: [ grass_border_1_alt_1 ] }
+	sprite grass_border_2: { alt_tiles: [ grass_border_2_alt_1 ] }
+	sprite grass_border_3: { alt_tiles: [ grass_border_3_alt_1 ] }
+	sprite grass_border_4: { alt_tiles: [ grass_border_4_alt_1 ] }
+	sprite grass_border_5: { alt_tiles: [ grass_border_5_alt_1 ] }
+	sprite grass_border_6: { alt_tiles: [ grass_border_6_alt_1 ] }
+	sprite grass_border_7: { alt_tiles: [ grass_border_7_alt_1 ] }
+	sprite grass_border_8: { alt_tiles: [ grass_border_8_alt_1 ] }
+	sprite grass_border_9: { alt_tiles: [ grass_border_9_alt_1 ] }
+	sprite grass_border_10: { alt_tiles: [ grass_border_10_alt_1 ] }
+	sprite grass_border_11: { alt_tiles: [ grass_border_11_alt_1 ] }
+	sprite grass_border_12: { alt_tiles: [ grass_border_12_alt_1 ] }
+	sprite grass_border_13: { alt_tiles: [ grass_border_13_alt_1 ] }
+	sprite grass_border_14: { alt_tiles: [ grass_border_14_alt_1 ] }
+	sprite grass_border_15: { alt_tiles: [ grass_border_15_alt_1 ] }
+	sprite grass_border_16: { alt_tiles: [ grass_border_16_alt_1 ] }
+	sprite grass_border_17: { alt_tiles: [ grass_border_17_alt_1 ] }
 	
 	sprite wood_wall_grass_1: { flags: [ tile_block_line_of_sight tile_top ] }
 	sprite wood_wall_grass_2: { flags: [ tile_block_line_of_sight tile_top ] }
@@ -88,23 +88,23 @@ sprites:
 		[ dirt_border_1 dirt_border_2 dirt_border_3 dirt_border_4 dirt_border_5 dirt_border_6 dirt_border_7
 		  dirt_border_8 dirt_border_9 dirt_border_10 dirt_border_11 dirt_border_12 dirt_border_13 dirt_border_14
 		  dirt_border_15 dirt_border_16 dirt_border_17 ] alt_tiles: [ dirt_alt_1 dirt_alt_2 ] }	
-	sprite dirt_border_1: { }
-	sprite dirt_border_2: { }
-	sprite dirt_border_3: { }
-	sprite dirt_border_4: { }
-	sprite dirt_border_5: { }
-	sprite dirt_border_6: { }
-	sprite dirt_border_7: { }
-	sprite dirt_border_8: { }
-	sprite dirt_border_9: { }
-	sprite dirt_border_10: { }
-	sprite dirt_border_11: { }
-	sprite dirt_border_12: { }
-	sprite dirt_border_13: { }
-	sprite dirt_border_14: { }
-	sprite dirt_border_15: { }
-	sprite dirt_border_16: { }
-	sprite dirt_border_17: { }
+	sprite dirt_border_1: { alt_tiles: [ dirt_border_1_alt_1 ] }
+	sprite dirt_border_2: { alt_tiles: [ dirt_border_2_alt_1 ] }
+	sprite dirt_border_3: { alt_tiles: [ dirt_border_3_alt_1 ] }
+	sprite dirt_border_4: { alt_tiles: [ dirt_border_4_alt_1 ] }
+	sprite dirt_border_5: { alt_tiles: [ dirt_border_5_alt_1 ] }
+	sprite dirt_border_6: { alt_tiles: [ dirt_border_6_alt_1 ] }
+	sprite dirt_border_7: { alt_tiles: [ dirt_border_7_alt_1 ] }
+	sprite dirt_border_8: { alt_tiles: [ dirt_border_8_alt_1 ] }
+	sprite dirt_border_9: { alt_tiles: [ dirt_border_9_alt_1 ] }
+	sprite dirt_border_10: { alt_tiles: [ dirt_border_10_alt_1 ] }
+	sprite dirt_border_11: { alt_tiles: [ dirt_border_11_alt_1 ] }
+	sprite dirt_border_12: { alt_tiles: [ dirt_border_12_alt_1 ] }
+	sprite dirt_border_13: { alt_tiles: [ dirt_border_13_alt_1 ] }
+	sprite dirt_border_14: { alt_tiles: [ dirt_border_14_alt_1 ] }
+	sprite dirt_border_15: { alt_tiles: [ dirt_border_15_alt_1 ] }
+	sprite dirt_border_16: { alt_tiles: [ dirt_border_16_alt_1 ] }
+	sprite dirt_border_17: { alt_tiles: [ dirt_border_17_alt_1 ] }
 	
 	skip: {}
 	skip: {}
@@ -128,23 +128,23 @@ sprites:
 		[ forest_border_1 forest_border_2 forest_border_3 forest_border_4 forest_border_5 forest_border_6 forest_border_7
 		  forest_border_8 forest_border_9 forest_border_10 forest_border_11 forest_border_12 forest_border_13 forest_border_14
 		  forest_border_15 forest_border_16 forest_border_17 ] alt_tiles: [ forest_alt_1 forest_alt_2 ] }	
-	sprite forest_border_1: { }
-	sprite forest_border_2: { }
-	sprite forest_border_3: { }
-	sprite forest_border_4: { }
-	sprite forest_border_5: { }
-	sprite forest_border_6: { }
-	sprite forest_border_7: { }
-	sprite forest_border_8: { }
-	sprite forest_border_9: { }
-	sprite forest_border_10: { }
-	sprite forest_border_11: { }
-	sprite forest_border_12: { }
-	sprite forest_border_13: { }
-	sprite forest_border_14: { }
-	sprite forest_border_15: { }
-	sprite forest_border_16: { }
-	sprite forest_border_17: { }
+	sprite forest_border_1: { alt_tiles: [ forest_border_1_alt_1 ] }
+	sprite forest_border_2: { alt_tiles: [ forest_border_2_alt_1 ] }
+	sprite forest_border_3: { alt_tiles: [ forest_border_3_alt_1 ] }
+	sprite forest_border_4: { alt_tiles: [ forest_border_4_alt_1 ] }
+	sprite forest_border_5: { alt_tiles: [ forest_border_5_alt_1 ] }
+	sprite forest_border_6: { alt_tiles: [ forest_border_6_alt_1 ] }
+	sprite forest_border_7: { alt_tiles: [ forest_border_7_alt_1 ] }
+	sprite forest_border_8: { alt_tiles: [ forest_border_8_alt_1 ] }
+	sprite forest_border_9: { alt_tiles: [ forest_border_9_alt_1 ] }
+	sprite forest_border_10: { alt_tiles: [ forest_border_10_alt_1 ] }
+	sprite forest_border_11: { alt_tiles: [ forest_border_11_alt_1 ] }
+	sprite forest_border_12: { alt_tiles: [ forest_border_12_alt_1 ] }
+	sprite forest_border_13: { alt_tiles: [ forest_border_13_alt_1 ] }
+	sprite forest_border_14: { alt_tiles: [ forest_border_14_alt_1 ] }
+	sprite forest_border_15: { alt_tiles: [ forest_border_15_alt_1 ] }
+	sprite forest_border_16: { alt_tiles: [ forest_border_16_alt_1 ] }
+	sprite forest_border_17: { alt_tiles: [ forest_border_17_alt_1 ] }
 	
 	sprite roof_2_nw: { flags: [ tile_indoor ] }
 	sprite roof_2_n: { flags: [ tile_indoor ] }
@@ -162,23 +162,23 @@ sprites:
 		[ rocks_border_1 rocks_border_2 rocks_border_3 rocks_border_4 rocks_border_5 rocks_border_6 rocks_border_7
 		  rocks_border_8 rocks_border_9 rocks_border_10 rocks_border_11 rocks_border_12 rocks_border_13 rocks_border_14
 		  rocks_border_15 rocks_border_16 rocks_border_17 ] alt_tiles: [ rocks_alt_1 rocks_alt_2 ] }		
-	sprite rocks_border_1: { }
-	sprite rocks_border_2: { }
-	sprite rocks_border_3: { }
-	sprite rocks_border_4: { }
-	sprite rocks_border_5: { }
-	sprite rocks_border_6: { }
-	sprite rocks_border_7: { }
-	sprite rocks_border_8: { }
-	sprite rocks_border_9: { }
-	sprite rocks_border_10: { }
-	sprite rocks_border_11: { }
-	sprite rocks_border_12: { }
-	sprite rocks_border_13: { }
-	sprite rocks_border_14: { }
-	sprite rocks_border_15: { }
-	sprite rocks_border_16: { }
-	sprite rocks_border_17: { }
+	sprite rocks_border_1: { alt_tiles: [ rocks_border_1_alt_1 ] }
+	sprite rocks_border_2: { alt_tiles: [ rocks_border_2_alt_1 ] }
+	sprite rocks_border_3: { alt_tiles: [ rocks_border_3_alt_1 ] }
+	sprite rocks_border_4: { alt_tiles: [ rocks_border_4_alt_1 ] }
+	sprite rocks_border_5: { alt_tiles: [ rocks_border_5_alt_1 ] }
+	sprite rocks_border_6: { alt_tiles: [ rocks_border_6_alt_1 ] }
+	sprite rocks_border_7: { alt_tiles: [ rocks_border_7_alt_1 ] }
+	sprite rocks_border_8: { alt_tiles: [ rocks_border_8_alt_1 ] }
+	sprite rocks_border_9: { alt_tiles: [ rocks_border_9_alt_1 ] }
+	sprite rocks_border_10: { alt_tiles: [ rocks_border_10_alt_1 ] }
+	sprite rocks_border_11: { alt_tiles: [ rocks_border_11_alt_1 ] }
+	sprite rocks_border_12: { alt_tiles: [ rocks_border_12_alt_1 ] }
+	sprite rocks_border_13: { alt_tiles: [ rocks_border_13_alt_1 ] }
+	sprite rocks_border_14: { alt_tiles: [ rocks_border_14_alt_1 ] }
+	sprite rocks_border_15: { alt_tiles: [ rocks_border_15_alt_1 ] }
+	sprite rocks_border_16: { alt_tiles: [ rocks_border_16_alt_1 ] }
+	sprite rocks_border_17: { alt_tiles: [ rocks_border_17_alt_1 ] }
 	
 	sprite roof_3_nw: { flags: [ tile_indoor ] }
 	sprite roof_3_n: { flags: [ tile_indoor ] }
@@ -196,23 +196,23 @@ sprites:
 		[ mud_border_1 mud_border_2 mud_border_3 mud_border_4 mud_border_5 mud_border_6 mud_border_7
 		  mud_border_8 mud_border_9 mud_border_10 mud_border_11 mud_border_12 mud_border_13 mud_border_14
 		  mud_border_15 mud_border_16 mud_border_17 ] alt_tiles: [ mud_alt_1 mud_alt_2 ] }		
-	sprite mud_border_1: { }
-	sprite mud_border_2: { }
-	sprite mud_border_3: { }
-	sprite mud_border_4: { }
-	sprite mud_border_5: { }
-	sprite mud_border_6: { }
-	sprite mud_border_7: { }
-	sprite mud_border_8: { }
-	sprite mud_border_9: { }
-	sprite mud_border_10: { }
-	sprite mud_border_11: { }
-	sprite mud_border_12: { }
-	sprite mud_border_13: { }
-	sprite mud_border_14: { }
-	sprite mud_border_15: { }
-	sprite mud_border_16: { }	
-	sprite mud_border_17: { }
+	sprite mud_border_1: { alt_tiles: [ mud_border_1_alt_1 ] }
+	sprite mud_border_2: { alt_tiles: [ mud_border_2_alt_1 ] }
+	sprite mud_border_3: { alt_tiles: [ mud_border_3_alt_1 ] }
+	sprite mud_border_4: { alt_tiles: [ mud_border_4_alt_1 ] }
+	sprite mud_border_5: { alt_tiles: [ mud_border_5_alt_1 ] }
+	sprite mud_border_6: { alt_tiles: [ mud_border_6_alt_1 ] }
+	sprite mud_border_7: { alt_tiles: [ mud_border_7_alt_1 ] }
+	sprite mud_border_8: { alt_tiles: [ mud_border_8_alt_1 ] }
+	sprite mud_border_9: { alt_tiles: [ mud_border_9_alt_1 ] }
+	sprite mud_border_10: { alt_tiles: [ mud_border_10_alt_1 ] }
+	sprite mud_border_11: { alt_tiles: [ mud_border_11_alt_1 ] }
+	sprite mud_border_12: { alt_tiles: [ mud_border_12_alt_1 ] }
+	sprite mud_border_13: { alt_tiles: [ mud_border_13_alt_1 ] }
+	sprite mud_border_14: { alt_tiles: [ mud_border_14_alt_1 ] }
+	sprite mud_border_15: { alt_tiles: [ mud_border_15_alt_1 ] }
+	sprite mud_border_16: { alt_tiles: [ mud_border_16_alt_1 ] }	
+	sprite mud_border_17: { alt_tiles: [ mud_border_17_alt_1 ] }
 	
 	sprite roof_4_nw: { flags: [ tile_indoor ] }
 	sprite roof_4_n: { flags: [ tile_indoor ] }
@@ -230,23 +230,23 @@ sprites:
 		[ sand_border_1 sand_border_2 sand_border_3 sand_border_4 sand_border_5 sand_border_6 sand_border_7
 		  sand_border_8 sand_border_9 sand_border_10 sand_border_11 sand_border_12 sand_border_13 sand_border_14
 		  sand_border_15 sand_border_16 sand_border_17 ] alt_tiles: [ sand_alt_1 sand_alt_2 ] }		
-	sprite sand_border_1: { }
-	sprite sand_border_2: { }
-	sprite sand_border_3: { }
-	sprite sand_border_4: { }
-	sprite sand_border_5: { }
-	sprite sand_border_6: { }
-	sprite sand_border_7: { }
-	sprite sand_border_8: { }
-	sprite sand_border_9: { }
-	sprite sand_border_10: { }
-	sprite sand_border_11: { }
-	sprite sand_border_12: { }
-	sprite sand_border_13: { }
-	sprite sand_border_14: { }
-	sprite sand_border_15: { }
-	sprite sand_border_16: { }	
-	sprite sand_border_17: { }
+	sprite sand_border_1: { alt_tiles: [ sand_border_1_alt_1 ] }
+	sprite sand_border_2: { alt_tiles: [ sand_border_2_alt_1 ] }
+	sprite sand_border_3: { alt_tiles: [ sand_border_3_alt_1 ] }
+	sprite sand_border_4: { alt_tiles: [ sand_border_4_alt_1 ] }
+	sprite sand_border_5: { alt_tiles: [ sand_border_5_alt_1 ] }
+	sprite sand_border_6: { alt_tiles: [ sand_border_6_alt_1 ] }
+	sprite sand_border_7: { alt_tiles: [ sand_border_7_alt_1 ] }
+	sprite sand_border_8: { alt_tiles: [ sand_border_8_alt_1 ] }
+	sprite sand_border_9: { alt_tiles: [ sand_border_9_alt_1 ] }
+	sprite sand_border_10: { alt_tiles: [ sand_border_10_alt_1 ] }
+	sprite sand_border_11: { alt_tiles: [ sand_border_11_alt_1 ] }
+	sprite sand_border_12: { alt_tiles: [ sand_border_12_alt_1 ] }
+	sprite sand_border_13: { alt_tiles: [ sand_border_13_alt_1 ] }
+	sprite sand_border_14: { alt_tiles: [ sand_border_14_alt_1 ] }
+	sprite sand_border_15: { alt_tiles: [ sand_border_15_alt_1 ] }
+	sprite sand_border_16: { alt_tiles: [ sand_border_16_alt_1 ] }	
+	sprite sand_border_17: { alt_tiles: [ sand_border_17_alt_1 ] }
 
 	cursor: { position: [ 0 112 ] }
 	
@@ -1421,4 +1421,123 @@ sprites:
 	sprite slime: { flags: [ tile_fishable tile_water tile_no_water_edge ] water_floor: slime_base water_animation: [ slime_1 slime_2 slime_3 ] }
 	sprite slime_base: { flags: [ tile_walkable ] }		
 
+	cursor: { position: [ 0 752 ] }
+	
+	sprite grass_border_1_alt_1: { }
+	sprite grass_border_2_alt_1: { }
+	sprite grass_border_3_alt_1: { }
+	sprite grass_border_4_alt_1: { }
+	sprite grass_border_5_alt_1: { }
+	sprite grass_border_6_alt_1: { }
+	sprite grass_border_7_alt_1: { }
+	sprite grass_border_8_alt_1: { }
+	sprite grass_border_9_alt_1: { }
+	sprite grass_border_10_alt_1: { }
+	sprite grass_border_11_alt_1: { }
+	sprite grass_border_12_alt_1: { }
+	sprite grass_border_13_alt_1: { }
+	sprite grass_border_14_alt_1: { }
+	sprite grass_border_15_alt_1: { }
+	sprite grass_border_16_alt_1: { }	
+	sprite grass_border_17_alt_1: { }
+	
+	cursor: { position: [ 0 768 ] }
+	
+	sprite dirt_border_1_alt_1: { }
+	sprite dirt_border_2_alt_1: { }
+	sprite dirt_border_3_alt_1: { }
+	sprite dirt_border_4_alt_1: { }
+	sprite dirt_border_5_alt_1: { }
+	sprite dirt_border_6_alt_1: { }
+	sprite dirt_border_7_alt_1: { }
+	sprite dirt_border_8_alt_1: { }
+	sprite dirt_border_9_alt_1: { }
+	sprite dirt_border_10_alt_1: { }
+	sprite dirt_border_11_alt_1: { }
+	sprite dirt_border_12_alt_1: { }
+	sprite dirt_border_13_alt_1: { }
+	sprite dirt_border_14_alt_1: { }
+	sprite dirt_border_15_alt_1: { }
+	sprite dirt_border_16_alt_1: { }	
+	sprite dirt_border_17_alt_1: { }
+
+	cursor: { position: [ 0 784 ] }
+	
+	sprite forest_border_1_alt_1: { }
+	sprite forest_border_2_alt_1: { }
+	sprite forest_border_3_alt_1: { }
+	sprite forest_border_4_alt_1: { }
+	sprite forest_border_5_alt_1: { }
+	sprite forest_border_6_alt_1: { }
+	sprite forest_border_7_alt_1: { }
+	sprite forest_border_8_alt_1: { }
+	sprite forest_border_9_alt_1: { }
+	sprite forest_border_10_alt_1: { }
+	sprite forest_border_11_alt_1: { }
+	sprite forest_border_12_alt_1: { }
+	sprite forest_border_13_alt_1: { }
+	sprite forest_border_14_alt_1: { }
+	sprite forest_border_15_alt_1: { }
+	sprite forest_border_16_alt_1: { }	
+	sprite forest_border_17_alt_1: { }
+
+	cursor: { position: [ 0 800 ] }
+	
+	sprite rocks_border_1_alt_1: { }
+	sprite rocks_border_2_alt_1: { }
+	sprite rocks_border_3_alt_1: { }
+	sprite rocks_border_4_alt_1: { }
+	sprite rocks_border_5_alt_1: { }
+	sprite rocks_border_6_alt_1: { }
+	sprite rocks_border_7_alt_1: { }
+	sprite rocks_border_8_alt_1: { }
+	sprite rocks_border_9_alt_1: { }
+	sprite rocks_border_10_alt_1: { }
+	sprite rocks_border_11_alt_1: { }
+	sprite rocks_border_12_alt_1: { }
+	sprite rocks_border_13_alt_1: { }
+	sprite rocks_border_14_alt_1: { }
+	sprite rocks_border_15_alt_1: { }
+	sprite rocks_border_16_alt_1: { }	
+	sprite rocks_border_17_alt_1: { }
+
+	cursor: { position: [ 0 816 ] }
+	
+	sprite mud_border_1_alt_1: { }
+	sprite mud_border_2_alt_1: { }
+	sprite mud_border_3_alt_1: { }
+	sprite mud_border_4_alt_1: { }
+	sprite mud_border_5_alt_1: { }
+	sprite mud_border_6_alt_1: { }
+	sprite mud_border_7_alt_1: { }
+	sprite mud_border_8_alt_1: { }
+	sprite mud_border_9_alt_1: { }
+	sprite mud_border_10_alt_1: { }
+	sprite mud_border_11_alt_1: { }
+	sprite mud_border_12_alt_1: { }
+	sprite mud_border_13_alt_1: { }
+	sprite mud_border_14_alt_1: { }
+	sprite mud_border_15_alt_1: { }
+	sprite mud_border_16_alt_1: { }	
+	sprite mud_border_17_alt_1: { }
+	
+	cursor: { position: [ 0 832 ] }
+	
+	sprite sand_border_1_alt_1: { }
+	sprite sand_border_2_alt_1: { }
+	sprite sand_border_3_alt_1: { }
+	sprite sand_border_4_alt_1: { }
+	sprite sand_border_5_alt_1: { }
+	sprite sand_border_6_alt_1: { }
+	sprite sand_border_7_alt_1: { }
+	sprite sand_border_8_alt_1: { }
+	sprite sand_border_9_alt_1: { }
+	sprite sand_border_10_alt_1: { }
+	sprite sand_border_11_alt_1: { }
+	sprite sand_border_12_alt_1: { }
+	sprite sand_border_13_alt_1: { }
+	sprite sand_border_14_alt_1: { }
+	sprite sand_border_15_alt_1: { }
+	sprite sand_border_16_alt_1: { }	
+	sprite sand_border_17_alt_1: { }	
 }

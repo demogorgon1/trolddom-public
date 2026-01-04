@@ -993,7 +993,10 @@ sprites:
 	sprite icon_belt_6: { tags: [ icon ] }
 	sprite icon_lich_tower_heroic: { tags: [ icon ] }
 	sprite icon_tirnwood_thicket_heroic: { tags: [ icon ] }
-	
+	sprite icon_worm_2: { tags: [ icon ] }
+	sprite icon_eel_2: { tags: [ icon ] }
+	sprite icon_eel_2_cooked: { tags: [ icon ] }
+	sprite icon_potion_12: { tags: [ icon ] }
 }
 
 

@@ -253,3 +253,41 @@ item recipe_hot_grilled_shrimp:
 		}
 	}
 }
+
+#####################################################
+# Cup of Warm Eels
+
+ability craft_cup_of_warm_eels: !COOKING_CRAFT
+{
+	_string: "Cup of Warm Eels"
+	_item: consumable_cup_of_warm_eels
+	_produce: { consumable_cup_of_warm_eels: 1 } 
+	_materials: { item_majestic_slime_eel: 2 item_wild_herbs: 1 }	
+	_skill: 100
+}
+
+item recipe_cup_of_warm_eels:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 20
+	icon: icon_scroll_1
+	string: "Recipe: Cup of Warm Eels"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Cup of Warm Eels."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_cup_of_warm_eels: 1 }
+		required_profession<100>: cooking
+		requirement self<must_not_have_profession_ability>: craft_cup_of_warm_eels
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_cup_of_warm_eels
+		}
+	}
+}
