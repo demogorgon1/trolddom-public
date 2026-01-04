@@ -115,6 +115,27 @@ sprites:
 	sprite doodad_sarcophagus_open: { flags: [ tile_walkable ] }
 	sprite doodad_sarcophagus_closed: { flags: [ tile_walkable ] }
 	sprite doodad_statue: { flags: [ ] }
+	sprite doodad_wall_shield_1: { flags: [ ] }
+	sprite doodad_wall_shield_2: { flags: [ ] }
+	sprite doodad_wall_shield_3: { flags: [ ] }
+	sprite doodad_wall_painting_1: { flags: [ ] }
+	sprite doodad_wall_painting_2: { flags: [ ] }
+	sprite doodad_wall_painting_3: { flags: [ ] }
+	sprite doodad_wall_painting_4: { flags: [ ] }
+	sprite doodad_wall_painting_5: { flags: [ ] }
+	sprite doodad_wall_painting_6: { flags: [ ] }
+	sprite doodad_wall_painting_7: { flags: [ ] }
+	sprite doodad_wall_painting_8: { flags: [ ] }
+	sprite doodad_wall_painting_9: { flags: [ ] }
+	sprite doodad_wall_painting_10: { flags: [ ] }
+	sprite doodad_wall_painting_11: { flags: [ ] }
+	sprite doodad_wall_painting_12: { flags: [ ] }
+	sprite doodad_wall_painting_13: { flags: [ ] }
+	sprite doodad_wall_painting_14: { flags: [ ] }
+	sprite doodad_wall_painting_15: { flags: [ ] }
+	sprite doodad_wall_painting_16: { flags: [ ] }
+	sprite doodad_wall_painting_17: { flags: [ ] }
+	sprite doodad_wall_painting_18: { flags: [ ] }
 	
 	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -405,3 +426,7 @@ doodad bones: { sprites: [ doodad_bone_1 doodad_bone_2 doodad_bone_3 ] map_palet
 doodad sarcophagus_open: { sprites: [ doodad_sarcophagus_open ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 doodad sarcophagus_closed: { sprites: [ doodad_sarcophagus_closed ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 doodad statue: { sprites: [ doodad_statue ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad wall_shield: { sprites: [ doodad_wall_shield_1 doodad_wall_shield_2 doodad_wall_shield_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
+doodad wall_painting: { sprites: [ doodad_wall_painting_1 doodad_wall_painting_2 doodad_wall_painting_3 doodad_wall_painting_4 doodad_wall_painting_5 doodad_wall_painting_6
+	doodad_wall_painting_7 doodad_wall_painting_8 doodad_wall_painting_9 doodad_wall_painting_10 doodad_wall_painting_11 doodad_wall_painting_12 
+	doodad_wall_painting_13 doodad_wall_painting_14 doodad_wall_painting_15 doodad_wall_painting_16 doodad_wall_painting_17 doodad_wall_painting_18 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 

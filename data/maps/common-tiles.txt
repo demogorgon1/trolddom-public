@@ -155,6 +155,10 @@ sprites:
 	sprite roof_2_sw: { flags: [ tile_indoor ] }
 	sprite roof_2_s: { flags: [ tile_indoor ] }
 	sprite roof_2_se: { flags: [ tile_indoor ] }	
+	sprite roof_2_c_1: { flags: [ tile_indoor ] }	
+	sprite roof_2_c_2: { flags: [ tile_indoor ] }	
+	sprite roof_2_c_3: { flags: [ tile_indoor ] }	
+	sprite roof_2_c_4: { flags: [ tile_indoor ] }	
 
 	cursor: { position: [ 0 64 ] }
 	
@@ -189,6 +193,10 @@ sprites:
 	sprite roof_3_sw: { flags: [ tile_indoor ] }
 	sprite roof_3_s: { flags: [ tile_indoor ] }
 	sprite roof_3_se: { flags: [ tile_indoor ] }	
+	sprite roof_3_c_1: { flags: [ tile_indoor ] }
+	sprite roof_3_c_2: { flags: [ tile_indoor ] }
+	sprite roof_3_c_3: { flags: [ tile_indoor ] }
+	sprite roof_3_c_4: { flags: [ tile_indoor ] }
 
 	cursor: { position: [ 0 80 ] }
 	
@@ -223,6 +231,10 @@ sprites:
 	sprite roof_4_sw: { flags: [ tile_indoor ] }
 	sprite roof_4_s: { flags: [ tile_indoor ] }
 	sprite roof_4_se: { flags: [ tile_indoor ] }	
+	sprite roof_4_c_1: { flags: [ tile_indoor ] }
+	sprite roof_4_c_2: { flags: [ tile_indoor ] }
+	sprite roof_4_c_3: { flags: [ tile_indoor ] }
+	sprite roof_4_c_4: { flags: [ tile_indoor ] }
 
 	cursor: { position: [ 0 96 ] }
 	
