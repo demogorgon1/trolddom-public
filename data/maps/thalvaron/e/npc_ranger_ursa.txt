@@ -91,7 +91,7 @@ objective .ranger_ursa_2:
 {
 	${ _level: 28 }
 	item .ranger_ursa_2_a: !QUEST_REWARD_SHOULDERS{ _string: "Mantle of the Urthonak Wizard" _icon: icon_shoulders_9 _constitution: 1 _wisdom: 4 _spirit: 2 _type: armor_cloth }
-	item .ranger_ursa_2_b: !QUEST_REWARD_LEGS{ _string: "Unstoppable Legplates" _icon: icon_plate_legs_1 _constitution: 2 _strength: 1 _dodge_chance: 1 _budget_bias: -10 _type: armor_plate }
+	item .ranger_ursa_2_b: !QUEST_REWARD_LEGS{ _string: "Unstoppable Legplates" _icon: icon_plate_legs_1 _constitution: 2 _strength: 1 _dodge: 1 _budget_bias: -10 _type: armor_plate }
 }
 
 quest .ranger_ursa_2:

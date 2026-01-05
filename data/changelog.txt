@@ -30,6 +30,10 @@ changelog:
 		{ text: "Improved support for lower screen resolutions." }
 		{ text: "Mouse wheel can be bound to actions again." }
 		{ text: "Fixed various minor issues." }
+		{ text: "Rurik Ironmantle quest line no longer ends abruptly." }
+		{ text: "Secrecy is now a tier 2 talent like intended." }
+		{ text: "More thundering Thunder Lizards." }
+		{ text: "Fixed items that didn't provide dodge chance like intended: Unstoppable Legplates, Pigdodger's Necklace, Bulwark of Tzun'Kala, and Shield of Zaggra." }
 	]
 
 	#######################################################################################

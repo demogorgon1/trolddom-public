@@ -21515,6 +21515,9 @@ ability craft_swiftness_potion 34513
 ability __professions_learn_swiftness_potion 34514
 ability craft_cup_of_warm_eels 34515
 ability _item_recipe_cup_of_warm_eels_use_ability 34516
+ability __maps_thalvaron_sw_rurik_ironmantle_2_a 34517
+ability _entity_thalvaron_thunder_lizard_components_npc_state_in_combat_abilities_id 34518
+ability _entity_thalvaron_thunder_lizard_boss_components_npc_state_in_combat_abilities_id 34519
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -30873,6 +30876,10 @@ sprite roof_4_c_1 6112
 sprite roof_4_c_2 6113
 sprite roof_4_c_3 6114
 sprite roof_4_c_4 6115
+sprite icon_rune_stone_2 6116
+sprite icon_rune_stone_3 6117
+sprite __unnamed_874__ 6118
+sprite __unnamed_873__ 6119
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -50746,7 +50753,6 @@ item recipe_herbed_snapper 36543
 item recipe_piranha_soup 36544
 item __maps_thalvaron_se_orm_thogore_1_quest_item 36545
 item __maps_thalvaron_se_seren_virelith_2_quest_item 36546
-item __maps_thalvaron_sw_mumle_whiterock_3_quest_item 36547
 item __maps_thalvaron_se_brill_craigsworth_3_quest_item 36548
 item _6_4_3_5cff2dea6062da92 36549
 item r_6_4_3_5cff2dea6062da92 36550
@@ -63185,6 +63191,9 @@ item recipe_swiftness_potion 52249
 item recipe_cup_of_warm_eels 52250
 item item_slime_worms 52251
 item item_majestic_slime_eel 52252
+item __maps_thalvaron_sw_rurik_ironmantle_1_quest_item 52253
+item __maps_thalvaron_sw_rurik_ironmantle_2_quest_item 52254
+item __maps_thalvaron_sw_rurik_ironmantle_2_a 52255
 aura knock 1
 aura dont_touch_me_bro 2
 aura immortality 3
@@ -65872,6 +65881,7 @@ aura _item_lich_tower_boss_6_1_heroic_aura 4743
 aura consumable_swiftness_potion 4744
 aura consumable_cup_of_warm_eels_buff 4745
 aura consumable_cup_of_warm_eels 4746
+aura __maps_thalvaron_sw_rurik_ironmantle_2_a 4747
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -66479,7 +66489,6 @@ loot_group fish_jungle 274
 loot_group fish_skaldrun 275
 loot_group __maps_thalvaron_se_orm_thogore_1_quest_item 276
 loot_group __maps_thalvaron_se_seren_virelith_2_quest_item 277
-loot_group thalvaron_mumle_whiterock_3_quest_item 278
 loot_group __maps_thalvaron_se_brill_craigsworth_3_quest_item 279
 loot_group __maps_durgan_urok_boss_6 280
 loot_group __maps_the_shrouded_lands_wanderer_1_quest_item 281
@@ -66584,6 +66593,8 @@ loot_group __maps_lich_tower_malrik_the_undying_heroic 379
 loot_group __maps_lich_tower_rotfang_heroic 380
 loot_group fish_slime_common 381
 loot_group fish_slime_uncommon 382
+loot_group thalvaron_rurik_ironmantle_1_quest_item 383
+loot_group thalvaron_rurik_ironmantle_2_quest_item 384
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -68013,7 +68024,6 @@ objective __maps_thalvaron_se_orm_thogore_1 266
 objective __maps_thalvaron_se_seren_virelith_1 267
 objective __maps_thalvaron_se_seren_virelith_2 268
 objective thalvaron_seren_virelith_3 269
-objective __maps_thalvaron_sw_mumle_whiterock_3 270
 objective __maps_thalvaron_sw_warmaster_jounheim_3 271
 objective __maps_thalvaron_se_brill_craigsworth_3 272
 objective __maps_the_shrouded_lands_wanderer_1 273
@@ -68113,6 +68123,8 @@ objective __maps_thalvaron_n_block_manson_2 369
 objective __seasonal_events_nisse_3_a 370
 objective __seasonal_events_nisse_3_b 371
 objective __seasonal_events_nisse_4 372
+objective __maps_thalvaron_sw_rurik_ironmantle_1 373
+objective __maps_thalvaron_sw_rurik_ironmantle_2 374
 quest spawn_of_umbracoth 3
 quest spawn_of_umbracoth_2 4
 quest gateway_world_quest_1 5
@@ -68372,7 +68384,6 @@ quest __maps_thalvaron_se_seren_virelith_1 309
 quest __maps_thalvaron_se_seren_virelith_2 310
 quest thalvaron_seren_virelith_3 311
 quest __maps_thalvaron_se_rod_gambil_3 312
-quest thalvaron_mumle_whiterock_3 313
 quest __maps_thalvaron_sw_warmaster_jounheim_3 314
 quest __maps_thalvaron_se_brill_craigsworth_3 315
 quest thalvaron_elaris_the_veil_walker_1 316
@@ -68481,6 +68492,8 @@ quest __maps_thalvaron_n_block_manson_2 420
 quest thalvaron_block_manson_3 421
 quest __seasonal_events_nisse_3 422
 quest thalvaron_nisse_4 423
+quest thalvaron_rurik_ironmantle_1 424
+quest thalvaron_rurik_ironmantle_2 425
 achievement cash_loot_1 6
 achievement cash_loot_2 7
 achievement cash_loot_3 8
@@ -69205,6 +69218,8 @@ cooldown _ability_npc_frostbolt_2_cooldown 215
 cooldown _ability_dragon_breath_cooldown 216
 cooldown _ability_priest_dragon_counterkick_cooldown 217
 cooldown _ability_lich_tower_6_slime_spit_cooldown 218
+cooldown _ability__entity_thalvaron_thunder_lizard_components_npc_state_in_combat_abilities_id_cooldown 219
+cooldown _ability__entity_thalvaron_thunder_lizard_boss_components_npc_state_in_combat_abilities_id_cooldown 220
 sound fantastic_a 1
 sound button_1 2
 sound switch_1 3

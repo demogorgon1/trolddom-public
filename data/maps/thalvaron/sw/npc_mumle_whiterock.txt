@@ -9,7 +9,6 @@ dialogue_screen .mumle_whiterock_dialogue:
 	[
 		{ quest: .mumle_whiterock_1 }
 		{ quest<offer_only>: .mumle_whiterock_2 }
-		#{ quest: thalvaron_mumle_whiterock_3 }   # FIXME uncomment this for 0.3.0
 	]
 }
 
@@ -184,59 +183,6 @@ quest .mumle_whiterock_2:
 	level: 16	
 	objectives: [ .mumle_whiterock_2 ]
 	reward_one_item: [ .mumle_whiterock_2_a .mumle_whiterock_2_b .mumle_whiterock_2_c ]
+	prerequisites: [ .mumle_whiterock_1 ]
 }
 
-##########################################################################################
-# Quest 3
-
-loot_group thalvaron_mumle_whiterock_3_quest_item: {}
-
-item .mumle_whiterock_3_quest_item:
-{
-	icon: icon_rune_stone_1
-	item_level: 22
-	loot_groups: [ thalvaron_mumle_whiterock_3_quest_item ]
-	flags: [ not_sellable unique ]
-	string: "Runed Elemental Rock"
-	quest: thalvaron_mumle_whiterock_3
-}
-
-objective .mumle_whiterock_3:
-{
-	string: "Runed Elemental Rock"
-	
-	maps: [ thalvaron ]
-	
-	collect_items: { item: .mumle_whiterock_3_quest_item count: 1 }
-}
-
-quest thalvaron_mumle_whiterock_3:
-{
-	string: "Secrets of Durgan Urok"
-
-	text:
-	[
-		"Find the ancient golem of Durgan Urok and return one of its rocks to Mumle Whiterock."
-	]
-	
-	description: 
-	[
-		"To the south east of here you'll find one of several gates leading to the ancient dwarven fortress of Durgan Urok. The place has been long abandoned by dwaves, allegedly now completely overrun by"
-		"orcs. Needless to say, it don't really want to go there, just to be captured and tortured by those brutes.\n\n"
-		"The thing is, I've heard rumors of a mighty golem roaming the corridors of outer Durgan Urok. Where it is exactly I don't know, what I know is that it must have been constructed using some very"
-		"intriguing stones. Please seek it out and return one of its rocks to me."
-	]
-
-	progress: 
-	[
-		"How is it going?"
-	]
-		
-	completion:
-	[
-		"That is one very interesting stone."
-	]
-
-	level: 22	
-	objectives: [ .mumle_whiterock_3 ]
-}

@@ -997,6 +997,8 @@ sprites:
 	sprite icon_eel_2: { tags: [ icon ] }
 	sprite icon_eel_2_cooked: { tags: [ icon ] }
 	sprite icon_potion_12: { tags: [ icon ] }
+	sprite icon_rune_stone_2 : { tags: [ icon ] }
+	sprite icon_rune_stone_3 : { tags: [ icon ] }
 }
 
 

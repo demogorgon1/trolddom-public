@@ -88,6 +88,7 @@ talent witch_secrecy:
 {
 	string: "Secrecy"
 	icon: icon_nature_heart_1
+	talent_tree_points_required: 5
 	points:
 	[
 		{ aura: witch_secrecy_1 }

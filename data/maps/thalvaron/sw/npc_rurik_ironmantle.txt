@@ -9,6 +9,8 @@ dialogue_screen .rurik_ironmantle_dialogue:
 	[
 		{ quest<completion_only>: .hort_ironmantle_2 }
 		{ quest<completion_only>: .mumle_whiterock_2 }
+		{ quest: thalvaron_rurik_ironmantle_1 }
+		{ quest: thalvaron_rurik_ironmantle_2 }
 	]
 }
 
@@ -30,3 +32,151 @@ entity thalvaron_rurik_ironmantle: !NPC
 	_not_pushable: true	
 }
 
+##########################################################################################
+# Quest 1
+
+loot_group thalvaron_rurik_ironmantle_1_quest_item: {}
+
+item .rurik_ironmantle_1_quest_item:
+{
+	icon: icon_rune_stone_1
+	item_level: 22
+	loot_groups: [ thalvaron_rurik_ironmantle_1_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Runed Elemental Rock"
+	quest: thalvaron_rurik_ironmantle_1
+}
+
+objective .rurik_ironmantle_1:
+{
+	string: "Runed Elemental Rock"
+	
+	maps: [ thalvaron ]
+	
+	collect_items: { item: .rurik_ironmantle_1_quest_item count: 1 }
+}
+
+quest thalvaron_rurik_ironmantle_1:
+{
+	string: "Secrets of Durgan Urok"
+
+	text:
+	[
+		"Find the ancient golem of Durgan Urok and return one of its rocks to Rurik Ironmantle in Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"To the south east of here you'll find one of several gates leading to the ancient dwarven fortress of Durgan Urok. The place has been long abandoned by dwarves, allegedly now completely overrun by"
+		"orcs. Needless to say, I don't really want to go there, just to be captured and tortured by those brutes.\n\n"
+		"The thing is, I've heard rumors of a mighty golem roaming the corridors of outer Durgan Urok. Where it is exactly I don't know, what I know is that it must have been constructed using some very"
+		"intriguing stones. Please seek it out and return one of its rocks to me."
+	]
+
+	progress: 
+	[
+		"How is it going?"
+	]
+		
+	completion:
+	[
+		"That is one very interesting stone. Let me see..."
+	]
+
+	level: 22	
+	objectives: [ .rurik_ironmantle_1 ]
+	prerequisites: [ .mumle_whiterock_2 ]
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group thalvaron_rurik_ironmantle_2_quest_item: {}
+
+item .rurik_ironmantle_2_quest_item:
+{
+	icon: icon_rune_stone_2
+	item_level: 22
+	loot_groups: [ thalvaron_rurik_ironmantle_2_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Charged Elemental Rock"
+	quest: thalvaron_rurik_ironmantle_2
+}
+
+objective .rurik_ironmantle_2:
+{
+	string: "Charged Elemental Rock"
+	
+	maps: [ durgan_urok ]
+	
+	collect_items: { item: .rurik_ironmantle_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 22 _rarity: rare }
+	
+	ability .rurik_ironmantle_2_a:
+	{
+		string: "Runecore Talisman"
+		states: [ default in_combat ]
+		icon: icon_rune_stone_3
+		direct_effect damage: 
+		{
+			flags: [ can_be_critical ]
+			damage_type: nature
+			function: 85
+			spread: 0.10
+		}		
+	}
+	
+	aura .rurik_ironmantle_2_a:
+	{
+		string: "Runecore Talisman"
+		description: "Sometimes deals damage to enemies that attack you in melee."
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_rune_stone_3
+		
+		aura_effect combat_event_trigger: 
+		{ 
+			combat_event<target>: [ hit critical block ]
+			combat_event_ability_mask: [ offensive melee ]
+			ability<self>: .rurik_ironmantle_2_a
+			probability: 24
+		}
+	}	
+	
+	item .rurik_ironmantle_2_a: !QUEST_REWARD_TRINKET{ _string: "Runecore Talisman" _icon: icon_rune_stone_3 _item_aura: .rurik_ironmantle_2_a }
+}
+
+quest thalvaron_rurik_ironmantle_2:
+{
+	string: "Runecore Sentinel"
+
+	text:
+	[
+		"Find the Runecore Sentinel deep inside Durgan Urok, destroy it, and return its elemental rock to Rurik in Durgan Tharok."
+	]
+	
+	description: 
+	[
+		"The stone you brought me has convinced that the myths of the Runecore Sentinel are true. Dwarves have long been talking about an ancient golem that was constructed to defend our underground realm, but was"
+		"corrupted. They call it the Runecore Sentinel. I want you to seek it out and bring back one of its stones. Get going, please."
+	]
+
+	progress: 
+	[
+		"How is it going?"
+	]
+		
+	completion:
+	[
+		"That's exactly what I was looking for. I'll break off a small piece of it. You can have it."
+	]
+
+	level: 22	
+	type: dungeon
+	objectives: [ .rurik_ironmantle_2 ]
+	prerequisites: [ thalvaron_rurik_ironmantle_1 ]
+	reward_all_items: [ .rurik_ironmantle_2_a ]
+}

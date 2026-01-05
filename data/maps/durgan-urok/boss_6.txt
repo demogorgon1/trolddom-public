@@ -10,6 +10,11 @@ loot_table .boss_6:
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
 		  map_message durgan_urok: "Runecore Sentinel will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .boss_6  } }			
+		
+		{
+			possibility: { loot_group: thalvaron_rurik_ironmantle_2_quest_item requirement self<must_have_active_quest>: { id: thalvaron_rurik_ironmantle_2 } }				
+		}
+		
 		!WORLD_DROPS{}		
 	]	
 }

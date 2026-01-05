@@ -1050,7 +1050,7 @@ map_entity_spawn thalvaron_dirt_slitherer:
 			
 				possibility: 
 				{ 
-					weight: 1
+					weight: 4
 					loot_group: .mumle_whiterock_2_quest_item 
 					requirement self<must_have_active_quest>: .mumle_whiterock_2 
 				} 

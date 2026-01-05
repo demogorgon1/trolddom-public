@@ -335,7 +335,7 @@ quest .sheila_urkins_3:
 	level: 20
 	type: dungeon
 	prerequisites: [ .sheila_urkins_2 ]
-	reward_one_item: [ .sheila_urkins_3_a ]
+	reward_all_items: [ .sheila_urkins_3_a ]
 }
 
 ############################################################
