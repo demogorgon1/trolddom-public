@@ -52,7 +52,7 @@ loot_table .boss_5:
 
 	item durgan_urok_5_4: !BOSS_DROP_HANDS
 	{
-		_string: "Aetherthread Shroud"
+		_string: "Gloves of Mending"
 		_type: armor_cloth
 		_icon: icon_gloves_1
 		_wisdom: 2

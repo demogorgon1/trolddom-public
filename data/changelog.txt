@@ -29,6 +29,7 @@ changelog:
 	[
 		{ text: "Improved support for lower screen resolutions." }
 		{ text: "Mouse wheel can be bound to actions again." }
+		{ text: "Fixed various minor issues." }
 	]
 
 	#######################################################################################
