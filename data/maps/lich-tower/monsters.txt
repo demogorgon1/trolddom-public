@@ -87,11 +87,14 @@ map_entity_spawn .skeletal_brute:
 		_default_behavior_state: .wandering_short
 		_loot_table: default_zombie
 		_weapon_damage: 2
-		_resource_health: 1.9
+		_resource_health: 1.9		
 		_abilities: 
 		[ 
 			{ id: npc_attack } 
 		]
+		
+		_heroic_weapon_damage: 2
+		_heroic_resource_health: 1.2		
 	}
 
 	entity .zombie_18_a: !NPC { _string: "Reanimated Corpse" _sprite: zombie_1 _sprite_dead: zombie_1_dead _level: 18 }
@@ -113,6 +116,9 @@ map_entity_spawn .skeletal_brute:
 		[ 
 			{ id: npc_attack } 
 		]
+		
+		_heroic_weapon_damage: 3.1
+		_heroic_resource_health: 4.7				
 	}
 
 	entity .bloated_zombie_18_a: !NPC { _string: "Bloated Zombie" _sprite: zombie_2 _sprite_dead: zombie_2_dead _level: 18 }
@@ -132,6 +138,9 @@ map_entity_spawn .skeletal_brute:
 		[ 
 			{ id: npc_attack } 
 		]
+		
+		_heroic_weapon_damage: 3.2
+		_heroic_resource_health: 2.8						
 	}
 
 	entity .skeletal_warrior_18_a: !NPC { _string: "Skeletal Warrior" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _level: 18 }
@@ -166,6 +175,9 @@ map_entity_spawn .skeletal_brute:
 			{ id: npc_heal target: low_health_friend_or_self } 
 			{ id: npc_attack } 
 		]
+		
+		_heroic_weapon_damage: 1.5
+		_heroic_resource_health: 1.9
 	}
 
 	entity .skeletal_healer_18_a: !NPC { _string: "Skeletal Priest" _sprite: skeleton_caster_3 _sprite_dead: skeleton_caster_3_dead _level: 18 }
@@ -189,6 +201,9 @@ map_entity_spawn .skeletal_brute:
 			{ id: npc_frostbolt_no_cooldown } 
 			{ id: npc_attack } 
 		]
+		
+		_heroic_weapon_damage: 1.5
+		_heroic_resource_health: 2.3		
 	}
 
 	entity .skeletal_caster_18_a: !NPC { _string: "Skeletal Mage" _sprite: skeleton_caster_1 _sprite_dead: skeleton_caster_1_dead _level: 18 }
@@ -210,6 +225,9 @@ map_entity_spawn .skeletal_brute:
 		[ 
 			{ id: npc_attack } 
 		]
+		
+		_heroic_weapon_damage: 3.3
+		_heroic_resource_health: 3.8		
 	}
 
 	entity .skeletal_brute_18_a: !NPC { _string: "Elite Guard" _sprite: skeleton_boss_1 _sprite_dead: skeleton_boss_1_dead _level: 18 }

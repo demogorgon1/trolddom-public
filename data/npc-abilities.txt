@@ -60,7 +60,7 @@ ability npc_poison_attack:
 					direct_effect damage:
 					{
 						damage_type: poison
-						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 heroic_multiplier: 2 }
 						direct: false
 					}				
 				}
@@ -121,7 +121,7 @@ ability npc_firebolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 		spread: !DEFAULT_SPREAD{}						
 	}
 }
@@ -159,7 +159,7 @@ ability npc_fireball:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: fire
-		function: { expression: a a: [ [ 1 24 ] [ 10 70 ] [ 20 140 ] [ 30 280 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 24 ] [ 10 70 ] [ 20 140 ] [ 30 280 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 		spread: !DEFAULT_SPREAD{}						
 	}
 	
@@ -190,7 +190,7 @@ ability npc_fireball:
 					direct_effect damage:
 					{
 						damage_type: fire
-						function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+						function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 						direct: false
 					}
 				}
@@ -300,7 +300,7 @@ ability npc_frostbolt:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 		spread: !DEFAULT_SPREAD{}						
 	}
 	
@@ -393,7 +393,7 @@ ability npc_frostbolt_no_cooldown:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: frost
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 		spread: !DEFAULT_SPREAD{}						
 	}
 	
@@ -427,7 +427,7 @@ ability npc_curse_tick:
 	direct_effect damage:
 	{
 		damage_type: unholy
-		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 		direct: false
 	}
 }
@@ -481,7 +481,7 @@ ability npc_poison_bite_tick:
 	direct_effect damage:
 	{
 		damage_type: poison
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 heroic_multiplier: 2 }
 		direct: false
 	}
 }
@@ -518,7 +518,7 @@ ability npc_poison_bite:
 	{
 		flags: [ can_be_critical ]
 		damage_type: poison
-		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 		spread: !DEFAULT_SPREAD{}						
 	}
 
@@ -543,7 +543,7 @@ ability npc_rend_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.5 }
+		function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.5 heroic_multiplier: 2 }
 		direct: false
 	}
 }
@@ -579,7 +579,7 @@ ability npc_rend:
 	{
 		flags: [ can_be_critical ]
 		damage_type: bleed
-		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 15 ] [ 20 30 ] [ 30 60 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
 	}
 
 	direct_effect apply_aura:
@@ -828,7 +828,7 @@ ability npc_chain_lightning_tertiary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }	
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }	
 		spread: !DEFAULT_SPREAD{}								
 	}			
 }
@@ -848,7 +848,7 @@ ability npc_chain_lightning_secondary:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }		
 		spread: !DEFAULT_SPREAD{}						
 	}			
 	
@@ -877,7 +877,7 @@ ability npc_chain_lightning:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }		
 		spread: !DEFAULT_SPREAD{}						
 	}		
 	
@@ -918,7 +918,7 @@ ability npc_arcane_detonation:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }			
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }			
 		spread: !DEFAULT_SPREAD{}							
 	}
 
@@ -942,6 +942,52 @@ particle_system npc_arcane_detonation:
 		scale: 3
 		alpha: 0.6
 		fade_out: 200
+	}
+}
+
+ability npc_poison_detonation:
+{
+	string: "Poison Detonation"
+	cooldowns: [ spell_arcane_lockout ]
+	flags: [ spell target_self target_aoe target_aoe_hostile always_in_line_of_sight always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_frost_explosion
+	cast_time: 20
+	delay: 3
+	aoe_radius: 2
+	aoe_cap: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	source_particle_system: npc_poison_detonation
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: poison
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }			
+		spread: !DEFAULT_SPREAD{}							
+	}
+
+	direct_effect damage:
+	{
+		flags: [ is_magical self ]
+		damage_type: poison
+		function: { expression: a_mul_x x: health_max a: 0.2 }				
+	}	
+}
+
+particle_system npc_poison_detonation:
+{
+	particle:
+	{
+		sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+		sprite_interval: 125
+		flags: [ attached blend_add no_loop ]
+		duration: 400
+		count: 1		
+		scale: 3
+		alpha: 0.6
+		fade_out: 200
+		color_mod: [ 0 255 0 ]
 	}
 }
 
@@ -980,7 +1026,7 @@ ability npc_fire_attack_fire_tick:
 	direct_effect damage:
 	{
 		damage_type: fire
-		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }				
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }				
 	}
 }
 
@@ -1045,7 +1091,7 @@ ability npc_arcane_explosion:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: arcane
-		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }		
 		spread: !DEFAULT_SPREAD{}						
 	}
 }
@@ -1274,7 +1320,7 @@ ability npc_infection_aura:
 					direct_effect damage:
 					{
 						damage_type: poison
-						function: { expression: a a: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 }			
+						function: { expression: a a: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }			
 						direct: false
 					}
 				}
@@ -1415,7 +1461,7 @@ ability npc_poison_bolt:
 					direct_effect damage:
 					{
 						damage_type: poison
-						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 }
+						function: { expression: a a: [ [ 1 2 ] [ 10 7 ] [ 20 14 ] [ 30 28 ] ] elite_multiplier: 2.1 heroic_multiplier: 2 }
 						direct: false
 					}				
 				}
@@ -1472,7 +1518,7 @@ ability npc_thorn_spit_no_cooldown:
 					direct_effect damage:
 					{
 						damage_type: bleed
-						function: { expression: a a: [ [ 1 2 ] [ 10 4 ] [ 20 7 ] [ 30 14 ] ] elite_multiplier: 1.8 }
+						function: { expression: a a: [ [ 1 2 ] [ 10 4 ] [ 20 7 ] [ 30 14 ] ] elite_multiplier: 1.8 heroic_multiplier: 2 }
 						direct: false
 					}
 				}
@@ -1500,7 +1546,7 @@ ability npc_beam_of_petrification:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: unholy
-		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 }		
+		function: { expression: a a: [ [ 1 15 ] [ 10 45 ] [ 20 90 ] [ 30 180 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }		
 		spread: !DEFAULT_SPREAD{}						
 	}		
 	
@@ -1599,7 +1645,7 @@ ability npc_curse_stacking_tick:
 	direct_effect damage:
 	{
 		damage_type: unholy
-		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 2 }
+		function: { expression: a a: [ [ 1 4 ] [ 10 10 ] [ 20 20 ] [ 30 40 ] ] elite_multiplier: 2 heroic_multiplier: 2 }
 		direct: false
 	}
 }

@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .malrik_the_undying: {}
+loot_group .malrik_the_undying_heroic: {}
 
 loot_table .malrik_the_undying:
 {
@@ -10,6 +11,19 @@ loot_table .malrik_the_undying:
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
 		  map_message lich_tower: "Malrik the Undying will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .malrik_the_undying  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
+	]	
+}
+
+loot_table .malrik_the_undying_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Malrik the Undying will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .malrik_the_undying_heroic  } }					
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 		!WORLD_DROPS_SKELETONS{}
@@ -79,6 +93,72 @@ loot_table .malrik_the_undying:
 	
 }
 
+{
+	${
+		_rarity: epic
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .malrik_the_undying_heroic
+		_heroic: true		
+	}	
+	
+	item lich_tower_22_heroic: !BOSS_DROP_2H_SWORD
+	{
+		_string: "Dwarven Greatsword"
+		_icon: icon_sword_12
+		_strength: 2
+		_constitution: 1
+		_budget_bias: -10
+		_phys_crit: 1
+		_weapon_cooldown: 34
+	}
+	
+	item lich_tower_23_heroic: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Staff of the Lich Lord"
+		_icon: icon_staff_7
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 3
+		_budget_bias: -10
+		_spell_crit: 1
+		_weapon_cooldown: 22
+	}
+	
+	item lich_tower_24_heroic: !BOSS_DROP_OFFHAND
+	{
+		_string: "Orb of Eternal Life"
+		_icon: icon_orb_1
+		_wisdom: 1
+		_healing: 3
+		_mana_per_5: 2
+	}
+
+	item lich_tower_25_heroic: !BOSS_DROP_1H_AXE
+	{
+		_string: "Bonehacker"
+		_icon: icon_axe_6
+		_constitution: 3
+		_strength: 2
+		_budget_bais: -10
+		_dodge: 1
+		_weapon_cooldown: 22		
+	}
+	
+	item lich_tower_26_heroic: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Battle-Mage Warstaff"
+		_icon: icon_staff_10
+		_dexterity: 4
+		_strength: 3
+		_budget_bias: -10
+		_phys_crit: 1
+		_weapon_cooldown: 30
+	}
+	
+}
+
 ############################################################
 # Boss
 
@@ -109,6 +189,10 @@ entity lich_tower_malrik_the_undying: !NPC
 	_immune_to_stun: true
 	_immune_to_immobilize: true
 	_immune_to_slow: true
+
+	_heroic_weapon_damage: 4.8
+	_heroic_resource_health: 17.3	
+	_loot_table_heroic: .malrik_the_undying_heroic
 
 	_abilities: 
 	[
@@ -221,6 +305,10 @@ aura .malrik_the_undying:
 		${
 			_weapon_damage: 1.5
 			_resource_health: 1.4
+			
+			_heroic_weapon_damage: 3.2
+			_heroic_resource_health: 3.2
+	
 			_abilities: 
 			[ 
 				{ id: npc_attack } 
@@ -234,6 +322,10 @@ aura .malrik_the_undying:
 		${
 			_weapon_damage: 1.1
 			_resource_health: 1
+			
+			_heroic_weapon_damage: 2.8
+			_heroic_resource_health: 2.8
+			
 			_abilities: 
 			[ 
 				{ id: npc_frostbolt_no_cooldown } 
@@ -245,9 +337,13 @@ aura .malrik_the_undying:
 	}
 
 	{
-		${
+		${		
 			_weapon_damage: 1.1
 			_resource_health: 1
+			
+			_heroic_weapon_damage: 2.8
+			_heroic_resource_health: 2.8
+			
 			_abilities: 
 			[ 
 				{ id: npc_heal target: low_health_friend_or_self } 

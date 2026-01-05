@@ -1,3 +1,9 @@
+dialogue_screen .blimcraft_assistant_vendor: 
+{
+	sell recipe_cup_of_warm_eels: { quantity: 1 cost: 20000 }	
+	sell recipe_swiftness_potion: { quantity: 1 cost: 20000 }	
+}
+
 dialogue_screen .blimcraft_assistant:
 {
 	text: 
@@ -10,6 +16,7 @@ dialogue_screen .blimcraft_assistant:
 		{ quest<completion_only>: thalvaron_blimcraft_highborne_3 }
 		{ quest<completion_only>: thalvaron_blimcraft_highborne_4 }
 		{ quest: thalvaron_blimcraft_assistant_1 }
+		{ goto: .blimcraft_assistant_vendor text: "Let me browse your goods." }
 	]
 }
 

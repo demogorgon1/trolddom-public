@@ -1207,3 +1207,38 @@ item consumable_schnaps (elixir):
 	string: "Schnaps"
 	use_ability: consumable_schnaps
 }
+
+#####################################################
+# Swiftness Potion
+
+aura consumable_swiftness_potion:
+{
+	string: "Swiftness"
+	type: buff
+	icon: icon_potion_12
+	duration: 150
+	description: "Movement speed increased."
+	flags: [ unique no_source_needed ]
+	
+	aura_effect move_speed_modifier:
+	{
+		move_speed: fast
+	}
+}
+
+ability consumable_swiftness_potion (potion):
+{
+	string: "Swiftness Potion"
+	description: "Increases your movement speed for 15 seconds."
+	icon: icon_potion_12
+	direct_effect apply_aura: { aura: consumable_swiftness_potion }
+	consume_items: { consumable_swiftness_potion: 1 }
+	required_level: 16
+}
+
+item consumable_swiftness_potion (potion):
+{
+	icon: icon_potion_12
+	string: "Swiftness Potion"
+	use_ability: consumable_swiftness_potion
+}

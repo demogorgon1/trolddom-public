@@ -133,6 +133,7 @@
 	tile jungle_wall_1_inside: [ 205 200 81 ]
 	tile jungle_wall_1_entrance: [ 200 81 181 ]
 	tile jungle_wall_1_entrance_closed: [ 120 242 81 ]
+	tile slime: [ 60 242 34 ]
 }
 
 !define DEFAULT_DOODAD_PALETTE
@@ -143,4 +144,11 @@
 	doodad potted_plant_4: [ 74 159 202 ]
 	doodad ground_mark_2: [ 49 84 120 ]
 	doodad crash_site: [ 30 48 125 ]
+	doodad slime_1x2_ns_out: [ 130 48 125 ]
+	doodad slime_1x2_ns_wall: [ 30 148 125 ]
+	doodad slime_1x2_ns_out_wall: [ 30 48 225 ]
+	doodad slime_2x2_ns_out: [ 30 248 125 ]
+	doodad wall_shield: [ 201 1 10 ]
+	doodad wall_painting: [ 20 201 10 ]
+	doodad bones: [ 100 100 141 ]
 }

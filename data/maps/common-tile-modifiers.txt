@@ -435,6 +435,19 @@ tile_modifier roof_2_e: { sprites: [ roof_2_e ] requirement<center_must_be>: [ r
 tile_modifier roof_2_s: { sprites: [ roof_2_s ] requirement<center_must_be>: [ roof_2 ] requirement<south_must_not_be>: [ roof_2 ] probability: 100 }
 tile_modifier roof_2_w: { sprites: [ roof_2_w ]	requirement<center_must_be>: [ roof_2 ] requirement<west_must_not_be>: [ roof_2 ] probability: 100 }
 
+tile_modifier roof_2_c_1: { sprites: [ roof_2_c_1 ] probability: 100 requirement<center_must_be>: [ roof_2 ] 
+	requirement<north_must_be>: [ roof_2 ] requirement<west_must_be>: [ roof_2 ] requirement<south_must_be>: [ roof_2 ] requirement<east_must_be>: [ roof_2 ] 
+	requirement<south_east_must_not_be>: [ roof_2 ] }
+tile_modifier roof_2_c_2: { sprites: [ roof_2_c_2 ] probability: 100 requirement<center_must_be>: [ roof_2 ] 
+	requirement<north_must_be>: [ roof_2 ] requirement<west_must_be>: [ roof_2 ] requirement<south_must_be>: [ roof_2 ] requirement<east_must_be>: [ roof_2 ] 
+	requirement<south_west_must_not_be>: [ roof_2 ] }
+tile_modifier roof_2_c_3: { sprites: [ roof_2_c_3 ] probability: 100 requirement<center_must_be>: [ roof_2 ] 
+	requirement<north_must_be>: [ roof_2 ] requirement<west_must_be>: [ roof_2 ] requirement<south_must_be>: [ roof_2 ] requirement<east_must_be>: [ roof_2 ] 
+	requirement<north_east_must_not_be>: [ roof_2 ] }
+tile_modifier roof_2_c_4: { sprites: [ roof_2_c_4 ] probability: 100 requirement<center_must_be>: [ roof_2 ] 
+	requirement<north_must_be>: [ roof_2 ] requirement<west_must_be>: [ roof_2 ] requirement<south_must_be>: [ roof_2 ] requirement<east_must_be>: [ roof_2 ] 
+	requirement<north_west_must_not_be>: [ roof_2 ] }
+
 tile_modifier roof_3_nw: { sprites: [ roof_3_nw ] requirement<center_must_be>: [ roof_3 ] requirement<north_must_not_be>: [ roof_3 ] requirement<west_must_not_be>: [ roof_3 ] probability: 100 priority: true }
 tile_modifier roof_3_ne: { sprites: [ roof_3_ne ] requirement<center_must_be>: [ roof_3 ] requirement<north_must_not_be>: [ roof_3 ] requirement<east_must_not_be>: [ roof_3 ] probability: 100 priority: true }
 tile_modifier roof_3_sw: { sprites: [ roof_3_sw ] requirement<center_must_be>: [ roof_3 ] requirement<south_must_not_be>: [ roof_3 ] requirement<west_must_not_be>: [ roof_3 ] probability: 100 priority: true }
@@ -444,6 +457,19 @@ tile_modifier roof_3_e: { sprites: [ roof_3_e ] requirement<center_must_be>: [ r
 tile_modifier roof_3_s: { sprites: [ roof_3_s ] requirement<center_must_be>: [ roof_3 ] requirement<south_must_not_be>: [ roof_3 ] probability: 100 }
 tile_modifier roof_3_w: { sprites: [ roof_3_w ]	requirement<center_must_be>: [ roof_3 ] requirement<west_must_not_be>: [ roof_3 ] probability: 100 }
 
+tile_modifier roof_3_c_1: { sprites: [ roof_3_c_1 ] probability: 100 requirement<center_must_be>: [ roof_3 ] 
+	requirement<north_must_be>: [ roof_3 ] requirement<west_must_be>: [ roof_3 ] requirement<south_must_be>: [ roof_3 ] requirement<east_must_be>: [ roof_3 ] 
+	requirement<south_east_must_not_be>: [ roof_3 ] }
+tile_modifier roof_3_c_2: { sprites: [ roof_3_c_2 ] probability: 100 requirement<center_must_be>: [ roof_3 ] 
+	requirement<north_must_be>: [ roof_3 ] requirement<west_must_be>: [ roof_3 ] requirement<south_must_be>: [ roof_3 ] requirement<east_must_be>: [ roof_3 ] 
+	requirement<south_west_must_not_be>: [ roof_3 ] }
+tile_modifier roof_3_c_3: { sprites: [ roof_3_c_3 ] probability: 100 requirement<center_must_be>: [ roof_3 ] 
+	requirement<north_must_be>: [ roof_3 ] requirement<west_must_be>: [ roof_3 ] requirement<south_must_be>: [ roof_3 ] requirement<east_must_be>: [ roof_3 ] 
+	requirement<north_east_must_not_be>: [ roof_3 ] }
+tile_modifier roof_3_c_4: { sprites: [ roof_3_c_4 ] probability: 100 requirement<center_must_be>: [ roof_3 ] 
+	requirement<north_must_be>: [ roof_3 ] requirement<west_must_be>: [ roof_3 ] requirement<south_must_be>: [ roof_3 ] requirement<east_must_be>: [ roof_3 ] 
+	requirement<north_west_must_not_be>: [ roof_3 ] }
+
 tile_modifier roof_4_nw: { sprites: [ roof_4_nw ] requirement<center_must_be>: [ roof_4 ] requirement<north_must_not_be>: [ roof_4 ] requirement<west_must_not_be>: [ roof_4 ] probability: 100 priority: true }
 tile_modifier roof_4_ne: { sprites: [ roof_4_ne ] requirement<center_must_be>: [ roof_4 ] requirement<north_must_not_be>: [ roof_4 ] requirement<east_must_not_be>: [ roof_4 ] probability: 100 priority: true }
 tile_modifier roof_4_sw: { sprites: [ roof_4_sw ] requirement<center_must_be>: [ roof_4 ] requirement<south_must_not_be>: [ roof_4 ] requirement<west_must_not_be>: [ roof_4 ] probability: 100 priority: true }
@@ -452,6 +478,19 @@ tile_modifier roof_4_n: { sprites: [ roof_4_n ] requirement<center_must_be>: [ r
 tile_modifier roof_4_e: { sprites: [ roof_4_e ] requirement<center_must_be>: [ roof_4 ] requirement<east_must_not_be>: [ roof_4 ] probability: 100 }
 tile_modifier roof_4_s: { sprites: [ roof_4_s ] requirement<center_must_be>: [ roof_4 ] requirement<south_must_not_be>: [ roof_4 ] probability: 100 }
 tile_modifier roof_4_w: { sprites: [ roof_4_w ]	requirement<center_must_be>: [ roof_4 ] requirement<west_must_not_be>: [ roof_4 ] probability: 100 }
+
+tile_modifier roof_4_c_1: { sprites: [ roof_4_c_1 ] probability: 100 requirement<center_must_be>: [ roof_4 ] 
+	requirement<north_must_be>: [ roof_4 ] requirement<west_must_be>: [ roof_4 ] requirement<south_must_be>: [ roof_4 ] requirement<east_must_be>: [ roof_4 ] 
+	requirement<south_east_must_not_be>: [ roof_4 ] }
+tile_modifier roof_4_c_2: { sprites: [ roof_4_c_2 ] probability: 100 requirement<center_must_be>: [ roof_4 ] 
+	requirement<north_must_be>: [ roof_4 ] requirement<west_must_be>: [ roof_4 ] requirement<south_must_be>: [ roof_4 ] requirement<east_must_be>: [ roof_4 ] 
+	requirement<south_west_must_not_be>: [ roof_4 ] }
+tile_modifier roof_4_c_3: { sprites: [ roof_4_c_3 ] probability: 100 requirement<center_must_be>: [ roof_4 ] 
+	requirement<north_must_be>: [ roof_4 ] requirement<west_must_be>: [ roof_4 ] requirement<south_must_be>: [ roof_4 ] requirement<east_must_be>: [ roof_4 ] 
+	requirement<north_east_must_not_be>: [ roof_4 ] }
+tile_modifier roof_4_c_4: { sprites: [ roof_4_c_4 ] probability: 100 requirement<center_must_be>: [ roof_4 ] 
+	requirement<north_must_be>: [ roof_4 ] requirement<west_must_be>: [ roof_4 ] requirement<south_must_be>: [ roof_4 ] requirement<east_must_be>: [ roof_4 ] 
+	requirement<north_west_must_not_be>: [ roof_4 ] }
 
 tile_modifier roof_5_nw: { sprites: [ roof_5_nw ] requirement<center_must_be>: [ roof_5 ] requirement<north_must_not_be>: [ roof_5 ] requirement<west_must_not_be>: [ roof_5 ] probability: 100 priority: true }
 tile_modifier roof_5_ne: { sprites: [ roof_5_ne ] requirement<center_must_be>: [ roof_5 ] requirement<north_must_not_be>: [ roof_5 ] requirement<east_must_not_be>: [ roof_5 ] probability: 100 priority: true }

@@ -983,7 +983,22 @@ sprites:
 	sprite icon_reindeer: { tags: [ icon ] }
 	sprite icon_valoris_insurgency_heroic: { tags: [ icon ] }
 	sprite icon_kick_2: { tags: [ icon ] }
+	sprite icon_skull_5: { tags: [ icon ] }
+	sprite icon_helmet_10: { tags: [ icon ] }
 	
+	cursor: { position: [ 0 864 ] }	
+	sprite icon_sword_21: { tags: [ icon ] }
+	sprite icon_shirt_4: { tags: [ icon ] }
+	sprite icon_gloves_6: { tags: [ icon ] }
+	sprite icon_belt_6: { tags: [ icon ] }
+	sprite icon_lich_tower_heroic: { tags: [ icon ] }
+	sprite icon_tirnwood_thicket_heroic: { tags: [ icon ] }
+	sprite icon_worm_2: { tags: [ icon ] }
+	sprite icon_eel_2: { tags: [ icon ] }
+	sprite icon_eel_2_cooked: { tags: [ icon ] }
+	sprite icon_potion_12: { tags: [ icon ] }
+	sprite icon_rune_stone_2 : { tags: [ icon ] }
+	sprite icon_rune_stone_3 : { tags: [ icon ] }
 }
 
 

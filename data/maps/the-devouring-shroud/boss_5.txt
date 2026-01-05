@@ -23,7 +23,7 @@ loot_table .boss_5:
 		_loot_group: .boss_5
 	}		
 	
-	item the_devouring_shroud_5_1: !BOSS_DROP_SHIELD { _string: "Bulwark of Tzun'Kala" _icon: icon_shield_11 _constitution: 1 _budget_bias: -10 _dodge_chance: 1 }			
+	item the_devouring_shroud_5_1: !BOSS_DROP_SHIELD { _string: "Bulwark of Tzun'Kala" _icon: icon_shield_11 _constitution: 1 _budget_bias: -10 _dodge: 1 }			
 	item the_devouring_shroud_5_2: !BOSS_DROP_1H_KNIFE { _string: "Dagger of the Shroud" _icon: icon_knife_7 _spell_damage: 2 _wisdom: 1 _budget_bias: -20 _spell_crit: 2 }			
 	item the_devouring_shroud_5_3: !BOSS_DROP_BOW { _string: "Facepiercer" _icon: icon_bow_3 _dexterity: 2 _constitution: 1 _budget_bias: -10 _phys_crit: 1 }			
 	item the_devouring_shroud_5_4: !BOSS_DROP_2H_SWORD { _string: "Blade of the Lizard King" _icon: icon_sword_20 _strength: 1 _constitution: 1 _dexterity: 1 _budget_bias: -10 _phys_crit: 1 _weapon_cooldown: 34 }			

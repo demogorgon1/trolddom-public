@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .library: {}
+loot_group .library_heroic: {}
 
 loot_table .library:
 {
@@ -10,6 +11,19 @@ loot_table .library:
 		{ possibility: { loot_group: token_of_victory loot_cooldown: $loot_cooldown { seconds: !TOKEN_OF_VICTORY_LOOT_COOLDOWN_SECONDS{} 
 		  map_message lich_tower: "Arch-Mage Farrux will not drop Token of Victory for {}." } } }
 		{ possibility: { loot_group: .library  } }			
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
+	]	
+}
+
+loot_table .library_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Arch-Mage Farrux will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .library_heroic  } }					
 		!WORLD_DROPS{}
 		!WORLD_DROPS_CLOTH{}
 		!WORLD_DROPS_SKELETONS{}
@@ -76,6 +90,68 @@ loot_table .library:
 	
 }
 
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .library_heroic
+		_heroic: true		
+	}	
+	
+	item lich_tower_17_heroic: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Pauldrons of the Lost Mage"
+		_icon: icon_shoulders_10
+		_type: armor_cloth
+		_spell_damage: 1
+		_wisdom: 2
+		_constitution: 1
+	}
+	
+	item lich_tower_18_heroic: !BOSS_DROP_CHEST
+	{
+		_string: "Battleplate of the Tower"
+		_type: armor_plate
+		_icon: icon_plate_chest_4
+		_constitution: 3
+		_strength: 2
+		_budget_bias: -10
+		_parry: 1
+	}
+	
+	item lich_tower_19_heroic: !BOSS_DROP_BACK
+	{
+		_string: "Elven Warlord's Cape"
+		_type: armor_cloth
+		_icon: icon_cape_4
+		_constitution: 1
+		_dexterity: 1
+		_strength: 1
+	}
+
+	item lich_tower_20_heroic: !BOSS_DROP_BACK
+	{
+		_string: "Spellcloak"
+		_type: armor_cloth
+		_icon: icon_cape_4
+		_constitution: 1
+		_wisdom: 1
+		_spirit: 1
+	}
+	
+	item lich_tower_21_heroic: !BOSS_DROP_WRISTS
+	{
+		_string: "Dark Elf Cuffs"
+		_icon: icon_bracers_3
+		_type: armor_cloth
+		_wisdom: 2
+		_spirit: 1
+		_healing: 3
+	}
+	
+}
 ############################################################
 # Boss
 
@@ -109,6 +185,10 @@ entity lich_tower_library: !NPC
 	_immune_to_slow: true
 	_default_behavior_state: .passive
 
+	_heroic_weapon_damage: 4.2
+	_heroic_resource_health: 16.3	
+	_loot_table_heroic: .library_heroic
+	
 	_abilities: 
 	[
 		{
@@ -118,6 +198,13 @@ entity lich_tower_library: !NPC
 		}	
 		
 		{
+			requirement self<must_not_be_heroic>: {}
+			id: npc_frostbolt_no_cooldown
+		}
+		
+		{
+			requirement self<must_be_heroic>: {}
+			target: random_player
 			id: npc_frostbolt_no_cooldown
 		}
 	

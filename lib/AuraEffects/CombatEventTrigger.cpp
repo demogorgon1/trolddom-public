@@ -179,7 +179,7 @@ namespace tpublic::AuraEffects
 						shouldTrigger = false;
 				}
 
-				if (shouldTrigger && m_combatEventAbilityRejectMask != 0 )
+				if (shouldTrigger && m_combatEventAbilityRejectMask != 0 )	
 				{
 					if (ability->m_flags & m_combatEventAbilityRejectMask)
 						shouldTrigger = false;

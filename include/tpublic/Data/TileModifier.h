@@ -29,7 +29,15 @@ namespace tpublic
 					TYPE_SOUTH_MUST_BE,
 					TYPE_SOUTH_MUST_NOT_BE,
 					TYPE_NORTH_MUST_BE,
-					TYPE_NORTH_MUST_NOT_BE
+					TYPE_NORTH_MUST_NOT_BE,
+					TYPE_NORTH_EAST_MUST_BE,
+					TYPE_NORTH_EAST_MUST_NOT_BE,
+					TYPE_NORTH_WEST_MUST_BE,
+					TYPE_NORTH_WEST_MUST_NOT_BE,
+					TYPE_SOUTH_EAST_MUST_BE,
+					TYPE_SOUTH_EAST_MUST_NOT_BE,
+					TYPE_SOUTH_WEST_MUST_BE,
+					TYPE_SOUTH_WEST_MUST_NOT_BE
 				};
 
 				static Vec2
@@ -38,16 +46,24 @@ namespace tpublic
 				{
 					switch(aType)
 					{
-					case TYPE_CENTER_MUST_BE:		return Vec2{0, 0};
-					case TYPE_EAST_MUST_BE:			return Vec2{1, 0};
-					case TYPE_EAST_MUST_NOT_BE:		return Vec2{1, 0};
-					case TYPE_WEST_MUST_BE:			return Vec2{-1, 0};
-					case TYPE_WEST_MUST_NOT_BE:		return Vec2{-1, 0};
-					case TYPE_SOUTH_MUST_BE:		return Vec2{0, 1};
-					case TYPE_SOUTH_MUST_NOT_BE:	return Vec2{0, 1};
-					case TYPE_NORTH_MUST_BE:		return Vec2{0, -1};
-					case TYPE_NORTH_MUST_NOT_BE:	return Vec2{0, -1};
-					default:						break;
+					case TYPE_CENTER_MUST_BE:			return Vec2{0, 0};
+					case TYPE_EAST_MUST_BE:				return Vec2{1, 0};
+					case TYPE_EAST_MUST_NOT_BE:			return Vec2{1, 0};
+					case TYPE_WEST_MUST_BE:				return Vec2{-1, 0};
+					case TYPE_WEST_MUST_NOT_BE:			return Vec2{-1, 0};
+					case TYPE_SOUTH_MUST_BE:			return Vec2{0, 1};
+					case TYPE_SOUTH_MUST_NOT_BE:		return Vec2{0, 1};
+					case TYPE_NORTH_MUST_BE:			return Vec2{0, -1};
+					case TYPE_NORTH_MUST_NOT_BE:		return Vec2{0, -1};
+					case TYPE_NORTH_EAST_MUST_BE:		return Vec2{1, -1};
+					case TYPE_NORTH_EAST_MUST_NOT_BE:	return Vec2{1, -1};
+					case TYPE_NORTH_WEST_MUST_BE:		return Vec2{-1, -1};
+					case TYPE_NORTH_WEST_MUST_NOT_BE:	return Vec2{-1, -1};
+					case TYPE_SOUTH_EAST_MUST_BE:		return Vec2{1, 1};
+					case TYPE_SOUTH_EAST_MUST_NOT_BE:	return Vec2{1, 1};
+					case TYPE_SOUTH_WEST_MUST_BE:		return Vec2{-1, 1};
+					case TYPE_SOUTH_WEST_MUST_NOT_BE:	return Vec2{-1, 1};
+					default:							break;
 					}
 
 					TP_CHECK(false, "Invalid tile modifier requirement type.");
@@ -65,12 +81,20 @@ namespace tpublic
 					case TYPE_WEST_MUST_BE:
 					case TYPE_SOUTH_MUST_BE:
 					case TYPE_NORTH_MUST_BE:
+					case TYPE_NORTH_EAST_MUST_BE:
+					case TYPE_NORTH_WEST_MUST_BE:
+					case TYPE_SOUTH_EAST_MUST_BE:
+					case TYPE_SOUTH_WEST_MUST_BE:
 						return true;
 
 					case TYPE_EAST_MUST_NOT_BE:
 					case TYPE_WEST_MUST_NOT_BE:
 					case TYPE_SOUTH_MUST_NOT_BE:
 					case TYPE_NORTH_MUST_NOT_BE:
+					case TYPE_NORTH_EAST_MUST_NOT_BE:
+					case TYPE_NORTH_WEST_MUST_NOT_BE:
+					case TYPE_SOUTH_EAST_MUST_NOT_BE:
+					case TYPE_SOUTH_WEST_MUST_NOT_BE:
 						return false;
 
 					default:					
@@ -104,6 +128,22 @@ namespace tpublic
 						return TYPE_NORTH_MUST_BE;
 					else if (t == "north_must_not_be")
 						return TYPE_NORTH_MUST_NOT_BE;
+					else if (t == "north_west_must_be")
+						return TYPE_NORTH_WEST_MUST_BE;
+					else if (t == "north_west_must_not_be")
+						return TYPE_NORTH_WEST_MUST_NOT_BE;
+					else if (t == "north_east_must_be")
+						return TYPE_NORTH_EAST_MUST_BE;
+					else if (t == "north_east_must_not_be")
+						return TYPE_NORTH_EAST_MUST_NOT_BE;
+					else if (t == "south_west_must_be")
+						return TYPE_SOUTH_WEST_MUST_BE;
+					else if (t == "south_west_must_not_be")
+						return TYPE_SOUTH_WEST_MUST_NOT_BE;
+					else if (t == "south_east_must_be")
+						return TYPE_SOUTH_EAST_MUST_BE;
+					else if (t == "south_east_must_not_be")
+						return TYPE_SOUTH_EAST_MUST_NOT_BE;
 					TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->GetIdentifier());
 					return INVALID_TYPE;
 				}

@@ -26,7 +26,7 @@ loot_table .boss_1:
 		_string: "Shield of Zaggra"
 		_icon: icon_shield_5
 		_budget_bias: -10
-		_dodge_chance: 1
+		_dodge: 1
 		_constitution: 1
 	}	
 	

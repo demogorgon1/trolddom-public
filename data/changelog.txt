@@ -2,6 +2,41 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.16"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Heroic: Tower of Indulath." }		
+		{ text: "Another monster has appeared in the Tower of Indulath." }
+		{ text: "Blimcraft's assistant now sells a couple of new recipes." }
+	]
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Chat and combat log frames can be resized." }		
+		{ text: "Inventory can be resized and moved." }		
+		{ text: "Party frame can be moved." }		
+		{ text: "Some enemy spells do more damage on heroic difficulty." }		
+	]
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Improved support for lower screen resolutions." }
+		{ text: "Mouse wheel can be bound to actions again." }
+		{ text: "Fixed various minor issues." }
+		{ text: "Rurik Ironmantle quest line no longer ends abruptly." }
+		{ text: "Secrecy is now a tier 2 talent like intended." }
+		{ text: "More thundering Thunder Lizards." }
+		{ text: "Fixed items that didn't provide dodge chance like intended: Unstoppable Legplates, Pigdodger's Necklace, Bulwark of Tzun'Kala, and Shield of Zaggra." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.15"
 
 	text: "Changes:"

@@ -241,6 +241,11 @@ map_entity_spawn thalvaron_jungle_ghost:
 		_faction: monsters
 		_creature_type: beast		
 		_default_behavior_state: .wandering_short
+		_abilities: 
+		[ 
+			{ id: $ability (npc_chain_lightning) { cast_time: 18 cooldown: $cooldown { duration: 80 } } } 
+			{ id: npc_attack } 
+		]
 	}
 
 	entity thalvaron_thunder_lizard: !NPC { _string: "Thunder Lizard" _sprite: lizard_4 _sprite_dead: lizard_4_dead _loot_table: .thunder_lizard }
@@ -425,8 +430,8 @@ map_entity_spawn thalvaron_durgan_urok_orc:
 			{
 				possibility: 
 				{ 
-					loot_group: thalvaron_mumle_whiterock_3_quest_item 
-					requirement self<must_have_active_quest>: { id: thalvaron_mumle_whiterock_3 }				
+					loot_group: thalvaron_rurik_ironmantle_1_quest_item 
+					requirement self<must_have_active_quest>: { id: thalvaron_rurik_ironmantle_1 }				
 				}			
 			}					
 		]	
