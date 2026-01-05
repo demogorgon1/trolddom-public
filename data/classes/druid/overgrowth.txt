@@ -2,6 +2,60 @@
 # DRUID OVERGROWTH TALENT TREE 
 ###############################################################################
 
+###############################################################################
+# ENGINE FEATURE REQUESTS FOR DEMO
+# 
+# The Cultivate/Lifespore/Fungal Network system requires features that don't
+# currently exist. Below is a summary of what is believed to be needed and why.
+#
+# FEATURE REQUEST 1: Charge System That Grants Ability Use Charges Before Procing CD
+# ---------------------------------------------------------
+# Problem: No dedicated charge system for giving abilities "free" charges to use them multiple times and tracking their increments/decrements via aura additions and removals. When I tried to make this work with helpers, nothing fired properly.
+# See feature request 3 for more details.
+# 
+# Current workaround: Using cooldown instead of charges (less elegant UI)
+#
+#
+# FEATURE REQUEST 2: aoe_radius for Environment Entity Abilities  
+# --------------------------------------------------------------
+# Problem: Environment entity abilities (like lifespore_pulse) ignore
+# aoe_radius/cap entirely. Healing continues at any distance - only line of
+# sight blocks it.
+#
+# Tested: aoe_radius: 1, 2, removing it - all same behavior
+# 
+# Desired: aoe_radius should limit the range of environment entity AOE
+# abilities, or provide an alternative like aoe_requirement distance check.
+#
+# Note: The desire is not for infinite range. We want SMALL range (2 tiles).
+#
+#
+# FEATURE REQUEST 3: ability_modifier for Aura max_stack
+# ------------------------------------------------------
+# Problem: Fungal Network should increase max Lifespore charges by 1/1.
+# Base Cultivate = 1 charge, R1 = 2 charges, R2 = 3 charges (max).
+# Currently no way to modify an aura's max_stack via ability_modifier.
+#
+# Desired: ability_modifier could include aura_modifier: { max_stack: +1 }
+#
+# Current workaround: Make each lifespore last the same amount of time and reduce the CD on the base ability so you can always have 3 up overlapping each other.
+#
+#
+# FEATURE REQUEST 4: Entity-to-Entity Communication (Network Healing)
+# -------------------------------------------------------------------
+# Problem: "Fungal Network" concept where healing near one Lifespore
+# Triggers reduced healing near other Lifespores owned by same player based on the amount the druid is directly healing other targets with.
+#
+# This would require one of:
+# a) Environment entity can apply aura to its owner
+# b) Environment entity can read the healing output of the owner
+# c) New trigger: on_friendly_entity_ability for when another owned
+#    entity uses a specific ability
+#
+# Current workaround: Not implemented (feature cut for now)
+#
+###############################################################################
+
 talent_tree druid_overgrowth:
 {
 	string: "Overgrowth"
@@ -131,9 +185,6 @@ ability verdant_bolt:
 # All versions share aura_group so they're mutually exclusive
 aura_group sprouting_wound_group: { }
 
-aura_group cultivate_charges_group: { }
-aura_group cultivate_passive_group: { }
-
 aura sprouting_wound:
 {
 	string: "Sprouting Wound"
@@ -160,6 +211,7 @@ aura sprouting_wound:
 				damage_type: nature
 				flags: [ is_magical ]
 				function: { expression: a_mul_x_plus_b x: spell_damage a: 0.25 b: [ [ 1 3 ] [ 10 7 ] [ 20 14 ] [ 30 23 ] ] }
+				spread: !DEFAULT_SPREAD{}
 				direct: false
 			}
 		}
@@ -194,6 +246,7 @@ aura sprouting_wound_2:
 				damage_type: nature
 				flags: [ is_magical ]
 				function: { expression: a_mul_x_plus_b x: spell_damage a: 0.17 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }
+				spread: !DEFAULT_SPREAD{}
 				direct: false
 			}
 		}
@@ -227,6 +280,7 @@ aura sprouting_wound_3:
 				damage_type: nature
 				flags: [ is_magical ]
 				function: { expression: a_mul_x_plus_b x: spell_damage a: 0.19 b: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 33 ] ] }
+				spread: !DEFAULT_SPREAD{}
 				direct: false
 			}
 		}
@@ -315,6 +369,7 @@ aura phytotoxin_poison:
 				damage_type: poison
 				flags: [ is_magical ]
 				function: { expression: a_mul_x_plus_b x: spell_damage a: 0.2 b: [ [ 1 5 ] [ 10 10 ] [ 20 20 ] [ 30 30 ] ] }
+				spread: !DEFAULT_SPREAD{}
 				direct: false
 			}
 		}
@@ -705,6 +760,7 @@ ability verdant_touch_tick:
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x_plus_b x: healing a: 0.55 b: [ [ 1 8 ] [ 10 12 ] [ 20 22 ] [ 30 34 ] ] }
+		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
 }
@@ -947,6 +1003,33 @@ ability_modifier improved_sprouting_wound_3:
 	description: "Sprouting Wound stacks 3x, +30% damage, +6s duration."
 }
 
+###############################################################################
+# CULTIVATE & LIFESPORE SYSTEM
+#
+# CURRENT WORKING IMPLEMENTATION:
+# - Simple cooldown-based system (7s cooldown, 20s duration = max 3 active)
+# - Fungal Network increases healing via ability_modifier
+# - No charge UI, no network healing
+#
+# DESIGN INTENT (requires engine features):
+# - Charge-based system with visible charge count
+# - Cultivate (base): 1 charge max, base healing
+# - Fungal Network R1: 2 charges max (+1), 20% network healing
+# - Fungal Network R2: 3 charges max (+1), 30% network healing
+# - Max 3 Lifespores total
+# - "Network healing" = healing near one lifespore triggers healing near others
+#   at 20%/30% effectiveness (not a boost to base healing)
+#
+# KNOWN ENGINE LIMITATIONS:
+# 1. aoe_radius does NOT limit environment entity AOE - only LOS blocks healing
+# 2. Charge system via aura_effect repeat doesn't grant charges as desired
+# 3. No entity-to-entity communication for "network healing" effect. 
+###############################################################################
+
+#==============================================================================
+# CURRENT WORKING VERSION (uncommented)
+#==============================================================================
+
 talent druid_cultivate:
 {
 	string: "Cultivate"
@@ -954,9 +1037,114 @@ talent druid_cultivate:
 	talent_tree_points_required: 10
 	points:
 	[
-		{ aura: cultivate_passive ability: lifespore }
+		{ ability: lifespore }
 	]
 }
+
+cooldown lifespore:
+{
+	duration: 70
+}
+
+#==============================================================================
+# IDEAL VERSION - CHARGE SYSTEM (commented out)
+# 
+# REQUIRED ENGINE FEATURES:
+# 1. aura_effect repeat needs to fire abilities with states so charges accumulate out of combat
+# 2. OR: A way to grant initial charges immediately when aura is applied and have charges either added over time or just after all charges are used and the ability cooldown is back up
+#    (e.g., aura_effect apply_aura_on_gain or initial_stacks property)
+# 3. Ability to modify max_stack via ability_modifier for scaling with talents
+#==============================================================================
+
+# talent druid_cultivate:
+# {
+# 	string: "Cultivate"
+# 	icon: icon_green_sphere
+# 	talent_tree_points_required: 10
+# 	points:
+# 	[
+# 		{ aura: cultivate_passive ability: lifespore }
+# 	]
+# }
+
+# # Passive aura that regenerates charges over time
+# aura cultivate_passive:
+# {
+# 	flags: [ persist_in_death ]
+# 	type: hidden
+# 	aura_effect repeat:
+# 	{
+# 		update_interval: 200  # 20 seconds per charge
+# 		ability: cultivate_grant
+# 		# ISSUE: This doesn't fire out of combat 
+# 	}
+# 	# DESIRED: aura_effect on_apply: { ability: cultivate_grant }
+# 	# This would grant first charge immediately when talent is learned
+# }
+
+# # Charge tracking aura - visible to player
+# aura cultivate_charges:
+# {
+# 	string: "Cultivate"
+# 	description: "Lifespore charges available."
+# 	icon: icon_green_sphere
+# 	type: buff
+# 	duration: 6000
+# 	max_stack: 1  # Base max, would need ability_modifier to increase
+# 	flags: [ unique effects_as_charges ]
+# 	# DESIRED: max_stack should be modifiable by ability_modifier
+# 	# e.g., fungal_network_1 adds { max_stack: +1 }
+# }
+
+# # Ability to grant charges (fired by passive)
+# ability cultivate_grant:
+# {
+# 	string: "Cultivate"
+# 	flags: [ target_self always_in_range ]
+# 	states: [ default ]  # CRITICAL: Must work out of combat!
+# 	icon: icon_green_sphere
+# 	
+# 	direct_effect apply_aura:
+# 	{
+# 		aura: cultivate_charges
+# 	}
+# }
+
+# # Main ability - requires and consumes charges
+# ability lifespore_charged:
+# {
+# 	string: "Lifespore"
+# 	description: "Place a Lifespore at target. Heals all allies closeby every 2s."
+# 	range: 2
+# 	cooldowns: [ global ]
+# 	flags: [ spell target_self target_other target_friendly ]
+# 	states: [ default in_combat ]
+# 	icon: icon_green_sphere
+# 	resource_cost mana: 15
+# 	talent_tree: druid_overgrowth
+# 	
+# 	requirement self<must_have_aura>: cultivate_charges
+# 	requirement self<must_not_have_aura>: cat_form
+# 	requirement self<must_not_have_aura>: bear_form
+# 	
+# 	direct_effect spawn_entity:
+# 	{
+# 		entity: lifespore
+# 		spawn_flags: [ at_target ]
+# 	}
+# 	
+# 	direct_effect remove_aura:
+# 	{
+# 		aura: cultivate_charges  # Consumes one charge
+# 	}
+# }
+
+#==============================================================================
+# LIFESPORE ENTITIES
+#
+# CURRENT: Three separate entities for base/r1/r2 healing tiers (temporary)
+# IDEAL: Single entity, network healing triggered by Fungal Network talent
+#==============================================================================
 
 entity lifespore:
 {
@@ -969,8 +1157,48 @@ entity lifespore:
 		environment:
 		{
 			tick_interval: 20
-			duration: 200
+			duration: 200  # 20 seconds
 			ability: lifespore_pulse
+			delay: 6
+		}
+		sprite:
+		{
+			animations:
+			[
+				{
+					states: [ default ]
+					frames: [ effect_heal_0 effect_heal_1 effect_heal_2 ]
+					frame_delay: 120
+					random_start_frame: true
+					z_offset: -1
+				}
+				{
+				states: [ spawning despawning ] 
+					frames: [ effect_heal_0 effect_heal_1 effect_heal_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+
+				}
+			]
+		}
+	}
+}
+
+# R1 Lifespore - 25% more healing
+entity lifespore_r1:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }
+		owner: { }
+		environment:
+		{
+			tick_interval: 20
+			duration: 200
+			ability: lifespore_pulse_r1
 			delay: 6
 		}
 		sprite:
@@ -1037,234 +1265,124 @@ entity lifespore_improved:
 	}
 }
 
+#==============================================================================
+# LIFESPORE PULSE ABILITIES
+#
+# CURRENT LIMITATION: aoe_radius does not limit range for environment entities
+# Healing continues at any distance as long as target is in line of sight.
+# We removed aoe_radius since it had no effect.
+#
+# DESIRED BEHAVIOR:
+# - aoe_radius: 2 should limit healing to 2 tiles from the Lifespore
+# - This would allow strategic placement and create meaningful gameplay
+#
+# TESTED COMBINATIONS THAT DID NOT WORK:
+# - flags: [ target_self target_aoe target_aoe_friendly always_in_range ] + aoe_radius: 2
+# - flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ] + aoe_radius: 2
+# - flags: [ target_self target_aoe target_aoe_friendly ] + aoe_radius: 2
+# - flags: [ target_self target_aoe target_aoe_friendly ] + aoe_radius: 1
+# - Removing aoe_radius and aoe_cap entirely = same behavior (LOS only)
+#
+# POSSIBLE SOLUTIONS FOR DEMO:
+# 1. Make aoe_radius work for environment entity abilities
+# 2. Add aoe_requirement with distance check from entity position
+# 3. Add a "max_range" property specifically for environment abilities
+#==============================================================================
+
 ability lifespore_pulse:
 {
 	string: "Lifespore"
-	flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ]
+	flags: [ target_self target_aoe target_aoe_friendly ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	target_particle_system: small_heal
 	sound_effects: !SOUND_HEAL_SMALL{}
-	aoe_radius: 2
 	aoe_cap: 5
 	
 	direct_effect heal:
 	{
-		function: { expression: a_mul_x_plus_b x: healing a: 0.07 b: [ [ 1 1 ] [ 10 3 ] [ 20 8 ] [ 30 12 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.08 b: [ [ 1 2 ] [ 10 4 ] [ 20 8 ] [ 30 14 ] ] }
+		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
 }
 
+# +25% healing (Fungal Network R1)
+ability lifespore_pulse_r1:
+{
+	string: "Lifespore"
+	flags: [ target_self target_aoe target_aoe_friendly ]
+	states: [ default in_combat ]
+	icon: icon_green_sphere
+	target_particle_system: small_heal
+	sound_effects: !SOUND_HEAL_SMALL{}
+	aoe_cap: 5
+	
+	direct_effect heal:
+	{
+		function: { expression: a_mul_x_plus_b x: healing a: 0.10 b: [ [ 1 3 ] [ 10 5 ] [ 20 10 ] [ 30 18 ] ] }
+		spread: !DEFAULT_SPREAD{}
+		direct: false
+	}
+}
+
+# +50% healing (Fungal Network R2)
 ability lifespore_pulse_improved:
 {
 	string: "Lifespore"
-	flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ]
+	flags: [ target_self target_aoe target_aoe_friendly ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	target_particle_system: small_heal
 	sound_effects: !SOUND_HEAL_SMALL{}
-	aoe_radius: 2
 	aoe_cap: 5
 	
 	direct_effect heal:
 	{
-		function: { expression: a_mul_x_plus_b x: healing a: 0.09 b: [ [ 1 1 ] [ 10 4 ] [ 20 10 ] [ 30 15 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing a: 0.12 b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 21 ] ] }
+		spread: !DEFAULT_SPREAD{}
 		direct: false
-	}
-}
-
-aura cultivate_charges:
-{
-	string: "Cultivate"
-	description: "Can place a Lifespore."
-	icon: icon_green_sphere
-	type: buff
-	duration: 6000
-	max_stack: 1
-	flags: [ unique effects_as_charges ]
-	aura_group: cultivate_charges_group
-}
-
-aura cultivate_charges_2:
-{
-	string: "Cultivate"
-	description: "Can place Lifespores."
-	icon: icon_green_sphere
-	type: buff
-	duration: 6000
-	max_stack: 2
-	flags: [ unique effects_as_charges ]
-	aura_group: cultivate_charges_group
-}
-
-aura cultivate_charges_3:
-{
-	string: "Cultivate"
-	description: "Can place Lifespores."
-	icon: icon_green_sphere
-	type: buff
-	duration: 6000
-	max_stack: 3
-	flags: [ unique effects_as_charges ]
-	aura_group: cultivate_charges_group
-}
-
-aura cultivate_passive:
-{
-	flags: [ persist_in_death ]
-	type: hidden
-	aura_group: cultivate_passive_group
-	aura_effect repeat:
-	{
-		update_interval: 200
-		ability: cultivate_grant
-	}
-}
-
-aura cultivate_passive_2:
-{
-	flags: [ persist_in_death ]
-	type: hidden
-	aura_group: cultivate_passive_group
-	aura_effect repeat:
-	{
-		update_interval: 200
-		ability: cultivate_grant_2
-	}
-}
-
-aura cultivate_passive_3:
-{
-	flags: [ persist_in_death ]
-	type: hidden
-	aura_group: cultivate_passive_group
-	aura_effect repeat:
-	{
-		update_interval: 200
-		ability: cultivate_grant_3
-	}
-}
-
-ability cultivate_grant:
-{
-	string: "Cultivate"
-	flags: [ target_self always_in_range ]
-	states: [ default in_combat ]
-	icon: icon_green_sphere
-	
-	direct_effect apply_aura:
-	{
-		aura: cultivate_charges
-	}
-}
-
-ability cultivate_grant_2:
-{
-	string: "Cultivate"
-	flags: [ target_self always_in_range ]
-	states: [ default in_combat ]
-	icon: icon_green_sphere
-	
-	direct_effect apply_aura:
-	{
-		aura: cultivate_charges_2
-	}
-}
-
-ability cultivate_grant_3:
-{
-	string: "Cultivate"
-	flags: [ target_self always_in_range ]
-	states: [ default in_combat ]
-	icon: icon_green_sphere
-	
-	direct_effect apply_aura:
-	{
-		aura: cultivate_charges_3
 	}
 }
 
 ability lifespore:
 {
 	string: "Lifespore"
-	description: "Place a Lifespore at target. Heals nearby allies every 2s for 20s. Max 1 charge, regenerates every 20s."
+	description: "Place a Lifespore at target. Heals allies in line of sight every 2s for 20s."
 	range: 6
-	cooldowns: [ global ]
+	cooldowns: [ global lifespore ]
 	flags: [ spell target_self target_other target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	resource_cost mana: 5
+	resource_cost mana: 15
 	talent_tree: druid_overgrowth
 	
-	requirement self<must_have_aura>: cultivate_charges
 	requirement self<must_not_have_aura>: cat_form
 	requirement self<must_not_have_aura>: bear_form
 	
+	# Base version (no Fungal Network)
 	direct_effect spawn_entity:
 	{
+		must_not_have_ability_modifiers: [ fungal_network_1 fungal_network_2 ]
 		entity: lifespore
 		spawn_flags: [ at_target ]
 	}
 	
-	direct_effect remove_aura:
-	{
-		aura: cultivate_charges
-	}
-}
-
-ability lifespore_r1:
-{
-	string: "Lifespore"
-	description: "Place a Lifespore at target. Heals nearby allies every 2s for 20s. Max 2 charges, regenerates every 20s."
-	range: 6
-	cooldowns: [ global ]
-	flags: [ spell target_self target_other target_friendly ]
-	states: [ default in_combat ]
-	icon: icon_green_sphere
-	resource_cost mana: 5
-	talent_tree: druid_overgrowth
-	
-	requirement self<must_have_aura>: cultivate_charges_2
-	requirement self<must_not_have_aura>: cat_form
-	requirement self<must_not_have_aura>: bear_form
-	
+	# Fungal Network R1: +25% healing
 	direct_effect spawn_entity:
 	{
-		entity: lifespore_improved
+		must_have_ability_modifier: fungal_network_1
+		must_not_have_ability_modifiers: [ fungal_network_2 ]
+		entity: lifespore_r1
 		spawn_flags: [ at_target ]
 	}
 	
-	direct_effect remove_aura:
-	{
-		aura: cultivate_charges_2
-	}
-}
-
-ability lifespore_r2:
-{
-	string: "Lifespore"
-	description: "Place a Lifespore at target. Heals nearby allies every 2s for 20s. Max 3 charges, regenerates every 20s."
-	range: 6
-	cooldowns: [ global ]
-	flags: [ spell target_self target_other target_friendly ]
-	states: [ default in_combat ]
-	icon: icon_green_sphere
-	resource_cost mana: 5
-	talent_tree: druid_overgrowth
-	
-	requirement self<must_have_aura>: cultivate_charges_3
-	requirement self<must_not_have_aura>: cat_form
-	requirement self<must_not_have_aura>: bear_form
-	
+	# Fungal Network R2: +50% healing
 	direct_effect spawn_entity:
 	{
+		must_have_ability_modifier: fungal_network_2
 		entity: lifespore_improved
 		spawn_flags: [ at_target ]
-	}
-	
-	direct_effect remove_aura:
-	{
-		aura: cultivate_charges_3
 	}
 }
 
@@ -1318,6 +1436,7 @@ ability wild_growth_tick:
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x_plus_b x: healing a: 0.15 b: [ [ 1 4 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }
+		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
 }
@@ -1342,8 +1461,16 @@ ability wild_growth:
 	requirement self<must_not_have_aura>: cat_form
 	requirement self<must_not_have_aura>: bear_form
 	
+	# Apply to self and nearby allies
 	direct_effect apply_aura:
 	{
+		aura: wild_growth
+	}
+	
+	# Also apply to companion
+	direct_effect apply_aura:
+	{
+		flags: [ minion ]
 		aura: wild_growth
 	}
 }
@@ -1386,6 +1513,13 @@ aura druid_natures_wrath_3:
 	stat_modifiers: { spell_crit_chance: { add: 6 } }
 }
 
+#==============================================================================
+# CURRENT WORKING VERSION - HEALING BOOST (temporary workaround)
+# 
+# Until network healing and charge modifiers are implemented, this version
+# just increases Lifespore healing. The intended design is below (commented).
+#==============================================================================
+
 talent druid_fungal_network:
 {
 	string: "Fungal Network"
@@ -1394,10 +1528,171 @@ talent druid_fungal_network:
 	prerequisites: [ druid_cultivate ]
 	points:
 	[
-		{ aura: cultivate_passive_2 ability: lifespore_r1 }
-		{ aura: cultivate_passive_3 ability: lifespore_r2 }
+		{ ability_modifier: fungal_network_1 }
+		{ ability_modifier: fungal_network_2 }
 	]
 }
+
+# TEMPORARY: Healing boost until network healing is implemented
+ability_modifier fungal_network_1:
+{
+	description: "Lifespore healing increased by 25%."
+	ability: lifespore
+}
+
+# TEMPORARY: Healing boost until network healing is implemented
+ability_modifier fungal_network_2:
+{
+	description: "Lifespore healing increased by 50%."
+	ability: lifespore
+}
+
+#==============================================================================
+# IDEAL FUNGAL NETWORK - FULL FEATURE SET (commented out)
+#
+# DESIGN INTENT:
+# - R1: +1 max charge (2 total), 20% network healing
+# - R2: +1 max charge (3 total), 30% network healing
+# - No base healing increase - just charges and network effect
+#
+# "Network healing" concept:
+# When a Lifespore or a Druid heals allies, other Lifespores owned by same player
+# also pulse a smaller heal (20%/30% of either their normal heal amount or a percent of the owner's last direct heal) to allies near THEM.
+# Creates synergy for placing multiple Lifespores strategically.
+#
+# REQUIRED ENGINE FEATURES:
+# 1. ability_modifier should support modifying aura max_stack
+#    e.g., { aura_modifier: { aura: cultivate_charges max_stack: +1 } }
+# 2. Entity-to-entity or entity-to-owner communication for network healing
+#    Options:
+#    a) When lifespore heals a damaged ally, apply aura to owner that triggers other lifespores to heal a percent of that heal OR When the Druid casts a heal that isnt Lifespore, trigger lifespores to heal for a percentage of that heal.
+#    b) Lifespore pulse checks for other lifespores owned by same player
+#    c) New trigger type: on_friendly_entity_ability that fires when
+#       another entity owned by same player uses an ability
+#==============================================================================
+
+# talent druid_fungal_network_ideal:
+# {
+# 	string: "Fungal Network"
+# 	icon: icon_nature_heart_1
+# 	talent_tree_points_required: 15
+# 	prerequisites: [ druid_cultivate ]
+# 	points:
+# 	[
+# 		{ ability_modifier: fungal_network_1 aura_modifier: cultivate_charges_r1 }
+# 		{ ability_modifier: fungal_network_2 aura_modifier: cultivate_charges_r2 }
+# 	]
+# }
+
+# # R1: +1 charge (2 total), 20% network healing
+# ability_modifier fungal_network_1:
+# {
+# 	description: "Lifespore: +1 max charge (2 total), 20% network healing."
+# 	ability: lifespore
+# 	# DESIRED: These properties don't exist yet
+# 	# charge_max_modifier: +1
+# 	# Spawns network-enabled entity with 20% echo healing
+# }
+
+# # R2: +1 charge (3 total), 30% network healing
+# ability_modifier fungal_network_2:
+# {
+# 	description: "Lifespore: +1 max charge (3 total), 30% network healing."
+# 	ability: lifespore
+# 	# charge_max_modifier: +1  # (2 total from talent, 3 with base)
+# 	# Spawns network-enabled entity with 30% echo healing
+# }
+
+#==============================================================================
+# NETWORK HEALING CONCEPT USING JUST LIFESPORE HEALING (commented out)
+#
+# When one Lifespore pulses, it would:
+# 1. Heal allies near itself (current behavior)
+# 2. Apply a brief aura to owner marking "network pulse occurred"
+# 3. Other Lifespores check for this aura and do a reduced heal
+#
+# IMPLEMENTATION ATTEMPT:
+#==============================================================================
+
+# # Aura applied to owner when any lifespore pulses
+# aura lifespore_network_trigger:
+# {
+# 	type: hidden
+# 	duration: 5  # Very brief, just to trigger others
+# 	flags: [ unique ]
+# }
+
+# # Modified pulse that triggers network
+# ability lifespore_pulse_network:
+# {
+# 	string: "Lifespore"
+# 	flags: [ target_self target_aoe target_aoe_friendly ]
+# 	states: [ default in_combat ]
+# 	icon: icon_green_sphere
+# 	target_particle_system: small_heal
+# 	sound_effects: !SOUND_HEAL_SMALL{}
+# 	aoe_cap: 5
+# 	
+# 	# Primary heal
+# 	direct_effect heal:
+# 	{
+# 		function: { expression: a_mul_x_plus_b x: healing a: 0.08 b: [ [ 1 2 ] [ 10 4 ] [ 20 8 ] [ 30 14 ] ] }
+# 		spread: !DEFAULT_SPREAD{}
+# 		direct: false
+# 	}
+# 	
+# 	# Mark owner for network effect
+# 	# PROBLEM: Environment entities may not be able to affect their owner
+# 	direct_effect apply_aura:
+# 	{
+# 		flags: [ owner ]  # Hypothetical flag to target entity's owner
+# 		aura: lifespore_network_trigger
+# 	}
+# }
+
+# # Secondary pulse triggered by network (reduced healing)
+# ability lifespore_pulse_network_echo:
+# {
+# 	string: "Lifespore"
+# 	flags: [ target_self target_aoe target_aoe_friendly ]
+# 	states: [ default in_combat ]
+# 	icon: icon_green_sphere
+# 	target_particle_system: small_heal
+# 	aoe_cap: 5
+# 	
+# 	# Only fire if owner has network trigger (another lifespore just pulsed)
+# 	# PROBLEM: No way to check owner's auras from environment entity
+# 	requirement owner<must_have_aura>: lifespore_network_trigger
+# 	
+# 	# 20-30% of normal healing
+# 	direct_effect heal:
+# 	{
+# 		function: { expression: a_mul_x_plus_b x: healing a: 0.02 b: [ [ 1 0 ] [ 10 1 ] [ 20 2 ] [ 30 4 ] ] }
+# 		direct: false
+# 	}
+# }
+
+#==============================================================================
+# ALTERNATIVE NETWORK APPROACH - Owner-based (commented out)
+#
+# Instead of entity-to-entity, use owner aura that pulses all lifespore locations
+# PROBLEM: No way to get positions of owned entities or heal at their locations
+#==============================================================================
+
+# aura fungal_network_owner:
+# {
+# 	flags: [ persist_in_death ]
+# 	type: hidden
+# 	description: "Your Lifespores share healing."
+# 	
+# 	# When owner cast a heal, pulse heal at all other lifespore locations
+# 	# DESIRED: aura_effect on_heal_received:
+# 	# {
+# 	#     source_abilities: [mend_spirit wild_growth Urgent_Bloom ] 
+# 	#     ability_at_owned_entities: lifespore_network_echo
+# 	#     entity_type: lifespore
+# 	# }
+# }
 
 ###############################################################################
 # 15 PTS TIER (4 talents)

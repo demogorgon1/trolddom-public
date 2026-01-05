@@ -1177,6 +1177,7 @@ ability spectral_strike_bleed_tick:
 	{
 		damage_type: bleed
 		function: { expression: a_mul_x a: 0.15 x: level }
+		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
 }
