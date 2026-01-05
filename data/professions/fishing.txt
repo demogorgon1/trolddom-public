@@ -90,10 +90,13 @@ loot_group fish: { }
 loot_group fish_jungle: { } 
 loot_group fish_skaldrun: { } 
 loot_group fish_realm_of_fire: { } 
+loot_group fish_slime_common: { } 
+loot_group fish_slime_uncommon: { } 
 
 loot_table fish: { slots: [ { possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_jungle: { slots: [ { possibility: { weight: 2 loot_group: fish_jungle } possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_skaldrun: { slots: [ { possibility: { weight: 2 loot_group: fish_skaldrun } possibility: { weight: 1 loot_group: fish } } ] }
+loot_table fish_slime: { slots: [ { possibility: { weight: 5 loot_group: fish_slime_common } possibility: { weight: 1 loot_group: fish_slime_uncommon } } ] }
 
 loot_table fish_realm_of_fire: 
 { 
@@ -264,4 +267,30 @@ item item_lava_shrimp:
 	stack: 20
 	item_level: 25
 	level_range: [ 20 30 ]
+}
+
+################################################################################
+# Slime Worms
+
+item item_slime_worms:
+{
+	loot_groups: [ fish_slime_common ]		
+	string: "Slime Worms"
+	icon: icon_worm_2
+	stack: 20
+	item_level: 20
+	level_range: [ 18 30 ]
+}
+
+################################################################################
+# Majestic Slime Eel
+
+item item_majestic_slime_eel:
+{
+	loot_groups: [ fish_slime_uncommon ]		
+	string: "Majestic Slime Eel"
+	icon: icon_eel_2
+	stack: 20
+	item_level: 20
+	level_range: [ 18 30 ]
 }

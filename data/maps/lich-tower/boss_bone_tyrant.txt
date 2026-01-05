@@ -2,6 +2,7 @@
 # Loot
 
 loot_group .bone_tyrant: {}
+loot_group .bone_tyrant_heroic: {}
 
 loot_table .bone_tyrant:
 {
@@ -13,6 +14,19 @@ loot_table .bone_tyrant:
 		!WORLD_DROPS{}
 		!WORLD_DROPS_SKELETONS{}
 		!WORLD_DROPS_CLOTH{}		
+	]	
+}
+
+loot_table .bone_tyrant_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{} 
+		  map_message lich_tower: "Bone Tyrant will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .bone_tyrant_heroic  } }					
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+		!WORLD_DROPS_SKELETONS{}
 	]	
 }
 
@@ -74,8 +88,71 @@ loot_table .bone_tyrant:
 		_spell_damage: 1
 	}
 	
-}
+}	
 
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .bone_tyrant_heroic
+		_heroic: true		
+	}	
+	
+	item lich_tower_7_heroic: !BOSS_DROP_HEAD
+	{
+		_string: "Boneguard"
+		_type: armor_plate
+		_icon: icon_mail_head_1
+		_strength: 1
+		_constitution: 1
+	}
+	
+	item lich_tower_8_heroic: !BOSS_DROP_WAIST
+	{
+		_string: "Belt of a Thousand Screams"
+		_type: armor_cloth
+		_icon: icon_belt_5
+		_dexterity: 2
+		_constitution: 1
+		_budget_bias: -10
+		_phys_crit: 1
+	}
+	
+	item lich_tower_9_heroic: !BOSS_DROP_SHIELD
+	{
+		_string: "Ancient Shield of the Dead"
+		_type: armor_cloth
+		_icon: icon_shield_3
+		_constitution: 1
+		_budget_bias: -15		
+		_dodge: 1
+		_block: 1
+	}
+	
+	item lich_tower_10_heroic: !BOSS_DROP_FEET
+	{
+		_string: "Dread King Warboots"
+		_icon: icon_mail_boots_1
+		_type: armor_mail
+		_constitution: 1
+		_strength: 2
+		_dexterity: 2
+	}
+	
+	item lich_tower_11_heroic: !BOSS_DROP_CHEST
+	{
+		_string: "Veil of the Grave"
+		_icon: icon_robe_3
+		_type: armor_cloth
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 1
+	}
+	
+}
+	
 ############################################################
 # Boss
 
@@ -122,6 +199,10 @@ entity lich_tower_bone_tyrant: !NPC
 	_immune_to_slow: true
 	_large: true
 
+	_heroic_weapon_damage: 4.4
+	_heroic_resource_health: 16.9
+	_loot_table_heroic: .bone_tyrant_heroic
+	
 	_abilities: 
 	[
 		{
@@ -167,6 +248,10 @@ map_entity_spawn .bone_tyrant:
 		${
 			_weapon_damage: 1.4 
 			_resource_health: 1.4
+			
+			_heroic_weapon_damage: 2.8
+			_heroic_resource_health: 2.8
+	
 			_abilities: 
 			[ 
 				{ id: npc_attack } 
@@ -180,6 +265,10 @@ map_entity_spawn .bone_tyrant:
 		${
 			_weapon_damage: 0.9
 			_resource_health: 0.7
+			
+			_heroic_weapon_damage: 2.2
+			_heroic_resource_health: 2.3
+			
 			_abilities: 
 			[ 
 				{ id: npc_frostbolt_no_cooldown } 
@@ -194,6 +283,10 @@ map_entity_spawn .bone_tyrant:
 		${
 			_weapon_damage: 0.9
 			_resource_health: 0.7
+			
+			_heroic_weapon_damage: 2.1
+			_heroic_resource_health: 2.2
+			
 			_abilities: 
 			[ 
 				{ id: npc_heal target: low_health_friend_or_self } 

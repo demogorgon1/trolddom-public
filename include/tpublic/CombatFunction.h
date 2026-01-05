@@ -248,6 +248,10 @@ namespace tpublic
 					{
 						m_eliteMultiplier = aChild->GetFloat();
 					}
+					else if (aChild->m_name == "heroic_multiplier")
+					{
+						m_heroicMultiplier = aChild->GetFloat();
+					}
 					else if(aChild->m_name == "entity")
 					{
 						m_entity = SourceToEntity(aChild);
@@ -265,7 +269,7 @@ namespace tpublic
 			IWriter*							aWriter) const
 		{
 			aWriter->WritePOD<uint8_t>(0xFF); // This marks extended new format
-			aWriter->WritePOD<uint8_t>(1); // Format tag
+			aWriter->WritePOD<uint8_t>(2); // Format tag
 
 			aWriter->WritePOD(m_expression);
 			aWriter->WritePOD(m_x);
@@ -279,6 +283,7 @@ namespace tpublic
 			aWriter->WritePOD(m_entity);
 			aWriter->WriteFloat(m_c);
 			m_cLevelCurve.ToStream(aWriter);
+			aWriter->WriteFloat(m_heroicMultiplier);
 		}
 
 		bool
@@ -326,6 +331,12 @@ namespace tpublic
 				if (!aReader->ReadFloat(m_c))
 					return false;
 				if (!m_cLevelCurve.FromStream(aReader))
+					return false;
+			}
+
+			if(version >= 2)
+			{
+				if (!aReader->ReadFloat(m_heroicMultiplier))
 					return false;
 			}
 
@@ -379,6 +390,7 @@ namespace tpublic
 		float					m_c = 0.0f;
 		float					m_spread = 0.0f;
 		float					m_eliteMultiplier = 1.0f;
+		float					m_heroicMultiplier = 1.0f;
 		Entity					m_entity = ENTITY_SOURCE;
 
 		UIntCurve<uint32_t>		m_aLevelCurve;

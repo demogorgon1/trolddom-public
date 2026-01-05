@@ -49,7 +49,7 @@ objective .ophelie_1:
 
 {
 	${ _level: 24 }
-	item .ophelie_1_a: !QUEST_REWARD_NECK{ _string: "Pigdodger's Necklace" _icon: icon_necklace_2 _dodge_chance: 3 _constitution: 2 _strength: 1 }
+	item .ophelie_1_a: !QUEST_REWARD_NECK{ _string: "Pigdodger's Necklace" _icon: icon_necklace_2 _dodge: 1 _constitution: 2 _strength: 1 _budget_bias: -10 }
 	item .ophelie_1_b: !QUEST_REWARD_FINGER{ _string: "Wooden Ring" _icon: icon_ring_4 _wisdom: 3 _constitution: 2 _spell_damage: 1 }
 }
 

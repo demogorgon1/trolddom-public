@@ -64,12 +64,14 @@
 !define local AURA_FOOD_BUFF
 {
 	string: @_string
-	icon: @_icon
+	icon: @_icon	
 	type: buff
 	aura_group: food
 	flags: [ unique ]
 	duration: 12000
 	<exists _stat_modifiers> stat_modifiers: @_stat_modifiers
+	<exists _damage_input_modifier> aura_effect damage_input_modifier: @_damage_input_modifier
+	<exists _aura_food_description> description: @_aura_food_description
 }
 
 #####################################################
@@ -498,4 +500,27 @@
 	aura consumable_hot_grilled_shrimp: !AURA_FOOD { _buff: consumable_hot_grilled_shrimp_buff }
 	ability consumable_hot_grilled_shrimp: !ABILITY_FOOD {}
 	item consumable_hot_grilled_shrimp: !ITEM_FOOD {}
+}
+
+#####################################################
+# Cup of Warm Eels
+{
+	${
+		_string: "Cup of Warm Eels"
+		_description: "Restores 1360 health and mana over 10 seconds. Gain 8 Constitution and reduce non-physical damage taken by 10% for for 20 min. Can't be used in combat."
+		_aura_food_description: "-10% Non-physical damage taken"
+		_level: 18
+		_icon: icon_eel_2_cooked
+		_heal_tick: 136
+		_ability_tick: consumable_cup_of_warm_eels_tick
+		_ability: consumable_cup_of_warm_eels
+		_aura: consumable_cup_of_warm_eels
+		_item: { consumable_cup_of_warm_eels: 1 }
+	}
+		
+	aura consumable_cup_of_warm_eels_buff: !AURA_FOOD_BUFF { _stat_modifiers: { constitution: { add: 8 } } _damage_input_modifier: { type_mask: [ frost fire arcane unholy holy poison nature ] multiplier: 0.9 } }
+	ability consumable_cup_of_warm_eels_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_cup_of_warm_eels: !AURA_FOOD { _buff: consumable_cup_of_warm_eels_buff }
+	ability consumable_cup_of_warm_eels: !ABILITY_FOOD {}
+	item consumable_cup_of_warm_eels: !ITEM_FOOD {}
 }

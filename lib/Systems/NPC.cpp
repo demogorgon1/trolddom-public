@@ -125,7 +125,13 @@ namespace tpublic::Systems
 					resourceMax = heroicLevel->m_baseResource[resource.m_id];
 
 					if((Resource::Id)resource.m_id == Resource::ID_HEALTH)
-						resourceMax = (uint32_t)((float)resourceMax * npc->m_heroicHealthMultiplier * heroicLevel->m_eliteResource[resource.m_id]);
+					{
+						if(combatPublic->IsElite())
+							resourceMax = (uint32_t)((float)resourceMax * npc->m_heroicHealthMultiplier * heroicLevel->m_eliteResource[resource.m_id]);
+						else
+							resourceMax = (uint32_t)((float)resourceMax * npc->m_heroicHealthMultiplier);
+					}
+
 				}
 
 				combatPublic->AddResourceMax(resource.m_id, resourceMax);
