@@ -430,10 +430,11 @@
 			_abilities: 
 			[ 
 				{ id: .druid_companion_wolf_attack flags: [ auto ] } 
+				{ id: .druid_companion_wolf_rend flags: [ auto ] target_must_not_have_aura: .druid_companion_wolf_bleed }
 				{ id: .druid_companion_wolf_howl flags: [ auto ] self_must_not_have_aura: .druid_companion_wolf_howl }
 			]
 			
-			_ability_prio: [ .druid_companion_wolf_howl .druid_companion_wolf_attack ]		
+			_ability_prio: [ .druid_companion_wolf_howl .druid_companion_wolf_rend .druid_companion_wolf_attack ]		
 			_class_minion: true
 			_store_combat_data: true
 		}
@@ -494,6 +495,65 @@
 				function: { expression: a_mul_x_plus_b_mul_y a: 1 x: minion_weapon b: 0.5 y: owner_spell_damage }		
 			}
 		}	
+		
+		cooldown .druid_companion_wolf_rend:
+		{
+			duration: 60
+		}
+		
+		aura .druid_companion_wolf_bleed:
+		{
+			string: "Rend"
+			description: "Bleeding."
+			type: debuff
+			icon: icon_rend
+			duration: 80
+			flags: [ unique_per_source ]
+			
+			aura_effect repeat:
+			{
+				update_interval: 20
+				ability: .druid_companion_wolf_bleed_tick
+			}
+		}
+		
+		ability .druid_companion_wolf_bleed_tick:
+		{
+			string: "Rend"
+			icon: icon_rend
+			states: [ default in_combat ]
+			flags: [ always_in_range always_in_line_of_sight ]
+			
+			direct_effect damage:
+			{
+				damage_type: bleed
+				function: { expression: a a: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 20 ] ] }
+				direct: false
+			}
+		}
+		
+		ability .druid_companion_wolf_rend:
+		{
+			string: "Rend"
+			description: "Deals $damage$ damage and causes target to bleed."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_rend
+			cooldowns: [ .druid_companion_wolf_rend ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x a: 0.9 x: minion_weapon }		
+			}
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_wolf_bleed
+			}
+		}
 		
 		cooldown .druid_companion_wolf_howl:
 		{
@@ -602,10 +662,11 @@
 			_required_owner_aura: companion_active 
 			_abilities: [ 
 				{ id: .druid_companion_wolf_attack flags: [ auto ] } 
+				{ id: .druid_companion_wolf_rend flags: [ auto ] target_must_not_have_aura: .druid_companion_wolf_bleed }
 				{ id: .druid_companion_wolf_howl flags: [ auto ] self_must_not_have_aura: .druid_companion_wolf_howl }
 				{ id: .wolf_hunting_party_presence flags: [ auto ] }
 			]
-			_ability_prio: [ .wolf_hunting_party_presence .druid_companion_wolf_howl .druid_companion_wolf_attack ]
+			_ability_prio: [ .wolf_hunting_party_presence .druid_companion_wolf_howl .druid_companion_wolf_rend .druid_companion_wolf_attack ]
 		}
 	}
 

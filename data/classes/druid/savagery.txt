@@ -71,7 +71,7 @@ aura cat_form:
 	description: "Transformed into a Panther"
 	type: buff
 	icon: icon_cat
-	flags: [ unique indefinite persist_in_death ]
+	flags: [ unique indefinite ]
 	aura_group: druid_forms
 	override_sprite: panther_1
 	
@@ -101,7 +101,7 @@ aura bear_form:
 	description: "Transformed into a Bear"
 	type: buff
 	icon: icon_toughness
-	flags: [ unique indefinite persist_in_death ]
+	flags: [ unique indefinite ]
 	aura_group: druid_forms
 	override_sprite: bear
 	
@@ -298,19 +298,21 @@ aura rake_bleed:
 	type: debuff
 	icon: icon_rend
 	duration: 120
-	flags: [ unique ]
+	flags: [ unique_per_source ]
 	
 	aura_effect repeat:
 	{
 		update_interval: 20
-		ability<self>: rake_bleed_damage
+		ability: rake_bleed_tick
 	}
 }
 
-ability rake_bleed_damage:
+ability rake_bleed_tick:
 {
-	flags: [ offensive target_self always_in_range ]
+	string: "Rake"
+	icon: icon_rend
 	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect damage:
 	{
@@ -424,28 +426,30 @@ ability primal_strike:
 aura primal_swipe_bleed:
 {
 	string: "Primal Swipe"
-	description: "Bleeding for nature damage."
+	description: "Bleeding."
 	type: debuff
 	icon: icon_rend
 	duration: 120
-	flags: [ ]
+	flags: [ unique_per_source ]
 	max_stack: 3
 	
 	aura_effect repeat:
 	{
 		update_interval: 20
-		ability<self>: primal_swipe_bleed_tick
+		ability: primal_swipe_bleed_tick
 	}
 }
 
 ability primal_swipe_bleed_tick:
 {
-	flags: [ offensive target_self always_in_range ]
+	string: "Primal Swipe"
+	icon: icon_rend
 	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect damage:
 	{
-		damage_type: nature
+		damage_type: bleed
 		function: { expression: a_mul_x x: attack_power a: 0.12 }
 		direct: false
 	}
@@ -879,7 +883,6 @@ aura druid_improved_cat_form_3:
 }
 
 # Improved Bear Form - Grants Lacerate/Maul/Bellow
-# Note: Defensive bonuses via damage_input_modifier since conditional stat_modifiers not supported
 talent druid_improved_bear_form:
 {
 	string: "Improved Bear Form"
@@ -933,7 +936,6 @@ aura druid_improved_bear_form_3:
 }
 
 # Thick Hide - Damage reduction in savage forms
-# Note: Using damage_input_modifier since conditional stat_modifiers not supported
 talent druid_thick_hide:
 {
 	string: "Thick Hide"
@@ -1062,19 +1064,21 @@ aura rip_bleed:
 	type: debuff
 	icon: icon_rend
 	duration: 120
-	flags: [ unique ]
+	flags: [ unique_per_source ]
 	
 	aura_effect repeat:
 	{
 		update_interval: 20
-		ability<self>: rip_bleed_damage
+		ability: rip_bleed_tick
 	}
 }
 
-ability rip_bleed_damage:
+ability rip_bleed_tick:
 {
-	flags: [ offensive target_self always_in_range ]
+	string: "Rip"
+	icon: icon_rend
 	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect damage:
 	{
@@ -1241,20 +1245,22 @@ aura lacerate_bleed:
 	type: debuff
 	icon: icon_rend
 	duration: 150
-	flags: [ magic ]
+	flags: [ magic unique_per_source ]
 	max_stack: 5
 	
 	aura_effect repeat:
 	{
 		update_interval: 30
-		ability<self>: lacerate_bleed_damage
+		ability: lacerate_bleed_tick
 	}
 }
 
-ability lacerate_bleed_damage:
+ability lacerate_bleed_tick:
 {
-	flags: [ offensive target_self always_in_range ]
+	string: "Lacerate"
+	icon: icon_rend
 	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect damage:
 	{
@@ -1758,7 +1764,7 @@ talent druid_predatory_instinct:
 {
 	string: "Predatory Instinct"
 	icon: icon_crit
-	talent_tree_points_required: 17
+	talent_tree_points_required: 20
 	points:
 	[
 		{ aura: druid_predatory_instinct_1 }
@@ -1861,7 +1867,7 @@ talent druid_savage_roar:
 {
 	string: "Savage Roar"
 	icon: icon_fury
-	talent_tree_points_required: 17
+	talent_tree_points_required: 20
 	points:
 	[
 		{ ability: savage_roar }
@@ -1914,7 +1920,7 @@ talent druid_primal_rampage:
 {
 	string: "Primal Rampage"
 	icon: icon_summon_black_beast
-	talent_tree_points_required: 20
+	talent_tree_points_required: 25
 	points:
 	[
 		{ ability: primal_rampage }

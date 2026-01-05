@@ -22,9 +22,12 @@ talent_tree druid_kinship:
 		talent druid_marked_prey: "I"
 		talent druid_improved_coordinated_strike: "J"
 		talent druid_windrunner_mastery: "K"
+		talent druid_bestial_wrath: "L"
 		talent druid_war_cry: "M"
 		talent druid_gift_of_the_untamed: "N"
 		talent druid_feral_fury: "O"
+		talent druid_feral_charge: "P"
+		talent druid_primal_reflexes: "Q"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_down: "|"
 		sprite talent_tree_right_arrow: "-"
@@ -32,17 +35,17 @@ talent_tree druid_kinship:
 
 	map:
 	[
-		"A.B.C"
-		"....."
-		"F-E.D"
-		"d...."
-		"I.G.M"
-		"....."
-		"K.H-I"
-		"..d.."
-		"..J.N"
-		"....."
-		"..O.."
+		"A..B..C"
+		"......."
+		"F-E..D."
+		"d......"
+		"I.G...N"
+		"......."
+		"P.K.H.."
+		"d...d.L"
+		"Q.M.J.."
+		"......."
+		"..O...."
 	]
 }
 
@@ -134,7 +137,7 @@ cooldown call_of_the_wild:
 
 ability call_companion:
 {
-	string: "Call Companion"
+	string: "Call Snake Companion"
 	description: "Summon a snake companion to fight by your side."
 	cast_time: 30
 	cooldowns: [ global call_of_the_wild ]
@@ -453,8 +456,8 @@ talent druid_pack_hunter_mastery:
 {
 	string: "Pack Hunter Mastery"
 	icon: icon_dark_wolf
-	talent_tree_points_required: 5
-	prerequisites: [ druid_stalker_mastery ]
+	talent_tree_points_required: 7
+	prerequisites: [ druid_hunting_party ]
 	points:
 	[
 		{ aura: druid_pack_hunter_mastery ability: call_of_the_wild_wolf ability: feral_fury_pack_hunter }
@@ -528,7 +531,7 @@ talent druid_coordinated_strike:
 {
 	string: "Coordinated Strike"
 	icon: icon_attack_command
-	talent_tree_points_required: 10
+	talent_tree_points_required: 15
 	points:
 	[
 		{ ability: coordinated_strike }
@@ -633,7 +636,7 @@ talent druid_windrunner_mastery:
 {
 	string: "Windrunner Mastery"
 	icon: icon_swiftstrike
-	talent_tree_points_required: 10
+	talent_tree_points_required: 15
 	points:
 	[
 		{ aura: druid_windrunner_mastery ability: call_of_the_wild_owlbear ability: feral_fury_windrunner }
@@ -648,7 +651,112 @@ aura druid_windrunner_mastery:
 	stat_modifiers: { spell_haste: { add_percent: 5 } }
 }
 
+talent druid_bestial_wrath:
+{
+	string: "Bestial Wrath"
+	icon: icon_fury
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: bestial_wrath }
+	]
+}
 
+cooldown bestial_wrath:
+{
+	duration: 900
+}
+
+aura bestial_wrath_buff:
+{
+	string: "Bestial Wrath"
+	description: "Frenzied! Attack speed +30%, damage +20%."
+	type: buff
+	icon: icon_fury
+	duration: 120
+	flags: [ unique ]
+	
+	stat_modifiers:
+	{
+		attack_haste: { add_percent: 30 }
+	}
+	
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.20
+	}
+}
+
+ability bestial_wrath:
+{
+	string: "Bestial Wrath"
+	description: "Your companion enters a frenzy, gaining +30% attack speed and +20% damage for 12s."
+	cooldowns: [ global bestial_wrath ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	talent_tree: druid_kinship
+	resource_cost mana: 25
+	
+	requirement self<must_have_aura>: companion_active
+	
+	direct_effect apply_aura:
+	{
+		flags: [ minion ]
+		aura: bestial_wrath_buff
+	}
+}
+
+talent druid_feral_charge:
+{
+	string: "Feral Charge"
+	icon: icon_charge
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: feral_charge }
+	]
+}
+
+cooldown feral_charge:
+{
+	duration: 200
+}
+
+aura feral_charge_stun:
+{
+	string: "Feral Charge"
+	description: "Stunned."
+	type: debuff
+	icon: icon_stun
+	duration: 20
+	flags: [ incapacitation ]
+	aura_effect stun: { }
+	particle_system: knock
+	priority: !AURA_PRIORITY_CC{}
+	diminishing_effect: stun
+}
+
+ability feral_charge:
+{
+	string: "Feral Charge"
+	description: "Command your companion to charge target, stunning for 2s."
+	range: 6
+	cooldowns: [ global feral_charge ]
+	flags: [ offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	talent_tree: druid_kinship
+	resource_cost mana: 15
+	
+	requirement self<must_have_aura>: companion_active
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_charge_stun
+	}
+}
 
 
 ###############################################################################
@@ -659,7 +767,7 @@ talent druid_war_cry:
 {
 	string: "War Cry"
 	icon: icon_taunt_2
-	talent_tree_points_required: 15
+	talent_tree_points_required: 20
 	points:
 	[
 		{ ability: war_cry }
@@ -706,13 +814,53 @@ ability war_cry:
 	}
 }
 
+talent druid_primal_reflexes:
+{
+	string: "Primal Reflexes"
+	icon: icon_swiftstrike
+	talent_tree_points_required: 20
+	prerequisites: [ druid_feral_charge druid_bestial_wrath ]
+	points:
+	[
+		{ ability_modifier: primal_reflexes_fc_1 ability_modifier: primal_reflexes_bw_1 }
+		{ ability_modifier: primal_reflexes_fc_2 ability_modifier: primal_reflexes_bw_2 }
+	]
+}
+
+ability_modifier primal_reflexes_fc_1:
+{
+	description: "Feral Charge CD -5s."
+	ability: feral_charge
+	modify_cooldown: -50
+}
+
+ability_modifier primal_reflexes_fc_2:
+{
+	description: "Feral Charge CD -10s."
+	ability: feral_charge
+	modify_cooldown: -100
+}
+
+ability_modifier primal_reflexes_bw_1:
+{
+	description: "Bestial Wrath CD -15s."
+	ability: bestial_wrath
+	modify_cooldown: -150
+}
+
+ability_modifier primal_reflexes_bw_2:
+{
+	description: "Bestial Wrath CD -30s."
+	ability: bestial_wrath
+	modify_cooldown: -300
+}
 
 
 talent druid_improved_coordinated_strike:
 {
 	string: "Improved Coordinated Strike"
 	icon: icon_attack_command
-	talent_tree_points_required: 15
+	talent_tree_points_required: 20
 	prerequisites: [ druid_coordinated_strike ]
 	points:
 	[
@@ -748,7 +896,7 @@ talent druid_gift_of_the_untamed:
 {
 	string: "Improved Gift of the Untamed"
 	icon: icon_blessing_of_war
-	talent_tree_points_required: 15
+	talent_tree_points_required: 10
 	points:
 	[
 		{ ability_modifier: improved_gift_1 }
@@ -843,7 +991,7 @@ talent druid_feral_fury:
 {
 	string: "Feral Fury"
 	icon: icon_fury
-	talent_tree_points_required: 20
+	talent_tree_points_required: 25
 	points:
 	[
 		{ aura: druid_primal_unleashing }
@@ -1006,7 +1154,7 @@ aura spectral_strike_pack_hunter_bleed:
 	type: debuff
 	icon: icon_rend
 	duration: based_on_effects
-	flags: [ magic ]
+	flags: [ magic unique_per_source ]
 	max_stack: 5
 	sound: spell_14
 	
@@ -1014,16 +1162,16 @@ aura spectral_strike_pack_hunter_bleed:
 	{
 		update_interval: 20
 		update_count: 4
-		ability<self>: spectral_strike_bleed_tick
+		ability: spectral_strike_bleed_tick
 	}
 }
 
 ability spectral_strike_bleed_tick:
 {
 	string: "Wolf Bleed"
-	flags: [ offensive target_self always_in_range ]
-	states: [ default in_combat ]
 	icon: icon_rend
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
 	
 	direct_effect damage:
 	{

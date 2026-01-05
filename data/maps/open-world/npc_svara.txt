@@ -24,6 +24,13 @@ dialogue_screen .svara_greetings:
 			condition: .svara_can_afford 
 			confirmation: "This will reset all your talent points.\n\nDo you want to proceed?"
 		}
+		
+		{ quest: .timeweaver_10 }
+		{ quest<completion_only>: .timeweaver_10 }
+		{ quest: .timeweaver_20 }
+		{ quest<completion_only>: .timeweaver_20 }
+		{ quest: .timeweaver_30 }
+		{ quest<completion_only>: .timeweaver_30 }
 	]
 }
 
@@ -46,3 +53,72 @@ entity .svara: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Test Progression Quests
+
+quest .timeweaver_10:
+{
+	string: "Thread of Fate I"
+	text: [ "Speak with Svara." ]
+	description: [ "Pull the thread of time and become your future self. Close your eyes, count to three, and whisper: \"I accept.\"\n\nDon't worry about paradoxes. Probably." ]
+	completion: [ "You feel... different. Stronger. As if years of experience just downloaded directly into your brain.\n\nSide effects may include déjà vu, existential dread, and an inexplicable craving for cheese." ]
+	level: 10
+	reward_cash_multiplier: 3
+	reward_xp_multiplier: 3
+	repeat_mode: always
+}
+
+
+quest .timeweaver_15:
+{
+	string: "Thread of Fate I"
+	text: [ "Speak with Svara." ]
+	description: [ "Pull the thread of time and become your future self. Close your eyes, count to three, and whisper: \"I accept.\"\n\nDon't worry about paradoxes. Probably." ]
+	completion: [ "You feel... different. Stronger. As if at least 5 years of experience just downloaded directly into your brain.\n\nSide effects may include déjà vu, existential dread, and an inexplicable craving for cheese." ]
+	level: 15
+	reward_cash_multiplier: 3
+	reward_xp_multiplier: 3
+	repeat_mode: always
+	prerequisites: [ .timeweaver_10 ]
+}
+
+quest .timeweaver_20:
+{
+	string: "Thread of Fate II"
+	text: [ "Speak with Svara." ]
+	description: [ "The timeline grows impatient. Your future self is tapping their foot, arms crossed, wondering what's taking so long.\n\nBest not keep them waiting." ]
+	completion: [ "Excellent. Your future self sends their regards. Also, they said to remind you to stretch more." ]
+	level: 20
+	reward_cash_multiplier: 3
+	reward_xp_multiplier: 3
+	repeat_mode: always
+	prerequisites: [ .timeweaver_15 ]
+}
+
+quest .timeweaver_25:
+{
+	string: "Thread of Fate II"
+	text: [ "Speak with Svara." ]
+	description: [ "The timeline grows impatient. Your future self is tapping their foot, arms crossed, wondering what's taking so long.\n\nBest not keep them waiting." ]
+	completion: [ "Is that... wrinkles I see on your face? A touch of gray hair. Are... are you sure you want to continue this?" ]
+	level: 25
+	reward_cash_multiplier: 3
+	reward_xp_multiplier: 3
+	repeat_mode: always
+	prerequisites: [ .timeweaver_20 ]
+}
+
+
+
+quest .timeweaver_30:
+{
+	string: "Thread of Fate III"
+	text: [ "Speak with Svara." ]
+	description: [ "At this point, you and your future self are basically roommates. They keep borrowing your experience points and never pay rent.\n\nTime to collect." ]
+	completion: [ "The threads of fate are thoroughly tangled now. Causality is more of a suggestion than a rule.\n\nYou're welcome." ]
+	level: 30
+	reward_cash_multiplier: 3
+	reward_xp_multiplier: 3
+	repeat_mode: always
+	prerequisites: [ .timeweaver_25 ]
+}
