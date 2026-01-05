@@ -136,6 +136,8 @@ sprites:
 	sprite doodad_wall_painting_16: { flags: [ ] }
 	sprite doodad_wall_painting_17: { flags: [ ] }
 	sprite doodad_wall_painting_18: { flags: [ ] }
+	sprite doodad_bed_2: { flags: [ tile_walkable ] }
+	sprite doodad_bed_3: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -375,7 +377,7 @@ doodad crates: { sprites: [ doodad_crates_1 ] map_palette<"x">: { occupy: true }
 doodad sack: { sprites: [ doodad_sack_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad table: { sprites: [ doodad_table_1 doodad_table_2 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad chair_left: { sprites: [ doodad_chair_left_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
-doodad bed: { sprites: [ doodad_bed_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad bed: { sprites: [ doodad_bed_1 doodad_bed_2 doodad_bed_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad bookshelf: { sprites: [ doodad_bookshelf_1 doodad_bookshelf_2 doodad_bookshelf_3 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad alchemy_bookshelf: { sprites: [ doodad_bookshelf_potions_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad empty_bookshelf: { sprites: [ doodad_empty_bookshelf_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }

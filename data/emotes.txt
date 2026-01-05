@@ -74,3 +74,18 @@ emote roll: { strings: [
 	"You roll $random$ ($random_range$)" 
 	"$source$ rolls $random$ ($random_range$)"
 ]}
+
+emote wave: { strings: [ 
+	"You wave to everyone!" 
+	"$source$ waves to everyone!"
+	"You wave to $target$!"
+	"$source$ waves to $target$!"
+]}
+
+emote dance: { strings: [ 
+	"You dance with everyone!" 
+	"$source$ dances with everyone!"
+	"You dance with $target$!"
+	"$source$ dances with $target$!"
+]}
+

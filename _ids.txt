@@ -30880,6 +30880,8 @@ sprite icon_rune_stone_2 6116
 sprite icon_rune_stone_3 6117
 sprite __unnamed_874__ 6118
 sprite __unnamed_873__ 6119
+sprite doodad_bed_2 6120
+sprite doodad_bed_3 6121
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -69604,6 +69606,8 @@ emote rofl 8
 emote sorry 9
 emote yawn 10
 emote roll 11
+emote wave 12
+emote dance 13
 route __maps_open_world_town_farm_patrol 1
 route __maps_open_world_default_patrol 3
 route __maps_dungeon_1_patrol 4
