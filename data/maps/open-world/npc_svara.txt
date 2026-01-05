@@ -27,8 +27,12 @@ dialogue_screen .svara_greetings:
 		
 		{ quest: .timeweaver_10 }
 		{ quest<completion_only>: .timeweaver_10 }
+		{ quest: .timeweaver_15 }
+		{ quest<completion_only>: .timeweaver_15 }
 		{ quest: .timeweaver_20 }
 		{ quest<completion_only>: .timeweaver_20 }
+		{ quest: .timeweaver_25 }
+		{ quest<completion_only>: .timeweaver_25 }
 		{ quest: .timeweaver_30 }
 		{ quest<completion_only>: .timeweaver_30 }
 	]
