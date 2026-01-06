@@ -17,6 +17,7 @@ changelog:
 	list:
 	[
 		{ text: "Game no longer crashes on startup if loading a bad configuration." }
+		{ text: "Fixed icon dragging crash bug." }		
 	]
 
 	#######################################################################################
