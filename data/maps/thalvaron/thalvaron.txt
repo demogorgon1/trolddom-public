@@ -1528,7 +1528,7 @@ map thalvaron:
 {
 	string: "Thalvaron"
 	type: open_world
-	default_tile: water
+	default_tile: rocks
 	default_player_spawn: .player_spawn
 	default_fishing_loot_table: fish
 	view_attenuation: 0
