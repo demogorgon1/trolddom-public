@@ -1835,13 +1835,13 @@ ability verdant_nova:
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	resource_cost mana: 35
-	delay: 2
 	aoe_radius: 3
 	aoe_cap: 8
 	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	talent_tree: druid_overgrowth
-	source_particle_system: verdant_nova
+	delay: 2
 	target_particle_system: green_spell_hit
+	source_particle_system: verdant_nova
 	
 	requirement self<must_not_have_aura>: cat_form
 	requirement self<must_not_have_aura>: bear_form
@@ -1893,6 +1893,7 @@ ability verdant_nova:
 		spread: !DEFAULT_SPREAD{}
 	}
 }
+
 talent druid_grove_keeper:
 {
 	string: "Grove Keeper Form"
