@@ -1157,7 +1157,7 @@ entity lifespore:
 		environment:
 		{
 			tick_interval: 20
-			duration: 200  # 20 seconds
+			duration: 200 
 			ability: lifespore_pulse
 			delay: 6
 		}
@@ -1292,16 +1292,41 @@ entity lifespore_improved:
 ability lifespore_pulse:
 {
 	string: "Lifespore"
-	flags: [ target_self target_aoe target_aoe_friendly ]
+	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	target_particle_system: small_heal
 	sound_effects: !SOUND_HEAL_SMALL{}
-	aoe_cap: 5
+	
+	direct_effect apply_aura:
+	{
+		aura: lifespore_pulse_effect
+		apply_to_party_members_in_range: 2
+	}
+}
+
+aura lifespore_pulse_effect:
+{
+	type: hidden
+	duration: based_on_effects
+	flags: [ unique ]
+	
+	aura_effect repeat:
+	{
+		update_interval: 1
+		update_count: 1
+		ability: lifespore_pulse_heal
+	}
+}
+
+ability lifespore_pulse_heal:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	target_particle_system: small_heal
 	
 	direct_effect heal:
 	{
-		function: { expression: a_mul_x_plus_b x: healing a: 0.08 b: [ [ 1 2 ] [ 10 4 ] [ 20 8 ] [ 30 14 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing b: [ [ 1 2 ] [ 10 4 ] [ 20 8 ] [ 30 14 ] ] a: 0.08 }
 		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
@@ -1311,16 +1336,41 @@ ability lifespore_pulse:
 ability lifespore_pulse_r1:
 {
 	string: "Lifespore"
-	flags: [ target_self target_aoe target_aoe_friendly ]
+	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	target_particle_system: small_heal
 	sound_effects: !SOUND_HEAL_SMALL{}
-	aoe_cap: 5
+	
+	direct_effect apply_aura:
+	{
+		aura: lifespore_pulse_r1_effect
+		apply_to_party_members_in_range: 2
+	}
+}
+
+aura lifespore_pulse_r1_effect:
+{
+	type: hidden
+	duration: based_on_effects
+	flags: [ unique ]
+	
+	aura_effect repeat:
+	{
+		update_interval: 1
+		update_count: 1
+		ability: lifespore_pulse_r1_heal
+	}
+}
+
+ability lifespore_pulse_r1_heal:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	target_particle_system: small_heal
 	
 	direct_effect heal:
 	{
-		function: { expression: a_mul_x_plus_b x: healing a: 0.10 b: [ [ 1 3 ] [ 10 5 ] [ 20 10 ] [ 30 18 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing b: [ [ 1 3 ] [ 10 5 ] [ 20 10 ] [ 30 18 ] ] a: 0.10 }
 		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
@@ -1330,16 +1380,41 @@ ability lifespore_pulse_r1:
 ability lifespore_pulse_improved:
 {
 	string: "Lifespore"
-	flags: [ target_self target_aoe target_aoe_friendly ]
+	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	target_particle_system: small_heal
 	sound_effects: !SOUND_HEAL_SMALL{}
-	aoe_cap: 5
+	
+	direct_effect apply_aura:
+	{
+		aura: lifespore_pulse_improved_effect
+		apply_to_party_members_in_range: 2
+	}
+}
+
+aura lifespore_pulse_improved_effect:
+{
+	type: hidden
+	duration: based_on_effects
+	flags: [ unique ]
+	
+	aura_effect repeat:
+	{
+		update_interval: 1
+		update_count: 1
+		ability: lifespore_pulse_improved_heal
+	}
+}
+
+ability lifespore_pulse_improved_heal:
+{
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	target_particle_system: small_heal
 	
 	direct_effect heal:
 	{
-		function: { expression: a_mul_x_plus_b x: healing a: 0.12 b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 21 ] ] }
+		function: { expression: a_mul_x_plus_b x: healing b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 21 ] ] a: 0.12 }
 		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
@@ -1448,12 +1523,10 @@ ability wild_growth:
 	cast_time: 20
 	range: 8
 	cooldowns: [ global wild_growth ]
-	flags: [ spell target_self target_aoe target_aoe_always_self target_aoe_friendly ]
+	flags: [ spell target_self ]
 	states: [ default in_combat ]
 	icon: icon_heal
 	resource_cost mana: 25
-	aoe_radius: 4
-	aoe_cap: 4
 	talent_tree: druid_overgrowth
 	delay: 2
 	sound_effects: !SOUND_HEAL{}
@@ -1465,6 +1538,7 @@ ability wild_growth:
 	direct_effect apply_aura:
 	{
 		aura: wild_growth
+		apply_to_party_members_in_range: 8
 	}
 	
 	# Also apply to companion
@@ -1668,6 +1742,7 @@ ability_modifier fungal_network_2:
 # 	direct_effect heal:
 # 	{
 # 		function: { expression: a_mul_x_plus_b x: healing a: 0.02 b: [ [ 1 0 ] [ 10 1 ] [ 20 2 ] [ 30 4 ] ] }
+#		spread: !DEFAULT_SPREAD{}
 # 		direct: false
 # 	}
 # }
@@ -1810,7 +1885,7 @@ cooldown verdant_nova:
 ability verdant_nova:
 {
 	string: "Verdant Nova"
-	description: "Deals $damage$ nature damage to all enemies within 3 tiles. +25% damage to targets with DoTs."
+	description: "Deals $damage$ nature damage to all enemies within 3 tiles. +25% damage to targets with Nature DoTs."
 	cooldowns: [ global verdant_nova ]
 	flags: [ spell target_self target_aoe target_aoe_always_self ]
 	states: [ default in_combat ]
@@ -1840,6 +1915,7 @@ ability verdant_nova:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect damage:
@@ -1848,6 +1924,7 @@ ability verdant_nova:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	direct_effect damage:
@@ -1856,6 +1933,7 @@ ability verdant_nova:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	# Bonus damage vs Phytotoxin targets
@@ -1865,6 +1943,7 @@ ability verdant_nova:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		spread: !DEFAULT_SPREAD{}
 	}
 }
 
@@ -2066,6 +2145,7 @@ ability living_grove_pulse:
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x_plus_b x: healing a: 0.25 b: [ [ 1 6 ] [ 10 12 ] [ 20 24 ] [ 30 40 ] ] }
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	# Damage enemies
@@ -2074,6 +2154,7 @@ ability living_grove_pulse:
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
 		function: { expression: a_mul_x x: spell_damage a: 0.3 }
+		spread: !DEFAULT_SPREAD{}
 	}
 	
 	# Apply Sprouting Wound DoT to enemies

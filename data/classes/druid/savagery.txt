@@ -14,7 +14,9 @@ talent_tree druid_savagery:
 		talent druid_savage_momentum: "A"
 		talent druid_critical_instinct: "B"
 		talent druid_improved_cat_form: "C"
+		talent druid_improved_cat_form_pounce: "V"
 		talent druid_improved_bear_form: "D"
+		talent druid_improved_bear_form_bellow: "S"
 		talent druid_thick_hide: "E"
 		talent druid_feral_lunge: "F"
 		talent druid_blood_scent: "G"
@@ -37,12 +39,12 @@ talent_tree druid_savagery:
 		"..A.B.."
 		"......."
 		"C->.DaE"
-		"..d...."
-		"F.H...G"
-		"......d"
-		"L.....J"
+		"d.d.d.."
+		"V...S.."
 		"......."
-		".K...I."
+		".G.H.L."
+		".d....."
+		".J.F.I."
 		"......."
 		"...P..."
 	]
@@ -198,15 +200,6 @@ aura travel_form:
 			color_mod: [ 50 200 50 ]
 		}
 		
-		particle:
-		{
-			sprites: [ effect_z ]
-			flags: [ attached blend_add ]
-			count: 1
-			scale: 1.2
-			alpha: 0.3
-			color_mod: [ 100 255 100 ]
-		}
 	}
 	
 	aura_effect move_speed_modifier:
@@ -298,12 +291,13 @@ aura rake_bleed:
 	description: "Bleeding."
 	type: debuff
 	icon: icon_rend
-	duration: 120
+	duration: based_on_effects
 	flags: [ unique_per_source ]
 	
 	aura_effect repeat:
 	{
-		update_interval: 20
+		update_interval: 10
+		update_count: 6
 		ability: rake_bleed_tick
 	}
 }
@@ -318,7 +312,7 @@ ability rake_bleed_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a_mul_x x: attack_power a: 0.15 }
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.15 b: [ [ 1 3 ] [ 10 8 ] [ 20 19 ] [ 20 33 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
@@ -327,7 +321,7 @@ ability rake_bleed_tick:
 ability rake:
 {
 	string: "Rake"
-	description: "Deals $damage$ damage and applies a bleed. Requires Cat Form."
+	description: "Deals $damage$ damage and applies a bleed, dealing damage over time. Requires Cat Form."
 	cooldowns: [ global rake ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
 	states: [ default in_combat ]
@@ -361,12 +355,13 @@ ability swipe:
 	string: "Swipe"
 	description: "Cleave enemies in front of you for $damage$ damage."
 	cooldowns: [ global ]
-	flags: [ melee offensive target_other target_hostile target_aoe can_be_dodged can_be_parried can_miss ]
+	flags: [ melee offensive target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_claw
-	aoe_radius: 2
+	aoe_radius: 1
 	aoe_cap: 3
-	resource_cost mana: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	resource_cost mana: 10
 	delay: 4
 	
 	requirement self<must_have_aura>: bear_form
@@ -375,7 +370,7 @@ ability swipe:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: weapon a: 0.8 }
+		function: { expression: a_mul_x x: weapon a: 0.35 }
 		spread: !DEFAULT_SPREAD{}
 	}
 }
@@ -417,8 +412,7 @@ ability primal_strike:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: weapon a: 1.15 }
-		spread: !DEFAULT_SPREAD{}
+		function: { expression: x_plus_a x: weapon_normalized a: [ [ 1 5 ] [ 10 9 ] [ 20 20 ] [ 30 36 ] ] }
 	}
 	
 	direct_effect apply_aura:
@@ -440,7 +434,8 @@ aura primal_swipe_bleed:
 	
 	aura_effect repeat:
 	{
-		update_interval: 20
+		update_interval: 10
+		update_count: 6
 		ability: primal_swipe_bleed_tick
 	}
 }
@@ -454,7 +449,7 @@ ability primal_swipe_bleed_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a_mul_x x: attack_power a: 0.12 }
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.085 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 20 36 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
@@ -464,7 +459,7 @@ ability primal_swipe:
 {
 	string: "Primal Swipe"
 	description: "Deal $damage$ damage and apply a stacking bleed (max 3 stacks)."
-	cooldowns: [ global ]
+	cooldowns: [ global thrash ]
 	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]
 	states: [ default in_combat ]
 	icon: icon_rend
@@ -831,8 +826,7 @@ aura druid_critical_instinct_5:
 # TIER 5 (5 pts) - Form Improvements
 ###############################################################################
 
-# Improved Cat Form - Grants Rip/Ravage/Pounce
-# Note to demogorgon1: Crit bonus built into damage_output_modifier since conditional stat_modifiers not supported **HINT HINT*** :)
+# Improved Cat Form - Grants Rip/Ravage
 talent druid_improved_cat_form:
 {
 	string: "Improved Cat Form"
@@ -841,8 +835,8 @@ talent druid_improved_cat_form:
 	points:
 	[
 		{ aura: druid_improved_cat_form_1 ability: rip }
-		{ aura: druid_improved_cat_form_2 ability: ravage }
-		{ aura: druid_improved_cat_form_3 ability: pounce }
+		{ aura: druid_improved_cat_form_2 }
+		{ aura: druid_improved_cat_form_3 ability: rip ability: ravage }
 	]
 }
 
@@ -864,7 +858,7 @@ aura druid_improved_cat_form_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Cat Form: +10% damage. Grants Ravage."
+	description: "Cat Form: +10% damage."
 	
 	aura_effect damage_output_modifier:
 	{
@@ -878,7 +872,7 @@ aura druid_improved_cat_form_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Cat Form: +15% damage. Grants Pounce."
+	description: "Cat Form: +15% damage. Grants Rip and Ravage."
 	
 	aura_effect damage_output_modifier:
 	{
@@ -888,7 +882,7 @@ aura druid_improved_cat_form_3:
 	}
 }
 
-# Improved Bear Form - Grants Lacerate/Maul/Bellow
+# Improved Bear Form - Grants Thrash/Maul
 talent druid_improved_bear_form:
 {
 	string: "Improved Bear Form"
@@ -896,9 +890,9 @@ talent druid_improved_bear_form:
 	talent_tree_points_required: 5
 	points:
 	[
-		{ aura: druid_improved_bear_form_1 ability: lacerate }
-		{ aura: druid_improved_bear_form_2 ability: maul }
-		{ aura: druid_improved_bear_form_3 ability: bellow }
+		{ aura: druid_improved_bear_form_1 ability: thrash }
+		{ aura: druid_improved_bear_form_2 }
+		{ aura: druid_improved_bear_form_3 ability: thrash ability: maul }
 	]
 }
 
@@ -906,7 +900,7 @@ aura druid_improved_bear_form_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Bear Form: +10% damage reduction. Grants Lacerate."
+	description: "Bear Form: +10% damage reduction. Grants Thrash."
 	
 	aura_effect damage_input_modifier:
 	{
@@ -919,7 +913,7 @@ aura druid_improved_bear_form_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Bear Form: +15% damage reduction. Grants Maul."
+	description: "Bear Form: +15% damage reduction."
 	
 	aura_effect damage_input_modifier:
 	{
@@ -932,7 +926,7 @@ aura druid_improved_bear_form_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Bear Form: +20% damage reduction. Grants Bellow."
+	description: "Bear Form: +20% damage reduction. Grants Thrash and Maul."
 	
 	aura_effect damage_input_modifier:
 	{
@@ -1074,7 +1068,8 @@ aura rip_bleed:
 	
 	aura_effect repeat:
 	{
-		update_interval: 20
+		update_interval: 13
+		update_count: 9
 		ability: rip_bleed_tick
 	}
 }
@@ -1089,7 +1084,7 @@ ability rip_bleed_tick:
 	direct_effect damage:
 	{
 		damage_type: bleed
-		function: { expression: a_mul_x x: attack_power a: 0.25 }
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.20 b: [ [ 1 5 ] [ 10 11 ] [ 20 22 ] [ 20 36 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 		direct: false
 	}
@@ -1124,7 +1119,7 @@ ability rip:
 	}
 }
 
-# Ravage - Granted by Improved Cat Form R2
+# Ravage - Granted by Improved Cat Form R3
 cooldown ravage:
 {
 	duration: 100
@@ -1154,8 +1149,148 @@ ability ravage:
 	}
 }
 
-# Pounce - Granted by Improved Cat Form R3
+###############################################################################
+# TIER 5 GRANTED ABILITIES - Bear Form
+###############################################################################
+
+# Thrash - Granted by Improved Bear Form R1
+# AOE bleed for threat generation, shares cooldown with Primal Swipe
+cooldown thrash:
+{
+	duration: 40
+}
+
+aura thrash_bleed:
+{
+	string: "Thrash"
+	description: "Bleeding from thrash."
+	type: debuff
+	icon: icon_rend
+	duration: 150
+	flags: [ magic unique_per_source ]
+	max_stack: 5
+	
+	aura_effect repeat:
+	{
+		update_interval: 30
+		update_count: 10
+		ability: thrash_bleed_tick
+	}
+}
+
+ability thrash_bleed_tick:
+{
+	string: "Thrash"
+	icon: icon_rend
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: bleed
+		function: { expression: a_mul_x_plus_b x: attack_power a: 0.08 b: [ [ 1 3 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }	
+		spread: !DEFAULT_SPREAD{}
+		direct: false
+	}
+}
+
+ability thrash:
+{
+	string: "Thrash"
+	description: "Deals $damage$ damage to nearby enemies and applies a stacking bleed (max 5). Requires Bear Form."
+	range: 1
+	cooldowns: [ global thrash ]
+	flags: [ melee offensive target_self target_aoe target_aoe_hostile can_be_dodged can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_rend
+	resource_cost mana: 14
+	delay: 4
+	aoe_radius: 1
+	aoe_cap: 4
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.7 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: thrash_bleed
+	}
+}
+
+# Maul - Granted by Improved Bear Form R3
+aura maul_wounded:
+{
+	string: "Wounded"
+	description: "Wounded by Maul, generating 125% more threat against the target."
+	type: debuff
+	icon: icon_hammer_1
+	duration: 100
+	flags: [ unique ]
+
+	aura_effect threat_modifier: 
+	{ 
+		multiplier: 2.25
+	}
+
+}
+
+ability maul:
+{
+	string: "Maul"
+	description: "Deals $damage$ damage and wounds target, generating additional threat against them. Requires Bear Form."
+	cooldowns: [ global ]
+	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_blocked can_be_parried can_miss ]
+	states: [ default in_combat ]
+	icon: icon_hammer_1
+	resource_cost mana: 10
+	target_particle_system: purple_spell_hit
+	delay: 4
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 1.3 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: maul_wounded
+	}
+}
+
+###############################################################################
+# TIER 10 (10 pts) - Pounce, Bellow, 
+###############################################################################
+# Pounce - Requires Improved Cat Form R3
 # Grants stealth, next melee from stealth is guaranteed crit
+
+talent druid_improved_cat_form_pounce:
+{
+	string: "Pounce"
+	icon: icon_stealth
+	talent_tree_points_required: 10
+	prerequisites: [ druid_improved_cat_form ]
+	points:
+	[
+		{ ability: pounce }
+	]
+}
+
+
 cooldown pounce:
 {
 	duration: 300
@@ -1238,121 +1373,23 @@ ability pounce:
 	}
 }
 
-###############################################################################
-# TIER 5 GRANTED ABILITIES - Bear Form
-###############################################################################
 
-# Lacerate - Granted by Improved Bear Form R1
-cooldown lacerate:
+talent druid_improved_bear_form_bellow:
 {
-	duration: 40
-}
-
-aura lacerate_bleed:
-{
-	string: "Lacerate"
-	description: "Bleeding from laceration."
-	type: debuff
-	icon: icon_rend
-	duration: 150
-	flags: [ magic unique_per_source ]
-	max_stack: 5
-	
-	aura_effect repeat:
-	{
-		update_interval: 30
-		ability: lacerate_bleed_tick
-	}
-}
-
-ability lacerate_bleed_tick:
-{
-	string: "Lacerate"
-	icon: icon_rend
-	states: [ default in_combat ]
-	flags: [ always_in_range always_in_line_of_sight ]
-	
-	direct_effect damage:
-	{
-		damage_type: bleed
-		function: { expression: a_mul_x x: attack_power a: 0.12 }
-		spread: !DEFAULT_SPREAD{}
-		direct: false
-	}
-}
-
-ability lacerate:
-{
-	string: "Lacerate"
-	description: "Deals $damage$ damage and applies a stacking bleed (max 5). Requires Bear Form."
-	cooldowns: [ global lacerate ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
-	states: [ default in_combat ]
-	icon: icon_rend
-	resource_cost mana: 12
-	delay: 4
-	talent_tree: druid_savagery
-	
-	requirement self<must_have_aura>: bear_form
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical
-		function: { expression: a_mul_x x: weapon a: 0.9 }
-		spread: !DEFAULT_SPREAD{}
-	}
-	
-	direct_effect apply_aura:
-	{
-		aura: lacerate_bleed
-	}
-}
-
-# Maul - Granted by Improved Bear Form R2
-aura maul_wounded:
-{
-	string: "Wounded"
-	description: "Wounded by Maul."
-	type: debuff
-	icon: icon_hammer_1
-	duration: 100
-	flags: [ unique ]
-}
-
-ability maul:
-{
-	string: "Maul"
-	description: "Deals $damage$ damage and wounds target. Requires Bear Form."
-	cooldowns: [ global ]
-	flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_miss ]
-	states: [ default in_combat ]
-	icon: icon_hammer_1
-	resource_cost mana: 10
-	target_particle_system: purple_spell_hit
-	delay: 4
-	talent_tree: druid_savagery
-	
-	requirement self<must_have_aura>: bear_form
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical
-		function: { expression: a_mul_x x: weapon a: 1.3 }
-		spread: !DEFAULT_SPREAD{}
-	}
-	
-	direct_effect apply_aura:
-	{
-		aura: maul_wounded
-	}
+	string: "Bellow"
+	icon: icon_taunt
+	talent_tree_points_required: 10
+	prerequisites: [ druid_improved_bear_form ]
+	points:
+	[
+		{ ability: bellow }
+	]
 }
 
 # Bellow - Granted by Improved Bear Form R3
 cooldown bellow:
 {
-	duration: 120
+	duration: 1200
 }
 
 aura bellow_taunt:
@@ -1363,7 +1400,7 @@ aura bellow_taunt:
 	icon: icon_taunt
 	duration: 60
 	flags: [ unique ]
-	priority: !AURA_PRIORITY_CC{}
+	particle_system: druid_taunt
 	
 	aura_effect taunt:
 	{
@@ -1373,17 +1410,26 @@ aura bellow_taunt:
 ability bellow:
 {
 	string: "Bellow"
-	description: "Taunt all enemies within 3 tiles for 6s. Requires Bear Form."
+	description: "Taunt all closeby enemies for 6 seconds. Requires Bear Form."
+	range: 1
 	cooldowns: [ global bellow ]
-	flags: [ target_self target_aoe target_aoe_always_self ]
+	flags: [ target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
-	icon: icon_taunt
+	icon: icon_provocation
 	resource_cost mana: 15
+	delay: 3
 	aoe_radius: 3
-	aoe_cap: 8
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	talent_tree: druid_savagery
 	
 	requirement self<must_have_aura>: bear_form
+	
+	direct_effect threat:
+	{
+		apply_to: source
+		add: top
+	}
 	
 	direct_effect apply_aura:
 	{
@@ -1391,109 +1437,7 @@ ability bellow:
 	}
 }
 
-###############################################################################
-# TIER 10 (10 pts)
-###############################################################################
 
-# Feral Lunge - Charge with root (requires Cat OR Bear form)
-talent druid_feral_lunge:
-{
-	string: "Feral Lunge"
-	icon: icon_charge
-	talent_tree_points_required: 10
-	points:
-	[
-		{ ability: feral_lunge_cat ability: feral_lunge_bear }
-	]
-}
-
-cooldown feral_lunge:
-{
-	duration: 150
-}
-
-aura feral_lunge_root:
-{
-	string: "Feral Lunge"
-	description: "Rooted."
-	type: debuff
-	icon: icon_charge
-	duration: 20
-	flags: [ unique ]
-	priority: !AURA_PRIORITY_CC{}
-	
-	aura_effect stun:
-	{
-	}
-}
-
-ability feral_lunge_hit:
-{
-	flags: [ offensive target_other target_hostile always_in_range ]
-	states: [ default in_combat ]
-	icon: icon_charge
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical
-		function: { expression: a_mul_x x: weapon a: 0.5 }
-		spread: !DEFAULT_SPREAD{}
-	}
-	
-	direct_effect apply_aura:
-	{
-		aura: feral_lunge_root
-	}
-}
-
-ability feral_lunge_cat:
-{
-	string: "Feral Lunge"
-	description: "Charge to target, dealing $damage$ damage and rooting. Requires Cat Form."
-	min_range: 2
-	range: 6
-	cooldowns: [ global feral_lunge ]
-	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
-	states: [ default in_combat ]
-	icon: icon_charge
-	resource_cost mana: 18
-	talent_tree: druid_savagery
-	
-	requirement self<must_have_aura>: cat_form
-	
-	direct_effect move:
-	{
-		destination: target_adjacent
-		move_flags: [ walkable_path_required ]
-		max_steps: 8
-		trigger_ability_on_resolve<target>: feral_lunge_hit
-	}
-}
-
-ability feral_lunge_bear:
-{
-	string: "Feral Lunge"
-	description: "Charge to target, dealing $damage$ damage and rooting. Requires Bear Form."
-	min_range: 2
-	range: 6
-	cooldowns: [ global feral_lunge ]
-	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
-	states: [ default in_combat ]
-	icon: icon_charge
-	resource_cost mana: 18
-	talent_tree: druid_savagery
-	
-	requirement self<must_have_aura>: bear_form
-	
-	direct_effect move:
-	{
-		destination: target_adjacent
-		move_flags: [ walkable_path_required ]
-		max_steps: 8
-		trigger_ability_on_resolve<target>: feral_lunge_hit
-	}
-}
 
 # Blood Scent - Bleed damage bonus (3 ranks)
 talent druid_blood_scent:
@@ -1697,7 +1641,7 @@ aura druid_sharpened_claws_5:
 }
 
 ###############################################################################
-# TIER 15 (15 pts)
+# TIER 15 (15 pts) - Taste for Blood, Feral Lunge, Predatory Instincts
 ###############################################################################
 
 # Taste for Blood - Consume bleeds for damage + heal
@@ -1718,10 +1662,50 @@ cooldown taste_for_blood:
 	duration: 80
 }
 
+###############################################################################
+# FEATURE REQUEST: Aura-Count-Based Damage Scaling
+# 
+# Current limitation: No way to count auras on target and scale damage in a
+# single damage event. Current workaround triggers separate abilities per aura,
+# resulting in multiple damage numbers instead of one combined hit.
+#
+# DESIRED FUNCTIONALITY:
+# A way to define an array of auras to check on target, with bonus damage
+# applied per aura found, all combined into a single damage output.
+#
+# PROPOSED SYNTAX EXAMPLE:
+#
+#	direct_effect damage:
+#	{
+#		flags: [ can_be_critical ]
+#		damage_type: physical
+#		function: { expression: a_mul_x x: attack_power a: 1.0 }
+#		spread: !DEFAULT_SPREAD{}
+#		
+#		# Adds 0.3 * AP per aura found in array, combined into single damage
+#		aura_count_damage_bonus<target>:
+#		{
+#			auras: [ rake_bleed rip_bleed lacerate_bleed primal_swipe_bleed spectral_strike_pack_hunter_bleed ]
+#			per_aura_function: { expression: a_mul_x x: attack_power a: 0.3 }
+#		}
+#	}
+#
+# This would check target for each aura in the array, count how many are
+# present (0-5 in this case), multiply the per_aura_function result by that
+# count, and add it to the base damage as a single combined hit.
+#
+# Example outputs with 100 AP:
+#   0 bleeds: 100 damage (1.0 * 100)
+#   1 bleed:  130 damage (1.0 * 100) + (0.3 * 100 * 1)
+#   3 bleeds: 190 damage (1.0 * 100) + (0.3 * 100 * 3)
+#   5 bleeds: 250 damage (1.0 * 100) + (0.3 * 100 * 5)
+#
+###############################################################################
+
 ability taste_for_blood:
 {
 	string: "Taste for Blood"
-	description: "Consume all bleed effects on target, dealing burst damage and healing yourself."
+	description: "Consume all bleed effects on target, dealing burst damage and healing yourself. Bonus damage per bleed consumed."
 	cooldowns: [ global taste_for_blood ]
 	flags: [ melee offensive target_other target_hostile ]
 	states: [ default in_combat ]
@@ -1730,6 +1714,38 @@ ability taste_for_blood:
 	talent_tree: druid_savagery
 	delay: 3
 	target_particle_system: purple_spell_hit
+	
+	# CURRENT WORKAROUND: Conditional trigger per bleed type (multiple damage events)
+	# These should only fire if the bleed exists on target
+	direct_effect trigger_ability:
+	{
+		requirement target<must_have_aura>: rake_bleed
+		ability: taste_for_blood_bonus
+	}
+	
+	direct_effect trigger_ability:
+	{
+		requirement target<must_have_aura>: rip_bleed
+		ability: taste_for_blood_bonus
+	}
+	
+	direct_effect trigger_ability:
+	{
+		requirement target<must_have_aura>: thrash_bleed
+		ability: taste_for_blood_bonus
+	}
+	
+	direct_effect trigger_ability:
+	{
+		requirement target<must_have_aura>: primal_swipe_bleed
+		ability: taste_for_blood_bonus
+	}
+	
+	direct_effect trigger_ability:
+	{
+		requirement target<must_have_aura>: spectral_strike_pack_hunter_bleed
+		ability: taste_for_blood_bonus
+	}
 	
 	# Remove all bleed auras
 	direct_effect remove_aura:
@@ -1744,22 +1760,50 @@ ability taste_for_blood:
 	
 	direct_effect remove_aura:
 	{
-		aura: lacerate_bleed
+		aura: thrash_bleed
 	}
 	
-	# Burst damage - scales with attack power
+	direct_effect remove_aura:
+	{
+		aura: primal_swipe_bleed
+	}
+	
+	direct_effect remove_aura:
+	{
+		aura: spectral_strike_pack_hunter_bleed
+	}
+	
+	# Base damage (reduced since bonuses add to it)
 	direct_effect damage:
 	{
 		flags: [ can_be_critical ]
 		damage_type: physical
-		function: { expression: a_mul_x x: attack_power a: 1.5 }
+		function: { expression: a_mul_x x: attack_power a: 1.0 }
 		spread: !DEFAULT_SPREAD{}
 	}
 	
-	# Heal self - triggers a self-targeted ability
+	# Heal self
 	direct_effect trigger_ability:
 	{
 		ability<self>: taste_for_blood_heal
+	}
+}
+
+# Bonus damage per bleed consumed (0.3 AP per bleed)
+ability taste_for_blood_bonus:
+{
+	string: "Taste for Blood"
+	flags: [ always_in_range always_in_line_of_sight ]
+	states: [ default in_combat ]
+	icon: icon_heal
+	target_particle_system: purple_spell_hit
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: attack_power a: 0.3 }
+		spread: !DEFAULT_SPREAD{}
 	}
 }
 
@@ -1773,6 +1817,107 @@ ability taste_for_blood_heal:
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x a: 0.15 x: health_max entity: target }
+	}
+}
+
+
+# Feral Lunge - Charge with root (requires Cat OR Bear form)
+talent druid_feral_lunge:
+{
+	string: "Feral Lunge"
+	icon: icon_charge
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability: feral_lunge_cat ability: feral_lunge_bear }
+	]
+}
+
+cooldown feral_lunge:
+{
+	duration: 250
+}
+
+aura feral_lunge_root:
+{
+	string: "Feral Lunge"
+	description: "Pinned"
+	type: debuff
+	icon: icon_charge
+	duration: 20
+	flags: [ incapacitation ]
+	aura_effect immobilize: { } 
+	priority: !AURA_PRIORITY_CC{}
+	diminishing_effect: root
+	
+}
+
+ability feral_lunge_hit:
+{
+	flags: [ offensive target_other target_hostile always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a_mul_x x: weapon a: 0.5 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_lunge_root
+	}
+}
+
+ability feral_lunge_cat:
+{
+	string: "Feral Lunge"
+	description: "Lunge at the target, dealing $damage$ damage and pinning them in place for 2 seconds. Requires Cat Form."
+	min_range: 2
+	range: 6
+	cooldowns: [ global feral_lunge ]
+	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	resource_cost mana: 18
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: cat_form
+	
+
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 6
+		trigger_ability_on_resolve<target>: feral_lunge_hit
+	}
+}
+
+ability feral_lunge_bear:
+{
+	string: "Feral Lunge"
+	description: "Lunge at the target, dealing $damage$ damage and pinning them for 2 seconds. Requires Bear Form."
+	min_range: 2
+	range: 6
+	cooldowns: [ global feral_lunge ]
+	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	resource_cost mana: 18
+	talent_tree: druid_savagery
+	
+	requirement self<must_have_aura>: bear_form
+	
+	direct_effect move:
+	{
+		destination: target_adjacent
+		move_flags: [ walkable_path_required ]
+		max_steps: 6
+		trigger_ability_on_resolve<target>: feral_lunge_hit
 	}
 }
 
@@ -2005,5 +2150,26 @@ ability primal_rampage:
 	direct_effect apply_aura:
 	{
 		aura: primal_rampage_buff
+	}
+}
+
+###############################################################################
+# Druid Taunt (standalone, not reliant on Fighter)
+###############################################################################
+
+particle_system druid_taunt:
+{
+	particle:
+	{
+		sprites: [ effect_taunt_0 effect_taunt_1 effect_taunt_2 effect_taunt_1 ]
+		flags: [ attached ]
+		sprite_interval: 125
+		count: 1
+		scale: 1
+		alpha: 0.45
+		fade_in: 250	
+		fade_out: 250
+		offset_x: 0.5
+		offset_y: 0.5	
 	}
 }

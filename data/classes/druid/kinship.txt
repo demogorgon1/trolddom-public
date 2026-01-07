@@ -42,10 +42,10 @@ talent_tree druid_kinship:
 		"I.G...N"
 		"......."
 		"P.K.H.."
-		"d...d.L"
-		"Q.M.J.."
+		"d...d.."
+		"Q.M.J.L"
 		"......."
-		"..O...."
+		"...O..."
 	]
 }
 
@@ -75,19 +75,19 @@ aura gift_of_the_untamed:
 	
 	stat_modifiers:
 	{
-		attack_power: { add: 10 }
-		spell_damage: { add: 10 }
-		phys_crit_chance: { add: 3 }
-		spell_crit_chance: { add: 3 }
-		attack_haste: { add_percent: 3 }
-		spell_haste: { add_percent: 3 }
+		attack_power: { add: 5 }
+		spell_damage: { add: 5 }
+		phys_crit_chance: { add: 1 }
+		spell_crit_chance: { add: 1 }
+		attack_haste: { add_percent: 1 }
+		spell_haste: { add_percent: 1 }
 	}
 }
 
 ability gift_of_the_untamed:
 {
 	string: "Gift of the Untamed"
-	description: "Blesses target with primal vitality. +10 AP/SP, +3% crit/haste for 30 minutes. Improved by talents."
+	description: "Blesses target with primal vitality. +5 AP/SP, +1% crit/haste for 30 minutes. Improved by talents."
 	range: 8
 	cast_time: 10
 	cooldowns: [ global ]
@@ -108,21 +108,21 @@ ability gift_of_the_untamed:
 		aura: gift_of_the_untamed
 	}
 	
-	# R1: +13 AP/SP, +4% crit/haste (overwrites base via unique flag)
+	# R1: +10 AP/SP, +2% crit/haste (overwrites base via unique flag)
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_gift_1
 		aura: gift_of_the_untamed_improved_1
 	}
 	
-	# R2: +17 AP/SP, +5% crit/haste
+	# R2: +15 AP/SP, +3% crit/haste
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_gift_2
 		aura: gift_of_the_untamed_improved_2
 	}
 	
-	# R3: +20 AP/SP, +6% crit/haste
+	# R3: +20 AP/SP, +4% crit/haste
 	direct_effect apply_aura:
 	{
 		must_have_ability_modifier: improved_gift_3
@@ -164,8 +164,8 @@ ability call_companion:
 		
 		refresh_npc_metrics:
 		{
-			weapon_damage: 0.85
-			health: 0.65
+			weapon_damage: 0.35
+			health: 0.40
 			armor: 1
 		}
 	}
@@ -908,24 +908,24 @@ talent druid_gift_of_the_untamed:
 # Ability modifiers - these gate which aura version is applied
 ability_modifier improved_gift_1:
 {
-	description: "Gift of the Untamed: +13 AP/SP, +4% crit/haste."
+	description: "Gift of the Untamed: +10 AP/SP, +1% crit/haste"
 }
 
 ability_modifier improved_gift_2:
 {
-	description: "Gift of the Untamed: +17 AP/SP, +5% crit/haste."
+	description: "Gift of the Untamed: +15 AP/SP, +2% crit/haste."
 }
 
 ability_modifier improved_gift_3:
 {
-	description: "Gift of the Untamed: +20 AP/SP, +6% crit/haste."
+	description: "Gift of the Untamed: +20 AP/SP, +4% crit/haste."
 }
 
 # Improved aura versions - applied via must_have_ability_modifier in the ability
 aura gift_of_the_untamed_improved_1:
 {
 	string: "Gift of the Untamed"
-	description: "+13 Attack Power, +13 Spell Power, +4% crit, +4% haste."
+	description: "+10 Attack Power, +10 Spell Power, +1% crit, +1% haste."
 	icon: icon_blessing_of_war
 	duration: 18000
 	type: buff
@@ -933,19 +933,19 @@ aura gift_of_the_untamed_improved_1:
 	
 	stat_modifiers:
 	{
-		attack_power: { add: 13 }
-		spell_damage: { add: 13 }
-		phys_crit_chance: { add: 4 }
-		spell_crit_chance: { add: 4 }
-		attack_haste: { add_percent: 4 }
-		spell_haste: { add_percent: 4 }
+		attack_power: { add: 10 }
+		spell_damage: { add: 10 }
+		phys_crit_chance: { add: 1 }
+		spell_crit_chance: { add: 1 }
+		attack_haste: { add_percent: 1 }
+		spell_haste: { add_percent: 1 }
 	}
 }
 
 aura gift_of_the_untamed_improved_2:
 {
 	string: "Gift of the Untamed R2"
-	description: "+17 Attack Power, +17 Spell Power, +5% crit, +5% haste."
+	description: "+15 Attack Power, +15 Spell Power, +2% crit, +2% haste."
 	icon: icon_blessing_of_war
 	duration: 18000
 	type: buff
@@ -953,19 +953,19 @@ aura gift_of_the_untamed_improved_2:
 	
 	stat_modifiers:
 	{
-		attack_power: { add: 17 }
-		spell_damage: { add: 17 }
-		phys_crit_chance: { add: 5 }
-		spell_crit_chance: { add: 5 }
-		attack_haste: { add_percent: 5 }
-		spell_haste: { add_percent: 5 }
+		attack_power: { add: 15 }
+		spell_damage: { add: 15 }
+		phys_crit_chance: { add: 2 }
+		spell_crit_chance: { add: 2 }
+		attack_haste: { add_percent: 2 }
+		spell_haste: { add_percent: 2 }
 	}
 }
 
 aura gift_of_the_untamed_improved_3:
 {
 	string: "Gift of the Untamed R3"
-	description: "+20 Attack Power, +20 Spell Power, +6% crit, +6% haste."
+	description: "+20 Attack Power, +20 Spell Power, +4% crit, +4% haste."
 	icon: icon_blessing_of_war
 	duration: 18000
 	type: buff
@@ -975,10 +975,10 @@ aura gift_of_the_untamed_improved_3:
 	{
 		attack_power: { add: 20 }
 		spell_damage: { add: 20 }
-		phys_crit_chance: { add: 6 }
-		spell_crit_chance: { add: 6 }
-		attack_haste: { add_percent: 6 }
-		spell_haste: { add_percent: 6 }
+		phys_crit_chance: { add: 4 }
+		spell_crit_chance: { add: 4 }
+		attack_haste: { add_percent: 4 }
+		spell_haste: { add_percent: 4 }
 	}
 }
 
@@ -1030,7 +1030,7 @@ aura feral_fury_stalker_buff:
 	
 	aura_effect combat_event_trigger:
 	{
-		combat_event<source>: hit
+		combat_event_ability_mask: [ melee ]
 		probability: 20
 		ability<self>: spectral_strike_stalker
 	}
@@ -1048,17 +1048,16 @@ ability feral_fury_stalker:
 	string: "Feral Fury: Stalker"
 	description: "For 20s, you and nearby allies' attacks have 20% chance to gain stacking attack speed. Critical hits guarantee proc."
 	cooldowns: [ global feral_fury ]
-	flags: [ target_self target_aoe target_aoe_always_self target_aoe_friendly ]
+	flags: [ target_self ]
 	states: [ default in_combat ]
 	icon: icon_fury
-	aoe_radius: 5
-	aoe_cap: 5
 	talent_tree: druid_kinship
 	resource_cost mana: 50
 	
 	direct_effect apply_aura:
 	{
 		aura: feral_fury_stalker_buff
+		apply_to_party_members_in_range: 8
 	}
 }
 

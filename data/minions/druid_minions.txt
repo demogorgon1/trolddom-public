@@ -79,14 +79,14 @@
 			direct_effect damage:
 			{
 				flags: [ can_be_critical ]
-				damage_type: physical			
-				function: { expression: a_mul_x_plus_b_mul_y a: 1 x: minion_weapon b: 1 y: owner_spell_damage }		
+				damage_type: physical
+				function: { expression: a_mul_x a: 0.35 x: weapon }		
 			}
 		}
 		
 		cooldown .druid_companion_snake_venom_bite:
 		{
-			duration: 80
+			duration: 200
 		}
 		
 		aura .druid_companion_snake_venom:
@@ -100,7 +100,7 @@
 			
 			aura_effect repeat:
 			{
-				update_interval: 20
+				update_interval: 12
 				update_count: 5
 				ability<self>: .druid_companion_snake_venom_tick
 			}
@@ -114,9 +114,8 @@
 			direct_effect damage:
 			{
 				damage_type: nature
-				flags: [ is_magical ]
+				flags: [ can_be_critical ]
 				function: { expression: a_mul_x_plus_b a: 0.15 x: owner_spell_damage b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 20 ] ] }
-				direct: false
 			}
 		}
 		
@@ -297,8 +296,8 @@
 			direct_effect damage:
 			{
 				flags: [ can_be_critical ]
-				damage_type: physical			
-				function: { expression: a_mul_x_plus_b_mul_y a: 0.9 x: minion_weapon b: 0.8 y: owner_spell_damage }		
+				damage_type: physical
+				function: { expression: a_mul_x a: 1.0 x: weapon }		
 			}
 		}
 		
@@ -491,8 +490,8 @@
 			direct_effect damage:
 			{
 				flags: [ can_be_critical ]
-				damage_type: physical			
-				function: { expression: a_mul_x_plus_b_mul_y a: 1 x: minion_weapon b: 0.5 y: owner_spell_damage }		
+				damage_type: physical
+				function: { expression: a_mul_x a: 1.3 x: weapon }		
 			}
 		}	
 		
