@@ -194,7 +194,8 @@ aura travel_form:
 			sprites: [ effect_fire_0 effect_fire_1 effect_fire_2 ]
 			flags: [ attached blend_add ]
 			sprite_interval: 100
-			count: 1
+			duration: 50
+			count: 3
 			scale: 0.8
 			alpha: 0.4
 			color_mod: [ 50 200 50 ]
