@@ -1292,43 +1292,19 @@ entity lifespore_improved:
 ability lifespore_pulse:
 {
 	string: "Lifespore"
-	flags: [ target_self ]
+	flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	sound_effects: !SOUND_HEAL_SMALL{}
-	
-	direct_effect apply_aura:
-	{
-		aura: lifespore_pulse_effect
-		apply_to_party_members_in_range: 2
-	}
-}
-
-aura lifespore_pulse_effect:
-{
-	type: hidden
-	duration: based_on_effects
-	flags: [ unique ]
-	
-	aura_effect repeat:
-	{
-		update_interval: 1
-		update_count: 1
-		ability: lifespore_pulse_heal
-	}
-}
-
-ability lifespore_pulse_heal:
-{
-	flags: [ target_self always_in_range ]
-	states: [ default in_combat ]
 	target_particle_system: small_heal
+	sound_effects: !SOUND_HEAL_SMALL{}
+	aoe_radius: 2
+	aoe_cap: 5
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x_plus_b x: healing b: [ [ 1 2 ] [ 10 4 ] [ 20 8 ] [ 30 14 ] ] a: 0.08 }
 		spread: !DEFAULT_SPREAD{}
-		direct: false
 	}
 }
 
@@ -1336,43 +1312,19 @@ ability lifespore_pulse_heal:
 ability lifespore_pulse_r1:
 {
 	string: "Lifespore"
-	flags: [ target_self ]
+	flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	sound_effects: !SOUND_HEAL_SMALL{}
-	
-	direct_effect apply_aura:
-	{
-		aura: lifespore_pulse_r1_effect
-		apply_to_party_members_in_range: 2
-	}
-}
-
-aura lifespore_pulse_r1_effect:
-{
-	type: hidden
-	duration: based_on_effects
-	flags: [ unique ]
-	
-	aura_effect repeat:
-	{
-		update_interval: 1
-		update_count: 1
-		ability: lifespore_pulse_r1_heal
-	}
-}
-
-ability lifespore_pulse_r1_heal:
-{
-	flags: [ target_self always_in_range ]
-	states: [ default in_combat ]
 	target_particle_system: small_heal
+	sound_effects: !SOUND_HEAL_SMALL{}
+	aoe_radius: 2
+	aoe_cap: 5
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x_plus_b x: healing b: [ [ 1 3 ] [ 10 5 ] [ 20 10 ] [ 30 18 ] ] a: 0.10 }
 		spread: !DEFAULT_SPREAD{}
-		direct: false
 	}
 }
 
@@ -1380,43 +1332,19 @@ ability lifespore_pulse_r1_heal:
 ability lifespore_pulse_improved:
 {
 	string: "Lifespore"
-	flags: [ target_self ]
+	flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
-	sound_effects: !SOUND_HEAL_SMALL{}
-	
-	direct_effect apply_aura:
-	{
-		aura: lifespore_pulse_improved_effect
-		apply_to_party_members_in_range: 2
-	}
-}
-
-aura lifespore_pulse_improved_effect:
-{
-	type: hidden
-	duration: based_on_effects
-	flags: [ unique ]
-	
-	aura_effect repeat:
-	{
-		update_interval: 1
-		update_count: 1
-		ability: lifespore_pulse_improved_heal
-	}
-}
-
-ability lifespore_pulse_improved_heal:
-{
-	flags: [ target_self always_in_range ]
-	states: [ default in_combat ]
 	target_particle_system: small_heal
+	sound_effects: !SOUND_HEAL_SMALL{}
+	aoe_radius: 2
+	aoe_cap: 5
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	
 	direct_effect heal:
 	{
 		function: { expression: a_mul_x_plus_b x: healing b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 21 ] ] a: 0.12 }
 		spread: !DEFAULT_SPREAD{}
-		direct: false
 	}
 }
 
@@ -1553,7 +1481,7 @@ talent druid_natures_wrath:
 {
 	string: "Nature's Wrath"
 	icon: icon_nature_heart_1
-	talent_tree_points_required: 20
+	talent_tree_points_required: 17
 	prerequisites: [ druid_efflorescence ]
 	points:
 	[
@@ -1866,11 +1794,27 @@ ability efflorescence:
 		spawn_flags: [ at_target ]
 	}
 }
+particle_system verdant_nova:
+{
+	particle:
+	{
+		sprites: [ effect_expl_0 effect_expl_1 effect_expl_2 effect_expl_3 ]
+		sprite_interval: 125
+		flags: [ attached blend_add no_loop ]
+		duration: 400
+		count: 1		
+		scale: 3
+		alpha: 0.6
+		fade_out: 200
+		color_mod: [ 50 200 50 ]
+	}
+}
+
 talent druid_verdant_nova:
 {
 	string: "Verdant Nova"
 	icon: icon_green_sphere
-	talent_tree_points_required: 20
+	talent_tree_points_required: 18
 	points:
 	[
 		{ ability: verdant_nova }
@@ -1887,13 +1831,16 @@ ability verdant_nova:
 	string: "Verdant Nova"
 	description: "Deals $damage$ nature damage to all enemies within 3 tiles. +25% damage to targets with Nature DoTs."
 	cooldowns: [ global verdant_nova ]
-	flags: [ spell target_self target_aoe target_aoe_always_self ]
+	flags: [ spell offensive target_self target_aoe target_aoe_hostile ]
 	states: [ default in_combat ]
 	icon: icon_green_sphere
 	resource_cost mana: 35
+	delay: 2
 	aoe_radius: 3
 	aoe_cap: 8
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
 	talent_tree: druid_overgrowth
+	source_particle_system: verdant_nova
 	target_particle_system: green_spell_hit
 	
 	requirement self<must_not_have_aura>: cat_form
@@ -1904,7 +1851,7 @@ ability verdant_nova:
 	{
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a_mul_x x: spell_damage a: 1.5 }
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.5 b: [ [ 1 25 ] [ 10 50 ] [ 20 100 ] [ 30 150 ] ] }
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -1914,7 +1861,7 @@ ability verdant_nova:
 		requirement target<must_have_aura>: sprouting_wound
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.125 b: [ [ 1 6 ] [ 10 13 ] [ 20 25 ] [ 30 38 ] ] }
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -1923,7 +1870,7 @@ ability verdant_nova:
 		requirement target<must_have_aura>: sprouting_wound_2
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.125 b: [ [ 1 6 ] [ 10 13 ] [ 20 25 ] [ 30 38 ] ] }
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -1932,7 +1879,7 @@ ability verdant_nova:
 		requirement target<must_have_aura>: sprouting_wound_3
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.125 b: [ [ 1 6 ] [ 10 13 ] [ 20 25 ] [ 30 38 ] ] }
 		spread: !DEFAULT_SPREAD{}
 	}
 	
@@ -1942,11 +1889,10 @@ ability verdant_nova:
 		requirement target<must_have_aura>: phytotoxin_poison
 		flags: [ can_be_critical is_magical ]
 		damage_type: nature
-		function: { expression: a_mul_x x: spell_damage a: 0.375 }
+		function: { expression: a_mul_x_plus_b x: spell_damage a: 0.125 b: [ [ 1 6 ] [ 10 13 ] [ 20 25 ] [ 30 38 ] ] }
 		spread: !DEFAULT_SPREAD{}
 	}
 }
-
 talent druid_grove_keeper:
 {
 	string: "Grove Keeper Form"
@@ -2013,6 +1959,8 @@ ability grove_keeper_form:
 	
 	requirement self<must_not_have_aura>: cat_form
 	requirement self<must_not_have_aura>: bear_form
+
+	toggle_aura: grove_keeper_form
 	
 	direct_effect apply_aura:
 	{
@@ -2064,7 +2012,7 @@ talent druid_living_grove:
 {
 	string: "Living Grove"
 	icon: icon_nature_heart_1
-	talent_tree_points_required: 25
+	talent_tree_points_required: 20
 	points:
 	[
 		{ ability: living_grove }
@@ -2086,9 +2034,10 @@ entity living_grove_plant:
 		owner: { }
 		environment:
 		{
-			tick_interval: 30
+			tick_interval: 200
 			duration: 200
-			ability: living_grove_pulse
+			ability: living_grove_trigger
+			delay: 1
 		}
 		sprite:
 		{
@@ -2108,6 +2057,107 @@ entity living_grove_plant:
 				}
 			]
 		}
+	}
+}
+
+ability living_grove_trigger:
+{
+	string: "Living Grove"
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_nature_heart_1
+	
+	direct_effect apply_aura:
+	{
+		aura: living_grove_pulse_aura
+	}
+}
+
+aura living_grove_pulse_aura:
+{
+	string: "Living Grove"
+	type: buff
+	icon: icon_nature_heart_1
+	duration: 200
+	flags: [ unique ]
+	
+	aura_effect repeat:
+	{
+		update_interval: 20
+		update_count: 10
+		ability: living_grove_heal_tick
+	}
+	
+	aura_effect repeat:
+	{
+		update_interval: 20
+		update_count: 10
+		ability: living_grove_damage_tick
+	}
+}
+
+ability living_grove_heal_tick:
+{
+	string: "Living Grove"
+	flags: [ target_self target_aoe target_aoe_friendly always_in_range always_in_line_of_sight ]
+	states: [ default in_combat ]
+	icon: icon_nature_heart_1
+	target_particle_system: small_heal
+	aoe_radius: 3
+	aoe_cap: 5
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	
+	direct_effect heal:
+	{
+		function: { expression: a_mul_x_plus_b x: owner_healing a: 0.25 b: [ [ 1 6 ] [ 10 12 ] [ 20 24 ] [ 30 40 ] ] }
+		spread: !DEFAULT_SPREAD{}
+	}
+}
+
+ability living_grove_damage_tick:
+{
+	string: "Living Grove"
+	flags: [ offensive target_aoe target_aoe_hostile always_in_range always_in_line_of_sight ]
+	states: [ default in_combat ]
+	icon: icon_nature_heart_1
+	target_particle_system: green_spell_hit
+	aoe_radius: 3
+	aoe_cap: 10
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: nature
+		function: { expression: a_mul_x x: owner_spell_damage a: 0.3 }
+		spread: !DEFAULT_SPREAD{}
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: living_grove_entangle
+	}
+	
+	# Base sprouting wound - ONLY if no improved talent
+	direct_effect apply_aura:
+	{
+		must_not_have_ability_modifiers: [ improved_sprouting_wound_1 improved_sprouting_wound_2 improved_sprouting_wound_3 ]
+		aura: sprouting_wound
+	}
+	
+	# R1: 2 stacks
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_sprouting_wound_1
+		must_not_have_ability_modifiers: [ improved_sprouting_wound_2 improved_sprouting_wound_3 ]
+		aura: sprouting_wound_2
+	}
+	
+	# R2-R3: 3 stacks
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_sprouting_wound_2
+		aura: sprouting_wound_3
 	}
 }
 
@@ -2131,51 +2181,13 @@ aura living_grove_entangle:
 	}
 }
 
-ability living_grove_pulse:
-{
-	string: "Living Grove"
-	flags: [ target_self target_aoe target_aoe_always_self always_in_range ]
-	states: [ default in_combat ]
-	icon: icon_nature_heart_1
-	target_particle_system: green_spell_hit
-	aoe_radius: 3
-	aoe_cap: 10
-	
-	# Heal allies
-	direct_effect heal:
-	{
-		function: { expression: a_mul_x_plus_b x: healing a: 0.25 b: [ [ 1 6 ] [ 10 12 ] [ 20 24 ] [ 30 40 ] ] }
-		spread: !DEFAULT_SPREAD{}
-	}
-	
-	# Damage enemies
-	direct_effect damage:
-	{
-		flags: [ can_be_critical is_magical ]
-		damage_type: nature
-		function: { expression: a_mul_x x: spell_damage a: 0.3 }
-		spread: !DEFAULT_SPREAD{}
-	}
-	
-	# Apply Sprouting Wound DoT to enemies
-	direct_effect apply_aura:
-	{
-		aura: sprouting_wound
-	}
-	
-	# Apply slow to enemies
-	direct_effect apply_aura:
-	{
-		aura: living_grove_entangle
-	}
-}
-
 ability living_grove:
 {
 	string: "Living Grove"
-	description: "Summon a Living Grove for 20s. Every 3s it heals allies, damages enemies, applies Sprouting Wound, and slows enemies within 3 tiles."
+	description: "Summon a Living Grove at target for 20s. Every 2s it heals allies, damages enemies, applies Sprouting Wound, and slows enemies within 3 tiles."
+	range: 6
 	cooldowns: [ global living_grove ]
-	flags: [ spell target_self ]
+	flags: [ spell target_self target_other target_friendly ]
 	states: [ default in_combat ]
 	icon: icon_nature_heart_1
 	resource_cost mana: 50

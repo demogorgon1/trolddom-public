@@ -40,9 +40,9 @@ talent_tree druid_savagery:
 		"......."
 		"C->.DaE"
 		"d.d.d.."
-		"V...S.."
+		"V.H.S.."
 		"......."
-		".G.H.L."
+		".G...L."
 		".d....."
 		".J.F.I."
 		"......."
@@ -56,6 +56,13 @@ talent_tree druid_savagery:
 ###############################################################################
 
 aura_group druid_forms: { }
+
+# Hidden aura granted by both Cat and Bear form for shared ability requirements
+aura savage_form:
+{
+	type: hidden
+	flags: [ unique indefinite ]
+}
 
 cooldown cat_form:
 {
@@ -106,6 +113,7 @@ aura bear_form:
 	flags: [ unique indefinite ]
 	aura_group: druid_forms
 	override_sprite: bear
+	aura_effect threat_modifier: { multiplier: 2.25 }
 	
 	particle_system: $particle_system
 	{
@@ -146,16 +154,26 @@ ability cat_form:
 		aura: bear_form
 	}
 	
+	direct_effect remove_aura:
+	{
+		aura: savage_form
+	}
+	
 	direct_effect apply_aura:
 	{
 		aura: cat_form
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_form
 	}
 }
 
 ability bear_form:
 {
 	string: "Bear Form"
-	description: "Transform into a bear. +30% armor. Recast to cancel."
+	description: "Transform into a bear. +30% armor. Increases threat generation by 125%. Recast to cancel."
 	cooldowns: [ global bear_form ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
@@ -168,9 +186,19 @@ ability bear_form:
 		aura: cat_form
 	}
 	
+	direct_effect remove_aura:
+	{
+		aura: savage_form
+	}
+	
 	direct_effect apply_aura:
 	{
 		aura: bear_form
+	}
+	
+	direct_effect apply_aura:
+	{
+		aura: savage_form
 	}
 }
 
@@ -508,7 +536,7 @@ aura savage_momentum_heal:
 	description: "Regenerating health from feral combat. Move Speed increased."
 	type: buff
 	icon: icon_swiftstrike
-	duration: 60
+	duration: 30
 	flags: [ unique ]
 	
 	aura_effect move_speed_modifier:
@@ -836,7 +864,7 @@ talent druid_improved_cat_form:
 	points:
 	[
 		{ aura: druid_improved_cat_form_1 ability: rip }
-		{ aura: druid_improved_cat_form_2 }
+		{ aura: druid_improved_cat_form_2 ability: rip  }
 		{ aura: druid_improved_cat_form_3 ability: rip ability: ravage }
 	]
 }
@@ -892,7 +920,7 @@ talent druid_improved_bear_form:
 	points:
 	[
 		{ aura: druid_improved_bear_form_1 ability: thrash }
-		{ aura: druid_improved_bear_form_2 }
+		{ aura: druid_improved_bear_form_2 ability: thrash }
 		{ aura: druid_improved_bear_form_3 ability: thrash ability: maul }
 	]
 }
@@ -941,7 +969,7 @@ talent druid_thick_hide:
 {
 	string: "Thick Hide"
 	icon: icon_toughness
-	talent_tree_points_required: 5
+	talent_tree_points_required: 8
 	prerequisites: [ druid_improved_bear_form ]
 	points:
 	[
@@ -1177,6 +1205,7 @@ aura thrash_bleed:
 		update_count: 10
 		ability: thrash_bleed_tick
 	}
+
 }
 
 ability thrash_bleed_tick:
@@ -1192,6 +1221,12 @@ ability thrash_bleed_tick:
 		function: { expression: a_mul_x_plus_b x: attack_power a: 0.08 b: [ [ 1 3 ] [ 10 8 ] [ 20 16 ] [ 30 26 ] ] }	
 		spread: !DEFAULT_SPREAD{}
 		direct: false
+	}
+
+	direct_effect threat:
+	{
+		add: 6
+		apply_to: source
 	}
 }
 
@@ -1265,6 +1300,13 @@ ability maul:
 		damage_type: physical
 		function: { expression: a_mul_x x: weapon a: 1.3 }
 		spread: !DEFAULT_SPREAD{}
+	}
+
+	
+	direct_effect threat:
+	{
+		add: 10
+		apply_to: source
 	}
 	
 	direct_effect apply_aura:
@@ -1445,7 +1487,7 @@ talent druid_blood_scent:
 {
 	string: "Blood Scent"
 	icon: icon_rend
-	talent_tree_points_required: 10
+	talent_tree_points_required: 15
 	points:
 	[
 		{ aura: druid_blood_scent_1 }
@@ -1650,7 +1692,7 @@ talent druid_taste_for_blood:
 {
 	string: "Taste for Blood"
 	icon: icon_heal
-	talent_tree_points_required: 15
+	talent_tree_points_required: 18
 	prerequisites: [ druid_blood_scent ]
 	points:
 	[
@@ -1827,10 +1869,10 @@ talent druid_feral_lunge:
 {
 	string: "Feral Lunge"
 	icon: icon_charge
-	talent_tree_points_required: 10
+	talent_tree_points_required: 18
 	points:
 	[
-		{ ability: feral_lunge_cat ability: feral_lunge_bear }
+		{ ability: feral_lunge }
 	]
 }
 
@@ -1850,7 +1892,6 @@ aura feral_lunge_root:
 	aura_effect immobilize: { } 
 	priority: !AURA_PRIORITY_CC{}
 	diminishing_effect: root
-	
 }
 
 ability feral_lunge_hit:
@@ -1873,10 +1914,10 @@ ability feral_lunge_hit:
 	}
 }
 
-ability feral_lunge_cat:
+ability feral_lunge:
 {
 	string: "Feral Lunge"
-	description: "Lunge at the target, dealing $damage$ damage and pinning them in place for 2 seconds. Requires Cat Form."
+	description: "Lunge at the target, dealing 50% weapon damage and pinning them in place for 2 seconds. Requires Cat or Bear Form."
 	min_range: 2
 	range: 6
 	cooldowns: [ global feral_lunge ]
@@ -1886,32 +1927,7 @@ ability feral_lunge_cat:
 	resource_cost mana: 18
 	talent_tree: druid_savagery
 	
-	requirement self<must_have_aura>: cat_form
-	
-
-	direct_effect move:
-	{
-		destination: target_adjacent
-		move_flags: [ walkable_path_required ]
-		max_steps: 6
-		trigger_ability_on_resolve<target>: feral_lunge_hit
-	}
-}
-
-ability feral_lunge_bear:
-{
-	string: "Feral Lunge"
-	description: "Lunge at the target, dealing $damage$ damage and pinning them for 2 seconds. Requires Bear Form."
-	min_range: 2
-	range: 6
-	cooldowns: [ global feral_lunge ]
-	flags: [ offensive target_other target_hostile trigger_move_cooldown ]
-	states: [ default in_combat ]
-	icon: icon_charge
-	resource_cost mana: 18
-	talent_tree: druid_savagery
-	
-	requirement self<must_have_aura>: bear_form
+	requirement self<must_have_aura>: savage_form
 	
 	direct_effect move:
 	{
@@ -1998,7 +2014,7 @@ aura survival_instincts_buff:
 	description: "Damage taken reduced by 50%."
 	type: buff
 	icon: icon_shell
-	duration: 60
+	duration: 120
 	flags: [ unique ]
 	
 	aura_effect damage_input_modifier:
@@ -2010,7 +2026,7 @@ aura survival_instincts_buff:
 ability survival_instincts:
 {
 	string: "Survival Instincts"
-	description: "Reduce all damage taken by 50% for 6s. Requires Bear Form. 2 minute cooldown."
+	description: "Reduce all damage taken by 50% for 12s. Requires Bear Form. 2 minute cooldown."
 	cooldowns: [ global survival_instincts ]
 	flags: [ target_self ]
 	states: [ default in_combat ]
@@ -2031,7 +2047,7 @@ talent druid_savage_roar:
 {
 	string: "Savage Roar"
 	icon: icon_fury
-	talent_tree_points_required: 20
+	talent_tree_points_required: 18
 	points:
 	[
 		{ ability: savage_roar }
@@ -2155,7 +2171,7 @@ ability primal_rampage:
 }
 
 ###############################################################################
-# Druid Taunt (standalone, not reliant on Fighter)
+# Druid Taunt
 ###############################################################################
 
 particle_system druid_taunt:
