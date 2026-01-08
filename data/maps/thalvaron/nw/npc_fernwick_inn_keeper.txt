@@ -58,7 +58,7 @@ quest .fernwick_inn_keeper_1:
 	
 	completion:
 	[
-		"Have I been gone long? Oh, wasn't really aware of that. Kinda lost track of time. I found something interesting."
+		"Have I been gone long? Oh, I wasn't really aware of that. Kinda lost track of time. I found something interesting."
 	]
 
 	prerequisites: [ .fernwick_bar_patron_2 ]

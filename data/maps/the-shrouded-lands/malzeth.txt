@@ -102,7 +102,7 @@ quest .malzeth_2:
 	
 	description: 
 	[
-		"What's more fun than desecrating holy shrines? That's easy! Kill their whiny little followers! Find and kill one."
+		"What's more fun than desecrating holy shrines? That's easy! Killing their whiny little followers! Find and kill one."
 	]
 
 	progress:

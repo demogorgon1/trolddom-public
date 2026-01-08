@@ -132,7 +132,7 @@ quest .farmer_rabbit_1:
 	description: 
 	[
 		"Those brutes chased me out of my own house! And my cabbages! What will become of them? As you surely know, my cabbages always win first price at the early cabbage championship. That kind of quality"
-		"requires a lot of hard work. I doesn't come easy. My most important task to make sure they get enough water... and I'm afraid they're getting dry! I'd sneak back and water them, but the bandits told me that"
+		"requires a lot of hard work. It doesn't come easy. My most important task is to make sure they get enough water... and I'm afraid they're getting dry! I'd sneak back and water them, but the bandits told me that"
 		"they'd beat me up if they saw me again. Maybe you can do it? You'll find a watering can in the barn."
 	]
 

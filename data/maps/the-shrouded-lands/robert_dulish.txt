@@ -53,7 +53,7 @@ quest .robert_dulish_1:
 	
 	description: 
 	[
-		"I'm here on behalf of an anonymous wizard from Valoris. He has requested that I procure a large supply of tails of a species of lizard native to this hellhole. If you can deliver some to me I'll make sure you're"
+		"I'm here on behalf of an anonymous wizard from Valoris. He has requested that I procure a large supply of tails from a species of lizard native to this hellhole. If you can deliver some to me I'll make sure you're"
 		"rewarded.\n\n"
 		"You can find the lizard to the east in the crystal fields."
 	]

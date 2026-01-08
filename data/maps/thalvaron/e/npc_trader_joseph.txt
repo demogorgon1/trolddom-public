@@ -95,7 +95,7 @@ quest .trader_joseph_1:
 	
 	description: 
 	[
-		"My main source of income is acquiring items here and shipping them off to Valoris. Recently I send off a batch of exotic fruit called \"mangoes\" and they were really popular. I need more! Only problem"
+		"My main source of income is acquiring items here and shipping them off to Valoris. Recently I sent off a batch of exotic fruit called \"mangoes\" and they were really popular. I need more! Only problem"
 		"is that they're quite hard to collect because of all the poisonous animals and meat eating plants. Anyway, if you're up for the task you'll find plenty of these fruits in the jungle west of here."
 	]
 

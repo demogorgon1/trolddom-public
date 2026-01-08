@@ -18,6 +18,7 @@ changelog:
 	[
 		{ text: "Game no longer crashes on startup if loading a bad configuration." }
 		{ text: "Fixed icon dragging crash bug." }		
+		{ text: "Fixed quest text grammar and typos." }
 	]
 
 	#######################################################################################

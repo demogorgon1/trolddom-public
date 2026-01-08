@@ -66,7 +66,7 @@ quest .swampman_1:
 	description: 
 	[
 		"I got a guy in the city who helps me sell various swamp stuff. I supply him with crocodile teeth that may or may not be sold as genuine dragon teeth. I don't know. Anyway, it's a pretty good business."
-		"Unfortunately the teeth needs to be quite pristine so it can't be from just any old crocodile. Maybe you can help collecting a few and I'll give you a good deal."
+		"Unfortunately the teeth need to be quite pristine so it can't be from just any old crocodile. Maybe you can help collect a few and I'll give you a good deal."
 	]
 
 	progress:

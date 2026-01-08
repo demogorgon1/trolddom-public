@@ -65,7 +65,7 @@ quest .mirehaven_mayor_0:
 	description: 
 	[
 		"Hmm. You look like you've always wanted to become a government bureaucrat? Well, you're in luck! We need some help around here.\n\n"
-		"Certain members of the local community have been dragging their in regards to paying their taxes on time. A woman named Ria Tyson lives in a shack just north of this town. Go persuade her to pay up."
+		"Certain members of the local community have been dragging their feet in regards to paying their taxes on time. A woman named Ria Tyson lives in a shack just north of this town. Go persuade her to pay up."
 	]
 
 	progress:

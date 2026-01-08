@@ -54,7 +54,7 @@ quest .brail_howser_1:
 	description: 
 	[
 		"You might wonder what an old man like me is doing in a place like this. Well, I'm working for a whole sale supplier of exotic ingredients and reagents.\n\n"
-		"There isn't much wildlife around here, but to the east in the crystal fields, you'll find a strange species of lizard. No idea where it's coming from or if it's even native to these lands,"
+		"There isn't much wildlife around here, but to the east in the crystal fields, you'll find a strange species of lizard. No idea where it came from or if it's even native to these lands,"
 		"but apparently their tails are very useful to some people. Bring me some and I'll reward you."
 	]
 

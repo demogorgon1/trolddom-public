@@ -199,7 +199,7 @@ quest .sandra_riddle_2:
 	
 	description: 
 	[
-		"West of here are some old burial grounds. I've heard that potentially valuable items are scattered all over the place. I need you go collect some for me. I'll pay."
+		"West of here are some old burial grounds. I've heard that potentially valuable items are scattered all over the place. I need you to go collect some for me. I'll pay."
 	]
 
 	progress:

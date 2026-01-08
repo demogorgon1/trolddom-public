@@ -105,7 +105,7 @@ quest .werner_1:
 	
 	description: 
 	[
-		"Maybe you've noticed some red crystals sticking out of the ground around here? I need them for a special project. If you get me a bunch I'll teach you the secrets of the elusive lava shrimp."
+		"Maybe you've noticed some red crystals sticking out of the ground around here? I need them for a special project. If you get me a bunch, I'll teach you the secrets of the elusive lava shrimp."
 	]
 	
 	progress:

@@ -67,8 +67,8 @@ quest .rumin_whiterock_1:
 	
 	description: 
 	[
-		"I've had some trouble sleeping up here. Every night I'm occasionally woken by a deep growling that chill me to the bones. They say it's an old mountain lion that patrols the outside the walls of the camp, looking for an"
-		"easy snack. It goes by the name One-Eyed Moe and, for same reason, it has developed a taste for dwarf flesh. Several times it has snuck into the camp and dragged a poor dwarf out into the darkness to be devoured. No wonder"
+		"I've had some trouble sleeping up here. Every night I'm occasionally woken by a deep growling that chills me to the bones. They say it's an old mountain lion that patrols outside the walls of the camp, looking for an"
+		"easy snack. It goes by the name One-Eyed Moe and, for the same reason, it has developed a taste for dwarf flesh. Several times it has snuck into the camp and dragged a poor dwarf out into the darkness to be devoured. No wonder"
 		"I'm so worried, right?\n\n"
 		"So, uhm, maybe you can hunt it down and kill it? That would be swell."
 	]
@@ -123,7 +123,7 @@ quest .rumin_whiterock_2:
 	
 	description: 
 	[
-		"With that big scary cat out of the way I can start focussing on why I'm here in the first place. Have you heard of harpies? They're basically large birds with heads that looks almost human. Fascinating creatures!\n\n"
+		"With that big scary cat out of the way I can start focussing on why I'm here in the first place. Have you heard of harpies? They're basically large birds with heads that look almost human. Fascinating creatures!\n\n"
 		"I'm guessing they're more related to birds than humans, but I'm not sure. I'd like to have a bunch of their feathers to run some tests on. Maybe you can go get me some? There is a colony of harpies to the east of here, close"
 		"to the mountains."
 	]

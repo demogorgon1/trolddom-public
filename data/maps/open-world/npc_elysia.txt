@@ -114,7 +114,7 @@ quest .elysia_1:
 	
 	description: 
 	[
-		"Everyone loves mushrooms, right? Unfortunately I've run out and would love if you'd go into the woods to the east and collect some for me?"
+		"Everyone loves mushrooms, right? Unfortunately I've run out and would love it if you'd go into the woods to the east and collect some for me?"
 	]
 
 	progress:

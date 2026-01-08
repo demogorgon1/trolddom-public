@@ -199,7 +199,7 @@ quest .fisherman_4:
 	description: 
 	[
 		"I've heard rumors of cultists worshipping ancient, evil deities of the sea, causing the otherwise gentle crabs to lose their minds. With the elf dealt with, maybe the problem will subside, but I'm afraid"
-		"this beach still has the attention of whatever dark deity involved. My guessing that the pearl is a conduit for communicating with it. Take it back to the cave and see if you can use it to summon the deity and destroy it."
+		"this beach still has the attention of whatever dark deity is involved. My guess is that the pearl is a conduit for communicating with it. Take it back to the cave and see if you can use it to summon the deity and destroy it."
 		"There is probably a body of water inside the cave where it can be summoned. It might get intense so you should bring some friends."
 	]
 
@@ -282,7 +282,7 @@ quest .fisherman_5:
 	
 	completion:
 	[
-		"A dark elf sorceror? A giant crab monster? In a cave? Just south of the city? That's no good. This is important information. You deserve a reward!"	
+		"A dark elf sorcerer? A giant crab monster? In a cave? Just south of the city? That's no good. This is important information. You deserve a reward!"	
 	]
 
 	level: 12

@@ -106,7 +106,7 @@ quest .inn_keeper_1:
 	
 	description: 
 	[
-		"It seems like all this talk about rebels have increased the consumption of ale. I hear from my friend Bram who runs an inn down in Fernwick that they're about to run dry. I need you to go to the general store and pick up a shipment"
+		"It seems like all this talk about rebels has increased the consumption of ale. I hear from my friend Bram who runs an inn down in Fernwick that they're about to run dry. I need you to go to the general store and pick up a shipment"
 		"of ale and deliver it to him. You'll find the general store in the trade district. Just follow the street east and take a left. They probably keep the ale in the basement."
 	]
 

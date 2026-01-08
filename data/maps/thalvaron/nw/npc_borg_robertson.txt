@@ -128,7 +128,7 @@ quest .borg_robertson_2:
 	
 	description: 
 	[
-		"My pet pig Buttercup has disappeared. I'm feared the worst, with all the wolves around. I'd appreciate if can find her. I'm very worried."
+		"My pet pig Buttercup has disappeared. I feared the worst, with all the wolves around. I'd appreciate it if you can find her. I'm very worried."
 	]
 
 	progress:
@@ -138,7 +138,7 @@ quest .borg_robertson_2:
 	
 	completion:
 	[
-		"Oh. I really miss her, but if you say she's happy with her new life, I guess that's more important. I'll try to go visit her at first chance!"
+		"Oh. I really miss her, but if you say she's happy with her new life, I guess that's more important. I'll try to go visit her the first chance I get!"
 	]
 
 	level: 11

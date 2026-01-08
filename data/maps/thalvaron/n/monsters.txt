@@ -232,7 +232,7 @@ map_entity_spawn thalvaron_owlbear:
 		
 		completion:
 		[
-			"Hmm, why would a stupid beast carried that ugly thing around? I don't know, maybe it found it somewhere and picked it up?"
+			"Hmm, why would a stupid beast carry that ugly thing around? I don't know, maybe it found it somewhere and picked it up?"
 		]
 
 		level: 13

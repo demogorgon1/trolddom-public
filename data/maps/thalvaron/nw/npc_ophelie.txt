@@ -102,7 +102,7 @@ quest .ophelie_2:
 		"My son has been out bear hunting in Brior Hills. He left almost a week ago and I'm getting a bit worried. Tyron doesn't seem to care, so maybe you can go check out on him? I'm too busy"
 		"with my potatoes. Why he can't leave the bears alone, I don't know.\n"
 		"\n"
-		"The easiest way to reach Brior Hills is by crossing the river to the west and follow the coast."
+		"The easiest way to reach Brior Hills is by crossing the river to the west and following the coast."
 	]
 	
 	completion:

@@ -149,7 +149,7 @@ quest .swirl_tonkins_3:
 	
 	description: 
 	[
-		"I arrived here not long ago and haven't spend much time exploring. We need to hunt down the mad wizard and prevent him from tapping the powers of Solkara, but where he is and what he is doing exactly is"
+		"I arrived here not long ago and haven't spent much time exploring. We need to hunt down the mad wizard and prevent him from tapping the powers of Solkara, but where he is and what he is doing exactly is"
 		"a mystery. We know that he has summoned an army of demonic creatures and that these are present in great numbers to the north, around the great fortress of Urt.\n"
 		"\n"
 		"In the courtyard of the bastion a large number of these demons have been gathering. My scout, Ilhuna, has reported that some of these seem to be carrying weird looking amulets. We'd like to get a closer"
@@ -208,7 +208,7 @@ quest .swirl_tonkins_4:
 	description: 
 	[
 		"The elemental binding you returned to me has given me an important insight into how Voraghul channels the powers of this realm. I think we me might be able to construct some sort of weapon that can damage him."
-		"I'm gonna need you to do the heavy lifting. Travel east to the Desolate Plains where you're find a lot of elementals, no doubt under the influence of Voraghul. Go there, slay some of them and collect their"
+		"I'm gonna need you to do the heavy lifting. Travel east to the Desolate Plains where you'll find a lot of elementals, no doubt under the influence of Voraghul. Go there, slay some of them and collect their"
 		"corrupted stones. Return them to me."
 	]
 	

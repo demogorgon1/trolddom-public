@@ -81,7 +81,7 @@ quest thalvaron_blimcraft_assistant_1:
 		"Have you heard of Willowgast? Willowgast the Red? Probably not. He was once a good friend of Blimcraft, a fellow scholar of the arcane, but now they hate each other for reasons" 
 		"you'd have to be a wizard to understand. The whole reason why my master decided to study portals was because he found out that Willowgast spends most of his time these days doing nothing but traveling"
 		"around different planes of existence.\n\n"
-		"The portal you'll find in the next room will takes you to whichever reality Willowgast currently wanders in. My master wants you to enter that portal, find him, and defeat him in combat."
+		"The portal you'll find in the next room will take you to whichever reality Willowgast currently wanders in. My master wants you to enter that portal, find him, and defeat him in combat."
 		"You won't be able to kill him, he's very slippery. Just knock him down a peg or two and we'll reward you.\n\n"
 		"I'll give you a seeking stone that will help you locate him once you've entered the portal. Every day Willowgast will go to a different reality.\n\n"
 		"Don't forget that the usual laws planewalking apply. If you die beyond the gateway your spirit is locked away from entering again until the next day. Try not to die."

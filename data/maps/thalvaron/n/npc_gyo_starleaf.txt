@@ -101,7 +101,7 @@ quest .gyo_starleaf_1:
 	
 	description: 
 	[
-		"To the south west of here, past the owlbear colony, you'll find a small house. For a long time it was uninhibited, but now a few dark elves seem to have made it their home.\n\n"
+		"To the south west of here, past the owlbear colony, you'll find a small house. For a long time it was uninhabited, but now a few dark elves seem to have made it their home.\n\n"
 		"Needless to say, we don't appreciate their presence in these woods, but at this point it feels like there is nothing we can do about it. Anyway, some time ago they attacked one of my friends"
 		"and stole a family heirloom. Maybe you can help get it back? I'm sure they keep it in the house."
 	]

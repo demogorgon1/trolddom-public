@@ -95,8 +95,8 @@ quest thalvaron_benji_1:
 	
 	description: 
 	[
-		"I noticed that you've eagerly helped Thora with her vendetta against the thunder lizards. Maybe you can help me a with a less pointless endeavour.\n\n"
-		"Have you ever wondered why those lizards are able to should lightning out of their mouths? You don't need to worry about that. What I need you to do is venture into the"
+		"I noticed that you've eagerly helped Thora with her vendetta against the thunder lizards. Maybe you can help me with a less pointless endeavour.\n\n"
+		"Have you ever wondered why those lizards are able to shoot lightning out of their mouths? You don't need to worry about that. What I need you to do is venture into the"
 		"crystal caves in the western part of these highlands, collect some of the crystals, and return them to my master in Valoris. He will reward you.\n\n"
 		"You'll probably find him in his alchemy shop."
 	]

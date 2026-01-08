@@ -123,7 +123,7 @@ quest .ilhuna_1:
 	
 	description: 
 	[
-		"The amulet is you gave me is not from this realm. I'm afraid these demons are using them to channeling powers from somewhere else, probably to open portals to bring in reinforcements. The sky to the east"
+		"The amulet you gave me is not from this realm. I'm afraid these demons are using them to channel powers from somewhere else, probably to open portals to bring in reinforcements. The sky to the east"
 		"is lit up by an eerie glow that might be coming from such portals. Please, go and check it out. If you find any portals, take the amulet and see how it reacts to them. Report back to me when you're done."
 	]
 

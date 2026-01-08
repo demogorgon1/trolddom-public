@@ -70,7 +70,7 @@ quest .sheriff_cunningham_1:
 	
 	completion:
 	[
-		"How many where there? Too many? I'm sure it wasn't too difficult to get rid of them."
+		"How many were there? Too many? I'm sure it wasn't too difficult to get rid of them."
 	]
 
 	objectives: [ .sheriff_cunningham_1 ]
@@ -154,7 +154,7 @@ quest .sheriff_cunningham_2:
 	
 	completion:
 	[
-		"Huh, that's not particularily surprising."
+		"Huh, that's not particularly surprising."
 	]
 
 	objectives: [ .sheriff_cunningham_2 ]

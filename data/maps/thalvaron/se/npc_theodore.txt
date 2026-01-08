@@ -66,7 +66,7 @@ quest .theodore_1:
 	
 	description: 
 	[
-		"Ah, I just left and Isle of Aetheris and arrived here a short while ago. It's cetainly a very different place. The air is more moist, the sun warmer, and lots of more interesting animals"
+		"Ah, I just left the Isle of Aetheris and arrived here a short while ago. It's certainly a very different place. The air is more moist, the sun warmer, and lots of more interesting animals"
 		"to dominate.\n\n"
 		"Have you seen those giant snakes slithering around the jungle to the east of here, across the river? I'd love to see them up close, but, eh, I'm allergic to snakes. Can you kill a few of them for me"
 		"and bring back their heads?"
@@ -121,7 +121,7 @@ quest .theodore_2:
 	
 	description: 
 	[
-		"Very impressive work with those snakes. I got another task for you. Do you like big cats? Maybe you can go collect some big cat paws for me? You'll panthers stalking the dense jungle to the south. Be careful, I've heard they can be quite bity."
+		"Very impressive work with those snakes. I got another task for you. Do you like big cats? Maybe you can go collect some big cat paws for me? You'll have panthers stalking the dense jungle to the south. Be careful, I've heard they can be quite bitey."
 	]
 
 	progress:

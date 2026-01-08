@@ -62,7 +62,7 @@ quest .dag_hammerfest_1:
 	description: 
 	[
 		"I came from up north because I heard about these weird creatures that live in this desert. I'm not really sure what they are, but they're some type of wild bipedal beast. Instead of arms they have sharp spikes"
-		"they use to impale their prey. What do they even hunt? I don't know. Anyway, I'm interested in these peculiar spikes, claws, or whatever you'll call them. Can you collect some for me? You'll find them all over"
+		"they use to impale their prey. What do they even hunt? I don't know. Anyway, I'm interested in these peculiar spikes, claws, or whatever you call them. Can you collect some for me? You'll find them all over"
 		"the Kareth desert."
 	]
 

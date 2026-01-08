@@ -62,7 +62,7 @@ quest .johnson_1:
 	
 	description: 
 	[
-		"Have you heard about Kobolds? No? Until recently me neither. I had noticed some strange activities in my little mine, like weird poop in the corners, tools missing, and some of the ore being picked at. I had an"
+		"Have you heard about Kobolds? No? Until recently, me neither. I had noticed some strange activities in my little mine, like weird poop in the corners, tools missing, and some of the ore being picked at. I had an"
 		"exterminator come look at it and he immediately told me that I had kobolds! He told me he could help me get rid of them, but the price he quoted me was outrageous.\n\n"
 		"Maybe you can go clear them out for a more reasonable price?"
 	]

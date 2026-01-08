@@ -58,7 +58,7 @@ quest .chad_wartorn_1:
 	description: 
 	[
 		"As we were arriving here we encountered quite a bit of Skullforge activity. Those damn orcs seem to be everywhere. We chased a small band of them south. It was led by an orc boss"
-		"going by the name of Eeklong. I don't want them to sneak up on as at night and kill us in our sleep. I'll pay you if you track them down and kill their leader. That will cause them"
+		"going by the name of Eeklong. I don't want them to sneak up on us at night and kill us in our sleep. I'll pay you if you track them down and kill their leader. That will cause them"
 		"to scatter like cockroaches."
 	]
 

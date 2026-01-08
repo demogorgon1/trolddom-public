@@ -76,7 +76,7 @@ quest thalvaron_alchemy_trainer_1:
 	
 	description: 
 	[
-		"Look at these hands. They're clean, right? Yes. They need to be squeeky clean to do the kind of alchemy that needs to be done to better the world. Can't have any kind of contamination.\n\n"
+		"Look at these hands. They're clean, right? Yes. They need to be squeaky clean to do the kind of alchemy that needs to be done to better the world. Can't have any kind of contamination.\n\n"
 		"Unfortunately, sometimes I need some, hmm, dirty reagents for my studies. Like, for example, right now I need mud slinger essences for my research. As you're probably aware, a mud slinger is an"
 		"exceptionally filthy elemental found south in the Marshlands. Maybe you can get me some? The kind I'm interested in can be found in the northernmost parts of the marshlands."
 	]
