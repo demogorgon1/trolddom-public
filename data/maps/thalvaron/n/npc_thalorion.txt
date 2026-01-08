@@ -86,10 +86,10 @@ quest .thalorion_1:
 	
 	description: 
 	[
-		"It was a bit of a tragedy when the Mona Uptork and Jack Uptork, a young married couple living in Ravenreach, drowned in the lake to the east. They went for a swim in its clear water, but they were never seen"
+		"It was a bit of a tragedy when Mona Uptork and Jack Uptork, a young married couple living in Ravenreach, drowned in the lake to the east. They went for a swim in its clear water, but they were never seen"
 		"again - at least until recently. When the wave of dark magic rolled over the hills from the north, their remains must have been stirred at the bottom of the lake, because their reanimated bodies have been observed "
 		"walking the land!\n\n"
-		"Sure, it's horribly, but I'm curious about the nature of these so-called ghouls. I'm wantering if you can help me satisfy my curiousity? I want you to locate these two reanimated corpses and bring me some hair samples?\n\n" 
+		"Sure, it's horrible, but I'm curious about the nature of these so-called ghouls. I'm wondering if you can help me satisfy my curiosity? I want you to locate these two reanimated corpses and bring me some hair samples?\n\n" 
 		"They've been spotted wandering the area north of Lake Ylynor to the east."
 	]
 

@@ -59,7 +59,7 @@ quest .ranger_orwla_1:
 	description: 
 	[
 		"So you're just traveling around doing odd jobs for the man? I might have a suitable job for you. I have a target that needs to be taken out. If you follow the road north and then go east, you'll find a farm."
-		"A rebel lieutenant named Robert Freiling has set up residence on there. Infiltrate the compound, eliminate him, and report back to me."
+		"A rebel lieutenant named Robert Freiling has set up residence there. Infiltrate the compound, eliminate him, and report back to me."
 	]
 
 	progress:

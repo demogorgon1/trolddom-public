@@ -166,7 +166,7 @@ quest .ulrik_copperquill_3:
 	
 	description: 
 	[
-		"A friend of mine recently went to the camp up north to study the local wildlife and I know he suffers a bit from the climate. Thanks to you I've been able to brew a potion that will help him get through the nights. Maybe you"
+		"A friend of mine recently went to the camp up north to study the local wildlife and I know he suffers a bit from the climate. Thanks to you I've been able to brew a potion that will help him get through the night. Maybe you"
 		"can bring it to him? I'm sure he'll give you something for your trouble.\n\n"
 		"You'll find the camp if you head north in the Badlands. My friend's name is Rumin Whiterock."
 	]

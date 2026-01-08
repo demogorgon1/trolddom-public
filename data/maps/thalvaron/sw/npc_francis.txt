@@ -134,7 +134,7 @@ quest .francis_2:
 	description: 
 	[
 		"Bloody lizards... Now I need to hire a new prospector!\n\n"
-		"How do I deal with these lizards? Could be there is an alchemical solution to the conundrum. Can you go ask Buck if he know of some kind of lizard repellent? He lives in his little camp up north in the swamp and is good"
+		"How do I deal with these lizards? Could be there is an alchemical solution to the conundrum. Can you go ask Buck if he knows of some kind of lizard repellent? He lives in his little camp up north in the swamp and is good"
 		"with these kinds of things. But, uhm, please don't say that you're asking for me."
 	]
 

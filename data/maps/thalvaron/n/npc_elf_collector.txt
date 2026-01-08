@@ -73,7 +73,7 @@ quest .elf_collector_1:
 	
 	completion:
 	[
-		"Great, your support will not be forgotton."
+		"Great, your support will not be forgotten."
 	]
 	
 	objectives: [ .elf_collector_1_a .elf_collector_1_b ]

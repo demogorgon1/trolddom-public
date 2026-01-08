@@ -127,7 +127,7 @@ quest .ronja_frostmane_2:
 	
 	description: 
 	[
-		"To be honest, the pelts you bought mere were a bit disappointing. That fur was just way too itchy to be comfortable! But you know what, I've seen some softer looking white yetis living in the"
+		"To be honest, the pelts you brought me were a bit disappointing. That fur was just way too itchy to be comfortable! But you know what, I've seen some softer looking white yetis living in the"
 		"caves beyond the frozen lake to the east. Can you go get me some samples?"
 	]
 

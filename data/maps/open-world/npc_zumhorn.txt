@@ -102,7 +102,7 @@ quest .zumhorn_1:
 	description: 
 	[
 		"The blessed water of this forest protects it from outside interference, magical or otherwise. Somehow the waters have become tainted and have lost some of their powers."
-		"I need you take this vial and pour a few drops into the other pools of water. This will revitalize the forest until we get to the roots of the corruption."
+		"I need you to take this vial and pour a few drops into the other pools of water. This will revitalize the forest until we get to the roots of the corruption."
 	]
 
 	progress:

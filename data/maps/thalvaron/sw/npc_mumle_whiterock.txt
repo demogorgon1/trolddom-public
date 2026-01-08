@@ -106,7 +106,7 @@ quest .mumle_whiterock_1:
 	
 	description: 
 	[
-		"The Badlands haven't always been this dry and miserable. Long ago it consisted of woodlands and grassy hills, but the rivers dried out, which caused a rapid detoriation. This is the site of the former Lake Dourgol."
+		"The Badlands haven't always been this dry and miserable. Long ago it consisted of woodlands and grassy hills, but the rivers dried out, which caused a rapid deterioration. This is the site of the former Lake Dourgol."
 		"Once a beautiful lake, which had a significant spiritual meaning to both elves and dwarves. At the center of what was once the lake you will still find a muddy area, which seems to have some kind of magical property.\n\n"
 		"Look at those weird elementals moving around in it. Seems like they're made of the mud themselves. Can you bring me some samples?"
 	]

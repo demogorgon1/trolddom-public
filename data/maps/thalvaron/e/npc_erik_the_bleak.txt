@@ -56,7 +56,7 @@ quest .erik_the_bleak_1:
 		"We might have pushed back the undead of the north, but down here it's a whole different matter. I don't know the source of this evil, but it's probably unrelated to the dark elves. At least I haven't"
 		"seen any of them around.\n"
 		"\n"
-		"The sands of Kareth is now crawling with these unholy aberrations. We must destroy them!"
+		"The sands of Kareth are now crawling with these unholy aberrations. We must destroy them!"
 	]
 
 	progress:

@@ -80,7 +80,7 @@ quest .fernwick_bar_patron_1:
 	
 	completion:
 	[
-		"Oh no, what happened to the box? What kind of foul beast would do souch a thing? It's all covered in slime! And it's cracked?! Oh well, I guess I'll need to come up with some kind of excuse before I go home."
+		"Oh no, what happened to the box? What kind of foul beast would do such a thing? It's all covered in slime! And it's cracked?! Oh well, I guess I'll need to come up with some kind of excuse before I go home."
 	]
 
 	objectives: [ .fernwick_bar_patron_1 ]

@@ -90,7 +90,7 @@ quest .faolan_1:
 	description: 
 	[
 		"I don't really trust you, to be honest. Most outsiders have bad intentions when they come here. Prove your good intentions by making an offering at the shrine of Zilu. She likes herbs."
-		"Collect some around the here and find the shrine in the woods to the west. Then return to me."
+		"Collect some around here and find the shrine in the woods to the west. Then return to me."
 	]
 
 	progress:
@@ -142,7 +142,7 @@ quest .faolan_2:
 	
 	description: 
 	[
-		"I can feel that you made a succesful offering to Zilu. Very appreciated. Now I have a more practical job for you...\n"
+		"I can feel that you made a successful offering to Zilu. Very appreciated. Now I have a more practical job for you...\n"
 		"\n"
 		"To the south of here you'll find the Thalyssian Wilds. It's a fierce jungle full of dangerous creatures. A friend of mine, Frida, lives in a house by the coast down there. Last time I talked with her, she"
 		"had some problems that she could use some help with. Can you go visit her? Pick up some leaves from the thrasher plants on the way. They're good for tea."

@@ -105,9 +105,9 @@ quest .pearly_a_2:
 	
 	description: 
 	[
-		"These are uneasy times in this part of the world. I can feel it in my scales. There is something in the water that effects many of the lesser creatures that drink from them, including owlbears. I'm talking about some"
+		"These are uneasy times in this part of the world. I can feel it in my scales. There is something in the water that affects many of the lesser creatures that drink from them, including owlbears. I'm talking about some"
 		"kind of dark magic.\n\n"
-		"It's nothing new. For a long time these forests have had a vile aura, brought by the dark elves from the east that have slowly increased their pressence. I'm afraid we're close to a tipping point and I'm delighted that"
+		"It's nothing new. For a long time these forests have had a vile aura, brought by the dark elves from the east that have slowly increased their presence. I'm afraid we're close to a tipping point and I'm delighted that"
 		"a brave soul like you is interested in doing something about it.\n\n"
 		"Deep in the caves to the west there exists a sacred pond that is directly connected to the arteries of the mountains. You need to find it and see if anything is corrupting it."
 	]

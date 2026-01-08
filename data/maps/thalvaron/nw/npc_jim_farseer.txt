@@ -58,7 +58,7 @@ quest .jim_farseer_1:
 	
 	description: 
 	[
-		"An unseen battle is currently being waged. Forces from beyond this realm have long been trying to invade it an enslave us all. Most have no idea about what is going on.\n\n"
+		"An unseen battle is currently being waged. Forces from beyond this realm have long been trying to invade it and enslave us all. Most have no idea about what is going on.\n\n"
 		"These evil creatures are shifting around on the boundary between what is real and what is not, like worms under the skin of reality. You have to understand... they're already here. Sometimes they"
 		"break through, sometimes by themselves, sometimes aided by misguided allies.\n\n"
 		"You've encountered a spawn of Zyxtharion, a foul creature. Now I need you to face off with Zyxtharion itself. Defeat it. Make it crawl back where it came from.\n\n"

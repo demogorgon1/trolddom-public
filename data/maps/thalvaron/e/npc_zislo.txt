@@ -69,7 +69,7 @@ quest .zislo_1:
 	[
 		"Oh, you met my dear friend Zislo? How is he? Good?\n"
 		"\n"
-		"Lizard people like to send messages to each other in form of figurines. I'll try to figure out what he means by this."
+		"Lizard people like to send messages to each other in the form of figurines. I'll try to figure out what he means by this."
 	]
 	
 	level: 29

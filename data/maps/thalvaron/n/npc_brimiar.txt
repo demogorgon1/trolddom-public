@@ -98,8 +98,8 @@ quest .brimiar_1:
 	description: 
 	[
 		"Last night someone broke into my home and stole one of my books off my table. I have no idea why anyone would steal it, but it's really annoying because I was in the middle of reading it.\n\n"
-		"Maybe you can help me retrieve it? I can't offer you much clues about who could have done it, even though I woke up when it the burglars ran away. I heard a skitter-scatter of little feet as"
-		"I turned on the light. Seemed like the ran off into the gorge to the east."
+		"Maybe you can help me retrieve it? I can't offer you much clues about who could have done it. When I woke up, the burglars ran away. I heard a skitter-scatter of little feet as"
+		"I turned on the light. Seemed like they ran off into the gorge to the east."
 	]
 
 	progress:

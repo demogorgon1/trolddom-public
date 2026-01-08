@@ -60,9 +60,9 @@ quest .fenris_1:
 	
 	description: 
 	[
-		"If you want me to take you serious you need to prove your worth.\n"
+		"If you want me to take you seriously you need to prove your worth.\n"
 		"\n"
-		"On the Forbidden Island north of here, deep in its dense forest, resides Fryzilk, a powerful otherworldly entity. Where Fryzilk came from nobody knows, all we know is that its immortal. You can kill it, but"
+		"On the Forbidden Island north of here, deep in its dense forest, resides Fryzilk, a powerful otherworldly entity. Where Fryzilk came from nobody knows, all we know is that it's immortal. You can kill it, but"
 		"it will come back to life again eventually. Go there, defeat the beast, and return with one of its many tentacles to prove your deed. Then I'll know you're not useless."
 	]
 	
@@ -173,7 +173,7 @@ quest .fenris_3:
 	
 	description: 
 	[
-		"What now? Seems like we've getting totally overrun by crab men. You might have noticed the sandy cave to the east. I haven't been in there myself after it became infested, but it's definitely crawling with"
+		"What now? Seems like we've been totally overrun by crab men. You might have noticed the sandy cave to the east. I haven't been in there myself after it became infested, but it's definitely crawling with"
 		"more of these creatures. I've also heard rumors of a particularly large crab man somewhere around there. Go kill them all and I'll make it worth your while."
 	]
 

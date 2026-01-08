@@ -98,8 +98,8 @@ quest .jonas_white_1:
 	description: 
 	[
 		"I originally moved here for health reasons. Recently I got a taste for history and from that point of view, this place is amazing as well! Did you know that elves have lived here for"
-		"thousands of years? Fascinating, right? And before the elves there were another civilization. Turns out that they left a lot of stuff behind. Some people might call it junk,"
-		"but I found it very interesting. If you look closely, it's all over the place here! I love collecting it, but unfortunately my body is falling apart, so it's a bit difficult to go out and look for artifact.\n\n"
+		"thousands of years? Fascinating, right? And before the elves there was another civilization. Turns out that they left a lot of stuff behind. Some people might call it junk,"
+		"but I found it very interesting. If you look closely, it's all over the place here! I love collecting it, but unfortunately my body is falling apart, so it's a bit difficult to go out and look for artifacts.\n\n"
 		"Maybe you can help? The beach is littered with ancient tablets. Maybe you can collect some for me?"
 	]
 

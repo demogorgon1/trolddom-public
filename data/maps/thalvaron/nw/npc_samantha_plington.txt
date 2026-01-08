@@ -103,7 +103,7 @@ quest .samantha_plington_1:
 	
 	description: 
 	[
-		"Well, my husbands gets himself injured in the line of duty on a regular basis and he is always overly dramatic about it. While he's relaxing with his friends at work I'm working hard at home keeping everything together."
+		"Well, my husband gets himself injured in the line of duty on a regular basis and he is always overly dramatic about it. While he's relaxing with his friends at work I'm working hard at home keeping everything together."
 		"Yes, sure, he has probably hurt himself, but I'm sure it's not too bad. Bring him some healing herbs and he'll stop whining. His favorite herbs are growing along the river to the south."
 	]
 

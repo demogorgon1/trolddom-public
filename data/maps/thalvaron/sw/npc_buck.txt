@@ -106,7 +106,7 @@ quest .buck_1:
 	
 	description: 
 	[
-		"Those damn mosquitoes! Absolutely only problem with living in a swamp. Good thing I've developed a special tonic that repells those little devils. Bad thing is that I'm out of"
+		"Those damn mosquitoes! Absolutely the only problem with living in a swamp. Good thing I've developed a special tonic that repels those little devils. The bad thing is that I'm out of"
 		"one of the main ingredients. Collect local flowers of the Buzzing Delight variety and I'll give you a reward."
 	]
 

@@ -72,7 +72,7 @@ quest .gash_hewitt_1:
 	[
 		"I assume you're heading for Edmund's Haunt. Just follow the path and you'll get there. However, maybe I can get you to help me a bit first? My wife Joanna sent me out here to get some splinters from the wood elementals"
 		"that roam these woods. Apparently they're really good for cooking. Anyway, those wooden bastards are kinda dangerous and I'd rather not spend too much time with them. That's where you come into the picture. Go get me some"
-		"splinters and I'll make it worth your while. I know there is a bunch of them in the trees behind me."
+		"splinters and I'll make it worth your while. I know there are a bunch of them in the trees behind me."
 	]
 
 	progress:

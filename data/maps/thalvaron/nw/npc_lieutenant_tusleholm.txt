@@ -122,7 +122,7 @@ quest .lieutenant_tusleholm_2:
 	description: 
 	[
 		"The next job I have for you should be much easier than the last one.\n\n"
-		"Kobolds are a constant menace if you live close to any kinds of mountains. They dig their little tunnels everywhere and if you don't continously keep their population down, you'll soon find"
+		"Kobolds are a constant menace if you live close to any kinds of mountains. They dig their little tunnels everywhere and if you don't continuously keep their population down, you'll soon find"
 		"that you've been completely overrun. They reproduce like rabbits. I'm not sure exactly how it works."
 		"Anyway, around the area where you found the mudlord, there are some caves which have been overrun with kobolds. I need you to go and get rid of them."
 	]

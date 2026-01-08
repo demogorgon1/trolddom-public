@@ -76,7 +76,7 @@ quest .blacksmithing_trainer_1:
 	
 	completion:
 	[
-		"Great, your support will not be forgotton."
+		"Great, your support will not be forgotten."
 	]
 	
 	objectives: [ .blacksmithing_trainer_1_a .blacksmithing_trainer_1_b ]

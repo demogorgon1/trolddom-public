@@ -95,7 +95,7 @@ quest .borli_stouthammer_1:
 	
 	description: 
 	[
-		"Eek! I thought you were a spider, but thank the gods that you're not! You're here to get me out of here? I've been stuck in here for a while now. I don't dare moving or they'll see me and eat me!\n\n"
+		"Eek! I thought you were a spider, but thank the gods that you're not! You're here to get me out of here? I've been stuck in here for a while now. I don't dare move or they'll see me and eat me!\n\n"
 		"Can you escort me back to the camp? I don't have anything to offer you as payment, but if we get out alive, seek out my brother Grumli in Durgan Tharok. He'll surely reward you for saving my life."
 	]
 
@@ -106,7 +106,7 @@ quest .borli_stouthammer_1:
 	
 	completion:
 	[
-		"Borli get stuck in a cave full of spiders and couldn't get out? Not surprising... But okay, I can give you a little something for your efforts. If you see him again, tell him to come back home."
+		"Borli got stuck in a cave full of spiders and couldn't get out? Not surprising... But okay, I can give you a little something for your efforts. If you see him again, tell him to come back home."
 	]
 
 	level: 15

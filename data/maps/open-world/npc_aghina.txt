@@ -82,7 +82,7 @@ quest .aghina_1:
 	
 	description: 
 	[
-		"My fellow ranger and I was about to set up camp for the night, out by the strand, but suddenly crab men emerged from the water! We slayed a countless number of them, but they just keep coming!"
+		"My fellow ranger and I were about to set up camp for the night, out by the strand, but suddenly crab men emerged from the water! We slayed a countless number of them, but they just keep coming!"
 		"Poor Camus got wounded and I was completely overrun and had to retreat. I want to return, but I'm too exhausted from the battle. Please go and assist him!"
 	]
 

@@ -121,7 +121,7 @@ quest .sergeant_jensen_2:
 	
 	description: 
 	[
-		"If you follow the main road to the south you'll find a larger fortication called The Southern Choke. Maybe they need some help down there as well."
+		"If you follow the main road to the south you'll find a larger fortification called The Southern Choke. Maybe they need some help down there as well."
 	]
 
 	progress:

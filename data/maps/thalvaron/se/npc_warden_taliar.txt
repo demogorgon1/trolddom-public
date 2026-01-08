@@ -58,7 +58,7 @@ quest .warden_taliar_1:
 	
 	description: 
 	[
-		"The orcs have taken over the entire fortification complex of Durgan Urok. They must have recently breached out of the inner depths of the fortress. The orcs of the outer area is commanded"
+		"The orcs have taken over the entire fortification complex of Durgan Urok. They must have recently breached out of the inner depths of the fortress. The orcs of the outer area are commanded"
 		"by Mogdug, a larger than usual specimen of these vile creatures. I'm not sure where he is exactly, but he must be somewhere in the outer areas. Don't venture into the depths. Yet.\n\n"
 		"You need to kill this orc to disrupt their command structure."
 	]

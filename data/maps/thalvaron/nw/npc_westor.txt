@@ -98,7 +98,7 @@ quest .westor_1:
 	description: 
 	[
 		"You see the cave we're standing in front of, right? Doesn't look too dangerous, does it? Well, that's what I thought when I went in there looking for cave mushrooms. I was about to pick up a really fine specimen when I suddenly heard something growling behind me! I ran out as fast as I could.\n\n"
-		"You look somewhat brave, maybe you can go in there an pick up the mushroom for me?"
+		"You look somewhat brave, maybe you can go in there and pick up the mushroom for me?"
 	]
 
 	progress:
@@ -221,7 +221,7 @@ quest .westor_3:
 	description: 
 	[
 		"You know about The Mountain Hotel just north of here? I'm sure you do, it's quite famous. I've heard it has been overrun with shady characters, which is a bit of a problem because I usually pick mushrooms in the area behind it."
-		"I'd appreciate if you could go up there and get some for me? You've already proved that you can tell the difference between a mushroom and a rock. I don't think there are any oversized kitty cats up there, but you should"
+		"I'd appreciate it if you could go up there and get some for me? You've already proved that you can tell the difference between a mushroom and a rock. I don't think there are any oversized kitty cats up there, but you should"
 		"probably keep an eye out for bandits."
 	]
 

@@ -52,7 +52,7 @@ quest .frinrir_1:
 	
 	description: 
 	[
-		"The old mountain fortress to the north have been affected by the leaking arcane forces of the area and the dead has risen from the catacombs."
+		"The old mountain fortress to the north has been affected by the leaking arcane forces of the area and the dead have risen from the catacombs."
 		"Most would be smart enough to just stay clear of them, but for some reason the old hermit, who has been living in there for ages, refuses"
 		"to leave. Maybe you can deliver these supplies to him and see how he's holding up?\n"
 		"\n"

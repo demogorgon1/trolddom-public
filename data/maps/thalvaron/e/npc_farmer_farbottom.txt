@@ -59,7 +59,7 @@ quest .farmer_farbottom_1:
 	
 	description: 
 	[
-		"I'm just a humble farmer, trying to grow some vegetables out of this miserable dirt. It's really not doing very good as the soil isn't very good. It really needs to be fertilized. Luckily"
+		"I'm just a humble farmer, trying to grow some vegetables out of this miserable dirt. It's really not doing very well as the soil isn't very good. It really needs to be fertilized. Luckily"
 		"the desert south of here is crawling with skeletons. I figured that maybe their bones can be ground up and used as fertilizer? It's worth a shot, right? Can you go grab me some of their bones?"
 	]
 	
@@ -110,7 +110,7 @@ quest .farmer_farbottom_2:
 	
 	description: 
 	[
-		"I don't really mind kobolds too much, usually, but they've been a real pest recently. They come out at night and eats my potatoes! I think they hang out in the cave behind my house. The entrance to"
+		"I don't really mind kobolds too much, usually, but they've been a real pest recently. They come out at night and eat my potatoes! I think they hang out in the cave behind my house. The entrance to"
 		"the cave is just to the west of here. Can you go clear out their numbers a bit?"
 	]
 

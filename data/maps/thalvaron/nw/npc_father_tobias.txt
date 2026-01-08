@@ -99,7 +99,7 @@ quest .father_tobias_1:
 	description:
 	[
 		"A few days ago the Prince came to me and told me about a nightmare he had about the old catacombs under the castle. He was very shaken and couldn't stop talking about ghouls and ghosts. I assured him"
-		"that there is no such things down there, but in the end he made promise to go make sure. I was thinking that maybe you could go take a look? I don't really have time to do it myself. I have, uh, religious"
+		"that there are no such things down there, but in the end he made a promise to go make sure. I was thinking that maybe you could go take a look? I don't really have time to do it myself. I have, uh, religious"
 		"practices to attend to.\n"
 		"\n"
 		"Here take this key, it will unlock the gate to the catacombs. You'll find it down in the basement, accessible from the outside of the castle to the east."
@@ -112,7 +112,7 @@ quest .father_tobias_1:
 
 	completion:
 	[
-		"What? Oh no, undead creatures in my catacombs? Who yould have thought!"
+		"What? Oh no, undead creatures in my catacombs? Who would have thought!"
 	]
 
 	quest_items: [ .father_tobias_quest_item_1 ]

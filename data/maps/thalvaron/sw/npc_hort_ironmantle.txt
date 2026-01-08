@@ -105,7 +105,7 @@ quest .hort_ironmantle_2:
 	
 	description: 
 	[
-		"That infused elemental stone is very interesting. If you don't mind a bit of a travel, maybe I can convince you to bring it to my brother Rurik in Durgan Tharok? He most likely hangs out at the \"Pick and Pint\" tavern.\n\n"
+		"That infused elemental stone is very interesting. If you don't mind a bit of a trek, maybe I can convince you to bring it to my brother Rurik in Durgan Tharok? He most likely hangs out at the \"Pick and Pint\" tavern.\n\n"
 		"You'll find the magnificent dwarven stronghold of Durgan Tharok if you follow the road to the east, through the badlands."
 	]
 

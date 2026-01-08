@@ -65,7 +65,7 @@ quest .foramil_1:
 	
 	description: 
 	[
-		"Someone entrusted me with the quest of dealing with some bewildered tree elementals that seems to run amok in these woods. I don't really feel like doing it right now though, so maybe I can delegate the work to you?"
+		"Someone entrusted me with the quest of dealing with some bewildered tree elementals that seem to run amok in these woods. I don't really feel like doing it right now though, so maybe I can delegate the work to you?"
 		"Basically, the problem is that these forsaken tree creatures have lost their minds and are no longer peaceful. The attack people left and right. We can't have that, apparently. You'll find them to the east of here on both"
 		"sides of the river. Bring me back some of their splinters."
 	]
@@ -144,7 +144,7 @@ quest .foramil_2:
 
 	completion:
 	[
-		"Oh, didn't expect to see you here? Great! Just throw those splinters in the water and let me have look."
+		"Oh, didn't expect to see you here? Great! Just throw those splinters in the water and let me have a look."
 	]
 
 	level: 17
