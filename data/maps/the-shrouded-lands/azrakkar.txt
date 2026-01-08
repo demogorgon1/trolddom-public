@@ -74,7 +74,7 @@ quest .azrakkar_1:
 	
 	description: 
 	[
-		"The power of this realm materialize itself in crystals growing out of the ground. They can be used by us to summon more allies to fight against the light that has managed to get hold on parts of the land."
+		"The power of this realm materialize itself in crystals growing out of the ground. They can be used by us to summon more allies to fight against the light that have managed to get hold on parts of the land."
 		"Please, if you gather those crystals, it would be a great help. The more you can bring to me the better."
 	]
 
