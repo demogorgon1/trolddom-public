@@ -17,6 +17,7 @@
 
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Entity.h>
+#include <tpublic/Data/Faction.h>
 #include <tpublic/Data/Objective.h>
 #include <tpublic/Data/Quest.h>
 
@@ -53,6 +54,23 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_NOT_BE_FRIENDLY_FACTION:
+				{
+					bool shouldBeFriendlyFaction = aRequirement->m_type != Requirement::TYPE_MUST_NOT_BE_FRIENDLY_FACTION;
+					bool isFriendlyFaction = false;
+
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic != NULL && combatPublic->m_factionId != 0)
+					{
+						const Data::Faction* faction = aManifest->GetById<Data::Faction>(combatPublic->m_factionId);
+						isFriendlyFaction = faction->IsFriendly();
+					}
+
+					if(shouldBeFriendlyFaction != isFriendlyFaction)
+						return false;
+				}
+				break;
+
 			case Requirement::TYPE_MUST_BE_DISCIPLE:
 			case Requirement::TYPE_MUST_NOT_BE_DISCIPLE:
 				{

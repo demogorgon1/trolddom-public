@@ -239,6 +239,8 @@ namespace tpublic
 			m_type = TYPE_MUST_BE_HEROIC;
 		else if (typeString == "must_not_be_heroic")
 			m_type = TYPE_MUST_NOT_BE_HEROIC;
+		else if(typeString == "must_not_be_friendly_faction")
+			m_type = TYPE_MUST_NOT_BE_FRIENDLY_FACTION;
 		else
 			TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid type.", aSource->m_annotation->GetIdentifier());
 

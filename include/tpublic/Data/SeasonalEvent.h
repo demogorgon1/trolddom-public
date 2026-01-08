@@ -43,38 +43,55 @@ namespace tpublic
 				Period(
 					const SourceNode*	aSource)
 				{
-					aSource->GetObject()->ForEachChild([&](
-						const SourceNode* aChild)
+					if(aSource->IsIdentifier("always"))
 					{
-						if(aChild->m_name == "month")
-							m_month = SourceToMonth(aChild);
-						else if(aChild->m_name == "range")
-							m_range = UIntRange(aChild);
-						else
-							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-					});
+						m_always = true;
+					}
+					else
+					{
+						aSource->GetObject()->ForEachChild([&](
+							const SourceNode* aChild)
+						{
+							if(aChild->m_name == "month")
+								m_month = SourceToMonth(aChild);
+							else if(aChild->m_name == "range")
+								m_range = UIntRange(aChild);
+							else
+								TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						});
+					}
 				}
 
 				void
 				ToStream(
 					IWriter*			aWriter) const
 				{
-					aWriter->WriteUInt(m_month);
-					aWriter->WriteOptionalObject(m_range);
+					aWriter->WriteBool(m_always);
+					if(!m_always)
+					{
+						aWriter->WriteUInt(m_month);
+						aWriter->WriteOptionalObject(m_range);
+					}
 				}
 
 				bool
 				FromStream(
 					IReader*			aReader)
 				{
-					if(!aReader->ReadUInt(m_month))
+					if(!aReader->ReadBool(m_always))
 						return false;
-					if(!aReader->ReadOptionalObject(m_range))
-						return false;
+					if(!m_always)
+					{
+						if (!aReader->ReadUInt(m_month))
+							return false;
+						if (!aReader->ReadOptionalObject(m_range))
+							return false;
+					}
 					return true;
 				}
 
 				// Public data
+				bool						m_always = false;
 				uint32_t					m_month = 0;
 				std::optional<UIntRange>	m_range;
 			};

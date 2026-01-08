@@ -21518,6 +21518,7 @@ ability _item_recipe_cup_of_warm_eels_use_ability 34516
 ability __maps_thalvaron_sw_rurik_ironmantle_2_a 34517
 ability _entity_thalvaron_thunder_lizard_components_npc_state_in_combat_abilities_id 34518
 ability _entity_thalvaron_thunder_lizard_boss_components_npc_state_in_combat_abilities_id 34519
+ability _item_demonic_shard_use_ability 34520
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -30882,6 +30883,8 @@ sprite __unnamed_874__ 6118
 sprite __unnamed_873__ 6119
 sprite doodad_bed_2 6120
 sprite doodad_bed_3 6121
+sprite icon_shard_1 6122
+sprite __unnamed_875__ 6123
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -63196,6 +63199,7 @@ item item_majestic_slime_eel 52252
 item __maps_thalvaron_sw_rurik_ironmantle_1_quest_item 52253
 item __maps_thalvaron_sw_rurik_ironmantle_2_quest_item 52254
 item __maps_thalvaron_sw_rurik_ironmantle_2_a 52255
+item demonic_shard 52256
 aura knock 1
 aura dont_touch_me_bro 2
 aura immortality 3
@@ -65884,6 +65888,8 @@ aura consumable_swiftness_potion 4744
 aura consumable_cup_of_warm_eels_buff 4745
 aura consumable_cup_of_warm_eels 4746
 aura __maps_thalvaron_sw_rurik_ironmantle_2_a 4747
+aura possessed 4748
+aura _ability__item_demonic_shard_use_ability_direct_effect_apply_aura_aura 4749
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -66253,6 +66259,7 @@ loot_table __maps_lich_tower_library_heroic 423
 loot_table __maps_lich_tower_malrik_the_undying_heroic 424
 loot_table __maps_lich_tower_rotfang_heroic 425
 loot_table fish_slime 426
+loot_table _aura_possessed_loot_table 427
 loot_group world_drops_junk 8
 loot_group world_drops_uncommon 9
 loot_group world_drops_consumable 10
@@ -66597,6 +66604,7 @@ loot_group fish_slime_common 381
 loot_group fish_slime_uncommon 382
 loot_group thalvaron_rurik_ironmantle_1_quest_item 383
 loot_group thalvaron_rurik_ironmantle_2_quest_item 384
+loot_group possessed 385
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -66737,6 +66745,7 @@ particle_system _ability_npc_fireball_2_projectile 97
 particle_system _ability_npc_frostbolt_2_projectile 98
 particle_system npc_poison_detonation 99
 particle_system _ability_lich_tower_6_slime_spit_projectile 100
+particle_system _aura_possessed_particle_system 101
 dialogue_screen __maps_open_world_brom_mining 31
 dialogue_screen __maps_open_world_brom_greetings 32
 dialogue_screen __maps_open_world_brom_trainer 33
@@ -70377,3 +70386,4 @@ diminishing_effect stun 2
 diminishing_effect root 3
 seasonal_event jul 1
 seasonal_event jul_main 2
+seasonal_event possession 3
