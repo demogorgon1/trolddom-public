@@ -24,6 +24,13 @@ dialogue_screen .svara_greetings:
 			condition: .svara_can_afford 
 			confirmation: "This will reset all your talent points.\n\nDo you want to proceed?"
 		}
+		
+		{ quest: .timeweaver_10 }
+		{ quest<completion_only>: .timeweaver_10 }
+		{ quest: .timeweaver_20 }
+		{ quest<completion_only>: .timeweaver_20 }
+		{ quest: .timeweaver_30 }
+		{ quest<completion_only>: .timeweaver_30 }
 	]
 }
 
@@ -46,3 +53,41 @@ entity .svara: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Test Progression Quests
+
+quest .timeweaver_10:
+{
+	string: "Thread of Fate: A Moment"
+	text: [ "Speak with Svara." ]
+	description: [ "Skip ahead just a little. A few weeks, maybe a month. Enough to learn a new trick or two.\n\nBarely any paradoxes at all." ]
+	completion: [ "A brief flash of the future. You blink and it's over, but something stuck." ]
+	level: 10
+	reward_cash_multiplier: 3
+	reward_xp_multiplier: 3
+	repeat_mode: always
+}
+
+quest .timeweaver_20:
+{
+	string: "Thread of Fate: A Season"
+	text: [ "Speak with Svara." ]
+	description: [ "Skip ahead a few seasons. Watch the leaves change in fast-forward. Your future self has been busy.\n\nMinor temporal headache expected." ]
+	completion: [ "Months of experience compressed into a heartbeat. Your head hurts, but in a productive way." ]
+	level: 13
+	reward_cash_multiplier: 8
+	reward_xp_multiplier: 8
+	repeat_mode: always
+}
+
+quest .timeweaver_30:
+{
+	string: "Thread of Fate: A Year"
+	text: [ "Speak with Svara." ]
+	description: [ "Skip ahead a full year. Birthdays, holidays, countless battles - all absorbed in an instant.\n\nCausality is just a suggestion anyway." ]
+	completion: [ "A year of your life you'll never actually live. Worth it? Your future self seems to think so." ]
+	level: 23
+	reward_cash_multiplier: 15
+	reward_xp_multiplier: 15
+	repeat_mode: always
+}
