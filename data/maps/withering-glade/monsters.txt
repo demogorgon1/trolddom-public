@@ -1,0 +1,15 @@
+{
+	${
+		_level: 30
+		_faction: monsters
+		_creature_type: demon				
+		_no_kill_event: true
+		_despawn_time: { out_of_combat_ticks: 10 }
+		_zone: .boss
+		_out_of_zone_action: { evade: true }
+		_spawn_delay: 20
+	}
+
+	entity .random_demon_1: !NPC { _string: "Infernal Spawn" _sprite: demon_2 _sprite_dead: demon_2_dead _weapon_damage: 1 _resource_health: 1 }
+	entity .random_demon_2: !NPC { _string: "Damned Beast" _sprite: demon_1 _sprite_dead: demon_1_dead _weapon_damage: 0.8 _resource_health: 0.8 _abilities: [ { id: npc_curse target: random_player } { id: npc_firebolt } { id: npc_attack } ] }
+}

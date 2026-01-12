@@ -117,6 +117,19 @@ namespace tpublic::Components
 	}
 
 	const Auras::Entry* 
+	Auras::GetAura(
+		uint32_t									aAuraId) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			if (entry->m_auraId == aAuraId)
+				return entry.get();
+		}
+
+		return NULL;
+	}
+
+	const Auras::Entry* 
 	Auras::GetAuraWithSource(
 		uint32_t									aAuraId,
 		uint32_t									aEntityInstanceId) const

@@ -196,7 +196,7 @@ namespace tpublic::Systems
 
 		if(aEntityState == EntityState::ID_SPAWNING)
 		{
-			if(aTicksInState < SPAWN_TICKS)
+			if(aTicksInState < SPAWN_TICKS + npc->m_spawnDelay)
 				return EntityState::CONTINUE;
 
 			const Components::NPC::StateEntry* spawningState = npc->GetState(EntityState::ID_SPAWNING);
@@ -1308,7 +1308,7 @@ namespace tpublic::Systems
 		case EntityState::ID_EVADING:
 			if(npc->m_evadeDespawn)
 			{
-				returnValue = EntityState::ID_DESPAWNING;;
+				returnValue = EntityState::ID_DESPAWNING;
 			}
 			else if(position->m_position == npc->m_anchorPosition)
 			{

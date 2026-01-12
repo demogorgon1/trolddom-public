@@ -1,17 +1,17 @@
 # FIXME: don't implement this as a seasonal event
 
-seasonal_event possession:
-{
-	period: always
-	
-	random_npc_aura:
-	{
-		aura: possessed
-		probability: 50
-		requirement self<must_be_creature_type>: humanoid
-		requirement self<must_not_be_friendly_faction>: {}
-	}	
-}
+#seasonal_event possession:
+#{
+#	period: always
+#	
+#	random_npc_aura:
+#	{
+#		aura: possessed
+#		probability: 2
+#		requirement self<must_be_creature_type>: humanoid
+#		requirement self<must_not_be_friendly_faction>: {}
+#	}	
+#}
 
 loot_group possessed: {}
 
@@ -23,6 +23,29 @@ aura possessed:
 	icon: icon_aggressive
 	type: buff
 	
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: [ hit critical block ]
+		combat_event_ability_mask: [ melee ]
+		probability: 35
+		ability<self>: $ability
+		{
+			string: "Infernal Reflection"
+			range: 1
+			flags: [ spell offensive target_other target_hostile ]
+			states: [ default in_combat ]
+			icon: icon_aggressive
+			delay: 3
+
+			direct_effect damage:
+			{	
+				flags: [ is_magical ]
+				damage_type: unholy
+				function: { expression: a a: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] [ 30 64 ] ] }					
+			}	
+		}
+	}
+	
 	particle_system: $particle_system
 	{
 		particle:
@@ -31,11 +54,11 @@ aura possessed:
 			flags: [ attached ]
 			color_mod: [ 255 0 0 ]
 			count: 1
-			scale: 0.6
+			scale: 0.55
 			alpha: 0.5
 			offset_x: 0.5
-			offset_y: 0
-			sprite_interval: 80
+			offset_y: -0.08
+			sprite_interval: 100
 		}
 	}
 	
@@ -47,7 +70,7 @@ aura possessed:
 
 item demonic_shard:
 {
-	string: "Internal Shard"
+	string: "Infernal Shard"
 	icon: icon_shard_1
 	rarity: uncommon
 	loot_groups: [ possessed ]
@@ -59,7 +82,7 @@ item demonic_shard:
 	
 	use_ability: $ability [ icon string ]
 	{
-		description: "Restores 40% of your health and mana. Angers the Infernal powers for 20 minutes. Stacks up to 10 times. Effect persists in death."
+		description: "Restores 40% of your health and mana. Angers the infernal powers for 20 minutes. Stacks up to 10 times. Effect persists in death."
 		flags: [ target_self item ]
 		cooldowns: [ global ]
 		states: [ default in_combat ]
@@ -79,9 +102,9 @@ item demonic_shard:
 
 		direct_effect apply_aura: 
 		{
-			aura: $aura [ icon ]
+			aura: $aura @infernal_wrath [ icon ] 
 			{
-				string: "Internal Wrath"
+				string: "Infernal Wrath"
 				description: "They're not happy with you."
 				flags: [ unique silent always_show_timer persist_in_death ]
 				duration: 12000

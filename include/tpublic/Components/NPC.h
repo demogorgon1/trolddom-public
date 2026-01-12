@@ -497,6 +497,7 @@ namespace tpublic
 				FIELD_HEROIC_HEALTH_MULTIPLIER,
 				FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER,
 				FIELD_REQUIRED_SEASONAL_EVENT_ID,
+				FIELD_SPAWN_DELAY
 			};
 
 			static void
@@ -533,6 +534,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_HEROIC_HEALTH_MULTIPLIER, "heroic_health_multiplier", offsetof(NPC, m_heroicHealthMultiplier));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_HEROIC_WEAPON_DAMAGE_MULTIPLIER, "heroic_weapon_damage_multiplier", offsetof(NPC, m_heroicWeaponDamagerMultiplier));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_REQUIRED_SEASONAL_EVENT_ID, "required_seasonal_event", offsetof(NPC, m_requiredSeasonalEventId))->SetDataType(DataType::ID_SEASONAL_EVENT);
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_SPAWN_DELAY, "spawn_delay", offsetof(NPC, m_spawnDelay));
 			}
 
 			const StateEntry*
@@ -580,6 +582,7 @@ namespace tpublic
 				m_heroicHealthMultiplier = 1.0f;
 				m_heroicWeaponDamagerMultiplier = 1.0f;
 				m_requiredSeasonalEventId = 0;
+				m_spawnDelay = 0;
 
 				m_cooldowns.m_entries.clear();
 				m_castInProgress.reset();
@@ -636,6 +639,7 @@ namespace tpublic
 			float										m_heroicHealthMultiplier = 1.0f;
 			float										m_heroicWeaponDamagerMultiplier = 1.0f;
 			uint32_t									m_requiredSeasonalEventId = 0;
+			int32_t										m_spawnDelay = 0;
 
 			// Not serialized
 			Cooldowns									m_cooldowns;

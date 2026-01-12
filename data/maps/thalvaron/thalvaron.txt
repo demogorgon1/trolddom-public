@@ -25,6 +25,8 @@ map_player_spawn thalvaron_jungle_tower_portal_return_spawn: { }
 
 map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
 
+map_player_spawn withering_glade_exit: { }
+
 zone .top_zone_marshlands: { string: "The Marshlands" preposition: "in" }
 zone .top_zone_badlands: { string: "The Badlands" preposition: "in" }
 zone .top_zone_kareth: { string: "Kareth" loot_table: .kareth_zone_drops preposition: "in" }
@@ -159,6 +161,7 @@ zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true }
 zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
 zone .the_frozen_borderlands: { string: "The Frozen Borderlands" preposition: "in" }
 zone .crash_site: { string: "Crash Site" preposition: "at the" top_zone: .the_frozen_borderlands }
+zone .withering_glade: { string: "Withering Glade" preposition: "in the" } 
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -341,6 +344,9 @@ map_entity_spawn thalvaron_briana_roft: { entity thalvaron_briana_roft: { init_s
 map_entity_spawn thalvaron_random_vendor_3: { entity thalvaron_random_vendor_3: { init_state: default } }
 map_entity_spawn thalvaron_random_vendor_4: { entity thalvaron_random_vendor_4: { init_state: default } }
 map_entity_spawn thalvaron_dutsim: { entity thalvaron_dutsim: { init_state: default } }
+map_entity_spawn thalvaron_raella: { entity thalvaron_raella: { init_state: default } }
+map_entity_spawn thalvaron_raella_dog: { entity thalvaron_raella_dog: { init_state: default } }
+map_entity_spawn withering_glade_portal: { } #entity withering_glade_portal: { init_state: default } }
 
 # N
 map_entity_spawn thalvaron_ranger_fremalt: { entity thalvaron_ranger_fremalt: { init_state: default } }
@@ -610,6 +616,7 @@ map_palette .stuff:
 	player_spawn thalvaron_karethi_temple_exit: [ 111 124 244 ]
 	player_spawn thalvaron_jungle_tower_portal_spawn: [ 210 105 70 ]
 	player_spawn thalvaron_jungle_tower_portal_return_spawn: [ 210 105 240 ]
+	player_spawn withering_glade_exit: [ 87 6 182 ]
 
 	portal thalvaron_lich_tower_entrance: [ 144 188 94 ]
 	portal thalvaron_valoris_insurgency_entrance: [ 144 88 92 ]
@@ -800,6 +807,9 @@ map_palette .stuff:
 	entity_spawn thalvaron_random_vendor_3: [ 30 70 102 ]
 	entity_spawn thalvaron_random_vendor_4: [ 130 170 102 ]
 	entity_spawn thalvaron_dutsim: [ 230 110 105 ]
+	entity_spawn thalvaron_raella: [ 30 197 73 ]
+	entity_spawn thalvaron_raella_dog: [ 230 197 73 ]
+	entity_spawn withering_glade_portal: [ 20 91 84 ]
 	
 	# N
 	entity_spawn thalvaron_ranger_fremalt: [ 191 138 101 ]				
@@ -1356,6 +1366,7 @@ map_palette .zones:
 	zone .kobold_caves: [ 211 103 14 ]
 	zone .the_frozen_borderlands: [ 184 177 129 ]
 	zone .crash_site: [ 168 129 184 ]
+	zone .withering_glade: [ 243 155 34 ]
 }
 
 map_palette .sub_zones:

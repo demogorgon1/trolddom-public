@@ -148,6 +148,7 @@
 			<exists _heroic_weapon_damage> heroic_weapon_damage_multiplier: @_heroic_weapon_damage
 			<exists _heroic_resource_health> heroic_health_multiplier: @_heroic_resource_health
 			<exists _required_seasonal_event> required_seasonal_event: @_required_seasonal_event
+			<exists _spawn_delay> spawn_delay: @_spawn_delay
 		}		
 		sprite<static>: 
 		{ 
@@ -265,6 +266,8 @@
 	required_level: @_level	
 	icon: @_icon
 	flags: [ dungeon_loot ]
+	
+	<exists _unique and _unique> flags: [ unique ]
 	
 	<exists _item_level> item_level: @_item_level
 	<exists _level_range> level_range: @_level_range

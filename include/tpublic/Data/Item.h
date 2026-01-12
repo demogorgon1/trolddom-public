@@ -371,6 +371,10 @@ namespace tpublic
 						{
 							m_tokenCost = aChild->GetUInt32();
 						}
+						else if (aChild->m_name == "empower")
+						{
+							m_empower = aChild->GetUInt32();
+						}
 						else if (aChild->m_name == "weapon_damage")
 						{
 							m_weaponDamage = UIntRange(aChild);
@@ -479,6 +483,7 @@ namespace tpublic
 				aStream->WriteUInt(m_auraId);
 				aStream->WriteUInt(m_tokenCost);
 				aStream->WriteOptionalObjectPointer(m_oracle);
+				aStream->WriteUInt(m_empower);
 			}
 
 			bool
@@ -538,6 +543,8 @@ namespace tpublic
 				if (!aStream->ReadUInt(m_tokenCost))
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_oracle))
+					return false;
+				if (!aStream->ReadUInt(m_empower))
 					return false;
 
 				m_lcString = m_string;
@@ -607,6 +614,7 @@ namespace tpublic
 			uint32_t							m_auraId = 0;
 			uint32_t							m_tokenCost = 0;
 			std::unique_ptr<Oracle>				m_oracle;
+			uint32_t							m_empower = 0;
 
 			// Not serialized
 			std::string							m_lcString;

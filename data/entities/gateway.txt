@@ -469,3 +469,59 @@ entity thalvaron_jungle_tower_portal_return:
 		}	
 	}
 }
+
+entity withering_glade_portal:
+{
+	string: "Lake of the Damned"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: withering_glade } ]
+			schedule: none
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}
+
+entity withering_glade_portal_exit:
+{
+	string: "Thalvaron"
+	
+	components:
+	{
+		position: { }		
+		gateway: 
+		{ 
+			maps: [ { map: thalvaron map_player_spawn: withering_glade_exit } ]
+			schedule: none
+		}
+		sprite<static>: 
+		{ 
+			animations:
+			[
+				{ 
+					states: [ default in_combat spawning ] 
+					frames: [ purple_gateway_1 purple_gateway_2 purple_gateway_3 ] 		
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -3
+				}
+			]		
+		}		
+	}
+}

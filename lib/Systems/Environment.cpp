@@ -86,9 +86,9 @@ namespace tpublic::Systems
 
 			SourceEntityInstance sourceEntityInstance = owner->m_ownerSourceEntityInstance.IsSet() ? owner->m_ownerSourceEntityInstance : SourceEntityInstance{ aEntityInstanceId, 0 };
 			
-			if(ability->TargetAOE())
+			if(ability->TargetAOE() || ability->TargetSelf())
 			{
-				// This is a self targeted AOE ability
+				// This is a self targeted and/or AOE ability
 				aContext->m_eventQueue->EventQueueAbility(
 					sourceEntityInstance,
 					aEntityInstanceId, 

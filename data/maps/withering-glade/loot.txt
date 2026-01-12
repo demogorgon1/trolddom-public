@@ -1,0 +1,102 @@
+loot_group .rare_bop: {}
+
+loot_table .loot_1: 
+{
+	slots:
+	[			
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_uncommon }
+			possibility: { weight: 30 loot_group: world_drops_uncommon_recipe_random }
+			possibility: { weight: 20 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 1 loot_group: world_drops_epic }	
+		}		
+	]
+}
+
+loot_table .loot_2: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .rare_bop }
+		}
+		
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_uncommon }
+			possibility: { weight: 30 loot_group: world_drops_uncommon_recipe_random }
+			possibility: { weight: 20 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 1 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_3: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .rare_bop }
+		}
+		
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 1 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_4: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .rare_bop } # empower
+		}
+		
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 1 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+{
+	${ _level: 30 }
+	
+	{
+		${ _loot_group: .rare_bop _rarity: rare }
+
+		{
+			${ _unique: true }
+
+			item .rare_bop_finger_1: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _dexterity: 1 _strength: 1 }	
+			item .rare_bop_finger_2: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _strength: 1 _constitution: 1 }	
+			item .rare_bop_finger_3: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _dexterity: 1 _constitution: 1 }	
+			item .rare_bop_finger_4: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
+			item .rare_bop_finger_5: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _strength: 1 _hit: 1 _budget_bias: -10 }	
+			item .rare_bop_finger_6: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
+			item .rare_bop_finger_7: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _wisdom: 1 _spell_damage: 1 }	
+			item .rare_bop_finger_8: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }				
+		}
+
+		{
+			item .rare_bop_neck_1: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _dexterity: 1 _strength: 1 }	
+			item .rare_bop_neck_2: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _strength: 1 _constitution: 1 }	
+			item .rare_bop_neck_3: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _dexterity: 1 _constitution: 1 }	
+			item .rare_bop_neck_4: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
+			item .rare_bop_neck_5: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _strength: 1 _hit: 1 _budget_bias: -10 }	
+			item .rare_bop_neck_6: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
+			item .rare_bop_neck_7: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _wisdom: 1 _spell_damage: 1 }	
+			item .rare_bop_neck_8: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }	
+		}
+
+	}
+}

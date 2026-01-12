@@ -874,13 +874,12 @@ map_entity_spawn thalvaron_urthon_necromancer: { entity thalvaron_urthon_necroma
 		_level: 28
 		_faction: monsters
 		_creature_type: undead
-		_default_behavior_state: .wandering_long					
-		_loot_table: default_zombie
+		_default_behavior_state: .wandering_long							
 		_resource_health: 0.64
 		_weapon_damage: 0.74
 	}
 
-	entity thalvaron_urthon_skeleton: !NPC { _string: "Skeleton" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead }
+	entity thalvaron_urthon_skeleton: !NPC { _string: "Skeleton" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _loot_table: default_skeleton }
 	entity thalvaron_urthon_skeleton_no_xp: !NPC { _string: "Skeleton" _sprite: skeleton_warrior_1 _sprite_dead: skeleton_warrior_1_dead _no_kill_event: true }	
 }
 
@@ -904,7 +903,7 @@ map_entity_spawn thalvaron_urthon_necromancer: { entity thalvaron_urthon_necroma
 					range: 1
 					cast_time: 40
 					cooldowns: [ global ]
-					cooldown: $cooldown { duration: 80 }
+					cooldown: $cooldown { duration: 120 }
 					flags: [ target_self ]
 					states: [ in_combat ]
 					icon: icon_poison

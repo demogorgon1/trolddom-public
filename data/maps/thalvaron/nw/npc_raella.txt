@@ -1,0 +1,52 @@
+dialogue_screen .raella_dialogue:
+{
+	text: 
+	[	
+		"Are you a demon? If yes, I'll give you a 5 minute head start. Run."
+	]			
+	
+	options:
+	[
+		{ quest<completion_only>: .father_tobias_4 }
+	]
+}
+
+dialogue_screen .raella_dog_dialogue:
+{
+	text: 
+	[	
+		"Woof!"
+	]			
+	
+	options:
+	[
+		{ text: "Good boy!" }
+	]
+}
+
+entity thalvaron_raella: !NPC
+{
+	_string: "Raella"
+	_guild_name: "Demon Hunter"
+	_dialogue_root: $dialogue_root { .raella_dialogue: { } } 	
+	_sprite: woman_48
+	_sprite_dead: woman_48_dead
+	_level: 30
+	_faction: npcs		
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true	
+}
+
+entity thalvaron_raella_dog: !NPC
+{
+	_string: "Bonecrusher"
+	_dialogue_root: $dialogue_root { .raella_dog_dialogue: { } } 	
+	_sprite: wolf_1
+	_sprite_dead: wolf_1_dead
+	_level: 30
+	_faction: npcs		
+	_creature_type: beast
+	_loot_table: .npc
+	_not_pushable: true	
+}

@@ -1,0 +1,185 @@
+map_entity_spawn .altar: { entity .altar: { init_state: default } }
+map_entity_spawn .spawn_effect: { }
+
+entity .altar:
+{
+	string: "Altar of the Damned"
+	systems: [ openable ]
+	components:
+	{
+		position: { }		
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_altar_1 ] z_offset: -3 } ] }		
+
+		openable: 
+		{ 
+			verb: use
+			range: 1 
+			despawn: false 			
+			level: 30
+			trigger_ability: $ability
+			{
+				flags: [ target_self always_in_range always_in_line_of_sight ]				
+				direct_effect spawn_entity:
+				{					
+					flags: [ reverse ] # Make target (player) owner
+					map_entity_spawn: .spawn_effect
+					entity: .spawn_effect
+				}
+			}
+		}		
+	}
+}
+
+entity .spawn_effect:
+{
+	systems: [ environment ]
+	
+	components:
+	{
+		position: { }		
+		owner: { }
+		environment: 
+		{
+			tick_interval: 80
+			duration: 80
+			delay: 77
+			ability: $ability
+			{	
+				flags: [ target_self always_in_range always_in_line_of_sight ]							
+				target_particle_system: $particle_system
+				{
+					particle:
+					{
+						sprites: [ effect_expl_3_0 effect_expl_3_1 effect_expl_3_2 effect_expl_3_3 effect_expl_3_4 effect_expl_3_5
+								   effect_expl_3_6 effect_expl_3_7 effect_expl_3_8 effect_expl_3_9 effect_expl_3_10 effect_expl_3_11 ]
+						sprite_interval: 100
+						flags: [ attached no_loop ]
+						duration: 1200
+						count: 1		
+						scale: 2
+						alpha: 1
+						fade_out: 50
+						color_mod: [ 255 128 128 ]
+					}	
+				}		
+				
+				direct_effect spawn_entity:
+				{
+					requirement self<must_have_aura>: infernal_wrath
+				
+					spawn_flags: [ no_owner detached source_threat ]
+					map_entity_spawn: .spawn_effect
+					npc_target_threat: 10
+					init_state: spawning
+					
+					aura_conditional: 
+					{ 					
+						aura: infernal_wrath exact_charges: 1 consume: true 						
+						refresh_npc_metrics: { update: true elite: false weapon_damage: 1.2 health: 2 } 
+						loot_table: .loot_1
+						entity random_boss_1: { } 
+					}
+					
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 2 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.0 health: 1.0 } 
+						loot_table: .loot_2
+						entity random_boss_1: {}
+					}
+					
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 3 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.2 health: 2.0 } 
+						loot_table: .loot_3
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 4 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.4 health: 4.0 } 
+						loot_table: .loot_4
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 5 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.6 health: 6.0 } 
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 6 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.8 health: 8.0 } 
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 7 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.0 health: 10.0 } 
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 8 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.2 health: 12.0 } 
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 9 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.4 health: 14.0 } 
+						entity random_boss_1: {}
+					}
+
+					aura_conditional: 
+					{ 
+						aura: infernal_wrath exact_charges: 10 consume: true 
+						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.6 health: 16.0 } 
+						entity random_boss_1: {}
+					}
+				}											
+				
+				direct_effect spawn_entity:
+				{
+					requirement self<must_not_have_aura>: infernal_wrath
+				
+					spawn_flags: [ no_owner detached source_threat ]
+					map_entity_spawn: .spawn_effect
+					npc_target_threat: 10
+					init_state: spawning
+					
+					entities: [ .random_demon_1 .random_demon_2 ]
+				}															
+			}								
+		}		
+		sprite: 
+		{ 
+			animations: 
+			[
+				{ 
+					states: [ default ] 
+					frames: [ effect_fire_0 effect_fire_1 effect_fire_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}
+				
+				{ 
+					states: [ spawning despawning ] 
+					frames: [ effect_fire_fade_0 effect_fire_fade_1 effect_fire_fade_2 ] 
+					frame_delay: 120 
+					random_start_frame: true 
+					z_offset: -1
+				}				
+			]			
+		}		
+	}
+}	

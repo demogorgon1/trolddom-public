@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/Auras.h>
 #include <tpublic/Components/CombatPrivate.h>
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/DisplayName.h>
@@ -36,7 +37,11 @@ namespace tpublic::DirectEffects
 			{
 				if (aChild->m_name == "entity")
 				{
-					m_entityId = aChild->GetId(DataType::ID_ENTITY);
+					m_entityIds.push_back(aChild->GetId(DataType::ID_ENTITY));
+				}
+				else if (aChild->m_name == "entities")
+				{
+					aChild->GetIdArray(DataType::ID_ENTITY, m_entityIds);
 				}
 				else if (aChild->m_name == "map_entity_spawn")
 				{
@@ -67,6 +72,10 @@ namespace tpublic::DirectEffects
 						m_mustHaveOneAtTarget.push_back(MustHaveOneAtTarget(aChild));
 					});
 				}
+				else if(aChild->m_name == "aura_conditional")
+				{
+					m_auraConditionals.push_back(std::make_unique<AuraConditional>(aChild));
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
@@ -81,12 +90,13 @@ namespace tpublic::DirectEffects
 	{	
 		ToStreamBase(aStream);
 		aStream->WriteUInt(m_mapEntitySpawnId);
-		aStream->WriteUInt(m_entityId);
+		aStream->WriteUInts(m_entityIds);
 		aStream->WritePOD(m_spawnFlags);
 		aStream->WriteInt(m_npcTargetThreat);
 		aStream->WritePOD(m_initState);
 		aStream->WriteOptionalObject(m_refreshNPCMetrics);
 		aStream->WriteObjects(m_mustHaveOneAtTarget);
+		aStream->WriteObjectPointers(m_auraConditionals);
 	}
 
 	bool
@@ -97,7 +107,7 @@ namespace tpublic::DirectEffects
 			return false;
 		if (!aStream->ReadUInt(m_mapEntitySpawnId))
 			return false;
-		if (!aStream->ReadUInt(m_entityId))
+		if (!aStream->ReadUInts(m_entityIds))
 			return false;
 		if (!aStream->ReadPOD(m_spawnFlags))
 			return false;
@@ -108,6 +118,8 @@ namespace tpublic::DirectEffects
 		if(!aStream->ReadOptionalObject(m_refreshNPCMetrics))
 			return false;
 		if(!aStream->ReadObjects(m_mustHaveOneAtTarget))
+			return false;
+		if(!aStream->ReadObjectPointers(m_auraConditionals))
 			return false;
 		return true;
 	}
@@ -174,9 +186,76 @@ namespace tpublic::DirectEffects
 				return Result();
 		}
 
-		bool detached = (m_spawnFlags & SPAWN_FLAG_DETACHED) != 0;
+		const RefreshNPCMetrics* refreshNPCMetrics = m_refreshNPCMetrics.has_value() ? &m_refreshNPCMetrics.value() : NULL;
 
-		EntityInstance* spawnedEntity = aEventQueue->EventQueueSpawnEntity(m_entityId, m_initState, m_mapEntitySpawnId, detached);
+		bool detached = (m_spawnFlags & SPAWN_FLAG_DETACHED) != 0;
+		bool baseOnNPC = false;
+		uint32_t lootTableId = 0;
+
+		EntityInstance* spawnedEntity = NULL;
+		
+		if(!m_entityIds.empty())
+		{
+			spawnedEntity = aEventQueue->EventQueueSpawnEntity(Helpers::RandomItem(aRandom, m_entityIds), m_initState, m_mapEntitySpawnId, detached);
+		}
+		else if (!m_auraConditionals.empty())
+		{
+			for (const std::unique_ptr<AuraConditional>& auraConditional : m_auraConditionals)
+			{
+				if(auraConditional->m_auraId == 0 || auraConditional->m_entities.empty())
+					continue;
+
+				const EntityInstance* entity = aSource;
+				if (auraConditional->m_owner)
+				{
+					const Components::Owner* owner = entity->GetComponent<Components::Owner>();
+					if (owner != NULL && owner->m_ownerSourceEntityInstance.IsSet())
+						entity = aWorldView->WorldViewSingleEntityInstance(owner->m_ownerSourceEntityInstance.m_entityInstanceId);
+					else
+						entity = NULL;
+				}
+
+				if (entity != NULL)
+				{
+					const Components::Auras* auras = entity->GetComponent<Components::Auras>();
+					if (auras != NULL)
+					{
+						const Components::Auras::Entry* auraEntry = auras->GetAura(auraConditional->m_auraId);
+
+						bool ok = auras != NULL;
+
+						if (ok && auraConditional->m_exactCharges != 0 && auraEntry->m_charges != auraConditional->m_exactCharges)
+							ok = false;
+
+						if (ok)
+						{
+							const AuraConditionalEntity* possibility = Helpers::RandomItemPointer(aRandom, auraConditional->m_entities);
+							assert(possibility != NULL);
+
+							spawnedEntity = aEventQueue->EventQueueSpawnEntity(possibility->m_entityId, m_initState, m_mapEntitySpawnId, detached);
+
+							if(auraConditional->m_consume)
+								aEventQueue->EventQueueRemoveAura(entity->GetEntityInstanceId(), auraConditional->m_auraId);
+
+							if(possibility->m_refreshNPCMetrics.has_value())
+								refreshNPCMetrics = &possibility->m_refreshNPCMetrics.value();
+							else if(auraConditional->m_refreshNPCMetrics.has_value())
+								refreshNPCMetrics = &auraConditional->m_refreshNPCMetrics.value();
+
+							lootTableId = auraConditional->m_lootTableId;
+
+							baseOnNPC = true;
+						}
+					}
+				}
+
+				if (spawnedEntity != NULL)
+					break;
+			}
+		}
+		
+		if(spawnedEntity == NULL)
+			return Result();
 
 		if(m_mapEntitySpawnId == 0)
 		{
@@ -217,6 +296,10 @@ namespace tpublic::DirectEffects
 						npc->m_spawnWithTarget = { topThreat->m_key, m_npcTargetThreat };
 				}
 			}
+			else if((m_spawnFlags & SPAWN_FLAG_SOURCE_THREAT) != 0)
+			{
+				npc->m_spawnWithTarget = { { aSource->GetEntityInstanceId(), aSource->GetSeq() }, m_npcTargetThreat };
+			}
 			else
 			{
 				npc->m_spawnWithTarget = { { aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, m_npcTargetThreat };
@@ -249,7 +332,7 @@ namespace tpublic::DirectEffects
 				const Components::PlayerPublic* playerPublic = aSource->GetComponent<Components::PlayerPublic>();
 
 				if(minionPrivate->m_seed == 0) // No minion seed, derive one from the spawner's character id and minion entity id
-					minionPrivate->m_seed = (uint32_t)Hash::Splitmix_2_32(playerPublic->m_characterId, m_entityId);
+					minionPrivate->m_seed = (uint32_t)Hash::Splitmix_2_32(playerPublic->m_characterId, spawnedEntity->GetEntityId());
 
 				minionPrivate->SetDirty();
 
@@ -262,18 +345,26 @@ namespace tpublic::DirectEffects
 		}
 
 		// Refresh NPC metrics?
-		if(m_refreshNPCMetrics.has_value())
+		if(refreshNPCMetrics != NULL)
 		{
 			Data::Entity::Modifiers modifiers;
-			modifiers.m_weaponDamage = m_refreshNPCMetrics->m_weaponDamage;
-			modifiers.m_armor = m_refreshNPCMetrics->m_armor;
-			modifiers.m_resources[Resource::ID_HEALTH] = m_refreshNPCMetrics->m_health;
+			modifiers.m_weaponDamage = refreshNPCMetrics->m_weaponDamage;
+			modifiers.m_armor = refreshNPCMetrics->m_armor;
+			modifiers.m_resources[Resource::ID_HEALTH] = refreshNPCMetrics->m_health;
 
 			Components::CombatPublic* combatPublic = spawnedEntity->GetComponent<Components::CombatPublic>();
 			Components::CombatPrivate* combatPrivate = spawnedEntity->GetComponent<Components::CombatPrivate>();
 			Components::MinionPrivate* minionPrivate = spawnedEntity->GetComponent<Components::MinionPrivate>();
 			Components::MinionPublic* minionPublic = spawnedEntity->GetComponent<Components::MinionPublic>();
 			Components::NPC* npc = spawnedEntity->GetComponent<Components::NPC>();
+
+			if(refreshNPCMetrics->m_elite)
+			{	
+				if(refreshNPCMetrics->m_elite.value())
+					combatPublic->m_combatFlags |= Components::CombatPublic::COMBAT_FLAG_ELITE;
+				else
+					combatPublic->m_combatFlags &= ~Components::CombatPublic::COMBAT_FLAG_ELITE;
+			}
 
 			ApplyNPCMetrics::Process(
 				aManifest->m_npcMetrics.get(),
@@ -282,10 +373,19 @@ namespace tpublic::DirectEffects
 				combatPrivate,
 				minionPrivate,
 				npc,
-				m_refreshNPCMetrics->m_update);
+				refreshNPCMetrics->m_update,
+				baseOnNPC);
 
 			if(minionPublic != NULL)
 				minionPublic->m_toolTipWeaponDamageBase = UIntRange(combatPrivate->m_weaponDamageRangeMin, combatPrivate->m_weaponDamageRangeMax);
+		}
+
+		// Force loot table?
+		if(lootTableId != 0)
+		{
+			Components::Lootable* lootable = spawnedEntity->GetComponent<Components::Lootable>();
+			if(lootable != NULL)
+				lootable->m_lootTableId = lootTableId;
 		}
 
 		if(m_spawnFlags & SPAWN_FLAG_DESPAWN_SOURCE)

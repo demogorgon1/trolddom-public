@@ -1,0 +1,210 @@
+map_player_spawn .player_spawn:
+{
+}
+
+route withering_glade_default_patrol: 
+{ 
+}
+
+map_portal .exit:
+{
+	animation: !DEFAULT_PORTAL_ANIMATION{}
+	map: thalvaron
+	spawn: withering_glade_exit
+}
+
+map_cliff .dummy_cliff_0: { cliff_style: dummy elevation: 0 }
+map_cliff .dummy_cliff_0_ramp: { cliff_style: dummy elevation: 0 ramp: true }
+map_cliff .dummy_cliff_1: { cliff_style: dummy elevation: 1 } 
+map_cliff .dummy_cliff_1_ramp: { cliff_style: dummy elevation: 1 ramp: true }
+map_cliff .dummy_cliff_2: { cliff_style: dummy elevation: 2 }
+map_cliff .dummy_cliff_2_ramp: { cliff_style: dummy elevation: 2 ramp: true }
+map_cliff .dummy_cliff_3: { cliff_style: dummy elevation: 3 }
+map_cliff .dummy_cliff_3_ramp: { cliff_style: dummy elevation: 3 ramp: true }
+map_cliff .dummy_cliff_4: { cliff_style: dummy elevation: 4 }
+map_cliff .dummy_cliff_4_ramp: { cliff_style: dummy elevation: 4 ramp: true }
+map_cliff .dummy_cliff_5: { cliff_style: dummy elevation: 5 }
+map_cliff .dummy_cliff_5_ramp: { cliff_style: dummy elevation: 5 ramp: true }
+map_cliff .dummy_cliff_6: { cliff_style: dummy elevation: 6 }
+map_cliff .dummy_cliff_6_ramp: { cliff_style: dummy elevation: 6 ramp: true }
+map_cliff .dummy_cliff_7: { cliff_style: dummy elevation: 7 }
+map_cliff .dummy_cliff_7_ramp: { cliff_style: dummy elevation: 7 ramp: true }
+
+map_entity_spawn .exit_portal: { entity withering_glade_portal_exit: { init_state: default } }
+
+map_palette .tiles: !DEFAULT_TILE_PALETTE{}
+
+map_palette .stuff:
+{
+	player_spawn .player_spawn: [ 0 0 255 ]
+	
+	entity_spawn .altar: [ 220 81 74 ]
+	entity_spawn .exit_portal: [ 20 81 74 ]
+	entity_spawn .spawn_effect: [ 120 81 74 ]
+}
+
+map_palette .levels:
+{
+	level<30>: [ 255 0 255 ]
+}
+
+map_palette .routes:
+{
+	route withering_glade_default_patrol: [ 39 103 53 ]
+}
+
+map_palette .doodads:
+{
+	!DEFAULT_DOODAD_PALETTE{}
+
+	doodad crates: [ 45 39 100 ]
+	doodad sack: [ 35 100 200 ]
+	doodad table: [ 35 130 200 ]
+	doodad chair_left: [ 45 100 200 ]
+	doodad bed: [ 35 130 240 ]
+	doodad bookshelf: [ 35 140 100 ]
+	doodad alchemy_bookshelf: [ 135 100 200 ]
+	doodad empty_bookshelf: [ 135 200 200 ]
+	doodad chair_right: [ 45 200 100 ]	
+	doodad chair_bottom: [ 56 201 195 ]
+	doodad bench: [ 58 221 113 ]
+	doodad altar: [ 54 29 64 ]
+	doodad wall_banner_red: [ 243 29 53 ]
+	doodad broken_pillar: [ 136 130 200 ]
+	doodad wall_banner_mining: [ 243 19 53 ]
+	doodad wall_banner_blacksmithing: [ 243 59 53 ]
+	doodad tent: [ 249 51 53 ]	
+	doodad wall_banner_dark_green: [ 143 59 13 ]
+	doodad dungeon_open_door: [ 193 13 59 ]	
+	doodad statue_face_left: [ 193 63 59 ]	
+	doodad statue_face_right: [ 193 73 19 ]	
+	doodad ship: [ 193 173 119 ]	
+	doodad stone_stairs: [ 192 173 19 ]	
+	doodad wood_stairs: [ 192 19 173 ]	
+	doodad large_statue: [ 193 73 20 ]	
+	doodad counter: [ 197 73 20 ]	
+	doodad stone_stairs_reversed: [ 19 173 192 ]	
+	doodad wood_stairs_reversed: [ 173 19 192 ]	
+	doodad animal_skull: [ 197 173 210 ]	
+	doodad barrel: [ 111 38 84 ]
+	doodad cage: [ 45 41 145 ]
+	doodad rowboat: [ 145 46 145 ]
+	doodad cobweb: [ 84 111 83 ]
+	doodad dead_tree: [ 33 123 81 ]
+	doodad tombstone: [ 99 99 119 ]
+	doodad statue_angel: [ 199 199 119 ]
+	doodad skull_stick: [ 39 81 167 ]
+	doodad hole: [ 104 49 146 ]
+	doodad weapon_rack: [ 31 49 49 ]
+	doodad white_throne: [ 13 30 100 ]
+	doodad hard_slope_w: [ 40 103 18 ]
+	doodad hard_slope_n: [ 140 103 18 ]
+	doodad hard_slope_s: [ 40 203 18 ]
+	doodad hard_slope_e: [ 40 103 118 ]
+	doodad jungle_plant_purple: [ 147 66 77 ]
+	doodad closed_gate: [ 31 1 138 ]
+	doodad fs_ground_mark: [ 30 105 39 ]
+	doodad bones: [ 130 105 39 ]
+	doodad sarcophagus_open: [ 30 105 239 ]
+	doodad sarcophagus_closed: [ 30 205 39 ]
+	doodad jungle_plant: [ 49 205 50 ]
+	doodad dark_stairs_left: [ 144 49 146 ]
+	doodad dark_stairs_center: [ 104 41 146 ]
+	doodad dark_stairs_right: [ 104 42 246 ]	
+	doodad small_rocks: [ 204 52 210 ]
+	doodad statue: [ 104 153 149 ]
+
+}
+
+zone .boss: {}
+
+map_palette .subzones:
+{
+	sub_zone .boss: [ 175 255 219 ]
+}
+
+map_palette .cliffs:
+{
+	cliff .dummy_cliff_1: [ 197 169 134 ]
+	cliff .dummy_cliff_1_ramp: [ 197 142 8 ]	
+
+	cliff .dummy_cliff_2: [ 197 169 234 ]
+	cliff .dummy_cliff_2_ramp: [ 51 197 8 ]	
+
+	cliff .dummy_cliff_3: [ 184 234 169 ]
+	cliff .dummy_cliff_3_ramp: [ 8 197 142 ]	
+	
+	cliff .dummy_cliff_4: [ 169 192 234 ]
+	cliff .dummy_cliff_4_ramp: [ 8 51 197 ]	
+
+	cliff .dummy_cliff_5: [ 234 169 179 ]
+	cliff .dummy_cliff_5_ramp: [ 155 8 197 ]	
+
+	cliff .dummy_cliff_6: [ 255 62 93 ]
+	cliff .dummy_cliff_6_ramp: [ 197 8 39 ]		
+}
+
+map withering_glade:
+{
+	string: "Lake of the Damned"
+	type: private
+	reset: manual
+	default_tile: rocks
+	default_player_spawn: .player_spawn
+	default_exit_portal: .exit
+	default_fishing_loot_table: fish
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 45	
+	auto_doodads: true
+	level: 30
+	max_players: 5
+	max_minions: 1
+	openable_elite: true
+	
+	layers:
+	[
+		{
+			palettes:	[ .tiles ]
+			source:		"withering-glade-tiles.png"
+		}
+
+		{
+			palettes:	[ .stuff ]
+			source:		"withering-glade-stuff.png"
+		}
+		
+		{
+			palettes:	[ .levels ]
+			source:		"withering-glade-levels.png"
+		}
+
+		{ 
+			palettes: 	[ .tiles ]
+			source:		"withering-glade-cover.png"
+			cover: 		true
+		}		
+		
+		{ 
+			palettes: 	[ .routes ]
+			source:		"withering-glade-routes.png"
+		}				
+
+		{ 
+			palettes: 	[ .doodads ]
+			source:		"withering-glade-doodads.png"
+		}								
+		
+		{ 
+			palettes: 	[ .subzones ]
+			source:		"withering-glade-subzones.png"
+		}										
+		
+		{ 
+			palettes: 	[ .cliffs ]
+			source:		"withering-glade-cliffs.png"
+		}										
+	]
+	
+}
+ 
