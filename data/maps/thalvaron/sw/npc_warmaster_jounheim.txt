@@ -45,7 +45,7 @@ objective .warmaster_jounheim_1_a:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_badlands_orc_a thalvaron_badlands_orc_b ]
+		entities: [ thalvaron_badlands_orc_a thalvaron_badlands_orc_b thalvaron_jungle_orc_a thalvaron_jungle_orc_b ]
 		count: 4
 	}
 }
@@ -58,7 +58,7 @@ objective .warmaster_jounheim_1_b:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_badlands_orc_c ]
+		entities: [ thalvaron_badlands_orc_c thalvaron_urthon_orc_c thalvaron_jungle_orc_c ]
 		count: 2
 	}
 }

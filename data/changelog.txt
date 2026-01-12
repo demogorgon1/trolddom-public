@@ -20,6 +20,8 @@ changelog:
 		{ text: "Fixed icon dragging crash bug." }		
 		{ text: "Fixed a ton of quest text grammar and typos (thanks Shalken)." }
 		{ text: "John Krellington's minions no longer have loot." }
+		{ text: "Fixed Eastern Skaldrun fishing bug." }
+		{ text: "Fixed auction house item stacking bug." }
 	]
 
 	#######################################################################################
