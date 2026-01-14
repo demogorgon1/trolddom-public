@@ -20,6 +20,7 @@ changelog:
 		{ text: "Fixed icon dragging crash bug." }		
 		{ text: "Fixed a ton of quest text grammar and typos (thanks Shalken)." }
 		{ text: "John Krellington's minions no longer have loot." }
+		{ text: "Skeletons in northern Kareth now drop quest items for Farmer Farbottom like intended." }
 		{ text: "Fixed Eastern Skaldrun fishing bug." }
 		{ text: "Fixed auction house item stacking bug." }
 	]

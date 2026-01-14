@@ -38,6 +38,7 @@ item .farmer_farbottom_1_quest_item:
 	icon: icon_bone_2
 	stack: 8
 	item_level: 29
+	level_range: [ 28 29 ]
 	quest: .farmer_farbottom_1
 	flags: [ not_sellable ]
 }
