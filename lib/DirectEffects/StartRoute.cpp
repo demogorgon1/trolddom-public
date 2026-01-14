@@ -3,6 +3,7 @@
 #include <tpublic/Components/CombatPublic.h>
 #include <tpublic/Components/NPC.h>
 #include <tpublic/Components/PlayerPublic.h>
+#include <tpublic/Components/Position.h>
 #include <tpublic/Components/Tag.h>
 
 #include <tpublic/DirectEffects/StartRoute.h>
@@ -79,7 +80,12 @@ namespace tpublic::DirectEffects
 
 				if (npc != NULL && tag != NULL)
 				{
-					if (!tag->m_playerTag.IsSet() && npc->m_routeId == 0)
+					// Check if the NPC is at spawn position. If that's the case allow override of existing tag and route. This is a possible workaround for bug where 
+					// escord NPCs for some reason get tagged while not moving (permanently unresponsive to start requests)
+					const Components::Position* position = aSource->GetComponent<Components::Position>();
+					bool atSpawnPosition = npc->m_spawnPosition == position->m_position;
+
+					if ((!tag->m_playerTag.IsSet() && npc->m_routeId == 0) || atSpawnPosition)
 					{
 						Components::CombatPublic* targetCombatPublic = aTarget->GetComponent<Components::CombatPublic>();
 						Components::PlayerPublic* targetPlayerPublic = aTarget->GetComponent<Components::PlayerPublic>();

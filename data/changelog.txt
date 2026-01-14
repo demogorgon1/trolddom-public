@@ -23,6 +23,8 @@ changelog:
 		{ text: "Skeletons in northern Kareth now drop quest items for Farmer Farbottom like intended." }
 		{ text: "Fixed Eastern Skaldrun fishing bug." }
 		{ text: "Fixed auction house item stacking bug." }
+		{ text: "Possible fix for escort NPCs sometimes getting unresponsive." }
+		{ text: "Fixed bug that prevented paladin and witch classes from being unlocked in offline or custom server modes." }
 	]
 
 	#######################################################################################
