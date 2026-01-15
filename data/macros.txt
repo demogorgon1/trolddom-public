@@ -303,6 +303,8 @@
 	<exists _block> stat block_chance: @_block
 	<exists _phys_crit> stat phys_crit_chance: @_phys_crit
 	<exists _spell_crit> stat spell_crit_chance: @_spell_crit
+	
+	<exists _variants> variants: @_variants
 }
 
 !define BOSS_DROP_HEAD { !BOSS_DROP equipment_slots: [ head ] }

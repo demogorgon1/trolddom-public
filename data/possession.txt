@@ -1,17 +1,17 @@
 # FIXME: don't implement this as a seasonal event
 
-#seasonal_event possession:
-#{
-#	period: always
-#	
-#	random_npc_aura:
-#	{
-#		aura: possessed
-#		probability: 2
-#		requirement self<must_be_creature_type>: humanoid
-#		requirement self<must_not_be_friendly_faction>: {}
-#	}	
-#}
+seasonal_event possession:
+{
+	period: always
+	
+	random_npc_aura:
+	{
+		aura: possessed
+		probability: 100
+		requirement self<must_be_creature_type>: humanoid
+		requirement self<must_not_be_friendly_faction>: {}
+	}	
+}
 
 loot_group possessed: {}
 

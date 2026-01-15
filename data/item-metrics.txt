@@ -262,4 +262,10 @@ item_metrics:
 			spell_crit_chance: [ block_chance ]
 		}
 	}
+	
+	empower_strings:
+	[
+		"Empowered"
+		"Gloriously Empowered" 
+	]
 }

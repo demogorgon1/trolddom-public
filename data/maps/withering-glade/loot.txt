@@ -1,4 +1,6 @@
 loot_group .rare_bop: {}
+loot_group .rare_emp_1_bop: {}
+loot_group .rare_emp_2_bop: {}
 
 loot_table .loot_1: 
 {
@@ -56,7 +58,7 @@ loot_table .loot_4:
 	slots:
 	[
 		{ 
-			possibility: { loot_group: .rare_bop } # empower
+			possibility: { loot_group: .rare_emp_1_bop }
 		}
 		
 		{ 
@@ -72,7 +74,14 @@ loot_table .loot_4:
 	${ _level: 30 }
 	
 	{
-		${ _loot_group: .rare_bop _rarity: rare }
+		${ 
+			_rarity: rare 
+			_variants:  
+			{
+				variant emp_1: { loot_groups: [ .rare_emp_1_bop ] empower: 1 }
+				variant emp_2: { loot_groups: [ .rare_emp_2_bop ] empower: 2 }
+			}			
+		}
 
 		{
 			${ _unique: true }

@@ -366,6 +366,10 @@ namespace tpublic
 				{
 					m_invalidStats.FromSource(aChild);
 				}
+				else if(aChild->m_name == "empower_strings")
+				{
+					aChild->GetStringArray(m_empowerStrings);
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -387,6 +391,7 @@ namespace tpublic
 			aStream->WriteFloat(m_shieldArmorToBaseBlockValue);
 			aStream->WriteFloat(m_tokenCostBaseMultiplier);
 			m_invalidStats.ToStream(aStream);
+			aStream->WriteStrings(m_empowerStrings);
 
 			for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
 				m_itemTypeMultipliers[i].ToStream(aStream);
@@ -421,6 +426,8 @@ namespace tpublic
 			if (!aStream->ReadFloat(m_tokenCostBaseMultiplier))
 				return false;
 			if(!m_invalidStats.FromStream(aStream))
+				return false;
+			if(!aStream->ReadStrings(m_empowerStrings))
 				return false;
 
 			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
@@ -526,6 +533,15 @@ namespace tpublic
 		{
 			return m_rarityMultipliers[aRarity];
 		}
+
+		const char*
+		GetEmpowerString(
+			uint32_t						aEmpower) const
+		{
+			if(m_empowerStrings.empty() || aEmpower == 0)
+				return "?";
+			return m_empowerStrings[Helpers::Clamp<size_t>((size_t)aEmpower - 1, 0, m_empowerStrings.size() - 1)].c_str();
+		}
 		
 		// Public data
 		std::vector<uint32_t>					m_levelBaseArmor;
@@ -541,6 +557,7 @@ namespace tpublic
 		float									m_offHandDPSMultiplier = 0.5f;
 		float									m_tokenCostBaseMultiplier = 0.1f;
 		InvalidStats							m_invalidStats;
+		std::vector<std::string>				m_empowerStrings;
 	};
 
 }
