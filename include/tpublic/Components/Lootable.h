@@ -65,7 +65,8 @@ namespace tpublic
 				FIELD_TIME_STAMP,
 				FIELD_ANYONE_CAN_LOOT,
 				FIELD_SPECIAL_LOOT_COOLDOWN_ID,
-				FIELD_HEROIC_LOOT_TABLE_ID
+				FIELD_HEROIC_LOOT_TABLE_ID,
+				FIELD_EXTRA_LOOT_TABLE_ID
 			};
 
 			static void
@@ -82,6 +83,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_ANYONE_CAN_LOOT, "anyone_can_loot", offsetof(Lootable, m_anyoneCanLoot));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPECIAL_LOOT_COOLDOWN_ID, "special_loot_cooldown", offsetof(Lootable, m_specialLootCooldownId))->SetDataType(DataType::ID_LOOT_COOLDOWN);
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HEROIC_LOOT_TABLE_ID, "heroic_loot_table", offsetof(Lootable, m_heroicLootTableId))->SetDataType(DataType::ID_LOOT_TABLE);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_EXTRA_LOOT_TABLE_ID, "extra_loot_table", offsetof(Lootable, m_extraLootTableId))->SetDataType(DataType::ID_LOOT_TABLE);
 			}
 
 			bool
@@ -134,7 +136,6 @@ namespace tpublic
 				m_anyoneCanLoot = false;
 				m_specialLootCooldownId = 0;
 				m_heroicLootTableId = 0;
-
 				m_extraLootTableId = 0;
 			}
 
@@ -149,8 +150,6 @@ namespace tpublic
 			uint32_t					m_version = 0;	
 			uint32_t					m_specialLootCooldownId = 0;
 			uint32_t					m_heroicLootTableId = 0;
-
-			// Internal
 			uint32_t					m_extraLootTableId = 0;
 		};
 	}

@@ -238,6 +238,8 @@ namespace tpublic
 							m_auraId = aChild->GetId(DataType::ID_AURA);
 						else if (aChild->m_name == "loot_table")
 							m_lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+						else if (aChild->m_name == "extra_loot_table")
+							m_extraLootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
 						else if (aChild->m_tag == "entity")
 							m_entities.push_back(AuraConditionalEntity(aChild));
 						else if (aChild->m_name == "consume")
@@ -264,6 +266,7 @@ namespace tpublic
 					aWriter->WriteUInt(m_exactCharges);
 					aWriter->WriteOptionalObject(m_refreshNPCMetrics);
 					aWriter->WriteUInt(m_lootTableId);
+					aWriter->WriteUInt(m_extraLootTableId);
 				}
 
 				bool
@@ -284,6 +287,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadUInt(m_lootTableId))
 						return false;
+					if (!aReader->ReadUInt(m_extraLootTableId))
+						return false;
 					return true;
 				}
 
@@ -295,6 +300,7 @@ namespace tpublic
 				uint32_t							m_exactCharges = 0;
 				std::optional<RefreshNPCMetrics>	m_refreshNPCMetrics;
 				uint32_t							m_lootTableId = 0;
+				uint32_t							m_extraLootTableId = 0;
 			};
 
 			SpawnEntity()

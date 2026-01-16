@@ -191,6 +191,7 @@ namespace tpublic::DirectEffects
 		bool detached = (m_spawnFlags & SPAWN_FLAG_DETACHED) != 0;
 		bool baseOnNPC = false;
 		uint32_t lootTableId = 0;
+		uint32_t extraLootTableId = 0;
 
 		EntityInstance* spawnedEntity = NULL;
 		
@@ -243,6 +244,7 @@ namespace tpublic::DirectEffects
 								refreshNPCMetrics = &auraConditional->m_refreshNPCMetrics.value();
 
 							lootTableId = auraConditional->m_lootTableId;
+							extraLootTableId = auraConditional->m_extraLootTableId;
 
 							baseOnNPC = true;
 						}
@@ -381,11 +383,14 @@ namespace tpublic::DirectEffects
 		}
 
 		// Force loot table?
-		if(lootTableId != 0)
+		if(lootTableId != 0 || extraLootTableId != 0)
 		{
 			Components::Lootable* lootable = spawnedEntity->GetComponent<Components::Lootable>();
 			if(lootable != NULL)
+			{
 				lootable->m_lootTableId = lootTableId;
+				lootable->m_extraLootTableId = extraLootTableId;
+			}
 		}
 
 		if(m_spawnFlags & SPAWN_FLAG_DESPAWN_SOURCE)

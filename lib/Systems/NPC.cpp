@@ -267,7 +267,8 @@ namespace tpublic::Systems
 
 				if(lootable->m_playerTag.IsSet())
 				{
-					lootable->m_extraLootTableId = auras->GetLootTableId(*aContext->m_random, GetManifest());
+					if(lootable->m_extraLootTableId == 0)
+						lootable->m_extraLootTableId = auras->GetLootTableId(*aContext->m_random, GetManifest());
 
 					if(npc->m_heroic && lootable->m_heroicLootTableId != 0)
 						lootable->m_lootTableId = lootable->m_heroicLootTableId;
