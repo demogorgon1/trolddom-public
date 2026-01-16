@@ -2,6 +2,10 @@ loot_group .rare_bop: {}
 loot_group .rare_emp_1_bop: {}
 loot_group .rare_emp_2_bop: {}
 
+loot_group .epic_bop: {}
+loot_group .epic_emp_1_bop: {}
+loot_group .epic_emp_2_bop: {}
+
 loot_table .loot_1: 
 {
 	slots:
@@ -65,17 +69,144 @@ loot_table .loot_4:
 			possibility: { weight: 100 loot_group: world_drops_rare }	
 			possibility: { weight: 15 loot_group: .rare_bop }
 			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
-			possibility: { weight: 1 loot_group: world_drops_epic }	
+			possibility: { weight: 2 loot_group: world_drops_epic }	
 		}				
 	]
 }
+
+loot_table .loot_5: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .rare_emp_1_bop }
+		}
+		
+		{ 
+			possibility: { loot_group: .rare_bop }
+		}
+				
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 3 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_6: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .rare_emp_1_bop }
+		}
+		
+		{ 
+			possibility: { loot_group: .rare_emp_1_bop }
+		}
+				
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 4 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_7: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .rare_emp_2_bop }
+		}
+		
+		{ 
+			possibility: { loot_group: .rare_emp_1_bop }
+		}
+				
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_emp_1_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 5 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_8: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .epic_bop }
+		}
+		
+		{ 
+			possibility: { loot_group: .rare_emp_2_bop }
+		}
+				
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_emp_2_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 6 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_9: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .epic_emp_1_bop }
+		}
+		
+		{ 
+			possibility: { loot_group: .rare_emp_2_bop }
+		}
+				
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_emp_2_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 7 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
+loot_table .loot_10: 
+{
+	slots:
+	[
+		{ 
+			possibility: { loot_group: .epic_emp_2_bop }
+		}
+		
+		{ 
+			possibility: { loot_group: .rare_emp_2_bop }
+		}
+				
+		{ 
+			possibility: { weight: 100 loot_group: world_drops_rare }	
+			possibility: { weight: 15 loot_group: .rare_emp_2_bop }
+			possibility: { weight: 10 loot_group: world_drops_rare_recipe_random }	
+			possibility: { weight: 8 loot_group: world_drops_epic }	
+		}				
+	]
+}
+
 
 {
 	${ _level: 30 }
 	
 	{
 		${ 
-			_rarity: rare 
+			_rarity: rare _loot_groups: [ .rare_bop ]
 			_variants:  
 			{
 				variant emp_1: { loot_groups: [ .rare_emp_1_bop ] empower: 1 }
@@ -86,26 +217,192 @@ loot_table .loot_4:
 		{
 			${ _unique: true }
 
-			item .rare_bop_finger_1: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _dexterity: 1 _strength: 1 }	
-			item .rare_bop_finger_2: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _strength: 1 _constitution: 1 }	
-			item .rare_bop_finger_3: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _dexterity: 1 _constitution: 1 }	
-			item .rare_bop_finger_4: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
-			item .rare_bop_finger_5: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _strength: 1 _hit: 1 _budget_bias: -10 }	
-			item .rare_bop_finger_6: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
-			item .rare_bop_finger_7: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _wisdom: 1 _spell_damage: 1 }	
-			item .rare_bop_finger_8: !BOSS_DROP_FINGER { _string: "Ring" _icon: icon_ring_1 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }				
+			item .rare_bop_finger_1: !BOSS_DROP_FINGER { _string: "Band of the Bruiser" _icon: icon_ring_1 _dexterity: 1 _strength: 1 }	
+			item .rare_bop_finger_2: !BOSS_DROP_FINGER { _string: "Ironheart Loop" _icon: icon_ring_2 _strength: 1 _constitution: 1 }	
+			item .rare_bop_finger_3: !BOSS_DROP_FINGER { _string: "Demonic Endurance Ring" _icon: icon_ring_3 _dexterity: 1 _constitution: 1 }	
+			item .rare_bop_finger_4: !BOSS_DROP_FINGER { _string: "Ring of Quiet Mending" _icon: icon_ring_4 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
+			item .rare_bop_finger_5: !BOSS_DROP_FINGER { _string: "Band of the Sure Strike" _icon: icon_ring_5 _strength: 1 _hit: 1 _budget_bias: -10 }	
+			item .rare_bop_finger_6: !BOSS_DROP_FINGER { _string: "Bloodforged Ring of Oredh" _icon: icon_ring_6 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
+			item .rare_bop_finger_7: !BOSS_DROP_FINGER { _string: "Band of Bole" _icon: icon_ring_7 _wisdom: 1 _spell_damage: 1 }	
+			item .rare_bop_finger_8: !BOSS_DROP_FINGER { _string: "Strange Ring of Leralel" _icon: icon_ring_8 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }				
 		}
 
 		{
-			item .rare_bop_neck_1: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _dexterity: 1 _strength: 1 }	
-			item .rare_bop_neck_2: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _strength: 1 _constitution: 1 }	
-			item .rare_bop_neck_3: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _dexterity: 1 _constitution: 1 }	
-			item .rare_bop_neck_4: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
-			item .rare_bop_neck_5: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _strength: 1 _hit: 1 _budget_bias: -10 }	
-			item .rare_bop_neck_6: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
-			item .rare_bop_neck_7: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _wisdom: 1 _spell_damage: 1 }	
-			item .rare_bop_neck_8: !BOSS_DROP_NECK { _string: "Neck" _icon: icon_ring_1 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }	
+			item .rare_bop_neck_1: !BOSS_DROP_NECK { _string: "Bones of Cimihuth" _icon: icon_necklace_6 _dexterity: 1 _strength: 1 }	
+			item .rare_bop_neck_2: !BOSS_DROP_NECK { _string: "Iron Chain of Anosalon" _icon: icon_necklace_18 _strength: 1 _constitution: 1 }	
+			item .rare_bop_neck_3: !BOSS_DROP_NECK { _string: "Ranger's Medallion" _icon: icon_necklace_2 _dexterity: 1 _constitution: 1 }	
+			item .rare_bop_neck_4: !BOSS_DROP_NECK { _string: "Gem of Bala" _icon: icon_necklace_3 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
+			item .rare_bop_neck_5: !BOSS_DROP_NECK { _string: "Ancient Chain of Force" _icon: icon_necklace_19 _strength: 1 _hit: 1 _budget_bias: -10 }	
+			item .rare_bop_neck_6: !BOSS_DROP_NECK { _string: "Demonic Assassin Chain" _icon: icon_necklace_10 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
+			item .rare_bop_neck_7: !BOSS_DROP_NECK { _string: "Gem of Daha" _icon: icon_necklace_1 _wisdom: 1 _spell_damage: 1 }	
+			item .rare_bop_neck_8: !BOSS_DROP_NECK { _string: "Gem of the Spellbinder" _icon: icon_necklace_4 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }	
 		}
 
+		{
+			item .rare_bop_head_cloth_1: !BOSS_DROP_HEAD { _string: "Circlet of Focused Will" _icon: icon_crown_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 }
+			item .rare_bop_head_cloth_2: !BOSS_DROP_HEAD { _string: "Arcanist's Starbound Hood" _icon: icon_head_12 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .rare_bop_head_cloth_3: !BOSS_DROP_HEAD { _string: "Headdress of Lingering Grace" _icon: icon_crown_3 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .rare_bop_head_mail_1: !BOSS_DROP_HEAD { _string: "Shadowrunner's Cowl" _icon: icon_head_9 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .rare_bop_head_mail_2: !BOSS_DROP_HEAD { _string: "Mask of Silent Evasion" _icon: icon_head_11 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .rare_bop_head_mail_3: !BOSS_DROP_HEAD { _string: "Skullcap of Relentless Strikes" _icon: icon_head_3 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .rare_bop_head_plate_1: !BOSS_DROP_HEAD { _string: "Helm of the Steadfast Vanguard" _icon: icon_helmet_9 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .rare_bop_head_plate_2: !BOSS_DROP_HEAD { _string: "Warplate Visor of the Unbroken" _icon: icon_helmet_7 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }	
+		}
+		
+		{
+			item .rare_bop_waist_cloth_1: !BOSS_DROP_WAIST { _string: "Sash of Focused Channeling" _icon: icon_cloth_belt_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 }
+			item .rare_bop_waist_cloth_2: !BOSS_DROP_WAIST { _string: "Starwoven Cord" _icon: icon_cloth_belt_3 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .rare_bop_waist_cloth_3: !BOSS_DROP_WAIST { _string: "Girdle of Gentle Renewal" _icon: icon_belt_3 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .rare_bop_waist_mail_1: !BOSS_DROP_WAIST { _string: "Skirmisher's Binding Belt" _icon: icon_belt_1 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .rare_bop_waist_mail_2: !BOSS_DROP_WAIST { _string: "Tracker's Reinforced Cinch" _icon: icon_belt_2 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .rare_bop_waist_mail_3: !BOSS_DROP_WAIST { _string: "Chainlash Warbelt" _icon: icon_belt_4 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .rare_bop_waist_plate_1: !BOSS_DROP_WAIST { _string: "Girdle of the Iron Bulwark" _icon: icon_plate_belt_1 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .rare_bop_waist_plate_2: !BOSS_DROP_WAIST { _string: "Warlord's Locksteel Belt" _icon: icon_belt_5 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }		
+		}
+		
+		{
+			item .rare_bop_hands_cloth_1: !BOSS_DROP_HANDS { _string: "Gloves of Arcane Precision" _icon: icon_gloves_5 _type: armor_cloth _wisdom: 1 _spell_damage: 1 _budget_bias: -10 _hit: 1 }
+			item .rare_bop_hands_cloth_2: !BOSS_DROP_HANDS { _string: "Starcaller's Silk Mitts" _icon: icon_gloves_4 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .rare_bop_hands_cloth_3: !BOSS_DROP_HANDS { _string: "Handwraps of Restful Mending" _icon: icon_cloth_hands_1 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .rare_bop_hands_mail_1: !BOSS_DROP_HANDS { _string: "Skirmisher's Grips" _icon: icon_mail_gloves_1 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .rare_bop_hands_mail_2: !BOSS_DROP_HANDS { _string: "Tracker's Reinforced Gloves" _icon: icon_gloves_3 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .rare_bop_hands_mail_3: !BOSS_DROP_HANDS { _string: "Chainfist Gauntlets" _icon: icon_mail_gloves_2 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .rare_bop_hands_plate_1: !BOSS_DROP_HANDS { _string: "Gauntlets of the Steadfast Guard" _icon: icon_gloves_1 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .rare_bop_hands_plate_2: !BOSS_DROP_HANDS { _string: "Ironclad Striker's Fists" _icon: icon_gloves_2 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }				
+		}
+		
+		{
+			item .rare_bop_feet_cloth_1: !BOSS_DROP_FEET { _string: "Sandals of Measured Casting" _icon: icon_slippers_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 }
+			item .rare_bop_feet_cloth_2: !BOSS_DROP_FEET { _string: "Starstep Slippers" _icon: icon_slippers_1 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .rare_bop_feet_cloth_3: !BOSS_DROP_FEET { _string: "Softsoles of Tranquil Grace" _icon: icon_boots_1 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .rare_bop_feet_mail_1: !BOSS_DROP_FEET { _string: "Skirmisher's Swift Treads" _icon: icon_boots_4 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .rare_bop_feet_mail_2: !BOSS_DROP_FEET { _string: "Tracker's Reinforced Boots" _icon: icon_boots_6 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .rare_bop_feet_mail_3: !BOSS_DROP_FEET { _string: "Chainbound Warboots" _icon: icon_boots_3 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .rare_bop_feet_plate_1: !BOSS_DROP_FEET { _string: "Greaves of the Iron March" _icon: icon_boots_5 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .rare_bop_feet_plate_2: !BOSS_DROP_FEET { _string: "Steelstride Sabatons" _icon: icon_boots_2 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }			
+		}
+		
+		{
+			item .rare_bop_wrist_cloth_1: !BOSS_DROP_WRISTS { _string: "Cuffs of Focused Channeling" _icon: icon_bracers_6 _type: armor_cloth _wisdom: 1 _spell_damage: 1 _budget_bias: -10 _hit: 1 }
+			item .rare_bop_wrist_cloth_2: !BOSS_DROP_WRISTS { _string: "Starwoven Bindings" _icon: icon_bracers_4 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .rare_bop_wrist_cloth_3: !BOSS_DROP_WRISTS { _string: "Wristwraps of Quiet Renewal" _icon: icon_bracers_2 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .rare_bop_wrist_mail_1: !BOSS_DROP_WRISTS { _string: "Skirmisher's Armguards" _icon: icon_bracers_3 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .rare_bop_wrist_mail_2: !BOSS_DROP_WRISTS { _string: "Tracker's Reinforced Bracers" _icon: icon_plate_bracers_1 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .rare_bop_wrist_mail_3: !BOSS_DROP_WRISTS { _string: "Chainlash Vambraces" _icon: icon_mail_bracers_1 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .rare_bop_wrist_plate_1: !BOSS_DROP_WRISTS { _string: "Vambraces of the Iron Bulwark" _icon: icon_mail_bracers_3 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .rare_bop_wrist_plate_2: !BOSS_DROP_WRISTS { _string: "Locksteel Wristguards" _icon: icon_mail_bracers_2 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }		
+		}
+		
+		{
+			item .rare_bop_shoulders_cloth_1: !BOSS_DROP_SHOULDERS { _string: "Mantle of Focused Thought" _icon: icon_shoulders_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 _budget_bias: -10 _hit: 1 }
+			item .rare_bop_shoulders_cloth_2: !BOSS_DROP_SHOULDERS { _string: "Starcaller's Silken Mantle" _icon: icon_shoulders_9 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .rare_bop_shoulders_cloth_3: !BOSS_DROP_SHOULDERS { _string: "Drape of Gentle Renewal" _icon: icon_shoulders_3 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .rare_bop_shoulders_mail_1: !BOSS_DROP_SHOULDERS { _string: "Linkmail Spaulders" _icon: icon_shoulders_5 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .rare_bop_shoulders_mail_2: !BOSS_DROP_SHOULDERS { _string: "Tracker's Reinforced Shoulderguards" _icon: icon_shoulders_4 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .rare_bop_shoulders_mail_3: !BOSS_DROP_SHOULDERS { _string: "Chainlash Warspaulders" _icon: icon_shoulders_1 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .rare_bop_shoulders_plate_1: !BOSS_DROP_SHOULDERS { _string: "Pauldrons of the Iron Bulwark" _icon: icon_shoulders_8 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .rare_bop_shoulders_plate_2: !BOSS_DROP_SHOULDERS { _string: "Locksteel Shoulders" _icon: icon_shoulders_7 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }
+		}
+	}
+	
+	{
+		${ 
+			_rarity: epic _loot_groups: [ .epic_bop ]
+			_variants:  
+			{
+				variant emp_1: { loot_groups: [ .epic_emp_1_bop ] empower: 1 }
+				variant emp_2: { loot_groups: [ .epic_emp_2_bop ] empower: 2 }
+			}			
+		}
+
+		{
+			${ _unique: true }
+
+			item .epic_bop_finger_1: !BOSS_DROP_FINGER { _string: "Old Band of Harfusue" _icon: icon_ring_1 _dexterity: 1 _strength: 2 }	
+			item .epic_bop_finger_2: !BOSS_DROP_FINGER { _string: "Knuckle Ring of Cakimon" _icon: icon_ring_2 _strength: 2 _constitution: 1 }	
+			item .epic_bop_finger_3: !BOSS_DROP_FINGER { _string: "Tracker's Band" _icon: icon_ring_3 _dexterity: 2 _constitution: 1 }	
+			item .epic_bop_finger_4: !BOSS_DROP_FINGER { _string: "Ring of Rabeoth" _icon: icon_ring_4 _spirit: 1 _healing: 2 _mana_per_5: 1 }	
+			item .epic_bop_finger_5: !BOSS_DROP_FINGER { _string: "Ring of No Mercy" _icon: icon_ring_5 _strength: 1 _hit: 1 _budget_bias: -10 }	
+			item .epic_bop_finger_6: !BOSS_DROP_FINGER { _string: "Destroyer's Band" _icon: icon_ring_6 _strength: 1 _phys_crit: 1 _budget_bias: -20 _hit: 1 }	
+			item .epic_bop_finger_7: !BOSS_DROP_FINGER { _string: "Stormweaving Band of Balinit" _icon: icon_ring_7 _wisdom: 1 _spell_damage: 2 }	
+			item .epic_bop_finger_8: !BOSS_DROP_FINGER { _string: "Enchanted Ring of Hantus" _icon: icon_ring_8 _spell_crit: 1 _spell_damage: 2 _budget_bias: -10 }				
+		}
+
+		{
+			item .epic_bop_neck_1: !BOSS_DROP_NECK { _string: "Burned Bones of Vatha" _icon: icon_necklace_6 _dexterity: 1 _strength: 2 }	
+			item .epic_bop_neck_2: !BOSS_DROP_NECK { _string: "Malignant Chain of Elamas" _icon: icon_necklace_18 _strength: 1 _constitution: 1 }	
+			item .epic_bop_neck_3: !BOSS_DROP_NECK { _string: "Necklace of the Night" _icon: icon_necklace_2 _dexterity: 1 _constitution: 1 }	
+			item .epic_bop_neck_4: !BOSS_DROP_NECK { _string: "Gem of Rabeoth" _icon: icon_necklace_3 _spirit: 1 _healing: 1 _mana_per_5: 1 }	
+			item .epic_bop_neck_5: !BOSS_DROP_NECK { _string: "Marauder's Chain" _icon: icon_necklace_19 _strength: 1 _hit: 1 _budget_bias: -10 }	
+			item .epic_bop_neck_6: !BOSS_DROP_NECK { _string: "Destroyer's Chain" _icon: icon_necklace_10 _strength: 1 _phys_crit: 1 _budget_bias: -10 }	
+			item .epic_bop_neck_7: !BOSS_DROP_NECK { _string: "Gem of the Demon Wizard" _icon: icon_necklace_1 _wisdom: 1 _spell_damage: 1 }	
+			item .epic_bop_neck_8: !BOSS_DROP_NECK { _string: "Salitha's Gemstone" _icon: icon_necklace_4 _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }	
+		}
+
+		{		
+			item .epic_bop_head_cloth_1: !BOSS_DROP_HEAD { _string: "Circlet of Infinite Insight" _icon: icon_crown_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 }
+			item .epic_bop_head_cloth_2: !BOSS_DROP_HEAD { _string: "Astralseeker's Hood" _icon: icon_head_12 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .epic_bop_head_cloth_3: !BOSS_DROP_HEAD { _string: "Mantle of the Soothing Light" _icon: icon_crown_3 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .epic_bop_head_mail_1: !BOSS_DROP_HEAD { _string: "Nightveil Cowl" _icon: icon_head_9 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .epic_bop_head_mail_2: !BOSS_DROP_HEAD { _string: "Evasionist's Mask" _icon: icon_head_11 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .epic_bop_head_mail_3: !BOSS_DROP_HEAD { _string: "Bonecrusher Skullcap" _icon: icon_head_3 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .epic_bop_head_plate_1: !BOSS_DROP_HEAD { _string: "Ironwall Helm" _icon: icon_helmet_9 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .epic_bop_head_plate_2: !BOSS_DROP_HEAD { _string: "Visor of the Unyielding Warlord" _icon: icon_helmet_7 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }			
+		}
+		
+		{
+			item .epic_bop_waist_cloth_1: !BOSS_DROP_WAIST { _string: "Cord of Endless Insight" _icon: icon_cloth_belt_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 }
+			item .epic_bop_waist_cloth_2: !BOSS_DROP_WAIST { _string: "Starweaver's Cinch" _icon: icon_cloth_belt_3 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .epic_bop_waist_cloth_3: !BOSS_DROP_WAIST { _string: "Girdle of Soothing Renewal" _icon: icon_belt_3 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .epic_bop_waist_mail_1: !BOSS_DROP_WAIST { _string: "Bindings of the Swift Skirmisher" _icon: icon_belt_1 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .epic_bop_waist_mail_2: !BOSS_DROP_WAIST { _string: "Tracker's Reinforced Girdle" _icon: icon_belt_2 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .epic_bop_waist_mail_3: !BOSS_DROP_WAIST { _string: "Chainlash Battlebelt" _icon: icon_belt_4 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .epic_bop_waist_plate_1: !BOSS_DROP_WAIST { _string: "Girdle of the Unyielding Bulwark" _icon: icon_plate_belt_1 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .epic_bop_waist_plate_2: !BOSS_DROP_WAIST { _string: "Warlord's Locksteel Girdle" _icon: icon_belt_5 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }			
+		}
+		
+		{
+			item .epic_bop_hands_cloth_1: !BOSS_DROP_HANDS { _string: "Gloves of the Arcane Sage" _icon: icon_gloves_5 _type: armor_cloth _wisdom: 1 _spell_damage: 1 _budget_bias: -10 _hit: 1 }
+			item .epic_bop_hands_cloth_2: !BOSS_DROP_HANDS { _string: "Starweaver's Silk Mitts" _icon: icon_gloves_4 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .epic_bop_hands_cloth_3: !BOSS_DROP_HANDS { _string: "Handwraps of Tranquil Renewal" _icon: icon_cloth_hands_1 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .epic_bop_hands_mail_1: !BOSS_DROP_HANDS { _string: "Grips of the Swift Skirmisher" _icon: icon_mail_gloves_1 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .epic_bop_hands_mail_2: !BOSS_DROP_HANDS { _string: "Tracker's Reinforced Grips" _icon: icon_gloves_3 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .epic_bop_hands_mail_3: !BOSS_DROP_HANDS { _string: "Chainlash Gauntlets" _icon: icon_mail_gloves_2 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .epic_bop_hands_plate_1: !BOSS_DROP_HANDS { _string: "Gauntlets of the Iron Sentinel" _icon: icon_gloves_1 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .epic_bop_hands_plate_2: !BOSS_DROP_HANDS { _string: "Fists of the Unyielding Warlord" _icon: icon_gloves_2 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }
+		}
+		
+		{
+			item .epic_bop_feet_cloth_1: !BOSS_DROP_FEET { _string: "Sandals of the Astral Sage" _icon: icon_slippers_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 }
+			item .epic_bop_feet_cloth_2: !BOSS_DROP_FEET { _string: "Celestial Striders" _icon: icon_slippers_1 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .epic_bop_feet_cloth_3: !BOSS_DROP_FEET { _string: "Boots of Tranquil Flow" _icon: icon_boots_1 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .epic_bop_feet_mail_1: !BOSS_DROP_FEET { _string: "Treads of the Swift Scout" _icon: icon_boots_4 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .epic_bop_feet_mail_2: !BOSS_DROP_FEET { _string: "Tracker's Reinforced Treads" _icon: icon_boots_6 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .epic_bop_feet_mail_3: !BOSS_DROP_FEET { _string: "Warbound Chainboots" _icon: icon_boots_3 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .epic_bop_feet_plate_1: !BOSS_DROP_FEET { _string: "Marcher's Iron Greaves" _icon: icon_boots_5 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .epic_bop_feet_plate_2: !BOSS_DROP_FEET { _string: "Sabatons of the Unbroken March" _icon: icon_boots_2 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }
+		}
+		
+		{		
+			item .epic_bop_wrist_cloth_1: !BOSS_DROP_WRISTS { _string: "Cuffs of the Arcane Conduit" _icon: icon_bracers_6 _type: armor_cloth _wisdom: 1 _spell_damage: 1 _budget_bias: -10 _hit: 1 }
+			item .epic_bop_wrist_cloth_2: !BOSS_DROP_WRISTS { _string: "Bindings of the Starweaver" _icon: icon_bracers_4 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .epic_bop_wrist_cloth_3: !BOSS_DROP_WRISTS { _string: "Wristwraps of Tranquil Flow" _icon: icon_bracers_2 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .epic_bop_wrist_mail_1: !BOSS_DROP_WRISTS { _string: "Armguards of the Swift Scout" _icon: icon_bracers_3 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .epic_bop_wrist_mail_2: !BOSS_DROP_WRISTS { _string: "Tracker's Fortified Bracers" _icon: icon_plate_bracers_1 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .epic_bop_wrist_mail_3: !BOSS_DROP_WRISTS { _string: "Vambraces of the Chainlash" _icon: icon_mail_bracers_1 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .epic_bop_wrist_plate_1: !BOSS_DROP_WRISTS { _string: "Vambraces of the Iron Sentinel" _icon: icon_mail_bracers_3 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .epic_bop_wrist_plate_2: !BOSS_DROP_WRISTS { _string: "Wristguards of Unyielding Steel" _icon: icon_mail_bracers_2 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }			
+		}
+		
+		{			
+			item .epic_bop_shoulders_cloth_1: !BOSS_DROP_SHOULDERS { _string: "Mantle of the Astral Sage" _icon: icon_shoulders_2 _type: armor_cloth _wisdom: 1 _spell_damage: 1 _budget_bias: -10 _hit: 1 }
+			item .epic_bop_shoulders_cloth_2: !BOSS_DROP_SHOULDERS { _string: "Starweaver's Silken Mantle" _icon: icon_shoulders_9 _type: armor_cloth _spell_crit: 1 _spell_damage: 1 _budget_bias: -10 }
+			item .epic_bop_shoulders_cloth_3: !BOSS_DROP_SHOULDERS { _string: "Drape of Tranquil Renewal" _icon: icon_shoulders_3 _type: armor_cloth _spirit: 1 _healing: 1 _mana_per_5: 1 }
+			item .epic_bop_shoulders_mail_1: !BOSS_DROP_SHOULDERS { _string: "Spaulders of the Swift Skirmisher" _icon: icon_shoulders_5 _type: armor_mail _dexterity: 1 _hit: 1 _budget_bias: -10 }
+			item .epic_bop_shoulders_mail_2: !BOSS_DROP_SHOULDERS { _string: "Tracker's Fortified Spaulders" _icon: icon_shoulders_4 _type: armor_mail _dexterity: 1 _constitution: 1 }
+			item .epic_bop_shoulders_mail_3: !BOSS_DROP_SHOULDERS { _string: "Chainlash Warspauld ers" _icon: icon_shoulders_1 _type: armor_mail _strength: 1 _phys_crit: 1 _budget_bias: -10 }
+			item .epic_bop_shoulders_plate_1: !BOSS_DROP_SHOULDERS { _string: "Pauldrons of the Iron Sentinel" _icon: icon_shoulders_8 _type: armor_plate _strength: 1 _constitution: 1 }
+			item .epic_bop_shoulders_plate_2: !BOSS_DROP_SHOULDERS { _string: "Warlord's Locksteel Pauldrons" _icon: icon_shoulders_7 _type: armor_plate _strength: 1 _hit: 1 _budget_bias: -10 }			
+		}
 	}
 }
