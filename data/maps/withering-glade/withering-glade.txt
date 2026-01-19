@@ -163,7 +163,7 @@ zone .gauntlet:
 	no_map: true
 	
 	player_trigger_ability_requirement self<must_not_have_aura>: .outside_debuff
-	player_trigger_ability_requirement self<must_have_active_encounter>: 
+	player_trigger_ability_requirement self<must_have_any_active_encounter>: {}
 	
 	player_trigger_ability: $ability
 	{
