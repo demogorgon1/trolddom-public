@@ -437,7 +437,7 @@ namespace tpublic::Systems
 										detected = roll < detectionChance;
 									}
 
-									if (detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, NULL, aEntity)))
+									if (detected && (npc->m_aggroRequirements.m_requirements.empty() || Requirements::CheckList(GetManifest(), npc->m_aggroRequirements.m_requirements, aContext->m_worldView, NULL, aEntity)))
 										aContext->m_eventQueue->EventQueueThreat({ aEntity->GetEntityInstanceId(), aEntity->GetSeq() }, aEntityInstanceId, 1, aContext->m_tick, 0);
 								}
 							}
@@ -781,7 +781,7 @@ namespace tpublic::Systems
 										{
 											if (aEntity->GetState() != EntityState::ID_DEAD && aEntity->IsPlayer() && aDistanceSquared >= (int32_t)(ability->m_minRange * ability->m_minRange))
 											{
-												if(Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, aEntity))
+												if(Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, aContext->m_worldView, self, aEntity))
 													possibleTargets.push_back(aEntity);
 											}
 											return false;
@@ -805,7 +805,7 @@ namespace tpublic::Systems
 										{
 											const EntityInstance* self = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
 											const EntityInstance* target = aContext->m_worldView->WorldViewSingleEntityInstance(targetEntityInstanceId);
-											if (self != NULL && target != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, target))
+											if (self != NULL && target != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, aContext->m_worldView, self, target))
 												continue;
 										}
 
@@ -978,7 +978,7 @@ namespace tpublic::Systems
 								if(abilityEntry.m_requirements.size() > 0)
 								{
 									const EntityInstance* self = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
-									if(self != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, self, target))
+									if(self != NULL && !Requirements::CheckList(GetManifest(), abilityEntry.m_requirements, aContext->m_worldView, self, target))
 										continue;
 								}
 

@@ -108,6 +108,7 @@ entity .spawn_effect:
 					{ 
 						aura: infernal_wrath exact_charges: 5 consume: true 
 						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.6 health: 6.0 } 
+						loot_table: .loot_5
 						entity random_boss_1: {}
 					}
 
@@ -115,6 +116,7 @@ entity .spawn_effect:
 					{ 
 						aura: infernal_wrath exact_charges: 6 consume: true 
 						refresh_npc_metrics: { update: true elite: true weapon_damage: 1.8 health: 8.0 } 
+						loot_table: .loot_6
 						entity random_boss_1: {}
 					}
 
@@ -122,6 +124,7 @@ entity .spawn_effect:
 					{ 
 						aura: infernal_wrath exact_charges: 7 consume: true 
 						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.0 health: 10.0 } 
+						loot_table: .loot_7
 						entity random_boss_1: {}
 					}
 
@@ -129,6 +132,7 @@ entity .spawn_effect:
 					{ 
 						aura: infernal_wrath exact_charges: 8 consume: true 
 						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.2 health: 12.0 } 
+						loot_table: .loot_8
 						entity random_boss_1: {}
 					}
 
@@ -136,6 +140,7 @@ entity .spawn_effect:
 					{ 
 						aura: infernal_wrath exact_charges: 9 consume: true 
 						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.4 health: 14.0 } 
+						loot_table: .loot_9
 						entity random_boss_1: {}
 					}
 
@@ -143,6 +148,7 @@ entity .spawn_effect:
 					{ 
 						aura: infernal_wrath exact_charges: 10 consume: true 
 						refresh_npc_metrics: { update: true elite: true weapon_damage: 2.6 health: 16.0 } 
+						loot_table: .loot_10
 						entity random_boss_1: {}
 					}
 				}											

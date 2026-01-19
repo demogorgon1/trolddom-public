@@ -152,7 +152,7 @@ namespace tpublic::DirectEffects
 					{
 						for (const Data::LootTable::Possibility& possibility : slot->m_possibilities)
 						{
-							if (Requirements::CheckList(aManifest, possibility.m_requirements, aSource, aTarget))
+							if (Requirements::CheckList(aManifest, possibility.m_requirements, aWorldView, aSource, aTarget))
 							{
 								hasPossibleLoot = true;
 								break;

@@ -6,6 +6,10 @@ route withering_glade_default_patrol:
 { 
 }
 
+route .boss_route: 
+{ 
+}
+
 map_portal .exit:
 {
 	animation: !DEFAULT_PORTAL_ANIMATION{}
@@ -51,6 +55,8 @@ map_palette .levels:
 map_palette .routes:
 {
 	route withering_glade_default_patrol: [ 39 103 53 ]
+	
+	route .boss_route: [ 192 16 186 ]
 }
 
 map_palette .doodads:
@@ -116,11 +122,69 @@ map_palette .doodads:
 
 }
 
-zone .boss: {}
+aura .outside_debuff:
+{
+	string: "Intense Fire"
+	description: "Infernal fire burns you."
+	icon: icon_fire
+	type: debuff
+	flags: [ unique indefinite ]
+	aura_effect repeat: 
+	{ 
+		update_interval: 10
+		update_count: indefinite
+		ability: $ability [ string icon ]
+		{
+			states: [ default in_combat ]
+			flags: [ always_in_range always_in_line_of_sight ]			
+			direct_effect damage:
+			{	
+				damage_type: fire		
+				function: { expression: a_mul_x x: health_max a: 0.20 entity: target }					
+				flags: [ is_magical ]
+				direct: false
+			}					
+		}
+	}
+}
+
+zone .boss: 
+{
+	no_map: true
+}
+
+zone .start: 
+{
+	no_map: true
+}
+
+zone .gauntlet: 
+{
+	no_map: true
+	
+	player_trigger_ability_requirement self<must_not_have_aura>: .outside_debuff
+	player_trigger_ability_requirement self<must_have_active_encounter>: 
+	
+	player_trigger_ability: $ability
+	{
+		direct_effect apply_aura:
+		{
+			aura: .outside_debuff
+		}
+	}	
+}
+
+zone .boss_alt: 
+{
+	no_map: true
+}
 
 map_palette .subzones:
 {
 	sub_zone .boss: [ 175 255 219 ]
+	sub_zone .start: [ 252 175 255 ]
+	sub_zone .gauntlet: [ 23 149 93 ]
+	sub_zone .boss_alt: [ 59 24 160 ]
 }
 
 map_palette .cliffs:

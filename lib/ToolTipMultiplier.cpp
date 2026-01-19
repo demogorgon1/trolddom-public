@@ -28,7 +28,7 @@ namespace tpublic
 			if(toolTipMultiplier.m_typeMask != 0 && (toolTipMultiplier.m_typeMask & (1 << aDamageType)) == 0)
 				continue;
 
-			if(!Requirements::CheckList(aManifest, toolTipMultiplier.m_requirements, aEntityInstance, NULL))
+			if(!Requirements::CheckList(aManifest, toolTipMultiplier.m_requirements, NULL, aEntityInstance, NULL))
 				continue;
 
 			multiplier *= toolTipMultiplier.m_multiplier;

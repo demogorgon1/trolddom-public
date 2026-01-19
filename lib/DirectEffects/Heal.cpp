@@ -136,11 +136,11 @@ namespace tpublic::DirectEffects
 
 		Components::Auras* sourceAuras = aSource->GetComponent<Components::Auras>();
 		if (sourceAuras != NULL)
-			heal = sourceAuras->FilterHealOutput(aManifest, aSource, aTarget, heal, aAbilityId);
+			heal = sourceAuras->FilterHealOutput(aManifest, aWorldView, aSource, aTarget, heal, aAbilityId);
 
 		Components::Auras* targetAuras = aTarget->GetComponent<Components::Auras>();
 		if(targetAuras != NULL)
-			heal = targetAuras->FilterHealInput(aManifest, aSource, aTarget, heal, aAbilityId);
+			heal = targetAuras->FilterHealInput(aManifest, aWorldView, aSource, aTarget, heal, aAbilityId);
 
 		size_t healthResourceIndex;
 		if(targetCombatPublic->GetResourceIndex(Resource::ID_HEALTH, healthResourceIndex))
