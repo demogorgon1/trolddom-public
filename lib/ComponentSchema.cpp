@@ -441,7 +441,7 @@ namespace tpublic
 			{
 				std::string value = _ValueAsString(aObject, &field);
 
-				char buffer[1024];
+				char buffer[4096];
 				if(field.m_name != NULL)						
 					TP_STRING_FORMAT(buffer, sizeof(buffer), "%s:%s", field.m_name, value.c_str());
 				else
@@ -599,6 +599,17 @@ namespace tpublic
 			}
 			break;
 
+		case TYPE_CUSTOM:
+			{
+				void* t = (void*)&(((const uint8_t*)aObject)[field->m_offset]);
+				std::vector<uint8_t> serialized;
+				Base64::Decode(p, serialized);
+				VectorIO::Reader reader(serialized);
+				bool ok = field->m_customRead(&reader, t);
+				TP_CHECK(ok, "Invalid value.");
+			}			
+			break;
+
 		default:
 			break;
 		}
@@ -612,7 +623,7 @@ namespace tpublic
 
 		for(const Field& field : m_fields)
 		{
-			char buffer[1024];
+			char buffer[4096];
 			TP_STRING_FORMAT(buffer, sizeof(buffer), "%u(%s)=%s ", field.m_id, field.m_name != NULL ? field.m_name : "", _ValueAsString(aObject, &field).c_str());
 			t.append(buffer);
 		}
@@ -916,7 +927,7 @@ namespace tpublic
 		const void*		aObject,
 		const Field*	aField) const
 	{
-		char buffer[1024];
+		char buffer[4096];
 
 		switch(aField->m_type)
 		{
@@ -990,15 +1001,11 @@ namespace tpublic
 				for(size_t i = 0; i < t->size(); i++)
 				{
 					if(i > 0)
-					{
 						Helpers::StringAppend(buffer, sizeof(buffer), ",");
-					}
-					else
-					{
-						char tmp[1024];
-						TP_STRING_FORMAT(tmp, sizeof(tmp), "%u", t->at(i));
-						Helpers::StringAppend(buffer, sizeof(buffer), tmp);
-					}
+
+					char tmp[1024];
+					TP_STRING_FORMAT(tmp, sizeof(tmp), "%u", t->at(i));
+					Helpers::StringAppend(buffer, sizeof(buffer), tmp);
 				}
 			}
 			break;
