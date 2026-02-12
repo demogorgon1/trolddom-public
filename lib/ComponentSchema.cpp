@@ -639,6 +639,7 @@ namespace tpublic
 				break;
 
 			default:
+				TP_CHECK(false, "Unhandled field type: %u", field->m_type);
 				break;
 			}
 		}
