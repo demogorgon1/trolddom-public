@@ -66,9 +66,9 @@ quest .thora_1:
 	
 	description: 
 	[
-		"Wizards are a bit like hermit crabs, you know. For a long while one lived in these woods, but he left some years ago. He was all right, didn't cause too many problems while he lived here."
-		"Not long after he had left, however, another one moved in. This guy has been caused all kinds of havoc! For one, he released this giant monster in the woods, presumably to keep intruders out."
-		"What about my litle Tyler? He's playing in the woods while having to avoid being swallowed alive by this beast!\n\n"
+		"Wizards are a bit like hermit crabs, you know. For a long while one lived in these woods, but he left some years ago. He was all right, and didn't cause too many problems while he lived here."
+		"Not long after he had left, however, another one moved in. This guy has caused all kinds of havoc! For one, he released this giant monster in the woods, presumably to keep intruders out."
+		"What about my little Tyler? He's playing in the woods while having to avoid being swallowed alive by this beast!\n\n"
 		"I'm a bit of a dabbler in the arcane arts myself and I've come to the conclusion that the wizard has hidden his home behind some strange portal. In the western parts of these woods are now crawling"
 		"with weird elemental creatures, no doubt conjured by him to protect his portal. If you can bring me some of their residue, maybe I can find a way to get to him."
 	]
@@ -128,7 +128,7 @@ quest .thora_2:
 
 	text:
 	[
-		"Use amulet to enter the realm of the wizard and confront him about the beast."
+		"Use the amulet to enter the realm of the wizard and confront him about the beast."
 	]
 	
 	description: 

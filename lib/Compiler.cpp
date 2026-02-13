@@ -297,7 +297,7 @@ namespace tpublic
 			PostProcessWordGenerators::Run(m_manifest);
 			PostProcessAbilities::Run(m_manifest);
 			PostProcessSprites::Run(m_manifest);
-			PostProcessItems::Run(m_manifest);
+			PostProcessItems::Run(m_manifest, m_sourceContext.m_persistentIdTable.get());
 			PostProcessDoodads::Run(m_manifest);
 			PostProcessQuests::Run(m_manifest);
 			PostProcessMaps::Run(m_manifest);

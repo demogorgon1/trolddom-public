@@ -133,7 +133,11 @@
 	tile jungle_wall_1_inside: [ 205 200 81 ]
 	tile jungle_wall_1_entrance: [ 200 81 181 ]
 	tile jungle_wall_1_entrance_closed: [ 120 242 81 ]
-	tile slime: [ 60 242 34 ]
+	tile slime: [ 60 242 34 ]	
+	tile fs_rocks_1: [ 243 31 120 ]
+	tile fs_rocks_2: [ 43 231 220 ]
+	tile fs_cave_entrance: [ 100 46 59 ]
+	
 }
 
 !define DEFAULT_DOODAD_PALETTE

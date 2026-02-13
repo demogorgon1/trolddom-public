@@ -1,0 +1,118 @@
+# FIXME: don't implement this as a seasonal event
+
+#seasonal_event possession:
+#{
+#	period: always
+#	
+#	random_npc_aura:
+#	{
+#		aura: possessed
+#		probability: 100
+#		requirement self<must_be_creature_type>: humanoid
+#		requirement self<must_not_be_friendly_faction>: {}
+#	}	
+#}
+
+loot_group possessed: {}
+
+aura possessed:
+{
+	string: "Possessed"
+	description: "Something is wrong."
+	flags: [ unique indefinite silent ]
+	icon: icon_aggressive
+	type: buff
+	
+	aura_effect combat_event_trigger: 
+	{ 
+		combat_event<target>: [ hit critical block ]
+		combat_event_ability_mask: [ melee ]
+		probability: 35
+		ability<self>: $ability
+		{
+			string: "Infernal Reflection"
+			range: 1
+			flags: [ spell offensive target_other target_hostile ]
+			states: [ default in_combat ]
+			icon: icon_aggressive
+			delay: 3
+
+			direct_effect damage:
+			{	
+				flags: [ is_magical ]
+				damage_type: unholy
+				function: { expression: a a: [ [ 1 8 ] [ 10 16 ] [ 20 32 ] [ 30 64 ] ] }					
+			}	
+		}
+	}
+	
+	particle_system: $particle_system
+	{
+		particle:
+		{
+			sprites: [ effect_burning_0 effect_burning_1 effect_burning_2 effect_burning_3 effect_burning_4 ]
+			flags: [ attached ]
+			color_mod: [ 255 0 0 ]
+			count: 1
+			scale: 0.55
+			alpha: 0.5
+			offset_x: 0.5
+			offset_y: -0.08
+			sprite_interval: 100
+		}
+	}
+	
+	loot_table: $loot_table 
+	{ 
+		slots: [ { possibility: { loot_group: possessed } } ] 
+	}
+}
+
+item demonic_shard:
+{
+	string: "Infernal Shard"
+	icon: icon_shard_1
+	rarity: uncommon
+	loot_groups: [ possessed ]
+	item_level: 10
+	required_level: 1
+	type: miscellaneous
+	level_range: [ 1 31 ]
+	stack: 20
+	
+	use_ability: $ability [ icon string ]
+	{
+		description: "Restores 40% of your health and mana. Angers the infernal powers for 20 minutes. Stacks up to 10 times. Effect persists in death."
+		flags: [ target_self item ]
+		cooldowns: [ global ]
+		states: [ default in_combat ]
+		target_particle_system: small_heal	
+		consume_items: { demonic_shard: 1 }		
+
+		direct_effect heal: 
+		{ 
+			function: { expression: a_mul_x a: 0.4 x: health_max }		 
+		}
+
+		direct_effect modify_resource: 
+		{ 
+			resource: mana
+			function: { expression: a_mul_x a: 0.4 x: mana_max }		 
+		}
+
+		direct_effect apply_aura: 
+		{
+			aura: $aura @infernal_wrath [ icon ] 
+			{
+				string: "Infernal Wrath"
+				description: "They're not happy with you."
+				flags: [ unique silent always_show_timer persist_in_death ]
+				duration: 12000
+				type: debuff
+				max_stack: 10
+			}
+		}
+		
+		
+	}
+}

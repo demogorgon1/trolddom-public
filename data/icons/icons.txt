@@ -999,6 +999,13 @@ sprites:
 	sprite icon_potion_12: { tags: [ icon ] }
 	sprite icon_rune_stone_2 : { tags: [ icon ] }
 	sprite icon_rune_stone_3 : { tags: [ icon ] }
+	sprite icon_shard_1 : { tags: [ icon ] }
+	sprite icon_necklace_18 : { tags: [ icon ] }
+	sprite icon_necklace_19 : { tags: [ icon ] }
+	sprite icon_crown_2 : { tags: [ icon ] }
+	
+	cursor: { position: [ 0 880 ] }	
+	sprite icon_crown_3 : { tags: [ icon ] }
 }
 
 

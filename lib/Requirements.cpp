@@ -17,6 +17,7 @@
 
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Entity.h>
+#include <tpublic/Data/Faction.h>
 #include <tpublic/Data/Objective.h>
 #include <tpublic/Data/Quest.h>
 
@@ -36,6 +37,7 @@ namespace tpublic
 		bool	
 		Check(
 			const Manifest*						aManifest,
+			const IWorldView*					aWorldView,
 			const EntityInstance*				aSelf,
 			const EntityInstance*				aTarget,
 			const Requirement*					aRequirement)
@@ -53,6 +55,30 @@ namespace tpublic
 
 			switch(aRequirement->m_type)
 			{
+			case Requirement::TYPE_MUST_HAVE_ANY_ACTIVE_ENCOUNTER:
+				{
+					if(aWorldView != NULL && !aWorldView->WorldViewIsAnyEncounterActive())
+						return false;				
+				}
+				break;
+
+			case Requirement::TYPE_MUST_NOT_BE_FRIENDLY_FACTION:
+				{
+					bool shouldBeFriendlyFaction = aRequirement->m_type != Requirement::TYPE_MUST_NOT_BE_FRIENDLY_FACTION;
+					bool isFriendlyFaction = false;
+
+					const Components::CombatPublic* combatPublic = entity->GetComponent<Components::CombatPublic>();
+					if(combatPublic != NULL && combatPublic->m_factionId != 0)
+					{
+						const Data::Faction* faction = aManifest->GetById<Data::Faction>(combatPublic->m_factionId);
+						isFriendlyFaction = faction->IsFriendly();
+					}
+
+					if(shouldBeFriendlyFaction != isFriendlyFaction)
+						return false;
+				}
+				break;
+
 			case Requirement::TYPE_MUST_BE_DISCIPLE:
 			case Requirement::TYPE_MUST_NOT_BE_DISCIPLE:
 				{
@@ -637,13 +663,14 @@ namespace tpublic
 		CheckList(
 			const Manifest*										aManifest,
 			const std::vector<Requirement>&						aRequirements,
+			const IWorldView*									aWorldView,
 			const EntityInstance*								aSelf,
 			const EntityInstance*								aTarget,
 			const Requirement**									aOutFailedRequirement)
 		{
 			for(const Requirement& requirement : aRequirements)
 			{
-				if(!Check(aManifest, aSelf, aTarget, &requirement))
+				if(!Check(aManifest, aWorldView, aSelf, aTarget, &requirement))
 				{
 					if(aOutFailedRequirement != NULL)
 						*aOutFailedRequirement = &requirement;
@@ -665,13 +692,14 @@ namespace tpublic
 			const EntityInstance* self = aWorldView->WorldViewSingleEntityInstance(aSelfEntityInstanceId);
 			const EntityInstance* target = aWorldView->WorldViewSingleEntityInstance(aTargetEntityInstanceId);
 
-			return CheckList(aManifest, aRequirements, self, target, NULL);
+			return CheckList(aManifest, aRequirements, aWorldView, self, target, NULL);
 		}
 
 		bool	
 		CheckAnyList(
 			const Manifest*										aManifest,
 			const std::vector<Requirement>&						aRequirements,
+			const IWorldView*									aWorldView,
 			const std::vector<const EntityInstance*>&			aSelves,
 			const EntityInstance*								aTarget)
 		{
@@ -681,7 +709,7 @@ namespace tpublic
 
 				for (const Requirement& requirement : aRequirements)
 				{
-					if (!Check(aManifest, self, aTarget, &requirement))
+					if (!Check(aManifest, aWorldView, self, aTarget, &requirement))
 					{
 						ok = false;
 						break;
@@ -697,6 +725,7 @@ namespace tpublic
 		bool	
 		CheckOpenable(
 			const Manifest*										aManifest,
+			const IWorldView*									aWorldView,
 			const EntityInstance*								aSelf,
 			const EntityInstance*								aTarget,
 			bool*												aOutInstant,
@@ -739,7 +768,7 @@ namespace tpublic
 					return false;
 			}
 
-			if(!CheckList(aManifest, openable->m_requirements, aSelf, aTarget, NULL))
+			if(!CheckList(aManifest, openable->m_requirements, aWorldView, aSelf, aTarget, NULL))
 				return false;
 
 			const Components::Position* selfPosition = aSelf->GetComponent<Components::Position>();

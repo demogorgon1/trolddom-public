@@ -59,7 +59,7 @@ quest .thora_stormpiercer_1:
 	
 	description: 
 	[
-		"Years ago my mother died in a freak thunder lizard hunting accident. Since then I've dedicated my life to destroying these foul beasts. You also hate them? Great! Bring me some of their horns"
+		"Years ago my mother died in a freak thunder lizard hunting accident. Since then I've dedicated my life to destroying these foul beasts. Do you also hate them? Great! Bring me some of their horns"
 		"to show me that you're serious. You'll find these aggressive herbivorous monsters grazing to the south."
 	]
 

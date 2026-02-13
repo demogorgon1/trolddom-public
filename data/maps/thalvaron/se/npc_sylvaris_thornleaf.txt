@@ -171,7 +171,7 @@ quest .sylvaris_thornleaf_2:
 	description: 
 	[
 		"This place was once the home of a highly developed civilization that has long since vanished. What happened to it nobody knows, and most of its remains have disappeared. One of the few"
-		"sites that are still relatively intact is the temple ruins to the south, on the other side of the river. I'd appreciate if you could go look for artifacts in the ground, around that place."
+		"sites that are still relatively intact is the temple ruins to the south, on the other side of the river. I'd appreciate it if you could go look for artifacts in the ground, around that place."
 		"I'd go myself, but I've heard that the place is haunted. I think the wildlife around here is scary enough already, I don't need any bloody ghosts as well."
 	]
 

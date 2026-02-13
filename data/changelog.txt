@@ -2,6 +2,43 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.18"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Under gameplay options you can locally export your current character." }		
+		{ text: "Exported characters can be imported in offline or custom server modes." }		
+	]
+
+	#######################################################################################
+	heading: "v1.0.17"
+
+	text: "Changes:"
+	
+	list:
+	[
+		{ text: "Added option for larger chat and combat log text." }		
+	]
+
+
+	text: "Issues Fixed:"
+	
+	list:
+	[
+		{ text: "Game no longer crashes on startup if loading a bad configuration." }
+		{ text: "Fixed icon dragging crash bug." }		
+		{ text: "Fixed a ton of quest text grammar and typos (thanks Shalken)." }
+		{ text: "John Krellington's minions no longer have loot." }
+		{ text: "Skeletons in northern Kareth now drop quest items for Farmer Farbottom like intended." }
+		{ text: "Fixed Eastern Skaldrun fishing bug." }
+		{ text: "Fixed auction house item stacking bug." }
+		{ text: "Possible fix for escort NPCs sometimes getting unresponsive." }
+		{ text: "Fixed bug that prevented paladin and witch classes from being unlocked in offline or custom server modes." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.16"
 
 	text: "New:"

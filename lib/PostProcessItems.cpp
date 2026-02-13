@@ -14,7 +14,8 @@ namespace tpublic
 
 		void		
 		Run(
-			Manifest* aManifest)
+			Manifest*			aManifest,
+			PersistentIdTable*	aPersistentIdTable)
 		{
 			// First identify all items that can be bought from vendors
 			std::unordered_set<uint32_t> vendorItemIds;
@@ -27,7 +28,7 @@ namespace tpublic
 				return true;
 			});
 
-			// For each item
+			// For each item - first pass
 			{
 				// FIXME: some of these parameters should be from the manifest
 				WeightedRandom<ArmorStyle::Id> armorStyles;
@@ -82,8 +83,49 @@ namespace tpublic
 						armorStyleVisual.m_id = armorStyles.Get(random);
 						aItem->m_armorStyleVisual = armorStyleVisual;
 					}
-					return true;
+					return true; // continue
 				});
+			}
+
+			// For each item - second pass - generate variants
+			{
+				std::vector<const Data::Item*> itemsWithVariants;
+
+				aManifest->GetContainer<Data::Item>()->ForEach([&itemsWithVariants](
+					Data::Item* aItem)
+				{
+					if(!aItem->m_variants.empty())	
+						itemsWithVariants.push_back(aItem);
+
+					return true; // continue
+				});
+
+				for(const Data::Item* item : itemsWithVariants)
+				{
+					for (const std::unique_ptr<Data::Item::Variant>& variant : item->m_variants)
+					{
+						std::string variantName = Helpers::Format("%s_%s", item->m_name.c_str(), variant->m_suffix.c_str());
+						
+						Data::Item* newItem = aManifest->GetContainer<Data::Item>()->GetByName(aPersistentIdTable, variantName.c_str());
+
+						newItem->m_defined = true;
+
+						// Copy base item (serialize -> deserialize)
+						{
+							std::vector<uint8_t> buffer;
+							VectorIO::Writer writer(buffer);
+							item->ToStream(&writer);
+							VectorIO::Reader reader(buffer);
+							bool ok = newItem->FromStream(&reader);
+							assert(ok);
+							(void)ok;
+						}
+
+						newItem->InitVariant(variant->m_data.get());
+
+						newItem->m_flags |= Data::Item::FLAG_VARIANT;
+					}
+				}
 			}
 		}
 

@@ -110,8 +110,8 @@ quest .urgon_lark_2:
 	[
 		"Finally, I got my first holy task! Only problem is that it involves venturing into the desert. It's much more comfortable here at the oasis, especially after we got rid of the crocodiles.\n"
 		"\n"
-		"Maybe you can do my job? Joana told me about the Emerald Phalanx, and ancient military unit of the empire that once reigned these lands. They were known by the green helmet they wore on their heads."
-		"Some of the Emerald Phalanx has risen from the dead and now roam the desert as unholy monstrosities. My boss wants a bunch of their helmets. Can you bring them to me? That would be nice.\n"
+		"Maybe you can do my job? Joana told me about the Emerald Phalanx, an ancient military unit of the empire that once reigned these lands. They were known by the green helmet they wore on their heads."
+		"Some of the Emerald Phalanx have risen from the dead and now roam the desert as unholy monstrosities. My boss wants a bunch of their helmets. Can you bring them to me? That would be nice.\n"
 		"\n"
 		"You'll find these skeletons in the east."
 	]
@@ -177,7 +177,7 @@ quest .urgon_lark_3:
 	
 	completion:
 	[
-		"Praised be the light. Wasn't expecting you to come back alive from this. Here take this as a reward."
+		"Praise be the light. Wasn't expecting you to come back alive from this. Here take this as a reward."
 	]
 	
 	objectives: [ .urgon_lark_3 ]
@@ -220,7 +220,7 @@ quest thalvaron_urgon_lark_4:
 
 	text:
 	[
-		"Venture deeper into the the Temple of Karethi, locate Commander Hizua, and return his shield to Urgon Lark."
+		"Venture deeper into the Temple of Karethi, locate Commander Hizua, and return his shield to Urgon Lark."
 	]
 	
 	description: 
@@ -237,7 +237,7 @@ quest thalvaron_urgon_lark_4:
 	
 	completion:
 	[
-		"You survived? Excellent. You work here is over."
+		"You survived? Excellent. Your work here is over."
 	]
 	
 	objectives: [ .urgon_lark_4 ]

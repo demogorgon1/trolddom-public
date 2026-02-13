@@ -191,7 +191,7 @@ quest thalvaron_blimcraft_highborne_3:
 	
 	text: 
 	[
-		"Use the orb in the building besides Blimcraft Highborne's tower to find his assistant."
+		"Use the orb in the building beside Blimcraft Highborne's tower to find his assistant."
 	]
 	
 	description: 
@@ -199,7 +199,7 @@ quest thalvaron_blimcraft_highborne_3:
 		"There is a fellow wizard who lives on the island of Aetheris. These days she goes by the name of Junjun. Maybe you've met her? Huh, she's really into creating portals to other planes of"
 		"existence, something I've played around with as well. I've tasked my assistant with setting up a base of operation for exploring these other planes. You can help him if you want to. If you touch"
 		"the orb you'll be transported to him.\n\n"
-		"What? My orb? Yes, it's in the building besides my tower. When the ooze took over my home I moved it there."
+		"What? My orb? Yes, it's in the building beside my tower. When the ooze took over my home I moved it there."
 	]
 		
 	completion:

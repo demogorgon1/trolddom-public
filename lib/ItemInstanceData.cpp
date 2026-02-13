@@ -40,6 +40,7 @@ namespace tpublic
 			uint32_t totalStatWeight = 0;
 
 			m_statBudget = (int32_t)m_itemData->m_itemLevel - 1;			
+			m_statBudget += m_itemData->m_empower * 2;
 			m_statBudget = (int32_t)(multipliers.m_statBudget * (float)m_statBudget);
 
 			_Generate(aManifest, statWeights, totalStatWeight);

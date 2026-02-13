@@ -196,7 +196,7 @@ namespace tpublic
 
 				for (const EntityInstance* playerEntityInstance : aPlayerEntityInstances)
 				{
-					if (Requirements::CheckList(m_manifest, ability->m_requirements, playerEntityInstance, NULL))
+					if (Requirements::CheckList(m_manifest, ability->m_requirements, NULL, playerEntityInstance, NULL)) // FIXME: might want to support worldview requirements
 					{
 						const Components::PlayerPublic* playerPublic = playerEntityInstance->GetComponent<Components::PlayerPublic>();
 						loot.m_playerTag.SetCharacter(playerPublic->m_characterId, 0); // Player tag character level isn't relevant here
@@ -253,7 +253,7 @@ namespace tpublic
 
 				if(aLootableEntityInstance != NULL)
 				{
-					if (!Requirements::CheckAnyList(m_manifest, possibility.m_requirements, aPlayerEntityInstances, aLootableEntityInstance))
+					if (!Requirements::CheckAnyList(m_manifest, possibility.m_requirements, NULL, aPlayerEntityInstances, aLootableEntityInstance)) // FIXME: no IWorldView
 						continue;
 				}
 

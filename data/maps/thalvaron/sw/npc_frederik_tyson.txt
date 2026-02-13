@@ -100,7 +100,7 @@ quest .frederik_tyson_1:
 	description: 
 	[
 		"Do you know what a swamp ooze is? Annoying slime-creatures made out of goo. Unfortunately they're quite common down here. They move around like translucent slugs, sometimes picking up debris from the"
-		"ground as the slide over it. We've lost all kinds of stuff to these critters. Farm tools, shoes, you name it, but now they've gone too far! I think one of them might have absorbed our little kitty!\n\n"
+		"ground as they slide over it. We've lost all kinds of stuff to these critters. Farm tools, shoes, you name it, but now they've gone too far! I think one of them might have absorbed our little kitty!\n\n"
 		"If you can find the ooze culprit and return our cat to us, dead or alive, then I might consider paying my taxes."
 	]
 

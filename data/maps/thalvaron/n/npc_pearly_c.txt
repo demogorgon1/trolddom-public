@@ -201,10 +201,10 @@ quest .pearly_c_1:
 	
 	description: 
 	[
-		"The evil power of the north, resting in his tower, needs to be defeated. It won't be an easy task. He is an lich, a powerful creature of undeath, a wizard who have made deals with otherworldly beings to trick death.\n\n"
+		"The evil power of the north, resting in his tower, needs to be defeated. It won't be an easy task. He is a lich, a powerful creature of undeath, a wizard who has made deals with otherworldly beings to trick death.\n\n"
 		"I want you to summon one of these foul beings that he has used in his schemes, slay it, and collect its blood. You will need this blood if you want to truly destroy the lich.\n\n"
 		"First you will need to acquire a divine plant from the shores of Joonor. Through the cave here you'll be able to find a little alcove by the lake, where it grows. Then you will travel north into the hollows of the undying."
-		"In its very north you'll find the Temple of the Undying. Place the Tears of Joonor on the altar, which will provoke the evil deity to attack you. Slay it and collect it's blood."
+		"In its very north you'll find the Temple of the Undying. Place the Tears of Joonor on the altar, which will provoke the evil deity to attack you. Slay it and collect its blood."
 	]
 	
 	completion:

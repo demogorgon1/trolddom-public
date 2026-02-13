@@ -1,0 +1,36 @@
+{
+
+	${
+		_level: 30
+		_elite: false
+		_faction: monsters
+		_creature_type: demon
+		_zone: .boss
+		_out_of_zone_action: { evade: true }
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_spawn_delay: 20
+		_despawn_time: { out_of_combat_ticks: 10 }		
+	}
+	
+	entity random_boss_1: !NPC 
+	{ 
+		_string: "Random Boss 1" 
+		_sprite: stalker_3
+		_sprite_dead: stalker_3_dead 
+		_weapon_damage: 1.2
+		_resource_health: 1.2	
+		_encounter: $encounter
+		{
+			main_entities: [ random_boss_1 ]	
+		}
+		_abilities: 
+		[
+			{
+				id: npc_attack
+			}
+		]		
+	}
+
+}

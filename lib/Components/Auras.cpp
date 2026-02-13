@@ -117,6 +117,19 @@ namespace tpublic::Components
 	}
 
 	const Auras::Entry* 
+	Auras::GetAura(
+		uint32_t									aAuraId) const
+	{
+		for (const std::unique_ptr<Entry>& entry : m_entries)
+		{
+			if (entry->m_auraId == aAuraId)
+				return entry.get();
+		}
+
+		return NULL;
+	}
+
+	const Auras::Entry* 
 	Auras::GetAuraWithSource(
 		uint32_t									aAuraId,
 		uint32_t									aEntityInstanceId) const
@@ -195,6 +208,7 @@ namespace tpublic::Components
 	int32_t
 	Auras::FilterDamageInput(
 		const Manifest*								aManifest,
+		const IWorldView*							aWorldView,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
@@ -209,7 +223,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
 					damage = effect->FilterDamageInput(aDamageType, damage, aAbilityId, sourceEntityId);
 			}
 		}
@@ -220,6 +234,7 @@ namespace tpublic::Components
 	int32_t
 	Auras::FilterDamageOutput(
 		const Manifest*								aManifest,
+		const IWorldView*							aWorldView,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		DirectEffect::DamageType					aDamageType,
@@ -232,7 +247,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
 					damage = effect->FilterDamageOutput(aManifest, aSource, aTarget, aDamageType, damage, aAbilityId);
 			}
 		}
@@ -243,6 +258,7 @@ namespace tpublic::Components
 	int32_t		
 	Auras::FilterHealInput(
 		const Manifest*								aManifest,
+		const IWorldView*							aWorldView,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		int32_t										aHeal,
@@ -254,7 +270,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
 					heal = effect->FilterHealInput(heal, aAbilityId);
 			}
 		}
@@ -266,6 +282,7 @@ namespace tpublic::Components
 	int32_t		
 	Auras::FilterHealOutput(
 		const Manifest*								aManifest,
+		const IWorldView*							aWorldView,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		int32_t										aHeal,
@@ -277,7 +294,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
 					heal = effect->FilterHealOutput(heal, aAbilityId);
 			}
 		}
@@ -288,6 +305,7 @@ namespace tpublic::Components
 	int32_t		
 	Auras::FilterThreat(
 		const Manifest*								aManifest,
+		const IWorldView*							aWorldView,
 		const EntityInstance*						aSource,
 		const EntityInstance*						aTarget,
 		int32_t										aThreat,
@@ -299,7 +317,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget))
+				if (effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
 					threat = effect->FilterThreat(threat, aAbilityId);
 			}
 		}
@@ -364,7 +382,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if (effect->CheckRequirements(aManifest, aSource, aTarget) && numEntryEffectPairs < MAX_ENTRY_EFFECT_PAIRS)
+				if (effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget) && numEntryEffectPairs < MAX_ENTRY_EFFECT_PAIRS)
 					entryEffectPairs[numEntryEffectPairs++] = { entry.get(), effect.get() };
 			}
 		}
@@ -419,7 +437,7 @@ namespace tpublic::Components
 		{
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
-				if(effect->CheckRequirements(aManifest, aSource, aTarget))
+				if(effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
 					effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
 			}
 		}

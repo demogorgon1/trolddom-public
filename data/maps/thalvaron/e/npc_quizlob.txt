@@ -47,7 +47,7 @@ quest .quizlob_1:
 
 	text:
 	[
-		"Quizlob probably wants you do kill some crocodiles and return to him when done."
+		"Quizlob probably wants you to kill some crocodiles and return to him when done."
 	]
 	
 	description: 
@@ -98,7 +98,7 @@ quest .quizlob_2:
 
 	text:
 	[
-		"Quizlob probably wants you do kill some kobolds and return to him when done."
+		"Quizlob probably wants you to kill some kobolds and return to him when done."
 	]
 	
 	description: 

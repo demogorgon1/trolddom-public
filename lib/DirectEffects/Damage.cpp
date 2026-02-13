@@ -227,20 +227,20 @@ namespace tpublic::DirectEffects
 			uint32_t armor = targetCombatPrivate->m_armor;
 			if(targetCombatPublic->m_overrideArmor != 0)
 				armor = targetCombatPublic->m_overrideArmor;
-
+			
 			// Damage reduction from armor
 			float damageMultiplier = 1.0f - (float)armor / (float)(armor + 400 + 85 * sourceCombatPublic->m_level);
 			damage = (uint32_t)((float)damage * damageMultiplier);
 		}
-
+		
 		if (sourceAuras != NULL)
-			damage = sourceAuras->FilterDamageOutput(aManifest, aSource, aTarget, damageType, damage, aAbilityId);
+			damage = sourceAuras->FilterDamageOutput(aManifest, aWorldView, aSource, aTarget, damageType, damage, aAbilityId);
 
 		if (targetAuras != NULL)
-			damage = targetAuras->FilterDamageInput(aManifest, aSource, aTarget, damageType, damage, aAbilityId);
+			damage = targetAuras->FilterDamageInput(aManifest, aWorldView, aSource, aTarget, damageType, damage, aAbilityId);
 
 		uint32_t blocked = 0;
-
+		
 		if(result == CombatEvent::ID_BLOCK && targetCombatPrivate != NULL)
 		{
 			blocked = (damage * 3) / 10; // Base block is 30%

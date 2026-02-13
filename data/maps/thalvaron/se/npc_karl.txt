@@ -59,7 +59,7 @@ quest .karl_1:
 	description: 
 	[
 		"Haven't caught a single fish since I went down here from Mirehaven. I thought it would be a nice place, but no. Where did all the fish go? Seems like the waters are empty. Look at the crabs!"
-		"They seem to be starving - doesn't even want to go near the water. The only place I saw anything in the water was inside Skaldrun, to the west. Something was stirring, not sure what it was.\n\n"
+		"They seem to be starving - they don't even want to go near the water. The only place I saw anything in the water was inside Skaldrun, to the west. Something was stirring, not sure what it was.\n\n"
 		"That place is seriously creepy, though. Not setting my foot in there again, that's for sure! I think I'll just go home... But I'm a bit curious. Maybe you can catch it, whatever it is?\n\n"
 		"Or maybe you're not even a fisherman?"
 	]

@@ -194,10 +194,11 @@ namespace tpublic
 		bool
 		CheckRequirements(
 			const Manifest*					aManifest,
+			const IWorldView*				aWorldView,
 			const EntityInstance*			aSource,
 			const EntityInstance*			aTarget) const
 		{
-			return m_requirements.empty() || Requirements::CheckList(aManifest, m_requirements, aSource, aTarget, NULL);
+			return m_requirements.empty() || Requirements::CheckList(aManifest, m_requirements, aWorldView, aSource, aTarget, NULL);
 		}
 		
 		// Virtual methods

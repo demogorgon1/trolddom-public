@@ -107,7 +107,7 @@ quest .nook_morrow_1:
 	description: 
 	[
 		"The yetis usually aren't this aggressive. I suspect that something bad is going on. I want you to go back to the ice caves and look for anything that could be affecting the behavior of these"
-		"magnificient creatures.\n\n"
+		"magnificent creatures.\n\n"
 		"Here, you can borrow my homemade yeti perfume. Generously apply it to yourself and the yetis won't attack you."
 	]
 
@@ -133,7 +133,7 @@ quest .nook_morrow_1:
 
 aura .nook_morrow_2_quest_item:
 {
-	string: "Tranqualized"
+	string: "Tranquilized"
 	description: "Sleeping."
 	type: debuff
 	icon: icon_sleep
@@ -228,14 +228,14 @@ quest .nook_morrow_2:
 	
 	text:
 	[
-		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Nook Morrow."
+		"Locate the wandering owlbear, tranquilize it, and return one of its feathers to Nook Morrow."
 	]
 	
 	description: 
 	[
 		"Yetis are not the only creatures of these highlands that have changed behavior recently. The majestic owlbear is another affected creature. They don't go anywhere near the ice caves, so the source of dark magic you found"
 		"isn't likely to have affected them.\n\n"
-		"There is a fine specimen that is running around confused south of the frozen lake. Can you bring me one of his feathers? Please don't hurt him, you can use my tranqualizer dart gun to take him down gently and temporarily."
+		"There is a fine specimen that is running around confused south of the frozen lake. Can you bring me one of his feathers? Please don't hurt him, you can use my tranquilizer dart gun to take him down gently and temporarily."
 		"Be careful, their bite is painful, but it's not poisonous."
 	]
 
@@ -280,12 +280,12 @@ quest .nook_morrow_3:
 	
 	text:
 	[
-		"Locate the wandering owlbear, tranqualize it, and return one of its feathers to Fennian in Edmund's Haunt."
+		"Locate the wandering owlbear, tranquilize it, and return one of its feathers to Fennian in Edmund's Haunt."
 	]
 	
 	description: 
 	[
-		"In the eastern shadow of the mountains, in the town of Edmund's Haunt, an elf named Fennian lives. He's very knowledgable about owlbears and nature in general. I think you should take this feather to him"
+		"In the eastern shadow of the mountains, in the town of Edmund's Haunt, an elf named Fennian lives. He's very knowledgeable about owlbears and nature in general. I think you should take this feather to him"
 		"and see what he thinks about it. Something seems a bit off to me. The main pass to the east is blocked, but you'll find another smaller one a bit further to the south."
 	]
 

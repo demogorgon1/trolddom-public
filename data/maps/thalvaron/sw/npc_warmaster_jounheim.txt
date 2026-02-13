@@ -45,7 +45,7 @@ objective .warmaster_jounheim_1_a:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_badlands_orc_a thalvaron_badlands_orc_b ]
+		entities: [ thalvaron_badlands_orc_a thalvaron_badlands_orc_b thalvaron_jungle_orc_a thalvaron_jungle_orc_b ]
 		count: 4
 	}
 }
@@ -58,7 +58,7 @@ objective .warmaster_jounheim_1_b:
 	
 	kill_npc:
 	{
-		entities: [ thalvaron_badlands_orc_c ]
+		entities: [ thalvaron_badlands_orc_c thalvaron_urthon_orc_c thalvaron_jungle_orc_c ]
 		count: 2
 	}
 }
@@ -82,7 +82,7 @@ quest .warmaster_jounheim_1:
 	description: 
 	[
 		"I've heard you've dealt with the goblins of Aetheris island. Have you ever before encountered their bigger cousins, the orcs? They've been the enemy of all dwarves since the beginning of time. Luckily these lands have"
-		"long been spared their presence, but untortunately some from the Skullforge clan have been spotted in the south. This is a dangerous situation. Where are they coming from and is this a sign of darker times ahead?\n\n"
+		"long been spared their presence, but unfortunately some from the Skullforge clan have been spotted in the south. This is a dangerous situation. Where are they coming from and is this a sign of darker times ahead?\n\n"
 		"For now only a few patrols have been spotted, but we can't let them roam freely. I need you to venture south and hunt down these vile creatures."
 	]
 

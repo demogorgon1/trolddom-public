@@ -154,7 +154,7 @@ quest .tyron_frostmane_3:
 	
 	description: 
 	[
-		"A few days ago a man passed through here, going by the name of Doctor Hulius. I'm not sure if he was a real doctor. Anyway, he said he came for the city and wanted to go camping in the highlands."
+		"A few days ago a man passed through here, going by the name of Doctor Hulius. I'm not sure if he was a real doctor. Anyway, he said he came to the city and wanted to go camping in the highlands."
 		"I tried to explain to him that it wasn't a good idea, but he insisted. Maybe you can see if you can find him? Try to figure out where he is? He's likely somewhere to the south east."
 	]
 

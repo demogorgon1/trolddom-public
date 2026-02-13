@@ -25,7 +25,8 @@ namespace tpublic
 						Components::CombatPrivate*		aCombatPrivate,
 						Components::MinionPrivate*		aMinionPrivate,
 						Components::NPC*				aNPC,
-						bool							aUpdate);
+						bool							aUpdate,
+						bool							aBaseOnNPCResource);
 		void		MakeEliteEasy(
 						const NPCMetrics*				aNPCMetrics,
 						Components::CombatPublic*		aCombatPublic,

@@ -22,7 +22,8 @@ namespace tpublic
 			Components::CombatPrivate*		aCombatPrivate,
 			Components::MinionPrivate*		aMinionPrivate,
 			Components::NPC*				aNPC,
-			bool							aUpdate)
+			bool							aUpdate,
+			bool							aBaseOnNPCResource)
 		{
 			if (aCombatPublic != NULL && aCombatPrivate != NULL && (aNPC != NULL || aMinionPrivate != NULL))
 			{
@@ -53,7 +54,7 @@ namespace tpublic
 
 							if (t != NULL)
 							{
-								float value = (float)npcMetricsLevel->m_baseResource[resourceId] * modifier;
+								float value = (aBaseOnNPCResource ? (float)t->m_max : (float)npcMetricsLevel->m_baseResource[resourceId]) * modifier;
 
 								if (aCombatPublic->IsElite())
 									value *= npcMetricsLevel->m_eliteResource[resourceId];

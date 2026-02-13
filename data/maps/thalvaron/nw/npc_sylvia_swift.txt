@@ -86,7 +86,7 @@ quest .sylvia_swift_1:
 		"kill someone? I might be able to help you.\n\n"
 		"Inhale this powder and you'll be able to enter the Shrouded Lands in the guise of a disciple of the underworld. All the unholy forces will see you as an ally and you'll be able to slay the followers of the light. You're not"
 		"too attached to those guys anyway, are you?\n\n"
-		"Here take it. Enter through one of the portals, kill someone, and return to me for a reward."
+		"Here, take it. Enter through one of the portals, kill someone, and return to me for a reward."
 	]
 
 	progress:
@@ -134,7 +134,7 @@ quest .sylvia_swift_2:
 		"kill someone? I might be able to help you.\n\n"
 		"Inhale this powder and you'll be able to enter the Shrouded Lands in the guise of a disciple of the Light. All the holy forces will see you as an ally and you'll be able to slay the followers of the Underworld. You're not"
 		"too attached to those guys anyway, are you?\n\n"
-		"Here take it. Enter through one of the portals, kill someone, and return to me for a reward."
+		"Here, take it. Enter through one of the portals, kill someone, and return to me for a reward."
 	]
 
 	progress:

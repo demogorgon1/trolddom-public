@@ -195,7 +195,7 @@ quest .baldric_sunstrike_1:
 
 	description:
 	[
-		"You've arrive at the most dire time. The ancient Temple of Luminara, once a place of holy sanctuary, has fallen under foul corruption. Demons..."
+		"You've arrived at the most dire time. The ancient Temple of Luminara, once a place of holy sanctuary, has fallen under foul corruption. Demons..."
 		"they've infested its sacred ruins.\n"
 		"\n"
 		"These creatures defile all that is good and pure. The light of the gods grows dim, and if they remain unchecked, the temple will become a gateway for even"

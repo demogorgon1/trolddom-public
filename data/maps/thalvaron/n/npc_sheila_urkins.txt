@@ -132,7 +132,7 @@ quest .sheila_urkins_1:
 	description: 
 	[
 		"To the south, on the other side of the river, you can encounter a special species of spider that produces the most wonderful silk. I need some for a special project of mine. Can you go collect some for me?\n\n"
-		"Be careful, those spiders are venomonous. You'll find them close to the mountains.\n\n"
+		"Be careful, those spiders are venomous. You'll find them close to the mountains.\n\n"
 		"Oh, and while you're there, please get me some spider eggs from the cave, thanks."
 	]
 
@@ -352,7 +352,7 @@ quest thalvaron_sheila_urkins_4:
 	
 	description: 
 	[
-		"This tentacle monster business is above my paygrade. Brind the tentacle to my friend Jim in Valoris and see what he can make of it. You'll find him in the western part of the Southgate district."
+		"This tentacle monster business is above my paygrade. Bring the tentacle to my friend Jim in Valoris and see what he can make of it. You'll find him in the western part of the Southgate district."
 	]
 
 	completion:

@@ -70,7 +70,7 @@ quest .rod_gambil_1:
 	
 	description: 
 	[
-		"Well, yes, people call this the Howling Pass, which I suppose is a fitting name, considering the sounds that fills the area at night. Wolves all over the place. It's getting a bit out of hands, to"
+		"Well, yes, people call this the Howling Pass, which I suppose is a fitting name, considering the sounds that fills the area at night. Wolves all over the place. It's getting a bit out of hand, to"
 		"be honest. How about you go and clear them out a bit? Follow the path beyond my house to the east and I'm sure you'll find some."
 	]
 	
@@ -158,7 +158,7 @@ quest .rod_gambil_2:
 	description: 
 	[
 		"Beyond this pass to the west you'll find the Swamp of Skaldrun. It's a desolate place and you won't find any civilized people living there. For a while it has been overrun with Skullforge clan orcs" 
-		"from Durgan Urok. They don't seem to show much interest in this pass so they've largely left me alone, but they a couple of them raided my home a few days ago. I managed to get away unscathed, but"
+		"from Durgan Urok. They don't seem to show much interest in this pass so they've largely left me alone, but a couple of them raided my home a few days ago. I managed to get away unscathed, but"
 		"they stole some of my possessions. Maybe you can get them back? I went looking for them and I think they've stashed them at a small camp in the eastern part of the swamp."
 	]
 	

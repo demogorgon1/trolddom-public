@@ -107,7 +107,7 @@ quest .elara_nightshade_1:
 	
 	completion:
 	[
-		"Great. Want to taste test?"
+		"Great. Want a taste test?"
 	]
 
 	objectives: [ .elara_nightshade_1 ]

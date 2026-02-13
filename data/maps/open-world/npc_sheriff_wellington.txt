@@ -56,7 +56,7 @@ quest .sheriff_wellington_1:
 
 	text:
 	[
-		"Handle the crab man situation on peninsula to the north west."
+		"Handle the crab man situation on the peninsula to the north west."
 	]
 	
 	description: 
@@ -64,7 +64,7 @@ quest .sheriff_wellington_1:
 		"As everyone around these parts know, we've recently encountered more crab men in the area than usual. They seem to be concentrated on the north western peninsula,"
 		"but I'm afraid they'll soon start showing up in other areas as well. Poor Harald had to abandon his house up there.\n"
 		"\n"
-		"I have no idea why suddenly these bastards have increased their activity so much recently.\n"
+		"I have no idea why these bastards have suddenly increased their activity so much recently.\n"
 		"\n"
 		"If you go there and kill a bunch of them you'll be rewarded.\n"
 	]
@@ -139,7 +139,7 @@ quest .sheriff_wellington_2:
 	description: 
 	[
 		"Further out the peninsula you'll find the old abandoned fort. I've had word that there is even more crab activity out there."
-		"You seem to be reasonable adept at killing these critters, maybe you can go deal with them as well?\n"
+		"You seem to be reasonably adept at killing these critters, maybe you can go deal with them as well?\n"
 		"\n"
 		"Rumor has it that a giant crab man has been spotted there as well, so be careful."
 	]

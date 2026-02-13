@@ -437,7 +437,7 @@ namespace tpublic::Systems
 									if(ability->m_requirements.size() > 0)
 									{
 										const EntityInstance* entityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
-										if(entityInstance != NULL && !Requirements::CheckList(GetManifest(), ability->m_requirements, entityInstance, targetEntityInstance))
+										if(entityInstance != NULL && !Requirements::CheckList(GetManifest(), ability->m_requirements, aContext->m_worldView, entityInstance, targetEntityInstance))
 											continue;
 									}
 

@@ -73,7 +73,7 @@ quest .royal_chef_assistant_1:
 	[
 		"I have a bit of a problem I hope you might be able to help me with.\n\n"
 		"I'm in charge of buying ingredients for the kitchen, which can be a bit difficult at times. Recently I got a good deal on some giant eggs, which was turned into an omelette."
-		"The Prince Consort loved it and asked Chef Swanson for more. Now, it turned out, that those eggs were owlbear eggs, which are absolutely impossible to find. I'm afraid the chef is going to kill me"
+		"The Prince Consort loved it and asked Chef Swanson for more. Now, it turned out that those eggs were owlbear eggs, which are absolutely impossible to find. I'm afraid the chef is going to kill me"
 		"if I don't find some. I did a bit of research and it turns out that owlbears live in the Iceveil Highlands to the east. If you go there on your travels, maybe you can get me some?"
 	]
 

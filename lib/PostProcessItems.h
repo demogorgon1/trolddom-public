@@ -9,7 +9,8 @@ namespace tpublic
 	{
 
 		void		Run(
-						Manifest*		aManifest);
+						Manifest*			aManifest,
+						PersistentIdTable*	aPersistentIdTable);
 
 	}
 

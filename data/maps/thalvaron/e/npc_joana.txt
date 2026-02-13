@@ -55,7 +55,7 @@ quest .joana_1:
 	description: 
 	[
 		"I don't know how these skeletal monsters operate. They seem to mostly wander around mindlessly at the moment, but sometimes it seems like they are commanded by some more powerful creature."
-		"I've located one of these commanders at an compound north east of here. It's a monstrous skeleton, allegedly the remains of some ancient captain named Xildur. Locate this monster and destroy it."
+		"I've located one of these commanders at a compound north east of here. It's a monstrous skeleton, allegedly the remains of some ancient captain named Xildur. Locate this monster and destroy it."
 	]
 
 	progress:

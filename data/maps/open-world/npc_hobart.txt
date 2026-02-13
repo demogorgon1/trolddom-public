@@ -109,7 +109,7 @@ quest .hobart_1:
 	
 	completion:
 	[
-		"That was very helpful, thank you. Now, you if run into Theodore, please promise me that you ignore everything he's saying. He's a murderous psychopath."
+		"That was very helpful, thank you. Now, if you run into Theodore, please promise me that you ignore everything he's saying. He's a murderous psychopath."
 	]
 
 	objectives: [ .hobart_1 ]

@@ -149,6 +149,8 @@ namespace tpublic
 								uint32_t									aEntityInstanceId) const;
 			Entry*			GetAura(
 								uint32_t									aAuraId);
+			const Entry*	GetAura(
+								uint32_t									aAuraId) const;
 			const Entry*	GetAuraWithSource(
 								uint32_t									aAuraId,
 								uint32_t									aEntityInstanceId) const;
@@ -159,6 +161,7 @@ namespace tpublic
 								const Manifest*								aManifest) const;
 			int32_t			FilterDamageInput(
 								const Manifest*								aManifest,
+								const IWorldView*							aWorldView,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								DirectEffect::DamageType					aDamageType,
@@ -166,6 +169,7 @@ namespace tpublic
 								uint32_t									aAbilityId) const;
 			int32_t			FilterDamageOutput(
 								const Manifest*								aManifest,
+								const IWorldView*							aWorldView,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,				
 								DirectEffect::DamageType					aDamageType,
@@ -173,18 +177,21 @@ namespace tpublic
 								uint32_t									aAbilityId) const;
 			int32_t			FilterHealInput(
 								const Manifest*								aManifest,
+								const IWorldView*							aWorldView,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								int32_t										aHeal,
 								uint32_t									aAbilityId) const;
 			int32_t			FilterHealOutput(
 								const Manifest*								aManifest,
+								const IWorldView*							aWorldView,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								int32_t										aHeal,
 								uint32_t									aAbilityId) const;
 			int32_t			FilterThreat(
 								const Manifest*								aManifest,
+								const IWorldView*							aWorldView,
 								const EntityInstance*						aSource,
 								const EntityInstance*						aTarget,
 								int32_t										aThreat,

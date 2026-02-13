@@ -33,7 +33,8 @@ namespace tpublic
 				FLAG_DUNGEON_LOOT					= 0x00000020,
 				FLAG_FISHING_ROD					= 0x00000040,
 				FLAG_STARTS_QUEST					= 0x00000080,
-				FLAG_HEROIC							= 0x00000100
+				FLAG_HEROIC							= 0x00000100,
+				FLAG_VARIANT						= 0x00000200
 			};
 
 			static inline uint32_t
@@ -245,6 +246,46 @@ namespace tpublic
 				std::vector<Zone>			m_zones;
 			};
 
+			struct Variant
+			{
+				Variant()
+				{
+
+				}
+
+				Variant(
+					const SourceNode*	aSource)
+				{
+					m_suffix = aSource->m_name;
+
+					m_data.reset(new Item());
+					m_data->FromSource(aSource);
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteString(m_suffix);
+					aWriter->WriteObjectPointer(m_data);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader) 
+				{
+					if(!aReader->ReadString(m_suffix))
+						return false;
+					if(!aReader->ReadObjectPointer(m_data))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::string					m_suffix;
+				std::unique_ptr<Item>		m_data;
+			};
+
 			void
 			Verify() const
 			{
@@ -274,6 +315,11 @@ namespace tpublic
 				return defaultArmorStyleVisual;
 			}
 
+			void	ReadSource(
+						const SourceNode*	aSource);
+			void	InitVariant(
+						const Item*			aVariant);
+
 			// Helpers
 			bool	IsUnique() const { return m_flags & FLAG_UNIQUE; }
 			bool	IsNotSellable() const { return m_flags & FLAG_NOT_SELLABLE; }
@@ -287,139 +333,13 @@ namespace tpublic
 			// Base implementation
 			void
 			FromSource(
-				const SourceNode*		aSource) override
+				const SourceNode*			aSource) override
 			{
 				aSource->ForEachChild([&](
 					const SourceNode* aChild)
 				{
 					if(!FromSourceBase(aChild))
-					{
-						if (aChild->m_name == "equipment_slots")
-						{
-							aChild->ForEachChild([&](
-								const SourceNode* aEquipmentSlot)
-							{
-								EquipmentSlot::Id id = EquipmentSlot::StringToId(aEquipmentSlot->GetIdentifier());
-								TP_VERIFY(id != EquipmentSlot::INVALID_ID, aEquipmentSlot->m_debugInfo, "'%s' is not a valid equipment slot.", aEquipmentSlot->GetIdentifier());
-								m_equipmentSlots.push_back(id);
-							});
-						}
-						else if (aChild->m_name == "loot_groups")
-						{
-							aChild->GetIdArray(DataType::ID_LOOT_GROUP, m_lootGroups);
-						}
-						else if (aChild->m_name == "stack")
-						{
-							m_stackSize = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "item_level")
-						{
-							m_itemLevel = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "level_range")
-						{
-							m_levelRange = UIntRange(aChild);
-						}
-						else if (aChild->m_name == "required_level")
-						{
-							m_requiredLevel = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "cost")
-						{
-							m_cost = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "use_ability")
-						{
-							m_useAbilityId = aChild->GetId(DataType::ID_ABILITY);
-						}
-						else if (aChild->m_name == "icon")
-						{
-							m_iconSpriteId = aChild->GetId(DataType::ID_SPRITE);
-						}
-						else if (aChild->m_name == "quest")
-						{
-							m_questId = aChild->GetId(DataType::ID_QUEST);
-						}
-						else if (aChild->m_name == "aura")
-						{
-							m_auraId = aChild->GetId(DataType::ID_AURA);
-						}
-						else if (aChild->m_name == "rarity")
-						{
-							m_rarity = Rarity::StringToId(aChild->GetIdentifier());
-							TP_VERIFY(m_rarity != Rarity::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid rarity.", aChild->GetIdentifier());
-						}
-						else if (aChild->m_name == "type")
-						{
-							m_itemType = ItemType::StringToId(aChild->GetIdentifier());
-							TP_VERIFY(m_itemType != ItemType::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item type.", aChild->GetIdentifier());
-						}
-						else if (aChild->m_name == "binds")
-						{
-							m_itemBinding = ItemBinding::StringToId(aChild->GetIdentifier());
-							TP_VERIFY(m_itemBinding != ItemBinding::INVALID_ID, aChild->m_debugInfo, "'%s' is not a valid item binding.", aChild->GetIdentifier());
-						}
-						else if (aChild->m_name == "weapon_cooldown")
-						{
-							m_weaponCooldown = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "bag_slots")
-						{
-							m_bagSlots = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "token_cost")
-						{
-							m_tokenCost = aChild->GetUInt32();
-						}
-						else if (aChild->m_name == "weapon_damage")
-						{
-							m_weaponDamage = UIntRange(aChild);
-						}
-						else if (aChild->m_name == "string")
-						{
-							m_string = aChild->GetString();
-						}
-						else if (aChild->m_name == "flags")
-						{
-							m_flags |= SourceToFlags(aChild);
-						}
-						else if (aChild->m_name == "flavor")
-						{
-							m_flavor = aChild->GetString();
-						}
-						else if (aChild->m_name == "budget_bias")
-						{
-							m_budgetBias = aChild->GetInt32();
-						}
-						else if (aChild->m_tag == "stat")
-						{
-							m_addedStats.push_back(AddedStat(aChild, false));
-						}
-						else if (aChild->m_tag == "stat_weight")
-						{
-							m_addedStats.push_back(AddedStat(aChild, true));
-						}
-						else if(aChild->m_name == "sound_effects")
-						{
-							m_soundEffects.FromSource(aChild);
-						}
-						else if (aChild->m_name == "value_multiplier")
-						{
-							m_valueMultiplier = aChild->GetFloat();
-						}
-						else if(aChild->m_name == "armor_style_visual")
-						{
-							m_armorStyleVisual = ArmorStyle::Visual(aChild);
-						}
-						else if(aChild->m_name == "oracle")
-						{
-							m_oracle = std::make_unique<Oracle>(aChild);
-						}
-						else
-						{
-							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
-						}
-					}
+						ReadSource(aChild);
 				});
 
 				if(m_itemLevel == 0)
@@ -479,6 +399,7 @@ namespace tpublic
 				aStream->WriteUInt(m_auraId);
 				aStream->WriteUInt(m_tokenCost);
 				aStream->WriteOptionalObjectPointer(m_oracle);
+				aStream->WriteUInt(m_empower);
 			}
 
 			bool
@@ -539,6 +460,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObjectPointer(m_oracle))
 					return false;
+				if (!aStream->ReadUInt(m_empower))
+					return false;
 
 				m_lcString = m_string;
 				Helpers::MakeLowerCase(m_lcString);
@@ -580,36 +503,38 @@ namespace tpublic
 							const Manifest*			aManifest) override;
 
 			// Public data
-			std::vector<uint32_t>				m_equipmentSlots;
-			std::vector<uint32_t>				m_lootGroups;
-			uint32_t							m_stackSize = 1;
-			uint32_t							m_useAbilityId = 0;
-			ItemType::Id						m_itemType = ItemType::ID_NONE;
-			UIntRange							m_levelRange;
-			uint32_t							m_requiredLevel = 0;
-			uint32_t							m_itemLevel = 0;
-			uint32_t							m_iconSpriteId = 0;
-			uint32_t							m_cost = 0;
-			Rarity::Id							m_rarity = Rarity::ID_COMMON;
-			std::vector<AddedStat>				m_addedStats;
-			std::optional<UIntRange>			m_weaponDamage;
-			uint32_t							m_weaponCooldown = 0;
-			std::string							m_string;
-			std::string							m_flavor;
-			int32_t								m_budgetBias = 0;
-			ItemBinding::Id						m_itemBinding = ItemBinding::ID_NEVER;
-			SoundEffect::Collection				m_soundEffects;
-			uint32_t							m_flags = 0;
-			uint32_t							m_bagSlots = 0;
-			float								m_valueMultiplier = 1.0f;
-			std::optional<ArmorStyle::Visual>	m_armorStyleVisual;
-			uint32_t							m_questId = 0;
-			uint32_t							m_auraId = 0;
-			uint32_t							m_tokenCost = 0;
-			std::unique_ptr<Oracle>				m_oracle;
+			std::vector<uint32_t>					m_equipmentSlots;
+			std::vector<uint32_t>					m_lootGroups;
+			uint32_t								m_stackSize = 1;
+			uint32_t								m_useAbilityId = 0;
+			ItemType::Id							m_itemType = ItemType::ID_NONE;
+			UIntRange								m_levelRange;
+			uint32_t								m_requiredLevel = 0;
+			uint32_t								m_itemLevel = 0;
+			uint32_t								m_iconSpriteId = 0;
+			uint32_t								m_cost = 0;
+			Rarity::Id								m_rarity = Rarity::ID_COMMON;
+			std::vector<AddedStat>					m_addedStats;
+			std::optional<UIntRange>				m_weaponDamage;
+			uint32_t								m_weaponCooldown = 0;
+			std::string								m_string;
+			std::string								m_flavor;
+			int32_t									m_budgetBias = 0;
+			ItemBinding::Id							m_itemBinding = ItemBinding::ID_NEVER;
+			SoundEffect::Collection					m_soundEffects;
+			uint32_t								m_flags = 0;
+			uint32_t								m_bagSlots = 0;
+			float									m_valueMultiplier = 1.0f;
+			std::optional<ArmorStyle::Visual>		m_armorStyleVisual;
+			uint32_t								m_questId = 0;
+			uint32_t								m_auraId = 0;
+			uint32_t								m_tokenCost = 0;
+			std::unique_ptr<Oracle>					m_oracle;
+			uint32_t								m_empower = 0;
+			std::vector<std::unique_ptr<Variant>>	m_variants;
 
 			// Not serialized
-			std::string							m_lcString;
+			std::string								m_lcString;
 		};
 
 	}

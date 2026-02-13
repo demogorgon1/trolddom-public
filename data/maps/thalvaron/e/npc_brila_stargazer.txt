@@ -116,7 +116,7 @@ quest .brila_stargazer_1:
 	description: 
 	[
 		"If you want to save Mr. Ronson you'll need to gather some ingredients for me. You seem like a capable adventurer so it might not be impossible."
-		"First of all I need"
+		"First of all, I need"
 		"some special mushrooms that only grow by an underground lake in a cave to the west of here. You'll find the entrance deep in the jungle, so good luck with that. Also, south of here is the Verdant Mire. A"
 		"really horrible swamp crawling with monsters. These monsters are covered in a very interesting goo that is essential for the brew.\n"
 		"\n"

@@ -348,7 +348,7 @@ map_entity_spawn thalvaron_swamp_giant:
 		
 		description: 
 		[
-			"The giant swamp monsters claw is slimy to the touch. You should return it to Sheriff Foster outside Mirehaven. Maybe you'll get a reward for slaying this vile creature."
+			"The giant swamp monster's claw is slimy to the touch. You should return it to Sheriff Foster outside Mirehaven. Maybe you'll get a reward for slaying this vile creature."
 		]
 		
 		completion:
@@ -1176,7 +1176,7 @@ map_entity_spawn thalvaron_badlands_orc_gorvak:
 		
 		description: 
 		[
-			"This looks like a crude map of the badlands with lots of arrows and crosses on it. It might be of the interest to the Warmaster."
+			"This looks like a crude map of the badlands with lots of arrows and crosses on it. It might be of interest to the Warmaster."
 		]
 		
 		completion:

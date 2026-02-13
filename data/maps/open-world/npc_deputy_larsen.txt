@@ -95,7 +95,7 @@ quest .deputy_larsen_2:
 	
 	description: 
 	[
-		"Good job with the crab men, that will help holding them at bay for a while longer.\n"
+		"Good job with the crab men, that will help hold them at bay for a while longer.\n"
 		"\n"
 		"Unfortunately, they're not the only dangers we're facing at the moment. There have been reports of sinister activity in the Eldersong Woods to the north.\n"
 		"\n"
@@ -109,7 +109,7 @@ quest .deputy_larsen_2:
 	
 	completion:
 	[
-		"Glad to hear that the crab men of the south has been pushed back, but we have other problems up here."
+		"Glad to hear that the crab men of the south have been pushed back, but we have other problems up here."
 	]
 
 	prerequisites: [ .deputy_larsen_1 ]

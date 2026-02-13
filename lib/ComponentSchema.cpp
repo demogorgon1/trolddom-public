@@ -441,7 +441,7 @@ namespace tpublic
 			{
 				std::string value = _ValueAsString(aObject, &field);
 
-				char buffer[1024];
+				char buffer[4096];
 				if(field.m_name != NULL)						
 					TP_STRING_FORMAT(buffer, sizeof(buffer), "%s:%s", field.m_name, value.c_str());
 				else
@@ -462,6 +462,7 @@ namespace tpublic
 			PARSE_STATE_INIT,
 			PARSE_STATE_FIELD_ID,
 			PARSE_STATE_FIELD_NAME,
+			PARSE_STATE_FIELD_VALUE
 		};
 
 		ParseState parseState = PARSE_STATE_INIT;
@@ -469,6 +470,8 @@ namespace tpublic
 
 		std::vector<char> buffer;
 		const Field* field = NULL;
+
+		std::vector<std::pair<const Field*, std::string>> fieldsAndValues;
 
 		while(*p != '\0')
 		{
@@ -493,114 +496,152 @@ namespace tpublic
 						field = _GetFieldById(strtoul(&buffer[0], NULL, 10));
 					else 
 						field = _GetFieldByName(&buffer[0]);
-					p++;
-					break;
+
+					buffer.clear();
+					parseState = PARSE_STATE_FIELD_VALUE;
 				}
 				else 
 				{
 					buffer.push_back(c);
 				}
 				break;
+
+			case PARSE_STATE_FIELD_VALUE:
+				if(c == '\n')
+				{
+					buffer.push_back('\0');
+
+					fieldsAndValues.push_back(std::make_pair(field, std::string(&buffer[0])));
+
+					field = NULL;
+					buffer.clear();
+
+					parseState = PARSE_STATE_INIT;
+				}
+				else
+				{
+					buffer.push_back(c);
+				}
+				break;
 			}
+
 			p++;
 		}
 
-		TP_CHECK(*p != '\0', "Missing component field value.");
-		TP_CHECK(field != NULL, "Missing component field.");
+		if(field != NULL && !buffer.empty())
+			fieldsAndValues.push_back(std::make_pair(field, std::string(&buffer[0])));
 
-		switch(field->m_type)
+		for(const std::pair<const Field*, std::string>& fieldAndValue : fieldsAndValues)
 		{
-		case TYPE_VEC2:
-			{				
-				Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[field->m_offset]);
-				int32_t result = sscanf(p, "%d,%d", &t->m_x, &t->m_y);
-				TP_CHECK(result == 2, "Invalid value.");
-			}
-			break;
+			field = fieldAndValue.first;
+			p = fieldAndValue.second.c_str();
 
-		case TYPE_STRING:
+			switch(field->m_type)
 			{
-				std::string* t = (std::string*)&(((const uint8_t*)aObject)[field->m_offset]);
-				*t = p;
-			}
-			break;
-
-		case TYPE_BOOL:
-			{
-				bool* t = (bool*)&(((const uint8_t*)aObject)[field->m_offset]);
-				*t = strcmp(p, "true") == 0;
-			}
-			break;
-
-		case TYPE_INT32:
-			{
-				int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-				int32_t result = sscanf(p, "%d", t);
-				TP_CHECK(result == 1, "Invalid value.");
-			}
-			break;
-
-		case TYPE_INT64:
-			{
-				int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-				int32_t result = sscanf(p, "%zd", t);
-				TP_CHECK(result == 1, "Invalid value.");
-			}
-			break;
-
-		case TYPE_UINT8:
-			{
-				uint8_t* t = (uint8_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-				uint32_t tmp = 0;
-				int32_t result = sscanf(p, "%u", &tmp);
-				TP_CHECK(result == 1 && tmp >= 0 && tmp <= 255, "Invalid value.");
-				*t = (uint8_t)tmp;
-			}
-			break;
-
-		case TYPE_UINT32:
-			{
-				uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-				int32_t result = sscanf(p, "%u", t);
-				TP_CHECK(result == 1, "Invalid value.");
-			}
-			break;
-
-		case TYPE_UINT64:
-			{
-				uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
-				int32_t result = sscanf(p, "%zu", t);
-				TP_CHECK(result == 1, "Invalid value.");
-		}
-			break;
-
-		case TYPE_FLOAT:
-			{
-				float* t = (float*)&(((const uint8_t*)aObject)[field->m_offset]);
-				int32_t result = sscanf(p, "%f", t);
-				TP_CHECK(result == 1, "Invalid value.");
-			}
-			break;
-
-		case TYPE_UINT32_ARRAY:
-			{
-				std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
-				t->clear();
-				std::stringstream tokenizer(p);
-				std::string token;
-				while (std::getline(tokenizer, token, ','))
-				{
-					Helpers::TrimString(token);
-					uint32_t v;
-					int32_t result = sscanf(p, "%u", &v);
-					TP_CHECK(result == 1, "Invalid value.");
-					t->push_back(v);
+			case TYPE_VEC2:
+				{				
+					Vec2* t = (Vec2*)&(((const uint8_t*)aObject)[field->m_offset]);
+					int32_t result = sscanf(p, "%d,%d", &t->m_x, &t->m_y);
+					TP_CHECK(result == 2, "Invalid value.");
 				}
-			}
-			break;
+				break;
 
-		default:
-			break;
+			case TYPE_STRING:
+				{
+					std::string* t = (std::string*)&(((const uint8_t*)aObject)[field->m_offset]);
+					*t = p;
+				}
+				break;
+
+			case TYPE_BOOL:
+				{
+					bool* t = (bool*)&(((const uint8_t*)aObject)[field->m_offset]);
+					*t = strcmp(p, "true") == 0;
+				}
+				break;
+
+			case TYPE_INT32:
+				{
+					int32_t* t = (int32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+					int32_t result = sscanf(p, "%d", t);
+					TP_CHECK(result == 1, "Invalid value.");
+				}
+				break;
+
+			case TYPE_INT64:
+				{
+					int64_t* t = (int64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+					int32_t result = sscanf(p, "%zd", t);
+					TP_CHECK(result == 1, "Invalid value.");
+				}
+				break;
+
+			case TYPE_UINT8:
+				{
+					uint8_t* t = (uint8_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+					uint32_t tmp = 0;
+					int32_t result = sscanf(p, "%u", &tmp);
+					TP_CHECK(result == 1 && tmp >= 0 && tmp <= 255, "Invalid value.");
+					*t = (uint8_t)tmp;
+				}
+				break;
+
+			case TYPE_UINT32:
+				{
+					uint32_t* t = (uint32_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+					int32_t result = sscanf(p, "%u", t);
+					TP_CHECK(result == 1, "Invalid value.");
+				}
+				break;
+
+			case TYPE_UINT64:
+				{
+					uint64_t* t = (uint64_t*)&(((const uint8_t*)aObject)[field->m_offset]);
+					int32_t result = sscanf(p, "%zu", t);
+					TP_CHECK(result == 1, "Invalid value.");
+				}
+				break;
+
+			case TYPE_FLOAT:
+				{
+					float* t = (float*)&(((const uint8_t*)aObject)[field->m_offset]);
+					int32_t result = sscanf(p, "%f", t);
+					TP_CHECK(result == 1, "Invalid value.");
+				}
+				break;
+
+			case TYPE_UINT32_ARRAY:
+				{
+					std::vector<uint32_t>* t = (std::vector<uint32_t>*)&(((const uint8_t*)aObject)[field->m_offset]);
+					t->clear();
+					std::stringstream tokenizer(p);
+					std::string token;
+					while (std::getline(tokenizer, token, ','))
+					{
+						Helpers::TrimString(token);
+						uint32_t v;
+						int32_t result = sscanf(p, "%u", &v);
+						TP_CHECK(result == 1, "Invalid value.");
+						t->push_back(v);
+					}
+				}
+				break;
+
+			case TYPE_CUSTOM:
+				{
+					void* t = (void*)&(((const uint8_t*)aObject)[field->m_offset]);
+					std::vector<uint8_t> serialized;
+					Base64::Decode(p, serialized);
+					VectorIO::Reader reader(serialized);
+					bool ok = field->m_customRead(&reader, t);
+					TP_CHECK(ok, "Invalid value.");
+				}			
+				break;
+
+			default:
+				TP_CHECK(false, "Unhandled field type: %u", field->m_type);
+				break;
+			}
 		}
 	}
 
@@ -612,7 +653,7 @@ namespace tpublic
 
 		for(const Field& field : m_fields)
 		{
-			char buffer[1024];
+			char buffer[4096];
 			TP_STRING_FORMAT(buffer, sizeof(buffer), "%u(%s)=%s ", field.m_id, field.m_name != NULL ? field.m_name : "", _ValueAsString(aObject, &field).c_str());
 			t.append(buffer);
 		}
@@ -916,7 +957,7 @@ namespace tpublic
 		const void*		aObject,
 		const Field*	aField) const
 	{
-		char buffer[1024];
+		char buffer[4096];
 
 		switch(aField->m_type)
 		{
@@ -990,15 +1031,11 @@ namespace tpublic
 				for(size_t i = 0; i < t->size(); i++)
 				{
 					if(i > 0)
-					{
 						Helpers::StringAppend(buffer, sizeof(buffer), ",");
-					}
-					else
-					{
-						char tmp[1024];
-						TP_STRING_FORMAT(tmp, sizeof(tmp), "%u", t->at(i));
-						Helpers::StringAppend(buffer, sizeof(buffer), tmp);
-					}
+
+					char tmp[1024];
+					TP_STRING_FORMAT(tmp, sizeof(tmp), "%u", t->at(i));
+					Helpers::StringAppend(buffer, sizeof(buffer), tmp);
 				}
 			}
 			break;

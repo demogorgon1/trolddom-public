@@ -148,6 +148,7 @@
 			<exists _heroic_weapon_damage> heroic_weapon_damage_multiplier: @_heroic_weapon_damage
 			<exists _heroic_resource_health> heroic_health_multiplier: @_heroic_resource_health
 			<exists _required_seasonal_event> required_seasonal_event: @_required_seasonal_event
+			<exists _spawn_delay> spawn_delay: @_spawn_delay
 		}		
 		sprite<static>: 
 		{ 
@@ -266,6 +267,8 @@
 	icon: @_icon
 	flags: [ dungeon_loot ]
 	
+	<exists _unique and _unique> flags: [ unique ]
+	
 	<exists _item_level> item_level: @_item_level
 	<exists _level_range> level_range: @_level_range
 	
@@ -300,6 +303,8 @@
 	<exists _block> stat block_chance: @_block
 	<exists _phys_crit> stat phys_crit_chance: @_phys_crit
 	<exists _spell_crit> stat spell_crit_chance: @_spell_crit
+	
+	<exists _variants> variants: @_variants
 }
 
 !define BOSS_DROP_HEAD { !BOSS_DROP equipment_slots: [ head ] }

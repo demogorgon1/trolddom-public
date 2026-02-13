@@ -223,7 +223,7 @@ namespace tpublic::Systems
 				{
 					const EntityInstance* self = aContext->m_worldView->WorldViewSingleEntityInstance(aEntityInstanceId);
 					if(self != NULL)
-						entry->m_cancel = Requirements::CheckList(GetManifest(), aura->m_cancelRequirements, self, NULL);
+						entry->m_cancel = Requirements::CheckList(GetManifest(), aura->m_cancelRequirements, aContext->m_worldView, self, NULL);
 				}
 
 				if((aura->m_flags & Data::Aura::FLAG_CHARGED) != 0 && entry->m_charges == 0)

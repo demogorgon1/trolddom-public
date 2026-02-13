@@ -38,6 +38,7 @@ namespace tpublic
 				combatPrivate,
 				aEntity->TryGetComponent<Components::MinionPrivate>(),
 				npc,
+				false,
 				false);
 
 			// Default melee push priorities

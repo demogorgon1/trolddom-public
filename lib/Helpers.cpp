@@ -146,10 +146,37 @@ namespace tpublic::Helpers
 		if (f == NULL)
 			return false;
 
-		char line[1024];
+		std::string line;
+		int ch;
 
-		while (feof(f) == 0 && fgets(line, sizeof(line), f) != NULL)
+		while ((ch = fgetc(f)) != EOF)
+		{
+			if (ch == '\n' || ch == '\r')
+			{
+				if (ch == '\r')
+				{
+					int next = fgetc(f);
+					if (next != '\n' && next != EOF)
+						ungetc(next, f);
+				}
+
+				aOut.push_back(line);
+				line.clear();
+			}
+			else
+			{
+				line.push_back((char)ch);
+			}
+		}
+
+		if (!line.empty())
 			aOut.push_back(line);
+
+		if (ferror(f))
+		{
+			fclose(f);
+			return false;
+		}
 
 		fclose(f);
 		return true;

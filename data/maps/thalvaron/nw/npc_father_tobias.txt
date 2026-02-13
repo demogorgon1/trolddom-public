@@ -12,6 +12,7 @@ dialogue_screen .father_tobias_dialogue:
 		{ quest: .father_tobias_2 }	
 		{ quest<completion_only>: thalvaron_joana_2 }
 		{ quest<offer_only>: thalvaron_father_tobias_3 } 
+		{ quest<offer_only>: .father_tobias_4 requirement self<must_have_item>: demonic_shard }
 	]
 }
 
@@ -99,7 +100,7 @@ quest .father_tobias_1:
 	description:
 	[
 		"A few days ago the Prince came to me and told me about a nightmare he had about the old catacombs under the castle. He was very shaken and couldn't stop talking about ghouls and ghosts. I assured him"
-		"that there is no such things down there, but in the end he made promise to go make sure. I was thinking that maybe you could go take a look? I don't really have time to do it myself. I have, uh, religious"
+		"that there are no such things down there, but in the end he made a promise to go make sure. I was thinking that maybe you could go take a look? I don't really have time to do it myself. I have, uh, religious"
 		"practices to attend to.\n"
 		"\n"
 		"Here take this key, it will unlock the gate to the catacombs. You'll find it down in the basement, accessible from the outside of the castle to the east."
@@ -112,7 +113,7 @@ quest .father_tobias_1:
 
 	completion:
 	[
-		"What? Oh no, undead creatures in my catacombs? Who yould have thought!"
+		"What? Oh no, undead creatures in my catacombs? Who would have thought!"
 	]
 
 	quest_items: [ .father_tobias_quest_item_1 ]
@@ -309,4 +310,38 @@ quest thalvaron_father_tobias_3:
 	objectives: [ .father_tobias_quest_item_3_x ]	
 	prerequisites: [ thalvaron_joana_2 ]
 	level: 30
+}
+
+############################################################
+# Quest 4
+
+quest .father_tobias_4:
+{
+	string: "Infernal Shards"
+
+	text:
+	[
+		"Find the demon hunter in the woods behind the temple."
+	]
+
+	description:
+	[
+		"Hmm, that's an horrible object you've got there. The green shard. Yeah, that one.\n"
+		"\n"
+		"Can't you feel that something is wrong with it? Not just ordinary unholy shenanigans, no, this is straight up infernal.\n"
+		"\n"
+		"A demon hunter came to me recently and told me about how people all around the world are getting possessed by infernal powers. She showed me one of these shards and told me the problem"
+		"is linked to those... and that she'd be interested if I came upon more of them.\n"
+		"\n"
+		"She said something about setting up camp in the woods behind my temple. You should go talk to her."
+	]
+
+	completion:
+	[
+		"Oh, let me see what you've got."
+	]
+
+	level: 30
+	reward_cash_multiplier: 0.1
+	reward_xp_multiplier: 0.1
 }

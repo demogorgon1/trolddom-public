@@ -71,8 +71,8 @@ quest .gob_fulbro_1:
 	
 	description: 
 	[
-		"A friend of mine was recently attacked by a vicious salt-water crocodile while fishing just south of Mirehaven. By some miracle he survived, even after it severed his leg in on clean bite and then swam away.\n\n"
-		"He went back to the capital to recover and won't be back for a while. When that happens, I'd like to have a surprise ready for him. Maybe you can help me by hunting down the crocodile and recover his leg?"
+		"A friend of mine was recently attacked by a vicious salt-water crocodile while fishing just south of Mirehaven. By some miracle he survived, even after it severed his leg in one clean bite and then swam away.\n\n"
+		"He went back to the capital to recover and won't be back for a while. When that happens, I'd like to have a surprise ready for him. Maybe you can help me by hunting down the crocodile and recovering his leg?"
 		"I've seen the crocodile patrolling the waters along the coast to the south."
 	]
 

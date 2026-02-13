@@ -16,12 +16,14 @@ namespace tpublic
 
 		bool	Check(
 					const Manifest*										aManifest,
+					const IWorldView*									aWorldView,
 					const EntityInstance*								aSelf,
 					const EntityInstance*								aTarget,
 					const Requirement*									aRequirement);
 		bool	CheckList(
 					const Manifest*										aManifest,
 					const std::vector<Requirement>&						aRequirements,
+					const IWorldView*									aWorldView,
 					const EntityInstance*								aSelf,
 					const EntityInstance*								aTarget,
 					const Requirement**									aOutFailedRequirement = NULL);
@@ -34,10 +36,12 @@ namespace tpublic
 		bool	CheckAnyList(
 					const Manifest*										aManifest,
 					const std::vector<Requirement>&						aRequirements,
+					const IWorldView*									aWorldView,
 					const std::vector<const EntityInstance*>&			aSelves,
 					const EntityInstance*								aTarget);
 		bool	CheckOpenable(
 					const Manifest*										aManifest,
+					const IWorldView*									aWorldView,
 					const EntityInstance*								aSelf,
 					const EntityInstance*								aTarget,
 					bool*												aOutInstant,

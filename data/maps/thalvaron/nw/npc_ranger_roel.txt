@@ -94,7 +94,7 @@ quest .ranger_roel_1:
 	
 	description: 
 	[
-		"Didn't expect to see anyone here. It's been ages since last time I had a visitor. Or, well, recently goblins have been coming out of the caves at night to steal my things. They seem to be afraid of me,"
+		"Didn't expect to see anyone here. It's been ages since the last time I had a visitor. Or, well, recently goblins have been coming out of the caves at night to steal my things. They seem to be afraid of me,"
 		"but yesterday they stole my satchel.\n"		
 		"\n"
 		"I went in there to look for it, but couldn't find it. Maybe you can retrieve it for me?"
@@ -184,8 +184,8 @@ quest .ranger_roel_3:
 	
 	description: 
 	[
-		"Aetheris Island is just across the water from here and have long been plagued by weird crabs walking on their hind legs, some even employing tools, weapons, and magic. Well, now they seem to have"
-		"reached our shores as well. I haven't seen them other places so hopefully they're not too widespread. Anyway, yesterday I went for a walk up by the old fort when suddenly a giant green crab appeared out"
+		"Aetheris Island is just across the water from here and has long been plagued by weird crabs walking on their hind legs, some even employing tools, weapons, and magic. Well, now they seem to have"
+		"reached our shores as well. I haven't seen them in other places so hopefully they're not too widespread. Anyway, yesterday I went for a walk up by the old fort when suddenly a giant green crab appeared out"
 		"of nowhere and blasted me with some kind of lightning strike. I don't want to deal with that. Can you go up there and take care of it?"
 	]
 

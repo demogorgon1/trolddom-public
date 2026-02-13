@@ -302,7 +302,7 @@ map realm_of_fire:
 {
 	string: "Realm of Fire"
 	type: open_world
-	default_tile: lava
+	default_tile: black_rocks
 	default_player_spawn: .player_spawn
 	default_fishing_loot_table: fish_realm_of_fire
 	view_attenuation: 0

@@ -89,8 +89,8 @@ quest .brill_craigsworth_1:
 	
 	description: 
 	[
-		"My old uncle is a bit of a weirdo and has taken up residence in a the most spider infested part of the jungle. There is a path leading to his house just north of here. Can you go check"
-		"up on him? I'd rather not venture into that part of the jungle. If you do, bring him some the sour bananas you can find across the river. The man needs to eat."
+		"My old uncle is a bit of a weirdo and has taken up residence in the most spider infested part of the jungle. There is a path leading to his house just north of here. Can you go check"
+		"up on him? I'd rather not venture into that part of the jungle. If you do, bring him some of the sour bananas you can find across the river. The man needs to eat."
 	]
 	
 	completion:
@@ -136,7 +136,7 @@ quest .brill_craigsworth_2:
 	
 	description: 
 	[
-		"Most things in this jungle will try to kill you if they get the chance, including the plants. Some will shoot things at you from afar, others will bite you if you get too close. Some will even chase you, running with their little legs. Anyway, some of these plants are actually really good for cooking. The jungle to the west of here is crawling with carnivous plants that are really good when you"
+		"Most things in this jungle will try to kill you if they get the chance, including the plants. Some will shoot things at you from afar, others will bite you if you get too close. Some will even chase you, running with their little legs. Anyway, some of these plants are actually really good for cooking. The jungle to the west of here is crawling with carnivorous plants that are really good when you"
 		"put them in a nice stew. I'd rather not lose my fingers so maybe you can go and get me some of their leaves? Remember to wear protective gloves."
 	]
 

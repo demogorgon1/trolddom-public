@@ -13,23 +13,24 @@ namespace tpublic
 		{
 			static const DirectEffect::Id ID = DirectEffect::ID_SPAWN_ENTITY;
 
-			enum SpawnFlag : uint8_t
+			enum SpawnFlag : uint32_t
 			{
-				SPAWN_FLAG_AT_TARGET			= 0x01,
-				SPAWN_FLAG_NO_OWNER				= 0x02,
-				SPAWN_FLAG_SOURCE_LEVEL			= 0x04,
-				SPAWN_FLAG_AT_AOE_TARGET		= 0x08,
-				SPAWN_FLAG_SOURCE_THREAT_TARGET = 0x10,
-				SPAWN_FLAG_DETACHED				= 0x20,
-				SPAWN_FLAG_DESPAWN_SOURCE		= 0x40,
-				SPAWN_FLAG_NEARBY				= 0x80
+				SPAWN_FLAG_AT_TARGET			= 0x00000001,
+				SPAWN_FLAG_NO_OWNER				= 0x00000002,
+				SPAWN_FLAG_SOURCE_LEVEL			= 0x00000004,
+				SPAWN_FLAG_AT_AOE_TARGET		= 0x00000008,
+				SPAWN_FLAG_SOURCE_THREAT_TARGET = 0x00000010,
+				SPAWN_FLAG_DETACHED				= 0x00000020,
+				SPAWN_FLAG_DESPAWN_SOURCE		= 0x00000040,
+				SPAWN_FLAG_NEARBY				= 0x00000080,
+				SPAWN_FLAG_SOURCE_THREAT		= 0x00000100
 			};
 
-			static uint8_t
+			static uint32_t
 			SourceToSpawnFlags(
 				const SourceNode* aSource)
 			{
-				uint8_t flags = 0;
+				uint32_t flags = 0;
 				aSource->GetArray()->ForEachChild([&](
 					const SourceNode* aFlag)
 				{
@@ -50,6 +51,8 @@ namespace tpublic
 						flags |= SPAWN_FLAG_DESPAWN_SOURCE;
 					else if (strcmp(string, "nearby") == 0)
 						flags |= SPAWN_FLAG_NEARBY;
+					else if (strcmp(string, "source_threat") == 0)
+						flags |= SPAWN_FLAG_SOURCE_THREAT;
 					else
 						TP_VERIFY(false, aFlag->m_debugInfo, "'%s' is not a valid spawn flag.", string);
 				});
@@ -127,6 +130,8 @@ namespace tpublic
 							m_health = aChild->GetFloat();
 						else if (aChild->m_name == "armor")
 							m_armor = aChild->GetFloat();
+						else if(aChild->m_name == "elite")
+							m_elite = aChild->GetBool();
 						else if (aChild->m_name == "update")
 							m_update = aChild->GetBool();
 						else
@@ -142,6 +147,7 @@ namespace tpublic
 					aWriter->WriteFloat(m_health);
 					aWriter->WriteFloat(m_armor);
 					aWriter->WriteBool(m_update);
+					aWriter->WriteOptionalPOD(m_elite);
 				}
 
 				bool
@@ -156,14 +162,145 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadBool(m_update))
 						return false;
+					if(!aReader->ReadOptionalPOD(m_elite))
+						return false;
 					return true;
 				}
 				
 				// Public data
-				float			m_weaponDamage = 1.0f;
-				float			m_health = 1.0f;
-				float			m_armor = 1.0f;
-				bool			m_update = false;
+				float					m_weaponDamage = 1.0f;
+				float					m_health = 1.0f;
+				float					m_armor = 1.0f;
+				std::optional<bool>		m_elite;
+				bool					m_update = false;
+			};
+
+			struct AuraConditionalEntity
+			{
+				AuraConditionalEntity()
+				{
+
+				}
+
+				AuraConditionalEntity(
+					const SourceNode*							aSource)
+				{
+					m_entityId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_ENTITY, aSource->m_name.c_str());
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if (aChild->m_name == "refresh_npc_metrics")
+							m_refreshNPCMetrics = RefreshNPCMetrics(aChild);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*									aWriter) const
+				{
+					aWriter->WriteUInt(m_entityId);
+					aWriter->WriteOptionalObject(m_refreshNPCMetrics);
+				}
+
+				bool
+				FromStream(
+					IReader*									aReader)
+				{
+					if(!aReader->ReadUInt(m_entityId))
+						return false;
+					if (!aReader->ReadOptionalObject(m_refreshNPCMetrics))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t							m_entityId = 0;
+				std::optional<RefreshNPCMetrics>	m_refreshNPCMetrics;
+			};
+
+			struct AuraConditional
+			{
+				AuraConditional()
+				{
+
+				}
+
+				AuraConditional(
+					const SourceNode*							aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "aura")
+							m_auraId = aChild->GetId(DataType::ID_AURA);
+						else if (aChild->m_name == "loot_table")
+							m_lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+						else if (aChild->m_name == "extra_loot_table")
+							m_extraLootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+						else if (aChild->m_tag == "entity")
+							m_entities.push_back(AuraConditionalEntity(aChild));
+						else if (aChild->m_name == "consume")
+							m_consume = aChild->GetBool();
+						else if (aChild->m_name == "owner")
+							m_owner = aChild->GetBool();
+						else if (aChild->m_name == "exact_charges")
+							m_exactCharges = aChild->GetUInt32();
+						else if (aChild->m_name == "refresh_npc_metrics")
+							m_refreshNPCMetrics = RefreshNPCMetrics(aChild);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*									aWriter) const
+				{
+					aWriter->WriteUInt(m_auraId);
+					aWriter->WriteBool(m_consume);
+					aWriter->WriteBool(m_owner);
+					aWriter->WriteObjects(m_entities);
+					aWriter->WriteUInt(m_exactCharges);
+					aWriter->WriteOptionalObject(m_refreshNPCMetrics);
+					aWriter->WriteUInt(m_lootTableId);
+					aWriter->WriteUInt(m_extraLootTableId);
+				}
+
+				bool
+				FromStream(
+					IReader*									aReader)
+				{
+					if(!aReader->ReadUInt(m_auraId))
+						return false;
+					if (!aReader->ReadBool(m_consume))
+						return false;
+					if (!aReader->ReadBool(m_owner))
+						return false;
+					if (!aReader->ReadObjects(m_entities))
+						return false;
+					if (!aReader->ReadUInt(m_exactCharges))
+						return false;
+					if (!aReader->ReadOptionalObject(m_refreshNPCMetrics))
+						return false;
+					if (!aReader->ReadUInt(m_lootTableId))
+						return false;
+					if (!aReader->ReadUInt(m_extraLootTableId))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t							m_auraId = 0;
+				bool								m_consume = false;
+				bool								m_owner = false;				
+				std::vector<AuraConditionalEntity>	m_entities;
+				uint32_t							m_exactCharges = 0;
+				std::optional<RefreshNPCMetrics>	m_refreshNPCMetrics;
+				uint32_t							m_lootTableId = 0;
+				uint32_t							m_extraLootTableId = 0;
 			};
 
 			SpawnEntity()
@@ -202,13 +339,14 @@ namespace tpublic
 								bool							aOffHand) override;
 
 			// Public data
-			EntityState::Id						m_initState = EntityState::ID_DEFAULT;
-			uint32_t							m_mapEntitySpawnId = 0;
-			uint32_t							m_entityId = 0;
-			uint8_t								m_spawnFlags = 0;
-			int32_t								m_npcTargetThreat = 0;
-			std::optional<RefreshNPCMetrics>	m_refreshNPCMetrics;
-			std::vector<MustHaveOneAtTarget>	m_mustHaveOneAtTarget;
+			EntityState::Id									m_initState = EntityState::ID_DEFAULT;
+			uint32_t										m_mapEntitySpawnId = 0;
+			std::vector<uint32_t>							m_entityIds;
+			uint32_t										m_spawnFlags = 0;
+			int32_t											m_npcTargetThreat = 0;
+			std::optional<RefreshNPCMetrics>				m_refreshNPCMetrics;
+			std::vector<MustHaveOneAtTarget>				m_mustHaveOneAtTarget;
+			std::vector<std::unique_ptr<AuraConditional>>	m_auraConditionals;
 		};
 
 	}
