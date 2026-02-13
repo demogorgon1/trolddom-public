@@ -49,7 +49,7 @@ FetchContent_MakeAvailable(nwork)
 # -------------------
 
 if(MSVC)
-	add_compile_options(/bigobj /MP)
+	add_compile_options(/bigobj /MP /wd4702)
 	
 	if(TROLDDOM_PUBLIC_DISABLE_MSVC_ITERATOR_DEBUG)
 		add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)	
