@@ -91,7 +91,7 @@ namespace tpublic
 			{
 				std::vector<const Data::Item*> itemsWithVariants;
 
-				aManifest->GetContainer<Data::Item>()->ForEach([aManifest, &itemsWithVariants](
+				aManifest->GetContainer<Data::Item>()->ForEach([&itemsWithVariants](
 					Data::Item* aItem)
 				{
 					if(!aItem->m_variants.empty())	
