@@ -1,5 +1,9 @@
 #pragma once
 
+#if defined(WIN32)
+	#pragma warning(disable: 4702) // Unreachable code, triggered by /LTCG in release builds
+#endif
+
 #include <atomic>
 #include <filesystem>
 #include <functional>
