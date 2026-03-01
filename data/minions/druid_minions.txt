@@ -1,0 +1,1049 @@
+{
+
+	${
+		_level: 1 
+	}
+
+	##############################################################################
+	# Snake Companion (baseline at level 7)
+	{
+		${
+			_creature_type: beast	
+			_name_template: .druid_companion_snake		
+			_sprite: snake_1
+			_sprite_dead: snake_1_dead
+			_minion_modes: [ .druid_companion_snake_aggressive .druid_companion_snake_defensive .druid_companion_snake_passive ]
+			_default_minion_mode: .druid_companion_snake_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .druid_companion_snake_attack flags: [ auto ] } 
+				{ id: .druid_companion_snake_venom_bite flags: [ auto ] target_must_not_have_aura: .druid_companion_snake_venom }
+			]
+			
+			_ability_prio: [ .druid_companion_snake_venom_bite .druid_companion_snake_attack ]
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .druid_companion_snake:
+		{
+			possibility<1>:
+			{
+				string: [ "Snake" ]
+			}
+		}
+
+		minion_mode .druid_companion_snake_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_snake_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_snake_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .druid_companion_snake_attack:
+		{
+			duration: 18
+		}
+		
+		ability .druid_companion_snake_attack:
+		{
+			string: "Bite"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_strike
+			cooldowns: [ .druid_companion_snake_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				function: { expression: a_mul_x a: 0.35 x: weapon }		
+			}
+		}
+		
+		cooldown .druid_companion_snake_venom_bite:
+		{
+			duration: 200
+		}
+		
+		aura .druid_companion_snake_venom:
+		{
+			string: "Venom"
+			description: "Poisoned, taking nature damage over time."
+			type: debuff
+			icon: icon_improved_poison_bomb
+			duration: 100
+			flags: [ unique magic ]
+			
+			aura_effect repeat:
+			{
+				update_interval: 12
+				update_count: 5
+				ability<self>: .druid_companion_snake_venom_tick
+			}
+		}
+		
+		ability .druid_companion_snake_venom_tick:
+		{
+			flags: [ offensive target_self always_in_range ]
+			states: [ default in_combat ]
+
+			direct_effect damage:
+			{
+				damage_type: nature
+				flags: [ can_be_critical ]
+				function: { expression: a_mul_x_plus_b a: 0.15 x: owner_spell_damage b: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 20 ] ] }
+			}
+		}
+		
+		ability .druid_companion_snake_venom_bite:
+		{
+			string: "Venom Bite"
+			description: "Deals $damage$ damage and poisons target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_improved_poison_bomb
+			cooldowns: [ .druid_companion_snake_venom_bite ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x a: 0.8 x: minion_weapon }		
+			}
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_snake_venom
+			}
+		}
+		
+		cooldown .snake_hunting_party_presence:
+		{
+			duration: 30
+		}
+		
+		aura .snake_hunting_party_presence_1:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 2%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 2 } }
+		}
+		
+		aura .snake_hunting_party_presence_2:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 4%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 4 } }
+		}
+		
+		aura .snake_hunting_party_presence_3:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 6%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 6 } }
+		}
+		
+		ability .snake_hunting_party_presence:
+		{
+			string: "Pack Presence"
+			flags: [ target_aoe target_aoe_friendly always_in_range ]
+			states: [ default in_combat ]
+			icon: icon_swiftstrike
+			cooldowns: [ .snake_hunting_party_presence ]
+			aoe_radius: 2
+			aoe_cap: 1
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_1
+				aura: .snake_hunting_party_presence_1
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_2
+				aura: .snake_hunting_party_presence_2
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_3
+				aura: .snake_hunting_party_presence_3
+			}
+		}
+		
+		entity druid_companion_snake: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_snake_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_snake_attack flags: [ auto ] } 
+				{ id: .druid_companion_snake_venom_bite flags: [ auto ] target_must_not_have_aura: .druid_companion_snake_venom }
+				{ id: .snake_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .snake_hunting_party_presence .druid_companion_snake_venom_bite .druid_companion_snake_attack ]
+		}
+	}
+
+	##############################################################################
+	# Cat Companion (Stalker archetype - talent unlocked)
+	{
+		${
+			_creature_type: beast	
+			_name_template: .druid_companion_cat		
+			_sprite: panther_1
+			_sprite_dead: panther_1_dead
+			_minion_modes: [ .druid_companion_cat_aggressive .druid_companion_cat_defensive .druid_companion_cat_passive ]
+			_default_minion_mode: .druid_companion_cat_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .druid_companion_cat_attack flags: [ auto ] } 
+				{ id: .druid_companion_cat_prowl flags: [ auto ] self_must_not_have_aura: .druid_companion_cat_prowl }
+			]
+			
+			_ability_prio: [ .druid_companion_cat_prowl .druid_companion_cat_attack ]
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .druid_companion_cat:
+		{
+			possibility<1>:
+			{
+				string: [ "Cat" ]
+			}
+		}
+
+		minion_mode .druid_companion_cat_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_cat_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_cat_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .druid_companion_cat_attack:
+		{
+			duration: 15
+		}
+		
+		ability .druid_companion_cat_attack:
+		{
+			string: "Claw"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 2
+			icon: icon_claw
+			cooldowns: [ .druid_companion_cat_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				function: { expression: a_mul_x a: 1.0 x: weapon }		
+			}
+		}
+		
+		cooldown .druid_companion_cat_prowl:
+		{
+			duration: 200
+		}
+		
+		aura .druid_companion_cat_prowl:
+		{
+			string: "Prowl"
+			type: buff
+			icon: icon_swiftstrike
+			duration: 100
+			flags: [ unique ]
+			stat_modifiers:
+			{
+				phys_crit_chance: { add: 10 }
+			}
+		}
+		
+		ability .druid_companion_cat_prowl:
+		{
+			string: "Prowl"
+			description: "Enters a stalking stance, increasing crit chance."
+			flags: [ target_self ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_swiftstrike
+			cooldowns: [ .druid_companion_cat_prowl ]
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_cat_prowl
+			}
+		}
+		
+		cooldown .cat_hunting_party_presence:
+		{
+			duration: 30
+		}
+		
+		aura .cat_hunting_party_presence_1:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 2%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 2 } }
+		}
+		
+		aura .cat_hunting_party_presence_2:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 4%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 4 } }
+		}
+		
+		aura .cat_hunting_party_presence_3:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 6%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 6 } }
+		}
+		
+		ability .cat_hunting_party_presence:
+		{
+			string: "Pack Presence"
+			flags: [ target_aoe target_aoe_friendly always_in_range ]
+			states: [ default in_combat ]
+			icon: icon_swiftstrike
+			cooldowns: [ .cat_hunting_party_presence ]
+			aoe_radius: 2
+			aoe_cap: 1
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_1
+				aura: .cat_hunting_party_presence_1
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_2
+				aura: .cat_hunting_party_presence_2
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_3
+				aura: .cat_hunting_party_presence_3
+			}
+		}
+		
+		entity druid_companion_cat: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_cat_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_cat_attack flags: [ auto ] } 
+				{ id: .druid_companion_cat_prowl flags: [ auto ] self_must_not_have_aura: .druid_companion_cat_prowl }
+				{ id: .cat_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .cat_hunting_party_presence .druid_companion_cat_prowl .druid_companion_cat_attack ]
+		}
+	}
+
+	##############################################################################
+	# Wolf Companion (Pack Hunter archetype - talent unlocked)
+	{
+		${
+			_name_template: .druid_companion_wolf
+			_creature_type: beast
+			_sprite: wolf_1
+			_sprite_dead: wolf_1_dead
+			_minion_modes: [ .druid_companion_wolf_aggressive .druid_companion_wolf_defensive .druid_companion_wolf_passive ]
+			_default_minion_mode: .druid_companion_wolf_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .druid_companion_wolf_attack flags: [ auto ] } 
+				{ id: .druid_companion_wolf_rend flags: [ auto ] target_must_not_have_aura: .druid_companion_wolf_bleed }
+				{ id: .druid_companion_wolf_howl flags: [ auto ] self_must_not_have_aura: .druid_companion_wolf_howl }
+			]
+			
+			_ability_prio: [ .druid_companion_wolf_howl .druid_companion_wolf_rend .druid_companion_wolf_attack ]		
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .druid_companion_wolf:
+		{
+			possibility<1>:
+			{
+				string: [ "Wolf" ]
+			}
+		}
+
+		minion_mode .druid_companion_wolf_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_wolf_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_wolf_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .druid_companion_wolf_attack:
+		{
+			duration: 18
+		}
+		
+		ability .druid_companion_wolf_attack:
+		{
+			string: "Bite"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_strike
+			cooldowns: [ .druid_companion_wolf_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical
+				function: { expression: a_mul_x a: 1.3 x: weapon }		
+			}
+		}	
+		
+		cooldown .druid_companion_wolf_rend:
+		{
+			duration: 60
+		}
+		
+		aura .druid_companion_wolf_bleed:
+		{
+			string: "Rend"
+			description: "Bleeding."
+			type: debuff
+			icon: icon_rend
+			duration: 80
+			flags: [ unique_per_source ]
+			
+			aura_effect repeat:
+			{
+				update_interval: 20
+				ability: .druid_companion_wolf_bleed_tick
+			}
+		}
+		
+		ability .druid_companion_wolf_bleed_tick:
+		{
+			string: "Rend"
+			icon: icon_rend
+			states: [ default in_combat ]
+			flags: [ always_in_range always_in_line_of_sight ]
+			
+			direct_effect damage:
+			{
+				damage_type: bleed
+				function: { expression: a a: [ [ 1 3 ] [ 10 6 ] [ 20 12 ] [ 30 20 ] ] }
+				direct: false
+			}
+		}
+		
+		ability .druid_companion_wolf_rend:
+		{
+			string: "Rend"
+			description: "Deals $damage$ damage and causes target to bleed."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_rend
+			cooldowns: [ .druid_companion_wolf_rend ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x a: 0.9 x: minion_weapon }		
+			}
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_wolf_bleed
+			}
+		}
+		
+		cooldown .druid_companion_wolf_howl:
+		{
+			duration: 300
+		}
+		
+		aura .druid_companion_wolf_howl:
+		{
+			string: "Howl"
+			type: buff
+			icon: icon_provocation
+			duration: 100
+			flags: [ unique ]
+			stat_modifiers:
+			{
+				strength: { add_percent: 5 }
+			}
+		}
+		
+		ability .druid_companion_wolf_howl:
+		{
+			string: "Howl"
+			description: "Howls, increasing strength for nearby allies."
+			flags: [ target_aoe target_aoe_friendly ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_provocation
+			cooldowns: [ .druid_companion_wolf_howl ]
+			aoe_radius: 4
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_wolf_howl
+			}
+		}
+		
+		cooldown .wolf_hunting_party_presence:
+		{
+			duration: 30
+		}
+		
+		aura .wolf_hunting_party_presence_1:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 2%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 2 } }
+		}
+		
+		aura .wolf_hunting_party_presence_2:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 4%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 4 } }
+		}
+		
+		aura .wolf_hunting_party_presence_3:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 6%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 6 } }
+		}
+		
+		ability .wolf_hunting_party_presence:
+		{
+			string: "Pack Presence"
+			flags: [ target_aoe target_aoe_friendly always_in_range ]
+			states: [ default in_combat ]
+			icon: icon_swiftstrike
+			cooldowns: [ .wolf_hunting_party_presence ]
+			aoe_radius: 2
+			aoe_cap: 1
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_1
+				aura: .wolf_hunting_party_presence_1
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_2
+				aura: .wolf_hunting_party_presence_2
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_3
+				aura: .wolf_hunting_party_presence_3
+			}
+		}
+		
+		entity druid_companion_wolf: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_wolf_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_wolf_attack flags: [ auto ] } 
+				{ id: .druid_companion_wolf_rend flags: [ auto ] target_must_not_have_aura: .druid_companion_wolf_bleed }
+				{ id: .druid_companion_wolf_howl flags: [ auto ] self_must_not_have_aura: .druid_companion_wolf_howl }
+				{ id: .wolf_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .wolf_hunting_party_presence .druid_companion_wolf_howl .druid_companion_wolf_rend .druid_companion_wolf_attack ]
+		}
+	}
+
+	##############################################################################
+	# Bear Companion (Guardian archetype - talent unlocked)
+	{
+		${
+			_name_template: .druid_companion_bear
+			_creature_type: beast
+			_sprite: bear
+			_sprite_dead: bear_dead
+			_minion_modes: [ .druid_companion_bear_aggressive .druid_companion_bear_defensive .druid_companion_bear_passive ]
+			_default_minion_mode: .druid_companion_bear_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .druid_companion_bear_attack flags: [ auto ] } 
+				{ id: .druid_companion_bear_swipe flags: [ auto ] min_neighbor_hostiles: 2 }
+			]
+			
+			_ability_prio: [ .druid_companion_bear_swipe .druid_companion_bear_attack ]		
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .druid_companion_bear:
+		{
+			possibility<1>:
+			{
+				string: [ "Bear" ]
+			}
+		}
+
+		minion_mode .druid_companion_bear_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_bear_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_bear_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .druid_companion_bear_attack:
+		{
+			duration: 21
+		}
+		
+		ability .druid_companion_bear_attack:
+		{
+			string: "Claw"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_strike
+			cooldowns: [ .druid_companion_bear_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x_plus_b_mul_y a: 1.2 x: minion_weapon b: 0.3 y: owner_spell_damage }		
+			}
+		}	
+		
+		cooldown .druid_companion_bear_swipe:
+		{
+			duration: 80
+		}
+		
+		ability .druid_companion_bear_swipe:
+		{
+			string: "Swipe"
+			description: "Deals damage to nearby enemies."
+			flags: [ melee offensive target_aoe target_aoe_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_strike_2
+			cooldowns: [ .druid_companion_bear_swipe ]
+			aoe_radius: 2
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x_plus_b_mul_y a: 0.8 x: minion_weapon b: 0.3 y: owner_spell_damage }		
+			}
+		}
+		
+		cooldown .bear_hunting_party_presence:
+		{
+			duration: 30
+		}
+		
+		aura .bear_hunting_party_presence_1:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 2%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 2 } }
+		}
+		
+		aura .bear_hunting_party_presence_2:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 4%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 4 } }
+		}
+		
+		aura .bear_hunting_party_presence_3:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 6%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 6 } }
+		}
+		
+		ability .bear_hunting_party_presence:
+		{
+			string: "Pack Presence"
+			flags: [ target_aoe target_aoe_friendly always_in_range ]
+			states: [ default in_combat ]
+			icon: icon_swiftstrike
+			cooldowns: [ .bear_hunting_party_presence ]
+			aoe_radius: 2
+			aoe_cap: 1
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_1
+				aura: .bear_hunting_party_presence_1
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_2
+				aura: .bear_hunting_party_presence_2
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_3
+				aura: .bear_hunting_party_presence_3
+			}
+		}
+		
+		entity druid_companion_bear: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_bear_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_bear_attack flags: [ auto ] } 
+				{ id: .druid_companion_bear_swipe flags: [ auto ] min_neighbor_hostiles: 2 }
+				{ id: .bear_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .bear_hunting_party_presence .druid_companion_bear_swipe .druid_companion_bear_attack ]
+		}
+	}
+
+	##############################################################################
+	# Owlbear Companion (Windrunner archetype - talent unlocked)
+	{
+		${
+			_name_template: .druid_companion_owlbear
+			_creature_type: beast
+			_sprite: owlbear_1
+			_sprite_dead: owlbear_1_dead
+			_minion_modes: [ .druid_companion_owlbear_aggressive .druid_companion_owlbear_defensive .druid_companion_owlbear_passive ]
+			_default_minion_mode: .druid_companion_owlbear_defensive
+			_commands: [ move attack ]
+			
+			_abilities: 
+			[ 
+				{ id: .druid_companion_owlbear_attack flags: [ auto ] } 
+				{ id: .druid_companion_owlbear_screech flags: [ auto ] target_must_not_have_aura: .druid_companion_owlbear_screech }
+			]
+			
+			_ability_prio: [ .druid_companion_owlbear_screech .druid_companion_owlbear_attack ]		
+			_class_minion: true
+			_store_combat_data: true
+		}
+		
+		name_template .druid_companion_owlbear:
+		{
+			possibility<1>:
+			{
+				string: [ "Owlbear" ]
+			}
+		}
+
+		minion_mode .druid_companion_owlbear_aggressive:
+		{
+			string: "Aggressive"
+			icon: icon_aggressive
+			follow_distance: 3
+			aggro_range: 5
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_owlbear_defensive:
+		{
+			string: "Defensive"
+			icon: icon_defensive
+			follow_distance: 3
+			attack_owner_threat_target: true
+			attack_threat_target: true
+		}
+
+		minion_mode .druid_companion_owlbear_passive:
+		{
+			string: "Passive"
+			icon: icon_passive
+			follow_distance: 3
+		}
+		
+		cooldown .druid_companion_owlbear_attack:
+		{
+			duration: 20
+		}
+		
+		ability .druid_companion_owlbear_attack:
+		{
+			string: "Rend"
+			description: "Deals $damage$ damage to target."
+			flags: [ melee offensive target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_claw_2
+			cooldowns: [ .druid_companion_owlbear_attack ]
+			
+			direct_effect damage:
+			{
+				flags: [ can_be_critical ]
+				damage_type: physical			
+				function: { expression: a_mul_x_plus_b_mul_y a: 1.1 x: minion_weapon b: 0.6 y: owner_spell_damage }		
+			}
+		}	
+		
+		cooldown .druid_companion_owlbear_screech:
+		{
+			duration: 250
+		}
+		
+		aura .druid_companion_owlbear_screech:
+		{
+			string: "Terrifying Screech"
+			type: debuff
+			icon: icon_taunt
+			duration: 80
+			flags: [ unique ]
+			stat_modifiers:
+			{
+				armor: { add_percent: -10 }
+			}
+		}
+		
+		ability .druid_companion_owlbear_screech:
+		{
+			string: "Terrifying Screech"
+			description: "Screeches, reducing armor of nearby enemies."
+			flags: [ target_aoe target_aoe_hostile ]	
+			states: [ default in_combat ]
+			delay: 3
+			icon: icon_taunt
+			cooldowns: [ .druid_companion_owlbear_screech ]
+			aoe_radius: 3
+			
+			direct_effect apply_aura:
+			{
+				aura: .druid_companion_owlbear_screech
+			}
+		}
+		
+		cooldown .owlbear_hunting_party_presence:
+		{
+			duration: 30
+		}
+		
+		aura .owlbear_hunting_party_presence_1:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 2%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 2 } }
+		}
+		
+		aura .owlbear_hunting_party_presence_2:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 4%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 4 } }
+		}
+		
+		aura .owlbear_hunting_party_presence_3:
+		{
+			string: "Pack Presence"
+			description: "Attack speed increased by 6%."
+			type: buff
+			icon: icon_swiftstrike
+			duration: 50
+			flags: [ unique ]
+			stat_modifiers: { attack_haste: { add_percent: 6 } }
+		}
+		
+		ability .owlbear_hunting_party_presence:
+		{
+			string: "Pack Presence"
+			flags: [ target_aoe target_aoe_friendly always_in_range ]
+			states: [ default in_combat ]
+			icon: icon_swiftstrike
+			cooldowns: [ .owlbear_hunting_party_presence ]
+			aoe_radius: 2
+			aoe_cap: 1
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_1
+				aura: .owlbear_hunting_party_presence_1
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_2
+				aura: .owlbear_hunting_party_presence_2
+			}
+			
+			direct_effect apply_aura:
+			{
+				must_have_ability_modifier: hunting_party_3
+				aura: .owlbear_hunting_party_presence_3
+			}
+		}
+		
+		entity druid_companion_owlbear: !MINION{ _required_owner_aura: companion_active }
+		entity druid_companion_owlbear_hp: !MINION{ 
+			_required_owner_aura: companion_active 
+			_abilities: [ 
+				{ id: .druid_companion_owlbear_attack flags: [ auto ] } 
+				{ id: .druid_companion_owlbear_screech flags: [ auto ] target_must_not_have_aura: .druid_companion_owlbear_screech }
+				{ id: .owlbear_hunting_party_presence flags: [ auto ] }
+			]
+			_ability_prio: [ .owlbear_hunting_party_presence .druid_companion_owlbear_screech .druid_companion_owlbear_attack ]
+		}
+	}
+
+}

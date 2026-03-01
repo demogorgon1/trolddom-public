@@ -1,0 +1,1656 @@
+###############################################################################
+# DRUID KINSHIP TALENT TREE
+# Beast mastery and companion bonding
+###############################################################################
+
+talent_tree druid_kinship:
+{
+	string: "Kinship"
+	description: "Form powerful bonds with animal companions, enhancing you and your allies abilities."
+	icon: icon_summon_black_beast
+	
+	map_palette:
+	{
+		talent druid_natural_predator: "A" 
+		talent druid_pack_tactics: "B" 
+		talent druid_improved_mend_spirit: "C" 
+		talent druid_stalker_mastery: "D"
+		talent druid_pack_hunter_mastery: "E"
+		talent druid_hunting_party: "F"
+		talent druid_guardian_mastery: "G"
+		talent druid_coordinated_strike: "H"
+		talent druid_marked_prey: "I"
+		talent druid_improved_coordinated_strike: "J"
+		talent druid_windrunner_mastery: "K"
+		talent druid_bestial_wrath: "L"
+		talent druid_war_cry: "M"
+		talent druid_gift_of_the_untamed: "N"
+		talent druid_feral_fury: "O"
+		talent druid_feral_charge: "P"
+		talent druid_primal_reflexes: "Q"
+		sprite talent_tree_down_arrow: "d"
+		sprite talent_tree_down: "|"
+		sprite talent_tree_right_arrow: "-"
+	}
+
+	map:
+	[
+		"A..B..C"
+		"......."
+		"F-E..D."
+		"d......"
+		"I.G...N"
+		"......."
+		"P.K.H.."
+		"d...d.."
+		"Q.M.J.L"
+		"......."
+		"...O..."
+	]
+}
+
+###############################################################################
+# BASELINE ABILITIES (granted by class, not talents)
+###############################################################################
+
+aura_group armor_reduction: { }
+
+aura companion_active:
+{
+	string: "Companion Active"
+	description: "You have an active companion."
+	type: hidden
+	icon: icon_improved_poison_bomb
+	flags: [ unique indefinite persist_in_death ]
+}
+
+aura gift_of_the_untamed:
+{
+	string: "Gift of the Untamed"
+	description: "+10 Attack Power, +10 Spell Power, +3% crit, +3% haste."
+	icon: icon_blessing_of_war
+	duration: 18000
+	type: buff
+	flags: [ unique magic ]
+	
+	stat_modifiers:
+	{
+		attack_power: { add: 5 }
+		spell_damage: { add: 5 }
+		phys_crit_chance: { add: 1 }
+		spell_crit_chance: { add: 1 }
+		attack_haste: { add_percent: 1 }
+		spell_haste: { add_percent: 1 }
+	}
+}
+
+ability gift_of_the_untamed:
+{
+	string: "Gift of the Untamed"
+	description: "Blesses target with primal vitality. +5 AP/SP, +1% crit/haste for 30 minutes. Improved by talents."
+	range: 8
+	cast_time: 10
+	cooldowns: [ global ]
+	flags: [ spell target_other target_friendly target_self ]
+	states: [ default ]
+	icon: icon_blessing_of_war
+	talent_tree: druid_kinship
+	resource_cost mana: 20
+	delay: 2
+	target_particle_system: heal
+	
+	requirement self<must_not_have_aura>: cat_form
+	requirement self<must_not_have_aura>: bear_form
+
+	# Base version (applies if no talent)
+	direct_effect apply_aura:
+	{
+		aura: gift_of_the_untamed
+	}
+	
+	# R1: +10 AP/SP, +2% crit/haste (overwrites base via unique flag)
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_gift_1
+		aura: gift_of_the_untamed_improved_1
+	}
+	
+	# R2: +15 AP/SP, +3% crit/haste
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_gift_2
+		aura: gift_of_the_untamed_improved_2
+	}
+	
+	# R3: +20 AP/SP, +4% crit/haste
+	direct_effect apply_aura:
+	{
+		must_have_ability_modifier: improved_gift_3
+		aura: gift_of_the_untamed_improved_3
+	}
+}
+
+cooldown call_of_the_wild:
+{
+	duration: 50
+}
+
+ability call_companion:
+{
+	string: "Call Snake Companion"
+	description: "Summon a snake companion to fight by your side."
+	cast_time: 30
+	cooldowns: [ global call_of_the_wild ]
+	flags: [ target_self minion_summon class_minion_summon ]
+	states: [ default ]
+	icon: icon_improved_poison_bomb
+	resource_cost mana: 25
+	talent_tree: druid_kinship
+	delay: 2
+	
+	requirement self<must_not_be_in_state>: { id: in_combat }
+	
+	direct_effect apply_aura:
+	{
+		aura: companion_active
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.35
+			health: 0.40
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake_hp
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.65
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake_hp
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.65
+			armor: 1
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_snake_hp
+		init_state: spawning		
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.65
+			armor: 1
+		}
+	}
+}
+
+ability dismiss_companion:
+{
+	string: "Dismiss Companion"
+	description: "Dismiss your active companion."
+	cooldowns: [ global ]
+	flags: [ target_self ]
+	states: [ default ]
+	icon: icon_improved_poison_bomb
+	talent_tree: druid_kinship
+	
+	requirement self<must_have_aura>: companion_active
+	
+	direct_effect remove_aura:
+	{
+		aura: companion_active
+	}
+}
+
+###############################################################################
+# 0 PTS TIER - ENTRY (3 talents)
+# natural_predator, pack_tactics, improved_mend_spirit
+###############################################################################
+
+talent druid_natural_predator:
+{
+	string: "Natural Predator"
+	icon: icon_claw
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: druid_natural_predator_1 }
+		{ aura: druid_natural_predator_2 }
+		{ aura: druid_natural_predator_3 }
+		{ aura: druid_natural_predator_4 }
+		{ aura: druid_natural_predator_5 }
+	]
+}
+
+aura druid_natural_predator_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage to non-humanoids +2%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.02
+		requirement target<must_not_be_creature_type>: humanoid
+	}
+}
+
+aura druid_natural_predator_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage to non-humanoids +4%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.04
+		requirement target<must_not_be_creature_type>: humanoid
+	}
+}
+
+aura druid_natural_predator_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage to non-humanoids +6%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.06
+		requirement target<must_not_be_creature_type>: humanoid
+	}
+}
+
+aura druid_natural_predator_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage to non-humanoids +8%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.08
+		requirement target<must_not_be_creature_type>: humanoid
+	}
+}
+
+aura druid_natural_predator_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Damage to non-humanoids +10%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.10
+		requirement target<must_not_be_creature_type>: humanoid
+	}
+}
+
+talent druid_pack_tactics:
+{
+	string: "Pack Tactics"
+	icon: icon_attack_command
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: druid_pack_tactics_1 }
+		{ aura: druid_pack_tactics_2 }
+		{ aura: druid_pack_tactics_3 }
+		{ aura: druid_pack_tactics_4 }
+		{ aura: druid_pack_tactics_5 }
+	]
+}
+
+aura druid_pack_tactics_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "All damage +2%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.02
+	}
+}
+
+aura druid_pack_tactics_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "All damage +4%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.04
+	}
+}
+
+aura druid_pack_tactics_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "All damage +6%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.06
+	}
+}
+
+aura druid_pack_tactics_4:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "All damage +8%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.08
+	}
+}
+
+aura druid_pack_tactics_5:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "All damage +10%."
+	aura_effect damage_output_modifier:
+	{
+		multiplier: 1.10
+	}
+}
+
+talent druid_improved_mend_spirit:
+{
+	string: "Improved Mend Spirit"
+	icon: icon_heal
+	talent_tree_points_required: 0
+	points:
+	[
+		{ aura: druid_improved_mend_1 }
+		{ aura: druid_improved_mend_2 }
+		{ aura: druid_improved_mend_3 }
+	]
+}
+
+aura druid_improved_mend_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Healing +5%."
+	stat_modifiers: { healing: { add_percent: 5 } }
+}
+
+aura druid_improved_mend_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Healing +10%."
+	stat_modifiers: { healing: { add_percent: 10 } }
+}
+
+aura druid_improved_mend_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Healing +15%."
+	stat_modifiers: { healing: { add_percent: 15 } }
+}
+
+###############################################################################
+# 5 PTS TIER (3 talents)
+# stalker_mastery, pack_hunter_mastery, hunting_party
+###############################################################################
+
+
+
+talent druid_stalker_mastery:
+{
+	string: "Stalker Mastery"
+	icon: icon_claw
+	talent_tree_points_required: 5
+	points:
+	[
+		{ aura: druid_stalker_mastery ability: call_of_the_wild_cat ability: feral_fury_stalker }
+	]
+}
+
+aura druid_stalker_mastery:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Grants you a Cat companion and Feral Fury: Stalker. Attack haste +5%."
+	stat_modifiers: { attack_haste: { add_percent: 5 } }
+}
+
+talent druid_pack_hunter_mastery:
+{
+	string: "Pack Hunter Mastery"
+	icon: icon_dark_wolf
+	talent_tree_points_required: 7
+	prerequisites: [ druid_hunting_party ]
+	points:
+	[
+		{ aura: druid_pack_hunter_mastery ability: call_of_the_wild_wolf ability: feral_fury_pack_hunter }
+	]
+}
+
+aura druid_pack_hunter_mastery:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Grants you a Wolf companion and Feral Fury: Pack Hunter. Bleed damage +10%."
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ bleed ]
+		multiplier: 1.10
+	}
+}
+
+talent druid_hunting_party:
+{
+	string: "Hunting Party"
+	icon: icon_swiftstrike
+	talent_tree_points_required: 5
+	points:
+	[
+		{ ability_modifier: hunting_party_1 }
+		{ ability_modifier: hunting_party_2 }
+		{ ability_modifier: hunting_party_3 }
+	]
+}
+
+ability_modifier hunting_party_1:
+{
+	description: "Your companion grants you +2% attack speed while alive."
+}
+
+ability_modifier hunting_party_2:
+{
+	description: "Your companion grants you +4% attack speed while alive."
+}
+
+ability_modifier hunting_party_3:
+{
+	description: "Your companion grants you +6% attack speed while alive."
+}
+
+###############################################################################
+# 10 PTS TIER (4 talents)
+# druid_guardian, windrunner mastery, coordinated strike, marked prey
+###############################################################################
+talent druid_guardian_mastery:
+{
+	string: "Guardian Mastery"
+	icon: icon_defend
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: druid_guardian_mastery ability: call_of_the_wild_bear ability: feral_fury_guardian }
+	]
+}
+
+aura druid_guardian_mastery:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Grants you a Bear companion and Feral Fury: Guardian. Armor +10%."
+	stat_modifiers: { armor: { add_percent: 10 } }
+}
+
+talent druid_coordinated_strike:
+{
+	string: "Coordinated Strike"
+	icon: icon_attack_command
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: coordinated_strike }
+	]
+}
+
+cooldown coordinated_strike:
+{
+	duration: 100
+}
+
+aura coordinated_strike_mark:
+{
+	string: "Marked"
+	description: "Marked for coordinated attack. Taking increased damage."
+	type: debuff
+	icon: icon_attack_command
+	duration: 80
+	flags: [ unique ]
+	sound: spell_14
+	
+	aura_effect damage_input_modifier:
+	{
+		multiplier: 1.10
+	}
+}
+
+ability coordinated_strike:
+{
+	string: "Coordinated Strike"
+	description: "Mark target, increasing damage taken by 10% for 8s."
+	range: 6
+	cooldowns: [ global coordinated_strike ]
+	flags: [ offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_attack_command
+	talent_tree: druid_kinship
+	resource_cost mana: 18
+	target_particle_system: purple_spell_hit
+	delay: 3
+	
+	requirement self<must_have_aura>: companion_active
+	
+	direct_effect apply_aura:
+	{
+		aura: coordinated_strike_mark
+	}
+}
+
+talent druid_marked_prey:
+{
+	string: "Marked Prey"
+	icon: icon_attack_command
+	talent_tree_points_required: 10
+	prerequisites: [ druid_hunting_party ]
+	points:
+	[
+		{ aura: druid_marked_prey_1 }
+		{ aura: druid_marked_prey_2 }
+		{ aura: druid_marked_prey_3 }
+	]
+}
+
+aura druid_marked_prey_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Coordinated Strike marks target. Allies deal +2% damage to marked targets."
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_have_aura>: coordinated_strike_mark
+		multiplier: 1.02
+	}
+}
+
+aura druid_marked_prey_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Coordinated Strike marks target. Allies deal +4% damage to marked targets."
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_have_aura>: coordinated_strike_mark
+		multiplier: 1.04
+	}
+}
+
+aura druid_marked_prey_3:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Coordinated Strike marks target. Allies deal +6% damage to marked targets."
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_have_aura>: coordinated_strike_mark
+		multiplier: 1.06
+	}
+}
+
+
+talent druid_windrunner_mastery:
+{
+	string: "Windrunner Mastery"
+	icon: icon_swiftstrike
+	talent_tree_points_required: 15
+	points:
+	[
+		{ aura: druid_windrunner_mastery ability: call_of_the_wild_owlbear ability: feral_fury_windrunner }
+	]
+}
+
+aura druid_windrunner_mastery:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Unlocks Owlbear companion and Feral Fury: Windrunner. Spell haste +5%."
+	stat_modifiers: { spell_haste: { add_percent: 5 } }
+}
+
+talent druid_bestial_wrath:
+{
+	string: "Bestial Wrath"
+	icon: icon_fury
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: bestial_wrath }
+	]
+}
+
+cooldown bestial_wrath:
+{
+	duration: 900
+}
+
+aura bestial_wrath_buff:
+{
+	string: "Bestial Wrath"
+	description: "Frenzied! Attack speed +30%, damage +20%."
+	type: buff
+	icon: icon_fury
+	duration: 120
+	flags: [ unique ]
+	
+	stat_modifiers:
+	{
+		attack_haste: { add_percent: 30 }
+	}
+	
+	aura_effect damage_output_modifier:
+	{
+		type_mask: [ all ]
+		multiplier: 1.20
+	}
+}
+
+ability bestial_wrath:
+{
+	string: "Bestial Wrath"
+	description: "Your companion enters a frenzy, gaining +30% attack speed and +20% damage for 12s."
+	cooldowns: [ global bestial_wrath ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	talent_tree: druid_kinship
+	resource_cost mana: 25
+	
+	requirement self<must_have_aura>: companion_active
+	
+	direct_effect apply_aura:
+	{
+		flags: [ minion ]
+		aura: bestial_wrath_buff
+	}
+}
+
+talent druid_feral_charge:
+{
+	string: "Feral Charge"
+	icon: icon_charge
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability: feral_charge }
+	]
+}
+
+cooldown feral_charge:
+{
+	duration: 200
+}
+
+aura feral_charge_stun:
+{
+	string: "Feral Charge"
+	description: "Stunned."
+	type: debuff
+	icon: icon_stun
+	duration: 20
+	flags: [ incapacitation ]
+	aura_effect stun: { }
+	particle_system: knock
+	priority: !AURA_PRIORITY_CC{}
+	diminishing_effect: stun
+}
+
+ability feral_charge:
+{
+	string: "Feral Charge"
+	description: "Command your companion to charge target, stunning for 2s."
+	range: 6
+	cooldowns: [ global feral_charge ]
+	flags: [ offensive target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_charge
+	talent_tree: druid_kinship
+	resource_cost mana: 15
+	
+	requirement self<must_have_aura>: companion_active
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_charge_stun
+	}
+}
+
+
+###############################################################################
+# 15 PTS TIER (4 talents)
+# Improved gift_of_the_untamed, improved_coordinated_strike, warcry
+###############################################################################
+talent druid_war_cry:
+{
+	string: "War Cry"
+	icon: icon_taunt_2
+	talent_tree_points_required: 20
+	points:
+	[
+		{ ability: war_cry }
+	]
+}
+
+cooldown war_cry:
+{
+	duration: 300
+}
+
+aura war_cry_buff:
+{
+	string: "War Cry"
+	description: "Rallied! Attack power and spell damage increased."
+	type: buff
+	icon: icon_taunt_2
+	duration: 200
+	flags: [ unique magic ]
+	
+	stat_modifiers:
+	{
+		attack_power: { add_percent: 10 }
+		spell_damage: { add_percent: 10 }
+	}
+}
+
+ability war_cry:
+{
+	string: "War Cry"
+	description: "Rally nearby allies, increasing attack power and spell damage by 10% for 20s."
+	cooldowns: [ global war_cry ]
+	flags: [ target_self target_aoe target_aoe_always_self target_aoe_friendly ]
+	states: [ default in_combat ]
+	icon: icon_taunt_2
+	aoe_radius: 5
+	aoe_cap: 5
+	talent_tree: druid_kinship
+	resource_cost mana: 30
+	
+	direct_effect apply_aura:
+	{
+		aura: war_cry_buff
+	}
+}
+
+talent druid_primal_reflexes:
+{
+	string: "Primal Reflexes"
+	icon: icon_swiftstrike
+	talent_tree_points_required: 20
+	prerequisites: [ druid_feral_charge druid_bestial_wrath ]
+	points:
+	[
+		{ ability_modifier: primal_reflexes_fc_1 ability_modifier: primal_reflexes_bw_1 }
+		{ ability_modifier: primal_reflexes_fc_2 ability_modifier: primal_reflexes_bw_2 }
+	]
+}
+
+ability_modifier primal_reflexes_fc_1:
+{
+	description: "Feral Charge CD -5s."
+	ability: feral_charge
+	modify_cooldown: -50
+}
+
+ability_modifier primal_reflexes_fc_2:
+{
+	description: "Feral Charge CD -10s."
+	ability: feral_charge
+	modify_cooldown: -100
+}
+
+ability_modifier primal_reflexes_bw_1:
+{
+	description: "Bestial Wrath CD -15s."
+	ability: bestial_wrath
+	modify_cooldown: -150
+}
+
+ability_modifier primal_reflexes_bw_2:
+{
+	description: "Bestial Wrath CD -30s."
+	ability: bestial_wrath
+	modify_cooldown: -300
+}
+
+
+talent druid_improved_coordinated_strike:
+{
+	string: "Improved Coordinated Strike"
+	icon: icon_attack_command
+	talent_tree_points_required: 20
+	prerequisites: [ druid_coordinated_strike ]
+	points:
+	[
+		{ ability_modifier: improved_coordinated_strike_1 }
+		{ ability_modifier: improved_coordinated_strike_2 }
+		{ ability_modifier: improved_coordinated_strike_3 }
+	]
+}
+
+ability_modifier improved_coordinated_strike_1:
+{
+	description: "Coordinated Strike CD -2s."
+	ability: coordinated_strike
+	modify_cooldown: -20
+}
+
+ability_modifier improved_coordinated_strike_2:
+{
+	description: "Coordinated Strike CD -3s."
+	ability: coordinated_strike
+	modify_cooldown: -30
+}
+
+ability_modifier improved_coordinated_strike_3:
+{
+	description: "Coordinated Strike CD -5s."
+	ability: coordinated_strike
+	modify_cooldown: -50
+}
+
+
+talent druid_gift_of_the_untamed:
+{
+	string: "Improved Gift of the Untamed"
+	icon: icon_blessing_of_war
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: improved_gift_1 }
+		{ ability_modifier: improved_gift_2 }
+		{ ability_modifier: improved_gift_3 }
+	]
+}
+
+# Ability modifiers - these gate which aura version is applied
+ability_modifier improved_gift_1:
+{
+	description: "Gift of the Untamed: +10 AP/SP, +1% crit/haste"
+}
+
+ability_modifier improved_gift_2:
+{
+	description: "Gift of the Untamed: +15 AP/SP, +2% crit/haste."
+}
+
+ability_modifier improved_gift_3:
+{
+	description: "Gift of the Untamed: +20 AP/SP, +4% crit/haste."
+}
+
+# Improved aura versions - applied via must_have_ability_modifier in the ability
+aura gift_of_the_untamed_improved_1:
+{
+	string: "Gift of the Untamed"
+	description: "+10 Attack Power, +10 Spell Power, +1% crit, +1% haste."
+	icon: icon_blessing_of_war
+	duration: 18000
+	type: buff
+	flags: [ unique magic ]
+	
+	stat_modifiers:
+	{
+		attack_power: { add: 10 }
+		spell_damage: { add: 10 }
+		phys_crit_chance: { add: 1 }
+		spell_crit_chance: { add: 1 }
+		attack_haste: { add_percent: 1 }
+		spell_haste: { add_percent: 1 }
+	}
+}
+
+aura gift_of_the_untamed_improved_2:
+{
+	string: "Gift of the Untamed R2"
+	description: "+15 Attack Power, +15 Spell Power, +2% crit, +2% haste."
+	icon: icon_blessing_of_war
+	duration: 18000
+	type: buff
+	flags: [ unique magic ]
+	
+	stat_modifiers:
+	{
+		attack_power: { add: 15 }
+		spell_damage: { add: 15 }
+		phys_crit_chance: { add: 2 }
+		spell_crit_chance: { add: 2 }
+		attack_haste: { add_percent: 2 }
+		spell_haste: { add_percent: 2 }
+	}
+}
+
+aura gift_of_the_untamed_improved_3:
+{
+	string: "Gift of the Untamed R3"
+	description: "+20 Attack Power, +20 Spell Power, +4% crit, +4% haste."
+	icon: icon_blessing_of_war
+	duration: 18000
+	type: buff
+	flags: [ unique magic ]
+	
+	stat_modifiers:
+	{
+		attack_power: { add: 20 }
+		spell_damage: { add: 20 }
+		phys_crit_chance: { add: 4 }
+		spell_crit_chance: { add: 4 }
+		attack_haste: { add_percent: 4 }
+		spell_haste: { add_percent: 4 }
+	}
+}
+
+###############################################################################
+# 20 PTS TIER - CAPSTONE (1 talent)
+# feral_fury - Enhances all Feral Fury variants
+###############################################################################
+
+talent druid_feral_fury:
+{
+	string: "Feral Fury"
+	icon: icon_fury
+	talent_tree_points_required: 25
+	points:
+	[
+		{ aura: druid_primal_unleashing }
+	]
+}
+
+aura druid_primal_unleashing:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "For 20s, all allies' attacks have 15% chance to trigger a Feral Fury strike."
+}
+
+###############################################################################
+# FERAL FURY VARIANTS
+# Each mastery grants its own version
+###############################################################################
+
+cooldown feral_fury:
+{
+	duration: 3000
+}
+
+# ============================================================================
+# STALKER (Cat) - Attack Speed
+# ============================================================================
+
+aura feral_fury_stalker_buff:
+{
+	string: "Feral Fury: Stalker"
+	description: "Attacks have 20% chance to trigger Feral Fury: Stalker. Crits guarantee proc."
+	type: buff
+	icon: icon_fury
+	duration: 200
+	flags: [ unique magic ]
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event_ability_mask: [ melee ]
+		probability: 20
+		ability<self>: spectral_strike_stalker
+	}
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		probability: 100
+		ability<self>: spectral_strike_stalker
+	}
+}
+
+ability feral_fury_stalker:
+{
+	string: "Feral Fury: Stalker"
+	description: "For 20s, you and nearby allies' attacks have 20% chance to gain stacking attack speed. Critical hits guarantee proc."
+	cooldowns: [ global feral_fury ]
+	flags: [ target_self ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	talent_tree: druid_kinship
+	resource_cost mana: 50
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_fury_stalker_buff
+		apply_to_party_members_in_range: 8
+	}
+}
+
+ability spectral_strike_stalker:
+{
+	string: "Spectral Strike"
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect apply_aura:
+	{
+		aura: spectral_strike_stalker_buff
+	}
+}
+
+aura spectral_strike_stalker_buff:
+{
+	string: "Spectral Strike: Stalker"
+	description: "Attack speed increased by 3%."
+	type: buff
+	icon: icon_swiftstrike
+	duration: 80
+	flags: [ magic ]
+	max_stack: 5
+	stat_modifiers: { attack_haste: { add_percent: 3 } }
+}
+
+# ============================================================================
+# PACK HUNTER (Wolf) - Bleed Damage
+# ============================================================================
+
+aura feral_fury_pack_hunter_buff:
+{
+	string: "Feral Fury: Pack Hunter"
+	description: "Attacks have a 20% chance to cause Feral Fury: Pack Hunter. Crits guarantee proc."
+	type: buff
+	icon: icon_fury
+	duration: 200
+	flags: [ unique magic ]
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		probability: 20
+		ability<target>: spectral_strike_pack_hunter
+	}
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		probability: 100
+		ability<target>: spectral_strike_pack_hunter
+	}
+}
+
+ability feral_fury_pack_hunter:
+{
+	string: "Feral Fury: Pack Hunter"
+	description: "For 20s, you and nearby allies' attacks have 20% chance to apply stacking bleed. Critical hits guarantee proc."
+	cooldowns: [ global feral_fury ]
+	flags: [ target_self target_aoe target_aoe_always_self target_aoe_friendly ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	aoe_radius: 5
+	aoe_cap: 5
+	talent_tree: druid_kinship
+	resource_cost mana: 50
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_fury_pack_hunter_buff
+	}
+}
+
+ability spectral_strike_pack_hunter:
+{
+	string: "Wolf Bleed"
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_rend
+	
+	direct_effect apply_aura:
+	{
+		aura: spectral_strike_pack_hunter_bleed
+	}
+}
+
+aura spectral_strike_pack_hunter_bleed:
+{
+	string: "Feral Fury: Pack Hunter"
+	description: "Bleeding from a wolf's bite."
+	type: debuff
+	icon: icon_rend
+	duration: based_on_effects
+	flags: [ magic unique_per_source ]
+	max_stack: 5
+	sound: spell_14
+	
+	aura_effect repeat:
+	{
+		update_interval: 20
+		update_count: 4
+		ability: spectral_strike_bleed_tick
+	}
+}
+
+ability spectral_strike_bleed_tick:
+{
+	string: "Wolf Bleed"
+	icon: icon_rend
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	
+	direct_effect damage:
+	{
+		damage_type: bleed
+		function: { expression: a_mul_x a: 0.15 x: level }
+		spread: !DEFAULT_SPREAD{}
+		direct: false
+	}
+}
+
+# ============================================================================
+# GUARDIAN (Bear) - Armor Reduction on Enemies
+# ============================================================================
+
+aura feral_fury_guardian_buff:
+{
+	string: "Feral Fury: Guardian"
+	description: "Attacks have 20% chance to trigger Feral Fury: Guardian. Crits guarantee proc."
+	type: buff
+	icon: icon_fury
+	duration: 200
+	flags: [ unique magic ]
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		probability: 20
+		ability<target>: spectral_strike_guardian
+	}
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		probability: 100
+		ability<target>: spectral_strike_guardian
+	}
+}
+
+ability feral_fury_guardian:
+{
+	string: "Feral Fury: Guardian"
+	description: "For 20s, you and nearby allies' attacks have 20% chance to reduce enemy armor. Critical hits guarantee proc."
+	cooldowns: [ global feral_fury ]
+	flags: [ target_self target_aoe target_aoe_always_self target_aoe_friendly ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	aoe_radius: 5
+	aoe_cap: 5
+	talent_tree: druid_kinship
+	resource_cost mana: 50
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_fury_guardian_buff
+	}
+}
+
+ability spectral_strike_guardian:
+{
+	string: "Armor Shred"
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_toughness
+	
+	direct_effect apply_aura:
+	{
+		aura: spectral_strike_guardian_debuff
+	}
+}
+
+aura spectral_strike_guardian_debuff:
+{
+	string: "Feral Fury: Guardian"
+	description: "Armor reduced by 3%."
+	type: debuff
+	icon: icon_toughness
+	duration: 80
+	flags: [ magic ]
+	max_stack: 5
+	aura_group: armor_reduction
+	stat_modifiers: { armor: { add_percent: -3 } }
+}
+
+# ============================================================================
+# WINDRUNNER (Owlbear) - Spell Haste
+# ============================================================================
+
+aura feral_fury_windrunner_buff:
+{
+	string: "Feral Fury: Windrunner"
+	description: "Attacks have 20% chance to trigger Feral Fury: Windrunner. Crits guarantee proc."
+	type: buff
+	icon: icon_fury
+	duration: 200
+	flags: [ unique magic ]
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: hit
+		probability: 20
+		ability<self>: spectral_strike_windrunner
+	}
+	
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		probability: 100
+		ability<self>: spectral_strike_windrunner
+	}
+}
+
+ability feral_fury_windrunner:
+{
+	string: "Feral Fury: Windrunner"
+	description: "For 20s, you and nearby allies' attacks have 20% chance to gain stacking spell haste. Critical hits guarantee proc."
+	cooldowns: [ global feral_fury ]
+	flags: [ target_self target_aoe target_aoe_always_self target_aoe_friendly ]
+	states: [ default in_combat ]
+	icon: icon_fury
+	aoe_radius: 5
+	aoe_cap: 5
+	talent_tree: druid_kinship
+	resource_cost mana: 50
+	
+	direct_effect apply_aura:
+	{
+		aura: feral_fury_windrunner_buff
+	}
+}
+
+ability spectral_strike_windrunner:
+{
+	string: "Taloned Tempo"
+	flags: [ target_self always_in_range ]
+	states: [ default in_combat ]
+	icon: icon_swiftstrike
+	
+	direct_effect apply_aura:
+	{
+		aura: spectral_strike_windrunner_buff
+	}
+}
+
+aura spectral_strike_windrunner_buff:
+{
+	string: "Feral Fury: Windrunner"
+	description: "Spell haste increased by 3%."
+	type: buff
+	icon: icon_swiftstrike
+	duration: 80
+	flags: [ magic ]
+	max_stack: 5
+	stat_modifiers: { spell_haste: { add_percent: 3 } }
+}
+
+###############################################################################
+# COMPANION SUMMON ABILITIES
+# Unlocked by mastery talents
+###############################################################################
+
+ability call_of_the_wild_cat:
+{
+	string: "Call of the Wild: Cat"
+	description: "Summon a cat companion. Stalker archetype: fast attacks."
+	cast_time: 30
+	cooldowns: [ global call_of_the_wild ]
+	flags: [ target_self minion_summon class_minion_summon ]
+	states: [ default in_combat ]
+	icon: icon_claw
+	resource_cost mana: 25
+	talent_tree: druid_kinship
+	delay: 2
+	
+	requirement self<must_not_be_in_state>: { id: in_combat }
+	
+	direct_effect apply_aura:
+	{
+		aura: companion_active
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_cat_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.8
+			health: 0.5
+			armor: 0.8
+		}
+	}
+}
+
+ability call_of_the_wild_wolf:
+{
+	string: "Call of the Wild: Wolf"
+	description: "Summon a wolf companion. Pack Hunter archetype: bleeds."
+	cast_time: 30
+	cooldowns: [ global call_of_the_wild ]
+	flags: [ target_self minion_summon class_minion_summon ]
+	states: [ default in_combat ]
+	icon: icon_light_wolf
+	resource_cost mana: 25
+	talent_tree: druid_kinship
+	delay: 2
+	
+	requirement self<must_not_be_in_state>: { id: in_combat }
+	
+	direct_effect apply_aura:
+	{
+		aura: companion_active
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_wolf_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.9
+			health: 0.6
+			armor: 0.9
+		}
+	}
+}
+
+ability call_of_the_wild_bear:
+{
+	string: "Call of the Wild: Bear"
+	description: "Summon a bear companion. Guardian archetype: tanky."
+	cast_time: 30
+	cooldowns: [ global call_of_the_wild ]
+	flags: [ target_self minion_summon class_minion_summon ]
+	states: [ default in_combat ]
+	icon: icon_defend
+	resource_cost mana: 25
+	talent_tree: druid_kinship
+	delay: 2
+	
+	requirement self<must_not_be_in_state>: { id: in_combat }
+	
+	direct_effect apply_aura:
+	{
+		aura: companion_active
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_bear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.7
+			health: 1.0
+			armor: 1.2
+		}
+	}
+}
+
+ability call_of_the_wild_owlbear:
+{
+	string: "Call of the Wild: Owlbear"
+	description: "Summon an owlbear companion. Windrunner archetype: magic damage."
+	cast_time: 30
+	cooldowns: [ global call_of_the_wild ]
+	flags: [ target_self minion_summon class_minion_summon ]
+	states: [ default in_combat ]
+	icon: icon_spirit
+	resource_cost mana: 25
+	talent_tree: druid_kinship
+	delay: 2
+	
+	requirement self<must_not_be_in_state>: { id: in_combat }
+	
+	direct_effect apply_aura:
+	{
+		aura: companion_active
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_not_have_ability_modifiers: [ hunting_party_1 hunting_party_2 hunting_party_3 ]
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_owlbear
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.7
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_1
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_owlbear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.7
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_2
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_owlbear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.7
+			armor: 0.9
+		}
+	}
+	
+	direct_effect spawn_entity:
+	{
+		must_have_ability_modifier: hunting_party_3
+		spawn_flags: [ no_owner source_level ]
+		entity: druid_companion_owlbear_hp
+		init_state: spawning
+		
+		refresh_npc_metrics:
+		{
+			weapon_damage: 0.85
+			health: 0.7
+			armor: 0.9
+		}
+	}
+}
