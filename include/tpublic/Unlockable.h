@@ -10,6 +10,7 @@ namespace tpublic
 
 		enum Flag : uint32_t
 		{
+			FLAG_LEGACY_USER,
 			FLAG_CHARACTER_CUSTOMIZATION,
 
 			NUM_FLAGS,
@@ -25,7 +26,8 @@ namespace tpublic
 		// IMPORTANT: Must match Id enum
 		static constexpr const Info INFO[] =
 		{
-			{ "character_customization", "Character Customization" }
+			{ "legacy_user",				"Legacy User" },
+			{ "character_customization",	"Character Customization" }
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_FLAGS);
@@ -73,6 +75,23 @@ namespace tpublic
 			});
 
 			return flags;
+		}
+
+		inline std::string
+		FlagsToString(
+			uint32_t			aFlags)
+		{
+			std::string result;
+			for (uint32_t i = 0; i < (uint32_t)NUM_FLAGS; i++)
+			{
+				if (aFlags & (1 << i))
+				{
+					if (!result.empty())
+						result += ",";
+					result += INFO[i].m_name;
+				}
+			}
+			return result;
 		}
 	}
 

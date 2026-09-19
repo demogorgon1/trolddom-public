@@ -64,6 +64,9 @@
 
 #endif
 
+#define TP_PACKED_BEGIN _Pragma("pack(push, 1)")
+#define TP_PACKED_END _Pragma("pack(pop)")
+
 #define TP_UNUSED(_X) (void)_X;
 
 namespace tpublic::Base
