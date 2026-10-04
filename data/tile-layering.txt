@@ -18,6 +18,7 @@ tile_layering:
 	sand_2
 	badlands_2
 	sand_3
+	brown_grass
 	grass_2
 	grass
 	dark_grass_2
@@ -52,6 +53,9 @@ tile_layering:
 	badlands_rocks
 	crystals_1
 	black_rocks
+	
+	# Misc view blockers
+	spines
 ]
 
 base_tile_border_pattern_sprite: grass

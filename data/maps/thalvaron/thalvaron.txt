@@ -162,6 +162,9 @@ zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
 zone .the_frozen_borderlands: { string: "The Frozen Borderlands" preposition: "in" }
 zone .crash_site: { string: "Crash Site" preposition: "at the" top_zone: .the_frozen_borderlands }
 zone .withering_glade: { string: "Withering Glade" preposition: "in the" } 
+zone .central_ashira: { string: "Central Ashira" preposition: "in" }
+zone .ashiran_peaks: { string: "Ashiran Peaks" preposition: "in the" }
+zone .caves_of_limdrok: { string: "Caves of Lim'Drok" preposition: "in the" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -630,6 +633,7 @@ map_palette .stuff:
 	wall wood_wall: [ 164 128 140 ]
 	wall desert_wall: [ 190 175 95 ]
 	wall gs_stone_wall: [ 128 158 128 ]
+	wall ruin_wall: [ 129 157 122 ]
 	
 	# NW
 	entity_spawn thalvaron_marlowe: [ 44 56 139 ]
@@ -1367,6 +1371,9 @@ map_palette .zones:
 	zone .the_frozen_borderlands: [ 184 177 129 ]
 	zone .crash_site: [ 168 129 184 ]
 	zone .withering_glade: [ 243 155 34 ]
+	zone .central_ashira: [ 239 88 146 ]
+	zone .ashiran_peaks: [ 214 36 233 ]
+	zone .caves_of_limdrok: [ 163 195 29 ]
 }
 
 map_palette .sub_zones:

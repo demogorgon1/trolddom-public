@@ -98,6 +98,25 @@ sprites:
 	sprite desert_wall_w: { }
 	sprite desert_wall_e: { }
 	sprite desert_wall_s: { }	
+	
+	cursor: { position: [ 0 80 ] }
+
+	sprite ruin_wall_w_e: { }
+	sprite ruin_wall_n_s: { }
+	sprite ruin_wall_w_s: { }
+	sprite ruin_wall_e_s: { }
+	sprite ruin_wall_n_e: { }
+	sprite ruin_wall_w_n: { }
+	sprite ruin_wall_w_e_s: { }
+	sprite ruin_wall_w_e_n: { }
+	sprite ruin_wall_w_n_s: { }
+	sprite ruin_wall_e_n_s: { }
+	sprite ruin_wall_w_e_n_s: { }
+	sprite ruin_wall: { }
+	sprite ruin_wall_n: { }
+	sprite ruin_wall_w: { }
+	sprite ruin_wall_e: { }
+	sprite ruin_wall_s: { }		
 		
 }
 
@@ -223,5 +242,30 @@ wall desert_wall:
         desert_wall_e_n_s		
         desert_wall_w_n_s
         desert_wall_w_e_n_s
+	]
+}
+
+wall ruin_wall:
+{
+	flags: [ block_line_of_sight ]
+
+	sprites: 
+	[ 
+        ruin_wall
+		ruin_wall_e
+		ruin_wall_w	
+		ruin_wall_w_e
+		ruin_wall_n
+        ruin_wall_n_e
+        ruin_wall_w_n
+        ruin_wall_w_e_n
+		ruin_wall_s
+        ruin_wall_e_s
+	    ruin_wall_w_s
+        ruin_wall_w_e_s		
+		ruin_wall_n_s
+        ruin_wall_e_n_s		
+        ruin_wall_w_n_s
+        ruin_wall_w_e_n_s
 	]
 }

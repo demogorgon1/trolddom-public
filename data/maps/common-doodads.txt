@@ -149,6 +149,10 @@ sprites:
 	size: { width: 32 height: 32 } sprite slime_2x2_ns_out: { flags: [ tile_walkable ] }
 	size: { width: 16 height: 32 } sprite slime_1x2_ns_wall: { flags: [ tile_walkable ] }
 	size: { width: 16 height: 32 } sprite slime_1x2_ns_out_wall: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite spines_1: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite spines_2: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite spines_3: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite spines_4: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
 	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
@@ -369,6 +373,13 @@ doodad slime_1x2_ns_out_wall:
 doodad slime_2x2_ns_out:
 {
 	sprites: [ slime_2x2_ns_out ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
+}
+
+doodad spines_2x2:
+{
+	sprites: [ spines_1 spines_2 spines_3 spines_4 ]
 	map_palette<"x">: { occupy: true } map: [ "xx"
                                               "xx" ]
 }
