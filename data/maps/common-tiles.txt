@@ -1624,4 +1624,76 @@ sprites:
 	sprite brown_grass_border_17: { }	
 	sprite brown_grass_alt_1: { flags: [ tile_walkable ] }
 	sprite brown_grass_alt_2: { flags: [ tile_walkable ] }		
+
+	cursor: { position: [ 0 896 ] }
+	
+	sprite spines_2_border_1_alt_1: { }
+	sprite spines_2_border_2_alt_1: { }
+	sprite spines_2_border_3_alt_1: { }
+	sprite spines_2_border_4_alt_1: { }
+	sprite spines_2_border_5_alt_1: { }
+	sprite spines_2_border_6_alt_1: { }
+	sprite spines_2_border_7_alt_1: { }
+	sprite spines_2_border_8_alt_1: { }
+	sprite spines_2_border_9_alt_1: { }
+	sprite spines_2_border_10_alt_1: { }
+	sprite spines_2_border_11_alt_1: { }
+	sprite spines_2_border_12_alt_1: { }
+	sprite spines_2_border_13_alt_1: { }
+	sprite spines_2_border_14_alt_1: { }
+	sprite spines_2_border_15_alt_1: { }
+	sprite spines_2_border_16_alt_1: { }	
+	sprite spines_2_border_17_alt_1: { }	
+	
+	cursor: { position: [ 0 912 ] }
+	
+	sprite spines_2: { flags: [ tile_block_line_of_sight ] borders:
+		[ spines_2_border_1 spines_2_border_2 spines_2_border_3 spines_2_border_4 spines_2_border_5 spines_2_border_6 spines_2_border_7
+		  spines_2_border_8 spines_2_border_9 spines_2_border_10 spines_2_border_11 spines_2_border_12 spines_2_border_13 spines_2_border_14
+		  spines_2_border_15 spines_2_border_16 spines_2_border_17 ] alt_tiles: [ spines_2_alt_1 spines_2_alt_2 ] }		
+	sprite spines_2_border_1: { alt_tiles: [ spines_2_border_1_alt_1 ] }
+	sprite spines_2_border_2: { alt_tiles: [ spines_2_border_2_alt_1 ] }
+	sprite spines_2_border_3: { alt_tiles: [ spines_2_border_3_alt_1 ] }
+	sprite spines_2_border_4: { alt_tiles: [ spines_2_border_4_alt_1 ] }
+	sprite spines_2_border_5: { alt_tiles: [ spines_2_border_5_alt_1 ] }
+	sprite spines_2_border_6: { alt_tiles: [ spines_2_border_6_alt_1 ] }
+	sprite spines_2_border_7: { alt_tiles: [ spines_2_border_7_alt_1 ] }
+	sprite spines_2_border_8: { alt_tiles: [ spines_2_border_8_alt_1 ] }
+	sprite spines_2_border_9: { alt_tiles: [ spines_2_border_9_alt_1 ] }
+	sprite spines_2_border_10: { alt_tiles: [ spines_2_border_10_alt_1 ] }
+	sprite spines_2_border_11: { alt_tiles: [ spines_2_border_11_alt_1 ] }
+	sprite spines_2_border_12: { alt_tiles: [ spines_2_border_12_alt_1 ] }
+	sprite spines_2_border_13: { alt_tiles: [ spines_2_border_13_alt_1 ] }
+	sprite spines_2_border_14: { alt_tiles: [ spines_2_border_14_alt_1 ] }
+	sprite spines_2_border_15: { alt_tiles: [ spines_2_border_15_alt_1 ] }
+	sprite spines_2_border_16: { alt_tiles: [ spines_2_border_16_alt_1 ] }	
+	sprite spines_2_border_17: { alt_tiles: [ spines_2_border_17_alt_1 ] }	
+	sprite spines_2_alt_1: { flags: [ tile_block_line_of_sight ] }
+	sprite spines_2_alt_2: { flags: [ tile_block_line_of_sight ] }		
+	
+	cursor: { position: [ 0 928 ] }
+	
+	sprite red_grass: { flags: [ tile_walkable ] borders:
+		[ red_grass_border_1 red_grass_border_2 red_grass_border_3 red_grass_border_4 red_grass_border_5 red_grass_border_6 red_grass_border_7
+		  red_grass_border_8 red_grass_border_9 red_grass_border_10 red_grass_border_11 red_grass_border_12 red_grass_border_13 red_grass_border_14
+		  red_grass_border_15 red_grass_border_16 red_grass_border_17 ] alt_tiles: [ red_grass_alt_1 red_grass_alt_2 ] }		
+	sprite red_grass_border_1: { }
+	sprite red_grass_border_2: { }
+	sprite red_grass_border_3: { }
+	sprite red_grass_border_4: { }
+	sprite red_grass_border_5: { }
+	sprite red_grass_border_6: { }
+	sprite red_grass_border_7: { }
+	sprite red_grass_border_8: { }
+	sprite red_grass_border_9: { }
+	sprite red_grass_border_10: { }
+	sprite red_grass_border_11: { }
+	sprite red_grass_border_12: { }
+	sprite red_grass_border_13: { }
+	sprite red_grass_border_14: { }
+	sprite red_grass_border_15: { }
+	sprite red_grass_border_16: { }	
+	sprite red_grass_border_17: { }	
+	sprite red_grass_alt_1: { flags: [ tile_walkable ] }
+	sprite red_grass_alt_2: { flags: [ tile_walkable ] }		
 }

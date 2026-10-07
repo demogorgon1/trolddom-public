@@ -138,6 +138,8 @@ sprites:
 	sprite doodad_wall_painting_18: { flags: [ ] }
 	sprite doodad_bed_2: { flags: [ tile_walkable ] }
 	sprite doodad_bed_3: { flags: [ tile_walkable ] }
+	sprite orange_tentacle_1: { flags: [ tile_walkable ] }
+	sprite orange_tentacle_2: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 64 ] }
 	size: { width: 80 height: 64 } sprite ship: { flags: [ tile_walkable ] }
@@ -149,16 +151,26 @@ sprites:
 	size: { width: 32 height: 32 } sprite slime_2x2_ns_out: { flags: [ tile_walkable ] }
 	size: { width: 16 height: 32 } sprite slime_1x2_ns_wall: { flags: [ tile_walkable ] }
 	size: { width: 16 height: 32 } sprite slime_1x2_ns_out_wall: { flags: [ tile_walkable ] }
-	size: { width: 32 height: 32 } sprite spines_1: { flags: [ tile_walkable ] }
-	size: { width: 32 height: 32 } sprite spines_2: { flags: [ tile_walkable ] }
-	size: { width: 32 height: 32 } sprite spines_3: { flags: [ tile_walkable ] }
-	size: { width: 32 height: 32 } sprite spines_4: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite d_spines_1: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite d_spines_2: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite d_spines_3: { flags: [ tile_walkable ] }
+	size: { width: 32 height: 32 } sprite d_spines_4: { flags: [ tile_walkable ] }
+	size: { width: 16 height: 16 } sprite orange_tentacle_3: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
 	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
 	sprite doodad_potted_plant_2: { flags: [ tile_walkable ] }
 	sprite doodad_potted_plant_3: { flags: [ tile_walkable ] }
 	sprite doodad_potted_plant_4: { flags: [ tile_walkable ] }
+}
+
+doodad orange_tentacle:
+{
+	sprites: [ orange_tentacle_1 orange_tentacle_2 orange_tentacle_3 ]
+	map_palette<"x">: { must_be_one_of: [ red_grass ] occupy: true  }
+	map: [ "x" ]
+	
+	auto_probability: [ 1 32 ]
 }
 
 doodad small_rocks:
@@ -256,7 +268,7 @@ doodad jungle_plant: !GROUND_AUTO_DOODAD { _sprites: [ doodad_jungle_1 doodad_ju
 doodad pier_edge:
 {
 	sprites: [ doodad_pier_edge_1 ]
-	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b fs_water ] }
 	map_palette<"y">: { must_be_one_of: [ wood_floor ] } 
 	map: [ "y"
 	       "x" ]
@@ -268,7 +280,7 @@ doodad pier_edge:
 doodad pier_edge_2:
 {
 	sprites: [ doodad_pier_edge_2 ]
-	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b fs_water ] }
 	map_palette<"y">: { must_be_one_of: [ road_1 road_2 rock_floor rock_floor_alt_1 rock_floor_alt_2 ] } 
 	map: [ "y"
 	       "x" ]
@@ -280,7 +292,7 @@ doodad pier_edge_2:
 doodad pier_edge_3:
 {
 	sprites: [ doodad_pier_edge_1 ]
-	map_palette<"x">: { must_be_one_of: [ water lava lava_b ] }
+	map_palette<"x">: { must_be_one_of: [ water lava lava_b fs_water ] }
 	map_palette<"y">: { must_be_one_of: [ outside_wood_floor_1 ] } 
 	map: [ "y"
 	       "x" ]
@@ -379,7 +391,7 @@ doodad slime_2x2_ns_out:
 
 doodad spines_2x2:
 {
-	sprites: [ spines_1 spines_2 spines_3 spines_4 ]
+	sprites: [ d_spines_1 d_spines_2 d_spines_3 d_spines_4 ]
 	map_palette<"x">: { occupy: true } map: [ "xx"
                                               "xx" ]
 }

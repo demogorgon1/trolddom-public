@@ -139,6 +139,8 @@
 	tile fs_cave_entrance: [ 100 46 59 ]
 	tile spines: [ 243 41 20 ]
 	tile brown_grass: [ 102 50 85 ]
+	tile red_grass: [ 120 25 45 ]
+	tile spines_2: [ 223 11 10 ]
 }
 
 !define DEFAULT_DOODAD_PALETTE
@@ -157,4 +159,5 @@
 	doodad wall_painting: [ 20 201 10 ]
 	doodad bones: [ 100 100 141 ]
 	doodad spines_2x2: [ 244 24 81 ]
+	doodad fs_rock: [ 0 59 131 ]
 }

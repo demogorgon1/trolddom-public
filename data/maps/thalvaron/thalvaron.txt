@@ -165,6 +165,7 @@ zone .withering_glade: { string: "Withering Glade" preposition: "in the" }
 zone .central_ashira: { string: "Central Ashira" preposition: "in" }
 zone .ashiran_peaks: { string: "Ashiran Peaks" preposition: "in the" }
 zone .caves_of_limdrok: { string: "Caves of Lim'Drok" preposition: "in the" }
+zone .corrupted_highlands: { string: "Corrupted Highlands" preposition: "in the" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -1374,6 +1375,7 @@ map_palette .zones:
 	zone .central_ashira: [ 239 88 146 ]
 	zone .ashiran_peaks: [ 214 36 233 ]
 	zone .caves_of_limdrok: [ 163 195 29 ]
+	zone .corrupted_highlands: [ 85 145 156 ]
 }
 
 map_palette .sub_zones:
