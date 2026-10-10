@@ -141,6 +141,7 @@
 	tile brown_grass: [ 102 50 85 ]
 	tile red_grass: [ 120 25 45 ]
 	tile spines_2: [ 223 11 10 ]
+	tile spines_entrance: [ 97 144 178 ]
 }
 
 !define DEFAULT_DOODAD_PALETTE

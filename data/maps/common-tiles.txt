@@ -1598,6 +1598,7 @@ sprites:
 	sprite spines_border_17: { alt_tiles: [ spines_border_17_alt_1 ] }	
 	sprite spines_alt_1: { flags: [ tile_block_line_of_sight ] }
 	sprite spines_alt_2: { flags: [ tile_block_line_of_sight ] }		
+	sprite spines_entrance: { flags: [ tile_walkable tile_top ] }
 	
 	cursor: { position: [ 0 880 ] }
 	
