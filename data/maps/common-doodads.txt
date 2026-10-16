@@ -162,6 +162,9 @@ sprites:
 	sprite doodad_potted_plant_2: { flags: [ tile_walkable ] }
 	sprite doodad_potted_plant_3: { flags: [ tile_walkable ] }
 	sprite doodad_potted_plant_4: { flags: [ tile_walkable ] }
+	
+	size: { width: 32 height: 32 }
+	sprite doodad_tent_large: { flags: [ ] }
 }
 
 doodad orange_tentacle:
@@ -392,6 +395,13 @@ doodad slime_2x2_ns_out:
 doodad spines_2x2:
 {
 	sprites: [ d_spines_1 d_spines_2 d_spines_3 d_spines_4 ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
+}
+
+doodad tent_large:
+{
+	sprites: [ doodad_tent_large ]
 	map_palette<"x">: { occupy: true } map: [ "xx"
                                               "xx" ]
 }

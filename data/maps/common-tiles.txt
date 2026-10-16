@@ -1670,7 +1670,8 @@ sprites:
 	sprite spines_2_border_16: { alt_tiles: [ spines_2_border_16_alt_1 ] }	
 	sprite spines_2_border_17: { alt_tiles: [ spines_2_border_17_alt_1 ] }	
 	sprite spines_2_alt_1: { flags: [ tile_block_line_of_sight ] }
-	sprite spines_2_alt_2: { flags: [ tile_block_line_of_sight ] }		
+	sprite spines_2_alt_2: { flags: [ tile_block_line_of_sight ] }	
+	sprite spines_2_entrance: { flags: [ tile_walkable tile_top ] }	
 	
 	cursor: { position: [ 0 928 ] }
 	

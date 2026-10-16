@@ -142,6 +142,7 @@
 	tile red_grass: [ 120 25 45 ]
 	tile spines_2: [ 223 11 10 ]
 	tile spines_entrance: [ 97 144 178 ]
+	tile spines_2_entrance: [ 197 144 176 ]
 }
 
 !define DEFAULT_DOODAD_PALETTE
@@ -161,4 +162,5 @@
 	doodad bones: [ 100 100 141 ]
 	doodad spines_2x2: [ 244 24 81 ]
 	doodad fs_rock: [ 0 59 131 ]
+	doodad tent_large: [ 49 28 100 ]
 }

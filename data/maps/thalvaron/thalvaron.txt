@@ -1273,6 +1273,7 @@ map_palette .levels:
 	level<28>: [ 61 181 222 ]
 	level<29>: [ 230 163 240 ]
 	level<30>: [ 240 232 163 ]
+	level<31>: [ 240 137 163 ]
 }
 
 map_palette .zones:
