@@ -1,0 +1,9 @@
+loot_table .npc:
+{
+	slots:
+	[
+		!WORLD_DROPS{}	
+		!WORLD_DROPS_CLOTH{}
+	]	
+}
+

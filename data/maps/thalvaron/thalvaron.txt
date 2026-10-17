@@ -570,6 +570,9 @@ map_entity_spawn thalvaron_jungle_tower_portal_return: { entity thalvaron_jungle
 map_entity_spawn thalvaron_elia: { entity thalvaron_elia: { init_state: default } }
 map_entity_spawn thalvaron_dawn: { entity thalvaron_dawn: { init_state: default } }
 
+# A
+map_entity_spawn thalvaron_lance: { entity thalvaron_lance: { init_state: default } }
+
 map_palette .stuff:
 {
 	entity_spawn mining: [ 200 200 200 ]
@@ -1247,6 +1250,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_jungle_kobold: [ 39 10 200 ]
 	entity_spawn thalvaron_stillwater_crocodile: [ 30 185 85 ]
 	entity_spawn thalvaron_dawn: [ 230 185 85 ]	
+	
+	# A
+	entity_spawn thalvaron_ashira_boar: [ 254 12 94 ]
+	entity_spawn thalvaron_lance: [ 40 138 92 ]
+	
 }
 
 map_palette .levels:
