@@ -1112,11 +1112,17 @@ sprites:
 	sprite slime_ball_1: { dead: slime_ball_1_dead }
 	sprite slime_ball_2: { dead: slime_ball_2_dead }
 	sprite woman_48: { dead: woman_48_dead }	
+	sprite elf_19: { dead: elf_19_dead }	
+	sprite dwarf_25: { dead: dwarf_25_dead }	
+	sprite man_101: { dead: man_101_dead }	
 
 	cursor: { position: [ 0 976 ] }
 	sprite slime_ball_1_dead: { }	
 	sprite slime_ball_2_dead: { }	
 	sprite woman_48_dead: { }
+	sprite elf_19_dead: { }
+	sprite dwarf_25_dead: { }
+	sprite man_101_dead: { }
 	
 }
 

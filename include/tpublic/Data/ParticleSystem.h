@@ -55,6 +55,54 @@ namespace tpublic
 				int32_t				m_radius = 1;
 			};
 
+			struct Ribbon
+			{
+				Ribbon()
+				{
+
+				}
+
+				Ribbon(
+					const SourceNode*	aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "duration")
+							m_duration = aChild->GetUInt32();
+						else if(aChild->m_name == "width")
+							m_width = aChild->GetFloat();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+
+					TP_VERIFY(m_duration > 0, aSource->m_debugInfo, "Ribbon duration must be greater than zero.");
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteUInt(m_duration);
+					aWriter->WriteFloat(m_width);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadUInt(m_duration))
+						return false;
+					if(!aReader->ReadFloat(m_width))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t			m_duration = 300; // ms, how long a point stays in the ribbon
+				float				m_width = 0.3f; // tiles, at the head (tapers to zero at the tail)
+			};
+
 			struct Entry
 			{
 				Entry()
@@ -138,6 +186,10 @@ namespace tpublic
 						{
 							m_swarm = Swarm(aChild);
 						}
+						else if(aChild->m_name == "ribbon")
+						{
+							m_ribbon = Ribbon(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -168,6 +220,7 @@ namespace tpublic
 					aWriter->WriteFloat(m_moveX);
 					aWriter->WriteFloat(m_moveY);
 					aWriter->WriteOptionalObject(m_swarm);
+					aWriter->WriteOptionalObject(m_ribbon);
 				}
 
 				bool
@@ -212,6 +265,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadOptionalObject(m_swarm))
 						return false;
+					if(!aReader->ReadOptionalObject(m_ribbon))
+						return false;
 					return true;
 				}
 
@@ -235,6 +290,7 @@ namespace tpublic
 				float								m_moveX = 0.0f;
 				float								m_moveY = 0.0f;
 				std::optional<Swarm>				m_swarm;
+				std::optional<Ribbon>				m_ribbon; // Strip following the particle system, drawn with the first sprite
 			};
 
 			void

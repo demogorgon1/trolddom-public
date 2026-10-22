@@ -163,4 +163,5 @@
 	doodad spines_2x2: [ 244 24 81 ]
 	doodad fs_rock: [ 0 59 131 ]
 	doodad tent_large: [ 49 28 100 ]
+	doodad debris: [ 77 84 130 ]
 }

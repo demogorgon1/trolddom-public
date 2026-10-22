@@ -156,6 +156,7 @@ sprites:
 	size: { width: 32 height: 32 } sprite d_spines_3: { flags: [ tile_walkable ] }
 	size: { width: 32 height: 32 } sprite d_spines_4: { flags: [ tile_walkable ] }
 	size: { width: 16 height: 16 } sprite orange_tentacle_3: { flags: [ tile_walkable ] }
+	size: { width: 16 height: 16 } sprite debris_1: { flags: [ tile_walkable ] }
 	
 	cursor: { position: [ 0 128 ] } size: { width: 16 height: 32 }
 	sprite doodad_potted_plant_1: { flags: [ tile_walkable ] }
@@ -436,6 +437,7 @@ doodad wall_banner_generic: { sprites: [ doodad_wall_banner_generic_1 ] map_pale
 doodad wall_sign_generic: { sprites: [ doodad_wall_sign_generic_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad barrel: { sprites: [ barrel_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad cage: { sprites: [ cage_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
+doodad debris: { sprites: [ debris_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad rowboat: { sprites: [ doodad_rowboat_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
 doodad sign_generic: { sprites: [ sign_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] } 
 doodad cobweb: { sprites: [ doodad_cobweb_1 ] map_palette<"x">: { occupy: true } map: [ "x" ] }
