@@ -17,8 +17,8 @@ entity thalvaron_lance: !NPC
 {
 	_string: "Lance"
 	_dialogue_root: $dialogue_root { .lance: { } }	
-	_sprite: man_23
-	_sprite_dead: man_23_dead
+	_sprite: elf_19
+	_sprite_dead: elf_19_dead
 	_level: 30
 	_faction: npcs		
 	_creature_type: humanoid

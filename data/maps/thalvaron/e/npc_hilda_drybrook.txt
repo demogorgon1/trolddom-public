@@ -1,0 +1,124 @@
+dialogue_screen .hilda_drybrook:
+{
+	text:
+	[
+		"Everyone says there's no water in Kareth. Everyone also said the world was flat, and look how that turned out."
+	]
+
+	options:
+	[
+		{ quest: .hilda_drybrook_1 }
+	]
+}
+
+entity thalvaron_hilda_drybrook: !NPC
+{
+	_string: "Hilda Drybrook"
+	_sprite: dwarf_25 
+	_sprite_dead: dwarf_25_dead 
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .hilda_drybrook: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .hilda_drybrook_1_a:
+{
+	string: "Dowsing Readings Taken"
+
+	maps: [ thalvaron ]
+
+	manual_counter:
+	{
+		count: 5
+	}
+}
+
+objective .hilda_drybrook_1_b:
+{
+	string: "Karethi Scorpions Slain"
+
+	maps: [ thalvaron ]
+
+	kill_npc: { entities: [ thalvaron_karethi_scorpion ] count: 8 }
+}
+
+item .hilda_drybrook_1_quest_item:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique not_sellable ]
+	item_level: 29
+	icon: icon_rod_1
+	string: "Patented Brass Dowsing Rod"
+	flavor: "Patent pending."
+	use_ability: $ability [ icon string ]
+	{
+		description: "Take a dowsing reading in Southern Kareth."
+		flags: [ target_self target_aoe target_aoe_hostile item ]
+		cooldowns: [ global ]
+		cooldown: $cooldown { duration: 40 }
+		states: [ default ]
+		sound_effects: !SOUND_INVENTORY{}
+		aoe_radius: 8
+		aoe_cap: 1
+		aoe_requirement target<must_be_type>: { id: thalvaron_hilda_drybrook_1_quest_item }
+		cast_time: 20
+		direct_effect simple<activate_trigger>: { }
+	}
+}
+
+entity thalvaron_hilda_drybrook_1_quest_item:
+{
+	components:
+	{
+		position: { }
+		visibility: { }
+		trigger: { lock_out_ticks: 1200 trigger_manual_objective: .hilda_drybrook_1_a }
+		combat_public: { faction: monsters }
+	}
+}
+
+{
+	${ _level: 29 }
+	item .hilda_drybrook_1_a: !QUEST_REWARD_HANDS{ _string: "Prospector's Grips" _icon: icon_mail_gloves_2 _constitution: 2 _strength: 2 _dexterity: 1 _type: armor_mail }
+	item .hilda_drybrook_1_b: !QUEST_REWARD_HANDS{ _string: "Dowser's Gloves" _icon: icon_gloves_4 _constitution: 1 _wisdom: 2 _spirit: 2 _type: armor_cloth }
+}
+
+quest .hilda_drybrook_1:
+{
+	string: "Water Under the Sand"
+
+	text:
+	[
+		"Use the Patented Brass Dowsing Rod at dry spots around Southern Kareth, slay Karethi Scorpions, and return to Hilda Drybrook."
+	]
+
+	description:
+	[
+		"There's water under this desert. I can feel it in my beard. Well, I would if I had one, but my mother had one and she could feel it too.\n"
+		"\n"
+		"Take my dowsing rod and walk around Southern Kareth. Hold it up near any dry hollow or old stone ring that looks like a well could have been there once, and it'll take a reading. I'd"
+		"do it myself, but every time I bend down to look at the sand, a scorpion tries to pinch my nose. If you could thin them out a bit while you're at it, my nose would be grateful."
+	]
+
+	progress:
+	[
+		"Is the rod twitching? It should twitch. If it doesn't twitch, hit it once. Gently."
+	]
+
+	completion:
+	[
+		"Five readings, and every single one of them says 'dry'. Hm. That just means the water is deeper than I thought. I'll need a bigger shovel."
+	]
+
+	objectives: [ .hilda_drybrook_1_a .hilda_drybrook_1_b ]
+	quest_items: [ .hilda_drybrook_1_quest_item ]
+	reward_one_item: [ .hilda_drybrook_1_a .hilda_drybrook_1_b ]
+	level: 29
+}

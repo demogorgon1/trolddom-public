@@ -1,0 +1,134 @@
+dialogue_screen .hasko_brindle:
+{
+	text:
+	[
+		"Never trust a map drawn by someone who has never seen sand."
+	]
+
+	options:
+	[
+		{ quest: .hasko_brindle_1 }
+	]
+}
+
+entity thalvaron_hasko_brindle: !NPC
+{
+	_string: "Hasko Brindle"
+	_sprite: man_101
+	_sprite_dead: man_101_dead 
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .hasko_brindle: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .hasko_brindle_1_quest_item: {}
+
+item .hasko_brindle_1_quest_item:
+{
+	icon: icon_spice_container
+	item_level: 29
+	loot_groups: [ .hasko_brindle_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Sack of Spices"
+	flavor: "Smells like pepper, cinnamon and a little bit of camel."
+	quest: .hasko_brindle_1
+	stack: 5
+}
+
+loot_table .hasko_brindle_1_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .hasko_brindle_1_quest_item }
+		}
+	]
+}
+
+entity thalvaron_hasko_brindle_1_quest_item:
+{
+	string: "Sack of Spices"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_sack_1 ] z_offset: -3 } ] }
+
+		openable:
+		{
+			loot_table: .hasko_brindle_1_quest_item
+			verb: pick_up
+			range: 1
+			level: 29
+			despawn: true
+			required_quest: .hasko_brindle_1
+		}
+	}
+}
+
+objective .hasko_brindle_1_a:
+{
+	string: "Sacks of Spices"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .hasko_brindle_1_quest_item count: 5 }
+}
+
+objective .hasko_brindle_1_b:
+{
+	string: "Dustwalker Archers Slain"
+
+	maps: [ thalvaron ]
+
+	kill_npc:
+	{
+		entities: [ thalvaron_kareth_skeleton_archer_29 thalvaron_kareth_skeleton_archer_30 ]
+		count: 6
+	}
+}
+
+{
+	${ _level: 29 }
+	item .hasko_brindle_1_a: !QUEST_REWARD_LEGS{ _string: "Caravan Guard's Leggings" _icon: icon_mail_pants_2 _constitution: 2 _dexterity: 3 _type: armor_mail }
+	item .hasko_brindle_1_b: !QUEST_REWARD_LEGS{ _string: "Spice Trader's Trousers" _icon: icon_pants_3 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
+}
+
+quest .hasko_brindle_1:
+{
+	string: "Lost Cargo"
+
+	text:
+	[
+		"Recover sacks of spices from the desert east of the Serpent's Rest, slay Dustwalker Archers, and return to Hasko Brindle."
+	]
+
+	description:
+	[
+		"I was taking a load of spices south to Ghora. Turns out the bridges are out, which nobody bothered to tell me before I left. So I took the scenic route through the desert instead, and ran straight into a bunch"
+		"of skeletons with bows. They don't even have eyes. How can they aim like that?\n"
+		"\n"
+		"My mules ran off and dropped the cargo all over the sand east of here. Can you bring back my spices? And if you happen to put a few of those archers back in the ground while you're at it, I won't"
+		"complain."
+	]
+
+	progress:
+	[
+		"Careful with the sacks, that's the expensive stuff."
+	]
+
+	completion:
+	[
+		"My spices! A little sand in them, but nobody will notice. Probably."
+	]
+
+	objectives: [ .hasko_brindle_1_a .hasko_brindle_1_b ]
+	level: 29
+	reward_one_item: [ .hasko_brindle_1_a .hasko_brindle_1_b ]
+}

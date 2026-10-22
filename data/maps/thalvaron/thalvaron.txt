@@ -166,6 +166,7 @@ zone .central_ashira: { string: "Central Ashira" preposition: "in" }
 zone .ashiran_peaks: { string: "Ashiran Peaks" preposition: "in the" }
 zone .caves_of_limdrok: { string: "Caves of Lim'Drok" preposition: "in the" }
 zone .corrupted_highlands: { string: "Corrupted Highlands" preposition: "in the" }
+zone .kareth_landing: { string: "Gate of Karethi" preposition: "at the" }
 
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
@@ -569,6 +570,10 @@ map_entity_spawn thalvaron_jungle_tower_portal: { entity thalvaron_jungle_tower_
 map_entity_spawn thalvaron_jungle_tower_portal_return: { entity thalvaron_jungle_tower_portal_return: { init_state: default } }
 map_entity_spawn thalvaron_elia: { entity thalvaron_elia: { init_state: default } }
 map_entity_spawn thalvaron_dawn: { entity thalvaron_dawn: { init_state: default } }
+map_entity_spawn thalvaron_hasko_brindle: { entity thalvaron_hasko_brindle: { init_state: default } }
+map_entity_spawn thalvaron_hasko_brindle_1_quest_item: { entity thalvaron_hasko_brindle_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hilda_drybrook: { entity thalvaron_hilda_drybrook: { init_state: default } }
+map_entity_spawn thalvaron_hilda_drybrook_1_quest_item: { entity thalvaron_hilda_drybrook_1_quest_item: { init_state: default } } # No respawn needed
 
 # A
 map_entity_spawn thalvaron_lance: { entity thalvaron_lance: { init_state: default } }
@@ -1249,7 +1254,11 @@ map_palette .stuff:
 	entity_spawn thalvaron_dark_elemental_boss: [ 203 93 82 ]
 	entity_spawn thalvaron_jungle_kobold: [ 39 10 200 ]
 	entity_spawn thalvaron_stillwater_crocodile: [ 30 185 85 ]
-	entity_spawn thalvaron_dawn: [ 230 185 85 ]	
+	entity_spawn thalvaron_dawn: [ 230 185 85 ]
+	entity_spawn thalvaron_hasko_brindle: [ 77 133 211 ]
+	entity_spawn thalvaron_hasko_brindle_1_quest_item: [ 177 133 211 ]
+	entity_spawn thalvaron_hilda_drybrook: [ 17 203 61 ]
+	entity_spawn thalvaron_hilda_drybrook_1_quest_item: [ 47 158 161 ]
 	
 	# A
 	entity_spawn thalvaron_ashira_boar: [ 254 12 94 ]
@@ -1385,6 +1394,7 @@ map_palette .zones:
 	zone .ashiran_peaks: [ 214 36 233 ]
 	zone .caves_of_limdrok: [ 163 195 29 ]
 	zone .corrupted_highlands: [ 85 145 156 ]
+	zone .kareth_landing: [ 244 250 49 ]
 }
 
 map_palette .sub_zones:
