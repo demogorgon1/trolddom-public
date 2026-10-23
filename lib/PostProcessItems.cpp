@@ -12,6 +12,37 @@ namespace tpublic
 	namespace PostProcessItems
 	{
 
+		namespace
+		{
+			std::string
+			_GetVariantName(
+				const Data::Item*			aItem,
+				const Data::Item::Variant*	aVariant)
+			{
+				return Helpers::Format("%s_%s", aItem->m_name.c_str(), aVariant->m_suffix.c_str());
+			}
+		}
+
+		//--------------------------------------------------------------------------------------
+
+		void
+		DefineVariantIds(
+			Manifest*			aManifest,
+			PersistentIdTable*	aPersistentIdTable)
+		{
+			aManifest->GetContainer<Data::Item>()->ForEach([aPersistentIdTable](
+				Data::Item* aItem)
+			{
+				for (const std::unique_ptr<Data::Item::Variant>& variant : aItem->m_variants)
+				{
+					std::string variantName = _GetVariantName(aItem, variant.get());
+					aPersistentIdTable->GetId(aItem->m_debugInfo.value_or(DataErrorHandling::DebugInfo()), DataType::ID_ITEM, variantName.c_str(), true);
+				}
+
+				return true; // continue
+			});
+		}
+
 		void		
 		Run(
 			Manifest*			aManifest,
@@ -104,7 +135,7 @@ namespace tpublic
 				{
 					for (const std::unique_ptr<Data::Item::Variant>& variant : item->m_variants)
 					{
-						std::string variantName = Helpers::Format("%s_%s", item->m_name.c_str(), variant->m_suffix.c_str());
+						std::string variantName = _GetVariantName(item, variant.get());
 						
 						Data::Item* newItem = aManifest->GetContainer<Data::Item>()->GetByName(aPersistentIdTable, variantName.c_str());
 

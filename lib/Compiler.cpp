@@ -205,6 +205,8 @@ namespace tpublic
 		{
 			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);			
 
+			PostProcessItems::DefineVariantIds(m_manifest, m_sourceContext.m_persistentIdTable.get());
+
 			bool validateOnly = !m_basePath.empty();
 
 			m_sourceContext.m_persistentIdTable->ValidateAndPrune(validateOnly, [&](
