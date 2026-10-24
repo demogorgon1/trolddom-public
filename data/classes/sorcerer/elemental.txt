@@ -757,10 +757,10 @@ particle_system fireball:
 {
 	particle:
 	{
-		sprites: [ effect_fireball ] # TODO: placeholder, needs a ribbon sprite (bright at the left edge, fading out to the right)
+		sprites: [ effect_flame_gradient_1 ] 
 		flags: [ blend_add ]
 		color_mod: [ 255 160 60 ]
-		alpha: 0.8
+		alpha: 0.4
 		ribbon: { duration: 250 width: 0.35 }
 	}
 

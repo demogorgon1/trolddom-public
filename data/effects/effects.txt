@@ -214,6 +214,10 @@ sprites:
 	sprite effect_level_up_10: { flags: [ centered ] }	
 	sprite effect_level_up_11: { flags: [ centered ] }	
 	sprite effect_level_up_12: { flags: [ centered ] }	
+	
+	cursor: { position: [ 0 81 ] }
+	size: { width: 32 height: 16 } sprite effect_beam_1: { flags: [ ] }	
+	size: { width: 16 height: 16 } sprite effect_flame_gradient_1: { flags: [ ] }	
 }
 
 
