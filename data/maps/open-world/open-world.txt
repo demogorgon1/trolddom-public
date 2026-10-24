@@ -483,6 +483,12 @@ map_entity_spawn .gnome_1_quest_item:
 	entity .gnome_1_quest_item: { init_state: default }
 }
 
+map_entity_spawn .frinrir_2_quest_item:
+{
+	spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{}
+	entity .frinrir_2_quest_item: { init_state: default }
+}
+
 map_entity_spawn .zumhorn_1:
 {
 	entity .zumhorn_1: { init_state: default }
@@ -795,7 +801,8 @@ map_palette .stuff:
 	entity_spawn .elysia_quest_item: [ 53 13 169 ]		
 	entity_spawn .elysia_quest_item_2: [ 54 13 169 ]		
 	entity_spawn .werner_quest_item: [ 54 104 169 ]		
-	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]		
+	entity_spawn .gnome_1_quest_item: [ 53 13 162 ]
+	entity_spawn .frinrir_2_quest_item: [ 17 203 61 ]
 	entity_spawn .zumhorn_1: [ 40 50 219 ]
 	entity_spawn .zumhorn_2: [ 255 104 102 ]
 	entity_spawn .zumhorn_2_boss: [ 205 104 102 ]

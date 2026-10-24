@@ -17,6 +17,7 @@ talent_tree witch_necromancy:
 		talent witch_corpse_explosion: "I"
 		talent witch_icy_bones: "J"
 		talent witch_extinguish: "K"
+		talent witch_necromancy_grave_shackles: "Z"
 		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
@@ -32,7 +33,7 @@ talent_tree witch_necromancy:
 		"d......"
 		"JlD.BrC"
 		"..d...|"
-		"..F.H.|"
+		"Z.F.H.|"
 		"....d.|"
 		"....I.|"
 		"......d"
@@ -1086,4 +1087,75 @@ aura blind:
 	duration: 200
 	flags: [ unique magic cancel_on_damage ]
 	aura_effect blind: { }
+}
+
+###############################################################################
+# Grave Shackles
+
+talent witch_necromancy_grave_shackles:
+{
+	string: "Grave Shackles"
+	icon: icon_improved_shackle_undeath
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: witch_necromancy_grave_shackles_1 }
+		{ aura: witch_necromancy_grave_shackles_2 }
+	]
+}
+
+aura witch_necromancy_grave_shackles_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "When you're struck by a melee attack from an undead, you have a 10% chance to shackle it for 5 seconds. Any damage cancels the effect."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<target>: [ hit critical ]
+		combat_event_ability_mask: [ melee ]
+		ability<self>: witch_necromancy_grave_shackles_trigger
+		probability: 10
+	}
+}
+
+aura witch_necromancy_grave_shackles_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "When you're struck by a melee attack from an undead, you have a 20% chance to shackle it for 5 seconds. Any damage cancels the effect."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<target>: [ hit critical ]
+		combat_event_ability_mask: [ melee ]
+		ability<self>: witch_necromancy_grave_shackles_trigger
+		probability: 20
+	}
+}
+
+ability witch_necromancy_grave_shackles_trigger:
+{
+	string: "Grave Shackles"
+	flags: [ target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_shackle_undeath
+	requirement target<must_be_creature_type>: undead
+
+	direct_effect apply_aura:
+	{
+		aura: witch_necromancy_grave_shackles
+	}
+}
+
+aura witch_necromancy_grave_shackles:
+{
+	string: "Grave Shackles"
+	description: "Shackled."
+	particle_system: shackle_undeath
+	icon: icon_shackle_undeath
+	type: debuff
+	duration: 50
+	flags: [ unique magic cancel_on_damage single_target incapacitation ]
+	aura_effect stun: { }
+	priority: !AURA_PRIORITY_CC{}
+	diminishing_effect: cc
 }

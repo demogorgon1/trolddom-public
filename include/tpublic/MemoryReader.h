@@ -22,6 +22,7 @@ namespace tpublic
 		size_t		Peek(
 						void*				aBuffer,
 						size_t				aBufferSize) const override;
+		size_t		GetRemainingSize() const override { return m_remaining; }
 
 	private:
 

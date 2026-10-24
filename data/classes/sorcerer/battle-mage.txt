@@ -18,6 +18,7 @@ talent_tree sorcerer_battle_mage:
 		talent sorcerer_battle_mage_staff_mastery: "J"
 		talent sorcerer_battle_mage_blink: "K"
 		talent sorcerer_battle_mage_shielded_by_strength: "L"
+		talent sorcerer_battle_mage_concussive_blows: "Z"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_left_arrow: "l"				
 		sprite talent_tree_right_arrow: "r"				
@@ -30,7 +31,7 @@ talent_tree sorcerer_battle_mage:
 		"....d...."
 		"ElC.D.G.."
 		"..d.|...."
-		"..F.|.HrL"
+		"ZlF.|.HrL"
 		"....|.d.."
 		"....|.I.."
 		"....d...."
@@ -730,5 +731,67 @@ particle_system power_shield:
 		fade_out: 500
 		offset_x: 0.5
 		offset_y: 0.5	
+	}
+}
+
+###############################################################################
+# Concussive Storm
+
+talent sorcerer_battle_mage_concussive_blows:
+{
+	string: "Concussive Storm"
+	icon: icon_improved_staff_attack_fist
+	talent_tree_points_required: 10
+	prerequisites: [ sorcerer_battle_mage_void_blade_storm ]
+	points:
+	[
+		{ aura: sorcerer_battle_mage_concussive_blows_1 }
+		{ aura: sorcerer_battle_mage_concussive_blows_2 }
+	]
+}
+
+aura sorcerer_battle_mage_concussive_blows_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Void Blade Storm has a 25% chance to knock the target back."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: [ hit critical ]
+		trigger_abilities: [ void_blade_storm ]
+		ability<target>: sorcerer_battle_mage_concussive_blows_trigger
+		probability: 25
+	}
+}
+
+aura sorcerer_battle_mage_concussive_blows_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Void Blade Storm has a 50% chance to knock the target back."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: [ hit critical ]
+		trigger_abilities: [ void_blade_storm ]
+		ability<target>: sorcerer_battle_mage_concussive_blows_trigger
+		probability: 50
+	}
+}
+
+ability sorcerer_battle_mage_concussive_blows_trigger:
+{
+	string: "Concussive Storm"
+	flags: [ always_in_range always_in_line_of_sight target_other target_hostile ]
+	states: [ default in_combat ]
+	icon: icon_fist
+
+	direct_effect simple<knockback>:
+	{
+		param: 1
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: pushed
 	}
 }

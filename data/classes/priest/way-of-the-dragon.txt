@@ -18,6 +18,7 @@ talent_tree priest_dragon:
 		talent priest_dragon_knockout: "J"
 		talent priest_dragon_swiftstrike: "K"
 		talent priest_dragon_counterkick: "L"
+		talent priest_dragon_hardened_resolve: "Z"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_right_arrow: "r"
@@ -30,7 +31,7 @@ talent_tree priest_dragon:
 		"..d......"
 		"D.C.ErFrL"
 		"..|.d...."
-		"H.|.GrJ.."
+		"H.|.GrJ.Z"
 		"d.|......"
 		"I.|......"
 		"..d......"
@@ -811,4 +812,106 @@ ability toughen_up:
 	}
 }
 
+###############################################################################
+# Hardened Resolve
 
+talent priest_dragon_hardened_resolve:
+{
+	string: "Hardened Resolve"
+	icon: icon_improved_toughen_up
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: priest_dragon_hardened_resolve_1 }
+		{ aura: priest_dragon_hardened_resolve_2 }
+	]
+}
+
+aura priest_dragon_hardened_resolve_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "When you're struck by a melee attack while below 35% health, you automatically Toughen Up, increasing your armor by 100% for 10 seconds. Can only happen once every 90 seconds."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<target>: [ hit critical ]
+		combat_event_ability_mask: [ melee ]
+		ability<target>: priest_dragon_hardened_resolve_trigger_1
+	}
+}
+
+ability priest_dragon_hardened_resolve_trigger_1:
+{
+	string: "Hardened Resolve"
+	states: [ default in_combat ]
+	icon: icon_special_12
+	requirement self<must_have_less_health_than>: 35
+	requirement self<must_not_have_aura>: priest_dragon_hardened_resolve_cooldown_1
+
+	direct_effect apply_aura:
+	{
+		aura: priest_dragon_hardened_resolve
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: priest_dragon_hardened_resolve_cooldown_1
+	}
+}
+
+aura priest_dragon_hardened_resolve_cooldown_1:
+{
+	type: hidden
+	duration: 900
+	flags: [ unique persist_in_death ]
+}
+
+aura priest_dragon_hardened_resolve_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "When you're struck by a melee attack while below 35% health, you automatically Toughen Up, increasing your armor by 100% for 10 seconds. Can only happen once every 45 seconds."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<target>: [ hit critical ]
+		combat_event_ability_mask: [ melee ]
+		ability<target>: priest_dragon_hardened_resolve_trigger_2
+	}
+}
+
+ability priest_dragon_hardened_resolve_trigger_2:
+{
+	string: "Hardened Resolve"
+	states: [ default in_combat ]
+	icon: icon_special_12
+	requirement self<must_have_less_health_than>: 35
+	requirement self<must_not_have_aura>: priest_dragon_hardened_resolve_cooldown_2
+
+	direct_effect apply_aura:
+	{
+		aura: priest_dragon_hardened_resolve
+	}
+
+	direct_effect apply_aura:
+	{
+		aura: priest_dragon_hardened_resolve_cooldown_2
+	}
+}
+
+aura priest_dragon_hardened_resolve_cooldown_2:
+{
+	type: hidden
+	duration: 450
+	flags: [ unique persist_in_death ]
+}
+
+aura priest_dragon_hardened_resolve:
+{
+	string: "Hardened Resolve"
+	description: "Armor increased by 100%."
+	icon: icon_special_12
+	type: buff
+	duration: 100
+	flags: [ magic unique ]
+	stat_modifiers: { armor: { add_percent: 100 } }
+}

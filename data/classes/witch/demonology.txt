@@ -17,7 +17,7 @@ talent_tree witch_demonology:
 		talent witch_demonic_infusion: "I"
 		talent witch_secrecy: "J"
 		talent witch_guardian_demon: "K"
-		
+		talent witch_demonology_swift_summoning: "Z"		
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_left_arrow: "l"
 		sprite talent_tree_down: "|"		
@@ -31,7 +31,7 @@ talent_tree witch_demonology:
 		"d.d.d.."
 		"F.D.C.J"
 		"d.|...."
-		"E.|.H.."
+		"E.|.H.Z"
 		"..|.d.."
 		"..|.I.."
 		"..d...."
@@ -940,4 +940,33 @@ ability blood_pact:
 		resource: mana
 		function: { expression: a_mul_x x: mana_max a: 0.2 }					
 	}		
+}
+
+###############################################################################
+# Swift Summoning
+
+talent witch_demonology_swift_summoning:
+{
+	string: "Swift Summoning"
+	icon: icon_improved_summon_lesser_demon
+	talent_tree_points_required: 10
+	points:
+	[
+		{ ability_modifier: witch_demonology_swift_summoning_1 }
+		{ ability_modifier: witch_demonology_swift_summoning_2 }
+	]
+}
+
+ability_modifier witch_demonology_swift_summoning_1:
+{
+	description: "Reduces casting time of demon summoning spells by 1 second."
+	abilities: [ summon_lesser_demon summon_black_beast summon_fiendish_spellcaster guardian_demon ]
+	modify_cast_time: -10
+}
+
+ability_modifier witch_demonology_swift_summoning_2:
+{
+	description: "Demon summoning spells are instant."
+	abilities: [ summon_lesser_demon summon_black_beast summon_fiendish_spellcaster guardian_demon ]
+	modify_cast_time: -20
 }

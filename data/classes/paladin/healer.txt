@@ -17,6 +17,7 @@ talent_tree paladin_healer:
 		talent paladin_holy_injection: "I"		
 		talent paladin_holy_assault: "J"
 		talent paladin_guardian_angel: "K"
+		talent paladin_healer_flux_surge: "Z"
 		sprite talent_tree_down_arrow: "d"
 		sprite talent_tree_right_arrow: "r"
 		sprite talent_tree_down: "|"				
@@ -28,7 +29,7 @@ talent_tree paladin_healer:
 		"d.....d"
 		"B.DrJ.A"
 		"..d...."
-		"H.G...."
+		"H.G.Z.."
 		"d.|...."
 		"I.|...."
 		"..d...."
@@ -879,5 +880,60 @@ ability divine_flux_trigger:
 	{
 		resource: mana
 		function: { expression: a_mul_x a: 0.10 x: mana_max }				
+	}
+}
+
+###############################################################################
+# Flux Surge
+
+talent paladin_healer_flux_surge:
+{
+	string: "Flux Surge"
+	icon: icon_improved_divine_flux
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: paladin_healer_flux_surge_1 }
+		{ aura: paladin_healer_flux_surge_2 }
+	]
+}
+
+aura paladin_healer_flux_surge_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your critical heals have a 25% chance to activate Divine Flux."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: paladin_healer_flux_surge_trigger
+		trigger_abilities: [ flash_heal holy_light ]
+		probability: 25
+	}
+}
+
+aura paladin_healer_flux_surge_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Your critical heals have a 50% chance to activate Divine Flux."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: paladin_healer_flux_surge_trigger
+		trigger_abilities: [ flash_heal holy_light ]
+		probability: 50
+	}
+}
+
+ability paladin_healer_flux_surge_trigger:
+{
+	string: "Flux Surge"
+	states: [ default in_combat ]
+	icon: icon_divine_flux
+
+	direct_effect apply_aura:
+	{
+		aura: divine_flux
 	}
 }

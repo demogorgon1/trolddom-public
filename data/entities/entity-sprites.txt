@@ -1115,6 +1115,11 @@ sprites:
 	sprite elf_19: { dead: elf_19_dead }	
 	sprite dwarf_25: { dead: dwarf_25_dead }	
 	sprite man_101: { dead: man_101_dead }	
+	sprite stalker_5: { dead: stalker_5_dead }	
+	sprite stalker_6: { dead: stalker_6_dead }	
+	sprite golem_4: { dead: golem_4_dead }	
+	sprite stalker_7: { dead: stalker_7_dead }	
+	sprite golem_5: { dead: golem_5_dead }	
 
 	cursor: { position: [ 0 976 ] }
 	sprite slime_ball_1_dead: { }	
@@ -1123,6 +1128,11 @@ sprites:
 	sprite elf_19_dead: { }
 	sprite dwarf_25_dead: { }
 	sprite man_101_dead: { }
+	sprite stalker_5_dead: { }
+	sprite stalker_6_dead: { }
+	sprite golem_4_dead: { }
+	sprite stalker_7_dead: { }
+	sprite golem_5_dead: { }
 	
 }
 

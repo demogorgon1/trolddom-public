@@ -41,9 +41,13 @@ namespace tpublic
 					return false;
 				if(!m_size.FromStream(aReader))
 					return false;
+				if(m_size.m_x <= 0 || m_size.m_y <= 0)
+					return false;
+				size_t bytes = sizeof(uint32_t) * (size_t)m_size.m_x * (size_t)m_size.m_y;
+				if(bytes > aReader->GetRemainingSize())
+					return false;
 				assert(m_tileMap == NULL);
-				m_tileMap = new uint32_t[m_size.m_x * m_size.m_y];
-				size_t bytes = sizeof(uint32_t) * (size_t)(m_size.m_x * m_size.m_y);
+				m_tileMap = new uint32_t[(size_t)m_size.m_x * (size_t)m_size.m_y];
 				if(aReader->Read(m_tileMap, bytes) != bytes)
 					return false;
 				return true;

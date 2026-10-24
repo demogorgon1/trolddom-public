@@ -8,6 +8,7 @@ dialogue_screen .frinrir_greetings:
 	options:
 	[
 		{ quest<offer_only>: .frinrir_1 requirement self<must_not_have_completed_quest>: { id: .rolf_1 } requirement self<must_not_have_active_quest>: { id: .rolf_1 } }
+		{ quest: .frinrir_2 }
 	]
 }
 
@@ -71,4 +72,124 @@ quest .frinrir_1:
 
 	quest_items: [ .frinrir_1 ]
 	level: 9
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .frinrir_2_quest_item: { }
+
+item .frinrir_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .frinrir_2_quest_item ]
+	string: "Sack of Supplies"
+	flavor: "Smells faintly of zombie."
+	icon: icon_green_bag
+	quest: .frinrir_2
+	stack: 5
+	item_level: 10
+	flags: [ not_sellable ]
+}
+
+loot_table .frinrir_2_quest_item:
+{
+	slots:
+	[
+		{
+			possibility: { loot_group: .frinrir_2_quest_item }
+		}
+	]
+}
+
+entity .frinrir_2_quest_item:
+{
+	string: "Dropped Supply Sack"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_sack_1 ] z_offset: -3 } ] }
+
+		openable:
+		{
+			loot_table: .frinrir_2_quest_item
+			verb: pick_up
+			level: 10
+			range: 1
+			despawn: true
+			required_quest: .frinrir_2
+		}
+	}
+}
+
+objective .frinrir_2:
+{
+	string: "Sacks of Supplies"
+
+	maps: [ open_world ]
+
+	collect_items: { item: .frinrir_2_quest_item count: 5 }
+}
+
+item shoulders_frinrir_1:
+{
+	type: armor_plate
+	binds: when_picked_up
+	equipment_slots: [ shoulders ]
+	required_level: 10
+	icon: icon_plate_shoulders_1
+	rarity: uncommon
+	string: "Cart Driver's Pauldrons"
+	stat_weight strength: 2
+	stat_weight constitution: 1
+}
+
+item feet_frinrir_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ feet ]
+	required_level: 10
+	icon: icon_boots_2
+	rarity: uncommon
+	string: "Muddy Wayfarer's Shoes"
+	stat_weight wisdom: 2
+	stat_weight constitution: 1
+}
+
+quest .frinrir_2:
+{
+	string: "The Shortcut"
+
+	text:
+	[
+		"Recover the sacks of supplies scattered among the zombies in the wasteland west of Frinrir."
+	]
+
+	description:
+	[
+		"My last supply cart never reached the mountain fortress. The driver decided to take a shortcut west through the wasteland. Right through"
+		"the zombies. He came back on foot, without the cart, without the supplies and without one of his boots.\n"
+		"\n"
+		"The sacks must still be lying around out there somewhere. The dead don't eat flour, as far as I know, so they should be fine. Mostly."
+		"Bring back five of them and I'll make it worth your while."
+	]
+
+	progress:
+	[
+		"No luck? Look for the sacks, not the boot."
+	]
+
+	completion:
+	[
+		"A bit chewed on, but that'll wash out. Probably.\n"
+		"\n"
+		"Next time I'll take the road myself."
+	]
+
+	objectives: [ .frinrir_2 ]
+	level: 10
+
+	reward_one_item: [ shoulders_frinrir_1 feet_frinrir_1 ]
 }

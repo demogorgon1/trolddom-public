@@ -17,6 +17,7 @@ talent_tree sorcerer_elemental:
 		talent sorcerer_elemental_shield: "I"
 		talent sorcerer_elemental_improved_ice_lance: "J"
 		talent sorcerer_elemental_shell: "K"
+		talent sorcerer_elemental_pyroclasm: "Z"
 		sprite talent_tree_down_arrow: "d"						
 		sprite talent_tree_right_arrow: "r"						
 		sprite talent_tree_down: "|"		
@@ -31,7 +32,7 @@ talent_tree sorcerer_elemental:
 		"d.|.d...."
 		"F.|.D-trE"
 		"..d...d.."
-		"..C.I.J.."
+		"..C.I.J.Z"
 		"....d...."
 		"....H...."
 		"....d...."
@@ -921,5 +922,77 @@ particle_system frost_explosion:
 		scale: 3
 		alpha: 0.6
 		fade_out: 200
+	}
+}
+
+###############################################################################
+# Pyroclasm
+
+talent sorcerer_elemental_pyroclasm:
+{
+	string: "Pyroclasm"
+	icon: icon_improved_fireball
+	talent_tree_points_required: 10
+	points:
+	[
+		{ aura: sorcerer_elemental_pyroclasm_1 }
+		{ aura: sorcerer_elemental_pyroclasm_2 }
+	]
+}
+
+aura sorcerer_elemental_pyroclasm_1:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Critical strikes with Fireball have a 50% chance to make your next Fireball instant."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: sorcerer_elemental_pyroclasm_trigger
+		trigger_abilities: [ fireball ]
+		probability: 50
+	}
+}
+
+aura sorcerer_elemental_pyroclasm_2:
+{
+	flags: [ persist_in_death ]
+	type: hidden
+	description: "Critical strikes with Fireball have a 100% chance to make your next Fireball instant."
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: critical
+		ability<self>: sorcerer_elemental_pyroclasm_trigger
+		trigger_abilities: [ fireball ]
+	}
+}
+
+ability sorcerer_elemental_pyroclasm_trigger:
+{
+	string: "Pyroclasm"
+	states: [ default in_combat ]
+	icon: icon_fireball
+
+	direct_effect apply_aura:
+	{
+		aura: sorcerer_elemental_pyroclasm
+	}
+}
+
+aura sorcerer_elemental_pyroclasm:
+{
+	string: "Pyroclasm"
+	description: "Your next Fireball is instant."
+	type: buff
+	icon: icon_fireball
+	duration: 100
+	flags: [ unique charged magic ]
+	charges: 1
+	aura_effect cast_modifier:
+	{
+		ability_flags: [ spell ]
+		abilities: [ fireball ]
+		cast_time_multiplier: 0
+		use_charge: true
 	}
 }

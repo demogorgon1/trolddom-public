@@ -1034,10 +1034,15 @@ entity wasteland_undead_10_b: !NPC
 ##########################################################################################
 # Wasteland Crab Men
 
-loot_table .wasteland_crab_men: 
+loot_table .wasteland_crab_men:
 {
 	slots:
 	[
+		{
+			possibility: { weight: 1 }
+			possibility: { loot_group: .rolf_2_quest_item weight: 4 requirement self<must_have_active_quest>: { id: .rolf_2 } }
+		}
+
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
 	]		

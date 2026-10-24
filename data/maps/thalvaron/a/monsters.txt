@@ -5,6 +5,13 @@ npc_behavior_state .wandering_short:
 	max_range: 1
 }
 
+npc_behavior_state .wandering_long:
+{
+	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
+	behavior: wandering
+	max_range: 3
+}
+
 npc_behavior_state .passive:
 {
 	on_route<thalvaron_default_patrol>: thalvaron_default_patrol
@@ -12,7 +19,7 @@ npc_behavior_state .passive:
 }
 
 ##########################################################################################
-# Ashira 
+# Ashira
 
 map_entity_spawn thalvaron_ashira_boar: { entity thalvaron_ashira_boar: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
@@ -25,7 +32,248 @@ map_entity_spawn thalvaron_ashira_boar: { entity thalvaron_ashira_boar: {} spawn
 		_default_behavior_state: .wandering_short
 		_loot_table: default_boar
 	}
-	
+
 	entity thalvaron_ashira_boar: !NPC { _string: "Blood Boar" _sprite: boar _sprite_dead: boar_dead _level: 30 }
 }
 
+##########################################################################################
+# Ashira outer slopes: wildlife that has wandered in from the desert or lives on the ridges
+
+map_entity_spawn thalvaron_ashira_lizard: { entity thalvaron_ashira_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+map_entity_spawn thalvaron_ashira_scorpion:
+{
+	entity thalvaron_ashira_scorpion_a: { }
+	entity thalvaron_ashira_scorpion_b: { }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_ashira_lion: { entity thalvaron_ashira_lion: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_harpy: { entity thalvaron_ashira_harpy: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Rust lizards
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_lizard
+		_level: 29
+		_weapon_damage: 0.8
+		_resource_health: 0.7
+	}
+
+	entity thalvaron_ashira_lizard: !NPC { _string: "Rust Lizard" _sprite: lizard_3 _sprite_dead: lizard_3_dead }
+}
+
+# Thornback scorpions
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_long
+		_loot_table: default_beast
+		_level: 29
+		_abilities: [ { id: npc_poison_bite } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_scorpion_a: !NPC { _string: "Thornback Scorpion" _sprite: scorpion_2 _sprite_dead: scorpion_2_dead }
+	entity thalvaron_ashira_scorpion_b: !NPC { _string: "Thornback Scorpion" _sprite: scorpion_3 _sprite_dead: scorpion_3_dead }
+}
+
+# Crag lions
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_long
+		_loot_table: default_lion
+		_level: 30
+		_weapon_damage: 1.3
+		_resource_health: 1.3
+		_abilities: [ { id: npc_charge } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_lion: !NPC { _string: "Crag Lion" _sprite: lion_1 _sprite_dead: lion_1_dead }
+}
+
+# Ridge harpies
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_bird
+		_level: 30
+		_abilities: [ { id: npc_trap } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_harpy: !NPC { _string: "Ridge Harpy" _sprite: harpy_2 _sprite_dead: harpy_2_dead }
+}
+
+##########################################################################################
+# Ashira brambles: the red and brown thickets
+
+map_entity_spawn thalvaron_ashira_stalker: { entity thalvaron_ashira_stalker: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_spider: { entity thalvaron_ashira_spider: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_golem: { entity thalvaron_ashira_golem: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Bramble stalkers
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .passive
+		_loot_table: default_beast
+		_level: 30
+		_weapon_damage: 1.2
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_stalker: !NPC { _string: "Bramble Stalker" _sprite: stalker_6 _sprite_dead: stalker_6_dead }
+}
+
+# Briar spiders
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_loot_table: default_spider
+		_level: 30
+		_abilities: [ { id: npc_web } { id: npc_poison_bite } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_spider: !NPC { _string: "Briar Spider" _sprite: spider_2 _sprite_dead: spider_2_dead }
+}
+
+# Redstone golems
+{
+	${
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: default_earth_elemental
+		_level: 30
+		_weapon_damage: 1.5
+		_resource_health: 1.5
+		_immune_to_stun: true
+		_abilities: [ { id: npc_sunder } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_golem: !NPC { _string: "Redstone Golem" _sprite: golem_4 _sprite_dead: golem_4_dead }
+}
+
+##########################################################################################
+# Ashiran peaks
+
+map_entity_spawn thalvaron_ashira_troll: { entity thalvaron_ashira_troll: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_owlbear: { entity thalvaron_ashira_owlbear: {} spawn_timer: !NPC_RESPAWN_RARE{} }
+
+# Trolls living in the caves
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: default_humanoid
+		_level: 30
+		_weapon_damage: 1.3
+		_resource_health: 1.4
+		_abilities: [ { id: npc_strike } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_troll: !NPC { _string: "Ashiran Troll" _sprite: troll_2 _sprite_dead: troll_2_dead }
+}
+
+# Bramblehide
+{
+	loot_table .ashira_owlbear:
+	{
+		slots:
+		[
+			{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{}
+		          map_message thalvaron: "Bramblehide will not drop Emblem of Triumph for {}." } } }
+
+			!WORLD_DROPS_VERY_RARE {}
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_long
+		_loot_table: .ashira_owlbear
+		_elite: true
+		_level: 30
+		_weapon_damage: 1.4
+		_resource_health: 4
+		_immune_to_stun: true
+		_max_leash_distance: 20
+		_abilities: [ { id: npc_charge_rend } { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_owlbear: !NPC { _string: "Bramblehide" _sprite: owlbear_3 _sprite_dead: owlbear_3_dead }
+}
+
+##########################################################################################
+# Ashira corrupted depths
+
+map_entity_spawn thalvaron_ashira_tainted_wildlife:
+{
+	entity thalvaron_ashira_tainted_boar: { }
+	entity thalvaron_ashira_tainted_wolf: { }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_ashira_tainted_bear: { entity thalvaron_ashira_tainted_bear: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_hollow_stalker: { entity thalvaron_ashira_hollow_stalker: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_shattered_golem: { entity thalvaron_ashira_shattered_golem: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Tainted wildlife
+{
+	${
+		_faction: monsters
+		_creature_type: beast
+		_default_behavior_state: .wandering_short
+		_level: 30
+	}
+
+	entity thalvaron_ashira_tainted_boar: !NPC { _string: "Tainted Boar" _sprite: infected_boar_1 _sprite_dead: infected_boar_1_dead _loot_table: default_boar _abilities: [ { id: npc_charge } { id: npc_attack } ] }
+	entity thalvaron_ashira_tainted_wolf: !NPC { _string: "Tainted Wolf" _sprite: infected_wolf_1 _sprite_dead: infected_wolf_1_dead _loot_table: default_wolf _abilities: [ { id: npc_rend } { id: npc_attack } ] }
+	entity thalvaron_ashira_tainted_bear: !NPC { _string: "Tainted Bear" _sprite: infected_bear_1 _sprite_dead: infected_bear_1_dead _loot_table: default_bear _weapon_damage: 1.3 _resource_health: 1.5 _abilities: [ { id: npc_sunder } { id: npc_attack } ] }
+}
+
+# Hollow stalkers
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: default_beast
+		_level: 30
+		_weapon_damage: 1.2
+		_abilities: [ { id: npc_drain_life } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_hollow_stalker: !NPC { _string: "Hollow Stalker" _sprite: stalker_7 _sprite_dead: stalker_7_dead }
+}
+
+# Shattered golems
+{
+	${
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: default_earth_elemental
+		_level: 30
+		_weapon_damage: 1.5
+		_resource_health: 1.5
+		_immune_to_stun: true
+		_abilities: [ { id: npc_curse } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_shattered_golem: !NPC { _string: "Shattered Golem" _sprite: golem_5 _sprite_dead: golem_5_dead }
+}

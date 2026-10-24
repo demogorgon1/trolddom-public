@@ -17,6 +17,7 @@ talent_tree priest_healing:
 		talent priest_spiritual_surge: "I"
 		talent priest_improved_inner_peace: "J"
 		talent priest_healing_shield: "K"
+		talent priest_healing_swift_resurrection: "Z"
 		sprite talent_tree_down_arrow: "d"				
 		sprite talent_tree_down: "|"		
 	}
@@ -29,7 +30,7 @@ talent_tree priest_healing:
 		"..d...|"
 		"J.D.H.|"
 		"....d.|"
-		"....I.|"
+		"..Z.I.|"
 		"......d"
 		"......K"
 	]
@@ -735,4 +736,33 @@ ability inner_peace:
 			aura_effect heal_output_modifier: { multiplier: 1.45 }
 		}
 	}	
+}
+
+###############################################################################
+# Swift Resurrection
+
+talent priest_healing_swift_resurrection:
+{
+	string: "Swift Resurrection"
+	icon: icon_improved_resurrection
+	talent_tree_points_required: 15
+	points:
+	[
+		{ ability_modifier: priest_healing_swift_resurrection_1 }
+		{ ability_modifier: priest_healing_swift_resurrection_2 }
+	]
+}
+
+ability_modifier priest_healing_swift_resurrection_1:
+{
+	description: "Reduces casting time of Resurrection by 1.5 seconds."
+	ability: resurrection
+	modify_cast_time: -15
+}
+
+ability_modifier priest_healing_swift_resurrection_2:
+{
+	description: "Reduces casting time of Resurrection by 3 seconds."
+	ability: resurrection
+	modify_cast_time: -30
 }

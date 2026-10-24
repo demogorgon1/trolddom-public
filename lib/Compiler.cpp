@@ -99,6 +99,7 @@ namespace tpublic
 					bool						IsEnd() const override					 { assert(false); return false; }
 					size_t						Read(void*, size_t) override			 { assert(false); return 0; }
 					size_t						Peek(void*, size_t) const override		 { assert(false); return 0; }
+					size_t						GetRemainingSize() const override		 { assert(false); return 0; }
 					const AuraEffectFactory*	GetAuraEffectFactory() const override	 { return m_sourceContext->m_auraEffectFactory.get(); }
 					const ComponentManager*		GetComponentManager() const override	 { return m_sourceContext->m_componentManager.get(); }
 					const DirectEffectFactory*	GetDirectEffectFactory() const override  { return m_sourceContext->m_directEffectFactory.get(); }

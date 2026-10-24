@@ -1006,6 +1006,24 @@ sprites:
 	
 	cursor: { position: [ 0 880 ] }	
 	sprite icon_crown_3 : { tags: [ icon ] }
+	sprite icon_improved_block : { tags: [ icon ] }
+	sprite icon_improved_divine_flux : { tags: [ icon ] }
+	sprite icon_improved_elemental_destruction : { tags: [ icon ] }
+	sprite icon_improved_exorcism : { tags: [ icon ] }
+	sprite icon_improved_fireball : { tags: [ icon ] }
+	sprite icon_improved_kick : { tags: [ icon ] }
+	sprite icon_improved_meditation : { tags: [ icon ] }
+	sprite icon_improved_push : { tags: [ icon ] }
+	sprite icon_improved_relentless_overpower : { tags: [ icon ] }
+	sprite icon_improved_resurrection : { tags: [ icon ] }
+	sprite icon_improved_shackle_undeath : { tags: [ icon ] }
+	sprite icon_improved_staff_attack : { tags: [ icon ] }
+	sprite icon_improved_staff_attack_fist : { tags: [ icon ] }
+	sprite icon_improved_summon_lesser_demon : { tags: [ icon ] }
+	sprite icon_improved_taunt : { tags: [ icon ] }
+
+	cursor: { position: [ 0 896 ] }
+	sprite icon_improved_toughen_up : { tags: [ icon ] }
 }
 
 

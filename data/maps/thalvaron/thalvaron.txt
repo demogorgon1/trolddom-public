@@ -1262,6 +1262,19 @@ map_palette .stuff:
 	
 	# A
 	entity_spawn thalvaron_ashira_boar: [ 254 12 94 ]
+	entity_spawn thalvaron_ashira_lizard: [ 17 203 111 ]
+	entity_spawn thalvaron_ashira_scorpion: [ 17 113 161 ]
+	entity_spawn thalvaron_ashira_lion: [ 17 23 211 ]
+	entity_spawn thalvaron_ashira_harpy: [ 47 113 111 ]
+	entity_spawn thalvaron_ashira_stalker: [ 47 23 161 ]
+	entity_spawn thalvaron_ashira_spider: [ 77 158 211 ]
+	entity_spawn thalvaron_ashira_golem: [ 77 23 61 ]
+	entity_spawn thalvaron_ashira_troll: [ 107 158 111 ]
+	entity_spawn thalvaron_ashira_owlbear: [ 107 68 161 ]
+	entity_spawn thalvaron_ashira_tainted_wildlife: [ 137 203 211 ]
+	entity_spawn thalvaron_ashira_tainted_bear: [ 137 68 61 ]
+	entity_spawn thalvaron_ashira_hollow_stalker: [ 167 203 111 ]
+	entity_spawn thalvaron_ashira_shattered_golem: [ 167 113 161 ]
 	entity_spawn thalvaron_lance: [ 40 138 92 ]
 	
 }

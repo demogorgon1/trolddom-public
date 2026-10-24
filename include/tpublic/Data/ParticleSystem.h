@@ -103,6 +103,79 @@ namespace tpublic
 				float				m_width = 0.3f; // tiles, at the head (tapers to zero at the tail)
 			};
 
+			struct Beam
+			{
+				Beam()
+				{
+
+				}
+
+				Beam(
+					const SourceNode*	aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "width")
+							m_width = aChild->GetFloat();
+						else if(aChild->m_name == "texture_length")
+							m_textureLength = aChild->GetFloat();
+						else if(aChild->m_name == "scroll_speed")
+							m_scrollSpeed = aChild->GetFloat();
+						else if(aChild->m_name == "wave_amplitude")
+							m_waveAmplitude = aChild->GetFloat();
+						else if(aChild->m_name == "wave_length")
+							m_waveLength = aChild->GetFloat();
+						else if(aChild->m_name == "wave_speed")
+							m_waveSpeed = aChild->GetFloat();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+
+					TP_VERIFY(m_textureLength > 0.0f, aSource->m_debugInfo, "Beam texture length must be greater than zero.");
+					TP_VERIFY(m_waveLength > 0.0f, aSource->m_debugInfo, "Beam wave length must be greater than zero.");
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteFloat(m_width);
+					aWriter->WriteFloat(m_textureLength);
+					aWriter->WriteFloat(m_scrollSpeed);
+					aWriter->WriteFloat(m_waveAmplitude);
+					aWriter->WriteFloat(m_waveLength);
+					aWriter->WriteFloat(m_waveSpeed);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadFloat(m_width))
+						return false;
+					if(!aReader->ReadFloat(m_textureLength))
+						return false;
+					if(!aReader->ReadFloat(m_scrollSpeed))
+						return false;
+					if(!aReader->ReadFloat(m_waveAmplitude))
+						return false;
+					if(!aReader->ReadFloat(m_waveLength))
+						return false;
+					if(!aReader->ReadFloat(m_waveSpeed))
+						return false;
+					return true;
+				}
+
+				// Public data
+				float				m_width = 0.3f; // tiles, tapers to zero at the ends
+				float				m_textureLength = 1.0f; // tiles covered by one repeat of the sprite
+				float				m_scrollSpeed = 0.0f; // tiles/second, positive scrolls the texture from source towards target
+				float				m_waveAmplitude = 0.0f; // tiles, sideways wobble (zero at the ends)
+				float				m_waveLength = 1.0f; // tiles
+				float				m_waveSpeed = 0.0f; // tiles/second, positive moves waves from source towards target
+			};
+
 			struct Entry
 			{
 				Entry()
@@ -190,6 +263,10 @@ namespace tpublic
 						{
 							m_ribbon = Ribbon(aChild);
 						}
+						else if(aChild->m_name == "beam")
+						{
+							m_beam = Beam(aChild);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -221,6 +298,7 @@ namespace tpublic
 					aWriter->WriteFloat(m_moveY);
 					aWriter->WriteOptionalObject(m_swarm);
 					aWriter->WriteOptionalObject(m_ribbon);
+					aWriter->WriteOptionalObject(m_beam);
 				}
 
 				bool
@@ -267,6 +345,8 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadOptionalObject(m_ribbon))
 						return false;
+					if(!aReader->ReadOptionalObject(m_beam))
+						return false;
 					return true;
 				}
 
@@ -291,12 +371,30 @@ namespace tpublic
 				float								m_moveY = 0.0f;
 				std::optional<Swarm>				m_swarm;
 				std::optional<Ribbon>				m_ribbon; // Strip following the particle system, drawn with the first sprite
+				std::optional<Beam>					m_beam; // Strip from the source to the particle system (aura source to aura holder), drawn with the first sprite
 			};
 
 			void
 			Verify() const
 			{
 				VerifyBase();
+
+				for(const std::unique_ptr<Entry>& particle : m_particles)
+				{
+					TP_VERIFY(!particle->m_beam.has_value() || !particle->m_ribbon.has_value(), m_debugInfo, "Particle can't be both a beam and a ribbon.");
+					TP_VERIFY(!particle->m_beam.has_value() || !particle->m_sprites.empty(), m_debugInfo, "Beam needs a sprite.");
+				}
+			}
+
+			bool
+			HasBeam() const
+			{
+				for(const std::unique_ptr<Entry>& particle : m_particles)
+				{
+					if(particle->m_beam.has_value())
+						return true;
+				}
+				return false;
 			}
 
 			// Base implementation

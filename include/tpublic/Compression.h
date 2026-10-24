@@ -20,7 +20,8 @@ namespace tpublic
 		bool		Unpack(
 						const void*				aBuffer,
 						size_t					aBufferSize,
-						std::vector<uint8_t>&	aOut);
+						std::vector<uint8_t>&	aOut,
+						size_t					aMaxUncompressedSize = SIZE_MAX);
 
 	}
 

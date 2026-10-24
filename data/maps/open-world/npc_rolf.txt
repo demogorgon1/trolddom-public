@@ -10,6 +10,7 @@ dialogue_screen .rolf_greetings:
 	options:
 	[
 		{ quest<offer_only>: .rolf_1 requirement self<must_not_have_completed_quest>: { id: .frinrir_1 } requirement self<must_not_have_active_quest>: { id: .frinrir_1 } }
+		{ quest: .rolf_2 }
 		{ goto: .rolf_vendor text: "Let me browse your goods." }
 	]
 }
@@ -60,4 +61,89 @@ quest .rolf_1:
 	]
 	
 	level: 9
+}
+
+##########################################################################################
+# Quest 2
+
+loot_group .rolf_2_quest_item: { }
+
+item .rolf_2_quest_item:
+{
+	binds: when_picked_up
+	loot_groups: [ .rolf_2_quest_item ]
+	string: "Crab Man Claw"
+	flavor: "Still twitching. Clack."
+	icon: icon_crab_claw_1
+	quest: .rolf_2
+	stack: 6
+	item_level: 10
+	flags: [ not_sellable ]
+}
+
+objective .rolf_2:
+{
+	string: "Crab Man Claws"
+	collect_items: { item: .rolf_2_quest_item count: 6 }
+}
+
+item hands_rolf_1:
+{
+	type: armor_mail
+	binds: when_picked_up
+	equipment_slots: [ hands ]
+	required_level: 10
+	icon: icon_mail_gloves_1
+	rarity: uncommon
+	string: "Clawproof Gauntlets"
+	stat_weight dexterity: 2
+	stat_weight constitution: 1
+}
+
+item waist_rolf_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ waist ]
+	required_level: 10
+	icon: icon_cloth_belt_2
+	rarity: uncommon
+	string: "Rolf's Spare Rope Belt"
+	stat_weight wisdom: 1
+	stat_weight spirit: 1
+}
+
+quest .rolf_2:
+{
+	string: "Clack Clack Clack"
+
+	text:
+	[
+		"Collect claws from the crab men in the wasteland north of Rolf's camp."
+	]
+
+	description:
+	[
+		"Those crab men up north march past my camp every night. Clack clack clack, all night long. I haven't slept properly since they moved in.\n"
+		"\n"
+		"Go up there and relieve a few of them of their claws. Fewer claws, less clacking. And I hear the city folk pay good money for a proper"
+		"nutcracker, so bring me six of them and we both win. Well, not the crabs."
+	]
+
+	progress:
+	[
+		"Hear that? Clack clack clack."
+	]
+
+	completion:
+	[
+		"Look at these beauties. I'll polish them up and put them on the shelf next to the rope.\n"
+		"\n"
+		"Maybe I'll finally get some sleep tonight. Here, take something for your trouble."
+	]
+
+	objectives: [ .rolf_2 ]
+	level: 10
+
+	reward_one_item: [ hands_rolf_1 waist_rolf_1 ]
 }

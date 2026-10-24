@@ -414,11 +414,11 @@ namespace tpublic
 			if(!ReadUInt(length))
 				return false;
 
-			if(length > aMaxLength)
+			if(length > aMaxLength || length > GetRemainingSize())
 				return false;
 
 			aOut.resize(length);
-			
+
 			if(Read(&aOut[0], length) != length)
 				return false;
 
@@ -489,6 +489,7 @@ namespace tpublic
 		virtual size_t						Peek(
 												void*	aBuffer,
 												size_t	aBufferSize) const = 0;
+		virtual size_t						GetRemainingSize() const = 0;
 
 		// FIXME: this is weird, relevant FromStream methods should get these from somewhere else.
 		virtual const AuraEffectFactory*	GetAuraEffectFactory() const { assert(false); return NULL; }
