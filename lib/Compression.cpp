@@ -62,7 +62,8 @@ namespace tpublic
 		Unpack(
 			const void*				aBuffer,
 			size_t					aBufferSize,
-			std::vector<uint8_t>&	aOut)
+			std::vector<uint8_t>&	aOut,
+			size_t					aMaxUncompressedSize)
 		{
 			if(aBufferSize < sizeof(size_t))
 				return false;
@@ -70,6 +71,8 @@ namespace tpublic
 			const uint8_t* p = (const uint8_t*)aBuffer;
 			p += aBufferSize - sizeof(size_t);
 			size_t uncompressedSize = *((const size_t*)p);
+			if(uncompressedSize > aMaxUncompressedSize)
+				return false;
 			size_t maxEncodedSize = BrotliEncoderMaxCompressedSize(uncompressedSize);
 			if(aBufferSize - sizeof(size_t) > maxEncodedSize)
 				return false;
