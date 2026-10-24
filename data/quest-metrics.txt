@@ -33,6 +33,8 @@ quest_metrics:
 		[ 28 1792 ]
 		[ 29 1882 ]
 		[ 30 1977 ]
+		[ 31 2040 ]
+		[ 32 2100 ]
 	]
 	
 	elite_cash_adjustment: 200

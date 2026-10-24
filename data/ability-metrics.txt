@@ -21,6 +21,7 @@ ability_metrics:
 		[ 10 12 ]
 		[ 20 24 ]
 		[ 30 36 ]
+		[ 40 44 ]
 	]
 	
 	rage_hit_base_per_second: 4
@@ -32,5 +33,6 @@ ability_metrics:
 		[ 10 2500 ]
 		[ 20 8000 ]
 		[ 30 21600 ]
+		[ 40 50000 ]
 	]
 }
