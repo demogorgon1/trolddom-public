@@ -524,3 +524,25 @@
 	ability consumable_cup_of_warm_eels: !ABILITY_FOOD {}
 	item consumable_cup_of_warm_eels: !ITEM_FOOD {}
 }
+
+#####################################################
+# Desert-Baked Rustfin
+{
+	${
+		_string: "Desert-Baked Rustfin"
+		_description: "Restores 1500 health and mana over 10 seconds. Increases Armor by 120 for 20 min. Can't be used in combat."
+		_level: 28
+		_icon: icon_fish_8_cooked
+		_heal_tick: 150
+		_ability_tick: consumable_desert_baked_rustfin_tick
+		_ability: consumable_desert_baked_rustfin
+		_aura: consumable_desert_baked_rustfin
+		_item: { consumable_desert_baked_rustfin: 1 }
+	}
+
+	aura consumable_desert_baked_rustfin_buff: !AURA_FOOD_BUFF { _stat_modifiers: { armor: { add: 120 } } }
+	ability consumable_desert_baked_rustfin_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_desert_baked_rustfin: !AURA_FOOD { _buff: consumable_desert_baked_rustfin_buff }
+	ability consumable_desert_baked_rustfin: !ABILITY_FOOD {}
+	item consumable_desert_baked_rustfin: !ITEM_FOOD {}
+}

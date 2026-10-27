@@ -891,3 +891,42 @@ item recipe_swiftness_potion:
 	string: "Recipe: Swiftness Potion"
 	use_ability: .learn_swiftness_potion
 }
+
+#####################################################
+# Elixir of the Warden
+
+ability craft_elixir_of_the_warden: !ALCHEMY_CRAFT
+{
+	_string: "Elixir of the Warden"
+	_item: consumable_elixir_of_the_warden
+	_produce: { consumable_elixir_of_the_warden: 1 } 
+	_materials: { item_hollowgill: 2 item_sand_orchid: 2 }
+	_skill: 110
+}
+
+item recipe_elixir_of_the_warden:
+{
+	type: miscellaneous
+	flags: [ unique ]
+	item_level: 29
+	rarity: uncommon
+	loot_groups: [ ashira_recipes ]
+	level_range: [ 28 32 ]
+	icon: icon_scroll_1
+	string: "Recipe: Elixir of the Warden"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Teaches you how to make an Elixir of the Warden."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_elixir_of_the_warden: 1 }
+		required_profession<110>: alchemy
+		requirement self<must_not_have_profession_ability>: { id: craft_elixir_of_the_warden }
+		direct_effect learn_profession_ability:
+		{
+			profession: alchemy
+			ability: craft_elixir_of_the_warden
+		}
+	}	
+}

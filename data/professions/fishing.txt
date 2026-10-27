@@ -91,12 +91,16 @@ loot_group fish_jungle: { }
 loot_group fish_skaldrun: { } 
 loot_group fish_realm_of_fire: { } 
 loot_group fish_slime_common: { } 
-loot_group fish_slime_uncommon: { } 
+loot_group fish_slime_uncommon: { }
+loot_group fish_ashira: { }
+loot_group fish_ashira_corrupted: { }
 
 loot_table fish: { slots: [ { possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_jungle: { slots: [ { possibility: { weight: 2 loot_group: fish_jungle } possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_skaldrun: { slots: [ { possibility: { weight: 2 loot_group: fish_skaldrun } possibility: { weight: 1 loot_group: fish } } ] }
 loot_table fish_slime: { slots: [ { possibility: { weight: 5 loot_group: fish_slime_common } possibility: { weight: 1 loot_group: fish_slime_uncommon } } ] }
+loot_table fish_ashira: { slots: [ { possibility: { weight: 2 loot_group: fish_ashira } possibility: { weight: 1 loot_group: fish } } ] }
+loot_table fish_ashira_corrupted: { slots: [ { possibility: { weight: 2 loot_group: fish_ashira_corrupted } possibility: { weight: 1 loot_group: fish_ashira } } ] }
 
 loot_table fish_realm_of_fire: 
 { 
@@ -293,4 +297,31 @@ item item_majestic_slime_eel:
 	stack: 20
 	item_level: 20
 	level_range: [ 18 30 ]
+}
+################################################################################
+# Ashiran Rustfin
+
+item item_ashiran_rustfin:
+{
+	loot_groups: [ fish_ashira ]		
+	string: "Ashiran Rustfin"
+	icon: icon_fish_8
+	flavor: "Its scales are the color of the desert at dusk."
+	stack: 20
+	item_level: 29
+	level_range: [ 28 32 ]
+}
+
+################################################################################
+# Hollowgill
+
+item item_hollowgill:
+{
+	loot_groups: [ fish_ashira_corrupted ]		
+	string: "Hollowgill"
+	icon: icon_eel_2
+	flavor: "It has no eyes, and it is still looking at you."
+	stack: 20
+	item_level: 30
+	level_range: [ 28 32 ]
 }

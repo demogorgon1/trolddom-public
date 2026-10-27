@@ -291,3 +291,42 @@ item recipe_cup_of_warm_eels:
 		}
 	}
 }
+
+#####################################################
+# Desert-Baked Rustfin
+
+ability craft_desert_baked_rustfin: !COOKING_CRAFT
+{
+	_string: "Desert-Baked Rustfin"
+	_item: consumable_desert_baked_rustfin
+	_produce: { consumable_desert_baked_rustfin: 1 } 
+	_materials: { item_ashiran_rustfin: 1 item_wild_herbs: 1 }	
+	_skill: 110
+}
+
+item recipe_desert_baked_rustfin:
+{
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 29
+	loot_groups: [ ashira_recipes ]
+	level_range: [ 28 32 ]
+	icon: icon_scroll_1
+	string: "Recipe: Desert-Baked Rustfin"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Desert-Baked Rustfin."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_desert_baked_rustfin: 1 }
+		required_profession<110>: cooking
+		requirement self<must_not_have_profession_ability>: craft_desert_baked_rustfin
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_desert_baked_rustfin
+		}
+	}
+}
