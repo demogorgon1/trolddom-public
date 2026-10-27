@@ -1120,6 +1120,7 @@ sprites:
 	sprite golem_4: { dead: golem_4_dead }	
 	sprite stalker_7: { dead: stalker_7_dead }	
 	sprite golem_5: { dead: golem_5_dead }	
+	sprite dwarf_26: { dead: dwarf_26_dead }	
 
 	cursor: { position: [ 0 976 ] }
 	sprite slime_ball_1_dead: { }	
@@ -1133,6 +1134,7 @@ sprites:
 	sprite golem_4_dead: { }
 	sprite stalker_7_dead: { }
 	sprite golem_5_dead: { }
+	sprite dwarf_26_dead: { }
 	
 }
 
