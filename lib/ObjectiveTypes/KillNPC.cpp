@@ -72,6 +72,16 @@ namespace tpublic::ObjectiveTypes
 			return true;
 		}
 
+		void
+		DebugComplete() override
+		{
+			if(!IsCompleted())
+			{
+				m_killed = m_objective->m_count;
+				OnUpdate();
+			}
+		}
+
 	private:
 		
 		const KillNPC*	m_objective = NULL;

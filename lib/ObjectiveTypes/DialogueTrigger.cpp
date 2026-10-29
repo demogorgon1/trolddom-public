@@ -81,6 +81,16 @@ namespace tpublic::ObjectiveTypes
 			}
 		}
 
+		void
+		DebugComplete() override
+		{
+			if(!IsCompleted())
+			{
+				m_completed = true;
+				OnUpdate();
+			}
+		}
+
 	private:
 		
 		const DialogueTrigger*	m_objective = NULL;

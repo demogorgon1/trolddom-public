@@ -260,7 +260,7 @@ namespace tpublic
 					for(const Data::MapPalette::Entry& paletteEntry : palette->m_entries)
 					{
 						uint32_t key = _MakeColorKey(paletteEntry.m_color.m_r, paletteEntry.m_color.m_g, paletteEntry.m_color.m_b);
-						TP_VERIFY(combinedPalette.find(key) == combinedPalette.end(), layer->m_debugInfo, "Source color defined by multiple palettes used at the same time.");
+						TP_VERIFY(combinedPalette.find(key) == combinedPalette.end(), layer->m_debugInfo, "Source color defined by multiple palettes used at the same time (layer '%s').", layer->m_source.c_str());
 						combinedPalette[key] = &paletteEntry;
 					}
 				}
@@ -278,7 +278,7 @@ namespace tpublic
 							{
 								uint32_t key = _MakeColorKey(src->m_r, src->m_g, src->m_b);
 								CombinedPalette::iterator i = combinedPalette.find(key);
-								TP_VERIFY(i != combinedPalette.end(), layer->m_debugInfo, "Source color not defined in any palette: %u %u %u (%d, %d)", src->m_r, src->m_g, src->m_b, x, y);
+								TP_VERIFY(i != combinedPalette.end(), layer->m_debugInfo, "Source color not defined in any palette: %u %u %u (%d, %d) in layer '%s'", src->m_r, src->m_g, src->m_b, x, y, layer->m_source.c_str());
 
 								const Data::MapPalette::Entry* entry = i->second;
 
@@ -288,7 +288,7 @@ namespace tpublic
 
 								if(layer->m_cover)
 								{
-									TP_VERIFY(entry->m_type == Data::MapPalette::ENTRY_TYPE_TILE, layer->m_debugInfo, "Cover layer can only have tiles.");
+									TP_VERIFY(entry->m_type == Data::MapPalette::ENTRY_TYPE_TILE, layer->m_debugInfo, "Cover layer can only have tiles (%d, %d) in layer '%s'.", x, y, layer->m_source.c_str());
 									coverMap[mapX + mapY * m_width] = entry->m_value;
 									hasCoverMap = true;
 								}
@@ -995,6 +995,7 @@ namespace tpublic
 				else if(aNode->m_name == "source")
 				{
 					sourcePath = aNode->m_realPath + "/" + aNode->m_value;
+					layer->m_source = aNode->m_value;
 				}
 				else if (aNode->m_name == "offset" && aNode->GetArray()->m_children.size() == 2)
 				{

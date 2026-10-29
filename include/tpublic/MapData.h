@@ -989,6 +989,7 @@ namespace tpublic
 			int32_t									m_width;
 			int32_t									m_height;
 			bool									m_cover;
+			std::string								m_source;
 			DataErrorHandling::DebugInfo			m_debugInfo;
 		};
 

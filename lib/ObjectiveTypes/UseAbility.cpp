@@ -89,6 +89,16 @@ namespace tpublic::ObjectiveTypes
 			}
 		}
 
+		void
+		DebugComplete() override
+		{
+			if(!IsCompleted())
+			{
+				m_count = m_objective->m_count;
+				OnUpdate();
+			}
+		}
+
 	private:
 		
 		const UseAbility*	m_objective = NULL;

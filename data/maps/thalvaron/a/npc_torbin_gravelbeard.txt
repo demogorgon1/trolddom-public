@@ -1,0 +1,209 @@
+dialogue_screen .torbin_gravelbeard_vendor: { !TRADE_SUPPLIES {} }
+
+dialogue_screen .torbin_gravelbeard:
+{
+	text:
+	[
+		"Welcome to Ashira, or what's left of it. Not many people make it across the desert, so if you need supplies, you've found the only shop for a hundred miles. Prices are adjusted accordingly."
+	]
+
+	options:
+	[
+		{ quest<completion_only>: __maps_thalvaron_nw_inn_keeper_3 }
+		{ quest: .torbin_gravelbeard_1 }
+		{ quest<offer_only>: .torbin_gravelbeard_2 }
+		{ goto: .torbin_gravelbeard_vendor text: "Let me browse your goods." }
+	]
+}
+
+entity thalvaron_torbin_gravelbeard: !NPC
+{
+	_string: "Torbin Gravelbeard"
+	_dialogue_root: $dialogue_root { .torbin_gravelbeard: { } }
+	_sprite: dwarf_26
+	_sprite_dead: dwarf_26_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+}
+
+############################################################
+# Quest 1
+
+loot_group .torbin_gravelbeard_1_quest_item: {}
+
+item .torbin_gravelbeard_1_quest_item:
+{
+	icon: icon_brown_bag
+	item_level: 29
+	loot_groups: [ .torbin_gravelbeard_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Maren's Satchel"
+	quest: .torbin_gravelbeard_1
+}
+
+loot_table .torbin_gravelbeard_1_quest_item: { slots: [ { possibility: { loot_group: .torbin_gravelbeard_1_quest_item } } ] }
+
+entity thalvaron_torbin_gravelbeard_1_quest_item:
+{
+	string: "Torn Satchel"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_sack_1 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .torbin_gravelbeard_1_quest_item
+			verb: pick_up
+			range: 1
+			level: 29
+			despawn: true
+			required_quest: .torbin_gravelbeard_1
+		}
+	}
+}
+
+objective .torbin_gravelbeard_1:
+{
+	string: "Maren's Satchel"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .torbin_gravelbeard_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 29 }
+	item .torbin_gravelbeard_1_a: !QUEST_REWARD_FEET{ _string: "Trailfinder Boots" _icon: icon_mail_boots_1 _constitution: 2 _dexterity: 3 _type: armor_mail }
+	item .torbin_gravelbeard_1_b: !QUEST_REWARD_HANDS{ _string: "Surveyor's Gloves" _icon: icon_cloth_hands_1 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
+}
+
+quest .torbin_gravelbeard_1:
+{
+	string: "Into the Overgrowth"
+
+	text:
+	[
+		"Search the dark overgrowth around the bend of the road to the north for any sign of Maren. Torbin thinks she would have followed the river."
+	]
+
+	description:
+	[
+		"Maren and I came over the mountains to map this place. Nobody has drawn a proper map of Ashira since the bridges went down, and people pay good money for maps. Ten days ago she went to chart the overgrowth"
+		"around the bend of the road to the north. She hasn't come back.\n"
+		"\n"
+		"I'm not much of a fighter. I'm better at selling rope to people who are. Go in there and find her, or find something of hers. The thickets are a maze, but she always said that if she got lost she'd follow"
+		"the river."
+	]
+
+	progress:
+	[
+		"Anything?"
+	]
+
+	completion:
+	[
+		"That's her satchel. She would never leave it behind. Not willingly.\n"
+		"\n"
+		"There's blood on the strap. And this mark burned into the leather... I've never seen anything like it."
+	]
+
+	objectives: [ .torbin_gravelbeard_1 ]
+	reward_one_item: [ .torbin_gravelbeard_1_a .torbin_gravelbeard_1_b ]
+	next_quest: .torbin_gravelbeard_2
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+loot_group .torbin_gravelbeard_2_quest_item: {}
+
+item .torbin_gravelbeard_2_quest_item:
+{
+	icon: icon_tablet_2
+	item_level: 29
+	loot_groups: [ .torbin_gravelbeard_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Hollow-Marked Tablet"
+	flavor: "It hums when you hold it close."
+	quest: .torbin_gravelbeard_2
+}
+
+loot_table .torbin_gravelbeard_2_quest_item: { slots: [ { possibility: { loot_group: .torbin_gravelbeard_2_quest_item } } ] }
+
+entity thalvaron_torbin_gravelbeard_2_quest_item:
+{
+	string: "Black Stone Tablet"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_tombstone_2 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .torbin_gravelbeard_2_quest_item
+			verb: pick_up
+			range: 1
+			level: 29
+			despawn: true
+			required_quest: .torbin_gravelbeard_2
+		}
+	}
+}
+
+objective .torbin_gravelbeard_2:
+{
+	string: "Hollow-Marked Tablet"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .torbin_gravelbeard_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 29 }
+	item .torbin_gravelbeard_2_a: !QUEST_REWARD_SHOULDERS{ _string: "Seawatch Pauldrons" _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .torbin_gravelbeard_2_b: !QUEST_REWARD_NECK{ _string: "Pendant of the Sea Cave" _icon: icon_necklace_4 _constitution: 1 _wisdom: 2 _healing: 3 }
+}
+
+quest .torbin_gravelbeard_2:
+{
+	string: "What Maren Found"
+
+	text:
+	[
+		"Find the black tablet Maren wrote about in a cave by the sea to the west, and bring it to the old man in the shack."
+	]
+
+	description:
+	[
+		"I've been reading her journal. The last pages are strange. She found a cave by the sea, to the west, and in it a black stone tablet carved with the same mark that's on her satchel. She wrote that it"
+		"was humming.\n"
+		"\n"
+		"She also wrote about an old man living alone in a shack. She said he knew things about Ashira that nobody else does, and she meant to show him the tablet. Find it and take it to him. Maybe he can tell us"
+		"who took her."
+	]
+
+	progress:
+	[
+		"What's that humming? Is that you?"
+	]
+
+	completion:
+	[
+		"Put that down! No, don't put it down. Hold it away from the soup.\n"
+		"\n"
+		"I know this mark. I saw it carved into the city gates the night Ashira burned. The Hollow Covenant. They're back. Of course they're back. They never finish anything properly, so they always come back"
+		"to finish it."
+	]
+
+	prerequisites: [ .torbin_gravelbeard_1 ]
+	objectives: [ .torbin_gravelbeard_2 ]
+	reward_one_item: [ .torbin_gravelbeard_2_a .torbin_gravelbeard_2_b ]
+	next_quest: .old_grimble_4
+	level: 29
+}

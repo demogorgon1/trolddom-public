@@ -26,6 +26,10 @@ namespace tpublic::ObjectiveTypes
 		void					PostCompletionInventoryUpdate(
 									Components::Inventory*	aInventory) const override;
 
+		// Data access
+		uint32_t				GetItemId() const { return m_itemId; }
+		uint32_t				GetCount() const { return m_count; }
+
 	private:
 
 		class Instance;

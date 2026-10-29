@@ -61,6 +61,7 @@ namespace tpublic
 		virtual void				OnDialogueTrigger(
 										const EntityInstance*			/*aEntityInstance*/) {}
 		virtual void				OnCompleteManualObjective() {}
+		virtual void				DebugComplete() {} // Collect items objectives can't complete themselves, items must be added to the inventory
 
 		// Virtual interface
 		virtual bool				IsCompleted() const = 0;

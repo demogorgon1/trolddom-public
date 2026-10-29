@@ -72,6 +72,16 @@ namespace tpublic::ObjectiveTypes
 			return true;
 		}
 
+		void
+		DebugComplete() override
+		{
+			if(!IsCompleted())
+			{
+				m_triggered = true;
+				OnUpdate();
+			}
+		}
+
 	private:
 		
 		const RouteNPC*	m_objective = NULL;
