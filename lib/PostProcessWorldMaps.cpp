@@ -232,6 +232,10 @@ namespace tpublic
 			aManifest->GetContainer<Data::WorldMap>()->ForEach([aManifest, &worldMapSources](
 				Data::WorldMap* aWorldMap)
 			{
+				// World maps from a base manifest are already built, and their source images aren't available
+				if(aWorldMap->m_base && !aWorldMap->m_defined)
+					return true;
+
 				WorldMapSources::iterator i = worldMapSources.find(aWorldMap->m_id);
 				if(i != worldMapSources.end())
 					i->second->Build(aManifest, aWorldMap);

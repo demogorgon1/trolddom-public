@@ -173,6 +173,29 @@ namespace tpublic
 
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);
 
+		if(!m_basePath.empty())
+		{
+			// Data from the base manifest counts as defined, so new data can reference it
+			DataErrorHandling::DebugInfo baseDebugInfo;
+			baseDebugInfo.m_file = m_basePath + "/manifest.bin";
+
+			for (uint8_t i = 1; i < (uint8_t)DataType::NUM_IDS; i++)
+			{
+				DataType::Id dataType = (DataType::Id)i;
+
+				m_manifest->m_containers[i]->ForEachBase([&](
+					const DataBase* aBase)
+				{
+					if(aBase->m_base && !aBase->m_name.empty())
+					{
+						uint32_t id = m_sourceContext.m_persistentIdTable->GetId(baseDebugInfo, dataType, aBase->m_name.c_str(), true);
+						TP_CHECK(id == aBase->m_id, "Base %s '%s' has id %u, but %u in the persistent id table. Use the persistent id table the base was built with.", DataType::IdToString(dataType), aBase->m_name.c_str(), aBase->m_id, id);
+					}
+					return true;
+				});
+			}
+		}
+
 		// Read source
 		m_parser.GetRoot()->ForEachChild([&](
 			const SourceNode* aNode)
