@@ -10,6 +10,7 @@ changelog:
 	[
 		{ text: "Level cap increased to 32." }		
 		{ text: "New talents, profession recipes, and items." }		
+		{ text: "Make hybrid classes by swapping talent trees." }
 		{ text: "Two new zones: Ashira in the south and The Sunken Reach to the east." }		
 		{ text: "New level 10 dungeon: Saltclaw Grotto (and Heroic level 30 version)." }		
 		{ text: "Large in-game maps can now be panned with the mouse." }		
