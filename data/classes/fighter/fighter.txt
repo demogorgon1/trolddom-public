@@ -236,7 +236,8 @@ class fighter:
 		{ level: 28 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 29 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 30 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } achievement: fighter_level_30 }				
-	]
+		{ level: 31 unlock_abilities: [ ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
+		{ level: 32 unlock_abilities: [ ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }			]
 	
 	gear_optimization default<{ weapon_dps_weight: 1.0 }>:
 	{	

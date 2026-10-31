@@ -211,7 +211,8 @@ class paladin:
 		{ level: 27 unlock_abilities: [	] stats: { dexterity: 1 strength: 1 spirit: 1 }	resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }				
 		{ level: 28 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }				
 		{ level: 29 unlock_abilities: [	] stats: { dexterity: 1 strength: 1 spirit: 1 }	resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }				
-		{ level: 30 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: paladin_level_30 }				
+		{ level: 30 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } achievement: paladin_level_30 }		{ level: 31 unlock_abilities: [	] stats: { dexterity: 1 strength: 1 spirit: 1 }	resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }				
+		{ level: 32 unlock_abilities: [ ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }				
 	]
 	
 	gear_optimization default<{ weapon_dps_weight: 1.0 }>:
