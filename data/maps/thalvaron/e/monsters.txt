@@ -446,6 +446,7 @@ map_entity_spawn thalvaron_thalyssian_spider_27: { entity thalvaron_thalyssian_s
 map_entity_spawn thalvaron_wyvern: { entity thalvaron_wyvern: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_battleground_troll: { entity thalvaron_battleground_troll: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_jungle_beast: { entity thalvaron_jungle_beast: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_jungle_beast_31: { entity thalvaron_jungle_beast_31: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 map_entity_spawn thalvaron_stillwater_crocodile: { entity thalvaron_stillwater_crocodile: { } spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 # Battleground troll
@@ -491,6 +492,21 @@ map_entity_spawn thalvaron_stillwater_crocodile: { entity thalvaron_stillwater_c
 	}
 
 	entity thalvaron_jungle_beast: !NPC { _string: "Spine Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_charge_rend } { id: npc_attack } ] }
+}
+
+# Level 31 Spine Beasts in the jungle north east of Quizlob's bridge, for his third quest
+{
+	${
+		_level: 31
+		_faction: monsters
+		_creature_type: beast
+		_weapon_damage: 1.15
+		_resource_health: 1.17
+		_loot_table: default_lion
+		_default_behavior_state: .wandering_long
+	}
+
+	entity thalvaron_jungle_beast_31: !NPC { _string: "Spine Beast" _sprite: monster_1 _sprite_dead: monster_1_dead _abilities: [ { id: npc_charge_rend } { id: npc_attack } ] }
 }
 
 # Forbidden island boss

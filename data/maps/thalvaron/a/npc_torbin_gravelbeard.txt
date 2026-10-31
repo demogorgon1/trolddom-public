@@ -75,12 +75,6 @@ objective .torbin_gravelbeard_1:
 	collect_items: { item: .torbin_gravelbeard_1_quest_item count: 1 }
 }
 
-{
-	${ _level: 29 }
-	item .torbin_gravelbeard_1_a: !QUEST_REWARD_FEET{ _string: "Trailfinder Boots" _icon: icon_mail_boots_1 _constitution: 2 _dexterity: 3 _type: armor_mail }
-	item .torbin_gravelbeard_1_b: !QUEST_REWARD_HANDS{ _string: "Surveyor's Gloves" _icon: icon_cloth_hands_1 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
-}
-
 quest .torbin_gravelbeard_1:
 {
 	string: "Into the Overgrowth"
@@ -112,7 +106,6 @@ quest .torbin_gravelbeard_1:
 	]
 
 	objectives: [ .torbin_gravelbeard_1 ]
-	reward_one_item: [ .torbin_gravelbeard_1_a .torbin_gravelbeard_1_b ]
 	next_quest: .torbin_gravelbeard_2
 	level: 29
 }
@@ -168,6 +161,7 @@ objective .torbin_gravelbeard_2:
 	${ _level: 29 }
 	item .torbin_gravelbeard_2_a: !QUEST_REWARD_SHOULDERS{ _string: "Seawatch Pauldrons" _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _type: armor_plate }
 	item .torbin_gravelbeard_2_b: !QUEST_REWARD_NECK{ _string: "Pendant of the Sea Cave" _icon: icon_necklace_4 _constitution: 1 _wisdom: 2 _healing: 3 }
+	item .torbin_gravelbeard_2_c: !QUEST_REWARD_WRISTS{ _string: "Cliffwalker Bracers" _icon: icon_mail_bracers_2 _constitution: 2 _dexterity: 3 _type: armor_mail }
 }
 
 quest .torbin_gravelbeard_2:
@@ -203,7 +197,7 @@ quest .torbin_gravelbeard_2:
 
 	prerequisites: [ .torbin_gravelbeard_1 ]
 	objectives: [ .torbin_gravelbeard_2 ]
-	reward_one_item: [ .torbin_gravelbeard_2_a .torbin_gravelbeard_2_b ]
+	reward_one_item: [ .torbin_gravelbeard_2_a .torbin_gravelbeard_2_b .torbin_gravelbeard_2_c ]
 	next_quest: .old_grimble_4
 	level: 29
 }

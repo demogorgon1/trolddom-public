@@ -1,0 +1,190 @@
+############################################################
+# Brinecoil
+
+############################################################
+# Loot
+
+loot_group .brinecoil: {}
+loot_group .brinecoil_heroic: {}
+
+loot_table .brinecoil:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .brinecoil } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]
+}
+
+loot_table .brinecoil_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{}
+		  map_message saltclaw_grotto: "Brinecoil will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .brinecoil_heroic } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]
+}
+
+# Placeholder items
+
+{
+	${
+		_rarity: rare
+		_level: 11
+		_loot_group: .brinecoil
+	}
+
+	item saltclaw_grotto_17: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Rod of the Deep Pool"
+		_icon: icon_staff_12
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 3
+		_weapon_cooldown: 24
+	}
+
+	item saltclaw_grotto_18: !BOSS_DROP_NECK
+	{
+		_string: "Coiled Sucker Pendant"
+		_icon: icon_necklace_14
+		_constitution: 1
+		_strength: 2
+	}
+
+	item saltclaw_grotto_19: !BOSS_DROP_LEGS
+	{
+		_string: "Inkstained Leggings"
+		_type: armor_mail
+		_icon: icon_mail_legs_1
+		_dexterity: 3
+		_constitution: 1
+	}
+
+	item saltclaw_grotto_20: !BOSS_DROP_TRINKET
+	{
+		_string: "Severed Tentacle"
+		_icon: icon_tentacle
+		_constitution: 2
+	}
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .brinecoil_heroic
+		_heroic: true
+	}
+
+	item saltclaw_grotto_17_heroic: !BOSS_DROP_2H_STAFF
+	{
+		_string: "Rod of the Deep Pool"
+		_icon: icon_staff_12
+		_constitution: 1
+		_wisdom: 2
+		_spell_damage: 3
+		_weapon_cooldown: 24
+	}
+
+	item saltclaw_grotto_18_heroic: !BOSS_DROP_NECK
+	{
+		_string: "Coiled Sucker Pendant"
+		_icon: icon_necklace_14
+		_constitution: 1
+		_strength: 2
+	}
+
+	item saltclaw_grotto_19_heroic: !BOSS_DROP_LEGS
+	{
+		_string: "Inkstained Leggings"
+		_type: armor_mail
+		_icon: icon_mail_legs_1
+		_dexterity: 3
+		_constitution: 1
+	}
+
+	item saltclaw_grotto_20_heroic: !BOSS_DROP_TRINKET
+	{
+		_string: "Severed Tentacle"
+		_icon: icon_tentacle
+		_constitution: 2
+	}
+}
+
+############################################################
+# Boss
+
+# Fishing anywhere in this sub zone has a 25% chance per fishing tick to call up Brinecoil. Nothing can be caught
+# here (the loot table is empty), so there are no splashes.
+zone .brinecoil:
+{
+	fishing_trigger_ability: .brinecoil_spawn
+	fishing_trigger_ability_chance: 25
+	fishing_loot_table: $loot_table { }
+}
+
+ability .brinecoil_spawn:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: saltclaw_grotto_brinecoil
+		map_entity_spawn: .brinecoil
+		if_not: .brinecoil_killed
+	}
+}
+
+encounter .brinecoil:
+{
+	main_entities: [ saltclaw_grotto_brinecoil ]
+}
+
+entity saltclaw_grotto_brinecoil: !NPC
+{
+	_string: "Brinecoil"
+	_level: 11
+	_elite: true
+	_faction: monsters
+	_sprite: tentacle_monster
+	_sprite_dead: tentacle_monster_dead
+	_weapon_damage: 1.4
+	_resource_health: 8
+	_loot_table: .brinecoil
+	_creature_type: beast
+	_encounter: .brinecoil
+	_zone: .brinecoil
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+	_can_move_on_all_non_view_blocking_tiles: true
+	_evade_despawn: true
+	_despawn_time: { never: true }
+
+	_heroic_weapon_damage: 4.0
+	_heroic_resource_health: 11
+	_loot_table_heroic: .brinecoil_heroic
+
+	_abilities:
+	[
+		{ id: npc_whirlwind target: self requirement self<must_have_less_health_than>: 90 }
+		{ id: npc_frostbolt target: random_player requirement self<must_have_less_health_than>: 95 }
+		{ id: npc_attack }
+	]
+}
+
+map_trigger .brinecoil_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .brinecoil: { spawn_timer: { only_when_triggered: true } }

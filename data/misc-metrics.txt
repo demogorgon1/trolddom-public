@@ -3,7 +3,7 @@ misc_metrics:
 	##################################################################
 	# Demo
 
-	demo_maps: [ open_world dungeon_1 player_world gateway_world lair_of_zuthyg ]
+	demo_maps: [ open_world dungeon_1 player_world gateway_world lair_of_zuthyg saltclaw_grotto ]
 
 	##################################################################
 	# Stash expansion

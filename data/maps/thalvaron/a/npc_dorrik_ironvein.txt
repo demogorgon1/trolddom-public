@@ -1,0 +1,167 @@
+dialogue_screen .dorrik_ironvein:
+{
+	text:
+	[
+		"Careful where you step, those rocks are samples. Well, they were samples. Now they're just rocks, because something down there keeps eating the good ones."
+	]
+
+	options:
+	[
+		{ quest: .dorrik_ironvein_1 }
+		{ quest: .dorrik_ironvein_2 }
+	]
+}
+
+entity thalvaron_dorrik_ironvein: !NPC
+{
+	_string: "Dorrik Ironvein"
+	_guild_name: "Prospector"
+	_sprite: dwarf_25
+	_sprite_dead: dwarf_25_dead
+	_level: 31
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .dorrik_ironvein: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .dorrik_ironvein_1_quest_item: {}
+
+item .dorrik_ironvein_1_quest_item:
+{
+	icon: icon_copper
+	item_level: 31
+	loot_groups: [ .dorrik_ironvein_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Half-Digested Redsilver"
+	flavor: "Slimy, but still valuable."
+	quest: .dorrik_ironvein_1
+	stack: 6
+}
+
+objective .dorrik_ironvein_1:
+{
+	string: "Half-Digested Redsilver"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .dorrik_ironvein_1_quest_item count: 6 }
+}
+
+{
+	${ _level: 31 }
+	item .dorrik_ironvein_1_a: !QUEST_REWARD_HANDS{ _string: "Acid-Etched Gloves" _icon: icon_mail_gloves_2 _constitution: 2 _dexterity: 3 _type: armor_mail }
+	item .dorrik_ironvein_1_b: !QUEST_REWARD_HEAD{ _string: "Prospector's Lamp Hat" _icon: icon_cloth_head_3 _constitution: 1 _wisdom: 3 _healing: 2 _type: armor_cloth }
+}
+
+quest .dorrik_ironvein_1:
+{
+	string: "Something Ate My Ore"
+
+	text:
+	[
+		"Kill Rust Oozes in the Rustvein Caverns in the southern Ashiran Peaks and bring 6 pieces of Half-Digested Redsilver to Dorrik Ironvein."
+	]
+
+	description:
+	[
+		"Torbin sold me a map that said there was redsilver in the southern peaks. Torbin's maps are mostly guesses, but this time he guessed right. The caves down there are full of it. Veins as thick as my arm.\n"
+		"\n"
+		"Well, they were. The caves are also full of oozes, and the oozes eat metal. They ate the ore, they ate my pick, and they ate the wheels off my cart. I watched one swallow a hammer.\n"
+		"\n"
+		"They don't digest it very fast, though. Go and squeeze some of my redsilver back out of them. I'll pay you for it, which is more than the oozes did."
+	]
+
+	progress:
+	[
+		"Did you get my ore back? Try not to get any on you. It stings."
+	]
+
+	completion:
+	[
+		"Slimy, but it'll clean up. That's a good haul.\n"
+		"\n"
+		"Hold on. Look at this piece. These are teeth marks. Oozes don't have teeth."
+	]
+
+	objectives: [ .dorrik_ironvein_1 ]
+	reward_one_item: [ .dorrik_ironvein_1_a .dorrik_ironvein_1_b ]
+	next_quest: .dorrik_ironvein_2
+	level: 31
+}
+
+############################################################
+# Quest 2
+
+objective .dorrik_ironvein_2_a:
+{
+	string: "Tunnel Ghouls Slain"
+
+	maps: [ thalvaron ]
+
+	kill_npc:
+	{
+		entities: [ thalvaron_ashira_tunnel_ghoul ]
+		count: 8
+	}
+}
+
+objective .dorrik_ironvein_2_b:
+{
+	string: "Gristlejaw Slain"
+
+	maps: [ thalvaron ]
+
+	kill_npc:
+	{
+		entities: [ thalvaron_ashira_gristlejaw ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 31 }
+	item .dorrik_ironvein_2_a: !QUEST_REWARD_1H_MACE{ _string: "Ironvein's Rock Hammer" _icon: icon_mace_12 _constitution: 1 _strength: 3 }
+	item .dorrik_ironvein_2_b: !QUEST_REWARD_LEGS{ _string: "Cave-Crawler Leggings" _icon: icon_plate_legs_1 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .dorrik_ironvein_2_c: !QUEST_REWARD_NECK{ _string: "Redsilver Pendant" _icon: icon_necklace_12 _constitution: 1 _wisdom: 2 _spell_damage: 3 }
+}
+
+quest .dorrik_ironvein_2:
+{
+	string: "Teeth in the Dark"
+
+	text:
+	[
+		"Go deep into the Rustvein Caverns, slay 8 Tunnel Ghouls and their leader Gristlejaw, then return to Dorrik Ironvein."
+	]
+
+	description:
+	[
+		"I asked around. Well, I asked Torbin, and he asked his ledger. The last prospectors who went into those caves bought a lot of rope and never came back to pay for it.\n"
+		"\n"
+		"I think I know where they went. Something lives in the deep tunnels, past where the oozes stop. It's been gnawing on the ore, and on whatever else it finds down there. I can hear it at night, chewing.\n"
+		"\n"
+		"Go down there and deal with it. They say the biggest one is called Gristlejaw. I don't know who 'they' are, but I'd rather not meet the thing they named."
+	]
+
+	progress:
+	[
+		"Still hear the chewing?"
+	]
+
+	completion:
+	[
+		"Gristlejaw is dead? Then the caves are open, and the redsilver is mine. Ours. Mostly mine.\n"
+		"\n"
+		"Here, take something for your trouble. And if you see Torbin, tell him he can have his rope back."
+	]
+
+	prerequisites: [ .dorrik_ironvein_1 ]
+	objectives: [ .dorrik_ironvein_2_a .dorrik_ironvein_2_b ]
+	reward_one_item: [ .dorrik_ironvein_2_a .dorrik_ironvein_2_b .dorrik_ironvein_2_c ]
+	level: 31
+}

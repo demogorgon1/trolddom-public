@@ -1,0 +1,483 @@
+dialogue_screen .hesk:
+{
+	text:
+	[
+		"Hesk is old. Hesk has watched this water for a long time. The water is angry now."
+	]
+
+	options:
+	[
+		{ quest<completion_only>: .bryn_tallow_3 }
+		{ quest: .hesk_1 }
+		{ quest<offer_only>: .hesk_2 }
+		{ quest<completion_only>: .marro_finch_1 }
+		{ quest<offer_only>: .hesk_3 }
+		{ quest: .hesk_4 }
+		{ quest: .hesk_5 }
+		{ goto: .hesk_house text: "Why do you live in a human house?" }
+	]
+}
+
+dialogue_screen .hesk_house:
+{
+	text:
+	[
+		"Hesk bought it. From some guy.\n"
+		"\n"
+		"He came in a little boat, many summers ago. He said it was a very good house, on stilts, so the water cannot get in. Hesk gave him a basket of fish and a shiny stone. He looked very happy. He rowed away very fast.\n"
+		"\n"
+		"The water gets in."
+	]
+
+	options:
+	[
+		{ goto: .hesk text: "Sounds like a good deal." }
+	]
+}
+
+entity thalvaron_hesk: !NPC
+{
+	_string: "Hesk"
+	_guild_name: "Tidewatcher"
+	_sprite: lizard_man_8
+	_sprite_dead: lizard_man_8_dead
+	_level: 31
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .hesk: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .hesk_1_quest_item: {}
+
+item .hesk_1_quest_item:
+{
+	icon: icon_seashell_1
+	item_level: 31
+	loot_groups: [ .hesk_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Tide Charm"
+	flavor: "A spiral shell strung on a bone. If you hold it to your ear, something is singing."
+	quest: .hesk_1
+	stack: 6
+}
+
+objective .hesk_1:
+{
+	string: "Tide Charms"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .hesk_1_quest_item count: 6 }
+}
+
+quest .hesk_1:
+{
+	string: "The Reef King's Song"
+
+	text:
+	[
+		"Take 6 Tide Charms from Clawkin Tidecallers and bring them to Hesk at the lagoon."
+	]
+
+	description:
+	[
+		"The Clawkin were small, quiet people. They ate fish. They took nobody. Then soft-skins came with the powder that thunders and broke open the reef to get at the old ships.\n"
+		"\n"
+		"Under the reef is the Drowned Temple, and in the temple sleeps Khar'kesh, the Reef King. Slept. The thunder woke him. Now he sings, and the Clawkin listen.\n"
+		"\n"
+		"His Tidecallers carry charms of shell and bone, so that they hear the song clearly. Bring Hesk six. Then Hesk will listen too, and learn where your people are kept."
+	]
+
+	progress:
+	[
+		"Hesk is waiting. Hesk is good at waiting."
+	]
+
+	completion:
+	[
+		"*Hesk holds a charm to his ear for a long time.*\n"
+		"\n"
+		"He sings of cages on the eastern isle, and of offerings. Your people are alive. The song says they are being kept for the full tide."
+	]
+
+	prerequisites: [ .bryn_tallow_3 ]
+	objectives: [ .hesk_1 ]
+	next_quest: .hesk_2
+	level: 31
+}
+
+############################################################
+# Quest 2
+
+loot_group .hesk_2_quest_item: {}
+
+item .hesk_2_quest_item:
+{
+	icon: icon_token_2
+	item_level: 31
+	loot_groups: [ .hesk_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Gull's Wager Token"
+	flavor: "A brass token stamped with a gull. Every sailor on the Gull's Wager carries one."
+	quest: .hesk_2
+	stack: 4
+}
+
+loot_table .hesk_2_quest_item: { slots: [ { possibility: { loot_group: .hesk_2_quest_item } } ] }
+
+entity thalvaron_hesk_2_quest_item:
+{
+	string: "Clawkin Cage"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ cage_1 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .hesk_2_quest_item
+			verb: open
+			range: 1
+			level: 31
+			despawn: true
+			required_quest: .hesk_2
+		}
+	}
+}
+
+objective .hesk_2_a:
+{
+	string: "Sailors Freed"
+	maps: [ thalvaron ]
+	collect_items: { item: .hesk_2_quest_item count: 4 }
+}
+
+objective .hesk_2_b:
+{
+	string: "Saltbound Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_saltbound_deckhand thalvaron_sr_saltbound_harpooner ] count: 8 }
+}
+
+{
+	${ _level: 31 }
+	item .hesk_2_a: !QUEST_REWARD_SHOULDERS{ _string: "Barnacled Pauldrons" _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .hesk_2_b: !QUEST_REWARD_HEAD{ _string: "Lookout's Cap" _icon: icon_mail_head_1 _constitution: 1 _dexterity: 3 _type: armor_mail }
+	item .hesk_2_c: !QUEST_REWARD_FINGER{ _string: "Ring of the Full Tide" _icon: icon_ring_7 _wisdom: 2 _spell_damage: 3 }
+}
+
+quest .hesk_2:
+{
+	string: "Before the Full Tide"
+
+	text:
+	[
+		"Free 4 of Bryn's sailors from the Clawkin cages on the eastern isle, kill 8 Saltbound and return to Bryn Tallow at Wrecker's Rest."
+	]
+
+	description:
+	[
+		"The cages are on the eastern isle, across the shallows. The Clawkin do not guard them. They do not need to.\n"
+		"\n"
+		"Many ships sank on this reef before yours, soft-skin. The sailors from those ships are still down there, and the Reef King's song does not let them rest. They walk out of the sea now and stand around"
+		"the cages. Hesk calls them the Saltbound.\n"
+		"\n"
+		"Open the cages and send your people home. Put the Saltbound back to sleep, and they will thank you for it."
+	]
+
+	progress:
+	[
+		"Did you find them? Are they all right?"
+	]
+
+	completion:
+	[
+		"Four tokens, and four of my people walking in behind you, half-starved and stinking of fish. Marro is already telling everyone he could have got out on his own.\n"
+		"\n"
+		"But Dagny wasn't with them. Where is Dagny?"
+	]
+
+	prerequisites: [ .hesk_1 ]
+	objectives: [ .hesk_2_a .hesk_2_b ]
+	reward_one_item: [ .hesk_2_a .hesk_2_b .hesk_2_c ]
+	level: 31
+}
+
+############################################################
+# Quest 3 (group)
+
+# Blown at the Tide Altar in the innermost chamber of the Drowned Temple to call up Khar'kesh
+ability .hesk_3_quest_item:
+{
+	flags: [ target_self always_in_range always_in_line_of_sight ]
+	must_have_nearby_entity: thalvaron_sr_tide_altar
+	string: "Sound the Conch"
+	description: "Call up Khar'kesh, the Reef King. Must be used at the Tide Altar in the Drowned Temple."
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: thalvaron_sr_kharkesh
+		map_entity_spawn: thalvaron_sr_kharkesh
+	}
+}
+
+item .hesk_3_quest_item:
+{
+	icon: icon_horn_1
+	item_level: 31
+	flags: [ not_sellable unique ]
+	string: "Conch of the Reef King"
+	flavor: "It's enormous, and it's warm."
+	use_ability: .hesk_3_quest_item
+}
+
+objective .hesk_3:
+{
+	string: "Khar'kesh Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_kharkesh ] count: 1 }
+}
+
+{
+	${ _level: 31 _rarity: rare }
+	item .hesk_3_a: !QUEST_REWARD_2H_AXE{ _string: "Reefbreaker" _icon: icon_axe_9 _constitution: 1 _strength: 3 _weapon_cooldown: 30 }
+	item .hesk_3_b: !QUEST_REWARD_2H_STAFF{ _string: "Staff of the Low Tide" _icon: icon_staff_9 _wisdom: 2 _spell_damage: 2 _healing: 1 }
+	item .hesk_3_c: !QUEST_REWARD_CHEST{ _string: "Kingshell Hauberk" _icon: icon_mail_shirt_2 _constitution: 1 _dexterity: 3 _type: armor_mail }
+}
+
+quest .hesk_3:
+{
+	string: "The Reef King"
+
+	text:
+	[
+		"Gather allies and go to the innermost chamber of the Drowned Temple on the eastern isle. Blow the Conch of the Reef King at the altar to call up Khar'kesh, the Reef King, and kill him. Then return to Bryn Tallow at Wrecker's Rest."
+	]
+
+	description:
+	[
+		"Go through the temple to the innermost chamber and blow the conch at the altar. Khar'kesh will come. He is old, older than Hesk, and very big. His shell has been growing for longer than your people have"
+		"had boats.\n"
+		"\n"
+		"Your Dagny is in there. The full tide is tonight. Do not go alone. Bring friends with sharp things, kill the Reef King, and let the Clawkin go back to eating fish."
+	]
+
+	progress:
+	[
+		"Well? Did you find her?"
+	]
+
+	completion:
+	[
+		"Dagny! You great idiot, I told you not to go wandering off for water!\n"
+		"\n"
+		"...She's soaked to the bone and she's lost her boots, but she's breathing. The old lizard came over from the lagoon too. He says the Clawkin went quiet all at once, then went back to fishing as if nothing"
+		"had happened. I'm not sure whether that's comforting.\n"
+		"\n"
+		"Take your pick of these. We pulled them out of the oldest wreck on the reef, and I can't think of anyone who's earned them more."
+	]
+
+	prerequisites: [ .marro_finch_1 ]
+	objectives: [ .hesk_3 ]
+	quest_items: [ .hesk_3_quest_item ]
+	reward_one_item: [ .hesk_3_a .hesk_3_b .hesk_3_c ]
+	reward_cash_multiplier: 2
+	type: elite
+	level: 31
+}
+
+############################################################
+# Quest 4 
+
+loot_group .hesk_4_quest_item: {}
+
+item .hesk_4_quest_item:
+{
+	icon: icon_barrel_1
+	item_level: 31
+	loot_groups: [ .hesk_4_quest_item ]
+	flags: [ not_sellable ]
+	string: "Keg of Blasting Powder"
+	flavor: "Do not drop it."
+	quest: .hesk_4
+	stack: 6
+}
+
+loot_table .hesk_4_quest_item: { slots: [ { possibility: { loot_group: .hesk_4_quest_item } } ] }
+
+entity thalvaron_hesk_4_quest_item:
+{
+	string: "Keg of Blasting Powder"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .hesk_4_quest_item
+			verb: pick_up
+			range: 1
+			level: 31
+			despawn: true
+			required_quest: .hesk_4
+		}
+	}
+}
+
+objective .hesk_4_a:
+{
+	string: "Blasting Powder"
+	maps: [ thalvaron ]
+	collect_items: { item: .hesk_4_quest_item count: 6 }
+}
+
+objective .hesk_4_b:
+{
+	string: "Reefblasters Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_reefblaster_wrecker_a thalvaron_sr_reefblaster_wrecker_b thalvaron_sr_reefblaster_powder_monkey ] count: 8 }
+}
+
+quest .hesk_4:
+{
+	string: "The Powder That Thunders"
+
+	text:
+	[
+		"Cross to the mainland, just across the water to the west of Hesk's hut. Kill 8 Reefblasters and take 6 kegs of their blasting powder, then return to Hesk."
+	]
+
+	description:
+	[
+		"Hesk told you about the soft-skins with the powder that thunders. The ones who broke the reef and woke the Reef King. They did not leave.\n"
+		"\n"
+		"They camp on the mainland, just across the water to the west. Hesk can smell their fires at night. They call themselves Reefblasters. When the tide is low they row out and the reef thunders again,"
+		"and every time, the Reef King sings louder.\n"
+		"\n"
+		"Go to their camp. Take the powder away from them, so the reef can stay quiet. If they argue, argue back with something sharp."
+	]
+
+	progress:
+	[
+		"The reef was quiet this morning. Hesk does not trust it."
+	]
+
+	completion:
+	[
+		"*Hesk sniffs one of the kegs and sneezes.*\n"
+		"\n"
+		"This is the thunder. It is smaller than Hesk thought. Hesk will sink it in the lagoon, where it cannot shout at anyone.\n"
+		"\n"
+		"But some of the soft-skins were missing from the camp, you say? Hesk does not like that."
+	]
+
+	prerequisites: [ .hesk_1 ]
+	objectives: [ .hesk_4_a .hesk_4_b ]
+	next_quest: .hesk_5
+	level: 31
+}
+
+############################################################
+# Quest 5 (side quest): Blastmaster Orrin Vey on the Eastern Isle
+
+loot_group .hesk_5_quest_item: {}
+
+item .hesk_5_quest_item:
+{
+	icon: icon_thread_1
+	item_level: 31
+	loot_groups: [ .hesk_5_quest_item ]
+	flags: [ not_sellable ]
+	string: "Cut Fuse"
+	flavor: "A length of fuse, cut well short of the powder."
+	quest: .hesk_5
+	stack: 5
+}
+
+loot_table .hesk_5_quest_item: { slots: [ { possibility: { loot_group: .hesk_5_quest_item } } ] }
+
+entity thalvaron_hesk_5_quest_item:
+{
+	string: "Powder Charge"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ barrel_1 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .hesk_5_quest_item
+			verb: use
+			range: 1
+			level: 31
+			despawn: true
+			required_quest: .hesk_5
+		}
+	}
+}
+
+objective .hesk_5_a:
+{
+	string: "Charges Defused"
+	maps: [ thalvaron ]
+	collect_items: { item: .hesk_5_quest_item count: 5 }
+}
+
+objective .hesk_5_b:
+{
+	string: "Blastmaster Orrin Vey Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_blastmaster ] count: 1 }
+}
+
+{
+	${ _level: 31 }
+	item .hesk_5_a: !QUEST_REWARD_HANDS{ _string: "Blastproof Gauntlets" _icon: icon_plate_hands_1 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .hesk_5_b: !QUEST_REWARD_LEGS{ _string: "Powder-Burned Leggings" _icon: icon_mail_legs_1 _constitution: 1 _dexterity: 3 _type: armor_mail }
+	item .hesk_5_c: !QUEST_REWARD_WRISTS{ _string: "Fusecutter's Cuffs" _icon: icon_bracers_3 _constitution: 1 _wisdom: 2 _spell_damage: 2 _type: armor_cloth }
+}
+
+quest .hesk_5:
+{
+	string: "The Blastmaster"
+
+	text:
+	[
+		"Go to the south shore of the Eastern Isle, defuse 5 Powder Charges set in the old wrecks and kill Blastmaster Orrin Vey. Then return to Hesk."
+	]
+
+	description:
+	[
+		"The missing soft-skins went east. Hesk watched their little boat from the hut. Their leader went with them, the one they call Blastmaster. He wears the thunder on a belt.\n"
+		"\n"
+		"On the south shore of the Eastern Isle lie the bones of the oldest ships. The Blastmaster thinks there is gold inside them. He is putting powder in the bones to crack them open, and if the thunder"
+		"is big enough, the whole reef will hear it.\n"
+		"\n"
+		"Cut his fuses before they burn. Then find the Blastmaster, and make him stop."
+	]
+
+	progress:
+	[
+		"Hesk has not heard thunder today. That is good. Keep it that way."
+	]
+
+	completion:
+	[
+		"No more Blastmaster, and no more thunder.\n"
+		"\n"
+		"Hesk thanks you, soft-skin. The reef thanks you too, but the reef does not talk, so Hesk will say it for both of them. Take something. Hesk has a lot of things. Hesk bought most of them from some guy."
+	]
+
+	prerequisites: [ .hesk_4 ]
+	objectives: [ .hesk_5_a .hesk_5_b ]
+	reward_one_item: [ .hesk_5_a .hesk_5_b .hesk_5_c ]
+	level: 31
+}

@@ -8,6 +8,7 @@ dialogue_screen .klaus_greetings:
 	options:
 	[
 		{ quest<completion_only>: .tom_1 }
+		{ quest: .klaus_1 }
 	]
 }
 
@@ -27,4 +28,71 @@ entity .klaus: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
+}
+
+############################################################
+# Quest 1
+
+loot_group .klaus_1_quest_item: {}
+
+item .klaus_1_quest_item:
+{
+	icon: icon_severed_paw
+	item_level: 5
+	loot_groups: [ .klaus_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Muddy Bear Paw"
+	quest: .klaus_1
+	stack: 5
+	level_range: [ 4 6 ]
+}
+
+objective .klaus_1:
+{
+	string: "Muddy Bear Paws"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .klaus_1_quest_item count: 3 }
+}
+
+{
+	${ _level: 5 }
+	item .klaus_1_a: !QUEST_REWARD_HANDS{ _string: "Ernston Digging Gloves" _icon: icon_gloves_2 _constitution: 1 _strength: 1 _type: armor_mail }
+	item .klaus_1_b: !QUEST_REWARD_WAIST{ _string: "Burlap Potato Belt" _icon: icon_cloth_belt_1 _constitution: 1 _wisdom: 1 _type: armor_cloth }
+}
+
+quest .klaus_1:
+{
+	string: "Definitely Bears"
+
+	text:
+	[
+		"Kill bears in Eldertree Woods and bring 5 muddy bear paws to Klaus Ernston."
+	]
+	
+	description: 
+	[
+		"Potatoes keep disappearing from the field, and my boy Billy is telling everyone it's gnomes. Gnomes! Little men with pointy hats, sneaking around at night and stealing potatoes. Ridiculous.\n"
+		"\n"
+		"It's bears. There are bears all over the woods, and bears love potatoes. Everyone knows that. Go and get me some bear paws, muddy ones, the kind that have been digging in a potato field. Five should"
+		"be enough to prove it, even to Billy."
+	]
+
+	progress:
+	[
+		"Well? Any bears?"
+	]
+	
+	completion:
+	[
+		"Let me see those. Mud, yes. Fur, yes. Potatoes... no. Not a single bit of potato on any of them.\n"
+		"\n"
+		"That doesn't prove anything! Bears are very clean animals. Don't you dare tell Billy about this."
+	]
+
+	prerequisites: [ .tom_1 ]
+	objectives: [ .klaus_1 ]
+	reward_one_item: [ .klaus_1_a .klaus_1_b ]
+	level: 5
 }

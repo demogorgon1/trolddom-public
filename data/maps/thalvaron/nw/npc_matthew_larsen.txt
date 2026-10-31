@@ -29,8 +29,14 @@ dialogue_screen .mathew_larsen_dialogue:
 			script: trigger
 		}	
 		
-		{ quest<completion_only>: thalvaron_gnome }		
+		{ quest<completion_only>: thalvaron_gnome }
 		{ quest<completion_only>: open_world_randy_2 }
+		{
+			quest<offer_only>: .mathew_larsen_1
+			requirement self<must_be_at_least_level>: 28
+			requirement self<must_not_have_completed_quest>: { id: __maps_thalvaron_sr_bryn_tallow_1 }
+			requirement self<must_not_have_active_quest>: { id: __maps_thalvaron_sr_bryn_tallow_1 }
+		}
 	]
 }
 
@@ -53,3 +59,37 @@ entity thalvaron_mathew_larsen: !NPC
 	_not_pushable: true	
 }
 
+############################################################
+# Quest 1 (leads players to the Sunken Reach)
+
+quest .mathew_larsen_1:
+{
+	string: "An Overdue Investment"
+
+	text:
+	[
+		"Travel to the reef east of Kaldor Island, far to the south, and find out what happened to Bryn Tallow and her salvage crew."
+	]
+
+	description:
+	[
+		"You look like someone who travels. Let me tell you about the finest investment I ever made. Possibly the worst. It's too early to say.\n"
+		"\n"
+		"A salvager named Bryn Tallow came to me with a plan. There's a reef east of Kaldor Island, far to the south, where ships have been sinking for a hundred years, and nobody has ever gone out to see what's"
+		"left in them. I paid for her ship, the Gull's Wager, and she promised me the first pick of everything she brought up. Gold, jewels, antique cannons. Rare and mysterious things. My kind of things.\n"
+		"\n"
+		"That was months ago. Not a single crate. Not a letter. Go out to that reef and find her. If she's found treasure, remind her who owns the first pick. If she hasn't, find out why not."
+	]
+
+	completion:
+	[
+		"Mathew sent you? Of course he did. Well, you can tell him his investment is sitting on the reef out there with a hole in it.\n"
+		"\n"
+		"Actually, don't tell him yet. Help me first, and maybe I'll have something to send back with you."
+	]
+
+	reward_cash_multiplier: 0.25
+	reward_xp_multiplier: 0.25
+	next_quest: __maps_thalvaron_sr_bryn_tallow_1
+	level: 31
+}

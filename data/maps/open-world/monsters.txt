@@ -493,12 +493,23 @@ loot_table .crab_man_6:
 	slots:
 	[
 		{
-			possibility: { loot_group: .randy_quest_items }			
-		}			
+			possibility: { loot_group: .randy_quest_items }
+		}
+
+		{
+			possibility: { weight: 3 }
+			possibility:
+			{
+				weight: 1
+				loot_group: .aghina_2_quest_item
+				requirement self<must_have_active_quest>: .aghina_2
+				requirement self<must_not_have_item>: .aghina_2_quest_item
+			}
+		}
 
 		!WORLD_DROPS {}
 		!WORLD_DROPS_CLOTH{}
-	]		
+	]
 }
 
 entity crab_man_6: !NPC

@@ -1,0 +1,85 @@
+dialogue_screen .wendel_crane:
+{
+	text:
+	[
+		"Don't make sudden noises. Please. My nerves can't take any more today."
+	]
+
+	options:
+	[
+		{ quest: .wendel_crane_1 }
+	]
+}
+
+entity thalvaron_wendel_crane: !NPC
+{
+	_string: "Wendel Crane"
+	_guild_name: "Cave Explorer"
+	_sprite: man_22
+	_sprite_dead: man_22_dead
+	_level: 31
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .wendel_crane: { } }
+}
+
+############################################################
+# Quest 1
+
+objective .wendel_crane_1_a:
+{
+	string: "Grimtusk Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_grimtusk ] count: 1 }
+}
+
+objective .wendel_crane_1_b:
+{
+	string: "Old Rootmaw Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_old_rootmaw ] count: 1 }
+}
+
+{
+	${ _level: 31 }
+	item .wendel_crane_1_a: !QUEST_REWARD_FEET{ _string: "Cave-Crawler Boots" _icon: icon_mail_boots_2 _constitution: 1 _dexterity: 3 _type: armor_mail }
+	item .wendel_crane_1_b: !QUEST_REWARD_BACK{ _string: "Boarhide Cloak" _icon: icon_cape_1 _constitution: 2 _strength: 3 _type: armor_cloth }
+	item .wendel_crane_1_c: !QUEST_REWARD_HEAD{ _string: "Spelunker's Lamp Hood" _icon: icon_cloth_head_1 _constitution: 1 _wisdom: 2 _spell_damage: 2 _type: armor_cloth }
+}
+
+quest .wendel_crane_1:
+{
+	string: "Tusks in the Dark"
+
+	text:
+	[
+		"Kill Grimtusk and Old Rootmaw, the two great boars roaming outside Wendel Crane's cave, and return to Wendel."
+	]
+
+	description:
+	[
+		"I came out here to map this cave. Small, I know, but nobody's ever drawn it, and I'd like to be the first. I was doing very well until two boars the size of carts came around the corner behind me.\n"
+		"\n"
+		"I did hear the locals talk abot two boars in these caves, calling them Grimtusk and Old Rootmaw. Grimtusk is the one with the broken tusk, and he charges at anything that moves. Rootmaw is older and slower, and somehow that's worse.\n"
+		"\n"
+		"My lantern is running low and my sandwiches ran out yesterday. Please, deal with them, so I can finish my map and go home."
+	]
+
+	progress:
+	[
+		"I can still hear them snuffling around out there. Or maybe that's my stomach."
+	]
+
+	completion:
+	[
+		"Both of them? Really? I could kiss you, but I won't. I've been in a cave for three days.\n"
+		"\n"
+		"Here, take something for your trouble. I'll put your name on the map. A small name, in the corner, but it'll be there."
+	]
+
+	objectives: [ .wendel_crane_1_a .wendel_crane_1_b ]
+	reward_one_item: [ .wendel_crane_1_a .wendel_crane_1_b .wendel_crane_1_c ]
+	level: 31
+}

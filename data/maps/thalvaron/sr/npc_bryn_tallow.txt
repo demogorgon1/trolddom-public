@@ -1,0 +1,225 @@
+dialogue_screen .bryn_tallow:
+{
+	text:
+	[
+		"Mind the tide. It comes in faster than you'd think, and it doesn't care whose boots are in the way."
+	]
+
+	options:
+	[
+		{ quest<completion_only>: __maps_thalvaron_nw_mathew_larsen_1 }
+		{ quest: .bryn_tallow_1 }
+		{ quest: .bryn_tallow_2 }
+		{ quest<offer_only>: .bryn_tallow_3 }
+		{ quest<completion_only>: .hesk_2 }
+		{ quest<completion_only>: .hesk_3 }
+	]
+}
+
+entity thalvaron_bryn_tallow: !NPC
+{
+	_string: "Bryn Tallow"
+	_guild_name: "Salvage Master"
+	_sprite: woman_34
+	_sprite_dead: woman_34_dead
+	_level: 31
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .bryn_tallow: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .bryn_tallow_1_quest_item: {}
+
+item .bryn_tallow_1_quest_item:
+{
+	icon: icon_box
+	item_level: 31
+	loot_groups: [ .bryn_tallow_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Salvaged Cargo"
+	quest: .bryn_tallow_1
+	stack: 6
+}
+
+loot_table .bryn_tallow_1_quest_item: { slots: [ { possibility: { loot_group: .bryn_tallow_1_quest_item } } ] }
+
+entity thalvaron_bryn_tallow_1_quest_item:
+{
+	string: "Washed-Up Crate"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_crates_1 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .bryn_tallow_1_quest_item
+			verb: pick_up
+			range: 1
+			level: 31
+			despawn: true
+			required_quest: .bryn_tallow_1
+		}
+	}
+}
+
+objective .bryn_tallow_1:
+{
+	string: "Salvaged Cargo"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .bryn_tallow_1_quest_item count: 6 }
+}
+
+quest .bryn_tallow_1:
+{
+	string: "Salvage Rights"
+
+	text:
+	[
+		"Collect 6 crates of salvaged cargo from the beaches of the Sunken Reach and bring them to Bryn Tallow at Wrecker's Rest."
+	]
+
+	description:
+	[
+		"There's a hundred years of sunken cargo in these shallows, and nobody has ever bothered to come and get it. So we did. We sailed the Gull's Wager out here to salvage the old wrecks, and three nights"
+		"ago she ran onto the reef herself. Now we're the wreck.\n"
+		"\n"
+		"The tide has been spreading what's left of our cargo over every beach from here to the big island. Pick up whatever crates you can find before the crabs do. And I do mean the crabs. Out here they walk"
+		"on two legs."
+	]
+
+	progress:
+	[
+		"Any luck on the beaches?"
+	]
+
+	completion:
+	[
+		"Six crates, and every one of them pried open. They weren't after the cargo, either. The salt pork is still here. The hammers, shovels and crowbars are all gone.\n"
+		"\n"
+		"Who steals a crowbar and leaves the pork?"
+	]
+
+	objectives: [ .bryn_tallow_1 ]
+	next_quest: .bryn_tallow_2
+	level: 31
+}
+
+############################################################
+# Quest 2
+
+loot_group .bryn_tallow_2_quest_item: {}
+
+item .bryn_tallow_2_quest_item:
+{
+	icon: icon_book
+	item_level: 31
+	loot_groups: [ .bryn_tallow_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Dagny's Logbook"
+	flavor: "Water-stained, and smells faintly of fish."
+	quest: .bryn_tallow_2
+}
+
+objective .bryn_tallow_2_a:
+{
+	string: "Clawkin Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_sr_clawkin_scuttler thalvaron_sr_clawkin_snapper ] count: 10 }
+}
+
+objective .bryn_tallow_2_b:
+{
+	string: "Dagny's Logbook"
+	maps: [ thalvaron ]
+	collect_items: { item: .bryn_tallow_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 31 }
+	item .bryn_tallow_2_a: !QUEST_REWARD_1H_SWORD{ _string: "Bosun's Cutlass" _icon: icon_sword_7 _strength: 3 _dexterity: 1 }
+	item .bryn_tallow_2_b: !QUEST_REWARD_LEGS{ _string: "Salt-Stained Trousers" _icon: icon_pants_4 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
+	item .bryn_tallow_2_c: !QUEST_REWARD_WRISTS{ _string: "Reefplate Bracers" _icon: icon_plate_bracers_1 _constitution: 2 _strength: 3 _type: armor_plate }
+}
+
+quest .bryn_tallow_2:
+{
+	string: "Claws in the Shallows"
+
+	text:
+	[
+		"Kill 10 Clawkin on the big island north-east of Wrecker's Rest and find Dagny's logbook."
+	]
+
+	description:
+	[
+		"On the first night half my crew crossed over to the big island to look for fresh water. They never came back. The next morning the crab folk were walking up and down our beach carrying our shovels.\n"
+		"\n"
+		"Clawkin, the lizards call them. I want them off that island, and I want to know where my people went. Dagny, my bosun, never went anywhere without her logbook. If the Clawkin took her, one of them is"
+		"carrying it now."
+	]
+
+	progress:
+	[
+		"Did you find the logbook?"
+	]
+
+	completion:
+	[
+		"'Second night. The Clawkin came out of the water all at once. They didn't kill us, they herded us. They took Marro, Pell and the Hollis twins alive and dragged them east. There's an old lizard living"
+		"on the lagoon who watched the whole thing and did nothing.'\n"
+		"\n"
+		"That's the last page. Dagny always did have a way with words."
+	]
+
+	prerequisites: [ .bryn_tallow_1 ]
+	objectives: [ .bryn_tallow_2_a .bryn_tallow_2_b ]
+	reward_one_item: [ .bryn_tallow_2_a .bryn_tallow_2_b .bryn_tallow_2_c ]
+	next_quest: .bryn_tallow_3
+	level: 31
+}
+
+############################################################
+# Quest 3
+
+quest .bryn_tallow_3:
+{
+	string: "The Lizard on the Lagoon"
+
+	text:
+	[
+		"Find the old lizard man living by the lagoon on the big island and ask him where the Clawkin took Bryn's crew."
+	]
+
+	description:
+	[
+		"An old lizard on the lagoon who watched the whole thing. If it saw them take my crew, it knows where they went.\n"
+		"\n"
+		"Go and ask it. Politely, if you can manage that. I'm told some of them can talk."
+	]
+
+	progress:
+	[
+		"Hesk is listening."
+	]
+
+	completion:
+	[
+		"Hesk did not do nothing. Hesk watched. Watching is something.\n"
+		"\n"
+		"Sit, soft-skin. Hesk will tell you about the Clawkin. Then you will tell Hesk why your people keep blowing holes in the reef."
+	]
+
+	prerequisites: [ .bryn_tallow_2 ]
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+	next_quest: .hesk_1
+	level: 31
+}

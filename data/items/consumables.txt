@@ -1249,7 +1249,7 @@ aura consumable_elixir_of_the_warden (elixir):
 {
 	string: "Elixir of the Warden"
 	description: "-20% Holy and Unholy damage taken"
-	icon: icon_potion_11
+	icon: icon_potion_13
 	duration: 12000
 	aura_effect damage_input_modifier: { type_mask: [ holy unholy ] multiplier: 0.8 }
 }
@@ -1258,7 +1258,7 @@ ability consumable_elixir_of_the_warden (elixir):
 {
 	string: "Elixir of the Warden"
 	description: "Reduces Holy and Unholy damage taken by 20% for 20 minutes. You can only have the effect of one elixir at a time."
-	icon: icon_potion_11
+	icon: icon_potion_13
 	direct_effect apply_aura: { aura: consumable_elixir_of_the_warden }
 	consume_items: { consumable_elixir_of_the_warden: 1 }
 	required_level: 28
@@ -1266,7 +1266,7 @@ ability consumable_elixir_of_the_warden (elixir):
 
 item consumable_elixir_of_the_warden (elixir):
 {
-	icon: icon_potion_11
+	icon: icon_potion_13
 	string: "Elixir of the Warden"
 	flavor: "Brewed the way the Lamp Wardens of Ashira once did. It tastes of ash and old prayers."
 	use_ability: consumable_elixir_of_the_warden

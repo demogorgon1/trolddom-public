@@ -295,6 +295,15 @@ entity lich_tower_boss_6: !NPC
 						scale: 0.45
 						count: 1		
 					}
+					
+					particle:
+					{
+						sprites: [ effect_flame_gradient_1 ] 
+						flags: [ blend_add ]
+						color_mod: [ 0 150 0 ]
+						alpha: 0.25
+						ribbon: { duration: 200 width: 0.15 }
+					}							
 				}
 
 				direct_effect damage:

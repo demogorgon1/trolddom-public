@@ -1121,7 +1121,11 @@ sprites:
 	sprite stalker_7: { dead: stalker_7_dead }	
 	sprite golem_5: { dead: golem_5_dead }	
 	sprite dwarf_26: { dead: dwarf_26_dead }	
-
+	sprite boar_3: { dead: boar_3_dead }	
+	sprite cultist_1: { dead: cultist_1_dead }	
+	sprite cultist_2: { dead: cultist_2_dead }	
+	sprite ghost_5: { dead: ghost_5_dead }	
+	
 	cursor: { position: [ 0 976 ] }
 	sprite slime_ball_1_dead: { }	
 	sprite slime_ball_2_dead: { }	
@@ -1135,6 +1139,18 @@ sprites:
 	sprite stalker_7_dead: { }
 	sprite golem_5_dead: { }
 	sprite dwarf_26_dead: { }
+	sprite boar_3_dead: { }
+	sprite cultist_1_dead: { }
+	sprite cultist_2_dead: { }
+	sprite ghost_5_dead: { }
+
+	cursor: { position: [ 0 992 ] }
+	sprite zombie_8: { dead: zombie_8_dead tags: [ undead ] }
+	sprite boar_4: { dead: boar_4_dead }
+
+	cursor: { position: [ 0 1008 ] }
+	sprite zombie_8_dead: { }
+	sprite boar_4_dead: { }
 	
 }
 

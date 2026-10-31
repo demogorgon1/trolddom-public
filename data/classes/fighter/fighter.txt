@@ -1,18 +1,8 @@
+# Obsolete, replaced by the shared "attack". Kept so old references (logs etc.) still resolve.
 ability fighter_attack:
 {
 	string: "Attack"
-	description: "Deals $damage$ damage to target."
-	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon extra_off_hand ]	
-	states: [ default in_combat ]
-	delay: 3
 	icon: icon_fist
-	
-	direct_effect damage:
-	{
-		flags: [ generate_rage can_be_critical ]
-		damage_type: physical			
-		function: { expression: x x: weapon }		
-	}
 }
 
 particle_system fighter_shoot:
@@ -162,8 +152,8 @@ class fighter:
 
 	color_1: [ 128 32 0 ] 
 	color_2: [ 70 32 0 ] 
-	default_attack: fighter_attack
-	default_action_bar: [ fighter_attack strike !DEFAULT_ABILITIES{} ]
+	default_attack: attack
+	default_action_bar: [ attack strike !DEFAULT_ABILITIES{} ]
 	talent_trees: [ fighter_combat fighter_subtlety fighter_protection ]
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
@@ -194,7 +184,7 @@ class fighter:
 
 	level_progression:
 	[
-		{ level: 1 unlock_abilities: [ fighter_attack fighter_shoot strike !DEFAULT_ABILITIES{} ] stats: { dexterity: 4 strength: 6 wisdom: 2 constitution: 4 spirit: 5 } resource health: { add_max: 80 } resource rage: { add_max: 100 } add_unarmed_weapon_damage: [ 2 4 ] }
+		{ level: 1 unlock_abilities: [ attack fighter_shoot strike !DEFAULT_ABILITIES{} ] stats: { dexterity: 4 strength: 6 wisdom: 2 constitution: 4 spirit: 5 } resource health: { add_max: 80 } resource rage: { add_max: 100 } add_unarmed_weapon_damage: [ 2 4 ] }
 		{ level: 2 unlock_abilities: [ rend ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }		
 		{ level: 3 unlock_abilities: [ charge ] stats: { dexterity: 1 constitution: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }				
 		{ level: 4 unlock_abilities: [ kick ] stats: { strength: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } }						
@@ -240,6 +230,7 @@ class fighter:
 		constitution: 2
 	}
 	
+	replace_ability fighter_attack: attack
 }  
 
 ###############################################################################
@@ -296,7 +287,7 @@ ability_list fighter_envenom:
 		requirement self<must_have_more_rage_than>: 30
 	}
 	
-	ability fighter_attack:
+	ability attack:
 	{
 	}
 }

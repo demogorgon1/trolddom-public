@@ -1168,9 +1168,24 @@ namespace tpublic::Systems
 										}
 
 										const EntityInstance* pushEntityInstance = NULL;
+										const EntityInstance* pushEntityInstance2 = NULL; // Large NPCs can push two at once
 
-										if(npc->m_meleePushPriority > 0 && !npc->m_large)
+										if(npc->m_meleePushPriority > 0)
 										{
+											std::function<bool(const EntityInstance*)> canPush = [&](
+												const EntityInstance* aOtherEntityInstance) -> bool
+											{
+												const Components::NPC* otherNPC = aOtherEntityInstance->GetComponent<Components::NPC>();
+												const Components::CombatPublic* otherCombatPublic = aOtherEntityInstance->GetComponent<Components::CombatPublic>();
+												const Components::Position* otherPosition = aOtherEntityInstance->GetComponent<Components::Position>();
+
+												if(otherNPC == NULL || otherCombatPublic == NULL || otherPosition == NULL)
+													return false;
+
+												bool canBePushed = otherCombatPublic->IsPushable() || otherNPC->m_otherNPCPushOverride;
+												return otherNPC->m_meleePushPriority < npc->m_meleePushPriority && canBePushed && !otherNPC->m_large && otherPosition->IsBlocking();
+											};
+
 											std::function<const EntityInstance*(const Vec2&)> getEntityInstance = [&](
 												const Vec2& aPosition) -> const EntityInstance*
 											{
@@ -1179,30 +1194,95 @@ namespace tpublic::Systems
 												aContext->m_worldView->WorldViewEntityInstancesAtPosition(aPosition, [&](
 													const EntityInstance* aMidEntityInstance) -> bool
 												{
-													const Components::NPC* otherNPC = aMidEntityInstance->GetComponent<Components::NPC>();
-													const Components::CombatPublic* otherCombatPublic = aMidEntityInstance->GetComponent<Components::CombatPublic>();
-													const Components::Position* otherPosition = aMidEntityInstance->GetComponent<Components::Position>();
-
-													if(otherNPC != NULL && otherCombatPublic != NULL)
+													if(canPush(aMidEntityInstance))
 													{
-														bool canBePushed = otherCombatPublic->IsPushable() || otherNPC->m_otherNPCPushOverride;
-														if (otherNPC->m_meleePushPriority < npc->m_meleePushPriority && canBePushed && !otherNPC->m_large && otherPosition->IsBlocking())
-														{
-															entityInstance = aMidEntityInstance;
-															return true; // Stop, found something to push
-														}
-													}										
+														entityInstance = aMidEntityInstance;
+														return true; // Stop, found something to push
+													}
 													return false;
 												});
 
 												return entityInstance;
 											};
 
-											if(distanceSquared == 4)
+											if(npc->m_large)
 											{
-												// This means that we're horizontally or vertically 2 tiles away from the target - and we're some kind of melee NPC that really wants 
+												// Large NPCs: the move resolver remembers an entity that blocked our last move. A step moves us into the two tiles along one
+												// side, so find out which side the blocker is on and push everything on those two tiles out of the way at once (the server
+												// moves each one to the nearest free spot). Only do it if everything there can be pushed and the tiles aren't walls.
+												if(position->m_blockingEntityInstanceId != 0)
+												{
+													const EntityInstance* blockingEntityInstance = aContext->m_worldView->WorldViewSingleEntityInstance(position->m_blockingEntityInstanceId);
+													const Components::Position* blockingPosition = blockingEntityInstance != NULL ? blockingEntityInstance->GetComponent<Components::Position>() : NULL;
+
+													if(blockingPosition != NULL && canPush(blockingEntityInstance) && Helpers::CalculateDistanceSquared(position, blockingPosition) == 1)
+													{
+														const Vec2& p = position->m_position;
+														const Vec2& b = blockingPosition->m_position;
+
+														// First tile of the blocked side, and the direction to the second one
+														Vec2 edgeStart = { p.m_x, p.m_y + 2 }; // Below
+														Vec2 edgeStep = { 1, 0 };
+														if(b.m_x == p.m_x - 1)
+														{
+															edgeStart = { p.m_x - 1, p.m_y }; // Left
+															edgeStep = { 0, 1 };
+														}
+														else if(b.m_x == p.m_x + 2)
+														{
+															edgeStart = { p.m_x + 2, p.m_y }; // Right
+															edgeStep = { 0, 1 };
+														}
+														else if(b.m_y == p.m_y - 1)
+														{
+															edgeStart = { p.m_x, p.m_y - 1 }; // Above
+														}
+
+														Vec2 edge[2] = { edgeStart, edgeStart + edgeStep };
+
+														const MapData* mapData = aContext->m_worldView->WorldViewGetMapData();
+														const EntityInstance* edgeEntityInstances[2] = { NULL, NULL };
+														bool blocked = false;
+
+														for(size_t i = 0; i < 2 && !blocked; i++)
+														{
+															if(!mapData->IsTileWalkable(edge[i].m_x, edge[i].m_y))
+															{
+																blocked = true;
+																break;
+															}
+
+															aContext->m_worldView->WorldViewEntityInstancesAtPosition(edge[i], [&](
+																const EntityInstance* aEdgeEntityInstance) -> bool
+															{
+																const Components::Position* edgePosition = aEdgeEntityInstance->GetComponent<Components::Position>();
+																if(edgePosition == NULL || !edgePosition->IsBlocking())
+																	return false;
+
+																if(!canPush(aEdgeEntityInstance))
+																{
+																	blocked = true;
+																	return true; // Stop, something here can't be pushed
+																}
+
+																edgeEntityInstances[i] = aEdgeEntityInstance;
+																return false;
+															});
+														}
+
+														if(!blocked)
+														{
+															pushEntityInstance = edgeEntityInstances[0] != NULL ? edgeEntityInstances[0] : edgeEntityInstances[1];
+															pushEntityInstance2 = edgeEntityInstances[0] != NULL ? edgeEntityInstances[1] : NULL;
+															position->m_blockingEntityInstanceId = 0;
+														}
+													}
+												}
+											}
+											else if(distanceSquared == 4)
+											{
+												// This means that we're horizontally or vertically 2 tiles away from the target - and we're some kind of melee NPC that really wants
 												// to get close to attack. Figure out if some other NPC is standing between us and the target.
-												// FIXME: doesn't work if either of the NPCs are large
 												Vec2 midPosition = { (position->m_position.m_x + targetPosition->m_position.m_x) / 2, (position->m_position.m_y + targetPosition->m_position.m_y) / 2 };
 												pushEntityInstance = getEntityInstance(midPosition);
 											}
@@ -1231,6 +1311,9 @@ namespace tpublic::Systems
 											const Data::Ability* pushAbility = GetManifest()->GetExistingByName<Data::Ability>("npc_push");
 
 											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, pushEntityInstance->GetEntityInstanceId(), Vec2(), pushAbility, ItemInstanceReference(), NULL);
+
+											if(pushEntityInstance2 != NULL)
+												aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, pushEntityInstance2->GetEntityInstanceId(), Vec2(), pushAbility, ItemInstanceReference(), NULL);
 										}
 										else
 										{	

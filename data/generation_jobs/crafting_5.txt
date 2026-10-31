@@ -1,0 +1,19 @@
+generation_job crafting_5: !CRAFTING
+{
+	_seed: 3459638
+		
+	_blacksmithing_item_prefixes:
+	[
+		{ level_range: [ 31 32 ] string: "Damned" rarity: uncommon material_multiplier: 0.6 }
+		
+		{ level_range: [ 31 32 ] string: "Scorched" rarity: rare material_multiplier: 0.9 }			
+	]
+	
+	_tailoring_item_prefixes:
+	[
+		{ level_range: [ 31 32 ] string: "True" rarity: uncommon material_multiplier: 0.9 }
+		
+		{ level_range: [ 31 32 ] string: "Divine" rarity: rare material_multiplier: 1.9 }			
+	]	
+}
+	

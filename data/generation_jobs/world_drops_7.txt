@@ -1,0 +1,9 @@
+generation_job world_drops_7: !GENERATE_WORLD_DROPS
+{
+	_seed: 583252845
+	_level_range: [ 31 32 ]
+	_weapon_and_shields_rare_count: 70 
+	_weapon_and_shields_epic_count: 70
+	_armor_and_jewelry_rare_count: 350
+	_armor_and_jewelry_epic_count: 350
+}

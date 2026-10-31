@@ -11,6 +11,7 @@ dialogue_screen .rolf_greetings:
 	[
 		{ quest<offer_only>: .rolf_1 requirement self<must_not_have_completed_quest>: { id: .frinrir_1 } requirement self<must_not_have_active_quest>: { id: .frinrir_1 } }
 		{ quest: .rolf_2 }
+		{ quest: rolf_3 }
 		{ goto: .rolf_vendor text: "Let me browse your goods." }
 	]
 }
@@ -119,12 +120,12 @@ quest .rolf_2:
 
 	text:
 	[
-		"Collect claws from the crab men in the wasteland north of Rolf's camp."
+		"Collect claws from the crab men in the wasteland north of Rolf's cabin."
 	]
 
 	description:
 	[
-		"Those crab men up north march past my camp every night. Clack clack clack, all night long. I haven't slept properly since they moved in.\n"
+		"Those crab men up north march past my cabin every night. Clack clack clack, all night long. I haven't slept properly since they moved in.\n"
 		"\n"
 		"Go up there and relieve a few of them of their claws. Fewer claws, less clacking. And I hear the city folk pay good money for a proper"
 		"nutcracker, so bring me six of them and we both win. Well, not the crabs."
@@ -146,4 +147,74 @@ quest .rolf_2:
 	level: 10
 
 	reward_one_item: [ hands_rolf_1 waist_rolf_1 ]
+}
+
+##########################################################################################
+# Quest 3 (Saltclaw Grotto)
+
+# Dropped by the crab men inside Saltclaw Grotto (see saltclaw-grotto/monsters.txt)
+loot_group saltclaw_egg: { }
+
+item saltclaw_egg:
+{
+	binds: when_picked_up
+	loot_groups: [ saltclaw_egg ]
+	string: "Saltclaw Egg"
+	flavor: "Something inside is clacking."
+	icon: icon_egg_2
+	quest: rolf_3
+	stack: 8
+	item_level: 10
+	flags: [ not_sellable ]
+}
+
+objective .rolf_3:
+{
+	string: "Saltclaw Eggs"
+	collect_items: { item: saltclaw_egg count: 8 }
+}
+
+{
+	${ _level: 10 _rarity: rare }
+	item .rolf_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Rolf's Lucky Shoulderpads" _icon: icon_mail_shoulders_1 _dexterity: 2 _strength: 1 _constitution: 1 _type: armor_mail }
+	item .rolf_3_b: !QUEST_REWARD_2H_STAFF{ _string: "Old Rolf's Walking Stick" _icon: icon_staff_9 _wisdom: 3 _healing: 2 _constitution: 1 }
+	item .rolf_3_c: !QUEST_REWARD_BACK{ _string: "Nightwatch Cloak" _icon: icon_cape_2 _strength: 2 _constitution: 2 }
+}
+
+quest rolf_3:
+{
+	string: "Fewer Eggs, Less Clacking"
+
+	text:
+	[
+		"Collect 8 Saltclaw Eggs from the crab men in Saltclaw Grotto to the north and bring them to Rolf at his cabin."
+	]
+
+	description:
+	[
+		"It's quieter now, thanks to you. Quieter. Not quiet. They're still out there clacking.\n"
+		"\n"
+		"I followed a few of them north last night, all the way to a cave by the sea. Saltclaw Grotto, they call it. There must be hundreds of them in there, and they're carrying eggs around like"
+		"it's harvest season. Every one of those eggs is another crab man marching past my cabin in a month or two.\n"
+		"\n"
+		"Go in there and take their eggs. Eight should do. Bring some friends, it's crawling with them. And don't worry, I'll find a use for them. Ever had a crab man omelette? Me neither."
+	]
+
+	progress:
+	[
+		"Got my eggs?"
+	]
+
+	completion:
+	[
+		"Look at that. Eight fewer crab men to keep me up at night.\n"
+		"\n"
+		"I'm going to try the omelette. If you don't hear from me in a few days, it was a bad idea. Here, take this before I change my mind."
+	]
+
+	type: dungeon
+	level: 10
+	prerequisites: [ .rolf_2 ]
+	objectives: [ .rolf_3 ]
+	reward_one_item: [ .rolf_3_a .rolf_3_b .rolf_3_c ]
 }

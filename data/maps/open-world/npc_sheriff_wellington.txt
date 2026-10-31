@@ -11,6 +11,7 @@ dialogue_screen .sheriff_wellington_greetings:
 	[
 		{ quest: .sheriff_wellington_1 }
 		{ quest: .sheriff_wellington_2 }
+		{ quest: .sheriff_wellington_3 requirement self<must_be_at_least_level>: 7 }
 		{ quest<completion_only>: spawn_of_umbracoth_2 }
 		{ quest<completion_only>: .crab_boss_5_quest }
 	]
@@ -159,4 +160,65 @@ quest .sheriff_wellington_2:
 	level: 3
 	
 	reward_one_item: [ chest_sheriff_wellington_2 weapon_sheriff_wellington_1 ]
+}
+
+############################################################
+# Quest 3
+
+objective .sheriff_wellington_3:
+{
+	string: "Queen Skarra Slain"
+
+	maps: [ saltclaw_grotto ]
+
+	kill_npc:
+	{
+		entities: [ saltclaw_grotto_queen_skarra ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 10 _rarity: rare }
+	item .sheriff_wellington_3_a: !QUEST_REWARD_CHEST{ _string: "Deputy's Breastplate" _icon: icon_chest_1 _strength: 2 _constitution: 2 _type: armor_plate }
+	item .sheriff_wellington_3_b: !QUEST_REWARD_FEET{ _string: "Crabhide Boots" _icon: icon_mail_feet_1 _dexterity: 2 _constitution: 1 _type: armor_mail }
+	item .sheriff_wellington_3_c: !QUEST_REWARD_FINGER{ _string: "Tidewatch Signet" _icon: icon_ring_1 _wisdom: 2 _spell_damage: 1 }
+}
+
+quest .sheriff_wellington_3:
+{
+	string: "The Saltclaw Queen"
+
+	text:
+	[
+		"Enter Saltclaw Grotto in the far north and kill Queen Skarra. Then return to Sheriff Wellington in Tidewatch."
+	]
+
+	description:
+	[
+		"Remember how I said I had no idea why there were suddenly so many crab men around? Well, now I do.\n"
+		"\n"
+		"One of my deputies followed a band of them north, past the wasteland. They went into a sea cave up there, the locals call it Saltclaw Grotto. He says there's a whole nest of them inside,"
+		"and they've got themselves a queen. A big one. As long as she's laying eggs in there, we'll be fighting crab men on our doorstep forever.\n"
+		"\n"
+		"Get some friends together, go into that grotto and kill the queen. Don't go alone. My deputy only came back because he ran very fast."
+	]
+
+	progress:
+	[
+		"Is the queen dead?"
+	]
+
+	completion:
+	[
+		"Dead? Ha! You've done what my whole office couldn't. Without her the rest of them won't last long.\n"
+		"\n"
+		"Here, take your pick. You've earned it, deputy. Yes, I'm calling you deputy now."
+	]
+
+	type: dungeon
+	level: 10
+	prerequisites: [ .sheriff_wellington_2 ]
+	objectives: [ .sheriff_wellington_3 ]
+	reward_one_item: [ .sheriff_wellington_3_a .sheriff_wellington_3_b .sheriff_wellington_3_c ]
 }

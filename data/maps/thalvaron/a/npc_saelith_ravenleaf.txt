@@ -1,0 +1,300 @@
+dialogue_screen .saelith_ravenleaf:
+{
+	text:
+	[
+		"Keep your voice down. Sound carries in these hills, and not everything out there is deaf."
+	]
+
+	options:
+	[
+		{ quest<completion_only>: .old_grimble_5 }
+		{ quest: .saelith_ravenleaf_1 }
+		{ quest: .saelith_ravenleaf_2 }
+		{ quest: .saelith_ravenleaf_3 }
+		{ quest: .saelith_ravenleaf_4 }
+	]
+}
+
+entity thalvaron_saelith_ravenleaf: !NPC
+{
+	_string: "Saelith Ravenleaf"
+	_sprite: elf_4
+	_sprite_dead: elf_4_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .saelith_ravenleaf: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .saelith_ravenleaf_1_quest_item: {}
+
+item .saelith_ravenleaf_1_quest_item:
+{
+	icon: icon_scroll_2
+	item_level: 30
+	loot_groups: [ .saelith_ravenleaf_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Warden Inscription"
+	quest: .saelith_ravenleaf_1
+	stack: 5
+}
+
+loot_table .saelith_ravenleaf_1_quest_item: { slots: [ { possibility: { loot_group: .saelith_ravenleaf_1_quest_item } } ] }
+
+entity thalvaron_saelith_ravenleaf_1_quest_item:
+{
+	string: "Inscribed Pillar"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_broken_pillar_2 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .saelith_ravenleaf_1_quest_item
+			verb: inspect
+			range: 1
+			level: 30
+			despawn: true
+			required_quest: .saelith_ravenleaf_1
+		}
+	}
+}
+
+objective .saelith_ravenleaf_1:
+{
+	string: "Warden Inscriptions"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .saelith_ravenleaf_1_quest_item count: 5 }
+}
+
+{
+	${ _level: 30 }
+	item .saelith_ravenleaf_1_a: !QUEST_REWARD_HEAD{ _string: "Hood of the Lamp Wardens" _icon: icon_cloth_head_2 _constitution: 1 _wisdom: 3 _healing: 2 _type: armor_cloth }
+	item .saelith_ravenleaf_1_b: !QUEST_REWARD_WAIST{ _string: "Belt of the Fallen City" _icon: icon_mail_belt_2 _constitution: 2 _dexterity: 2 _strength: 1 _type: armor_mail }
+	item .saelith_ravenleaf_1_c: !QUEST_REWARD_LEGS{ _string: "Lampwarden Greaves" _icon: icon_plate_legs_1 _constitution: 2 _strength: 3 _type: armor_plate }
+}
+
+quest .saelith_ravenleaf_1:
+{
+	string: "Ashes of Ashira"
+
+	text:
+	[
+		"Search the ruins of the old City of Ashira for 6 Warden inscriptions."
+	]
+
+	description:
+	[
+		"The Covenant didn't come all this way for the scenery. Long ago the Wardens of Ashira bound something beneath these hills, something the Covenant call the Hollow. If they mean to set it free, we need to"
+		"know how it was bound in the first place.\n"
+		"\n"
+		"The Wardens carved their rites into the pillars of their city. Go to the ruins of old Ashira and copy what you can find on the broken pillars. Mind the dead while you're there. They don't know they're"
+		"dead, and they don't like visitors."
+	]
+
+	progress:
+	[
+		"Did the ruins give up anything?"
+	]
+
+	completion:
+	[
+		"'A hunger without end, bound in the deep beneath the southern heights.' And here, again and again: 'Ulgoroth.'\n"
+		"\n"
+		"A name. Good. Names matter. Things with names can be killed."
+	]
+
+	prerequisites: [ .old_grimble_5 ]
+	objectives: [ .saelith_ravenleaf_1 ]
+	reward_one_item: [ .saelith_ravenleaf_1_a .saelith_ravenleaf_1_b .saelith_ravenleaf_1_c ]
+	next_quest: .saelith_ravenleaf_2
+	level: 30
+}
+
+############################################################
+# Quest 2
+
+objective .saelith_ravenleaf_2_a:
+{
+	string: "Hollow Stalkers Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_ashira_hollow_stalker ] count: 8 }
+}
+
+objective .saelith_ravenleaf_2_b:
+{
+	string: "Shattered Golems Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_ashira_shattered_golem ] count: 5 }
+}
+
+quest .saelith_ravenleaf_2:
+{
+	string: "Hounds of the Hollow"
+
+	text:
+	[
+		"Kill 8 Hollow Stalkers and 5 Shattered Golems where the corruption runs deepest in Ashira."
+	]
+
+	description:
+	[
+		"While I make sense of these inscriptions, there's work for your blade. Wherever the corruption seeps up from below, things go wrong. Stalkers turn hollow. Golems crack open and walk on with something"
+		"else inside them. The Covenant use them like hounds.\n"
+		"\n"
+		"Thin them out where the corruption runs deepest. Every one you put down now is one less between us and the Covenant when the time comes."
+	]
+
+	progress:
+	[
+		"Still hunting?"
+	]
+
+	completion:
+	[
+		"Good. The hills feel a little quieter already. Now listen. While you were gone, I worked out where the Covenant are gathering."
+	]
+
+	prerequisites: [ .saelith_ravenleaf_1 ]
+	objectives: [ .saelith_ravenleaf_2_a .saelith_ravenleaf_2_b ]
+	next_quest: .saelith_ravenleaf_3
+	level: 30
+}
+
+############################################################
+# Quest 3
+
+loot_group .saelith_ravenleaf_3_quest_item: {}
+
+item .saelith_ravenleaf_3_quest_item:
+{
+	icon: icon_scroll_3
+	item_level: 31
+	loot_groups: [ .saelith_ravenleaf_3_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Covenant Orders"
+	quest: .saelith_ravenleaf_3
+}
+
+objective .saelith_ravenleaf_3_a:
+{
+	string: "Hollow Covenant Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_ashira_hollow_zealot thalvaron_ashira_hollow_ritualist ] count: 10 }
+}
+
+objective .saelith_ravenleaf_3_b:
+{
+	string: "Covenant Orders"
+	maps: [ thalvaron ]
+	collect_items: { item: .saelith_ravenleaf_3_quest_item count: 1 }
+}
+
+{
+	${ _level: 31 }
+	item .saelith_ravenleaf_3_a: !QUEST_REWARD_CHEST{ _string: "Breastplate of the Highland Watch" _icon: icon_plate_chest_2 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .saelith_ravenleaf_3_b: !QUEST_REWARD_1H_KNIFE{ _string: "Ritualist's Bloodletter" _icon: icon_knife_5 _dexterity: 3 _strength: 1 }
+	item .saelith_ravenleaf_3_c: !QUEST_REWARD_CHEST{ _string: "Robe of the Unbound" _icon: icon_robe_3 _constitution: 1 _wisdom: 3 _spell_damage: 3 _type: armor_cloth }
+}
+
+quest .saelith_ravenleaf_3:
+{
+	string: "The Hollow Covenant"
+
+	text:
+	[
+		"Kill 10 Hollow Covenant cultists in the Corrupted Highlands and bring their orders to Saelith Ravenleaf."
+	]
+
+	description:
+	[
+		"The Covenant have made their camp in the Corrupted Highlands, west of here. Zealots and ritualists, dozens of them, all humming the same tune. Their leaders carry written orders. I want to know what"
+		"they're planning, and when.\n"
+		"\n"
+		"Kill as many as you can and bring me any orders you find. And keep an eye out for the surveyor. If she's still alive, that's where they'd be keeping her."
+	]
+
+	progress:
+	[
+		"Did you find anything on them?"
+	]
+
+	completion:
+	[
+		"'The vessel is prepared. Bring the surveyor to the Maw beneath the southern heights. When the moon turns, Ulgoroth wakes.'\n"
+		"\n"
+		"She's alive, then. For now."
+	]
+
+	prerequisites: [ .saelith_ravenleaf_2 ]
+	objectives: [ .saelith_ravenleaf_3_a .saelith_ravenleaf_3_b ]
+	reward_one_item: [ .saelith_ravenleaf_3_a .saelith_ravenleaf_3_b .saelith_ravenleaf_3_c ]
+	next_quest: .saelith_ravenleaf_4
+	level: 31
+}
+
+############################################################
+# Quest 4
+
+objective .saelith_ravenleaf_4:
+{
+	string: "Ulgoroth Slain"
+	maps: [ thalvaron ]
+	kill_npc: { entities: [ thalvaron_ashira_ulgoroth ] count: 1 }
+}
+
+{
+	${ _level: 31 _rarity: rare }
+	item .saelith_ravenleaf_4_a: !QUEST_REWARD_2H_SWORD{ _string: "Hollowbane" _icon: icon_sword_12 _constitution: 1 _strength: 3 _weapon_cooldown: 30 }
+	item .saelith_ravenleaf_4_b: !QUEST_REWARD_OFFHAND{ _string: "Lamp of the Last Warden" _icon: icon_orb_1 _wisdom: 2 _spell_damage: 1 _healing: 1 }
+	item .saelith_ravenleaf_4_c: !QUEST_REWARD_SHOULDERS{ _string: "Ravenleaf Mantle" _icon: icon_mail_shoulders_1 _constitution: 1 _dexterity: 3 _type: armor_mail }
+}
+
+quest .saelith_ravenleaf_4:
+{
+	string: "The Hollow Hunger"
+
+	text:
+	[
+		"Gather allies, enter the Maw in the southern Corrupted Highlands and kill Ulgoroth."
+	]
+
+	description:
+	[
+		"This is it. The Covenant have opened the Maw, the cave beneath the southern heights where the Wardens sealed Ulgoroth. If that thing wakes fully, Ashira will be the first to go, and the desert won't"
+		"stop it.\n"
+		"\n"
+		"The Wardens couldn't kill it. They only had spears and prayers. We have more than that, and we'll have friends. Don't go in alone. Gather the strongest you can find, cut through the Covenant and put"
+		"that thing down for good."
+	]
+
+	progress:
+	[
+		"The moon is turning. We don't have long."
+	]
+
+	completion:
+	[
+		"It's done? Truly done?\n"
+		"\n"
+		"I followed you into the Maw and found the surveyor in chains at the back of the cave. Breathing. She's asleep by my fire now, and when she wakes I'll take her down to Torbin's camp myself. The old"
+		"man will want to hear about this too, though he'll pretend he isn't interested.\n"
+		"\n"
+		"Take your pick of these. You've earned it."
+	]
+
+	prerequisites: [ .saelith_ravenleaf_3 ]
+	objectives: [ .saelith_ravenleaf_4 ]
+	reward_one_item: [ .saelith_ravenleaf_4_a .saelith_ravenleaf_4_b .saelith_ravenleaf_4_c ]
+	reward_cash_multiplier: 2
+	type: elite
+	level: 31
+}

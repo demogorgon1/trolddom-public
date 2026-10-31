@@ -1024,6 +1024,10 @@ sprites:
 
 	cursor: { position: [ 0 896 ] }
 	sprite icon_improved_toughen_up : { tags: [ icon ] }
+	sprite icon_fish_10 : { tags: [ icon ] }
+	sprite icon_potion_13 : { tags: [ icon ] }
+	sprite icon_fish_11 : { tags: [ icon ] }
+	sprite icon_fish_10_cooked : { tags: [ icon ] }
 }
 
 

@@ -1,0 +1,103 @@
+dialogue_screen .marro_finch:
+{
+	text:
+	[
+		"I'd have got out on my own, you know. I was just waiting for the right moment."
+	]
+
+	options:
+	[
+		{ quest<offer_only>: .marro_finch_1 }
+	]
+}
+
+entity thalvaron_marro_finch: !NPC
+{
+	_string: "Marro Finch"
+	_sprite: man_59
+	_sprite_dead: man_59_dead
+	_level: 31
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .marro_finch: { } }
+
+	# Only shows up at Wrecker's Rest once he's been rescued
+	_visibility_requirements:
+	{
+		requirement self<must_have_completed_quest>: .hesk_2
+	}
+}
+
+############################################################
+# Quest 1
+
+loot_group .marro_finch_1_quest_item: {}
+
+item .marro_finch_1_quest_item:
+{
+	icon: icon_horn_1
+	item_level: 31
+	loot_groups: [ .marro_finch_1_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Conch of the Reef King"
+	flavor: "It's enormous, and it's warm."
+	quest: .marro_finch_1
+}
+
+objective .marro_finch_1:
+{
+	string: "Conch of the Reef King"
+	maps: [ thalvaron ]
+	collect_items: { item: .marro_finch_1_quest_item count: 1 }
+}
+
+{
+	${ _level: 31 }
+	item .marro_finch_1_a: !QUEST_REWARD_WAIST{ _string: "Shellbinder Belt" _icon: icon_mail_belt_3 _constitution: 2 _strength: 2 _dexterity: 1 _type: armor_mail }
+	item .marro_finch_1_b: !QUEST_REWARD_FEET{ _string: "Tidecaller's Sandals" _icon: icon_cloth_feet_1 _constitution: 1 _wisdom: 2 _spell_damage: 2 _type: armor_cloth }
+	item .marro_finch_1_c: !QUEST_REWARD_HANDS{ _string: "Shellcrusher Gauntlets" _icon: icon_plate_hands_1 _constitution: 2 _strength: 3 _type: armor_plate }
+}
+
+quest .marro_finch_1:
+{
+	string: "High Tidecaller"
+
+	text:
+	[
+		"Kill High Tidecaller Skrr'lath on the steps of the Drowned Temple and bring the Conch of the Reef King to Hesk at the lagoon."
+	]
+
+	description:
+	[
+		"They took Dagny into the temple the night before you came. She told them they could take her instead of the twins. Typical Dagny.\n"
+		"\n"
+		"The big one with the shells on its back did the choosing. The others called it Skrr'lath. It sits on the temple steps at the far end of the eastern isle with a great big conch. When they took Dagny in,"
+		"it went with them, and I heard it blow that thing somewhere deep inside. Then something answered. I've never heard a noise like it.\n"
+		"\n"
+		"Get that conch. The old lizard will know what to do with it. I'd come with you, but I'm still waiting for the right moment."
+	]
+
+	progress:
+	[
+		"Hesk smells the sea on you. Did you bring it?"
+	]
+
+	completion:
+	[
+		"The conch of the Reef King. Hesk has not seen it since Hesk was very small.\n"
+		"\n"
+		"Khar'kesh sleeps in the deep water under the temple. When the conch sounds at the altar in the innermost chamber, he comes up to take his offering. Skrr'lath called him for the offerings. You will"
+		"call him too, but you will not be an offering. That is the difference.\n"
+		"\n"
+		"Hesk has listened to it. It is still a conch. Keep it."
+	]
+
+	prerequisites: [ .hesk_2 ]
+	objectives: [ .marro_finch_1 ]
+	reward_all_items: [ .hesk_3_quest_item ]
+	reward_one_item: [ .marro_finch_1_a .marro_finch_1_b .marro_finch_1_c ]
+	next_quest: .hesk_3
+	level: 31
+}

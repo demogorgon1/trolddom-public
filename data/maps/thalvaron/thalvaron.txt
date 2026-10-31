@@ -140,7 +140,7 @@ zone .eastern_kareth: { string: "Eastern Kareth" top_zone: .top_zone_kareth prep
 zone .southern_kareth: { string: "Southern Kareth" top_zone: .top_zone_kareth preposition: "in" }
 zone .kareth_pass: { string: "Kareth Pass" top_zone: .top_zone_kareth preposition: "around" }
 zone .balidor: { string: "Balidor" preposition: "in" }
-zone .ashira: { string: "Ashira" preposition: "in" }
+zone .ashira: { string: "Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" }
 zone .karethi_temple: { string: "Karethi Temple" preposition: "at the"  }
 zone .tomb_of_kralir: { string: "Tomb of Kralir" preposition: "in the" }
 zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" preposition: "in the" }
@@ -162,12 +162,19 @@ zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
 zone .the_frozen_borderlands: { string: "The Frozen Borderlands" preposition: "in" }
 zone .crash_site: { string: "Crash Site" preposition: "at the" top_zone: .the_frozen_borderlands }
 zone .withering_glade: { string: "Withering Glade" preposition: "in the" } 
-zone .central_ashira: { string: "Central Ashira" preposition: "in" }
-zone .ashiran_peaks: { string: "Ashiran Peaks" preposition: "in the" }
-zone .caves_of_limdrok: { string: "Caves of Lim'Drok" preposition: "in the" }
-zone .corrupted_highlands: { string: "Corrupted Highlands" preposition: "in the" }
+zone .central_ashira: { string: "Central Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" }
+zone .ashiran_peaks: { string: "Ashiran Peaks" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in the" }
+zone .caves_of_limdrok: { string: "Caves of Lim'Drok" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" }
+zone .corrupted_highlands: { string: "Corrupted Highlands" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" }
 zone .kareth_landing: { string: "Gate of Karethi" preposition: "at the" }
-
+zone .the_sunken_reach: { string: "The Sunken Reach" preposition: "in" }
+zone .wreck_zone_1: { string: "Green Cape" preposition: "in" }
+zone .wreck_zone_2: { string: "Wreck Isle" preposition: "on" }
+zone .wreck_zone_3: { string: "Eastern Wilds" preposition: "in the" }
+zone .wreck_zone_4: { string: "Lagoon Isle" preposition: "on" }
+zone .wreck_zone_5: { string: "Tidecaller Isles" preposition: "on the" }
+zone .wreck_zone_6: { string: "Eastern Isle" preposition: "on" }
+zone .wreck_zone_7: { string: "Drowned Temple" preposition: "in" }
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
 zone thalvaron_lurker: { fishing_trigger_ability: thalvaron_lurker_spawn fishing_trigger_ability_chance: 50 fishing_loot_table: $loot_table { } }
@@ -576,7 +583,24 @@ map_entity_spawn thalvaron_hilda_drybrook: { entity thalvaron_hilda_drybrook: { 
 map_entity_spawn thalvaron_hilda_drybrook_1_quest_item: { entity thalvaron_hilda_drybrook_1_quest_item: { init_state: default } } # No respawn needed
 
 # A
-map_entity_spawn thalvaron_lance: { entity thalvaron_lance: { init_state: default } }
+map_entity_spawn thalvaron_torbin_gravelbeard: { entity thalvaron_torbin_gravelbeard: { init_state: default } }
+map_entity_spawn thalvaron_old_grimble: { entity thalvaron_old_grimble: { init_state: default } }
+map_entity_spawn thalvaron_saelith_ravenleaf: { entity thalvaron_saelith_ravenleaf: { init_state: default } }
+map_entity_spawn thalvaron_torbin_gravelbeard_1_quest_item: { entity thalvaron_torbin_gravelbeard_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_torbin_gravelbeard_2_quest_item: { entity thalvaron_torbin_gravelbeard_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_old_grimble_4_quest_object: { entity thalvaron_old_grimble_4_quest_object: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_saelith_ravenleaf_1_quest_item: { entity thalvaron_saelith_ravenleaf_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_dorrik_ironvein: { entity thalvaron_dorrik_ironvein: { init_state: default } }
+
+# SR (The Sunken Reach)
+map_entity_spawn thalvaron_bryn_tallow: { entity thalvaron_bryn_tallow: { init_state: default } }
+map_entity_spawn thalvaron_hesk: { entity thalvaron_hesk: { init_state: default } }
+map_entity_spawn thalvaron_marro_finch: { entity thalvaron_marro_finch: { init_state: default } }
+map_entity_spawn thalvaron_wendel_crane: { entity thalvaron_wendel_crane: { init_state: default } }
+map_entity_spawn thalvaron_bryn_tallow_1_quest_item: { entity thalvaron_bryn_tallow_1_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hesk_2_quest_item: { entity thalvaron_hesk_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hesk_4_quest_item: { entity thalvaron_hesk_4_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+map_entity_spawn thalvaron_hesk_5_quest_item: { entity thalvaron_hesk_5_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
 
 map_palette .stuff:
 {
@@ -1248,6 +1272,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_lizard_man: [ 0 39 148 ]
 	entity_spawn thalvaron_battleground_troll: [ 100 0 238 ]
 	entity_spawn thalvaron_jungle_beast: [ 140 0 129 ]
+	entity_spawn thalvaron_jungle_beast_31: [ 107 203 161 ]
 	entity_spawn thalvaron_jungle_bandit: [ 9 2 164 ]
 	entity_spawn thalvaron_jungle_bandit_boss: [ 209 2 164 ]
 	entity_spawn thalvaron_dark_elemental: [ 103 93 82 ]
@@ -1267,6 +1292,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_ashira_lion: [ 17 23 211 ]
 	entity_spawn thalvaron_ashira_harpy: [ 47 113 111 ]
 	entity_spawn thalvaron_ashira_stalker: [ 47 23 161 ]
+	entity_spawn thalvaron_ashira_spider: [ 76 157 211 ]
 	entity_spawn thalvaron_ashira_spider: [ 77 158 211 ]
 	entity_spawn thalvaron_ashira_golem: [ 77 23 61 ]
 	entity_spawn thalvaron_ashira_troll: [ 107 158 111 ]
@@ -1275,7 +1301,44 @@ map_palette .stuff:
 	entity_spawn thalvaron_ashira_tainted_bear: [ 137 68 61 ]
 	entity_spawn thalvaron_ashira_hollow_stalker: [ 167 203 111 ]
 	entity_spawn thalvaron_ashira_shattered_golem: [ 167 113 161 ]
-	entity_spawn thalvaron_lance: [ 40 138 92 ]
+	entity_spawn thalvaron_torbin_gravelbeard: [ 40 138 92 ]
+	entity_spawn thalvaron_old_grimble: [ 17 203 161 ]
+	entity_spawn thalvaron_saelith_ravenleaf: [ 17 203 211 ]
+	entity_spawn thalvaron_torbin_gravelbeard_1_quest_item: [ 17 23 61 ]
+	entity_spawn thalvaron_torbin_gravelbeard_2_quest_item: [ 47 113 211 ]
+	entity_spawn thalvaron_old_grimble_4_quest_object: [ 77 158 61 ]
+	entity_spawn thalvaron_saelith_ravenleaf_1_quest_item: [ 77 23 161 ]
+	entity_spawn thalvaron_ashira_shade: [ 107 113 211 ]
+	entity_spawn thalvaron_ashira_hollow_covenant: [ 137 158 111 ]
+	entity_spawn thalvaron_ashira_hollow_devotee: [ 137 23 161 ]
+	entity_spawn thalvaron_ashira_ulgoroth: [ 167 68 61 ]
+	entity_spawn thalvaron_ashira_limdrok: [ 107 158 61 ]
+	entity_spawn thalvaron_dorrik_ironvein: [ 17 158 111 ]
+	entity_spawn thalvaron_ashira_rust_ooze: [ 47 68 211 ]
+	entity_spawn thalvaron_ashira_tunnel_ghoul: [ 137 68 161 ]
+	entity_spawn thalvaron_ashira_gristlejaw: [ 167 23 161 ]
+	entity_spawn thalvaron_bryn_tallow: [ 17 158 61 ]
+	entity_spawn thalvaron_hesk: [ 17 113 211 ]
+	entity_spawn thalvaron_marro_finch: [ 17 23 161 ]
+	entity_spawn thalvaron_bryn_tallow_1_quest_item: [ 47 158 111 ]
+	entity_spawn thalvaron_hesk_2_quest_item: [ 47 68 161 ]
+	entity_spawn thalvaron_sr_reef_crab: [ 77 203 111 ]
+	entity_spawn thalvaron_sr_mangrove_viper: [ 77 113 111 ]
+	entity_spawn thalvaron_sr_clawkin: [ 77 68 211 ]
+	entity_spawn thalvaron_sr_clawkin_tidecaller: [ 107 203 211 ]
+	entity_spawn thalvaron_sr_skrrlath: [ 107 113 161 ]
+	entity_spawn thalvaron_sr_saltbound: [ 107 23 161 ]
+	entity_spawn thalvaron_sr_reefguard: [ 137 158 161 ]
+	entity_spawn thalvaron_sr_kharkesh: [ 137 68 111 ]
+	entity_spawn thalvaron_sr_tide_altar: [ 167 158 211 ]
+	entity_spawn thalvaron_sr_reefblaster: [ 137 68 211 ]
+	entity_spawn thalvaron_sr_blastmaster: [ 197 23 211 ]
+	entity_spawn thalvaron_hesk_4_quest_item: [ 47 23 61 ]
+	entity_spawn thalvaron_hesk_5_quest_item: [ 197 203 61 ]
+	entity_spawn thalvaron_sr_ironhide_boar: [ 137 113 161 ]
+	entity_spawn thalvaron_wendel_crane: [ 17 158 161 ]
+	entity_spawn thalvaron_sr_grimtusk: [ 137 23 61 ]
+	entity_spawn thalvaron_sr_old_rootmaw: [ 227 203 61 ]
 	
 }
 
@@ -1408,6 +1471,14 @@ map_palette .zones:
 	zone .caves_of_limdrok: [ 163 195 29 ]
 	zone .corrupted_highlands: [ 85 145 156 ]
 	zone .kareth_landing: [ 244 250 49 ]
+	zone .the_sunken_reach: [ 66 190 200 ]
+	zone .wreck_zone_1: [ 141 170 41 ]
+	zone .wreck_zone_2: [ 228 218 168 ]
+	zone .wreck_zone_3: [ 228 168 216 ]
+	zone .wreck_zone_4: [ 168 170 228 ]
+	zone .wreck_zone_5: [ 97 208 43 ]
+	zone .wreck_zone_6: [ 128 43 208 ]
+	zone .wreck_zone_7: [ 208 123 43 ]
 }
 
 map_palette .sub_zones:

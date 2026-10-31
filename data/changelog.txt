@@ -2,6 +2,31 @@ changelog:
 {
 
 	#######################################################################################
+	heading: "v1.0.20"
+
+	text: "New:"
+	
+	list:
+	[
+		{ text: "Level cap increased to 32." }		
+		{ text: "New talents, profession recipes, and items." }		
+		{ text: "Two new zones: Ashira in the south and The Sunken Reach to the east." }		
+		{ text: "New level 10 dungeon: Saltclaw Grotto (and Heroic level 30 version)." }		
+		{ text: "Large in-game maps can now be panned with the mouse." }		
+	]
+
+	text: "Issues Fixed:"
+
+	list:
+	[
+		{ text: "Fixed the world map showing the wrong zone name under the mouse cursor." }
+		{ text: "Fixed various auction house bugs." }
+		{ text: "Fixed a few potential server crashes." }
+		{ text: "Fixed various other server issues." }
+		{ text: "Fixed a bunch of database issues when using offline mode or custom servers." }
+	]
+
+	#######################################################################################
 	heading: "v1.0.18"
 
 	text: "New:"

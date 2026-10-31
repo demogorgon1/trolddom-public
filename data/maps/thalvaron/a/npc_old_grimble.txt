@@ -1,0 +1,319 @@
+dialogue_screen .old_grimble:
+{
+	text:
+	[
+		"Oh! A visitor. Nobody comes up here. Not since the bridges went. Which is how I like it, mostly.\n"
+		"\n"
+		"Mind the pot, it's soup. Probably."
+	]
+
+	options:
+	[
+		{ quest: .old_grimble_1 }
+		{ quest: .old_grimble_2 }
+		{ quest: .old_grimble_3 }
+		{ quest<completion_only>: .torbin_gravelbeard_2 }
+		{ quest: .old_grimble_4 }
+		{ quest<offer_only>: .old_grimble_5 }
+	]
+}
+
+entity thalvaron_old_grimble: !NPC
+{
+	_string: "Old Grimble"
+	_sprite: man_37
+	_sprite_dead: man_37_dead
+	_level: 30
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+	_dialogue_root: $dialogue_root { .old_grimble: { } }
+}
+
+############################################################
+# Quest 1
+
+loot_group .old_grimble_1_quest_item: {}
+
+item .old_grimble_1_quest_item:
+{
+	icon: icon_tail_1
+	item_level: 29
+	loot_groups: [ .old_grimble_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Rust Lizard Tail"
+	quest: .old_grimble_1
+	stack: 8
+}
+
+objective .old_grimble_1:
+{
+	string: "Rust Lizard Tails"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .old_grimble_1_quest_item count: 8 }
+}
+
+{
+	${ _level: 30 }
+	item .old_grimble_1_a: !QUEST_REWARD_LEGS{ _string: "Grimble's Spare Trousers" _icon: icon_pants_4 _constitution: 1 _wisdom: 3 _spell_damage: 2 _type: armor_cloth }
+	item .old_grimble_1_b: !QUEST_REWARD_WRISTS{ _string: "Lizardhide Wristwraps" _icon: icon_mail_bracers_1 _constitution: 2 _dexterity: 3 _type: armor_mail }
+}
+
+quest .old_grimble_1:
+{
+	string: "Tail Soup"
+
+	text:
+	[
+		"Collect 8 tails from the rust lizards on the slopes of Ashira and bring them to Old Grimble."
+	]
+
+	description:
+	[
+		"You look strong. Stronger than me, anyway, and I'm very old. The secret to a good soup is tails. Everybody knows that. Rust lizard tails are the best ones, they've got a nice crunch to them.\n"
+		"\n"
+		"The lizards sun themselves on the rocks around here. Bring me eight tails. Don't feel bad for them, the tails grow back. I think. I've never checked."
+	]
+
+	progress:
+	[
+		"The pot's getting cold. Well, it was never really hot."
+	]
+
+	completion:
+	[
+		"Lovely, lovely. Into the pot they go. Here, have some trousers. They're clean. Cleaner than the ones I'm wearing."
+	]
+
+	objectives: [ .old_grimble_1 ]
+	reward_one_item: [ .old_grimble_1_a .old_grimble_1_b ]
+	level: 29
+}
+
+############################################################
+# Quest 2
+
+loot_group .old_grimble_2_quest_item: {}
+
+item .old_grimble_2_quest_item:
+{
+	icon: icon_trinket_1
+	item_level: 30
+	loot_groups: [ .old_grimble_2_quest_item ]
+	flags: [ not_sellable ]
+	string: "Grimble's Shiny Thing"
+	quest: .old_grimble_2
+	stack: 6
+}
+
+objective .old_grimble_2:
+{
+	string: "Grimble's Shiny Things"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .old_grimble_2_quest_item count: 6 }
+}
+
+{
+	${ _level: 30 }
+	item .old_grimble_2_a: !QUEST_REWARD_2H_STAFF{ _string: "Grimble's Other Walking Stick" _icon: icon_staff_2 _constitution: 2 _wisdom: 3 _spell_damage: 3 }
+	item .old_grimble_2_b: !QUEST_REWARD_FINGER{ _string: "Ring Found in a Harpy Nest" _icon: icon_ring_5 _constitution: 2 _strength: 2 }
+}
+
+quest .old_grimble_2:
+{
+	string: "Shiny Things"
+
+	text:
+	[
+		"Take back Old Grimble's shiny things from the ridge harpies of Ashira."
+	]
+
+	description:
+	[
+		"Somebody has been taking my shiny things. My good spoon. A button. The bit of glass that looks like a fish if you squint. I keep them in a box under the bed, and now the box is empty.\n"
+		"\n"
+		"I know who did it. The harpies in the ridges to the south. They screech at me every morning, and it's the screech of a thief. Go and get my things back. All six of them. I counted. Twice."
+	]
+
+	progress:
+	[
+		"Did they have my spoon?"
+	]
+
+	completion:
+	[
+		"My spoon! And the fish glass! Oh, I missed you. Take something for your trouble. Not the spoon."
+	]
+
+	prerequisites: [ .old_grimble_1 ]
+	objectives: [ .old_grimble_2 ]
+	reward_one_item: [ .old_grimble_2_a .old_grimble_2_b ]
+	level: 30
+}
+
+############################################################
+# Quest 3
+
+loot_group .old_grimble_3_quest_item: {}
+
+item .old_grimble_3_quest_item:
+{
+	icon: icon_rock_2
+	item_level: 30
+	loot_groups: [ .old_grimble_3_quest_item ]
+	flags: [ not_sellable unique ]
+	string: "Warm Redstone"
+	quest: .old_grimble_3
+}
+
+objective .old_grimble_3:
+{
+	string: "Warm Redstone"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .old_grimble_3_quest_item count: 1 }
+}
+
+quest .old_grimble_3:
+{
+	string: "Someone to Talk To"
+
+	text:
+	[
+		"Bring Old Grimble a warm redstone from one of the redstone golems in the brambles of Ashira."
+	]
+
+	description:
+	[
+		"You know what I've realised? It's quiet up here. Too quiet. I talk to the pot, but the pot never says anything back. A man needs a friend. Not a person, mind you, people are trouble. A rock.\n"
+		"\n"
+		"Not just any rock. The red golems in the brambles have a stone in their chest that stays warm. A warm rock is a friendly rock. Bring me one of those."
+	]
+
+	progress:
+	[
+		"The pot says hello. It doesn't, really."
+	]
+
+	completion:
+	[
+		"Oh, look at him. He's perfect. I'll call him Pebble. Say hello, Pebble.\n"
+		"\n"
+		"He's shy. I've nothing left to give you, I'm afraid, just a few coins I found in the soup. Come back and visit us some time. Not too often."
+	]
+
+	prerequisites: [ .old_grimble_2 ]
+	objectives: [ .old_grimble_3 ]
+	reward_cash_multiplier: 1.5
+	level: 30
+}
+
+############################################################
+# Quest 4 
+
+entity thalvaron_old_grimble_4_quest_object:
+{
+	string: "Hollow Idol"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_skull_stick ] z_offset: -3 } ] }
+		openable:
+		{
+			verb: destroy
+			range: 1
+			level: 30
+			despawn: true
+			required_quest: .old_grimble_4
+			complete_manual_objective: .old_grimble_4
+		}
+	}
+}
+
+objective .old_grimble_4:
+{
+	string: "Hollow Idols Destroyed"
+	
+	maps: [ thalvaron ]
+	
+	manual_counter: { count: 5 }
+}
+
+quest .old_grimble_4:
+{
+	string: "Idols of Lim'Drok"
+
+	text:
+	[
+		"Destroy 5 Hollow idols in the Caves of Lim'Drok to the south."
+	]
+	
+	description: 
+	[
+		"I was a lamp boy for the Wardens, you know. Before. I lit the lamps along the city walls every night, and a lamp boy hears things. The Covenant never did their own fighting. They paid the trolls of"
+		"Lim'Drok in trinkets and promises, and the trolls came over the walls.\n"
+		"\n"
+		"If the Covenant is back, they'll be at the trolls again. Go to the Caves of Lim'Drok, south of here. Look for idols with that mark on them and smash them. Smash all of them. I'd do it myself, but my"
+		"knees are older than the idols."
+	]
+
+	progress:
+	[
+		"Smashed?"
+	]
+	
+	completion:
+	[
+		"Five idols, and freshly carved? Then it's true, and it's worse than I thought. Somebody is teaching the trolls the old prayers again."
+	]
+
+	prerequisites: [ .torbin_gravelbeard_2 ]
+	objectives: [ .old_grimble_4 ]
+	next_quest: .old_grimble_5
+	level: 30
+}
+
+############################################################
+# Quest 5 
+
+quest .old_grimble_5:
+{
+	string: "The Elf in the North"
+
+	text:
+	[
+		"Find the elven ranger camping in the north of Ashira and tell her what you've found."
+	]
+	
+	description: 
+	[
+		"I'm too old for this. You need someone who can shoot straight. There's an elf up north. She's been camping in the hills for a season now, shooting things that need shooting. She thinks I haven't"
+		"noticed her. I notice everything. Mostly.\n"
+		"\n"
+		"She's hunting the Covenant, I'd bet my spoon on it. Find her and tell her what you've found. And tell her to stop stealing my firewood."
+	]
+
+	progress:
+	[
+		"Yes?"
+	]
+	
+	completion:
+	[
+		"The old man sent you? He knows I'm here? ...Of course he does.\n"
+		"\n"
+		"A marked tablet, idols in the troll caves and a missing surveyor. Sit down. I think we're hunting the same thing."
+	]
+
+	prerequisites: [ .old_grimble_4 ]
+	reward_cash_multiplier: 0.2
+	reward_xp_multiplier: 0.2
+	level: 30
+}

@@ -25,3 +25,16 @@ loot_table .thallysian_wilds_zone_drops:
 		}
 	]	
 }
+
+loot_group ashira_recipes: { oracle: { everywhere: true } }
+
+loot_table .ashira_zone_drops: 
+{
+	slots:
+	[	
+		{ 
+			possibility: { weight: 300 }
+			possibility: { weight: 2 loot_group: ashira_recipes } 
+		}
+	]	
+}

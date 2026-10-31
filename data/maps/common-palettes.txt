@@ -164,4 +164,6 @@
 	doodad fs_rock: [ 0 59 131 ]
 	doodad tent_large: [ 49 28 100 ]
 	doodad debris: [ 77 84 130 ]
+	doodad shipwreck: [ 38 129 114 ]
+	doodad mudhut: [ 38 229 114 ]
 }

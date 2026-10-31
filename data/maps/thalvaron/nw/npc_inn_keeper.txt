@@ -18,6 +18,12 @@ dialogue_screen .inn_keeper_dialogue:
 		{ text: "Have you ever done business with a gnome that hangs out at the Robertson farm?" goto: .inn_keeper_dialogue_gnome requirement self<must_have_active_quest>: { id: .gnome_1 } }
 		{ quest<offer_only>: .inn_keeper_1 }
 		{ quest<offer_only>: .inn_keeper_2 requirement self<must_not_have_completed_quest>: .father_tobias_1 }
+		{
+			quest<offer_only>: .inn_keeper_3
+			requirement self<must_be_at_least_level>: 27
+			requirement self<must_not_have_completed_quest>: { id: __maps_thalvaron_a_torbin_gravelbeard_1 }
+			requirement self<must_not_have_active_quest>: { id: __maps_thalvaron_a_torbin_gravelbeard_1 }
+		}
 		{ text: "Let me browse your goods." goto: $dialogue_screen !FOOD_VENDOR{} }
 	]
 }
@@ -152,5 +158,37 @@ quest .inn_keeper_2:
 	reward_cash_multiplier: 0.25
 	reward_xp_multiplier: 0.25
 	level: 23
+}
+
+############################################################
+# Quest 3 (leads returning players to Ashira)
+
+quest .inn_keeper_3:
+{
+	string: "Word from Ashira"
+
+	text:
+	[
+		"Travel south across the desert to Ashira and find Torbin Gravelbeard."
+	]
+
+	description:
+	[
+		"You look like someone who's been around. Here's something you might not have heard. A while back a dwarf by the name of Torbin Gravelbeard stayed here with a surveyor, a young woman called Maren. They were"
+		"headed south across the desert to Ashira to draw maps of the place. Nobody goes to Ashira, not since the bridges went down.\n"
+		"\n"
+		"A caravan driver came through yesterday and said the dwarf has set up a little shop down there, but the surveyor has gone missing, and he's asking for anyone who knows which end of a sword to hold."
+		"Sounds like your kind of trouble."
+	]
+
+	completion:
+	[
+		"Edward sent you? Ha! I still owe that man for a week of ale. Never mind that. You got here just in time."
+	]
+
+	reward_cash_multiplier: 0.25
+	reward_xp_multiplier: 0.25
+	next_quest: __maps_thalvaron_a_torbin_gravelbeard_1
+	level: 29
 }
 

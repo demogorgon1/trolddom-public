@@ -169,7 +169,7 @@ quest .frinrir_2:
 
 	description:
 	[
-		"My last supply cart never reached the mountain fortress. The driver decided to take a shortcut west through the wasteland. Right through"
+		"My last supply cart never reached the fortress out west. The driver decided to take a shortcut through the wasteland. Right through"
 		"the zombies. He came back on foot, without the cart, without the supplies and without one of his boots.\n"
 		"\n"
 		"The sacks must still be lying around out there somewhere. The dead don't eat flour, as far as I know, so they should be fine. Mostly."

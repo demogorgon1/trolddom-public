@@ -33,18 +33,17 @@ map_entity_spawn thalvaron_ashira_boar: { entity thalvaron_ashira_boar: {} spawn
 		_loot_table: default_boar
 	}
 
-	entity thalvaron_ashira_boar: !NPC { _string: "Blood Boar" _sprite: boar _sprite_dead: boar_dead _level: 30 }
+	entity thalvaron_ashira_boar: !NPC { _string: "Blood Boar" _sprite: boar_3 _sprite_dead: boar_3_dead _level: 30 }
 }
 
 ##########################################################################################
-# Ashira outer slopes: wildlife that has wandered in from the desert or lives on the ridges
+# Ashira outer slopes
 
 map_entity_spawn thalvaron_ashira_lizard: { entity thalvaron_ashira_lizard: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 map_entity_spawn thalvaron_ashira_scorpion:
 {
 	entity thalvaron_ashira_scorpion_a: { }
-	entity thalvaron_ashira_scorpion_b: { }
 	spawn_timer: !NPC_RESPAWN_NORMAL{}
 }
 
@@ -53,11 +52,21 @@ map_entity_spawn thalvaron_ashira_harpy: { entity thalvaron_ashira_harpy: {} spa
 
 # Rust lizards
 {
+	loot_table .ashira_lizard:
+	{
+		slots:
+		[
+			{ possibility: { loot_group: .old_grimble_1_quest_item requirement self<must_have_active_quest>: .old_grimble_1 } }
+			!WORLD_DROPS {}
+			!WORLD_DROPS_LIZARDS {}
+		]
+	}
+
 	${
 		_faction: monsters
 		_creature_type: beast
 		_default_behavior_state: .wandering_short
-		_loot_table: default_lizard
+		_loot_table: .ashira_lizard
 		_level: 29
 		_weapon_damage: 0.8
 		_resource_health: 0.7
@@ -78,7 +87,6 @@ map_entity_spawn thalvaron_ashira_harpy: { entity thalvaron_ashira_harpy: {} spa
 	}
 
 	entity thalvaron_ashira_scorpion_a: !NPC { _string: "Thornback Scorpion" _sprite: scorpion_2 _sprite_dead: scorpion_2_dead }
-	entity thalvaron_ashira_scorpion_b: !NPC { _string: "Thornback Scorpion" _sprite: scorpion_3 _sprite_dead: scorpion_3_dead }
 }
 
 # Crag lions
@@ -99,11 +107,24 @@ map_entity_spawn thalvaron_ashira_harpy: { entity thalvaron_ashira_harpy: {} spa
 
 # Ridge harpies
 {
+	loot_table .ashira_harpy:
+	{
+		slots:
+		[
+			{
+				possibility: { weight: 1 }
+				possibility: { weight: 1 loot_group: .old_grimble_2_quest_item requirement self<must_have_active_quest>: .old_grimble_2 }
+			}
+			!WORLD_DROPS {}
+			!WORLD_DROPS_BIRDS {}
+		]
+	}
+
 	${
 		_faction: monsters
 		_creature_type: humanoid
 		_default_behavior_state: .wandering_short
-		_loot_table: default_bird
+		_loot_table: .ashira_harpy
 		_level: 30
 		_abilities: [ { id: npc_trap } { id: npc_attack } ]
 	}
@@ -149,11 +170,30 @@ map_entity_spawn thalvaron_ashira_golem: { entity thalvaron_ashira_golem: {} spa
 
 # Redstone golems
 {
+	loot_table .ashira_golem:
+	{
+		slots:
+		[
+			{
+				possibility: { weight: 2 }
+				possibility:
+				{
+					weight: 1
+					loot_group: .old_grimble_3_quest_item
+					requirement self<must_have_active_quest>: .old_grimble_3
+					requirement self<must_not_have_item>: .old_grimble_3_quest_item
+				}
+			}
+			!WORLD_DROPS {}
+			!WORLD_DROPS_EARTH_ELEMENTALS {}
+		]
+	}
+
 	${
 		_faction: monsters
 		_creature_type: elemental
 		_default_behavior_state: .passive
-		_loot_table: default_earth_elemental
+		_loot_table: .ashira_golem
 		_level: 30
 		_weapon_damage: 1.5
 		_resource_health: 1.5
@@ -195,7 +235,6 @@ map_entity_spawn thalvaron_ashira_owlbear: { entity thalvaron_ashira_owlbear: {}
 			{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{}
 		          map_message thalvaron: "Bramblehide will not drop Emblem of Triumph for {}." } } }
 
-			!WORLD_DROPS_VERY_RARE {}
 			!WORLD_DROPS_RARE {}
 			!WORLD_DROPS {}
 		]
@@ -276,4 +315,273 @@ map_entity_spawn thalvaron_ashira_shattered_golem: { entity thalvaron_ashira_sha
 	}
 
 	entity thalvaron_ashira_shattered_golem: !NPC { _string: "Shattered Golem" _sprite: golem_5 _sprite_dead: golem_5_dead }
+}
+
+##########################################################################################
+# Ruins of the City of Ashira
+
+map_entity_spawn thalvaron_ashira_shade:
+{
+	entity thalvaron_ashira_shade_a: { }
+	entity thalvaron_ashira_shade_b: { }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Shades of the dead city
+{
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: default_ghost
+		_level: 30
+	}
+
+	entity thalvaron_ashira_shade_a: !NPC { _string: "Shade of Ashira" _sprite: ghost_3 _sprite_dead: ghost_3_dead _abilities: [ { id: npc_curse } { id: npc_attack } ] }
+	entity thalvaron_ashira_shade_b: !NPC { _string: "Fallen Warden" _sprite: ghost_5 _sprite_dead: ghost_5_dead _weapon_damage: 1.2 _abilities: [ { id: npc_strike } { id: npc_attack } ] }
+}
+
+##########################################################################################
+# Corrupted highlands: the Hollow Covenant
+
+map_entity_spawn thalvaron_ashira_hollow_covenant:
+{
+	entity thalvaron_ashira_hollow_zealot: { }
+	entity thalvaron_ashira_hollow_ritualist: { }
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+map_entity_spawn thalvaron_ashira_hollow_devotee: { entity thalvaron_ashira_hollow_devotee: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_ulgoroth: { entity thalvaron_ashira_ulgoroth: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Cultists
+{
+	loot_table .ashira_hollow_covenant:
+	{
+		slots:
+		[
+			{
+				possibility: { weight: 3 }
+				possibility: 
+				{ 
+					weight: 1 
+					loot_group: .saelith_ravenleaf_3_quest_item 
+					requirement self<must_have_active_quest>: .saelith_ravenleaf_3 
+					requirement self<must_not_have_item>: .saelith_ravenleaf_3_quest_item
+				}
+			}
+			!WORLD_DROPS {}
+			!WORLD_DROPS_CLOTH {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .wandering_short
+		_loot_table: .ashira_hollow_covenant
+		_level: 31
+	}
+
+	entity thalvaron_ashira_hollow_zealot: !NPC { _string: "Hollow Zealot" _sprite: cultist_2 _sprite_dead: cultist_2_dead _weapon_damage: 1.1 _abilities: [ { id: npc_strike } { id: npc_attack } ] }
+	entity thalvaron_ashira_hollow_ritualist: !NPC { _string: "Hollow Ritualist" _sprite: cultist_1 _sprite_dead: cultist_1_dead _resource_health: 0.85 _abilities: [ { id: npc_drain_life } { id: npc_curse } { id: npc_attack } ] }
+}
+
+# The Maw: elite cultists guarding Ulgoroth
+{
+	${
+		_faction: monsters
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .ashira_hollow_covenant
+		_elite: true
+		_level: 31
+		_resource_health: 1.2
+	}
+
+	entity thalvaron_ashira_hollow_devotee: !NPC { _string: "Hollow Devotee" _sprite: rebel_8 _sprite_dead: rebel_8_dead _abilities: [ { id: npc_heal target: low_health_friend_or_self } { id: npc_drain_life } { id: npc_attack } ] }
+}
+
+# Ulgoroth
+{
+	loot_table .ashira_ulgoroth:
+	{
+		slots:
+		[
+			!WORLD_DROPS {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: demon
+		_default_behavior_state: .passive
+		_loot_table: .ashira_ulgoroth
+		_elite: true
+		_level: 31
+		_weapon_damage: 1.4
+		_resource_health: 4.5
+		_immune_to_stun: true
+		_immune_to_immobilize: true
+		_immune_to_slow: true
+		_max_leash_distance: 20
+
+		_abilities:
+		[
+			{
+				id: $ability
+				{
+					string: "Hollow Pulse"
+					cooldowns: [ global ]
+					cooldown: $cooldown { duration: 150 }
+					flags: [ spell target_self target_aoe target_aoe_hostile always_in_line_of_sight always_in_range ]
+					states: [ default in_combat ]
+					icon: icon_pain_and_suffering
+					cast_time: 25
+					delay: 3
+					aoe_radius: 4
+					aoe_cap: 10
+					aoe_requirement target<must_not_be_in_state>: { id: dead }
+					source_particle_system: npc_arcane_explosion
+
+					direct_effect damage:
+					{
+						flags: [ is_magical ]
+						damage_type: unholy
+						function: { expression: a a: 260 }
+						spread: !DEFAULT_SPREAD{}
+					}
+				}
+			}
+
+			{ id: npc_curse_stacking }
+			{ id: npc_drain_life }
+			{ id: npc_attack }
+		]
+	}
+
+	entity thalvaron_ashira_ulgoroth: !NPC { _string: "Ulgoroth, the Hollow Hunger" _sprite: tentacle_monster_3 _sprite_dead: tentacle_monster_3_dead }
+}
+
+##########################################################################################
+# Lim'Drok
+
+map_entity_spawn thalvaron_ashira_limdrok: { entity thalvaron_ashira_limdrok: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+{
+	loot_table .ashira_limdrok:
+	{
+		slots:
+		[
+			!WORLD_DROPS_RARE {}
+			!WORLD_DROPS {}
+			!WORLD_DROPS_SKELETONS {}
+			!WORLD_DROPS_CLOTH {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: .ashira_limdrok
+		_level: 31
+		_resource_health: 3
+		_immune_to_stun: true
+		_max_leash_distance: 20
+		_abilities:
+		[
+			{ id: npc_curse_stacking }
+			{ id: npc_drain_life }
+			{ id: npc_frostbolt_no_cooldown }
+		]
+	}
+
+	entity thalvaron_ashira_limdrok: !NPC { _string: "Lim'Drok" _sprite: skeleton_caster_6 _sprite_dead: skeleton_caster_6_dead }
+}
+
+##########################################################################################
+# Rustvein Caverns
+
+map_entity_spawn thalvaron_ashira_rust_ooze: { entity thalvaron_ashira_rust_ooze: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_tunnel_ghoul: { entity thalvaron_ashira_tunnel_ghoul: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+map_entity_spawn thalvaron_ashira_gristlejaw: { entity thalvaron_ashira_gristlejaw: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+# Rust oozes: they eat metal, so Dorrik's ore ends up inside them
+{
+	loot_table .ashira_rust_ooze:
+	{
+		slots:
+		[
+			{
+				possibility: { weight: 1 }
+				possibility: { weight: 2 loot_group: .dorrik_ironvein_1_quest_item requirement self<must_have_active_quest>: .dorrik_ironvein_1 }
+			}
+			!WORLD_DROPS {}
+			!WORLD_DROPS_OOZES {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .wandering_short
+		_loot_table: .ashira_rust_ooze
+		_level: 31
+		_resource_health: 1.2
+		_abilities: [ { id: npc_acid_spit } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_rust_ooze: !NPC { _string: "Rust Ooze" _sprite: ooze_3 _sprite_dead: ooze_3_dead }
+}
+
+# Tunnel ghouls
+{
+	loot_table .ashira_tunnel_ghoul:
+	{
+		slots:
+		[
+			!WORLD_DROPS {}
+			!WORLD_DROPS_ZOMBIES {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .wandering_short
+		_loot_table: .ashira_tunnel_ghoul
+		_level: 31
+		_weapon_damage: 1.2
+		_abilities: [ { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_tunnel_ghoul: !NPC { _string: "Tunnel Ghoul" _sprite: ghoul_2 _sprite_dead: ghoul_2_dead }
+}
+
+# Gristlejaw
+{
+	loot_table .ashira_gristlejaw:
+	{
+		slots:
+		[
+			!WORLD_DROPS {}
+			!WORLD_DROPS_ZOMBIES {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: undead
+		_default_behavior_state: .passive
+		_loot_table: .ashira_gristlejaw
+		_level: 31
+		_weapon_damage: 1.4
+		_resource_health: 3
+		_immune_to_stun: true
+		_max_leash_distance: 20
+		_abilities: [ { id: npc_mortal_strike_non_instant } { id: npc_rend } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_gristlejaw: !NPC { _string: "Gristlejaw" _sprite: ghoul_1 _sprite_dead: ghoul_1_dead }
 }

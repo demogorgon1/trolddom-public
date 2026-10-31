@@ -30,5 +30,74 @@ entity thalvaron_faria: !NPC
 	_creature_type: humanoid
 	_loot_table: .npc
 	_not_pushable: true	
-	_dialogue_root: $dialogue_root { .faria_vendor: { } }
+	_dialogue_root: $dialogue_root { .faria: { } }
+}
+dialogue_screen .faria:
+{
+	text:
+	[
+		"Strife is a gift. It shows us who we are when the easy answers run out."
+	]
+
+	options:
+	[
+		{ quest: thalvaron_faria_1 }
+		{ goto: .faria_vendor text: "Let me see your wares." }
+	]
+}
+
+############################################################
+# Quest 1
+
+loot_group thalvaron_faria_1_quest_item: {}
+
+item thalvaron_faria_1_quest_item:
+{
+	icon: icon_tusk_1
+	item_level: 31
+	loot_groups: [ thalvaron_faria_1_quest_item ]
+	flags: [ not_sellable ]
+	string: "Ironhide Tusk"
+	flavor: "Heavy, curved and still sharp."
+	quest: thalvaron_faria_1
+	stack: 6
+}
+
+objective .faria_1:
+{
+	string: "Ironhide Tusks"
+	maps: [ thalvaron ]
+	collect_items: { item: thalvaron_faria_1_quest_item count: 6 }
+}
+
+quest thalvaron_faria_1:
+{
+	string: "Tusks for the Faithful"
+
+	text:
+	[
+		"Collect 6 Ironhide Tusks from the Ironhide Boars on the plain south of Faria's hut."
+	]
+
+	description:
+	[
+		"Those who fight for the Dominion of Strife wear their victories. A tusk on a cord, a claw on a belt. Small things, but they remind the bearer, and everyone who faces them, that they have killed before.\n"
+		"\n"
+		"The Ironhide Boars on the plain to the south are good for this. They are bad-tempered, hard to kill, and they never run. I respect that in a boar.\n"
+		"\n"
+		"Bring me six of their tusks. Earn them, don't find them."
+	]
+
+	progress:
+	[
+		"The boars still have their tusks, I see."
+	]
+
+	completion:
+	[
+		"Good. These will become trophies for those who come to fight in the battleground. Every one of them will remember the hunter who brought it, even if they never learn your name."
+	]
+
+	objectives: [ .faria_1 ]
+	level: 31
 }

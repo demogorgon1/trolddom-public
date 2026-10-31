@@ -849,7 +849,7 @@ aura divine_flux:
 	{
 		combat_event<source>: hit
 		ability<self>: divine_flux_trigger
-		trigger_abilities: [ paladin_attack holy_storm reckoning ]		
+		trigger_abilities: [ attack holy_storm reckoning ]		
 	}
 }
 

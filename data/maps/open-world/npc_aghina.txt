@@ -8,6 +8,7 @@ dialogue_screen .aghina_greetings:
 	options:
 	[
 		{ quest: .aghina_1 }
+		{ quest: .aghina_2 }
 	]
 }
 
@@ -100,4 +101,80 @@ quest .aghina_1:
 	level: 6	
 	
 	reward_one_item: [ chest_aghina_1 legs_aghina_1 back_aghina_1 ]
+}
+
+############################################################
+# Quest 2
+
+loot_group .aghina_2_quest_item: {}
+
+item .aghina_2_quest_item:
+{
+	icon: icon_necklace_2
+	item_level: 6
+	loot_groups: [ .aghina_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Camus's Ranger Pendant"
+	flavor: "A small silver leaf on a cord. The cord has been chewed through."
+	quest: .aghina_2
+}
+
+objective .aghina_2_a:
+{
+	string: "Crab Agents Slain"
+	
+	maps: [ open_world ]
+	
+	kill_npc: { entities: [ crab_man_6 ] count: 8 }
+}
+
+objective .aghina_2_b:
+{
+	string: "Camus's Ranger Pendant"
+	
+	maps: [ open_world ]
+	
+	collect_items: { item: .aghina_2_quest_item count: 1 }
+}
+
+{
+	${ _level: 6 }
+	item .aghina_2_a: !QUEST_REWARD_BOW{ _string: "Camus's Longbow" _icon: icon_bow_1 _dexterity: 2 }
+	item .aghina_2_b: !QUEST_REWARD_WRISTS{ _string: "Strandwatcher Bracers" _icon: icon_mail_bracers_1 _constitution: 1 _strength: 1 _type: armor_mail }
+	item .aghina_2_c: !QUEST_REWARD_NECK{ _string: "Silver Leaf Pendant" _icon: icon_necklace_3 _wisdom: 1 _spirit: 1 }
+}
+
+quest .aghina_2:
+{
+	string: "The Pendant"
+
+	text:
+	[
+		"Kill 8 Crab Agents on the eastern shore and recover Camus's ranger pendant."
+	]
+	
+	description: 
+	[
+		"I keep seeing it in my head. Camus always wore a little silver pendant, a leaf on a cord. Every ranger of our order gets one. It wasn't on him when you found him, so those crabs must have taken it.\n"
+		"\n"
+		"The ones further down the shore are different. Smarter. They watch you from the water before they come. They'll have it, I know it. Make them pay for what they did, and bring"
+		"the pendant back to me. His family should have something to bury."
+	]
+
+	progress:
+	[
+		"Did you find it?"
+	]
+	
+	completion:
+	[
+		"That's it. That's his.\n"
+		"\n"
+		"Thank you. I'll take it to his family myself. And you take something of ours. He would have wanted it used, not hung on a wall."
+	]
+
+	prerequisites: [ .aghina_1 ]
+	objectives: [ .aghina_2_a .aghina_2_b ]
+	reward_one_item: [ .aghina_2_a .aghina_2_b .aghina_2_c ]
+	level: 6
 }

@@ -1,0 +1,175 @@
+npc_behavior_state .wandering_short:
+{
+	on_route<saltclaw_grotto_default_patrol>: .patrol
+	behavior: wandering
+	max_range: 1
+}
+
+npc_behavior_state .passive:
+{
+	on_route<saltclaw_grotto_default_patrol>: .patrol
+	behavior: do_nothing
+}
+
+npc_behavior_state .patrol:
+{
+	behavior: patrolling
+}
+
+# Trash picks the entity matching the level painted on the levels layer. It stops spawning once the boss of its part of the grotto is dead.
+
+map_entity_spawn .crabman_warrior:
+{
+	entity .crabman_warrior_9_a: { level: 9 spawn_condition: { if_not: .snapjaw_killed } }
+	entity .crabman_warrior_9_b: { level: 9 spawn_condition: { if_not: .snapjaw_killed } }
+
+	entity .crabman_warrior_10_a: { level: 10 spawn_condition: { if_not: .gorvash_the_shellbreaker_killed } }
+	entity .crabman_warrior_10_b: { level: 10 spawn_condition: { if_not: .gorvash_the_shellbreaker_killed } }
+
+	entity .crabman_warrior_11_a: { level: 11 spawn_condition: { if_not: .queen_skarra_killed } }
+	entity .crabman_warrior_11_b: { level: 11 spawn_condition: { if_not: .queen_skarra_killed } }
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .crabman_shellguard:
+{
+	entity .crabman_shellguard_9: { level: 9 spawn_condition: { if_not: .snapjaw_killed } }
+	entity .crabman_shellguard_10: { level: 10 spawn_condition: { if_not: .gorvash_the_shellbreaker_killed } }
+	entity .crabman_shellguard_11: { level: 11 spawn_condition: { if_not: .queen_skarra_killed } }
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .crabman_tidecaller:
+{
+	entity .crabman_tidecaller_9: { level: 9 spawn_condition: { if_not: .snapjaw_killed } }
+	entity .crabman_tidecaller_10: { level: 10 spawn_condition: { if_not: .gorvash_the_shellbreaker_killed } }
+	entity .crabman_tidecaller_11: { level: 11 spawn_condition: { if_not: .queen_skarra_killed } }
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+map_entity_spawn .crabman_brute:
+{
+	entity .crabman_brute_11: { level: 11 spawn_condition: { if_not: .queen_skarra_killed } }
+
+	spawn_timer: !TRASH_RESPAWN_TIMER{}
+}
+
+loot_table .crabman:
+{
+	slots:
+	[
+		# Rolf's "Fewer Eggs, Less Clacking" (open-world/npc_rolf.txt) needs 8
+		{
+			possibility: { weight: 1 }
+			possibility: { weight: 1 loot_group: saltclaw_egg requirement self<must_have_active_quest>: rolf_3 }
+		}
+		!WORLD_DROPS {}
+		!WORLD_DROPS_CLOTH {}
+	]
+}
+
+# Crabman warriors
+{
+	${
+		_faction: crabmen
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .crabman
+		_weapon_damage: 1.33
+		_resource_health: 1.17
+		_elite: true
+		_abilities:
+		[
+			{ id: npc_rend }
+			{ id: npc_attack }
+		]
+
+		_heroic_weapon_damage: 3.1
+		_heroic_resource_health: 2.7
+	}
+
+	entity .crabman_warrior_9_a: !NPC { _string: "Saltclaw Warrior" _sprite: crab_monster_1 _sprite_dead: crab_monster_1_dead _level: 9 }
+	entity .crabman_warrior_9_b: !NPC { _string: "Saltclaw Warrior" _sprite: crab_monster_2 _sprite_dead: crab_monster_2_dead _level: 9 }
+
+	entity .crabman_warrior_10_a: !NPC { _string: "Saltclaw Warrior" _sprite: crab_monster_1 _sprite_dead: crab_monster_1_dead _level: 10 }
+	entity .crabman_warrior_10_b: !NPC { _string: "Saltclaw Warrior" _sprite: crab_monster_2 _sprite_dead: crab_monster_2_dead _level: 10 }
+
+	entity .crabman_warrior_11_a: !NPC { _string: "Saltclaw Warrior" _sprite: crab_monster_1 _sprite_dead: crab_monster_1_dead _level: 11 }
+	entity .crabman_warrior_11_b: !NPC { _string: "Saltclaw Warrior" _sprite: crab_monster_2 _sprite_dead: crab_monster_2_dead _level: 11 }
+}
+
+# Crabman shellguards (tanks)
+{
+	${
+		_faction: crabmen
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .crabman
+		_weapon_damage: 1.2
+		_resource_health: 1.89
+		_elite: true
+		_abilities:
+		[
+			{ id: npc_sunder requirement target<must_not_have_aura>: npc_sunder }
+			{ id: npc_attack }
+		]
+
+		_heroic_weapon_damage: 2.4
+		_heroic_resource_health: 3.1
+	}
+
+	entity .crabman_shellguard_9: !NPC { _string: "Saltclaw Shellguard" _sprite: crab_monster_3 _sprite_dead: crab_monster_3_dead _level: 9 }
+	entity .crabman_shellguard_10: !NPC { _string: "Saltclaw Shellguard" _sprite: crab_monster_3 _sprite_dead: crab_monster_3_dead _level: 10 }
+	entity .crabman_shellguard_11: !NPC { _string: "Saltclaw Shellguard" _sprite: crab_monster_3 _sprite_dead: crab_monster_3_dead _level: 11 }
+}
+
+# Crabman tidecallers (healers)
+{
+	${
+		_faction: crabmen
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .crabman
+		_weapon_damage: 1.1
+		_resource_health: 1.17
+		_resource_mana: 1
+		_elite: true
+		_abilities:
+		[
+			{ id: npc_heal target: low_health_friend_or_self }
+			{ id: npc_attack }
+		]
+
+		_heroic_weapon_damage: 2
+		_heroic_resource_health: 2.5
+	}
+
+	entity .crabman_tidecaller_9: !NPC { _string: "Saltclaw Tidecaller" _sprite: crab_caster_1 _sprite_dead: crab_caster_1_dead _level: 9 }
+	entity .crabman_tidecaller_10: !NPC { _string: "Saltclaw Tidecaller" _sprite: crab_caster_1 _sprite_dead: crab_caster_1_dead _level: 10 }
+	entity .crabman_tidecaller_11: !NPC { _string: "Saltclaw Tidecaller" _sprite: crab_caster_1 _sprite_dead: crab_caster_1_dead _level: 11 }
+}
+
+# Crabman brute
+{
+	${
+		_faction: crabmen
+		_creature_type: humanoid
+		_default_behavior_state: .passive
+		_loot_table: .crabman
+		_weapon_damage: 1.5
+		_resource_health: 2.79
+		_elite: true
+		_abilities:
+		[
+			{ id: npc_attack }
+		]
+
+		_heroic_weapon_damage: 3.2
+		_heroic_resource_health: 3.1
+	}
+
+	entity .crabman_brute_11: !NPC { _string: "Saltclaw Brute" _sprite: crab_monster_4 _sprite_dead: crab_monster_4_dead _level: 11 }
+}

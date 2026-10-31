@@ -305,8 +305,7 @@ item item_ashiran_rustfin:
 {
 	loot_groups: [ fish_ashira ]		
 	string: "Ashiran Rustfin"
-	icon: icon_fish_8
-	flavor: "Its scales are the color of the desert at dusk."
+	icon: icon_fish_10
 	stack: 20
 	item_level: 29
 	level_range: [ 28 32 ]
@@ -319,9 +318,10 @@ item item_hollowgill:
 {
 	loot_groups: [ fish_ashira_corrupted ]		
 	string: "Hollowgill"
-	icon: icon_eel_2
+	icon: icon_fish_11
 	flavor: "It has no eyes, and it is still looking at you."
 	stack: 20
 	item_level: 30
 	level_range: [ 28 32 ]
 }
+

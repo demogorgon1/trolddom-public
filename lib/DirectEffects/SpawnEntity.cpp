@@ -76,6 +76,14 @@ namespace tpublic::DirectEffects
 				{
 					m_auraConditionals.push_back(std::make_unique<AuraConditional>(aChild));
 				}
+				else if(aChild->m_name == "if")
+				{
+					m_ifMapTriggerId = aChild->GetId(DataType::ID_MAP_TRIGGER);
+				}
+				else if(aChild->m_name == "if_not")
+				{
+					m_ifNotMapTriggerId = aChild->GetId(DataType::ID_MAP_TRIGGER);
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->GetIdentifier());
@@ -97,6 +105,8 @@ namespace tpublic::DirectEffects
 		aStream->WriteOptionalObject(m_refreshNPCMetrics);
 		aStream->WriteObjects(m_mustHaveOneAtTarget);
 		aStream->WriteObjectPointers(m_auraConditionals);
+		aStream->WriteUInt(m_ifMapTriggerId);
+		aStream->WriteUInt(m_ifNotMapTriggerId);
 	}
 
 	bool
@@ -121,6 +131,10 @@ namespace tpublic::DirectEffects
 			return false;
 		if(!aStream->ReadObjectPointers(m_auraConditionals))
 			return false;
+		if(!aStream->ReadUInt(m_ifMapTriggerId))
+			return false;
+		if(!aStream->ReadUInt(m_ifNotMapTriggerId))
+			return false;
 		return true;
 	}
 
@@ -143,6 +157,12 @@ namespace tpublic::DirectEffects
 		bool							/*aOffHand*/)
 	{					
 		if(aSource == NULL)
+			return Result();
+
+		if(m_ifMapTriggerId != 0 && !aWorldView->WorldViewIsMapTriggerSet(m_ifMapTriggerId))
+			return Result();
+
+		if(m_ifNotMapTriggerId != 0 && aWorldView->WorldViewIsMapTriggerSet(m_ifNotMapTriggerId))
 			return Result();
 
 		if(m_mustHaveOneAtTarget.size() > 0)

@@ -347,6 +347,8 @@ namespace tpublic
 			std::optional<RefreshNPCMetrics>				m_refreshNPCMetrics;
 			std::vector<MustHaveOneAtTarget>				m_mustHaveOneAtTarget;
 			std::vector<std::unique_ptr<AuraConditional>>	m_auraConditionals;
+			uint32_t										m_ifMapTriggerId = 0;
+			uint32_t										m_ifNotMapTriggerId = 0;
 		};
 
 	}

@@ -1,0 +1,18 @@
+achievement_category .saltclaw_grotto: { string: "Dungeon: Saltclaw Grotto" order_key: 3 }
+achievement saltclaw_grotto_snapjaw: { sort_key: 1 category: .saltclaw_grotto string: "Snapjaw" description: "Slay Snapjaw." points: 10 priority: 0 kill_trigger: saltclaw_grotto_snapjaw icon: icon_skull_1 no_progress_values: true }
+achievement saltclaw_grotto_tidecaller_brekk: { sort_key: 2 category: .saltclaw_grotto string: "Tidecaller Brekk" description: "Slay Tidecaller Brekk." points: 10 priority: 0 kill_trigger: saltclaw_grotto_tidecaller_brekk icon: icon_skull_1 no_progress_values: true }
+achievement saltclaw_grotto_gorvash_the_shellbreaker: { sort_key: 3 category: .saltclaw_grotto string: "Gorvash the Shellbreaker" description: "Slay Gorvash the Shellbreaker." points: 10 priority: 0 kill_trigger: saltclaw_grotto_gorvash_the_shellbreaker icon: icon_skull_1 no_progress_values: true }
+achievement saltclaw_grotto_queen_skarra: { sort_key: 4 category: .saltclaw_grotto string: "Queen Skarra" description: "Slay Queen Skarra." points: 10 priority: 0 kill_trigger: saltclaw_grotto_queen_skarra icon: icon_skull_1 no_progress_values: true }
+
+achievement saltclaw_grotto_brinecoil: { sort_key: 6 category: .saltclaw_grotto string: "Something in the Water" description: "Fish up Brinecoil and slay it." points: 10 priority: 0 kill_trigger: saltclaw_grotto_brinecoil icon: icon_tentacle no_progress_values: true }
+
+achievement saltclaw_grotto: { sort_key: 5 category: .saltclaw_grotto string: "Saltclaw Grotto" description: "Finish Saltclaw Grotto." points: 20 need_achievements: [ saltclaw_grotto_snapjaw saltclaw_grotto_tidecaller_brekk saltclaw_grotto_gorvash_the_shellbreaker saltclaw_grotto_queen_skarra ] icon: icon_crab_claw_1 }
+
+achievement saltclaw_grotto_snapjaw_heroic: { sort_key: 11 category: .saltclaw_grotto string: "Heroic: Snapjaw" description: "Slay Snapjaw on Heroic Difficulty." points: 10 priority: 0 heroic: true kill_trigger: saltclaw_grotto_snapjaw icon: icon_skull_4 no_progress_values: true }
+achievement saltclaw_grotto_tidecaller_brekk_heroic: { sort_key: 12 category: .saltclaw_grotto string: "Heroic: Tidecaller Brekk" description: "Slay Tidecaller Brekk on Heroic Difficulty." points: 10 priority: 0 heroic: true kill_trigger: saltclaw_grotto_tidecaller_brekk icon: icon_skull_4 no_progress_values: true }
+achievement saltclaw_grotto_gorvash_the_shellbreaker_heroic: { sort_key: 13 category: .saltclaw_grotto string: "Heroic: Gorvash the Shellbreaker" description: "Slay Gorvash the Shellbreaker on Heroic Difficulty." points: 10 priority: 0 heroic: true kill_trigger: saltclaw_grotto_gorvash_the_shellbreaker icon: icon_skull_4 no_progress_values: true }
+achievement saltclaw_grotto_queen_skarra_heroic: { sort_key: 14 category: .saltclaw_grotto string: "Heroic: Queen Skarra" description: "Slay Queen Skarra on Heroic Difficulty." points: 10 priority: 0 heroic: true kill_trigger: saltclaw_grotto_queen_skarra icon: icon_skull_4 no_progress_values: true }
+
+achievement saltclaw_grotto_brinecoil_heroic: { sort_key: 16 category: .saltclaw_grotto string: "Heroic: Something in the Water" description: "Fish up Brinecoil and slay it on Heroic Difficulty." points: 10 priority: 0 heroic: true kill_trigger: saltclaw_grotto_brinecoil icon: icon_tentacle_2 no_progress_values: true }
+
+achievement saltclaw_grotto_heroic: { sort_key: 15 category: .saltclaw_grotto string: "Heroic: Saltclaw Grotto" description: "Finish Saltclaw Grotto on Heroic Difficulty." points: 20 need_achievements: [ saltclaw_grotto_snapjaw_heroic saltclaw_grotto_tidecaller_brekk_heroic saltclaw_grotto_gorvash_the_shellbreaker_heroic saltclaw_grotto_queen_skarra_heroic ] icon: icon_crab_claw_1 }

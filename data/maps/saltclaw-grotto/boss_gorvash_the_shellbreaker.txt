@@ -1,0 +1,192 @@
+############################################################
+# Loot
+
+loot_group .gorvash_the_shellbreaker: {}
+loot_group .gorvash_the_shellbreaker_heroic: {}
+
+loot_table .gorvash_the_shellbreaker:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .gorvash_the_shellbreaker } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]
+}
+
+loot_table .gorvash_the_shellbreaker_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{}
+		  map_message saltclaw_grotto: "Gorvash the Shellbreaker will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .gorvash_the_shellbreaker_heroic } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]
+}
+
+# Placeholder items
+
+{
+	${
+		_rarity: rare
+		_level: 11
+		_loot_group: .gorvash_the_shellbreaker
+	}
+
+	item saltclaw_grotto_9: !BOSS_DROP_LEGS
+	{
+		_string: "Shellbreaker Legplates"
+		_type: armor_plate
+		_icon: icon_mail_legs_1
+		_strength: 3
+		_constitution: 2
+	}
+
+	item saltclaw_grotto_10: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Spined Carapace Mantle"
+		_type: armor_mail
+		_icon: icon_mail_shoulders_1
+		_dexterity: 2
+		_strength: 1
+		_constitution: 1
+	}
+
+	item saltclaw_grotto_11: !BOSS_DROP_SHIELD
+	{
+		_string: "Gorvash's Shell"
+		_icon: icon_shield_2
+		_strength: 1
+		_constitution: 2
+		_budget_bias: -5
+		_block: 1
+	}
+
+	item saltclaw_grotto_12: !BOSS_DROP_FINGER
+	{
+		_string: "Band of Polished Coral"
+		_icon: icon_ring_1
+		_dexterity: 2
+		_constitution: 1
+	}
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .gorvash_the_shellbreaker_heroic
+		_heroic: true
+	}
+
+	item saltclaw_grotto_9_heroic: !BOSS_DROP_LEGS
+	{
+		_string: "Shellbreaker Legplates"
+		_type: armor_plate
+		_icon: icon_mail_legs_1
+		_strength: 3
+		_constitution: 2
+	}
+
+	item saltclaw_grotto_10_heroic: !BOSS_DROP_SHOULDERS
+	{
+		_string: "Spined Carapace Mantle"
+		_type: armor_mail
+		_icon: icon_mail_shoulders_1
+		_dexterity: 2
+		_strength: 1
+		_constitution: 1
+	}
+
+	item saltclaw_grotto_11_heroic: !BOSS_DROP_SHIELD
+	{
+		_string: "Gorvash's Shell"
+		_icon: icon_shield_2
+		_strength: 1
+		_constitution: 2
+		_budget_bias: -5
+		_block: 1
+	}
+
+	item saltclaw_grotto_12_heroic: !BOSS_DROP_FINGER
+	{
+		_string: "Band of Polished Coral"
+		_icon: icon_ring_1
+		_dexterity: 2
+		_constitution: 1
+	}
+}
+
+############################################################
+# Boss
+
+zone .gorvash_the_shellbreaker:
+{
+}
+
+encounter .gorvash_the_shellbreaker:
+{
+	main_entities: [ saltclaw_grotto_gorvash_the_shellbreaker ]
+}
+
+entity saltclaw_grotto_gorvash_the_shellbreaker: !NPC
+{
+	_string: "Gorvash the Shellbreaker"
+	_level: 11
+	_elite: true
+	_faction: crabmen
+	_sprite: crab_monster_boss_3
+	_sprite_dead: crab_monster_boss_3_dead
+	_weapon_damage: 1.5
+	_resource_health: 8
+	_loot_table: .gorvash_the_shellbreaker
+	_creature_type: humanoid
+	_encounter: .gorvash_the_shellbreaker
+	_zone: .gorvash_the_shellbreaker
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_heroic_weapon_damage: 3.9
+	_heroic_resource_health: 11.5
+	_loot_table_heroic: .gorvash_the_shellbreaker_heroic
+
+	_abilities:
+	[	
+		{ id: npc_charge_rend target: random_player requirement self<must_have_less_health_than>: 60 }
+		{ id: npc_mortal_strike_non_instant }
+		{ id: npc_attack }
+	]
+
+	_in_combat_barks:
+	[
+		{ type: say text: "Gorvash crush your little shell!" flags: [ no_chat_bubble ] }
+	]
+
+	_dead_barks:
+	[
+		{ type: say text: "Gorvash... cracked..." flags: [ no_chat_bubble ] }
+	]
+}
+
+map_trigger .gorvash_the_shellbreaker_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .gorvash_the_shellbreaker:
+{
+	entity saltclaw_grotto_gorvash_the_shellbreaker:
+	{
+		spawn_condition:
+		{
+			if_not: .gorvash_the_shellbreaker_killed
+		}
+	}
+}

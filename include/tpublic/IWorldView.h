@@ -84,6 +84,8 @@ namespace tpublic
 		virtual bool								WorldViewIsSeasonalEventActive(
 														uint32_t				aSeasonalEventId) const = 0;
 		virtual bool								WorldViewIsHeroic() const = 0;
+		virtual bool								WorldViewIsMapTriggerSet(
+														uint32_t				aMapTriggerId) const = 0;
 
 	};
 

@@ -68,7 +68,7 @@ map_entity_spawn mining:
 	entity mining_iron_vein: { level: [ 4 12 ] weight: 5 init_state: default } 
 	entity mining_azuryte_vein: { level: [ 11 16 ] weight: 5 init_state: default } 
 	entity mining_mithril_vein: { level: [ 14 19 ] weight: 5 init_state: default } 
-	entity mining_brontium_vein: { level: [ 17 30 ] weight: 5 init_state: default } 
+	entity mining_brontium_vein: { level: [ 17 32 ] weight: 5 init_state: default } 
 	
 	point_of_interest: true
 }
@@ -83,7 +83,7 @@ map_entity_spawn herbalism:
 	entity herbalism_mistflower: { level: [ 4 12 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_emberbloom: { level: [ 11 16 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_sunweave: { level: [ 14 19 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
-	entity herbalism_sylmarel: { level: [ 17 28 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
+	entity herbalism_sylmarel: { level: [ 17 32 ] weight: 4 init_state: default must_not_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_frostbloom: { level: [ 11 30 ] weight: 4 init_state: default must_have_tile_flags: [ tile_snow ] } 
 	entity herbalism_sand_orchid: { level: [ 28 30 ] weight: 4 init_state: default must_have_tile_flags: [ tile_desert ] } 
 	

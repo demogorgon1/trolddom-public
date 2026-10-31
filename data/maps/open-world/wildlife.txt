@@ -99,7 +99,20 @@ item .coarse_hair:
 loot_table .deer: !WILDLIFE_LOOT_TABLE { _loot_group: .deer_drops }
 loot_table .boar: !WILDLIFE_LOOT_TABLE { _loot_group: .boar_drops }
 loot_table .wolf: !WILDLIFE_LOOT_TABLE { _loot_group: .wolf_drops }
-loot_table .bear: !WILDLIFE_LOOT_TABLE { _loot_group: .bear_drops }
+loot_table .bear:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }
+			possibility: { weight: 1 loot_group: .bear_drops }
+		}
+
+		{ possibility: { loot_group: .klaus_1_quest_item requirement self<must_have_active_quest>: .klaus_1 } }
+
+		!WORLD_DROPS{}
+	]
+}
 
 npc_behavior_state .wildlife:
 {

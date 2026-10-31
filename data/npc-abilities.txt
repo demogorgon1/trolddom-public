@@ -101,6 +101,15 @@ particle_system npc_firebolt:
 		scale: 0.4
 		count: 1
 	}
+	
+	particle:
+	{
+		sprites: [ effect_flame_gradient_1 ] 
+		flags: [ blend_add ]
+		color_mod: [ 150 100 0 ]
+		alpha: 0.25
+		ribbon: { duration: 200 width: 0.15 }
+	}									
 }
 
 ability npc_firebolt:
@@ -294,6 +303,15 @@ ability npc_frostbolt:
 			scale: 0.4
 			count: 1
 		}
+		
+		particle:
+		{
+			sprites: [ effect_flame_gradient_1 ] 
+			flags: [ blend_add ]
+			color_mod: [ 0 0 150 ]
+			alpha: 0.25
+			ribbon: { duration: 200 width: 0.15 }
+		}										
 	}
 	
 	direct_effect damage:
@@ -319,6 +337,69 @@ ability npc_frostbolt:
 	}
 }
 
+ability npc_frostbolt_stacking:
+{
+	string: "Frostbolt"
+	range: 8
+	cast_time: 20
+	cooldowns: [ global spell_frost_lockout ]
+	cooldown: $cooldown { duration: 70 }
+	flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+	states: [ in_combat ]
+	icon: icon_ice_lance
+	speed: 6
+	resource_cost mana: 8
+
+	projectile: $particle_system 
+	{
+		particle:
+		{
+			sprites: [ effect_frostbolt ]
+			flags: [ attached no_rotation face_target ]
+			scale: 0.4
+			count: 1
+		}
+		
+		particle:
+		{
+			sprites: [ effect_flame_gradient_1 ] 
+			flags: [ blend_add ]
+			color_mod: [ 0 0 150 ]
+			alpha: 0.25
+			ribbon: { duration: 200 width: 0.15 }
+		}										
+	}
+	
+	direct_effect damage:
+	{
+		flags: [ can_be_critical is_magical ]
+		damage_type: frost
+		function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
+		spread: !DEFAULT_SPREAD{}						
+	}
+		
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Frozen"
+			description: "Taking increased frost damage."
+			icon: icon_freeze_for_all
+			type: debuff
+			duration: 600
+			flags: [ unique magic ]			
+			aura_effect damage_input_modifier: 
+			{
+				type_mask: [ frost ]
+				multiplier: 1.50
+			}
+			max_stack: 10
+			flags: [ effects_as_charges ]			
+		}
+	}
+	
+}
+
 ability npc_frostbolt_2:
 {
 	string: "Frostbolt"
@@ -341,6 +422,15 @@ ability npc_frostbolt_2:
 			scale: 0.4
 			count: 1
 		}
+		
+		particle:
+		{
+			sprites: [ effect_flame_gradient_1 ] 
+			flags: [ blend_add ]
+			color_mod: [ 0 0 150 ]
+			alpha: 0.25
+			ribbon: { duration: 200 width: 0.15 }
+		}			
 	}
 	
 	direct_effect damage:

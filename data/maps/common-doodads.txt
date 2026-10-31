@@ -166,6 +166,10 @@ sprites:
 	
 	size: { width: 32 height: 32 }
 	sprite doodad_tent_large: { flags: [ ] }
+	sprite doodad_mudhut: { flags: [ ] }
+	
+	cursor: { position: [ 0 160 ] }
+	size: { width: 80 height: 80 } sprite shipwreck: { flags: [ tile_walkable ] }
 }
 
 doodad orange_tentacle:
@@ -311,6 +315,12 @@ doodad ship:
 	map_palette<"x">: { occupy: true } map: [ "x" ]
 }
 
+doodad shipwreck:
+{
+	sprites: [ shipwreck ]
+	map_palette<"x">: { occupy: true } map: [ "x" ]
+}
+
 doodad large_statue:
 {
 	sprites: [ large_statue ]
@@ -403,6 +413,13 @@ doodad spines_2x2:
 doodad tent_large:
 {
 	sprites: [ doodad_tent_large ]
+	map_palette<"x">: { occupy: true } map: [ "xx"
+                                              "xx" ]
+}
+
+doodad mudhut:
+{
+	sprites: [ doodad_mudhut ]
 	map_palette<"x">: { occupy: true } map: [ "xx"
                                               "xx" ]
 }

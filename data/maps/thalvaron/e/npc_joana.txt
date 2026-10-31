@@ -9,6 +9,7 @@ dialogue_screen .joana:
 	[
 		{ quest: .joana_1 }
 		{ quest<offer_only>: thalvaron_joana_2 }
+		{ quest: .joana_3 }
 		{ quest<completion_only>: .erik_the_bleak_2 }
 		{ quest<completion_only>: thalvaron_father_tobias_3 } 
 	]
@@ -164,7 +165,66 @@ quest thalvaron_joana_2:
 	]
 
 	level: 29
-	objectives: [ .joana_2_a .joana_2_b .joana_2_c ]	
+	objectives: [ .joana_2_a .joana_2_b .joana_2_c ]
 	prerequisites: [ .joana_1 ]
 	reward_one_item: [ .joana_2_a .joana_2_b ]
+}
+
+############################################################
+# Quest 3
+
+objective .joana_3:
+{
+	string: "Lim'Drok Destroyed"
+
+	maps: [ thalvaron ]
+
+	kill_npc:
+	{
+		entities: [ thalvaron_ashira_limdrok ]
+		count: 1
+	}
+}
+
+{
+	${ _level: 31 }
+	item .joana_3_a: !QUEST_REWARD_2H_STAFF{ _string: "Staff of the Drowned Wizard" _icon: icon_staff_11 _constitution: 1 _wisdom: 3 _spell_damage: 4 }
+	item .joana_3_b: !QUEST_REWARD_HANDS{ _string: "Lightbound Gauntlets" _icon: icon_plate_hands_1 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .joana_3_c: !QUEST_REWARD_WRISTS{ _string: "Bracers of the Sea Cave" _icon: icon_mail_bracers_2 _constitution: 1 _dexterity: 3 _type: armor_mail }
+}
+
+quest .joana_3:
+{
+	string: "The Wizard of Lim'Drok"
+
+	text:
+	[
+		"Pass through the Caves of Lim'Drok in Ashira to the sea, find Lim'Drok in the small cave on the shore and destroy him."
+	]
+
+	description:
+	[
+		"The dead of Kareth aren't the only ones walking. Word has come from Ashira, west of here, beyond the mountains. The trolls there live in a cave they call Lim'Drok, and for once the name means something."
+		"Lim'Drok was a wizard, and he was the trolls' master long before the city of Ashira fell. He has been dead for centuries. Now the trolls are carving idols and making offerings again, and the fishermen"
+		"say there's a cold light in a cave by the sea.\n"
+		"\n"
+		"Go through the troll caves until you reach the sea. On the shore you'll find a smaller cave. Lim'Drok is in there. Whoever woke him up can find him again, so don't leave enough of him to wake."
+	]
+
+	progress:
+	[
+		"Is it done?"
+	]
+
+	completion:
+	[
+		"Then he is back in the grave where he belongs. May the Light keep him there.\n"
+		"\n"
+		"Someone raised him, though, and a dead wizard doesn't raise himself. Keep your eyes open while you're in Ashira."
+	]
+
+	objectives: [ .joana_3 ]
+	prerequisites: [ .joana_1 ]
+	reward_one_item: [ .joana_3_a .joana_3_b .joana_3_c ]
+	level: 31
 }

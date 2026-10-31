@@ -1,42 +1,8 @@
+# Obsolete, replaced by the shared "attack". Kept so old references (logs etc.) still resolve.
 ability sorcerer_attack:
 {
 	string: "Attack"
-	description: "Deals $damage$ damage to target."
-	flags: [ melee offensive attack target_other target_hostile can_be_dodged can_be_parried can_be_blocked can_miss use_weapon_icon extra_off_hand ]	
-	states: [ default in_combat ]
-	delay: 3
 	icon: icon_fist
-	
-	direct_effect damage:
-	{
-		flags: [ can_be_critical ]
-		damage_type: physical			
-		function: { expression: x x: weapon }															
-	}
-	
-	direct_effect modify_resource:
-	{
-		must_have_ability_modifier: charging_combat_1
-		resource: mana
-		target_self: true
-		function: { expression: a_mul_x a: 0.03 x: mana_base }
-	}
-	
-	direct_effect modify_resource:
-	{
-		must_have_ability_modifier: charging_combat_2
-		resource: mana
-		target_self: true
-		function: { expression: a_mul_x a: 0.06 x: mana_base }
-	}
-
-	direct_effect modify_resource:
-	{
-		must_have_ability_modifier: charging_combat_3
-		resource: mana
-		target_self: true
-		function: { expression: a_mul_x a: 0.09 x: mana_base }
-	}	
 }
 
 class sorcerer:
@@ -116,8 +82,8 @@ class sorcerer:
 			
 	color_1: [ 0 59 210 ] 
 	color_2: [ 0 10 64 ]
-	default_attack: sorcerer_attack
-	default_action_bar: [ sorcerer_attack firebolt !DEFAULT_ABILITIES{} ]
+	default_attack: attack
+	default_action_bar: [ attack firebolt !DEFAULT_ABILITIES{} ]
 	talent_trees: [ sorcerer_arcane sorcerer_elemental sorcerer_battle_mage ]
 
 	item_types: [ armor_cloth weapon_1h_sword weapon_1h_knife weapon_2h_staff ]
@@ -148,7 +114,7 @@ class sorcerer:
 
 	level_progression:
 	[
-		{ level: 1 unlock_abilities: [ sorcerer_attack firebolt !DEFAULT_ABILITIES{} ] stats: { dexterity: 2 strength: 2 wisdom: 6 constitution: 4 spirit: 6 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
+		{ level: 1 unlock_abilities: [ attack firebolt !DEFAULT_ABILITIES{} ] stats: { dexterity: 2 strength: 2 wisdom: 6 constitution: 4 spirit: 6 } resource health: { add_max: 60 } resource mana: { add_max: 60 } add_unarmed_weapon_damage: [ 2 4 ] }		
 		{ level: 2 unlock_abilities: [ ice_lance ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 3 unlock_abilities: [ power_shield ] stats: { dexterity: 1 strength: 1 spirit: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
 		{ level: 4 unlock_abilities: [ fireball ] stats: { wisdom: 1 constitution: 1 } resource health: { add_max: !HEALTH_PER_LEVEL{} } resource mana: { add_max: 6 } }		
@@ -193,6 +159,8 @@ class sorcerer:
 		strength: 1.0
 		constitution: 0.25
 	}		
+
+	replace_ability sorcerer_attack: attack
 }
 
 ###############################################################################
@@ -243,7 +211,7 @@ ability_list sorcerer_ranged:
 	{
 	}
 
-	ability sorcerer_attack:
+	ability attack:
 	{
 	}
 }
@@ -258,7 +226,7 @@ ability_list sorcerer_melee:
 	{
 	}
 
-	ability sorcerer_attack:
+	ability attack:
 	{
 	}
 }

@@ -9,6 +9,7 @@ dialogue_screen .quizlob:
 	[	
 		{ quest: .quizlob_1 }
 		{ quest: .quizlob_2 }
+		{ quest: .quizlob_3 }
 	]
 }
 
@@ -122,4 +123,63 @@ quest .quizlob_2:
 	prerequisites: [ .quizlob_1 ]
 	reward_all_items: [ .quizlob_2_a ]
 	level: 30
+}
+
+############################################################
+# Quest 3
+
+objective .quizlob_3:
+{
+	string: "Spine Beasts Killed"
+
+	maps: [ thalvaron ]
+
+	kill_npc:
+	{
+		entities: [ thalvaron_jungle_beast_31 ]
+		count: 6
+	}
+}
+
+{
+	${ _level: 31 }
+	item .quizlob_3_a: !QUEST_REWARD_SHOULDERS{ _string: "Spine Beast Pauldrons" _icon: icon_plate_shoulders_1 _constitution: 2 _strength: 3 _type: armor_plate }
+	item .quizlob_3_b: !QUEST_REWARD_WAIST{ _string: "Bridge Crosser's Belt" _icon: icon_mail_belt_2 _constitution: 1 _dexterity: 3 _type: armor_mail }
+	item .quizlob_3_c: !QUEST_REWARD_FINGER{ _string: "Ring of Pointing" _icon: icon_ring_13 _constitution: 1 _wisdom: 2 _spell_damage: 2 }
+}
+
+quest .quizlob_3:
+{
+	string: "Spine Beasts?"
+
+	text:
+	[
+		"Quizlob probably wants you to kill some Spine Beasts in the jungle across the bridge and return to him when done."
+	]
+
+	description:
+	[
+		"*Points at crude drawing of something with a lot of spikes*\n"
+		"\n"
+		"*Points north east, across the bridge*\n"
+		"\n"
+		"*Points at a hole in his hut wall that looks about the size of a Spine Beast*"
+	]
+
+	progress:
+	[
+		"J'urk? Spiny'ork?"
+	]
+
+	completion:
+	[
+		"Blaz'rok! Blaz'rok!\n"
+		"\n"
+		"*Patches the hole in the wall*"
+	]
+
+	objectives: [ .quizlob_3 ]
+	prerequisites: [ .quizlob_2 ]
+	reward_one_item: [ .quizlob_3_a .quizlob_3_b .quizlob_3_c ]
+	level: 31
 }

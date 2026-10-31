@@ -390,6 +390,15 @@ particle_system witch_bolt:
 		scale: 0.4
 		count: 1		
 	}
+	
+	particle:
+	{
+		sprites: [ effect_flame_gradient_1 ] 
+		flags: [ blend_add ]
+		color_mod: [ 0 160 0 ]
+		alpha: 0.25
+		ribbon: { duration: 200 width: 0.15 }
+	}		
 }
 
 ###############################################################################

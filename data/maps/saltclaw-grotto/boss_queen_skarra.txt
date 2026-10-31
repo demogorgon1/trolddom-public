@@ -1,0 +1,195 @@
+############################################################
+# Loot
+
+loot_group .queen_skarra: {}
+loot_group .queen_skarra_heroic: {}
+
+loot_table .queen_skarra:
+{
+	slots:
+	[
+		{ possibility: { loot_group: .queen_skarra } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]
+}
+
+loot_table .queen_skarra_heroic:
+{
+	slots:
+	[
+		{ possibility: { loot_group: emblem_of_triumph loot_cooldown: $loot_cooldown { seconds: !EMBLEM_OF_TRIUMPH_LOOT_COOLDOWN_SECONDS{}
+		  map_message saltclaw_grotto: "Queen Skarra will not drop Emblem of Triumph for {}." } } }
+		{ possibility: { loot_group: .queen_skarra_heroic } }
+		!WORLD_DROPS{}
+		!WORLD_DROPS_CLOTH{}
+	]
+}
+
+# Placeholder items
+
+{
+	${
+		_rarity: rare
+		_level: 11
+		_loot_group: .queen_skarra
+	}
+
+	item saltclaw_grotto_13: !BOSS_DROP_CHEST
+	{
+		_string: "Broodmother's Carapace"
+		_type: armor_mail
+		_icon: icon_mail_shirt_2
+		_dexterity: 3
+		_strength: 1
+		_constitution: 2
+	}
+
+	item saltclaw_grotto_14: !BOSS_DROP_CHEST
+	{
+		_string: "Robes of the Saltclaw Queen"
+		_type: armor_cloth
+		_icon: icon_robe_4
+		_wisdom: 3
+		_spell_damage: 2
+		_constitution: 1
+	}
+
+	item saltclaw_grotto_15: !BOSS_DROP_BACK
+	{
+		_string: "Cloak of Woven Seaweed"
+		_icon: icon_cape_1
+		_constitution: 2
+		_strength: 1
+		_dexterity: 1
+	}
+
+	item saltclaw_grotto_16: !BOSS_DROP_2H_AXE
+	{
+		_string: "Royal Pincer Axe"
+		_icon: icon_axe_9
+		_strength: 3
+		_constitution: 2
+		_weapon_cooldown: 30
+	}
+}
+
+{
+	${
+		_rarity: rare
+		_level: 30
+		_item_level: 32
+		_level_range: 30
+		_loot_group: .queen_skarra_heroic
+		_heroic: true
+	}
+
+	item saltclaw_grotto_13_heroic: !BOSS_DROP_CHEST
+	{
+		_string: "Broodmother's Carapace"
+		_type: armor_mail
+		_icon: icon_mail_shirt_2
+		_dexterity: 3
+		_strength: 1
+		_constitution: 2
+	}
+
+	item saltclaw_grotto_14_heroic: !BOSS_DROP_CHEST
+	{
+		_string: "Robes of the Saltclaw Queen"
+		_type: armor_cloth
+		_icon: icon_robe_4
+		_wisdom: 3
+		_spell_damage: 2
+		_constitution: 1
+	}
+
+	item saltclaw_grotto_15_heroic: !BOSS_DROP_BACK
+	{
+		_string: "Cloak of Woven Seaweed"
+		_icon: icon_cape_1
+		_constitution: 2
+		_strength: 1
+		_dexterity: 1
+	}
+
+	item saltclaw_grotto_16_heroic: !BOSS_DROP_2H_AXE
+	{
+		_string: "Royal Pincer Axe"
+		_icon: icon_axe_9
+		_strength: 3
+		_constitution: 2
+		_weapon_cooldown: 30
+	}
+}
+
+############################################################
+# Boss
+
+zone .queen_skarra:
+{
+}
+
+encounter .queen_skarra:
+{
+	main_entities: [ saltclaw_grotto_queen_skarra ]
+}
+
+entity saltclaw_grotto_queen_skarra: !NPC
+{
+	_string: "Queen Skarra"
+	_level: 11
+	_elite: true
+	_faction: crabmen
+	_sprite: crab_monster_boss_2
+	_sprite_dead: crab_monster_boss_2_dead
+	_weapon_damage: 1.5
+	_resource_health: 9
+	_loot_table: .queen_skarra
+	_creature_type: humanoid
+	_encounter: .queen_skarra
+	_zone: .queen_skarra
+	_out_of_zone_action: { evade: true }
+	_immune_to_stun: true
+	_immune_to_immobilize: true
+	_immune_to_slow: true
+
+	_heroic_weapon_damage: 4.1
+	_heroic_resource_health: 13
+	_loot_table_heroic: .queen_skarra_heroic
+
+	_abilities:
+	[
+		{ id: npc_acid_spit target: random_player requirement self<must_have_less_health_than>: 90 }
+		{ id: npc_firebolt target: random_player requirement self<must_have_less_health_than>: 80 }
+		{ id: npc_rend }
+		{ id: npc_attack }
+	]
+
+	_in_combat_barks:
+	[
+		{ type: say text: "You dare enter my grotto?" flags: [ no_chat_bubble ] }
+	]
+
+	_dead_barks:
+	[
+		{ type: say text: "My brood... will remember..." flags: [ no_chat_bubble ] }
+	]
+}
+
+map_trigger .queen_skarra_killed:
+{
+	persistent: true
+	default: false
+}
+
+map_entity_spawn .queen_skarra:
+{
+	entity saltclaw_grotto_queen_skarra:
+	{
+		spawn_condition:
+		{
+			if_not: .queen_skarra_killed
+		}
+	}
+}

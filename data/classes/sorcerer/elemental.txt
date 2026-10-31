@@ -699,6 +699,15 @@ particle_system firebolt:
 		scale: 0.4
 		count: 1		
 	}
+	
+	particle:
+	{
+		sprites: [ effect_flame_gradient_1 ] 
+		flags: [ blend_add ]
+		color_mod: [ 255 160 60 ]
+		alpha: 0.25
+		ribbon: { duration: 200 width: 0.15 }
+	}	
 }
 
 ###############################################################################
