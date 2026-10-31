@@ -45,7 +45,10 @@ namespace tpublic
 			enum Field
 			{
 				FIELD_ENTRIES,
-				FIELD_AVAILABLE_POINTS
+				FIELD_AVAILABLE_POINTS,
+				FIELD_HYBRID_REPLACED_TALENT_TREE_ID,
+				FIELD_HYBRID_TALENT_TREE_ID,
+				FIELD_HYBRID_CLASS_VERSION
 			};
 
 			static void
@@ -54,6 +57,60 @@ namespace tpublic
 			{
 				aSchema->DefineCustomObjectsNoSource<Entry>(FIELD_ENTRIES, offsetof(Talents, m_entries));
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_AVAILABLE_POINTS, NULL, offsetof(Talents, m_availablePoints));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HYBRID_REPLACED_TALENT_TREE_ID, NULL, offsetof(Talents, m_hybridReplacedTalentTreeId));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HYBRID_TALENT_TREE_ID, NULL, offsetof(Talents, m_hybridTalentTreeId));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HYBRID_CLASS_VERSION, NULL, offsetof(Talents, m_hybridClassVersion));
+			}
+
+			bool
+			IsHybrid() const
+			{
+				return m_hybridTalentTreeId != 0;
+			}
+
+			// The talent trees this character can use: the class' own trees, with the replaced one swapped for the hybrid tree
+			void
+			GetTalentTreeIds(
+				const std::vector<uint32_t>&	aClassTalentTreeIds,
+				std::vector<uint32_t>&			aOut) const
+			{
+				aOut.clear();
+				for(uint32_t talentTreeId : aClassTalentTreeIds)
+				{
+					if(IsHybrid() && talentTreeId == m_hybridReplacedTalentTreeId)
+						aOut.push_back(m_hybridTalentTreeId);
+					else
+						aOut.push_back(talentTreeId);
+				}
+			}
+
+			bool
+			CanUseTalentTree(
+				const std::vector<uint32_t>&	aClassTalentTreeIds,
+				uint32_t						aTalentTreeId) const
+			{
+				if(IsHybrid())
+				{
+					if(aTalentTreeId == m_hybridTalentTreeId)
+						return true;
+					if(aTalentTreeId == m_hybridReplacedTalentTreeId)
+						return false;
+				}
+
+				for(uint32_t talentTreeId : aClassTalentTreeIds)
+				{
+					if(talentTreeId == aTalentTreeId)
+						return true;
+				}
+				return false;
+			}
+
+			void
+			ClearHybrid()
+			{
+				m_hybridReplacedTalentTreeId = 0;
+				m_hybridTalentTreeId = 0;
+				m_hybridClassVersion = 0;
 			}
 
 			bool
@@ -129,11 +186,18 @@ namespace tpublic
 			{
 				m_entries.clear();
 				m_availablePoints = 0;
+				ClearHybrid();
 			}
 
 			// Public data
 			std::vector<Entry>			m_entries;
 			uint32_t					m_availablePoints = 0;
+
+			// Hybrid: one of the class' own talent trees replaced by a talent tree from another class. The other class'
+			// version is stored so that talents can be reset when it changes.
+			uint32_t					m_hybridReplacedTalentTreeId = 0;
+			uint32_t					m_hybridTalentTreeId = 0;
+			uint32_t					m_hybridClassVersion = 0;
 		};
 	}
 

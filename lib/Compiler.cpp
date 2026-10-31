@@ -36,6 +36,7 @@
 #include "JSONManifest.h"
 #include "MapImageOutput.h"
 #include "PostProcessAbilities.h"
+#include "PostProcessClasses.h"
 #include "PostProcessDoodads.h"
 #include "PostProcessEntities.h"
 #include "PostProcessItems.h"
@@ -299,6 +300,7 @@ namespace tpublic
 			PostProcessEntities::Run(m_manifest);
 			PostProcessWordGenerators::Run(m_manifest);
 			PostProcessAbilities::Run(m_manifest);
+			PostProcessClasses::Run(m_manifest);
 			PostProcessSprites::Run(m_manifest);
 			PostProcessItems::Run(m_manifest, m_sourceContext.m_persistentIdTable.get());
 			PostProcessDoodads::Run(m_manifest);

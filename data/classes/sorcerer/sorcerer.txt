@@ -86,6 +86,59 @@ class sorcerer:
 	default_action_bar: [ attack firebolt !DEFAULT_ABILITIES{} ]
 	talent_trees: [ sorcerer_arcane sorcerer_elemental sorcerer_battle_mage ]
 
+	hybrid_talent_trees:
+	{
+		fighter_combat:   { string: "Spellblade" item_types: [ armor_mail ] }
+		priest_healing:   { string: "Sage" }
+		witch_demonology: { string: "Summoner" }
+		paladin_guardian: { string: "Spellwarden" item_types: [ shield ] }
+	}
+
+	hybrid:
+	{
+		systems: [ mana_regen ]
+		stats_conversion:
+		{
+			wis_to_mana: [ 10 1 ]
+			spi_to_mana_regen_per_5_sec: [ 4 3 ]
+			wis_to_mag_crit: [ 1 25 ]
+			wis_to_spell_damage: [ 1 6 ]
+		}
+		level_progression:
+		[
+			{ level: 1 resource mana: { add_max: 60 } }
+			{ level: 2 resource mana: { add_max: 6 } }
+			{ level: 3 resource mana: { add_max: 6 } }
+			{ level: 4 resource mana: { add_max: 6 } }
+			{ level: 5 resource mana: { add_max: 6 } }
+			{ level: 6 resource mana: { add_max: 6 } }
+			{ level: 7 resource mana: { add_max: 6 } }
+			{ level: 8 resource mana: { add_max: 6 } }
+			{ level: 9 resource mana: { add_max: 6 } }
+			{ level: 10 resource mana: { add_max: 6 } }
+			{ level: 11 resource mana: { add_max: 6 } }
+			{ level: 12 resource mana: { add_max: 6 } }
+			{ level: 13 resource mana: { add_max: 6 } }
+			{ level: 14 resource mana: { add_max: 6 } }
+			{ level: 15 resource mana: { add_max: 6 } }
+			{ level: 16 resource mana: { add_max: 6 } }
+			{ level: 17 resource mana: { add_max: 6 } }
+			{ level: 18 resource mana: { add_max: 6 } }
+			{ level: 19 resource mana: { add_max: 6 } }
+			{ level: 20 resource mana: { add_max: 6 } }
+			{ level: 21 resource mana: { add_max: 6 } }
+			{ level: 22 resource mana: { add_max: 6 } }
+			{ level: 23 resource mana: { add_max: 6 } }
+			{ level: 24 resource mana: { add_max: 6 } }
+			{ level: 25 resource mana: { add_max: 6 } }
+			{ level: 26 resource mana: { add_max: 6 } }
+			{ level: 27 resource mana: { add_max: 6 } }
+			{ level: 28 resource mana: { add_max: 6 } }
+			{ level: 29 resource mana: { add_max: 6 } }
+			{ level: 30 resource mana: { add_max: 6 } }
+		]
+	}
+
 	item_types: [ armor_cloth weapon_1h_sword weapon_1h_knife weapon_2h_staff ]
 	
 	start_map open_world: [ ]

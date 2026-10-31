@@ -155,6 +155,28 @@ class fighter:
 	default_attack: attack
 	default_action_bar: [ attack strike !DEFAULT_ABILITIES{} ]
 	talent_trees: [ fighter_combat fighter_subtlety fighter_protection ]
+
+	hybrid_talent_trees:
+	{
+		priest_healing:   { string: "Holy Fighter" }
+		sorcerer_arcane:  { string: "Arcane Fighter" }
+		witch_necromancy: { string: "Death Knight" }
+		paladin_healer: { string: "Sanctifier" }
+	}
+
+	hybrid:
+	{
+		systems: [ rage ]
+		stats_conversion:
+		{
+			str_to_attack_power: [ 4 1 ]
+			str_to_block_value: [ 1 20 ]
+		}
+		level_progression:
+		[
+			{ level: 1 unlock_abilities: [ strike ] resource rage: { add_max: 100 } }
+		]
+	}
 	
 	item_types: [ armor_cloth armor_mail armor_plate weapon_1h_sword weapon_1h_mace weapon_1h_axe weapon_1h_knife
 	              weapon_2h_sword weapon_2h_mace weapon_2h_axe weapon_2h_staff shield ranged_bow ranged_crossbow ]

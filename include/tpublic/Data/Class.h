@@ -707,6 +707,14 @@ namespace tpublic
 					m_value += aOther.m_value;
 				}
 
+				void
+				CombineMax(
+					const StatsConversionEntry&	aOther)
+				{
+					if(aOther.m_value > m_value)
+						m_value = aOther.m_value;
+				}
+
 				bool
 				IsSet() const
 				{
@@ -834,6 +842,31 @@ namespace tpublic
 					return true;
 				}
 
+				// For each conversion, keeps the highest of the two
+				void
+				CombineMax(
+					const StatsConversion&	aOther)
+				{
+					m_dexToRangedDps.CombineMax(aOther.m_dexToRangedDps);
+					m_dexRangedDamageMin.CombineMax(aOther.m_dexRangedDamageMin);
+					m_dexRangedDamageMax.CombineMax(aOther.m_dexRangedDamageMax);
+					m_dexToPhysCrit.CombineMax(aOther.m_dexToPhysCrit);
+					m_dexToDodge.CombineMax(aOther.m_dexToDodge);
+					m_dexToParry.CombineMax(aOther.m_dexToParry);
+					m_strToParry.CombineMax(aOther.m_strToParry);
+					m_wisToMagCrit.CombineMax(aOther.m_wisToMagCrit);
+					m_conToHealth.CombineMax(aOther.m_conToHealth);
+					m_wisToMana.CombineMax(aOther.m_wisToMana);
+					m_spiToHealthRegen.CombineMax(aOther.m_spiToHealthRegen);
+					m_spiToManaRegenPer5Sec.CombineMax(aOther.m_spiToManaRegenPer5Sec);
+					m_strToBlockValue.CombineMax(aOther.m_strToBlockValue);
+					m_wisToSpellDamage.CombineMax(aOther.m_wisToSpellDamage);
+					m_wisToHealing.CombineMax(aOther.m_wisToHealing);
+					m_attackPowerToDps.CombineMax(aOther.m_attackPowerToDps);
+					m_strToAttackPower.CombineMax(aOther.m_strToAttackPower);
+					m_dexToAttackPower.CombineMax(aOther.m_dexToAttackPower);
+				}
+
 				// Public data
 				StatsConversionEntry								m_dexToRangedDps;
 				StatsConversionEntry								m_dexRangedDamageMin;
@@ -853,6 +886,171 @@ namespace tpublic
 				StatsConversionEntry								m_attackPowerToDps;
 				StatsConversionEntry								m_strToAttackPower;
 				StatsConversionEntry								m_dexToAttackPower;
+			};
+
+			// A talent tree from another class that this class can take as a hybrid: what the hybrid is called, and what
+			// this particular combination gets on top of the donor class' 'hybrid' block.
+			struct HybridTalentTree
+			{
+				HybridTalentTree()
+				{
+
+				}
+
+				HybridTalentTree(
+					const SourceNode*		aSource)
+				{
+					m_talentTreeId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_TALENT_TREE, aSource->m_name.c_str());
+					m_debugInfo = aSource->m_debugInfo;
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "string")
+						{
+							m_string = aChild->GetString();
+						}
+						else if(aChild->m_name == "item_types")
+						{
+							std::vector<ItemType::Id> itemTypes;
+							aChild->GetIdArrayWithLookup<ItemType::Id, ItemType::INVALID_ID>(itemTypes, [&](
+								const char* aIdentifier) -> ItemType::Id
+							{
+								return ItemType::StringToId(aIdentifier);
+							});
+							for (ItemType::Id itemType : itemTypes)
+							{
+								uint32_t t = (uint32_t)itemType;
+								static_assert((uint32_t)ItemType::NUM_IDS <= 32);
+								m_itemTypesMask |= (1 << t);
+							}
+						}
+						else if(aChild->m_name == "stats_conversion")
+						{
+							m_statsConversion.FromSource(aChild);
+						}
+						else if(aChild->m_name == "level_progression")
+						{
+							m_levelProgression = std::make_unique<LevelProgression>(aChild->GetArray());
+						}
+						else if(aChild->m_name == "exclude_abilities")
+						{
+							aChild->GetIdArray(DataType::ID_ABILITY, m_excludeAbilities);
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
+						}
+					});
+
+					TP_VERIFY(!m_string.empty(), aSource->m_debugInfo, "'%s' has no 'string'.", aSource->m_name.c_str());
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInt(m_talentTreeId);
+					aStream->WriteString(m_string);
+					aStream->WritePOD(m_itemTypesMask);
+					m_statsConversion.ToStream(aStream);
+					aStream->WriteOptionalObjectPointer(m_levelProgression);
+					aStream->WriteUInts(m_excludeAbilities);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadUInt(m_talentTreeId))
+						return false;
+					if(!aStream->ReadString(m_string))
+						return false;
+					if(!aStream->ReadPOD(m_itemTypesMask))
+						return false;
+					if(!m_statsConversion.FromStream(aStream))
+						return false;
+					if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
+						return false;
+					if(!aStream->ReadUInts(m_excludeAbilities))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t											m_talentTreeId = 0;
+				std::string											m_string;
+				uint32_t											m_itemTypesMask = 0;		// Extra item types the hybrid can use
+				StatsConversion										m_statsConversion;			// Extra stats conversions, the highest is used
+				std::unique_ptr<LevelProgression>					m_levelProgression;			// Extra abilities (only abilities)
+				std::vector<uint32_t>								m_excludeAbilities;			// Abilities the hybrid would otherwise get from the donor class
+				std::optional<DataErrorHandling::DebugInfo>			m_debugInfo;				// Not serialized, only for error messages
+			};
+
+			// What any character with one of this class' talent trees as a hybrid tree gets: the class' resource, the
+			// systems and stats conversions it needs, and core abilities.
+			struct Hybrid
+			{
+				Hybrid()
+				{
+
+				}
+
+				Hybrid(
+					const SourceNode*		aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aMember)
+					{
+						if (aMember->m_name == "systems")
+						{
+							aMember->GetIdArrayWithLookup<uint32_t, System::INVALID_ID>(m_systems, [&](
+								const char* aIdentifier) -> uint32_t
+							{
+								return (uint32_t)System::StringToId(aIdentifier);
+							});
+						}
+						else if (aMember->m_name == "stats_conversion")
+						{
+							m_statsConversion.FromSource(aMember);
+						}
+						else if (aMember->m_name == "level_progression")
+						{
+							m_levelProgression = std::make_unique<LevelProgression>(aMember->GetArray());
+						}
+						else
+						{
+							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
+						}
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInts(m_systems);
+					m_statsConversion.ToStream(aStream);
+					aStream->WriteOptionalObjectPointer(m_levelProgression);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadUInts(m_systems))
+						return false;
+					if(!m_statsConversion.FromStream(aStream))
+						return false;
+					if(!aStream->ReadOptionalObjectPointer(m_levelProgression))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::vector<uint32_t>								m_systems;
+				StatsConversion										m_statsConversion;
+				std::unique_ptr<LevelProgression>					m_levelProgression;
 			};
 
 			void
@@ -924,6 +1122,41 @@ namespace tpublic
 				if(i == m_replaceAbilityTable.cend())
 					return aAbilityId;
 				return i->second;
+			}
+
+			bool
+			HasTalentTree(
+				uint32_t				aTalentTreeId) const
+			{
+				for(uint32_t talentTreeId : m_talentTrees)
+				{
+					if(talentTreeId == aTalentTreeId)
+						return true;
+				}
+				return false;
+			}
+
+			const HybridTalentTree*
+			GetHybridTalentTree(
+				uint32_t				aTalentTreeId) const
+			{
+				for(const HybridTalentTree& t : m_hybridTalentTrees)
+				{
+					if(t.m_talentTreeId == aTalentTreeId)
+						return &t;
+				}
+				return NULL;
+			}
+
+			// Hybrid name (e.g. "Holy Fighter") if the hybrid talent tree is set and allowed, otherwise the class name
+			const std::string&
+			GetDisplayName(
+				uint32_t				aHybridTalentTreeId) const
+			{
+				const HybridTalentTree* hybridTalentTree = GetHybridTalentTree(aHybridTalentTreeId);
+				if(hybridTalentTree != NULL)
+					return hybridTalentTree->m_string;
+				return m_displayName;
 			}
 
 			// Base implementation
@@ -1083,6 +1316,18 @@ namespace tpublic
 						{
 							m_iconLockedSpriteId = aMember->GetId(DataType::ID_SPRITE);
 						}
+						else if(aMember->m_name == "hybrid_talent_trees")
+						{
+							aMember->GetObject()->ForEachChild([&](
+								const SourceNode* aChild)
+							{
+								m_hybridTalentTrees.push_back(HybridTalentTree(aChild));
+							});
+						}
+						else if(aMember->m_name == "hybrid")
+						{
+							m_hybrid = std::make_unique<Hybrid>(aMember);
+						}
 						else
 						{
 							TP_VERIFY(false, aMember->m_debugInfo, "'%s' not a valid member.", aMember->m_name.c_str());
@@ -1129,6 +1374,8 @@ namespace tpublic
 				m_customization.ToStream(aStream);
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteUInt(m_iconLockedSpriteId);
+				aStream->WriteObjects(m_hybridTalentTrees);
+				aStream->WriteOptionalObjectPointer(m_hybrid);
 			}
 			
 			bool	
@@ -1202,6 +1449,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_iconLockedSpriteId))
 					return false;
+				if(!aStream->ReadObjects(m_hybridTalentTrees))
+					return false;
+				if(!aStream->ReadOptionalObjectPointer(m_hybrid))
+					return false;
 
 				return true;
 			}
@@ -1236,6 +1487,8 @@ namespace tpublic
 			std::vector<std::unique_ptr<GearOptimization>>			m_gearOptimizations;
 			std::unordered_map<uint32_t, uint32_t>					m_replaceAbilityTable;
 			CharacterCustomization									m_customization;
+			std::vector<HybridTalentTree>							m_hybridTalentTrees;
+			std::unique_ptr<Hybrid>									m_hybrid;
 		};
 
 	}

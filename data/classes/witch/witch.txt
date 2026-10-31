@@ -113,6 +113,73 @@ class witch:
 	default_attack: attack
 	default_action_bar: [ attack witch_bolt !DEFAULT_ABILITIES{} ]
 	talent_trees: [ witch_malice witch_demonology witch_necromancy ]
+
+	hybrid_talent_trees:
+	{
+		fighter_subtlety:
+		{
+			string: "Hexblade"
+			item_types: [ ranged_bow ranged_crossbow ]
+			stats_conversion:
+			{
+				dex_to_ranged_dps: [ 2 7 ]
+				dex_ranged_damage_min: [ 2 3 ]
+				dex_ranged_damage_max: [ 4 3 ]
+			}
+			level_progression:
+			[
+				{ level: 1 unlock_abilities: [ fighter_shoot ] }
+			]
+		}
+
+		priest_condemnation: { string: "Heretic" }
+		sorcerer_elemental:  { string: "Storm Witch" }
+	}
+
+	hybrid:
+	{
+		systems: [ mana_regen ]
+		stats_conversion:
+		{
+			wis_to_mana: [ 10 1 ]
+			spi_to_mana_regen_per_5_sec: [ 3 2 ]
+			wis_to_mag_crit: [ 1 25 ]
+			wis_to_spell_damage: [ 1 6 ]
+		}
+		level_progression:
+		[
+			{ level: 1 unlock_abilities: [ witch_bolt ] resource mana: { add_max: 60 } }
+			{ level: 2 resource mana: { add_max: 6 } }
+			{ level: 3 resource mana: { add_max: 6 } }
+			{ level: 4 resource mana: { add_max: 6 } }
+			{ level: 5 resource mana: { add_max: 6 } }
+			{ level: 6 resource mana: { add_max: 6 } }
+			{ level: 7 resource mana: { add_max: 6 } }
+			{ level: 8 resource mana: { add_max: 6 } }
+			{ level: 9 resource mana: { add_max: 6 } }
+			{ level: 10 resource mana: { add_max: 6 } }
+			{ level: 11 resource mana: { add_max: 6 } }
+			{ level: 12 resource mana: { add_max: 6 } }
+			{ level: 13 resource mana: { add_max: 6 } }
+			{ level: 14 resource mana: { add_max: 6 } }
+			{ level: 15 resource mana: { add_max: 6 } }
+			{ level: 16 resource mana: { add_max: 6 } }
+			{ level: 17 resource mana: { add_max: 6 } }
+			{ level: 18 resource mana: { add_max: 6 } }
+			{ level: 19 resource mana: { add_max: 6 } }
+			{ level: 20 resource mana: { add_max: 6 } }
+			{ level: 21 resource mana: { add_max: 6 } }
+			{ level: 22 resource mana: { add_max: 6 } }
+			{ level: 23 resource mana: { add_max: 6 } }
+			{ level: 24 resource mana: { add_max: 6 } }
+			{ level: 25 resource mana: { add_max: 6 } }
+			{ level: 26 resource mana: { add_max: 6 } }
+			{ level: 27 resource mana: { add_max: 6 } }
+			{ level: 28 resource mana: { add_max: 6 } }
+			{ level: 29 resource mana: { add_max: 6 } }
+			{ level: 30 resource mana: { add_max: 6 } }
+		]
+	}
 	
 	item_types: [ armor_cloth weapon_1h_knife weapon_2h_staff ]
 

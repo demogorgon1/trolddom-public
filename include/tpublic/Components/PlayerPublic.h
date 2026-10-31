@@ -35,6 +35,7 @@ namespace tpublic
 				FIELD_STATS,
 				FIELD_STATUS,
 				FIELD_CUSTOMIZATION,
+				FIELD_HYBRID_TALENT_TREE_ID,
 			};
 
 			static void
@@ -46,6 +47,7 @@ namespace tpublic
 				aSchema->DefineCustomObjectNoSource<Stat::Collection>(FIELD_STATS, offsetof(PlayerPublic, m_stats));
 				aSchema->DefineCustomPODNoSource<Status>(FIELD_STATUS, offsetof(PlayerPublic, m_status));
 				aSchema->DefineCustomOptionalObjectNoSource<Customization>(FIELD_CUSTOMIZATION, offsetof(PlayerPublic, m_customization));
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_HYBRID_TALENT_TREE_ID, NULL, offsetof(PlayerPublic, m_hybridTalentTreeId));
 			}
 
 			void
@@ -56,6 +58,7 @@ namespace tpublic
 				m_stats.Reset();
 				m_status = STATUS_NORMAL;
 				m_customization.reset();
+				m_hybridTalentTreeId = 0;
 			}
 
 			// Public data
@@ -64,6 +67,7 @@ namespace tpublic
 			Stat::Collection				m_stats;			
 			Status							m_status = STATUS_NORMAL;			
 			std::optional<Customization>	m_customization;
+			uint32_t						m_hybridTalentTreeId = 0;	// Copy of Talents::m_hybridTalentTreeId so others can see the hybrid name
 		};
 	}
 

@@ -194,6 +194,7 @@ namespace tpublic
 				aStream->WriteUInt(m_iconSpriteId);
 				aStream->WriteOptionalObjectPointer(m_mapPalette);
 				aStream->WriteStrings(m_map);
+				aStream->WriteUInt(m_classId);
 			}
 
 			bool
@@ -210,6 +211,8 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadStrings(m_map))
 					return false;
+				if(!aStream->ReadUInt(m_classId))
+					return false;
 				return true;
 			}
 
@@ -219,6 +222,9 @@ namespace tpublic
 			uint32_t					m_iconSpriteId = 0;
 			std::unique_ptr<MapPalette>	m_mapPalette;
 			std::vector<std::string>	m_map;
+
+			// Not defined in data, set by PostProcessClasses
+			uint32_t					m_classId = 0;
 		};
 
 	}
