@@ -25,6 +25,7 @@ changelog:
 		{ text: "Fixed a few potential server crashes." }
 		{ text: "Fixed various other server issues." }
 		{ text: "Fixed a bunch of database issues when using offline mode or custom servers." }
+		{ text: "Minions and enemies should no longer chase each other in a circle." }
 	]
 
 	#######################################################################################

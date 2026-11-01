@@ -560,8 +560,11 @@ namespace tpublic::Systems
 								{
 									moveOutOfTheWay = false;
 
-									// Gotta move closer
-									if (!moveOnCooldown)
+									// Gotta move closer. If diagonally adjacent, sometimes wait: if the target is moving towards us at the same time we'd
+									// just swap diagonals and run in circles forever.
+									bool waitForTarget = distanceSquared == 2 && ((*aContext->m_random)() & 0x80000000) != 0;
+
+									if (!moveOnCooldown && !waitForTarget)
 									{
 										if (minionPrivate->m_npcMovement.ShouldResetIfLOS(aContext->m_tick))
 										{
