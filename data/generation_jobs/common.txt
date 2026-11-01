@@ -302,5 +302,102 @@ tag_context .caster_skeleton_boss_sprite:
 	must_have_tags: [ skeleton boss caster ]
 }
 
+############################################################################
+# Demons
 
+!define local DEMON_MELEE_TYPES [ "Fiend" "Ravager" "Hellguard" "Doomhound" "Brute" "Abomination" "Tormentor" "Felbeast" "Defiler" "Hellspawn" "Pit Fiend" "Flayer" ]
+!define local DEMON_CASTER_TYPES [ "Warlock" "Hellcaller" "Soulflayer" "Felcaster" "Pyromancer" "Shadowcaller" "Doomspeaker" "Hexer" "Flamebinder" "Soulbinder" ]
 
+name_template .melee_demon:
+{
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		string: !DEMON_MELEE_TYPES{}
+	}
+
+	possibility<3>:
+	{
+		string: !DEMON_MELEE_TYPES{}
+	}
+
+	possibility<3>:
+	{
+		string: [ "Demon " ]
+		word: [ .noun_melee ]
+	}
+}
+
+name_template .caster_demon:
+{
+	possibility<4>:
+	{
+		word: [ .adjective_evil ]
+		string: [ " " ]
+		string: !DEMON_CASTER_TYPES{}
+	}
+
+	possibility<3>:
+	{
+		string: !DEMON_CASTER_TYPES{}
+	}
+
+	possibility<3>:
+	{
+		string: [ "Demon " ]
+		word: [ .noun_caster ]
+	}
+}
+
+name_template .demon_minor_boss:
+{
+	possibility<2>:
+	{
+		generated_name: [ demon_name ]
+	}
+
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+		string: [ " the Flayer" " the Burning" " the Defiler" " the Tormentor" " of the Pit" " of the Abyss" " the Unbound" ]
+	}
+}
+
+name_template .demon_major_boss:
+{
+	possibility<2>:
+	{
+		generated_name: [ demon_name ]
+		string: [ " the " ]
+		word: [ .adjective_evil ]
+	}
+
+	possibility<1>:
+	{
+		generated_name: [ demon_name ]
+		string: [ ", Lord of the Pit" ", Herald of Ruin" ", Prince of Flames" ", Keeper of the Abyss" ", Devourer of Souls" ]
+	}
+}
+
+tag_context .melee_demon_sprite:
+{
+	must_have_tags: [ demon melee ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .melee_demon_boss_sprite:
+{
+	must_have_tags: [ demon boss melee ]
+}
+
+tag_context .caster_demon_sprite:
+{
+	must_have_tags: [ demon caster ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_demon_boss_sprite:
+{
+	must_have_tags: [ demon boss caster ]
+}

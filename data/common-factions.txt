@@ -23,6 +23,11 @@ faction skeletons:
 	influence_tile_transform: { from: dark_grass to: mud }
 }
 
+faction demons:
+{
+	influence_tile_transform: { from: dark_rocky_dirt to: molten_rock }
+}
+
 faction wildlife:
 {
 	flags: [ neutral ]

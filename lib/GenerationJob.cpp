@@ -3,6 +3,7 @@
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/CreatureType.h>
 #include <tpublic/Data/Faction.h>
+#include <tpublic/Data/NPCBehaviorState.h>
 #include <tpublic/Data/LootGroup.h>
 #include <tpublic/Data/LootTable.h>
 #include <tpublic/Data/NameTemplate.h>
@@ -952,6 +953,7 @@ namespace tpublic
 		UIntRange abilityCount;
 		bool hasMana = false;
 		uint32_t specialLootCooldownSeconds = 0; 
+		uint32_t defaultBehaviorStateId = 0;
 
 		aSource->ForEachChild([&](
 			const SourceNode* aChild)
@@ -982,6 +984,8 @@ namespace tpublic
 				abilityCount = UIntRange(aChild);
 			else if(aChild->m_name == "special_loot_cooldown_seconds")	
 				specialLootCooldownSeconds = aChild->GetUInt32();				
+			else if(aChild->m_name == "default_behavior_state")
+				defaultBehaviorStateId = aChild->GetId(DataType::ID_NPC_BEHAVIOR_STATE);
 			else
 				TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 		});
@@ -1084,6 +1088,9 @@ namespace tpublic
 
 				if(specialLootCooldownSeconds != 0)
 					output->PrintF(1, "_special_loot_cooldown: $loot_cooldown { seconds: %u }", specialLootCooldownSeconds);
+
+				if(defaultBehaviorStateId != 0)
+					output->PrintF(1, "_default_behavior_state: %s", m_manifest->GetById<Data::NPCBehaviorState>(defaultBehaviorStateId)->m_name.c_str());
 
 				output->PrintF(1, "_abilities:");
 				output->PrintF(1, "[");

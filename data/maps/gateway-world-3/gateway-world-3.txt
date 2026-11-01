@@ -1,0 +1,389 @@
+map_player_spawn .player_spawn:
+{
+}
+
+# Terrain set up like the Trial of Fire: a lava sea with volcanic ground, black rocks and lanes of magma
+
+noise .rocks_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 10000]>:
+			{
+				perlin: { scale: 8000 }
+				constant: 4
+			}
+
+			divide:
+			{
+				perlin: { scale: 4000 }
+				constant: 4
+			}
+
+			perlin: { scale: 2000 }
+			perlin: { scale: 1000 }
+			perlin: { scale: 500 }
+
+			constant: 5000
+		}
+
+		constant: 256
+	}
+}
+
+noise .magma_lane_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			divide<[0 19000]>:
+			{
+				perlin: { scale: 21000 }
+				constant: 3
+			}
+
+			divide:
+			{
+				perlin: { scale: 18000 }
+				constant: 4
+			}
+
+			perlin: { scale: 9000 }
+			perlin: { scale: 5700 }
+			perlin: { scale: 2400 }
+
+			constant: 15000
+		}
+
+		constant: 256
+	}
+}
+
+noise .temperature:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 100 }
+			perlin: { scale: 50 }
+
+			constant: 32000
+		}
+
+		constant: 256
+	}
+}
+
+noise .doodad_overlay:
+{
+	divide<[0 255]>:
+	{
+		add:
+		{
+			perlin: { scale: 9000 }
+			perlin: { scale: 5000 }
+			perlin: { scale: 1200 }
+			constant: 32000
+		}
+
+		constant: 256
+	}
+}
+
+tag_context .major_boss:
+{
+	must_have_tags: [ boss major_boss ]
+	must_not_have_tags: [ minor_boss ]
+}
+
+tag_context .minor_boss:
+{
+	must_have_tags: [ boss minor_boss ]
+	must_not_have_tags: [ major_boss ]
+}
+
+tag_context .melee_enemy:
+{
+	must_have_tags: [ melee ]
+	must_not_have_tags: [ boss ]
+}
+
+tag_context .caster_enemy:
+{
+	must_have_tags: [ caster ]
+	must_not_have_tags: [ boss ]
+}
+
+map_entity_spawn .major_boss:
+{	
+	spawn_timer: { normal: 36000 fast_trigger: 0 } 
+}
+
+map_entity_spawn .minor_boss:
+{	
+	spawn_timer: { normal: 18000 fast_trigger: 0 } 
+}
+
+map_entity_spawn .pack:
+{	
+	spawn_timer: !NPC_RESPAWN_NORMAL{}	
+}
+
+map_entity_spawn .object:
+{	
+}
+
+# Same gathering nodes as the Realm of Fire
+map_entity_spawn .mining: { spawn_timer: { despawn_required: true } entity mining_cindralite_vein: { init_state: default } }
+map_entity_spawn .herbalism: { spawn_timer: { despawn_required: true } entity herbalism_ashveil: { init_state: default } }
+
+!define local BOSS
+{
+	tag_context: .major_boss 
+	influence: 128 
+	influence_tile_transform_threshold: [ 32 96 ]
+	map_entity_spawn: .major_boss 
+	
+	minor_bosses:
+	{
+		tag_context: .minor_boss
+		map_entity_spawn: .minor_boss 
+		count: [ 2 4 ]
+		influence_range: [ 32 112 ]
+	}
+	
+	pack<24>: 
+	{ 
+		influence_range: [ 10 55 ]		
+		tag_contexts: [ .melee_enemy ]		
+		elite: false
+		map_entity_spawn: .pack
+		random_object<10>: default_chest		
+	}
+
+	pack<8>: 
+	{ 
+		influence_range: [ 10 55 ]		
+		tag_contexts: [ .caster_enemy ]		
+		elite: false
+		map_entity_spawn: .pack
+		random_object<10>: default_chest				
+	}
+
+	pack<64>: 
+	{ 
+		influence_range: [ 55 80 ] 		
+		tag_contexts: [ .melee_enemy .melee_enemy ]		
+		min_distance_to_nearby: 6
+		elite: false
+		map_entity_spawn: .pack
+		random_object<30>: default_chest				
+	}	
+
+	pack<32>: 
+	{ 
+		influence_range: [ 55 80 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: false
+		map_entity_spawn: .pack
+		random_object<40>: default_chest				
+	}	
+
+	pack<64>: 
+	{ 
+		influence_range: [ 85 100 ] 		
+		tag_contexts: [ .melee_enemy .melee_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<50>: default_chest				
+	}		
+
+	pack<64>: 
+	{ 
+		influence_range: [ 85 100 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<60>: default_chest				
+	}		
+
+	pack<64>: 
+	{ 
+		influence_range: [ 100 120 ] 		
+		tag_contexts: [ .melee_enemy .melee_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<60>: default_chest
+	}			
+	
+	pack<64>: 
+	{ 
+		influence_range: [ 100 120 ] 		
+		tag_contexts: [ .melee_enemy .caster_enemy ]		
+		min_distance_to_nearby: 6
+		elite: true
+		map_entity_spawn: .pack
+		random_object<70>: default_chest						
+	}			
+	
+}
+
+loot_table .gateway_world_3:
+{
+	slots:
+	[
+		{
+			possibility: 
+			{ 
+				loot_group: token_of_victory				
+				requirement target<must_have_tag>: { id: minor_boss }				
+				use_special_loot_cooldown: true
+			}			
+		
+			possibility: 
+			{ 
+				loot_group: token_of_victory				
+				requirement target<must_have_tag>: { id: major_boss }				
+				use_special_loot_cooldown: true
+			}	
+		}
+
+		{		
+			possibility: { weight: 200 loot_group: world_drops_uncommon requirement target<must_have_tag>: { id: minor_boss } }	
+			possibility: { weight: 10 loot_group: world_drops_rare requirement target<must_have_tag>: { id: minor_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: minor_boss } }				
+		}
+		
+		{		
+			possibility: { weight: 200 loot_group: world_drops_uncommon requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 10 loot_group: world_drops_rare requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: major_boss } }				
+		}
+		
+		{		
+			possibility: { weight: 99 loot_group: world_drops_rare requirement target<must_have_tag>: { id: major_boss } }	
+			possibility: { weight: 1 loot_group: world_drops_epic requirement target<must_have_tag>: { id: major_boss } }				
+		}		
+	]	
+}
+
+map gateway_world_3:
+{
+	string: "Infernal Gateway World"
+	type: open_world
+	default_player_spawn: .player_spawn
+	has_dynamic_overview_map: true
+	seed: time_seed
+	max_players: 80
+
+	default_tile: lava_b
+	default_fishing_loot_table: fish_realm_of_fire
+	view_attenuation: 0
+	view_attenuation_bias: 0
+	view_hidden_visibility: 45
+	openable_elite: true
+
+	map_loot_tables: [ .gateway_world_3 ]
+
+	generator world:
+	{
+		terrain_palette_entry<infernal_lava>: "."
+		terrain_palette_entry<infernal_flat>: "X"
+		player_spawn_entity: standing_stone
+		object_map_entity_spawn: .object
+		connect_conversion_radius: [ 0 0 0 0 1 1 1 1 1 1 2 ]
+
+		execute all:
+		{
+			execute one_of:
+			{
+				execute paletted_map:
+				[
+					"...."
+					".XX."
+					".XX."
+					"...."
+				]
+			}
+
+			execute double: { passes: 5 }
+			execute median_filter: 1
+			execute grow: infernal_spines
+			execute despeckle: {}
+			execute double: { passes: 1 no_mutations: true }
+			execute add_borders: infernal_lava
+			execute add_borders: infernal_lava
+
+			execute overlay:
+			{
+				noise: .rocks_overlay
+				terrain<black_rocks>: { above: 150 exclude: [ infernal_lava ] }
+				doodad<fs_rock>: { range: [ 0 128 ] probability: [ 0 6 ] terrain: [ infernal_flat ] }
+			}
+
+			execute overlay:
+			{
+				noise: .doodad_overlay
+				doodad<bones>: { range: [ 160 256 ] probability: [ 0 4 ] terrain: [ infernal_flat ] }
+				doodad<skull_stick>: { range: [ 200 256 ] probability: [ 0 2 ] terrain: [ infernal_flat ] }
+			}
+
+			execute terrain_modifier_map:
+			{
+				terrain_modifier: temperature
+				noise: .temperature
+			}
+
+			execute overlay:
+			{
+				noise: .magma_lane_overlay
+				terrain<coast_volcanic>: { above: 220 }
+				border: 48
+			}
+
+			execute despeckle: { from_terrain: infernal_lava to_terrain: coast_volcanic }
+
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ .herbalism ]
+				probability: 6
+				terrain: [ infernal_flat ]
+				neighbor_terrain_probability_bonus<infernal_spines>: 12
+				neighbor_terrain_probability_bonus<black_rocks>: 2
+				min_distance_to_nearby: 2
+			}
+
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ .mining ]
+				probability: 70
+				terrain: [ black_rocks ]
+				neighbor_terrain_required: infernal_flat
+				neighbor_terrain_required: black_rocks
+				min_distance_to_nearby: 2
+			}
+
+			execute add_entity_spawns:
+			{
+				entity_spawn: [ underworld_shrine holy_altar ]
+				probability: 1
+				terrain: [ infernal_flat ]
+				min_distance_to_nearby: 1
+			}
+
+			execute add_boss: !BOSS{}
+			execute add_boss: !BOSS{}
+
+			execute level_range: [ 31 32 ]
+			execute player_spawns: 4
+		}
+	}
+}

@@ -179,3 +179,45 @@ terrain black_rocks:
 					
 	debug_color: [ 32 32 32 ]
 }
+
+terrain infernal_lava:
+{
+	tile<lava_b>: { }
+
+	mutation_chance: 5
+	mutation<1>: infernal_flat
+
+	border<coast_volcanic>: [ infernal_flat coast_volcanic ]
+
+	connect_cost: 32
+	connect_conversion: coast_volcanic
+
+	debug_color: [ 64 64 0 ]
+}
+
+terrain infernal_flat:
+{
+	tile<dark_rocky_dirt>: { }
+
+	mutation_chance: 35
+	mutation<1>: infernal_spines
+
+	walkable: true
+
+	debug_color: [ 90 90 90 ]
+}
+
+terrain infernal_spines:
+{
+	tile<spines_2>: { }
+
+	mutation_chance: 10
+	mutation<1>: infernal_flat
+
+	grows_into<80>: infernal_flat
+
+	connect_cost: 1
+	connect_conversion: infernal_flat
+
+	debug_color: [ 160 40 0 ]
+}
