@@ -28,6 +28,7 @@ changelog:
 		{ text: "Minions and enemies should no longer chase each other in a circle." }
 		{ text: "Your own minions could be treated as hostile when PVP flagged." }
 		{ text: "Fixed bug where Cheat Death wouldn't be applied." }
+		{ text: "Half-Eye Lanior gives a quest to enter The Lich Tower like intended." }
 	]
 
 	#######################################################################################

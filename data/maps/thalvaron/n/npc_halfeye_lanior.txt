@@ -9,6 +9,7 @@ dialogue_screen .halfeye_lanior_dialogue:
 	[
 		{ quest<completion_only>: .spirit_of_joonor_1 }
 		{ quest: .halfeye_lanior_1 }
+		{ quest: .halfeye_lanior_2 }
 	]
 }
 
@@ -132,6 +133,7 @@ quest .halfeye_lanior_2:
 	]
 
 	objectives: [ .halfeye_lanior_2 ]
+	prerequisites: [ .halfeye_lanior_1 ]
 	level: 20
 	type: dungeon
 	reward_one_item: [ .halfeye_lanior_2_a .halfeye_lanior_2_b .halfeye_lanior_2_c ]
