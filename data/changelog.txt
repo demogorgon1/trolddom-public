@@ -26,6 +26,8 @@ changelog:
 		{ text: "Fixed various other server issues." }
 		{ text: "Fixed a bunch of database issues when using offline mode or custom servers." }
 		{ text: "Minions and enemies should no longer chase each other in a circle." }
+		{ text: "Your own minions could be treated as hostile when PVP flagged." }
+		{ text: "Fixed bug where Cheat Death wouldn't be applied." }
 	]
 
 	#######################################################################################

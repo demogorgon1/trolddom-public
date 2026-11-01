@@ -341,7 +341,7 @@ ability_modifier improved_cheat_death_2:
 
 ability_modifier improved_cheat_death_3:
 {	
-	description: "Cheat Death causes target to survive with 36% health."
+	description: "Cheat Death causes target to survive with 32% health."
 }
 
 ###############################################################################

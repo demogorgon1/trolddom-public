@@ -199,7 +199,8 @@ namespace tpublic
 			{
 				if(aura->m_cancelRequirements.size() > 0)
 				{
-					bool preemptiveCancel = !Requirements::CheckList(aManifest, aura->m_cancelRequirements, aWorldView, aTarget, NULL);
+					// Don't apply it if it would be canceled right away
+					bool preemptiveCancel = Requirements::CheckList(aManifest, aura->m_cancelRequirements, aWorldView, targetEntity, NULL);
 					if(preemptiveCancel)
 						continue;
 				}
