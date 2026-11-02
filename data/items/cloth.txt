@@ -26,7 +26,7 @@ item item_emberfelt_cloth:
 	loot_groups: [ world_drops_cloth ]
 	icon: icon_emberfelt_cloth
 	stack: 20
-	level_range: [ 17 30 ]
+	level_range: [ 17 32 ]
 	item_level: 20
 	tags: [ tailoring ]
 }

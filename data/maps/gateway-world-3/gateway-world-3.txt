@@ -236,21 +236,39 @@ map_entity_spawn .herbalism: { spawn_timer: { despawn_required: true } entity he
 	
 }
 
+loot_group gateway_world_3_formulas: {}
+
 loot_table .gateway_world_3:
 {
 	slots:
 	[
 		{
+			possibility: { weight: 49 }
+			possibility: { weight: 1 loot_group: gateway_world_3_formulas creature_types: [ demon ] }
+		}
+
+		# Infernal Ash from any demon, Demon Ichor only from elites
+		{
+			possibility: { weight: 4 }
+			possibility: { weight: 1 loot_group: gateway_world_3_infernal_ash creature_types: [ demon ] }
+		}
+
+		{
+			possibility: { weight: 23 }
+			possibility<must_be_elite>: { weight: 2 loot_group: gateway_world_3_demon_ichor creature_types: [ demon ] }
+		}
+
+		{
 			possibility: 
 			{ 
-				loot_group: token_of_victory				
+				loot_group: emblem_of_triumph				
 				requirement target<must_have_tag>: { id: minor_boss }				
 				use_special_loot_cooldown: true
 			}			
 		
 			possibility: 
 			{ 
-				loot_group: token_of_victory				
+				loot_group: emblem_of_triumph				
 				requirement target<must_have_tag>: { id: major_boss }				
 				use_special_loot_cooldown: true
 			}	

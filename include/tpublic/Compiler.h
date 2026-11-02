@@ -10,6 +10,7 @@ namespace tpublic
 
 	class GenerationJob;
 	class SpriteSheetBuilder;
+	class StructureSheetBuilder;
 
 	class Compiler
 	{
@@ -71,6 +72,7 @@ namespace tpublic
 						const char*										aPath);
 		void		_ProcessNode(
 						SpriteSheetBuilder*								aSpriteSheetBuilder,
+						StructureSheetBuilder*							aStructureSheetBuilder,
 						std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
 						const SourceNode*								aNode);
 		void		_ProcessDataQueue();

@@ -173,3 +173,222 @@ ability craft_linen_hood: !TAILORING_CRAFT
 	_materials: { item_linen_cloth: 6 item_thread: 1 }
 	_skill: 60
 }
+
+#####################################################
+# Emberward set: fire resistance cloth
+
+#####################################################
+# Emberward Hood (recipe drops in Gateway World 3)
+
+aura head_emberward_hood:
+{
+	string: "Emberward Hood"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item head_emberward_hood:
+{
+	string: "Emberward Hood"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ head ]
+	required_level: 32
+	icon: icon_cloth_head_3
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: head_emberward_hood
+}
+
+ability craft_head_emberward_hood: !TAILORING_CRAFT
+{
+	_string: "Emberward Hood"
+	_item: head_emberward_hood
+	_produce: { head_emberward_hood: 1 }
+	_materials: { item_thread: 1 item_emberfelt_cloth: 40 item_infernal_ash: 6 item_demon_ichor: 1 }
+	_skill: 160
+}
+
+item recipe_head_emberward_hood: !TAILORING_RECIPE
+{
+	_string: "Pattern: Emberward Hood"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_head_emberward_hood
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_head_emberward_hood: !TAILORING_LEARN
+{
+	_string: "Pattern: Emberward Hood"
+	_description: "Teaches you how to make Emberward Hood."
+	_consume_items: { recipe_head_emberward_hood: 1 }
+	_skill: 160
+	_craft_ability: craft_head_emberward_hood
+}
+
+#####################################################
+# Emberward Robe (recipe drops in Gateway World 3)
+
+aura chest_emberward_robe:
+{
+	string: "Emberward Robe"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item chest_emberward_robe:
+{
+	string: "Emberward Robe"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ chest ]
+	required_level: 32
+	icon: icon_chest_10
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: chest_emberward_robe
+}
+
+ability craft_chest_emberward_robe: !TAILORING_CRAFT
+{
+	_string: "Emberward Robe"
+	_item: chest_emberward_robe
+	_produce: { chest_emberward_robe: 1 }
+	_materials: { item_thread: 1 item_emberfelt_cloth: 50 item_infernal_ash: 8 item_demon_ichor: 1 }
+	_skill: 160
+}
+
+item recipe_chest_emberward_robe: !TAILORING_RECIPE
+{
+	_string: "Pattern: Emberward Robe"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_chest_emberward_robe
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_chest_emberward_robe: !TAILORING_LEARN
+{
+	_string: "Pattern: Emberward Robe"
+	_description: "Teaches you how to make Emberward Robe."
+	_consume_items: { recipe_chest_emberward_robe: 1 }
+	_skill: 160
+	_craft_ability: craft_chest_emberward_robe
+}
+
+#####################################################
+# Emberward Leggings (recipe drops in Gateway World 3)
+
+aura legs_emberward_leggings:
+{
+	string: "Emberward Leggings"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item legs_emberward_leggings:
+{
+	string: "Emberward Leggings"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ legs ]
+	required_level: 32
+	icon: icon_pants_5
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: legs_emberward_leggings
+}
+
+ability craft_legs_emberward_leggings: !TAILORING_CRAFT
+{
+	_string: "Emberward Leggings"
+	_item: legs_emberward_leggings
+	_produce: { legs_emberward_leggings: 1 }
+	_materials: { item_thread: 1 item_emberfelt_cloth: 45 item_infernal_ash: 7 item_demon_ichor: 1 }
+	_skill: 160
+}
+
+item recipe_legs_emberward_leggings: !TAILORING_RECIPE
+{
+	_string: "Pattern: Emberward Leggings"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_legs_emberward_leggings
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_legs_emberward_leggings: !TAILORING_LEARN
+{
+	_string: "Pattern: Emberward Leggings"
+	_description: "Teaches you how to make Emberward Leggings."
+	_consume_items: { recipe_legs_emberward_leggings: 1 }
+	_skill: 160
+	_craft_ability: craft_legs_emberward_leggings
+}
+
+#####################################################
+# Emberward Gloves (recipe drops in Gateway World 3)
+
+aura hands_emberward_gloves:
+{
+	string: "Emberward Gloves"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item hands_emberward_gloves:
+{
+	string: "Emberward Gloves"
+	type: armor_cloth
+	binds: when_equipped
+	equipment_slots: [ hands ]
+	required_level: 32
+	icon: icon_gloves_5
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: hands_emberward_gloves
+}
+
+ability craft_hands_emberward_gloves: !TAILORING_CRAFT
+{
+	_string: "Emberward Gloves"
+	_item: hands_emberward_gloves
+	_produce: { hands_emberward_gloves: 1 }
+	_materials: { item_thread: 1 item_emberfelt_cloth: 30 item_infernal_ash: 4 item_demon_ichor: 1 }
+	_skill: 160
+}
+
+item recipe_hands_emberward_gloves: !TAILORING_RECIPE
+{
+	_string: "Pattern: Emberward Gloves"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_hands_emberward_gloves
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_hands_emberward_gloves: !TAILORING_LEARN
+{
+	_string: "Pattern: Emberward Gloves"
+	_description: "Teaches you how to make Emberward Gloves."
+	_consume_items: { recipe_hands_emberward_gloves: 1 }
+	_skill: 160
+	_craft_ability: craft_hands_emberward_gloves
+}

@@ -93,7 +93,7 @@ aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat
 	item_level: 10
 	required_level: 1
 	type: miscellaneous
-	level_range: [ 1 31 ]
+	level_range: [ 1 32 ]
 }
 
 !define local ITEM_ABILITY

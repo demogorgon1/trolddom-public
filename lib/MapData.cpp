@@ -371,6 +371,11 @@ namespace tpublic
 										}
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_ENTRANCE:
+									case Data::MapPalette::ENTRY_TYPE_ANCHOR:
+										TP_VERIFY(false, layer->m_debugInfo, "Entrances and anchors can only be used in structure sheets (%d, %d) in layer '%s'.", x, y, layer->m_source.c_str());
+										break;
+
 									default:
 										assert(false);
 										break;

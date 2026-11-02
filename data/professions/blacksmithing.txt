@@ -353,3 +353,226 @@ item recipe_shiny_breastplate:
 	use_ability: .learn_shiny_breastplate
 	level_range: [ 7 10 ]
 }
+
+#####################################################
+# Infernal Ward set: fire resistance plate
+
+#####################################################
+# Infernal Ward Helm (recipe drops in Gateway World 3)
+
+aura head_infernal_ward_helm:
+{
+	string: "Infernal Ward Helm"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item head_infernal_ward_helm:
+{
+	string: "Infernal Ward Helm"
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots: [ head ]
+	required_level: 32
+	icon: icon_head_5
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: head_infernal_ward_helm
+}
+
+ability craft_head_infernal_ward_helm: !BLACKSMITHING_CRAFT
+{
+	_string: "Infernal Ward Helm"
+	_item: head_infernal_ward_helm
+	_produce: { head_infernal_ward_helm: 1 }
+	_materials: { item_brontium_ingot: 20 item_infernal_ash: 6 item_demon_ichor: 1 }
+	_skill: 160
+	_requires_anvil: true
+}
+
+item recipe_head_infernal_ward_helm: !BLACKSMITHING_RECIPE
+{
+	_string: "Plans: Infernal Ward Helm"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_head_infernal_ward_helm
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_head_infernal_ward_helm: !BLACKSMITHING_LEARN
+{
+	_string: "Plans: Infernal Ward Helm"
+	_description: "Teaches you how to make Infernal Ward Helm."
+	_consume_items: { recipe_head_infernal_ward_helm: 1 }
+	_skill: 160
+	_craft_ability: craft_head_infernal_ward_helm
+}
+
+#####################################################
+# Infernal Ward Breastplate (recipe drops in Gateway World 3)
+
+aura chest_infernal_ward_breastplate:
+{
+	string: "Infernal Ward Breastplate"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item chest_infernal_ward_breastplate:
+{
+	string: "Infernal Ward Breastplate"
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots: [ chest ]
+	required_level: 32
+	icon: icon_chest_8
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: chest_infernal_ward_breastplate
+}
+
+ability craft_chest_infernal_ward_breastplate: !BLACKSMITHING_CRAFT
+{
+	_string: "Infernal Ward Breastplate"
+	_item: chest_infernal_ward_breastplate
+	_produce: { chest_infernal_ward_breastplate: 1 }
+	_materials: { item_brontium_ingot: 26 item_infernal_ash: 8 item_demon_ichor: 1 }
+	_skill: 160
+	_requires_anvil: true
+}
+
+item recipe_chest_infernal_ward_breastplate: !BLACKSMITHING_RECIPE
+{
+	_string: "Plans: Infernal Ward Breastplate"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_chest_infernal_ward_breastplate
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_chest_infernal_ward_breastplate: !BLACKSMITHING_LEARN
+{
+	_string: "Plans: Infernal Ward Breastplate"
+	_description: "Teaches you how to make Infernal Ward Breastplate."
+	_consume_items: { recipe_chest_infernal_ward_breastplate: 1 }
+	_skill: 160
+	_craft_ability: craft_chest_infernal_ward_breastplate
+}
+
+#####################################################
+# Infernal Ward Legplates (recipe drops in Gateway World 3)
+
+aura legs_infernal_ward_legplates:
+{
+	string: "Infernal Ward Legplates"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item legs_infernal_ward_legplates:
+{
+	string: "Infernal Ward Legplates"
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots: [ legs ]
+	required_level: 32
+	icon: icon_mail_pants_2
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: legs_infernal_ward_legplates
+}
+
+ability craft_legs_infernal_ward_legplates: !BLACKSMITHING_CRAFT
+{
+	_string: "Infernal Ward Legplates"
+	_item: legs_infernal_ward_legplates
+	_produce: { legs_infernal_ward_legplates: 1 }
+	_materials: { item_brontium_ingot: 22 item_infernal_ash: 7 item_demon_ichor: 1 }
+	_skill: 160
+	_requires_anvil: true
+}
+
+item recipe_legs_infernal_ward_legplates: !BLACKSMITHING_RECIPE
+{
+	_string: "Plans: Infernal Ward Legplates"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_legs_infernal_ward_legplates
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_legs_infernal_ward_legplates: !BLACKSMITHING_LEARN
+{
+	_string: "Plans: Infernal Ward Legplates"
+	_description: "Teaches you how to make Infernal Ward Legplates."
+	_consume_items: { recipe_legs_infernal_ward_legplates: 1 }
+	_skill: 160
+	_craft_ability: craft_legs_infernal_ward_legplates
+}
+
+#####################################################
+# Infernal Ward Gauntlets (recipe drops in Gateway World 3)
+
+aura hands_infernal_ward_gauntlets:
+{
+	string: "Infernal Ward Gauntlets"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+item hands_infernal_ward_gauntlets:
+{
+	string: "Infernal Ward Gauntlets"
+	type: armor_plate
+	binds: when_equipped
+	equipment_slots: [ hands ]
+	required_level: 32
+	icon: icon_gloves_4
+	rarity: epic
+	budget_bias: -50
+	stat_weight constitution: 1
+	aura: hands_infernal_ward_gauntlets
+}
+
+ability craft_hands_infernal_ward_gauntlets: !BLACKSMITHING_CRAFT
+{
+	_string: "Infernal Ward Gauntlets"
+	_item: hands_infernal_ward_gauntlets
+	_produce: { hands_infernal_ward_gauntlets: 1 }
+	_materials: { item_brontium_ingot: 14 item_infernal_ash: 4 item_demon_ichor: 1 }
+	_skill: 160
+	_requires_anvil: true
+}
+
+item recipe_hands_infernal_ward_gauntlets: !BLACKSMITHING_RECIPE
+{
+	_string: "Plans: Infernal Ward Gauntlets"
+	_level: 32
+	_rarity: epic
+	_learn_ability: learn_hands_infernal_ward_gauntlets
+	_level_range: [ 31 32 ]
+	_loot_groups: [ gateway_world_3_formulas ]
+}
+
+ability learn_hands_infernal_ward_gauntlets: !BLACKSMITHING_LEARN
+{
+	_string: "Plans: Infernal Ward Gauntlets"
+	_description: "Teaches you how to make Infernal Ward Gauntlets."
+	_consume_items: { recipe_hands_infernal_ward_gauntlets: 1 }
+	_skill: 160
+	_craft_ability: craft_hands_infernal_ward_gauntlets
+}

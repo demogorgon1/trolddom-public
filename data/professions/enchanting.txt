@@ -1420,3 +1420,309 @@ ability disenchant:
 	item formula_enchant_weapon_vampiric_edge: !ENCHANTING_FORMULA_ITEM{}
 	ability learn_enchant_weapon_vampiric_edge: !ENCHANTING_FORMULA_ABILITY{}
 }
+
+#####################################################
+# Enchant Chest - Infernal Mastery (formula drops in Gateway World 3)
+
+{
+	${
+		_string: "Enchant Chest - Infernal Mastery"
+		_string_item: "Enchant Chest: Infernal Mastery"
+		_description: "Enchants item to increase all stats by 3."
+		_item: enchant_chest_infernal_mastery
+		_produce: { enchant_chest_infernal_mastery: 1 }
+		_materials: { reagent_void_crystal: 4 item_demon_heart: 1 item_infernal_ash: 5 reagent_paper: 1 }
+		_skill: 115
+		_target_item_requirements: { equipment_slots: [ chest ] }
+		_id: enchant_chest_infernal_mastery
+		_consume_items: { enchant_chest_infernal_mastery: 1 }
+	}
+
+	aura enchant_chest_infernal_mastery:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper
+
+		string: "All stats +3"
+		stat_modifiers: { wisdom: { add: 3 } strength: { add: 3 } dexterity: { add: 3 } spirit: { add: 3 } constitution: { add: 3 } }
+	}
+
+	ability enchant_chest_infernal_mastery: !ENCHANTING_APPLY{}
+	item enchant_chest_infernal_mastery: !ENCHANTING_ITEM{}
+	ability craft_enchant_chest_infernal_mastery: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 31
+		_formula_string: "Formula: Enchant Chest - Infernal Mastery"
+		_formula_description: "Teaches you how to enchant a chest to increase all stats by 3."
+		_formula_consume_items: { formula_enchant_chest_infernal_mastery: 1 }
+		_learn_ability: learn_enchant_chest_infernal_mastery
+		_formula_required_skill: 115
+		_level_range: [ 31 32 ]
+		_ability: craft_enchant_chest_infernal_mastery
+		_loot_groups: [ gateway_world_3_formulas ]
+	}
+
+	item formula_enchant_chest_infernal_mastery: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_chest_infernal_mastery: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Shield - Demonhide (formula drops in Gateway World 3)
+
+{
+	${
+		_string: "Enchant Shield - Demonhide"
+		_string_item: "Enchant Shield: Demonhide"
+		_description: "Enchants item to increase Constitution by 4."
+		_item: enchant_shield_demonhide
+		_produce: { enchant_shield_demonhide: 1 }
+		_materials: { reagent_void_crystal: 3 item_demon_heart: 1 item_infernal_ash: 4 reagent_paper: 1 }
+		_skill: 115
+		_target_item_requirements: { item_types: [ shield ] }
+		_id: enchant_shield_demonhide
+		_consume_items: { enchant_shield_demonhide: 1 }
+	}
+
+	aura enchant_shield_demonhide:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper
+
+		string: "Constitution +4"
+		stat_modifiers: { constitution: { add: 4 } }
+	}
+
+	ability enchant_shield_demonhide: !ENCHANTING_APPLY{}
+	item enchant_shield_demonhide: !ENCHANTING_ITEM{}
+	ability craft_enchant_shield_demonhide: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 31
+		_formula_string: "Formula: Enchant Shield - Demonhide"
+		_formula_description: "Teaches you how to enchant a shield to increase Constitution by 4."
+		_formula_consume_items: { formula_enchant_shield_demonhide: 1 }
+		_learn_ability: learn_enchant_shield_demonhide
+		_formula_required_skill: 115
+		_level_range: [ 31 32 ]
+		_ability: craft_enchant_shield_demonhide
+		_loot_groups: [ gateway_world_3_formulas ]
+	}
+
+	item formula_enchant_shield_demonhide: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_shield_demonhide: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Soulrend (formula drops in Gateway World 3)
+
+{
+	${
+		_string: "Enchant Weapon - Soulrend"
+		_string_item: "Enchant Weapon: Soulrend"
+		_description: "Enchants item to make your melee attacks sometimes inflict unholy damage over time."
+		_item: enchant_weapon_soulrend
+		_produce: { enchant_weapon_soulrend: 1 }
+		_materials: { reagent_void_crystal: 4 item_demon_ichor: 3 reagent_paper: 1 }
+		_skill: 115
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_soulrend
+		_consume_items: { enchant_weapon_soulrend: 1 }
+	}
+
+	ability enchant_weapon_soulrend_trigger:
+	{
+		string: "Soulrend"
+		flags: [ always_in_range always_in_line_of_sight ]
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Soulrend"
+				icon: icon_unholy
+				type: debuff
+				duration: based_on_effects
+				flags: [ unique_per_source magic ]
+				aura_effect repeat:
+				{
+					update_interval: 12
+					update_count: 4
+					ability: $ability [ string icon ]
+					{
+						states: [ default in_combat ]
+						flags: [ always_in_range always_in_line_of_sight ]
+
+						direct_effect damage:
+						{
+							damage_type: unholy
+							function: 25
+							flags: [ is_magical ]
+							direct: false
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	aura enchant_weapon_soulrend:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper
+
+		string: "Soulrend"
+		color_weapon_glow: [ 160 0 40 255 ]
+
+		aura_effect combat_event_trigger:
+		{
+			combat_event<source>: [ hit critical ]
+			combat_event_ability_mask: [ offensive melee ]
+			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
+			ability<target>: enchant_weapon_soulrend_trigger
+			probability: 20
+		}
+	}
+
+	ability enchant_weapon_soulrend: !ENCHANTING_APPLY{}
+	item enchant_weapon_soulrend: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_soulrend: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 31
+		_formula_string: "Formula: Enchant Weapon - Soulrend"
+		_formula_description: "Teaches you how to enchant a weapon to make your melee attacks sometimes inflict unholy damage over time."
+		_formula_consume_items: { formula_enchant_weapon_soulrend: 1 }
+		_learn_ability: learn_enchant_weapon_soulrend
+		_formula_required_skill: 115
+		_level_range: [ 31 32 ]
+		_ability: craft_enchant_weapon_soulrend
+		_loot_groups: [ gateway_world_3_formulas ]
+	}
+
+	item formula_enchant_weapon_soulrend: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_soulrend: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Weapon - Demonic Insight (formula drops in Gateway World 3)
+
+{
+	${
+		_string: "Enchant Weapon - Demonic Insight"
+		_string_item: "Enchant Weapon: Demonic Insight"
+		_description: "Enchants item to sometimes increase Wisdom by 80 for 12 seconds when your spells hit."
+		_item: enchant_weapon_demonic_insight
+		_produce: { enchant_weapon_demonic_insight: 1 }
+		_materials: { reagent_void_crystal: 4 item_demon_ichor: 3 reagent_paper: 1 }
+		_skill: 115
+		_target_item_requirements: { equipment_slots: [ main_hand off_hand ] }
+		_id: enchant_weapon_demonic_insight
+		_consume_items: { enchant_weapon_demonic_insight: 1 }
+	}
+
+	ability enchant_weapon_demonic_insight_trigger:
+	{
+		string: "Demonic Insight"
+		direct_effect apply_aura:
+		{
+			aura: $aura
+			{
+				string: "Demonic Insight"
+				icon: icon_unholy_empowerment
+				type: buff
+				duration: 120
+				flags: [ magic unique ]
+				stat_modifiers: { wisdom: { add: 80 } }
+			}
+		}
+	}
+
+	aura enchant_weapon_demonic_insight:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper
+
+		string: "Demonic Insight"
+		color_weapon_glow: [ 255 64 0 255 ]
+
+		aura_effect combat_event_trigger:
+		{
+			combat_event<source>: [ hit critical ]
+			combat_event_ability_mask: [ offensive spell ]
+			combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
+			ability<self>: enchant_weapon_demonic_insight_trigger
+			probability: 12
+		}
+	}
+
+	ability enchant_weapon_demonic_insight: !ENCHANTING_APPLY{}
+	item enchant_weapon_demonic_insight: !ENCHANTING_ITEM{}
+	ability craft_enchant_weapon_demonic_insight: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 31
+		_formula_string: "Formula: Enchant Weapon - Demonic Insight"
+		_formula_description: "Teaches you how to enchant a weapon to sometimes increase Wisdom by 80 for 12 seconds when your spells hit."
+		_formula_consume_items: { formula_enchant_weapon_demonic_insight: 1 }
+		_learn_ability: learn_enchant_weapon_demonic_insight
+		_formula_required_skill: 115
+		_level_range: [ 31 32 ]
+		_ability: craft_enchant_weapon_demonic_insight
+		_loot_groups: [ gateway_world_3_formulas ]
+	}
+
+	item formula_enchant_weapon_demonic_insight: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_weapon_demonic_insight: !ENCHANTING_FORMULA_ABILITY{}
+}
+
+#####################################################
+# Enchant Cloak - Fire Ward (formula drops in Gateway World 3)
+
+{
+	${
+		_string: "Enchant Cloak - Fire Ward"
+		_string_item: "Enchant Cloak: Fire Ward"
+		_description: "Enchants item to reduce Fire damage taken by 10%."
+		_item: enchant_cloak_fire_ward
+		_produce: { enchant_cloak_fire_ward: 1 }
+		_materials: { reagent_void_essence: 4 item_demon_ichor: 1 reagent_paper: 1 }
+		_skill: 115
+		_target_item_requirements: { equipment_slots: [ back ] }
+		_id: enchant_cloak_fire_ward
+		_consume_items: { enchant_cloak_fire_ward: 1 }
+	}
+
+	aura enchant_cloak_fire_ward:
+	{
+		type: hidden
+		flags: [ item silent ]
+		icon: icon_enchanted_paper
+
+		string: "Fire Ward"
+		aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+	}
+
+	ability enchant_cloak_fire_ward: !ENCHANTING_APPLY{}
+	item enchant_cloak_fire_ward: !ENCHANTING_ITEM{}
+	ability craft_enchant_cloak_fire_ward: !ENCHANTING_CRAFT{}
+
+	${
+		_formula_item_level: 31
+		_formula_string: "Formula: Enchant Cloak - Fire Ward"
+		_formula_description: "Teaches you how to enchant a cloak to reduce Fire damage taken by 10%."
+		_formula_consume_items: { formula_enchant_cloak_fire_ward: 1 }
+		_learn_ability: learn_enchant_cloak_fire_ward
+		_formula_required_skill: 115
+		_level_range: [ 31 32 ]
+		_ability: craft_enchant_cloak_fire_ward
+		_loot_groups: [ gateway_world_3_formulas ]
+	}
+
+	item formula_enchant_cloak_fire_ward: !ENCHANTING_FORMULA_ITEM{}
+	ability learn_enchant_cloak_fire_ward: !ENCHANTING_FORMULA_ABILITY{}
+}

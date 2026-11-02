@@ -15,6 +15,8 @@
 #include <tpublic/Data/Tag.h>
 #include <tpublic/Data/Zone.h>
 
+#include <tpublic/MapGenerators/World.h>
+
 #include <tpublic/LootGenerator.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/WorldInfoMap.h>
@@ -286,6 +288,11 @@ namespace tpublic
 							_EntityAtPosition(aManifest, { entitySpawn.m_x, entitySpawn.m_y }, entity->m_entityId, aMap, itemMap, errors);
 					}
 				}
+
+				// Generated worlds: check structures (only placed when the map is generated, so errors would show up late otherwise)
+				if(aMap->m_data->m_generator && aMap->m_data->m_generator->m_base->m_id == MapGenerator::ID_WORLD)
+					((const MapGenerators::World*)aMap->m_data->m_generator->m_base.get())->Validate(aManifest, aMap->m_name.c_str(), errors);
+
 				return true;
 			});			
 

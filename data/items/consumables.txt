@@ -1271,3 +1271,105 @@ item consumable_elixir_of_the_warden (elixir):
 	flavor: "Brewed the way the Lamp Wardens of Ashira once did. It tastes of ash and old prayers."
 	use_ability: consumable_elixir_of_the_warden
 }
+
+#####################################################
+# Major Healing Potion (recipe drops in Gateway World 3)
+
+ability consumable_major_healing_potion (healing_potion):
+{
+	string: "Major Healing Potion"
+	icon: icon_red_potion_2
+	direct_effect heal: { function: 750 }
+	consume_items: { consumable_major_healing_potion: 1 }
+	required_level: 28
+}
+
+item consumable_major_healing_potion (healing_potion):
+{
+	icon: icon_red_potion_2
+	string: "Major Healing Potion"
+	use_ability: consumable_major_healing_potion
+	level_range: [ 29 32 ]
+}
+
+#####################################################
+# Major Mana Potion (recipe drops in Gateway World 3)
+
+ability consumable_major_mana_potion (mana_potion):
+{
+	string: "Major Mana Potion"
+	description: "Restores 750 mana."
+	icon: icon_blue_potion_2
+	direct_effect modify_resource: { resource: mana function: 750 }
+	consume_items: { consumable_major_mana_potion: 1 }
+	required_level: 28
+}
+
+item consumable_major_mana_potion (mana_potion):
+{
+	icon: icon_blue_potion_2
+	string: "Major Mana Potion"
+	use_ability: consumable_major_mana_potion
+	level_range: [ 29 32 ]
+}
+
+#####################################################
+# Elixir of Infernal Vitality (recipe drops in Gateway World 3)
+
+aura consumable_elixir_of_infernal_vitality (elixir):
+{
+	string: "Elixir of Infernal Vitality"
+	icon: icon_purple_potion_2
+	duration: 12000
+	stat_modifiers: { health_per_5: { add: 25 } mana_per_5: { add: 25 } }
+}
+
+ability consumable_elixir_of_infernal_vitality (elixir):
+{
+	string: "Elixir of Infernal Vitality"
+	description: "Restores 25 health and 25 mana every 5 seconds for 20 minutes. You can only have the effect of one elixir at a time."
+	icon: icon_purple_potion_2
+	direct_effect apply_aura: { aura: consumable_elixir_of_infernal_vitality }
+	consume_items: { consumable_elixir_of_infernal_vitality: 1 }
+	required_level: 28
+}
+
+item consumable_elixir_of_infernal_vitality (elixir):
+{
+	icon: icon_purple_potion_2
+	string: "Elixir of Infernal Vitality"
+	flavor: "Thick, dark and faintly warm. Best not to ask what's in it."
+	use_ability: consumable_elixir_of_infernal_vitality
+}
+
+#####################################################
+# Fire Ward Potion (recipe drops in Gateway World 3)
+
+ability consumable_fire_ward_potion (potion):
+{
+	string: "Fire Ward Potion"
+	description: "Reduces Fire damage taken by 40% for 10 seconds."
+	icon: icon_orange_potion
+	consume_items: { consumable_fire_ward_potion: 1 }
+	required_level: 28
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Fire Ward Potion"
+			description: "Fire damage taken reduced by 40%."
+			icon: icon_orange_potion
+			type: buff
+			duration: 100
+			flags: [ unique magic ]
+			aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.6 }
+		}
+	}
+}
+
+item consumable_fire_ward_potion (potion):
+{
+	icon: icon_orange_potion
+	string: "Fire Ward Potion"
+	use_ability: consumable_fire_ward_potion
+}

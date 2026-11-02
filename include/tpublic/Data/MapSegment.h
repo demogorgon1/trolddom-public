@@ -91,6 +91,108 @@ namespace tpublic
 				uint32_t			m_id = 0; 
 			};
 
+			struct Entrance
+			{
+				Entrance()
+				{
+
+				}
+
+				Entrance(
+					const SourceNode*	aSource)
+				{
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "position")
+							m_position = aChild->GetVec2();
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					m_position.ToStream(aWriter);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!m_position.FromStream(aReader))
+						return false;
+					return true;
+				}
+
+				// Public data
+				Vec2					m_position;
+			};
+
+			struct Anchor
+			{
+				Anchor()
+				{
+
+				}
+
+				Anchor(
+					const SourceNode*	aSource)
+					: m_name(aSource->m_name)
+				{
+					bool hasPosition = false;
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "position")
+						{
+							m_position = aChild->GetVec2();
+							hasPosition = true;
+						}
+						else if(aChild->m_name == "entity_spawns")
+						{
+							aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawnIds);
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
+					});
+
+					TP_VERIFY(hasPosition, aSource->m_debugInfo, "Anchor '%s' has no position.", m_name.c_str());
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteString(m_name);
+					m_position.ToStream(aWriter);
+					aWriter->WriteUInts(m_mapEntitySpawnIds);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadString(m_name))
+						return false;
+					if(!m_position.FromStream(aReader))
+						return false;
+					if(!aReader->ReadUInts(m_mapEntitySpawnIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::string				m_name;
+				Vec2					m_position;
+				std::vector<uint32_t>	m_mapEntitySpawnIds;	// Default, can be overridden when placing the structure
+			};
+
 			struct PaletteEntry
 			{	
 				PaletteEntry()
@@ -322,6 +424,32 @@ namespace tpublic
 
 			struct TileMap
 			{
+				struct DoodadObject
+				{
+					void
+					ToStream(
+						IWriter*		aWriter) const
+					{
+						m_position.ToStream(aWriter);
+						aWriter->WriteUInt(m_doodadId);
+					}
+
+					bool
+					FromStream(
+						IReader*		aReader)
+					{
+						if(!m_position.FromStream(aReader))
+							return false;
+						if(!aReader->ReadUInt(m_doodadId))
+							return false;
+						return true;
+					}
+
+					// Public data
+					Vec2				m_position;
+					uint32_t			m_doodadId = 0;
+				};
+
 				TileMap()
 				{
 
@@ -483,6 +611,7 @@ namespace tpublic
 					aWriter->WriteUInts(m_tiles);
 					aWriter->WriteUInts(m_coverTiles);
 					aWriter->WriteObjects(m_objects);
+					aWriter->WriteObjects(m_doodads);
 				}
 
 				bool
@@ -501,7 +630,26 @@ namespace tpublic
 						return false;
 					if(!aReader->ReadObjects(m_objects))
 						return false;
+					if(!aReader->ReadObjects(m_doodads))
+						return false;
 					return true;
+				}
+
+				bool
+				IsSet(
+					const Vec2&			aPosition) const
+				{
+					if(aPosition.m_x < 0 || aPosition.m_y < 0 || aPosition.m_x >= m_size.m_x || aPosition.m_y >= m_size.m_y)
+						return false;
+					size_t i = (size_t)(aPosition.m_x + aPosition.m_y * m_size.m_x);
+					if(m_tiles[i] != 0 || (!m_coverTiles.empty() && m_coverTiles[i] != 0))
+						return true;
+					for(const DoodadObject& doodad : m_doodads)
+					{
+						if(doodad.m_position == aPosition)
+							return true;
+					}
+					return false;
 				}
 
 				void
@@ -520,6 +668,7 @@ namespace tpublic
 				std::vector<uint32_t>	m_tiles;
 				std::vector<uint32_t>	m_coverTiles;
 				std::vector<Object>		m_objects;
+				std::vector<DoodadObject> m_doodads;
 			};
 
 			struct TileMapModifier
@@ -652,6 +801,19 @@ namespace tpublic
 			}
 
 			// Base implementation
+			bool
+			HasAnchor(
+				const std::string&		aName) const
+			{
+				for(const Anchor& anchor : m_anchors)
+				{
+					if(anchor.m_name == aName)
+						return true;
+				}
+				return false;
+			}
+
+			// Base implementation
 			void
 			FromSource(
 				const SourceNode*		aSource) override
@@ -674,7 +836,9 @@ namespace tpublic
 				{
 					if(!FromSourceBase(aChild))
 					{
-						if(aChild->m_name == "string")
+						if(aChild->m_tag == "anchor")
+							m_anchors.push_back(Anchor(aChild));
+						else if(aChild->m_name == "string")
 							m_string = aChild->GetString();
 						else if (aChild->m_name == "palette" && m_type == TYPE_PALETTED)
 							palette = std::make_unique<Palette>(aChild);
@@ -686,10 +850,20 @@ namespace tpublic
 							m_tileMapModifiers.push_back(std::make_unique<TileMapModifier>(aChild));
 						else if(aChild->m_name == "underlying_tile")
 							m_underlyingTileSpriteId = aChild->GetId(DataType::ID_SPRITE);
+						else if(aChild->m_name == "entrance")
+							m_entrances.push_back(Entrance(aChild));
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
-				});			
+				});
+
+				TP_VERIFY(m_anchors.empty() || m_tileMap, aSource->m_debugInfo, "Anchors require a paletted map.");
+
+				for(const Entrance& entrance : m_entrances)
+				{
+					TP_VERIFY(m_tileMap, aSource->m_debugInfo, "Entrances require a paletted map.");
+					TP_VERIFY(!m_tileMap->IsSet(entrance.m_position), aSource->m_debugInfo, "Entrance (%d, %d) can't be on a tile of the map segment.", entrance.m_position.m_x, entrance.m_position.m_y);
+				}
 				
 				if(m_tileMap && m_tileMapModifiers.size() > 0)
 				{
@@ -708,6 +882,8 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_tileMapModifiers);
 				aStream->WriteString(m_string);
 				aStream->WriteUInt(m_underlyingTileSpriteId);
+				aStream->WriteObjects(m_entrances);
+				aStream->WriteObjects(m_anchors);
 			}
 
 			bool
@@ -726,6 +902,10 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadUInt(m_underlyingTileSpriteId))
 					return false;
+				if(!aStream->ReadObjects(m_entrances))
+					return false;
+				if(!aStream->ReadObjects(m_anchors))
+					return false;
 				return true;
 			}
 
@@ -736,6 +916,8 @@ namespace tpublic
 			std::vector<std::unique_ptr<TileMapModifier>>	m_tileMapModifiers;
 			std::unique_ptr<RandomRoom>						m_randomRoom;
 			uint32_t										m_underlyingTileSpriteId = 0;
+			std::vector<Entrance>							m_entrances;
+			std::vector<Anchor>								m_anchors;
 		};
 
 	}

@@ -19,5 +19,10 @@ map_segment wood_house_small_1<paletted>:
 		"#.....#"
 		"#.....#"
 		"XXXDXXX"
-	]		
+	]
+
+	# Tile just outside the door
+	entrance: { position: [ 3 5 ] }
+
+	anchor center: { position: [ 3 2 ] }
 }

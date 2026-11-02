@@ -185,7 +185,7 @@ item bag_brown_knapsack:
 	rarity: uncommon
 	string: "Brown Knapsack" 
 	bag_slots: 12
-	level_range: [ 26 30 ]
+	level_range: [ 26 32 ]
 }
 
 item bag_green_knapsack:
@@ -199,5 +199,5 @@ item bag_green_knapsack:
 	rarity: uncommon
 	string: "Green Knapsack" 
 	bag_slots: 12
-	level_range: [ 26 30 ]
+	level_range: [ 26 32 ]
 }

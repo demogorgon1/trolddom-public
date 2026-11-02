@@ -231,7 +231,7 @@ item item_mistveil:
 	icon: icon_fish_7
 	stack: 20
 	item_level: 20
-	level_range: [ 20 30 ]
+	level_range: [ 20 32 ]
 }
 
 ################################################################################
@@ -244,7 +244,7 @@ item item_skaldrun_snapper:
 	icon: icon_fish_8
 	stack: 20
 	item_level: 22
-	level_range: [ 21 30 ]
+	level_range: [ 21 32 ]
 }
 
 ################################################################################
@@ -257,7 +257,7 @@ item item_piranha:
 	icon: icon_fish_9
 	stack: 20
 	item_level: 22
-	level_range: [ 20 30 ]
+	level_range: [ 20 32 ]
 }
 
 ################################################################################
@@ -270,7 +270,7 @@ item item_lava_shrimp:
 	icon: icon_lava_shrimp
 	stack: 20
 	item_level: 25
-	level_range: [ 20 30 ]
+	level_range: [ 20 32 ]
 }
 
 ################################################################################
@@ -283,7 +283,7 @@ item item_slime_worms:
 	icon: icon_worm_2
 	stack: 20
 	item_level: 20
-	level_range: [ 18 30 ]
+	level_range: [ 18 32 ]
 }
 
 ################################################################################
@@ -296,7 +296,7 @@ item item_majestic_slime_eel:
 	icon: icon_eel_2
 	stack: 20
 	item_level: 20
-	level_range: [ 18 30 ]
+	level_range: [ 18 32 ]
 }
 ################################################################################
 # Ashiran Rustfin

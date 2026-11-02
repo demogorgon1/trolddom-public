@@ -4,8 +4,10 @@
 
 #include <tpublic/Data/Doodad.h>
 #include <tpublic/Data/Faction.h>
+#include <tpublic/Data/MapSegment.h>
 #include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/Noise.h>
+#include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/TagContext.h>
 #include <tpublic/Data/Terrain.h>
 
@@ -146,6 +148,69 @@ namespace tpublic::MapGenerators
 			}
 		}
 
+		// Structures
+		std::vector<uint32_t> coverMap;
+
+		for(const Structure& structure : m_structures)
+		{
+			const Data::MapSegment::TileMap* tileMap = structure.m_mapSegment->m_tileMap.get();
+
+			size_t i = 0;
+			for(int32_t y = 0; y < tileMap->m_size.m_y; y++)
+			{
+				for(int32_t x = 0; x < tileMap->m_size.m_x; x++)
+				{
+					size_t mapIndex = (size_t)(structure.m_position.m_x + x) + (size_t)(structure.m_position.m_y + y) * (size_t)m_width;
+
+					if(tileMap->m_tiles[i] != 0)
+						aOutMapData->m_tileMap[mapIndex] = tileMap->m_tiles[i];
+
+					if(!tileMap->m_coverTiles.empty() && tileMap->m_coverTiles[i] != 0)
+					{
+						if(coverMap.empty())
+							coverMap.resize((size_t)(m_width * m_height), 0);
+
+						coverMap[mapIndex] = tileMap->m_coverTiles[i];
+					}
+
+					i++;
+				}
+			}
+
+			for(const Data::MapSegment::Object& object : tileMap->m_objects)
+			{
+				switch(object.m_type)
+				{
+				case Data::MapSegment::OBJECT_TYPE_ENTITY_SPAWN:
+					{
+						MapData::EntitySpawn t;
+						t.m_mapEntitySpawnId = object.m_id;
+						t.m_x = structure.m_position.m_x + object.m_position.m_x;
+						t.m_y = structure.m_position.m_y + object.m_position.m_y;
+						aOutMapData->m_entitySpawns.push_back(t);
+					}
+					break;
+
+				case Data::MapSegment::OBJECT_TYPE_PORTAL:
+					{
+						MapData::Portal t;
+						t.m_id = object.m_id;
+						t.m_x = structure.m_position.m_x + object.m_position.m_x;
+						t.m_y = structure.m_position.m_y + object.m_position.m_y;
+						aOutMapData->m_portals.push_back(t);
+					}
+					break;
+
+				default:
+					TP_CHECK(false, "Map segment '%s' has objects that can't be used in a generated world.", structure.m_mapSegment->m_name.c_str());
+					break;
+				}
+			}
+
+			for(const MapData::EntitySpawn& entitySpawn : structure.m_anchorEntitySpawns)
+				aOutMapData->m_entitySpawns.push_back(entitySpawn);
+		}
+
 		// Player spawns
 		for (const std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
 		{
@@ -200,13 +265,57 @@ namespace tpublic::MapGenerators
 
 			const uint32_t* zoneMap = m_zoneMap.empty() ? NULL : &m_zoneMap[0];
 
+			std::vector<uint8_t> flags;
+			if(!coverMap.empty() && aOutMapData->m_mapInfo.m_autoIndoor)
+			{
+				flags.resize((size_t)(m_width * m_height), 0);
+				WorldInfoMap::AutoIndoor(m_manifest, (int32_t)m_width, (int32_t)m_height, &coverMap[0], &flags[0]);
+			}
+
 			aOutMapData->m_worldInfoMap = std::make_unique<WorldInfoMap>();
-			aOutMapData->m_worldInfoMap->Build(m_manifest, (int32_t)m_width, (int32_t)m_height, &levels[0], NULL, zoneMap, NULL);
+			aOutMapData->m_worldInfoMap->Build(m_manifest, (int32_t)m_width, (int32_t)m_height, &levels[0], NULL, zoneMap, flags.empty() ? NULL : &flags[0]);
+		}
+
+		// Roofs and other covers from structures
+		if(!coverMap.empty())
+		{
+			aOutMapData->m_mapCovers = std::make_unique<MapCovers>();
+			aOutMapData->m_mapCovers->Build((int32_t)m_width, (int32_t)m_height, &coverMap[0]);
 		}
 
 		// Doodads
 		{
 			std::unordered_map<Vec2, uint32_t, Vec2::Hasher> coverageMap;
+
+			if(!m_structureMap.empty())
+			{
+				for(int32_t y = 0; y < (int32_t)m_height; y++)
+				{
+					for(int32_t x = 0; x < (int32_t)m_width; x++)
+					{
+						if(m_structureMap[x + y * (int32_t)m_width] != STRUCTURE_MAP_NONE)
+							coverageMap[{ x, y }] = 1;
+					}
+				}
+			}
+
+			// Doodads that are part of structures go first, without placement checks
+			for(const Structure& structure : m_structures)
+			{
+				for(const Data::MapSegment::TileMap::DoodadObject& structureDoodad : structure.m_mapSegment->m_tileMap->m_doodads)
+				{
+					const Data::Doodad* doodadData = m_manifest->GetById<Data::Doodad>(structureDoodad.m_doodadId);
+					if(doodadData->m_spriteIds.empty())
+						continue;
+
+					Vec2 position = { structure.m_position.m_x + structureDoodad.m_position.m_x, structure.m_position.m_y + structureDoodad.m_position.m_y };
+					tpublic::UniformDistribution<size_t> distribution(0, doodadData->m_spriteIds.size() - 1);
+					aOutMapData->m_doodads[position] = doodadData->m_spriteIds[distribution(m_random)];
+
+					DoodadPlacement::AddToCoverageMap(doodadData, position, coverageMap);
+				}
+			}
+
 			for (const Doodad& doodad : m_doodads)
 			{
 				Vec2 mapSize = { (int32_t)m_width, (int32_t)m_height };
@@ -983,44 +1092,10 @@ namespace tpublic::MapGenerators
 			uint32_t mapEntitySpawnId = specialEntity.m_mapEntitySpawns[Roll(0, (uint32_t)specialEntity.m_mapEntitySpawns.size() - 1)];
 			Vec2 position = *m_walkable.cbegin();
 
-			switch(specialEntity.m_placement)
-			{
-			case SpecialEntity::PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS:
-				{
-					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
-					std::vector<Vec2> positions;
-					m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() - 8, positions);
-					if (positions.size() > 0)
-						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
-				}
-				break;
-
-			case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE:
-				{
-					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
-					TP_CHECK(specialEntity.m_range.has_value(), "Missing spawn distanace range.");
-					std::vector<Vec2> positions;
-					m_playerSpawnDistanceCombined->GetPositionsInRange(specialEntity.m_range->m_min, specialEntity.m_range->m_max, positions);
-					if (positions.size() > 0)
-						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
-				}
-				break;
-
-			case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE:
-				{
-					TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
-					TP_CHECK(specialEntity.m_range.has_value(), "Missing spawn distanace range.");
-					uint32_t maxDistance = m_playerSpawnDistanceCombined->GetMax();
-					std::vector<Vec2> positions;
-					m_playerSpawnDistanceCombined->GetPositionsInRange((specialEntity.m_range->m_min * maxDistance) / 100, (specialEntity.m_range->m_max * maxDistance) / 100, positions);
-					if (positions.size() > 0)
-						position = positions[Roll(0, (uint32_t)positions.size() - 1)];
-				}
-				break;
-
-			default:
-				break;
-			}
+			std::vector<Vec2> positions;
+			GetPlacementPositions(specialEntity.m_placement, specialEntity.m_range, positions);
+			if (positions.size() > 0)
+				position = positions[Roll(0, (uint32_t)positions.size() - 1)];
 
 			MapData::EntitySpawn t;
 			t.m_mapEntitySpawnId = mapEntitySpawnId;
@@ -1028,7 +1103,710 @@ namespace tpublic::MapGenerators
 			t.m_y = position.m_y;
 			m_entitySpawns.push_back(t);
 			m_entitySpawnPositions.insert({ t.m_x, t.m_y });
+			m_specialEntityPositions.insert(position);
 		}
+	}
+
+	void
+	World::Builder::GetPlacementPositions(
+		SpecialEntity::Placement			aPlacement,
+		const std::optional<UIntRange>&		aRange,
+		std::vector<Vec2>&					aOut) const
+	{
+		switch(aPlacement)
+		{
+		case SpecialEntity::PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS:
+			TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+			m_playerSpawnDistanceCombined->GetPositionsMoreThanValue(m_playerSpawnDistanceCombined->GetMax() - 8, aOut);
+			break;
+
+		case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE:
+			TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+			TP_CHECK(aRange.has_value(), "Missing spawn distance range.");
+			m_playerSpawnDistanceCombined->GetPositionsInRange(aRange->m_min, aRange->m_max, aOut);
+			break;
+
+		case SpecialEntity::PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE:
+			{
+				TP_CHECK(m_playerSpawnDistanceCombined, "No player spawn distance field.");
+				TP_CHECK(aRange.has_value(), "Missing spawn distance range.");
+				uint32_t maxDistance = m_playerSpawnDistanceCombined->GetMax();
+				m_playerSpawnDistanceCombined->GetPositionsInRange((aRange->m_min * maxDistance) / 100, (aRange->m_max * maxDistance) / 100, aOut);
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	void
+	World::Builder::InitStructures()
+	{
+		if(m_addStructures.empty())
+			return;
+
+		m_structureMap.resize((size_t)(m_width * m_height), STRUCTURE_MAP_NONE);
+
+		m_passableMap.resize((size_t)(m_width * m_height), 0);
+		for(const Vec2& position : m_walkable)
+			m_passableMap[(size_t)(position.m_x + position.m_y * (int32_t)m_width)] = 1;
+
+		// Things structures must never be placed on top of
+		std::set<Vec2> protectedPositions = m_specialEntityPositions;
+
+		for(const std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
+			protectedPositions.insert(playerSpawn->m_position);
+
+		for(const std::unique_ptr<Boss>& boss : m_bosses)
+		{
+			protectedPositions.insert(boss->m_position);
+
+			for(const MinorBoss& minorBoss : boss->m_subBosses)
+				protectedPositions.insert(minorBoss.m_position);
+		}
+
+		// Candidate positions are picked for a random entrance, then the rest of the structure is checked. Number of
+		// attempts is limited to keep it cheap, as maps are generated on the fly. If it fails the structure is skipped.
+		static const uint32_t MAX_ATTEMPTS = 64;
+
+		for(const Structures& structures : m_addStructures)
+		{
+			std::vector<Vec2> candidates;
+			if(structures.m_placement == SpecialEntity::INVALID_PLACEMENT)
+				candidates.assign(m_walkable.cbegin(), m_walkable.cend());
+			else
+				GetPlacementPositions(structures.m_placement, structures.m_range, candidates);
+
+			uint32_t count = Roll(structures.m_count.m_min, structures.m_count.m_max);
+
+			for(uint32_t i = 0; i < count && candidates.size() > 0; i++)
+			{
+				const Data::MapSegment* mapSegment = m_manifest->GetById<Data::MapSegment>(structures.m_mapSegmentIds[Roll(0, (uint32_t)structures.m_mapSegmentIds.size() - 1)]);
+				TP_CHECK(mapSegment->m_tileMap, "Map segment '%s' has no paletted map.", mapSegment->m_name.c_str());
+				TP_CHECK(mapSegment->m_entrances.size() > 0, "Map segment '%s' has no entrances.", mapSegment->m_name.c_str());
+
+				for(uint32_t attempt = 0; attempt < MAX_ATTEMPTS && candidates.size() > 0; attempt++)
+				{
+					uint32_t candidateIndex = Roll(0, (uint32_t)candidates.size() - 1);
+					Vec2 entrancePosition = candidates[candidateIndex];
+					Helpers::RemoveCyclicFromVector(candidates, (size_t)candidateIndex);
+
+					const Data::MapSegment::Entrance& entrance = mapSegment->m_entrances[Roll(0, (uint32_t)mapSegment->m_entrances.size() - 1)];
+					Vec2 position = { entrancePosition.m_x - entrance.m_position.m_x, entrancePosition.m_y - entrance.m_position.m_y };
+
+					std::vector<int32_t> path;
+					if(CanPlaceStructure(mapSegment, position, structures, protectedPositions) && KeepStructureConnected(mapSegment, position, path))
+					{
+						PlaceStructure(mapSegment, position, structures, path);
+						break;
+					}
+				}
+			}
+		}
+
+		// Remove entity spawns (monster packs, gathering nodes, etc) that ended up inside structures, on entrances, on paths or on anchors
+		std::erase_if(m_entitySpawns, [&](
+			const MapData::EntitySpawn& aEntitySpawn)
+		{
+			return m_structureMap[(size_t)(aEntitySpawn.m_x + aEntitySpawn.m_y * (int32_t)m_width)] != STRUCTURE_MAP_NONE;
+		});
+	}
+
+	bool
+	World::Builder::CanPlaceStructure(
+		const Data::MapSegment*				aMapSegment,
+		const Vec2&							aPosition,
+		const Structures&					aStructures,
+		const std::set<Vec2>&				aProtectedPositions) const
+	{
+		const Data::MapSegment::TileMap* tileMap = aMapSegment->m_tileMap.get();
+
+		if(aPosition.m_x < 0 || aPosition.m_y < 0 || aPosition.m_x + tileMap->m_size.m_x > (int32_t)m_width || aPosition.m_y + tileMap->m_size.m_y > (int32_t)m_height)
+			return false;
+
+		// Entrances must be part of the main walkable area (structures already placed have been removed from it)
+		for(const Data::MapSegment::Entrance& entrance : aMapSegment->m_entrances)
+		{
+			Vec2 p = { aPosition.m_x + entrance.m_position.m_x, aPosition.m_y + entrance.m_position.m_y };
+			if(!m_walkable.contains(p) || aProtectedPositions.contains(p))
+				return false;
+		}
+
+		// Anchors that will get something spawned on them, outside the structure, must be inside the map and free
+		for(const Data::MapSegment::Anchor& anchor : aMapSegment->m_anchors)
+		{
+			if(tileMap->IsSet(anchor.m_position) || aStructures.GetAnchorMapEntitySpawnIds(anchor).empty())
+				continue;
+
+			Vec2 p = { aPosition.m_x + anchor.m_position.m_x, aPosition.m_y + anchor.m_position.m_y };
+			if(p.m_x < 0 || p.m_y < 0 || p.m_x >= (int32_t)m_width || p.m_y >= (int32_t)m_height)
+				return false;
+			if(m_structureMap[(size_t)(p.m_x + p.m_y * (int32_t)m_width)] != STRUCTURE_MAP_NONE || aProtectedPositions.contains(p))
+				return false;
+		}
+
+		if(aStructures.m_minDistance > 0)
+		{
+			Vec2 center = { aPosition.m_x + tileMap->m_size.m_x / 2, aPosition.m_y + tileMap->m_size.m_y / 2 };
+			int32_t minDistanceSquared = (int32_t)(aStructures.m_minDistance * aStructures.m_minDistance);
+
+			for(const Structure& structure : m_structures)
+			{
+				const Data::MapSegment::TileMap* otherTileMap = structure.m_mapSegment->m_tileMap.get();
+				int32_t dx = structure.m_position.m_x + otherTileMap->m_size.m_x / 2 - center.m_x;
+				int32_t dy = structure.m_position.m_y + otherTileMap->m_size.m_y / 2 - center.m_y;
+				if(dx * dx + dy * dy < minDistanceSquared)
+					return false;
+			}
+		}
+
+		// Footprint can't cover other structures, their entrances, or protected entities
+		for(int32_t y = 0; y < tileMap->m_size.m_y; y++)
+		{
+			for(int32_t x = 0; x < tileMap->m_size.m_x; x++)
+			{
+				if(!tileMap->IsSet({ x, y }))
+					continue;
+
+				Vec2 p = { aPosition.m_x + x, aPosition.m_y + y };
+				if(m_structureMap[(size_t)(p.m_x + p.m_y * (int32_t)m_width)] != STRUCTURE_MAP_NONE || aProtectedPositions.contains(p))
+					return false;
+			}
+		}
+
+		return true;
+	}
+
+	void
+	World::Builder::PlaceStructure(
+		const Data::MapSegment*				aMapSegment,
+		const Vec2&							aPosition,
+		const Structures&					aStructures,
+		const std::vector<int32_t>&			aPath)
+	{
+		const Data::MapSegment::TileMap* tileMap = aMapSegment->m_tileMap.get();
+
+		Structure t;
+		t.m_mapSegment = aMapSegment;
+		t.m_position = aPosition;
+
+		for(const Data::MapSegment::Anchor& anchor : aMapSegment->m_anchors)
+		{
+			const std::vector<uint32_t>& mapEntitySpawnIds = aStructures.GetAnchorMapEntitySpawnIds(anchor);
+			if(mapEntitySpawnIds.empty())
+				continue;
+
+			Vec2 p = { aPosition.m_x + anchor.m_position.m_x, aPosition.m_y + anchor.m_position.m_y };
+			if(p.m_x < 0 || p.m_y < 0 || p.m_x >= (int32_t)m_width || p.m_y >= (int32_t)m_height)
+				continue; // Only possible for anchors on the structure itself, which is inside the map
+
+			MapData::EntitySpawn entitySpawn;
+			entitySpawn.m_mapEntitySpawnId = mapEntitySpawnIds[Roll(0, (uint32_t)mapEntitySpawnIds.size() - 1)];
+			entitySpawn.m_x = p.m_x;
+			entitySpawn.m_y = p.m_y;
+			t.m_anchorEntitySpawns.push_back(entitySpawn);
+
+			uint8_t& structureMapValue = m_structureMap[(size_t)(p.m_x + p.m_y * (int32_t)m_width)];
+			if(structureMapValue == STRUCTURE_MAP_NONE)
+				structureMapValue = STRUCTURE_MAP_ANCHOR;
+		}
+
+		m_structures.push_back(t);
+
+		std::vector<uint8_t> footprint;
+		GetStructureFootprint(aMapSegment, footprint);
+
+		for(int32_t y = 0; y < tileMap->m_size.m_y; y++)
+		{
+			for(int32_t x = 0; x < tileMap->m_size.m_x; x++)
+			{
+				if(!tileMap->IsSet({ x, y }))
+					continue;
+
+				Vec2 p = { aPosition.m_x + x, aPosition.m_y + y };
+				m_structureMap[(size_t)(p.m_x + p.m_y * (int32_t)m_width)] = STRUCTURE_MAP_FOOTPRINT;
+
+				uint8_t footprintValue = footprint[(size_t)(x + y * tileMap->m_size.m_x)];
+				if(footprintValue != FOOTPRINT_NONE)
+					m_passableMap[(size_t)(p.m_x + p.m_y * (int32_t)m_width)] = footprintValue == FOOTPRINT_WALKABLE ? 1 : 0;
+
+				// Keep later placement (routes, zone boundary entities) off the structure
+				m_walkable.erase(p);
+
+				if(m_playerSpawnDistanceCombined)
+					m_playerSpawnDistanceCombined->m_data[p.m_x + p.m_y * m_playerSpawnDistanceCombined->m_width] = UINT32_MAX;
+			}
+		}
+
+		for(const Data::MapSegment::Entrance& entrance : aMapSegment->m_entrances)
+		{
+			Vec2 p = { aPosition.m_x + entrance.m_position.m_x, aPosition.m_y + entrance.m_position.m_y };
+			if(p.m_x >= 0 && p.m_y >= 0 && p.m_x < (int32_t)m_width && p.m_y < (int32_t)m_height)
+				m_structureMap[(size_t)(p.m_x + p.m_y * (int32_t)m_width)] = STRUCTURE_MAP_ENTRANCE;
+		}
+
+		// Path that keeps the walkable area connected (already marked passable by KeepStructureConnected())
+		for(int32_t i : aPath)
+		{
+			const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(m_terrainMap[(size_t)i]);
+			if(!terrain->m_walkable)
+				m_terrainMap[(size_t)i] = terrain->m_connectConversion;
+
+			if(m_structureMap[(size_t)i] == STRUCTURE_MAP_NONE)
+				m_structureMap[(size_t)i] = STRUCTURE_MAP_PATH;
+
+			m_walkable.insert({ i % (int32_t)m_width, i / (int32_t)m_width });
+		}
+	}
+
+	void
+	World::Builder::GetStructureFootprint(
+		const Data::MapSegment*				aMapSegment,
+		std::vector<uint8_t>&				aOut) const
+	{
+		const Data::MapSegment::TileMap* tileMap = aMapSegment->m_tileMap.get();
+		aOut.resize(tileMap->m_tiles.size(), FOOTPRINT_NONE);
+
+		for(size_t i = 0; i < tileMap->m_tiles.size(); i++)
+		{
+			uint32_t tileSpriteId = tileMap->m_tiles[i];
+			if(tileSpriteId != 0)
+			{
+				const Data::Sprite* sprite = m_manifest->GetById<Data::Sprite>(tileSpriteId);
+				aOut[i] = (sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE) != 0 ? FOOTPRINT_WALKABLE : FOOTPRINT_BLOCKED;
+			}
+		}
+
+		for(const Data::MapSegment::TileMap::DoodadObject& doodad : tileMap->m_doodads)
+		{
+			const Data::Doodad* doodadData = m_manifest->GetById<Data::Doodad>(doodad.m_doodadId);
+			for(uint32_t spriteId : doodadData->m_spriteIds)
+			{
+				const Data::Sprite* sprite = m_manifest->GetById<Data::Sprite>(spriteId);
+				if((sprite->m_info.m_flags & SpriteInfo::FLAG_TILE_WALKABLE) == 0)
+				{
+					aOut[(size_t)(doodad.m_position.m_x + doodad.m_position.m_y * tileMap->m_size.m_x)] = FOOTPRINT_BLOCKED;
+					break;
+				}
+			}
+		}
+	}
+
+	bool
+	World::Builder::KeepStructureConnected(
+		const Data::MapSegment*				aMapSegment,
+		const Vec2&							aPosition,
+		std::vector<int32_t>&				aOutPath)
+	{
+		// The walkable area is connected before the structure is placed. Any path that crossed a position the structure
+		// blocks must have entered and left through a passable neighbor of a blocked position. This means that if all of
+		// these neighbors are still connected to each other, everything is. First this is checked in a small window
+		// around the structure, which is usually enough. If not, the groups found in the window are grown outwards
+		// in turns until they meet. A group that runs out of positions to grow into has been cut off from the rest,
+		// and a path is made for it around the structure.
+
+		static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+		static const size_t MAX_SEARCH = 4096;
+
+		const Data::MapSegment::TileMap* tileMap = aMapSegment->m_tileMap.get();
+		int32_t width = (int32_t)m_width;
+		int32_t height = (int32_t)m_height;
+
+		std::vector<uint8_t> footprint;
+		GetStructureFootprint(aMapSegment, footprint);
+
+		auto isPassable = [&](
+			const Vec2&		aP) -> bool
+		{
+			int32_t x = aP.m_x - aPosition.m_x;
+			int32_t y = aP.m_y - aPosition.m_y;
+			if(x >= 0 && y >= 0 && x < tileMap->m_size.m_x && y < tileMap->m_size.m_y)
+			{
+				uint8_t footprintValue = footprint[(size_t)(x + y * tileMap->m_size.m_x)];
+				if(footprintValue != FOOTPRINT_NONE)
+					return footprintValue == FOOTPRINT_WALKABLE;
+			}
+			return m_passableMap[(size_t)(aP.m_x + aP.m_y * width)] != 0;
+		};
+
+		auto isInMap = [&](
+			const Vec2&		aP) -> bool
+		{
+			return aP.m_x >= 0 && aP.m_y >= 0 && aP.m_x < width && aP.m_y < height;
+		};
+
+		// Passable neighbors of positions that become blocked by the structure
+		std::vector<Vec2> neighbors;
+		for(int32_t y = 0; y < tileMap->m_size.m_y; y++)
+		{
+			for(int32_t x = 0; x < tileMap->m_size.m_x; x++)
+			{
+				Vec2 p = { aPosition.m_x + x, aPosition.m_y + y };
+				if(footprint[(size_t)(x + y * tileMap->m_size.m_x)] != FOOTPRINT_BLOCKED || m_passableMap[(size_t)(p.m_x + p.m_y * width)] == 0)
+					continue;
+
+				for(const Vec2& offset : NEIGHBORS)
+				{
+					Vec2 n = { p.m_x + offset.m_x, p.m_y + offset.m_y };
+					if(isInMap(n) && isPassable(n))
+						neighbors.push_back(n);
+				}
+			}
+		}
+
+		if(neighbors.empty())
+			return true; // Doesn't block anything
+
+		if(m_groupMap.empty())
+		{
+			m_groupMap.resize((size_t)(width * height), 0);
+			m_groupStampMap.resize((size_t)(width * height), 0);
+		}
+
+		m_groupStamp++;
+
+		auto getGroup = [&](
+			const Vec2&		aP) -> uint32_t
+		{
+			size_t i = (size_t)(aP.m_x + aP.m_y * width);
+			return m_groupStampMap[i] == m_groupStamp ? m_groupMap[i] : UINT32_MAX;
+		};
+
+		auto setGroup = [&](
+			const Vec2&		aP,
+			uint32_t		aGroup)
+		{
+			size_t i = (size_t)(aP.m_x + aP.m_y * width);
+			m_groupStampMap[i] = m_groupStamp;
+			m_groupMap[i] = aGroup;
+		};
+
+		// Flood fill window around the structure, starting from each neighbor that isn't in a group yet
+		Vec2 windowMin = { (std::max)(aPosition.m_x - 1, 0), (std::max)(aPosition.m_y - 1, 0) };
+		Vec2 windowMax = { (std::min)(aPosition.m_x + tileMap->m_size.m_x, width - 1), (std::min)(aPosition.m_y + tileMap->m_size.m_y, height - 1) };
+
+		std::vector<std::vector<Vec2>> groupQueues;
+		size_t searched = 0;
+
+		for(const Vec2& start : neighbors)
+		{
+			if(getGroup(start) != UINT32_MAX)
+				continue;
+
+			uint32_t group = (uint32_t)groupQueues.size();
+			groupQueues.push_back({});
+			std::vector<Vec2>& groupPositions = groupQueues.back();
+
+			setGroup(start, group);
+			groupPositions.push_back(start);
+
+			for(size_t i = 0; i < groupPositions.size(); i++)
+			{
+				Vec2 p = groupPositions[i];
+
+				for(const Vec2& offset : NEIGHBORS)
+				{
+					Vec2 n = { p.m_x + offset.m_x, p.m_y + offset.m_y };
+					if(n.m_x >= windowMin.m_x && n.m_y >= windowMin.m_y && n.m_x <= windowMax.m_x && n.m_y <= windowMax.m_y && getGroup(n) == UINT32_MAX && isPassable(n))
+					{
+						setGroup(n, group);
+						groupPositions.push_back(n);
+					}
+				}
+			}
+
+			searched += groupPositions.size();
+		}
+
+		if(groupQueues.size() == 1)
+			return true; // All connected around (or through) the structure
+
+		// Grow the groups outwards in turns (without window limit). Groups that meet are merged.
+		size_t groupCount = groupQueues.size();
+		std::vector<uint32_t> groupRoots(groupCount);
+		std::vector<size_t> groupSizes(groupCount);
+		std::vector<size_t> queueHeads(groupCount, 0);
+		for(size_t i = 0; i < groupCount; i++)
+		{
+			groupRoots[i] = (uint32_t)i;
+			groupSizes[i] = groupQueues[i].size();
+		}
+
+		auto findRoot = [&](
+			uint32_t		aGroup) -> uint32_t
+		{
+			while(groupRoots[aGroup] != aGroup)
+			{
+				groupRoots[aGroup] = groupRoots[groupRoots[aGroup]];
+				aGroup = groupRoots[aGroup];
+			}
+			return aGroup;
+		};
+
+		std::vector<bool> activeRoots(groupCount);
+		std::vector<bool> allRoots(groupCount);
+
+		for(;;)
+		{
+			std::fill(activeRoots.begin(), activeRoots.end(), false);
+			std::fill(allRoots.begin(), allRoots.end(), false);
+			size_t activeRootCount = 0;
+			size_t rootCount = 0;
+
+			for(size_t i = 0; i < groupCount; i++)
+			{
+				uint32_t root = findRoot((uint32_t)i);
+
+				if(!allRoots[root])
+				{
+					allRoots[root] = true;
+					rootCount++;
+				}
+
+				if(queueHeads[i] < groupQueues[i].size() && !activeRoots[root])
+				{
+					activeRoots[root] = true;
+					activeRootCount++;
+				}
+			}
+
+			if(rootCount == 1)
+				return true; // Groups met, all connected
+
+			if(activeRootCount <= 1)
+				break; // Everything else has been cut off
+
+			for(size_t i = 0; i < groupCount; i++)
+			{
+				if(queueHeads[i] == groupQueues[i].size())
+					continue;
+
+				Vec2 p = groupQueues[i][queueHeads[i]++];
+
+				for(const Vec2& offset : NEIGHBORS)
+				{
+					Vec2 n = { p.m_x + offset.m_x, p.m_y + offset.m_y };
+					if(!isInMap(n) || !isPassable(n))
+						continue;
+
+					uint32_t otherGroup = getGroup(n);
+					if(otherGroup == UINT32_MAX)
+					{
+						setGroup(n, (uint32_t)i);
+						groupQueues[i].push_back(n);
+						groupSizes[i]++;
+						searched++;
+					}
+					else
+					{
+						uint32_t root = findRoot((uint32_t)i);
+						uint32_t otherRoot = findRoot(otherGroup);
+						if(root != otherRoot)
+							groupRoots[(std::max)(root, otherRoot)] = (std::min)(root, otherRoot);
+					}
+				}
+			}
+
+			if(searched > MAX_SEARCH)
+				return false; // Too expensive, try somewhere else
+		}
+
+		// The main area is the group still growing (or the largest if they all stopped at the same time)
+		uint32_t mainRoot = UINT32_MAX;
+		{
+			std::vector<size_t> rootSizes(groupCount, 0);
+			for(size_t i = 0; i < groupCount; i++)
+				rootSizes[findRoot((uint32_t)i)] += groupSizes[i];
+
+			for(uint32_t i = 0; i < (uint32_t)groupCount; i++)
+			{
+				if(activeRoots[i])
+				{
+					mainRoot = i;
+					break;
+				}
+
+				if(allRoots[i] && (mainRoot == UINT32_MAX || rootSizes[i] > rootSizes[mainRoot]))
+					mainRoot = i;
+			}
+		}
+
+		// Connect each cut off group with a path
+		std::vector<bool> unconnectedRoots(groupCount, false);
+		for(uint32_t i = 0; i < (uint32_t)groupCount; i++)
+			unconnectedRoots[i] = allRoots[i] && i != mainRoot;
+
+		for(uint32_t i = 0; i < (uint32_t)groupCount; i++)
+		{
+			if(!unconnectedRoots[i])
+				continue;
+
+			if(!FindStructurePocketPath(aMapSegment, aPosition, footprint, groupRoots, unconnectedRoots, i, aOutPath))
+			{
+				// Undo paths made for other groups
+				for(int32_t j : aOutPath)
+					m_passableMap[(size_t)j] = 0;
+				aOutPath.clear();
+				return false;
+			}
+
+			unconnectedRoots[i] = false;
+		}
+
+		return true;
+	}
+
+	bool
+	World::Builder::FindStructurePocketPath(
+		const Data::MapSegment*				aMapSegment,
+		const Vec2&							aPosition,
+		const std::vector<uint8_t>&			aFootprint,
+		const std::vector<uint32_t>&		aGroupRoots,
+		const std::vector<bool>&			aUnconnectedRoots,
+		uint32_t							aPocketRoot,
+		std::vector<int32_t>&				aOutPath)
+	{
+		// Cheapest path in a band around the structure from the pocket to anything passable that isn't cut off. Already
+		// passable positions cost nothing, other terrain costs its connect cost plus noise and is converted like when 
+		// walkable areas are connected.
+
+		static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+		static const int32_t BAND = 3;
+
+		const Data::MapSegment::TileMap* tileMap = aMapSegment->m_tileMap.get();
+		int32_t width = (int32_t)m_width;
+
+		Vec2 bandMin = { (std::max)(aPosition.m_x - BAND, 0), (std::max)(aPosition.m_y - BAND, 0) };
+		Vec2 bandMax = { (std::min)(aPosition.m_x + tileMap->m_size.m_x - 1 + BAND, width - 1), (std::min)(aPosition.m_y + tileMap->m_size.m_y - 1 + BAND, (int32_t)m_height - 1) };
+		Vec2 bandSize = { bandMax.m_x - bandMin.m_x + 1, bandMax.m_y - bandMin.m_y + 1 };
+
+		auto getRoot = [&](
+			size_t			aMapIndex) -> uint32_t
+		{
+			if(m_groupStampMap[aMapIndex] != m_groupStamp)
+				return UINT32_MAX;
+			uint32_t group = m_groupMap[aMapIndex];
+			while(aGroupRoots[group] != group)
+				group = aGroupRoots[group];
+			return group;
+		};
+
+		// Cost of entering a position, UINT32_MAX if it can't be part of the path
+		auto getCost = [&](
+			const Vec2&		aP,
+			bool&			aOutPassable) -> uint32_t
+		{
+			aOutPassable = false;
+
+			int32_t x = aP.m_x - aPosition.m_x;
+			int32_t y = aP.m_y - aPosition.m_y;
+			if(x >= 0 && y >= 0 && x < tileMap->m_size.m_x && y < tileMap->m_size.m_y)
+			{
+				uint8_t footprintValue = aFootprint[(size_t)(x + y * tileMap->m_size.m_x)];
+				if(footprintValue == FOOTPRINT_BLOCKED)
+					return UINT32_MAX;
+				if(footprintValue == FOOTPRINT_WALKABLE)
+				{
+					aOutPassable = true;
+					return 0;
+				}
+			}
+
+			size_t i = (size_t)(aP.m_x + aP.m_y * width);
+			if(m_passableMap[i] != 0)
+			{
+				aOutPassable = true;
+				return 0;
+			}
+
+			if(m_structureMap[i] == STRUCTURE_MAP_FOOTPRINT)
+				return UINT32_MAX; // Another structure
+
+			const Data::Terrain* terrain = m_manifest->GetById<Data::Terrain>(m_terrainMap[i]);
+			if(terrain->m_connectConversion == 0 || !m_manifest->GetById<Data::Terrain>(terrain->m_connectConversion)->m_walkable)
+				return UINT32_MAX;
+
+			// Noise makes paths less straight (and differ between structures)
+			return 1 + terrain->m_connectCost + SampleNoiseMap(aP);
+		};
+
+		std::vector<uint32_t> distances((size_t)(bandSize.m_x * bandSize.m_y), UINT32_MAX);
+		std::vector<int32_t> previous((size_t)(bandSize.m_x * bandSize.m_y), -1);
+		std::set<std::pair<uint32_t, int32_t>> queue; // Distance and band index, ordered for the same result on all platforms
+
+		for(int32_t y = bandMin.m_y; y <= bandMax.m_y; y++)
+		{
+			for(int32_t x = bandMin.m_x; x <= bandMax.m_x; x++)
+			{
+				if(getRoot((size_t)(x + y * width)) == aPocketRoot)
+				{
+					int32_t bandIndex = (x - bandMin.m_x) + (y - bandMin.m_y) * bandSize.m_x;
+					distances[(size_t)bandIndex] = 0;
+					queue.insert({ 0, bandIndex });
+				}
+			}
+		}
+
+		while(queue.size() > 0)
+		{
+			auto [distance, bandIndex] = *queue.begin();
+			queue.erase(queue.begin());
+
+			if(distance > distances[(size_t)bandIndex])
+				continue;
+
+			Vec2 p = { bandMin.m_x + bandIndex % bandSize.m_x, bandMin.m_y + bandIndex / bandSize.m_x };
+			size_t mapIndex = (size_t)(p.m_x + p.m_y * width);
+
+			bool passable;
+			getCost(p, passable);
+
+			if(passable)
+			{
+				uint32_t root = getRoot(mapIndex);
+				if(root == UINT32_MAX || !aUnconnectedRoots[root])
+				{
+					// Reached the main area: make the path passable
+					for(int32_t i = bandIndex; i != -1; i = previous[(size_t)i])
+					{
+						Vec2 q = { bandMin.m_x + i % bandSize.m_x, bandMin.m_y + i / bandSize.m_x };
+						int32_t j = q.m_x + q.m_y * width;
+						bool pathPassable;
+						getCost(q, pathPassable);
+						if(!pathPassable)
+						{
+							m_passableMap[(size_t)j] = 1;
+							aOutPath.push_back(j);
+						}
+					}
+					return true;
+				}
+			}
+
+			for(const Vec2& offset : NEIGHBORS)
+			{
+				Vec2 n = { p.m_x + offset.m_x, p.m_y + offset.m_y };
+				if(n.m_x < bandMin.m_x || n.m_y < bandMin.m_y || n.m_x > bandMax.m_x || n.m_y > bandMax.m_y)
+					continue;
+
+				bool neighborPassable;
+				uint32_t cost = getCost(n, neighborPassable);
+				if(cost == UINT32_MAX)
+					continue;
+
+				int32_t neighborBandIndex = (n.m_x - bandMin.m_x) + (n.m_y - bandMin.m_y) * bandSize.m_x;
+				uint32_t neighborDistance = distance + cost;
+				if(neighborDistance < distances[(size_t)neighborBandIndex])
+				{
+					distances[(size_t)neighborBandIndex] = neighborDistance;
+					previous[(size_t)neighborBandIndex] = bandIndex;
+					queue.insert({ neighborDistance, neighborBandIndex });
+				}
+			}
+		}
+
+		return false;
 	}
 
 	void			
@@ -1142,6 +1920,7 @@ namespace tpublic::MapGenerators
 		Register<ExecuteAddSpecialEntitySpawn>();
 		Register<ExecuteAddRandomRoute>();
 		Register<ExecuteAddPlayerSpawnZoneBoundaryEntity>();
+		Register<ExecuteAddStructures>();
 	}
 
 	World::IExecuteFactory::~IExecuteFactory()
@@ -1781,6 +2560,13 @@ namespace tpublic::MapGenerators
 	}
 
 	void				
+	World::ExecuteAddStructures::Run(
+		Builder*						aBuilder) const
+	{
+		aBuilder->m_addStructures.push_back(m_structures);
+	}
+
+	void
 	World::ExecuteAddRandomRoute::Run(
 		Builder*						aBuilder) const
 	{
@@ -1944,6 +2730,7 @@ namespace tpublic::MapGenerators
 		builder.InitBosses();
 		builder.InitPlayerSpawns();
 		builder.InitSpecialEntities();
+		builder.InitStructures();
 		builder.InitRoutes();
 		builder.InitZones();
 
@@ -1959,6 +2746,76 @@ namespace tpublic::MapGenerators
 			aOutMapData->WriteDebugTileMapPNG(aManifest, aDebugImagePath);
 
 		return true;
+	}
+
+	void
+	World::Validate(
+		const Manifest*					aManifest,
+		const char*						aMapName,
+		std::unordered_set<std::string>& aOutErrors) const
+	{
+		std::function<void(const CompoundExecute&)> validateCompound = [&](
+			const CompoundExecute&		aCompound)
+		{
+			for(const std::unique_ptr<IExecute>& execute : aCompound.m_children)
+			{
+				switch(execute->m_header.m_type)
+				{
+				case IExecute::TYPE_ALL:
+					validateCompound(((const ExecuteAll*)execute.get())->m_compound);
+					break;
+
+				case IExecute::TYPE_ONE_OF:
+					validateCompound(((const ExecuteOneOf*)execute.get())->m_compound);
+					break;
+
+				case IExecute::TYPE_ADD_STRUCTURES:
+					{
+						const Structures& structures = ((const ExecuteAddStructures*)execute.get())->m_structures;
+
+						for(uint32_t mapSegmentId : structures.m_mapSegmentIds)
+						{
+							const Data::MapSegment* mapSegment = aManifest->GetById<Data::MapSegment>(mapSegmentId);
+							if(!mapSegment->m_tileMap)
+								aOutErrors.insert(Helpers::Format("Map '%s' places structure '%s', which has no paletted map.", aMapName, mapSegment->m_name.c_str()));
+							else if(mapSegment->m_entrances.empty())
+								aOutErrors.insert(Helpers::Format("Map '%s' places structure '%s', which has no entrances.", aMapName, mapSegment->m_name.c_str()));
+
+							if(mapSegment->m_tileMap)
+							{
+								for(const Data::MapSegment::Object& object : mapSegment->m_tileMap->m_objects)
+								{
+									if(object.m_type != Data::MapSegment::OBJECT_TYPE_ENTITY_SPAWN && object.m_type != Data::MapSegment::OBJECT_TYPE_PORTAL)
+										aOutErrors.insert(Helpers::Format("Map '%s' places structure '%s', which has objects that can't be used in a generated world.", aMapName, mapSegment->m_name.c_str()));
+								}
+							}
+						}
+
+						for(const Structures::AnchorSpawn& anchorSpawn : structures.m_anchorSpawns)
+						{
+							bool found = false;
+							for(uint32_t mapSegmentId : structures.m_mapSegmentIds)
+							{
+								if(aManifest->GetById<Data::MapSegment>(mapSegmentId)->HasAnchor(anchorSpawn.m_anchor))
+								{
+									found = true;
+									break;
+								}
+							}
+
+							if(!found)
+								aOutErrors.insert(Helpers::Format("Map '%s' has a spawn for anchor '%s', but none of its structures have that anchor.", aMapName, anchorSpawn.m_anchor.c_str()));
+						}
+					}
+					break;
+
+				default:
+					break;
+				}
+			}
+		};
+
+		validateCompound(m_executes);
 	}
 
 	//---------------------------------------------------------------------------------

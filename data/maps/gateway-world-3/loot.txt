@@ -1,0 +1,32 @@
+# Reagents that only drop in Gateway World 3 (see the map loot table in gateway-world-3.txt)
+
+loot_group gateway_world_3_infernal_ash: {}
+loot_group gateway_world_3_demon_ichor: {}
+
+item item_infernal_ash:
+{
+	type: miscellaneous
+	item_level: 31
+	level_range: [ 31 32 ]
+	icon: icon_mud_essence_1
+	rarity: common
+	string: "Infernal Ash"
+	flavor: "Still warm."
+	stack: 20
+	loot_groups: [ gateway_world_3_infernal_ash ]
+	tags: [ reagent ]
+}
+
+item item_demon_ichor:
+{
+	type: miscellaneous
+	item_level: 31
+	level_range: [ 31 32 ]
+	icon: icon_vial_1
+	rarity: uncommon
+	string: "Demon Ichor"
+	flavor: "It hisses when exposed to air."
+	stack: 10
+	loot_groups: [ gateway_world_3_demon_ichor ]
+	tags: [ reagent ]
+}

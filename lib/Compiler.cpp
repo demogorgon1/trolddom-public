@@ -47,6 +47,7 @@
 #include "PostProcessWorldMaps.h"
 #include "SoundDataBuilder.h"
 #include "SpriteSheetBuilder.h"
+#include "StructureSheetBuilder.h"
 
 namespace tpublic
 {
@@ -169,6 +170,7 @@ namespace tpublic
 		nwork::ThreadPool threadPool(&workQueue);
 
 		SpriteSheetBuilder spriteSheetBuilder(1024);
+		StructureSheetBuilder structureSheetBuilder;
 		std::vector<std::unique_ptr<GenerationJob>> generationJobs;
 
 		m_sourceContext.m_persistentIdTable->Load(aPersistentIdTablePath);
@@ -208,7 +210,7 @@ namespace tpublic
 
 			try
 			{
-				_ProcessNode(&spriteSheetBuilder, &generationJobs, aNode);
+				_ProcessNode(&spriteSheetBuilder, &structureSheetBuilder, &generationJobs, aNode);
 			}
 			catch(BuildError& e)
 			{
@@ -228,7 +230,25 @@ namespace tpublic
 
 		// Validate/prune persistent ids and build map data
 		{
-			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);			
+			spriteSheetBuilder.ExportPreliminaryManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
+
+			// Structures from structure sheets become map segments (palettes are defined now)
+			{
+				DataErrorHandling::ScopedErrorCallback scopedErrorCallback([&](
+					const char* aString)
+				{
+					throw BuildError{ aString };
+				});
+
+				try
+				{
+					structureSheetBuilder.ExportManifestData(m_sourceContext.m_persistentIdTable.get(), m_manifest);
+				}
+				catch(BuildError& e)
+				{
+					_OnBuildError(e);
+				}
+			}			
 
 			PostProcessItems::DefineVariantIds(m_manifest, m_sourceContext.m_persistentIdTable.get());
 
@@ -570,6 +590,7 @@ namespace tpublic
 	void	
 	Compiler::_ProcessNode(
 		SpriteSheetBuilder*								aSpriteSheetBuilder,
+		StructureSheetBuilder*							aStructureSheetBuilder,
 		std::vector<std::unique_ptr<GenerationJob>>*	aGenerationJobs,
 		const SourceNode*								aNode)
 	{
@@ -624,6 +645,10 @@ namespace tpublic
 		else if (aNode->m_name == "sprites")
 		{
 			aSpriteSheetBuilder->AddSprites(aNode);
+		}
+		else if (aNode->m_name == "structure_sheets")
+		{
+			aStructureSheetBuilder->AddStructureSheet(aNode);
 		}
 		else if (aNode->m_name == "word_list")
 		{

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Data/Entity.h"
+#include "../Data/MapSegment.h"
 
 #include "../MapData.h"
 #include "../MapGeneratorBase.h"
@@ -254,6 +255,20 @@ namespace tpublic::MapGenerators
 				PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE,
 			};
 
+			static Placement
+			SourceToPlacement(
+				const SourceNode*						aSource)
+			{
+				if(aSource->IsIdentifier("far_away_from_player_spawns"))
+					return PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS;
+				if(aSource->IsIdentifier("in_player_spawn_distance_range"))
+					return PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE;
+				if(aSource->IsIdentifier("in_player_spawn_distance_range_percentage"))
+					return PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE;
+				TP_VERIFY(false, aSource->m_debugInfo, "Not a valid placement.");
+				return INVALID_PLACEMENT;
+			}
+
 			SpecialEntity()
 			{
 
@@ -273,12 +288,8 @@ namespace tpublic::MapGenerators
 							TP_VERIFY(false, aChild->m_annotation->m_debugInfo, "Invalid annotation.");
 					}
 
-					if(aChild->m_name == "placement" && aChild->IsIdentifier("far_away_from_player_spawns"))
-						m_placement = PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS;
-					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range"))
-						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE;
-					else if (aChild->m_name == "placement" && aChild->IsIdentifier("in_player_spawn_distance_range_percentage"))
-						m_placement = PLACEMENT_IN_PLAYER_SPAWN_DISTANCE_RANGE_PERCENTAGE;
+					if(aChild->m_name == "placement")
+						m_placement = SourceToPlacement(aChild);
 					else if(aChild->m_name == "entity_spawn")
 						aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawns);
 					else
@@ -312,6 +323,156 @@ namespace tpublic::MapGenerators
 			Placement								m_placement = INVALID_PLACEMENT;
 			std::vector<uint32_t>					m_mapEntitySpawns;
 			std::optional<UIntRange>				m_range;
+		};
+
+		struct Structures
+		{
+			struct AnchorSpawn
+			{
+				AnchorSpawn()
+				{
+
+				}
+
+				AnchorSpawn(
+					const SourceNode*					aSource)
+					: m_anchor(aSource->m_name)
+				{
+					// An empty list means nothing is spawned, even if the anchor has a default
+					aSource->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawnIds);
+				}
+
+				void
+				ToStream(
+					IWriter*							aWriter) const
+				{
+					aWriter->WriteString(m_anchor);
+					aWriter->WriteUInts(m_mapEntitySpawnIds);
+				}
+
+				bool
+				FromStream(
+					IReader*							aReader)
+				{
+					if(!aReader->ReadString(m_anchor))
+						return false;
+					if(!aReader->ReadUInts(m_mapEntitySpawnIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				std::string							m_anchor;
+				std::vector<uint32_t>				m_mapEntitySpawnIds;
+			};
+
+			Structures()
+			{
+
+			}
+
+			Structures(
+				const SourceNode*						aSource)
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_tag == "anchor")
+					{
+						TP_VERIFY(GetAnchorSpawn(aChild->m_name) == NULL, aChild->m_debugInfo, "Anchor '%s' already specified.", aChild->m_name.c_str());
+						m_anchorSpawns.push_back(AnchorSpawn(aChild));
+					}
+					else if(aChild->m_name == "map_segments")
+					{
+						aChild->GetIdArray(DataType::ID_MAP_SEGMENT, m_mapSegmentIds);
+					}
+					else if(aChild->m_name == "count")
+					{
+						m_count = UIntRange(aChild);
+					}
+					else if(aChild->m_name == "min_distance")
+					{
+						m_minDistance = aChild->GetUInt32();
+					}
+					else if(aChild->m_name == "placement")
+					{
+						m_placement = SpecialEntity::SourceToPlacement(aChild);
+
+						if(aChild->m_annotation)
+						{
+							TP_VERIFY(aChild->m_annotation->m_children.size() == 2 && aChild->m_annotation->IsArrayType(SourceNode::TYPE_NUMBER), aChild->m_annotation->m_debugInfo, "Invalid annotation.");
+							m_range = UIntRange(aChild->m_annotation.get());
+						}
+
+						TP_VERIFY(m_placement == SpecialEntity::PLACEMENT_FAR_AWAY_FROM_PLAYER_SPAWNS || m_range.has_value(), aChild->m_debugInfo, "Placement requires a range.");
+					}
+					else
+					{
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					}
+				});
+
+				TP_VERIFY(m_mapSegmentIds.size() > 0, aSource->m_debugInfo, "No map segments specified.");
+			}
+
+			void
+			ToStream(
+				IWriter*								aWriter) const
+			{
+				aWriter->WriteUInts(m_mapSegmentIds);
+				m_count.ToStream(aWriter);
+				aWriter->WriteUInt(m_minDistance);
+				aWriter->WritePOD(m_placement);
+				aWriter->WriteOptionalObject(m_range);
+				aWriter->WriteObjects(m_anchorSpawns);
+			}
+
+			bool
+			FromStream(
+				IReader*								aReader)
+			{
+				if(!aReader->ReadUInts(m_mapSegmentIds))
+					return false;
+				if(!m_count.FromStream(aReader))
+					return false;
+				if(!aReader->ReadUInt(m_minDistance))
+					return false;
+				if(!aReader->ReadPOD(m_placement))
+					return false;
+				if(!aReader->ReadOptionalObject(m_range))
+					return false;
+				if(!aReader->ReadObjects(m_anchorSpawns))
+					return false;
+				return true;
+			}
+
+			const AnchorSpawn*
+			GetAnchorSpawn(
+				const std::string&						aAnchor) const
+			{
+				for(const AnchorSpawn& anchorSpawn : m_anchorSpawns)
+				{
+					if(anchorSpawn.m_anchor == aAnchor)
+						return &anchorSpawn;
+				}
+				return NULL;
+			}
+
+			const std::vector<uint32_t>&
+			GetAnchorMapEntitySpawnIds(
+				const Data::MapSegment::Anchor&			aAnchor) const
+			{
+				const AnchorSpawn* anchorSpawn = GetAnchorSpawn(aAnchor.m_name);
+				return anchorSpawn != NULL ? anchorSpawn->m_mapEntitySpawnIds : aAnchor.m_mapEntitySpawnIds;
+			}
+
+			// Public data
+			std::vector<uint32_t>					m_mapSegmentIds;
+			UIntRange								m_count = UIntRange(1);
+			uint32_t								m_minDistance = 0;
+			SpecialEntity::Placement				m_placement = SpecialEntity::INVALID_PLACEMENT;
+			std::optional<UIntRange>				m_range;
+			std::vector<AnchorSpawn>				m_anchorSpawns;
 		};
 
 		struct Builder
@@ -348,6 +509,36 @@ namespace tpublic::MapGenerators
 			void			InitBosses();
 			void			InitPlayerSpawns();
 			void			InitSpecialEntities();
+			void			GetPlacementPositions(
+								SpecialEntity::Placement			aPlacement,
+								const std::optional<UIntRange>&		aRange,
+								std::vector<Vec2>&					aOut) const;
+			void			InitStructures();
+			bool			CanPlaceStructure(
+								const Data::MapSegment*				aMapSegment,
+								const Vec2&							aPosition,
+								const Structures&					aStructures,
+								const std::set<Vec2>&				aProtectedPositions) const;
+			void			GetStructureFootprint(
+								const Data::MapSegment*				aMapSegment,
+								std::vector<uint8_t>&				aOut) const;
+			bool			KeepStructureConnected(
+								const Data::MapSegment*				aMapSegment,
+								const Vec2&							aPosition,
+								std::vector<int32_t>&				aOutPath);
+			bool			FindStructurePocketPath(
+								const Data::MapSegment*				aMapSegment,
+								const Vec2&							aPosition,
+								const std::vector<uint8_t>&			aFootprint,
+								const std::vector<uint32_t>&		aGroupRoots,
+								const std::vector<bool>&			aUnconnectedRoots,
+								uint32_t							aPocketRoot,
+								std::vector<int32_t>&				aOutPath);
+			void			PlaceStructure(
+								const Data::MapSegment*				aMapSegment,
+								const Vec2&							aPosition,
+								const Structures&					aStructures,
+								const std::vector<int32_t>&			aPath);
 			void			InitRoutes();
 			void			InitZones();
 
@@ -450,6 +641,29 @@ namespace tpublic::MapGenerators
 				uint32_t									m_entityId = 0;
 			};
 
+			struct Structure
+			{
+				const Data::MapSegment*						m_mapSegment = NULL;
+				Vec2										m_position;
+				std::vector<MapData::EntitySpawn>			m_anchorEntitySpawns;
+			};
+
+			enum StructureMapValue : uint8_t
+			{
+				STRUCTURE_MAP_NONE,
+				STRUCTURE_MAP_FOOTPRINT,
+				STRUCTURE_MAP_ENTRANCE,
+				STRUCTURE_MAP_PATH,
+				STRUCTURE_MAP_ANCHOR
+			};
+
+			enum FootprintValue : uint8_t
+			{
+				FOOTPRINT_NONE,			// Not part of the structure, or only a cover tile: terrain decides
+				FOOTPRINT_BLOCKED,
+				FOOTPRINT_WALKABLE
+			};
+
 			std::vector<std::unique_ptr<Boss>>				m_bosses;
 			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
 			std::vector<std::unique_ptr<PlayerSpawn>>		m_playerSpawns;
@@ -457,6 +671,14 @@ namespace tpublic::MapGenerators
 			std::vector<LevelMapPoint>						m_levelMap;
 			std::vector<Doodad>								m_doodads;
 			std::vector<SpecialEntity>						m_specialEntities;
+			std::set<Vec2>									m_specialEntityPositions;
+			std::vector<Structures>							m_addStructures;
+			std::vector<Structure>							m_structures;
+			std::vector<uint8_t>							m_structureMap;
+			std::vector<uint8_t>							m_passableMap;			// Main walkable area, including walkable structure tiles
+			std::vector<uint32_t>							m_groupMap;				// Connectivity search group per position, valid where m_groupStampMap matches m_groupStamp
+			std::vector<uint32_t>							m_groupStampMap;
+			uint32_t										m_groupStamp = 0;
 			std::vector<std::unique_ptr<Route>>				m_routes;
 			std::vector<uint32_t>							m_zoneMap;
 			std::vector<PlayerSpawnZoneBoundaryEntity>		m_playerSpawnZoneBoundaryEntities;
@@ -488,6 +710,7 @@ namespace tpublic::MapGenerators
 				TYPE_ADD_SPECIAL_ENTITY_SPAWN,
 				TYPE_ADD_RANDOM_ROUTE,
 				TYPE_ADD_PLAYER_SPAWN_ZONE_BOUNDARY_ENTITY,
+				TYPE_ADD_STRUCTURES,
 
 				NUM_TYPES
 			};
@@ -533,6 +756,8 @@ namespace tpublic::MapGenerators
 					return TYPE_ADD_RANDOM_ROUTE;
 				else if (t == "add_player_spawn_zone_boundary_entity")
 					return TYPE_ADD_PLAYER_SPAWN_ZONE_BOUNDARY_ENTITY;
+				else if (t == "add_structures")
+					return TYPE_ADD_STRUCTURES;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid execute type.", aSource->m_name.c_str());
 				return INVALID_TYPE;
 			}
@@ -1780,6 +2005,46 @@ namespace tpublic::MapGenerators
 			SpecialEntity				m_specialEntity;
 		};
 
+		struct ExecuteAddStructures : public IExecute
+		{
+			static const Type TYPE = TYPE_ADD_STRUCTURES;
+
+			ExecuteAddStructures() : IExecute(TYPE) { }
+			virtual	~ExecuteAddStructures() { }
+
+			// IExecute implementation
+			void
+			FromSource(
+				const IExecuteFactory*				/*aFactory*/,
+				const SourceNode*					aSource) override
+			{
+				m_structures = Structures(aSource);
+			}
+
+			void
+			ToStream(
+				IWriter*							aWriter) const override
+			{
+				m_structures.ToStream(aWriter);
+			}
+
+			bool
+			FromStream(
+				const IExecuteFactory*				/*aFactory*/,
+				IReader*							aReader) override
+			{
+				if(!m_structures.FromStream(aReader))
+					return false;
+				return true;
+			}
+
+			void				Run(
+									Builder*			aBuilder) const override;
+
+			// Public data
+			Structures					m_structures;
+		};
+
 		struct ExecuteAddRandomRoute : public IExecute
 		{
 			static const Type TYPE = TYPE_ADD_RANDOM_ROUTE;
@@ -1887,6 +2152,12 @@ namespace tpublic::MapGenerators
 							const MapData*				aSourceMapData,
 							const char*					aDebugImagePath,
 							std::unique_ptr<MapData>&	aOutMapData) const override;
+
+		// Data build time checks
+		void			Validate(
+							const Manifest*				aManifest,
+							const char*					aMapName,
+							std::unordered_set<std::string>& aOutErrors) const;
 
 	private:
 

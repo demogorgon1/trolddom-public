@@ -28,7 +28,9 @@ namespace tpublic
 				ENTRY_TYPE_ROUTE,
 				ENTRY_TYPE_DOODAD,
 				ENTRY_TYPE_FLAGS,
-				ENTRY_TYPE_CLIFF
+				ENTRY_TYPE_CLIFF,
+				ENTRY_TYPE_ENTRANCE,		// Structure sheets only
+				ENTRY_TYPE_ANCHOR			// Structure sheets only, name in m_string
 			};
 
 			struct Color
@@ -158,6 +160,16 @@ namespace tpublic
 						{
 							entry.m_type = ENTRY_TYPE_CLIFF;
 							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_MAP_CLIFF, aChild->m_name.c_str());
+						}
+						else if (aChild->m_name == "entrance" && aChild->m_tag.empty())
+						{
+							entry.m_type = ENTRY_TYPE_ENTRANCE;
+						}
+						else if (aChild->m_tag == "anchor")
+						{
+							TP_VERIFY(entry.m_string.empty(), aChild->m_debugInfo, "Anchors can't have a tool tip.");
+							entry.m_type = ENTRY_TYPE_ANCHOR;
+							entry.m_string = aChild->m_name;
 						}
 						else
 						{

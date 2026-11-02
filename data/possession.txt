@@ -77,7 +77,7 @@ item demonic_shard:
 	item_level: 10
 	required_level: 1
 	type: miscellaneous
-	level_range: [ 1 31 ]
+	level_range: [ 1 32 ]
 	stack: 20
 	
 	use_ability: $ability [ icon string ]
