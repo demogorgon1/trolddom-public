@@ -75231,6 +75231,7 @@ zone __maps_saltclaw_grotto_queen_skarra 268
 zone __maps_saltclaw_grotto_snapjaw 269
 zone __maps_saltclaw_grotto_tidecaller_brekk 270
 zone __maps_saltclaw_grotto_brinecoil 272
+zone __maps_thalvaron_frozen_landing 273
 creature_type humanoid 1
 creature_type beast 2
 creature_type undead 3
