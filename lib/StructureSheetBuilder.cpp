@@ -326,11 +326,11 @@ namespace tpublic
 						doodads.push_back({ position, entry->m_value });
 						break;
 
-					case Data::MapPalette::ENTRY_TYPE_ENTRANCE:
+					case Data::MapPalette::ENTRY_TYPE_STRUCTURE_ENTRANCE:
 						entrances.push_back(position);
 						break;
 
-					case Data::MapPalette::ENTRY_TYPE_ANCHOR:
+					case Data::MapPalette::ENTRY_TYPE_STRUCTURE_ANCHOR:
 						{
 							Data::MapSegment::Anchor anchor;
 							anchor.m_name = entry->m_string;
@@ -340,7 +340,7 @@ namespace tpublic
 						break;
 
 					default:
-						TP_VERIFY(false, aStructure->m_debugInfo, "Only tiles, entity spawns, player spawns, portals, doodads, entrances and anchors can be used in structures (%u, %u) in layer '%s'.",
+						TP_VERIFY(false, aStructure->m_debugInfo, "Only tiles, entity spawns, player spawns, portals, doodads, structure entrances and structure anchors can be used in structures (%u, %u) in layer '%s'.",
 							imageX, imageY, layer->m_source.c_str());
 						break;
 					}
@@ -430,8 +430,8 @@ namespace tpublic
 		{
 			Data::MapSegment::Entrance entrance;
 			entrance.m_position = { position.m_x - min.m_x, position.m_y - min.m_y };
-			TP_VERIFY(!mapSegment->m_tileMap->IsSet(entrance.m_position), aStructure->m_debugInfo, "Entrance (%d, %d) in structure '%s' can't be on one of its tiles.",
-				position.m_x, position.m_y, aStructure->m_name.c_str());
+			TP_VERIFY(!mapSegment->m_tileMap->IsSet(entrance.m_position), aStructure->m_debugInfo, "Entrance (%u, %u) in structure '%s' can't be on one of its tiles.",
+				aStructure->m_x + (uint32_t)position.m_x, aStructure->m_y + (uint32_t)position.m_y, aStructure->m_name.c_str());
 			mapSegment->m_entrances.push_back(entrance);
 		}
 

@@ -108,6 +108,8 @@ namespace tpublic
 					{
 						if(aChild->m_name == "threshold")
 							m_thresholds.push_back(TileThreshold(aChild));
+						else if(aChild->m_name == "cave_entrance")
+							m_caveEntranceSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -119,6 +121,7 @@ namespace tpublic
 				{
 					aWriter->WriteUInt(m_tileSpriteId);
 					aWriter->WriteObjects(m_thresholds);
+					aWriter->WriteUInt(m_caveEntranceSpriteId);
 				}
 
 				bool
@@ -129,12 +132,15 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadObjects(m_thresholds))
 						return false;
+					if (!aReader->ReadUInt(m_caveEntranceSpriteId))
+						return false;
 					return true;
 				}
 
 				// Public data
 				uint32_t						m_tileSpriteId = 0;
 				std::vector<TileThreshold>		m_thresholds;
+				uint32_t						m_caveEntranceSpriteId = 0;	// Cover tile for a cave entrance dug into this tile
 			};
 
 			struct Border

@@ -675,7 +675,7 @@ namespace tpublic
 			aNode->ForEachChild([&](
 				const SourceNode* aChild)
 			{
-				_ProcessNode(aSpriteSheetBuilder, aGenerationJobs, aChild);
+				_ProcessNode(aSpriteSheetBuilder, aStructureSheetBuilder, aGenerationJobs, aChild);
 			});
 		}
 		else
