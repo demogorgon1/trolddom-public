@@ -178,6 +178,7 @@ zone .wreck_zone_7: { string: "Drowned Temple" preposition: "in" }
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
 zone thalvaron_lurker: { fishing_trigger_ability: thalvaron_lurker_spawn fishing_trigger_ability_chance: 50 fishing_loot_table: $loot_table { } }
+zone .frozen_landing: { string: "Frozen Landing" preposition: "at the" }
 	
 route thalvaron_default_patrol: { }
 
@@ -1481,6 +1482,7 @@ map_palette .zones:
 	zone .wreck_zone_5: [ 97 208 43 ]
 	zone .wreck_zone_6: [ 128 43 208 ]
 	zone .wreck_zone_7: [ 208 123 43 ]
+	zone .frozen_landing: [ 168 43 228 ]
 }
 
 map_palette .sub_zones:
