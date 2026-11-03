@@ -478,6 +478,63 @@ namespace tpublic::MapGenerators
 
 		struct Caves
 		{
+			struct EntitySpawns
+			{
+				EntitySpawns()
+				{
+
+				}
+
+				EntitySpawns(
+					const SourceNode*					aSource)
+				{
+					TP_VERIFY(aSource->m_annotation && aSource->m_annotation->m_children.size() == 2 && aSource->m_annotation->IsArrayType(SourceNode::TYPE_NUMBER), aSource->m_debugInfo, "Missing distance range, for example 'entity_spawns<[80 90]>'.");
+					m_range = UIntRange(aSource->m_annotation.get());
+					TP_VERIFY(m_range.m_min <= m_range.m_max && m_range.m_max <= 100, aSource->m_annotation->m_debugInfo, "Invalid distance range, must be percentages.");
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "count")
+							m_count = UIntRange(aChild);
+						else if(aChild->m_name == "entity_spawn")
+							aChild->GetIdArray(DataType::ID_MAP_ENTITY_SPAWN, m_mapEntitySpawnIds);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+					});
+
+					TP_VERIFY(m_mapEntitySpawnIds.size() > 0, aSource->m_debugInfo, "No entity spawns specified.");
+					TP_VERIFY(m_count.m_min <= m_count.m_max, aSource->m_debugInfo, "Invalid count.");
+				}
+
+				void
+				ToStream(
+					IWriter*							aWriter) const
+				{
+					m_range.ToStream(aWriter);
+					m_count.ToStream(aWriter);
+					aWriter->WriteUInts(m_mapEntitySpawnIds);
+				}
+
+				bool
+				FromStream(
+					IReader*							aReader)
+				{
+					if(!m_range.FromStream(aReader))
+						return false;
+					if(!m_count.FromStream(aReader))
+						return false;
+					if(!aReader->ReadUInts(m_mapEntitySpawnIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				UIntRange							m_range;					// Distance from nearest entrance, in percent of the deepest position
+				UIntRange							m_count = UIntRange(1);
+				std::vector<uint32_t>				m_mapEntitySpawnIds;		// Picked at random for each one placed
+			};
+
 			Caves()
 			{
 
@@ -493,7 +550,7 @@ namespace tpublic::MapGenerators
 						aChild->GetIdArray(DataType::ID_TERRAIN, m_terrainIds);
 					else if(aChild->m_name == "floor")
 						m_floorTerrainId = aChild->GetId(DataType::ID_TERRAIN);
-else if(aChild->m_name == "entrance_count")
+					else if(aChild->m_name == "entrance_count")
 						m_entranceCount = UIntRange(aChild);
 					else if(aChild->m_name == "count")
 						m_count = UIntRange(aChild);
@@ -505,16 +562,18 @@ else if(aChild->m_name == "entrance_count")
 						m_maxEntranceTunnel = aChild->GetUInt32();
 					else if(aChild->m_name == "min_entrance_distance")
 						m_minEntranceDistance = aChild->GetUInt32();
+					else if(aChild->m_name == "entity_spawns")
+						m_entitySpawns.push_back(EntitySpawns(aChild));
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
 
 				TP_VERIFY(m_terrainIds.size() > 0, aSource->m_debugInfo, "No terrain to dig into specified.");
 				TP_VERIFY(m_floorTerrainId != 0, aSource->m_debugInfo, "No floor terrain specified.");
-TP_VERIFY(m_margin > 0, aSource->m_debugInfo, "Margin must be at least 1.");
+				TP_VERIFY(m_margin > 0, aSource->m_debugInfo, "Margin must be at least 1.");
 				TP_VERIFY(m_size.m_min > 0 && m_size.m_min <= m_size.m_max, aSource->m_debugInfo, "Invalid size.");
 				TP_VERIFY(m_entranceCount.m_min > 0 && m_entranceCount.m_min <= m_entranceCount.m_max, aSource->m_debugInfo, "Invalid entrance count.");
-}
+			}
 
 			void
 			ToStream(
@@ -522,12 +581,13 @@ TP_VERIFY(m_margin > 0, aSource->m_debugInfo, "Margin must be at least 1.");
 			{
 				aWriter->WriteUInts(m_terrainIds);
 				aWriter->WriteUInt(m_floorTerrainId);
-m_entranceCount.ToStream(aWriter);
+				m_entranceCount.ToStream(aWriter);
 				m_count.ToStream(aWriter);
 				m_size.ToStream(aWriter);
 				aWriter->WriteUInt(m_margin);
 				aWriter->WriteUInt(m_maxEntranceTunnel);
 				aWriter->WriteUInt(m_minEntranceDistance);
+				aWriter->WriteObjects(m_entitySpawns);
 			}
 
 			bool
@@ -538,7 +598,7 @@ m_entranceCount.ToStream(aWriter);
 					return false;
 				if(!aReader->ReadUInt(m_floorTerrainId))
 					return false;
-if(!m_entranceCount.FromStream(aReader))
+				if(!m_entranceCount.FromStream(aReader))
 					return false;
 				if(!m_count.FromStream(aReader))
 					return false;
@@ -550,18 +610,21 @@ if(!m_entranceCount.FromStream(aReader))
 					return false;
 				if(!aReader->ReadUInt(m_minEntranceDistance))
 					return false;
+				if(!aReader->ReadObjects(m_entitySpawns))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<uint32_t>					m_terrainIds;				// Terrain to dig into
 			uint32_t								m_floorTerrainId = 0;
-UIntRange								m_entranceCount = UIntRange(1);
+			UIntRange								m_entranceCount = UIntRange(1);
 			UIntRange								m_count = UIntRange(1);
 			UIntRange								m_size = UIntRange(60, 120);	// Number of floor positions
 			uint32_t								m_margin = 2;				// Terrain left between the cave and the outside
 			uint32_t								m_maxEntranceTunnel = 12;
 			uint32_t								m_minEntranceDistance = 8;
+			std::vector<EntitySpawns>				m_entitySpawns;				// Placed in each cave
 		};
 
 		struct Builder
@@ -608,13 +671,19 @@ UIntRange								m_entranceCount = UIntRange(1);
 								const Caves&						aCaves,
 								const Vec2&							aEntrance,
 								const std::vector<uint32_t>&		aDepth,
-								std::vector<uint8_t>&				aWalkableMap);
+								std::vector<uint8_t>&				aWalkableMap,
+								std::vector<MapData::EntitySpawn>&	aOutEntitySpawns);
 			void			AddCaveEntrances(
 								const Caves&						aCaves,
 								std::vector<int32_t>&				aFloor,
 								std::vector<Vec2>&					aEntrances,
 								const std::vector<uint32_t>&		aDepth,
 								const std::vector<uint8_t>&			aWalkableMap);
+			void			AddCaveEntitySpawns(
+								const Caves&						aCaves,
+								const std::vector<int32_t>&			aFloor,
+								const std::vector<Vec2>&			aEntrances,
+								std::vector<MapData::EntitySpawn>&	aOutEntitySpawns);
 			bool			IsInCave(
 								const Vec2&							aPosition) const;
 			void			RemoveCavePositions(
@@ -805,12 +874,12 @@ UIntRange								m_entranceCount = UIntRange(1);
 			std::vector<uint8_t>							m_caveMap;
 			std::vector<uint32_t>							m_caveCoverTerrainMap;	// Terrain that was dug out, its tiles cover the cave
 			std::vector<std::pair<size_t, uint32_t>>		m_caveEntranceCovers;	// Position index and cover tile
-std::vector<uint32_t>							m_caveStampMap;			// Temporary marks while digging, valid where it matches m_caveStamp
+			std::vector<uint32_t>							m_caveStampMap;			// Temporary marks while digging, valid where it matches m_caveStamp
 			std::vector<int32_t>							m_caveParentMap;
 			std::vector<uint32_t>							m_caveCostMap;
 			std::vector<uint32_t>							m_caveStepsMap;
-uint32_t										m_caveStamp = 0;
-std::vector<std::unique_ptr<Route>>				m_routes;
+			uint32_t										m_caveStamp = 0;
+			std::vector<std::unique_ptr<Route>>				m_routes;
 			std::vector<uint32_t>							m_zoneMap;
 			std::vector<PlayerSpawnZoneBoundaryEntity>		m_playerSpawnZoneBoundaryEntities;
 		

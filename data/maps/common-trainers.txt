@@ -2,6 +2,7 @@
 {
 	train_profession<0>: enchanting
 	train_profession<1>: enchanting
+	train_profession<2>: enchanting
 	train_ability: disenchant
 	train_ability: craft_enchant_shield_minor_constitution
 	train_ability: craft_enchant_boots_spirit
@@ -29,6 +30,7 @@
 {
 	train_profession<0>: blacksmithing
 	train_profession<1>: blacksmithing
+	train_profession<2>: blacksmithing
 	train_ability: craft_copper_ingot
 	train_ability: craft_iron_ingot
 	train_ability: craft_gold_ingot
@@ -52,6 +54,7 @@
 {
 	train_profession<0>: tailoring
 	train_profession<1>: tailoring
+	train_profession<2>: tailoring
 	train_ability: craft_linen_bracers
 	train_ability: craft_linen_feet_wraps
 	train_ability: craft_linen_leggings
@@ -66,6 +69,7 @@
 {
 	train_profession<0>: herbalism
 	train_profession<1>: herbalism
+	train_profession<2>: herbalism
 	
 	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I can't teach you anything else." ] }
 }
@@ -74,6 +78,7 @@
 {
 	train_profession<0>: mining
 	train_profession<1>: mining
+	train_profession<2>: mining
 	
 	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I can't teach you anything else. Go hit some rocks!" ] }
 }
@@ -82,6 +87,7 @@
 {
 	train_profession<0>: fishing
 	train_profession<1>: fishing
+	train_profession<2>: fishing
 	
 	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I have nothing else to teach you at the moment." ] }
 }
@@ -90,6 +96,7 @@
 {
 	train_profession<0>: first_aid
 	train_profession<1>: first_aid
+	train_profession<2>: first_aid
 	train_ability: craft_linen_bandage
 	train_ability: craft_heavy_linen_bandage
 	train_ability: craft_cottonweave_bandage
@@ -104,6 +111,7 @@
 {
 	train_profession<0>: cooking
 	train_profession<1>: cooking
+	train_profession<2>: cooking
 	train_ability: craft_dry_bread
 	train_ability: craft_pickled_herring
 	train_ability: craft_pickled_sucker
@@ -123,6 +131,7 @@
 {
 	train_profession<0>: alchemy
 	train_profession<1>: alchemy
+	train_profession<2>: alchemy
 	train_ability: craft_small_healing_potion
 	train_ability: craft_small_mana_potion
 	train_ability: craft_elixir_of_the_bear

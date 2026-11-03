@@ -1180,6 +1180,8 @@ namespace tpublic::MapGenerators
 		for(const Vec2& position : m_walkable)
 			walkableMap[(size_t)(position.m_x + position.m_y * width)] = 1;
 
+		std::vector<MapData::EntitySpawn> caveEntitySpawns;
+
 		for(const Caves& caves : m_addCaves)
 		{
 			auto isHost = [&](
@@ -1271,7 +1273,7 @@ namespace tpublic::MapGenerators
 					Vec2 entrance = candidates[candidateIndex];
 					Helpers::RemoveCyclicFromVector(candidates, (size_t)candidateIndex);
 
-					if(TryDigCave(caves, entrance, depth, walkableMap))
+					if(TryDigCave(caves, entrance, depth, walkableMap, caveEntitySpawns))
 						break;
 				}
 			}
@@ -1284,6 +1286,19 @@ namespace tpublic::MapGenerators
 			uint8_t value = m_caveMap[(size_t)(aEntitySpawn.m_x + aEntitySpawn.m_y * width)];
 			return value == CAVE_MAP_FLOOR || value == CAVE_MAP_ENTRANCE;
 		});
+
+		std::erase_if(m_entitySpawnPositions, [&](
+			const Vec2& aPosition)
+		{
+			return IsInCave(aPosition);
+		});
+
+		// Then add the ones made for the caves
+		for(const MapData::EntitySpawn& entitySpawn : caveEntitySpawns)
+		{
+			m_entitySpawns.push_back(entitySpawn);
+			m_entitySpawnPositions.insert({ entitySpawn.m_x, entitySpawn.m_y });
+		}
 	}
 
 	bool
@@ -1291,7 +1306,8 @@ namespace tpublic::MapGenerators
 		const Caves&						aCaves,
 		const Vec2&							aEntrance,
 		const std::vector<uint32_t>&		aDepth,
-		std::vector<uint8_t>&				aWalkableMap)
+		std::vector<uint8_t>&				aWalkableMap,
+		std::vector<MapData::EntitySpawn>&	aOutEntitySpawns)
 	{
 		static const Vec2 DIRECTIONS[4] = { { 0, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 } }; // North, east, west, south
 		static const Vec2 NEIGHBORS_8[8] = { { -1, -1 }, { 0, -1 }, { 1, -1 }, { -1, 0 }, { 1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 } };
@@ -1541,6 +1557,10 @@ namespace tpublic::MapGenerators
 				floor.push_back((int32_t)toIndex(p));
 		}
 
+		// Smoothing and the connectivity check can cut away most of it, so check the size again
+		if(floor.size() < neck.size() + (size_t)aCaves.m_size.m_min)
+			return false;
+
 		// More entrances
 		std::vector<Vec2> entrances = { aEntrance };
 		AddCaveEntrances(aCaves, floor, entrances, aDepth, aWalkableMap);
@@ -1571,6 +1591,9 @@ namespace tpublic::MapGenerators
 			if(m_caveMap[approach] == CAVE_MAP_NONE)
 				m_caveMap[approach] = CAVE_MAP_APPROACH;
 		}
+
+		if(aCaves.m_entitySpawns.size() > 0)
+			AddCaveEntitySpawns(aCaves, floor, entrances, aOutEntitySpawns);
 
 		return true;
 	}
@@ -1731,6 +1754,112 @@ namespace tpublic::MapGenerators
 			}
 
 			aEntrances.push_back(entrance);
+		}
+	}
+
+	void
+	World::Builder::AddCaveEntitySpawns(
+		const Caves&						aCaves,
+		const std::vector<int32_t>&			aFloor,
+		const std::vector<Vec2>&			aEntrances,
+		std::vector<MapData::EntitySpawn>&	aOutEntitySpawns)
+	{
+		static const Vec2 DIRECTIONS[4] = { { 0, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 } };
+
+		int32_t width = (int32_t)m_width;
+
+		auto toIndex = [&](
+			const Vec2&	aP) -> size_t
+		{
+			return (size_t)(aP.m_x + aP.m_y * width);
+		};
+
+		// Distance from the nearest entrance, walking inside the cave
+		m_caveStamp++;
+		uint32_t caveStamp = m_caveStamp;
+		for(int32_t i : aFloor)
+			m_caveStampMap[(size_t)i] = caveStamp;
+
+		m_caveStamp++;
+		uint32_t visitedStamp = m_caveStamp;
+
+		std::vector<Vec2> queue;
+		for(const Vec2& entrance : aEntrances)
+		{
+			m_caveStampMap[toIndex(entrance)] = visitedStamp;
+			m_caveStepsMap[toIndex(entrance)] = 0;
+			queue.push_back(entrance);
+		}
+
+		uint32_t maxDistance = 0;
+
+		for(size_t j = 0; j < queue.size(); j++)
+		{
+			uint32_t distance = m_caveStepsMap[toIndex(queue[j])];
+
+			for(const Vec2& offset : DIRECTIONS)
+			{
+				Vec2 n = { queue[j].m_x + offset.m_x, queue[j].m_y + offset.m_y };
+				if(n.m_x < 0 || n.m_y < 0 || n.m_x >= width || n.m_y >= (int32_t)m_height)
+					continue;
+				size_t i = toIndex(n);
+				if(m_caveStampMap[i] == caveStamp)
+				{
+					m_caveStampMap[i] = visitedStamp;
+					m_caveStepsMap[i] = distance + 1;
+					maxDistance = Base::Max(maxDistance, distance + 1);
+					queue.push_back(n);
+				}
+			}
+		}
+
+		// Place them, not next to each other
+		std::vector<Vec2> placed;
+
+		for(const Caves::EntitySpawns& entitySpawns : aCaves.m_entitySpawns)
+		{
+			// Rounded inwards, but a tiny cave still gets the nearest distance (and 0 is only the entrances)
+			uint32_t minDistance = Base::Max(1u, (entitySpawns.m_range.m_min * maxDistance + 99) / 100);
+			uint32_t maxDistanceInRange = Base::Max(minDistance, (entitySpawns.m_range.m_max * maxDistance) / 100);
+
+			uint32_t count = Roll(entitySpawns.m_count.m_min, entitySpawns.m_count.m_max);
+
+			for(uint32_t k = 0; k < count; k++)
+			{
+				std::vector<Vec2> candidates;
+
+				for(const Vec2& position : queue)
+				{
+					uint32_t distance = m_caveStepsMap[toIndex(position)];
+					if(distance < minDistance || distance > maxDistanceInRange || m_caveMap[toIndex(position)] != CAVE_MAP_FLOOR)
+						continue;
+
+					bool nextToPlaced = false;
+					for(const Vec2& other : placed)
+					{
+						if(std::abs(other.m_x - position.m_x) <= 1 && std::abs(other.m_y - position.m_y) <= 1)
+						{
+							nextToPlaced = true;
+							break;
+						}
+					}
+
+					if(!nextToPlaced)
+						candidates.push_back(position);
+				}
+
+				if(candidates.empty())
+					break;
+
+				Vec2 position = candidates[Roll(0, (uint32_t)candidates.size() - 1)];
+				placed.push_back(position);
+
+				MapData::EntitySpawn t;
+				t.m_mapEntitySpawnId = entitySpawns.m_mapEntitySpawnIds[Roll(0, (uint32_t)entitySpawns.m_mapEntitySpawnIds.size() - 1)];
+				t.m_x = position.m_x;
+				t.m_y = position.m_y;
+				aOutEntitySpawns.push_back(t);
+			}
 		}
 	}
 
@@ -3519,7 +3648,7 @@ namespace tpublic::MapGenerators
 
 						if(!hasCaveEntrance)
 							aOutErrors.insert(Helpers::Format("Map '%s' has caves, but no tile of the terrain to dig into has a 'cave_entrance'.", aMapName));
-}
+					}
 					break;
 
 				default:

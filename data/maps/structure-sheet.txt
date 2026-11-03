@@ -1,0 +1,20 @@
+map_palette structure_tiles: !DEFAULT_TILE_PALETTE{}
+map_palette .structure_specials: 
+{
+	structure_entrance: [ 39 85 101 ]
+}
+
+structure_sheets:
+{
+	layers:
+	[
+		{ palettes: [ structure_tiles ] source: "structure-sheet-tiles.png" }
+		{ palettes: [ structure_tiles ] source: "structure-sheet-cover.png" cover: true }
+		{ palettes: [ .structure_specials ] source: "structure-sheet-specials.png" }
+	]
+
+	size: { width: 7 height: 11 }
+
+	structure tower_1: { string: "Tower 1" }
+
+}

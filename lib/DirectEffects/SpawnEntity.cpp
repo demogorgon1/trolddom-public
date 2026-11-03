@@ -243,7 +243,7 @@ namespace tpublic::DirectEffects
 					{
 						const Components::Auras::Entry* auraEntry = auras->GetAura(auraConditional->m_auraId);
 
-						bool ok = auras != NULL;
+						bool ok = auraEntry != NULL;
 
 						if (ok && auraConditional->m_exactCharges != 0 && auraEntry->m_charges != auraConditional->m_exactCharges)
 							ok = false;

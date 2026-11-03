@@ -169,7 +169,7 @@ terrain flat_volcanic:
 
 terrain black_rocks:
 {
-	tile<black_rocks>: { }
+	tile<black_rocks>: { cave_entrance: black_rocks_cave_entrance }
 
 	mutation_chance: 10
 	mutation<1>: flat_volcanic
@@ -209,7 +209,7 @@ terrain infernal_flat:
 
 terrain infernal_spines:
 {
-	tile<spines_2>: { }
+	tile<spines_2>: { cave_entrance: spines_2_entrance }
 
 	mutation_chance: 10
 	mutation<1>: infernal_flat

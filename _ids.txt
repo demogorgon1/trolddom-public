@@ -27774,6 +27774,8 @@ map_palette __maps_saltclaw_grotto_routes 121
 map_palette __maps_saltclaw_grotto_doodads 122
 map_palette __maps_saltclaw_grotto_subzones 123
 map_palette __maps_saltclaw_grotto_cliffs 124
+map_palette structure_tiles 125
+map_palette __maps_structure_specials 126
 talent fighter_protection_stoicism 1
 talent fighter_protection_knock 2
 talent fighter_protection_shield_block 3
@@ -74975,6 +74977,7 @@ map_segment __maps_dungeon_2_blind_2 33
 map_segment __maps_dungeon_2_blind_3 34
 map_segment __maps_dungeon_2_blind_4 35
 map_segment wood_house_small_1 36
+map_segment tower_1 37
 map_segment_connector connector_east 3
 map_segment_connector connector_west 4
 map_segment_connector connector_south 5
