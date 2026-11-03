@@ -61,7 +61,7 @@ namespace tpublic
 			return (uint32_t)aFlag < (uint32_t)NUM_FLAGS;
 		}
 
-		inline const uint32_t
+		inline uint32_t
 		SourceToFlags(
 			const SourceNode*	aSource)
 		{
