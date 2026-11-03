@@ -288,7 +288,7 @@ entity gateway_3:
 			[
 				{ 
 					states: [ default in_combat spawning ] 
-					frames: [ gateway_1 gateway_2 gateway_3 ] 		
+					frames: [ orange_gateway_1 orange_gateway_2 orange_gateway_3 ] 		
 					frame_delay: 120 
 					random_start_frame: true 
 					z_offset: -3
