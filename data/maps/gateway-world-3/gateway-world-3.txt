@@ -292,7 +292,7 @@ loot_table .gateway_world_3:
 
 map gateway_world_3:
 {
-	string: "Infernal Gateway World"
+	string: "Gateway World"
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
@@ -400,6 +400,36 @@ map gateway_world_3:
 			{
 				map_segments: [ tower_1 ]
 				count: 1
+			}
+
+			# More enemies everywhere, not only where the bosses have influence (placed after the bosses' packs)
+			execute add_enemies:
+			{
+				min_player_spawn_distance: 20
+
+				pack<12>:
+				{
+					tag_contexts: [ .melee_enemy ]
+					min_distance_to_nearby: 5
+					elite: false
+					map_entity_spawn: .pack
+				}
+
+				pack<4>:
+				{
+					tag_contexts: [ .caster_enemy ]
+					min_distance_to_nearby: 5
+					elite: false
+					map_entity_spawn: .pack
+				}
+
+				pack<4>:
+				{
+					tag_contexts: [ .melee_enemy .caster_enemy ]
+					min_distance_to_nearby: 6
+					elite: false
+					map_entity_spawn: .pack
+				}
 			}
 
 			execute add_boss: !BOSS{}

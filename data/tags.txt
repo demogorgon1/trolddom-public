@@ -27,6 +27,7 @@ tag male: { }
 tag female: { }
 tag human: { }
 tag demon: { }
+tag gateway_demon: { }
 tag goblin: { }
 tag undead: { }
 tag skeleton: { }

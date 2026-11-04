@@ -4,6 +4,8 @@
 #include "../Data/MapSegment.h"
 #include "../Data/Terrain.h"
 
+#include "../Hash.h"
+
 #include "../MapData.h"
 #include "../MapGeneratorBase.h"
 #include "../TerrainModifier.h"
@@ -627,6 +629,55 @@ namespace tpublic::MapGenerators
 			std::vector<EntitySpawns>				m_entitySpawns;				// Placed in each cave
 		};
 
+		// Enemy packs placed anywhere walkable far enough from the player spawns, not only where bosses have influence
+		struct Enemies
+		{
+			Enemies()
+			{
+
+			}
+
+			Enemies(
+				const SourceNode*							aSource)
+			{
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "min_player_spawn_distance")
+						m_minPlayerSpawnDistance = aChild->GetUInt32();
+					else if(aChild->m_name == "pack")
+						m_packs.push_back(Pack(aChild));
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+
+				TP_VERIFY(m_packs.size() > 0, aSource->m_debugInfo, "No packs specified.");
+			}
+
+			void
+			ToStream(
+				IWriter*									aWriter) const
+			{
+				aWriter->WriteUInt(m_minPlayerSpawnDistance);
+				aWriter->WriteObjects(m_packs);
+			}
+
+			bool
+			FromStream(
+				IReader*									aReader)
+			{
+				if(!aReader->ReadUInt(m_minPlayerSpawnDistance))
+					return false;
+				if(!aReader->ReadObjects(m_packs))
+					return false;
+				return true;
+			}
+
+			// Public data
+			uint32_t								m_minPlayerSpawnDistance = 0;		// Walking distance
+			std::vector<Pack>						m_packs;							// Influence range isn't used
+		};
+
 		struct Builder
 		{
 			uint32_t		GetTerrainPaletteEntry(
@@ -690,7 +741,16 @@ namespace tpublic::MapGenerators
 								std::vector<Vec2>&					aPositions) const;
 			Vec2			GetFirstWalkableOutsideCaves() const;
 			void			InitBosses();
+			bool			CanPlacePack(
+								const Pack*							aPack,
+								const Vec2&							aPosition) const;
+			void			PlacePack(
+								const Pack*							aPack,
+								const Vec2&							aPosition,
+								uint32_t							aLevel,
+								uint32_t							aFactionId);
 			void			InitPlayerSpawns();
+			void			InitEnemies();
 			void			InitSpecialEntities();
 			void			GetPlacementPositions(
 								SpecialEntity::Placement			aPlacement,
@@ -855,7 +915,37 @@ namespace tpublic::MapGenerators
 				FOOTPRINT_WALKABLE
 			};
 
+			// Enemy type picked for each tag context, level and elite flag, so all packs on the map use the same ones
+			struct EnemyTypeKey
+			{
+				struct Hasher
+				{
+					uint32_t
+					operator()(
+						const EnemyTypeKey& aKey) const
+					{
+						uint64_t h = Hash::Splitmix_2_32(aKey.m_level, aKey.m_tagContextId);
+						return (uint32_t)(h ^ (aKey.m_elite ? 1ULL : 0ULL));
+					}
+				};
+
+				bool
+				operator ==(
+					const EnemyTypeKey& aOther) const
+				{
+					return m_tagContextId == aOther.m_tagContextId && m_level == aOther.m_level && m_elite == aOther.m_elite;
+				}
+
+				// Public data
+				uint32_t		m_tagContextId = 0;
+				uint32_t		m_level = 0;
+				bool			m_elite = false;
+			};
+
 			std::vector<std::unique_ptr<Boss>>				m_bosses;
+			std::unordered_map<EnemyTypeKey, uint32_t, EnemyTypeKey::Hasher> m_enemyTypeTable;
+			std::unordered_set<Vec2, Vec2::Hasher>			m_enemyPositions;
+			std::vector<const Enemies*>						m_addEnemies;
 			std::unique_ptr<DistanceField>					m_bossDistanceCombined;
 			std::vector<std::unique_ptr<PlayerSpawn>>		m_playerSpawns;
 			std::unique_ptr<DistanceField>					m_playerSpawnDistanceCombined;
@@ -912,6 +1002,7 @@ namespace tpublic::MapGenerators
 				TYPE_ADD_PLAYER_SPAWN_ZONE_BOUNDARY_ENTITY,
 				TYPE_ADD_STRUCTURES,
 				TYPE_ADD_CAVES,
+				TYPE_ADD_ENEMIES,
 
 				NUM_TYPES
 			};
@@ -961,6 +1052,8 @@ namespace tpublic::MapGenerators
 					return TYPE_ADD_STRUCTURES;
 				else if (t == "add_caves")
 					return TYPE_ADD_CAVES;
+				else if (t == "add_enemies")
+					return TYPE_ADD_ENEMIES;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not a valid execute type.", aSource->m_name.c_str());
 				return INVALID_TYPE;
 			}
@@ -2286,6 +2379,46 @@ namespace tpublic::MapGenerators
 
 			// Public data
 			Caves						m_caves;
+		};
+
+		struct ExecuteAddEnemies : public IExecute
+		{
+			static const Type TYPE = TYPE_ADD_ENEMIES;
+
+			ExecuteAddEnemies() : IExecute(TYPE) { }
+			virtual	~ExecuteAddEnemies() { }
+
+			// IExecute implementation
+			void
+			FromSource(
+				const IExecuteFactory*				/*aFactory*/,
+				const SourceNode*					aSource) override
+			{
+				m_enemies = Enemies(aSource);
+			}
+
+			void
+			ToStream(
+				IWriter*							aWriter) const override
+			{
+				m_enemies.ToStream(aWriter);
+			}
+
+			bool
+			FromStream(
+				const IExecuteFactory*				/*aFactory*/,
+				IReader*							aReader) override
+			{
+				if(!m_enemies.FromStream(aReader))
+					return false;
+				return true;
+			}
+
+			void				Run(
+									Builder*			aBuilder) const override;
+
+			// Public data
+			Enemies						m_enemies;
 		};
 
 		struct ExecuteAddRandomRoute : public IExecute

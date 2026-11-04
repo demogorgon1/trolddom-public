@@ -826,9 +826,9 @@ sprites:
 	sprite man_72: { dead: man_72_dead }
 	sprite lizard_4: { dead: lizard_4_dead }	
 	sprite lizard_5: { dead: lizard_5_dead }	
-	sprite demon_7: { dead: demon_7_dead }	
+	sprite demon_7: { dead: demon_7_dead tags: [ gateway_demon melee ] }	
 	sprite demon_8: { dead: demon_8_dead }	
-	sprite demon_9: { dead: demon_9_dead }	
+	sprite demon_9: { dead: demon_9_dead tags: [ gateway_demon caster ] }	
 	sprite man_73: { dead: man_73_dead }
 	sprite golem_1: { dead: golem_1_dead }
 	sprite golem_2: { dead: golem_2_dead }
@@ -1406,9 +1406,6 @@ sprites:
 	sprite large_orange_gateway_closed_3: { }
 }
 
-##########################################################################
-# Gateway World 3 demons (placeholders, copies of other demon sprites)
-
 sprites:
 {
 	source: "gateway-demons.png"
@@ -1417,12 +1414,14 @@ sprites:
 
 	cursor: { position: [ 0 0 ] }
 
-	sprite gateway_demon_1: { dead: gateway_demon_1_dead tags: [ demon melee ] }
-	sprite gateway_demon_2: { dead: gateway_demon_2_dead tags: [ demon melee ] }
-	sprite gateway_demon_3: { dead: gateway_demon_3_dead tags: [ demon melee ] }
-	sprite gateway_demon_4: { dead: gateway_demon_4_dead tags: [ demon melee ] }
-	sprite gateway_demon_5: { dead: gateway_demon_5_dead tags: [ demon melee ] }
-	sprite gateway_demon_6: { dead: gateway_demon_6_dead tags: [ demon melee ] }
+	sprite gateway_demon_1: { dead: gateway_demon_1_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_2: { dead: gateway_demon_2_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_3: { dead: gateway_demon_3_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_4: { dead: gateway_demon_4_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_5: { dead: gateway_demon_5_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_6: { dead: gateway_demon_6_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_7: { dead: gateway_demon_7_dead tags: [ gateway_demon melee ] }
+	sprite gateway_demon_8: { dead: gateway_demon_8_dead tags: [ gateway_demon melee ] }
 
 	cursor: { position: [ 0 16 ] }
 
@@ -1432,13 +1431,15 @@ sprites:
 	sprite gateway_demon_4_dead: { }
 	sprite gateway_demon_5_dead: { }
 	sprite gateway_demon_6_dead: { }
+	sprite gateway_demon_7_dead: { }
+	sprite gateway_demon_8_dead: { }
 
 	cursor: { position: [ 0 32 ] }
 
-	sprite gateway_demon_caster_1: { dead: gateway_demon_caster_1_dead tags: [ demon caster ] }
-	sprite gateway_demon_caster_2: { dead: gateway_demon_caster_2_dead tags: [ demon caster ] }
-	sprite gateway_demon_caster_3: { dead: gateway_demon_caster_3_dead tags: [ demon caster ] }
-	sprite gateway_demon_caster_4: { dead: gateway_demon_caster_4_dead tags: [ demon caster ] }
+	sprite gateway_demon_caster_1: { dead: gateway_demon_caster_1_dead tags: [ gateway_demon caster ] }
+	sprite gateway_demon_caster_2: { dead: gateway_demon_caster_2_dead tags: [ gateway_demon caster ] }
+	sprite gateway_demon_caster_3: { dead: gateway_demon_caster_3_dead tags: [ gateway_demon caster ] }
+	sprite gateway_demon_caster_4: { dead: gateway_demon_caster_4_dead tags: [ gateway_demon caster ] }
 
 	cursor: { position: [ 0 48 ] }
 
@@ -1449,25 +1450,39 @@ sprites:
 
 	cursor: { position: [ 0 64 ] }
 
-	sprite gateway_demon_boss_1: { dead: gateway_demon_boss_1_dead tags: [ demon melee boss ] }
-	sprite gateway_demon_boss_2: { dead: gateway_demon_boss_2_dead tags: [ demon melee boss ] }
-	sprite gateway_demon_boss_3: { dead: gateway_demon_boss_3_dead tags: [ demon melee boss ] }
+	sprite gateway_demon_boss_1: { dead: gateway_demon_boss_1_dead tags: [ gateway_demon melee boss ] }
+	sprite gateway_demon_boss_2: { dead: gateway_demon_boss_2_dead tags: [ gateway_demon melee boss ] }
+	sprite gateway_demon_boss_3: { dead: gateway_demon_boss_3_dead tags: [ gateway_demon melee boss ] }
+	sprite gateway_demon_boss_4: { dead: gateway_demon_boss_4_dead tags: [ gateway_demon melee boss ] }
+	sprite gateway_demon_boss_5: { dead: gateway_demon_boss_5_dead tags: [ gateway_demon melee boss ] }
+	sprite gateway_demon_boss_6: { dead: gateway_demon_boss_6_dead tags: [ gateway_demon melee boss ] }
+	sprite gateway_demon_boss_7: { dead: gateway_demon_boss_7_dead tags: [ gateway_demon melee boss ] }
 
 	cursor: { position: [ 0 80 ] }
 
 	sprite gateway_demon_boss_1_dead: { }
 	sprite gateway_demon_boss_2_dead: { }
 	sprite gateway_demon_boss_3_dead: { }
+	sprite gateway_demon_boss_4_dead: { }
+	sprite gateway_demon_boss_5_dead: { }
+	sprite gateway_demon_boss_6_dead: { }
+	sprite gateway_demon_boss_7_dead: { }
 
 	cursor: { position: [ 0 96 ] }
 
-	sprite gateway_demon_caster_boss_1: { dead: gateway_demon_caster_boss_1_dead tags: [ demon caster boss ] }
-	sprite gateway_demon_caster_boss_2: { dead: gateway_demon_caster_boss_2_dead tags: [ demon caster boss ] }
-	sprite gateway_demon_caster_boss_3: { dead: gateway_demon_caster_boss_3_dead tags: [ demon caster boss ] }
+	sprite gateway_demon_caster_boss_1: { dead: gateway_demon_caster_boss_1_dead tags: [ gateway_demon caster boss ] }
+	sprite gateway_demon_caster_boss_2: { dead: gateway_demon_caster_boss_2_dead tags: [ gateway_demon caster boss ] }
+	sprite gateway_demon_caster_boss_3: { dead: gateway_demon_caster_boss_3_dead tags: [ gateway_demon caster boss ] }
+	sprite gateway_demon_caster_boss_4: { dead: gateway_demon_caster_boss_4_dead tags: [ gateway_demon caster boss ] }
+	sprite gateway_demon_caster_boss_5: { dead: gateway_demon_caster_boss_5_dead tags: [ gateway_demon caster boss ] }
+	sprite gateway_demon_caster_boss_6: { dead: gateway_demon_caster_boss_6_dead tags: [ gateway_demon caster boss ] }
 
 	cursor: { position: [ 0 112 ] }
 
 	sprite gateway_demon_caster_boss_1_dead: { }
 	sprite gateway_demon_caster_boss_2_dead: { }
 	sprite gateway_demon_caster_boss_3_dead: { }
+	sprite gateway_demon_caster_boss_4_dead: { }
+	sprite gateway_demon_caster_boss_5_dead: { }
+	sprite gateway_demon_caster_boss_6_dead: { }
 }

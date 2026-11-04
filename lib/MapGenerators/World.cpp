@@ -782,193 +782,165 @@ namespace tpublic::MapGenerators
 		}
 
 		// Enemy packs
+		for (int32_t y = 0; y < (int32_t)m_height; y++)
 		{
-			std::unordered_set<Vec2, Vec2::Hasher> enemyPositions;
-
-			struct EnemyTypeKey
+			for (int32_t x = 0; x < (int32_t)m_width; x++)
 			{
-				struct Hasher
+				const LevelMapPoint& point = m_levelMap[x + y * (int32_t)m_width];
+				if (point.m_boss != NULL && !m_entitySpawnPositions.contains({ x, y }))
 				{
-					uint32_t
-					operator()(
-						const EnemyTypeKey& aKey) const
+					const Pack* pickedPack = NULL;
+
+					for (const Pack* pack : point.m_boss->m_packs)
 					{
-						uint64_t h = Hash::Splitmix_2_32(aKey.m_level, aKey.m_tagContextId);
-						return (uint32_t)(h ^ (aKey.m_elite ? 1ULL : 0ULL));
-					}
-				};
-
-				bool
-				operator ==(
-					const EnemyTypeKey& aOther) const
-				{
-					return m_tagContextId == aOther.m_tagContextId && m_level == aOther.m_level && m_elite == aOther.m_elite;
-				}
-
-				// Public data
-				uint32_t		m_tagContextId = 0;
-				uint32_t		m_level = 0;
-				bool			m_elite = false;
-			};
-
-			typedef std::unordered_map<EnemyTypeKey, uint32_t, EnemyTypeKey::Hasher> EnemyTypeTable;
-			EnemyTypeTable enemyTypeTable;
-
-			for (int32_t y = 0; y < (int32_t)m_height; y++)
-			{
-				for (int32_t x = 0; x < (int32_t)m_width; x++)
-				{
-					const LevelMapPoint& point = m_levelMap[x + y * (int32_t)m_width];
-					if (point.m_boss != NULL && !m_entitySpawnPositions.contains({ x, y }))
-					{
-						const Pack* pickedPack = NULL;
-
-						for (const Pack* pack : point.m_boss->m_packs)
+						if (point.m_influence >= pack->m_influenceRange.m_min && point.m_influence <= pack->m_influenceRange.m_max)
 						{
-							if (point.m_influence >= pack->m_influenceRange.m_min && point.m_influence <= pack->m_influenceRange.m_max)
+							if (Roll(1, 1000) <= pack->m_probability && CanPlacePack(pack, { x, y }))
 							{
-								if (Roll(1, 1000) <= pack->m_probability)
-								{
-									// Check if anything is too close
-									bool canPlace = true;
-
-									int32_t minX = x - (int32_t)pack->m_minDistanceToNearBy;
-									int32_t maxX = x + (int32_t)pack->m_minDistanceToNearBy;
-									int32_t minY = y - (int32_t)pack->m_minDistanceToNearBy;
-									int32_t maxY = y + (int32_t)pack->m_minDistanceToNearBy;
-									int32_t minDistanceSquared = (int32_t)(pack->m_minDistanceToNearBy * pack->m_minDistanceToNearBy);
-
-									for (int32_t iy = minY; iy <= maxY && canPlace; iy++)
-									{
-										for (int32_t ix = minX; ix <= maxX && canPlace; ix++)
-										{
-											int32_t dx = x - ix;
-											int32_t dy = y - iy;
-											int32_t distanceSquared = dx * dx + dy * dy;
-											if (distanceSquared <= minDistanceSquared && enemyPositions.contains({ ix, iy }))
-												canPlace = false;
-										}
-									}
-
-									if (canPlace)
-									{
-										pickedPack = pack;
-										break;
-									}
-								}
-							}
-						}
-
-						if (pickedPack != NULL)
-						{
-							uint32_t level = point.m_level;
-
-							bool firstEnemy = true;
-
-							for (uint32_t tagContextId : pickedPack->m_tagContextIds)
-							{
-								uint32_t entityId = 0;
-
-								{
-									EnemyTypeKey enemyTypeKey;
-									enemyTypeKey.m_tagContextId = tagContextId;
-									enemyTypeKey.m_level = level;
-									enemyTypeKey.m_elite = pickedPack->m_elite;
-									EnemyTypeTable::const_iterator i = enemyTypeTable.find(enemyTypeKey);
-									if(i != enemyTypeTable.cend())
-									{
-										entityId = i->second;
-									}
-									else
-									{
-										const TaggedData::QueryResult* result = m_mapGeneratorRuntime->m_entities->PerformQueryWithTagContext(m_manifest->GetById<Data::TagContext>(tagContextId));
-										const TaggedData::QueryResult::Entry* picked = result->TryPickRandomFiltered(m_random, [&](
-											const TaggedData::QueryResult::Entry* aEntry) -> bool
-										{
-											const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
-											const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
-											if (combatPublic->m_level == level && combatPublic->m_factionId == point.m_boss->m_factionId && combatPublic->IsElite() == pickedPack->m_elite)
-												return true;
-											return false;
-										});
-
-										TP_CHECK(picked != NULL, "Unable to pick enemy.");
-										entityId = picked->m_id;
-
-										enemyTypeTable[enemyTypeKey] = entityId;
-									}
-								}
-
-								std::optional<Vec2> position;
-
-								if (firstEnemy)
-								{
-									firstEnemy = false;
-									position = Vec2{x, y};
-								}
-								else
-								{
-									static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-									size_t randomOffset = (size_t)m_random() % 4;
-									for (size_t i = 0; i < 4; i++)
-									{
-										size_t j = (i + randomOffset) % 8;
-										Vec2 p = { x + NEIGHBORS[j].m_x, y + NEIGHBORS[j].m_y };
-										if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
-										{
-											position = p;
-											break;
-										}
-									}
-								}
-
-								if (position.has_value())
-								{
-									MapData::EntitySpawn entitySpawn;
-									entitySpawn.m_entityId = entityId;
-									entitySpawn.m_mapEntitySpawnId = pickedPack->m_mapEntitySpawnId;
-									entitySpawn.m_x = position->m_x;
-									entitySpawn.m_y = position->m_y;
-									m_entitySpawns.push_back(entitySpawn);
-
-									m_entitySpawnPositions.insert(position.value());
-
-									enemyPositions.insert(position.value());
-								}
-							}
-
-							if(pickedPack->m_randomObject.has_value() && Roll(1, 1000) <= pickedPack->m_randomObject->m_probability)
-							{
-								static const Vec2 NEIGHBORS[8] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { 1, 1 }, { -1, 1 } };
-								size_t randomOffset = (size_t)m_random() % 8;
-								std::optional<Vec2> position;
-
-								for (size_t i = 0; i < 8; i++)
-								{
-									size_t j = (i + randomOffset) % 8;
-
-									Vec2 p = { x + NEIGHBORS[j].m_x, y + NEIGHBORS[j].m_y };
-									if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
-									{
-										position = p;
-										break;
-									}
-								}
-
-								if(position.has_value())
-								{
-									MapData::EntitySpawn entitySpawn;
-									entitySpawn.m_mapEntitySpawnId = pickedPack->m_randomObject->m_mapEntitySpawnId;
-									entitySpawn.m_x = position->m_x;
-									entitySpawn.m_y = position->m_y;
-									m_entitySpawns.push_back(entitySpawn);
-
-									m_entitySpawnPositions.insert(position.value());
-								}
+								pickedPack = pack;
+								break;
 							}
 						}
 					}
+
+					if (pickedPack != NULL)
+						PlacePack(pickedPack, { x, y }, point.m_level, point.m_boss->m_factionId);
 				}
+			}
+		}
+	}
+
+	bool
+	World::Builder::CanPlacePack(
+		const Pack*						aPack,
+		const Vec2&						aPosition) const
+	{
+		// Check if any other enemy is too close
+		int32_t minDistanceSquared = (int32_t)(aPack->m_minDistanceToNearBy * aPack->m_minDistanceToNearBy);
+
+		for (int32_t iy = aPosition.m_y - (int32_t)aPack->m_minDistanceToNearBy; iy <= aPosition.m_y + (int32_t)aPack->m_minDistanceToNearBy; iy++)
+		{
+			for (int32_t ix = aPosition.m_x - (int32_t)aPack->m_minDistanceToNearBy; ix <= aPosition.m_x + (int32_t)aPack->m_minDistanceToNearBy; ix++)
+			{
+				int32_t dx = aPosition.m_x - ix;
+				int32_t dy = aPosition.m_y - iy;
+				int32_t distanceSquared = dx * dx + dy * dy;
+				if (distanceSquared <= minDistanceSquared && m_enemyPositions.contains({ ix, iy }))
+					return false;
+			}
+		}
+
+		return true;
+	}
+
+	void
+	World::Builder::PlacePack(
+		const Pack*						aPack,
+		const Vec2&						aPosition,
+		uint32_t						aLevel,
+		uint32_t						aFactionId)
+	{
+		bool firstEnemy = true;
+
+		for (uint32_t tagContextId : aPack->m_tagContextIds)
+		{
+			uint32_t entityId = 0;
+
+			{
+				EnemyTypeKey enemyTypeKey;
+				enemyTypeKey.m_tagContextId = tagContextId;
+				enemyTypeKey.m_level = aLevel;
+				enemyTypeKey.m_elite = aPack->m_elite;
+				auto i = m_enemyTypeTable.find(enemyTypeKey);
+				if(i != m_enemyTypeTable.cend())
+				{
+					entityId = i->second;
+				}
+				else
+				{
+					const TaggedData::QueryResult* result = m_mapGeneratorRuntime->m_entities->PerformQueryWithTagContext(m_manifest->GetById<Data::TagContext>(tagContextId));
+					const TaggedData::QueryResult::Entry* picked = result->TryPickRandomFiltered(m_random, [&](
+						const TaggedData::QueryResult::Entry* aEntry) -> bool
+					{
+						const Data::Entity* entity = m_manifest->GetById<Data::Entity>(aEntry->m_id);
+						const Components::CombatPublic* combatPublic = entity->TryGetComponent<Components::CombatPublic>();
+						if (combatPublic->m_level == aLevel && combatPublic->m_factionId == aFactionId && combatPublic->IsElite() == aPack->m_elite)
+							return true;
+						return false;
+					});
+
+					TP_CHECK(picked != NULL, "Unable to pick enemy.");
+					entityId = picked->m_id;
+
+					m_enemyTypeTable[enemyTypeKey] = entityId;
+				}
+			}
+
+			std::optional<Vec2> position;
+
+			if (firstEnemy)
+			{
+				firstEnemy = false;
+				position = aPosition;
+			}
+			else
+			{
+				static const Vec2 NEIGHBORS[4] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+				size_t randomOffset = (size_t)m_random() % 4;
+				for (size_t i = 0; i < 4; i++)
+				{
+					size_t j = (i + randomOffset) % 4;
+					Vec2 p = { aPosition.m_x + NEIGHBORS[j].m_x, aPosition.m_y + NEIGHBORS[j].m_y };
+					if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
+					{
+						position = p;
+						break;
+					}
+				}
+			}
+
+			if (position.has_value())
+			{
+				MapData::EntitySpawn entitySpawn;
+				entitySpawn.m_entityId = entityId;
+				entitySpawn.m_mapEntitySpawnId = aPack->m_mapEntitySpawnId;
+				entitySpawn.m_x = position->m_x;
+				entitySpawn.m_y = position->m_y;
+				m_entitySpawns.push_back(entitySpawn);
+
+				m_entitySpawnPositions.insert(position.value());
+
+				m_enemyPositions.insert(position.value());
+			}
+		}
+
+		if(aPack->m_randomObject.has_value() && Roll(1, 1000) <= aPack->m_randomObject->m_probability)
+		{
+			static const Vec2 NEIGHBORS[8] = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { 1, -1 }, { 1, 1 }, { -1, 1 } };
+			size_t randomOffset = (size_t)m_random() % 8;
+			std::optional<Vec2> position;
+
+			for (size_t i = 0; i < 8; i++)
+			{
+				size_t j = (i + randomOffset) % 8;
+
+				Vec2 p = { aPosition.m_x + NEIGHBORS[j].m_x, aPosition.m_y + NEIGHBORS[j].m_y };
+				if (!m_entitySpawnPositions.contains(p) && m_walkable.contains(p))
+				{
+					position = p;
+					break;
+				}
+			}
+
+			if(position.has_value())
+			{
+				MapData::EntitySpawn entitySpawn;
+				entitySpawn.m_mapEntitySpawnId = aPack->m_randomObject->m_mapEntitySpawnId;
+				entitySpawn.m_x = position->m_x;
+				entitySpawn.m_y = position->m_y;
+				m_entitySpawns.push_back(entitySpawn);
+
+				m_entitySpawnPositions.insert(position.value());
 			}
 		}
 	}
@@ -1067,6 +1039,55 @@ namespace tpublic::MapGenerators
 					m_playerSpawnDistanceCombined->CombineMin(&distanceField);
 				}
 			}		
+		}
+	}
+
+	void
+	World::Builder::InitEnemies()
+	{
+		// Needs bosses for levels and faction, and player spawns to keep away from
+		if(m_addEnemies.empty() || m_bosses.empty() || m_playerSpawns.empty())
+			return;
+
+		std::vector<Vec2> playerSpawnPositions;
+		for(const std::unique_ptr<PlayerSpawn>& playerSpawn : m_playerSpawns)
+			playerSpawnPositions.push_back(playerSpawn->m_position);
+
+		DistanceField playerSpawnDistance((int32_t)m_width, (int32_t)m_height);
+		playerSpawnDistance.Generate(playerSpawnPositions, m_walkable, UINT32_MAX);
+
+		for(const Enemies* enemies : m_addEnemies)
+		{
+			for (int32_t y = 0; y < (int32_t)m_height; y++)
+			{
+				for (int32_t x = 0; x < (int32_t)m_width; x++)
+				{
+					size_t index = (size_t)(x + y * (int32_t)m_width);
+					uint32_t distance = playerSpawnDistance.m_data[index];
+					if(distance == UINT32_MAX || distance <= enemies->m_minPlayerSpawnDistance || m_entitySpawnPositions.contains({ x, y }))
+						continue;
+
+					const Pack* pickedPack = NULL;
+
+					for (const Pack& pack : enemies->m_packs)
+					{
+						if (Roll(1, 1000) <= pack.m_probability && CanPlacePack(&pack, { x, y }))
+						{
+							pickedPack = &pack;
+							break;
+						}
+					}
+
+					if (pickedPack != NULL)
+					{
+						// Level and faction from the boss with the most influence here. Outside the influence of all bosses, the lowest
+						// level and the faction of the first boss.
+						const LevelMapPoint& point = m_levelMap[index];
+						uint32_t factionId = point.m_boss != NULL ? point.m_boss->m_factionId : m_bosses[0]->m_factionId;
+						PlacePack(pickedPack, { x, y }, point.m_level, factionId);
+					}
+				}
+			}
 		}
 	}
 
@@ -2733,6 +2754,7 @@ namespace tpublic::MapGenerators
 		Register<ExecuteAddPlayerSpawnZoneBoundaryEntity>();
 		Register<ExecuteAddStructures>();
 		Register<ExecuteAddCaves>();
+		Register<ExecuteAddEnemies>();
 	}
 
 	World::IExecuteFactory::~IExecuteFactory()
@@ -3386,6 +3408,13 @@ namespace tpublic::MapGenerators
 	}
 
 	void
+	World::ExecuteAddEnemies::Run(
+		Builder*						aBuilder) const
+	{
+		aBuilder->m_addEnemies.push_back(&m_enemies);
+	}
+
+	void
 	World::ExecuteAddRandomRoute::Run(
 		Builder*						aBuilder) const
 	{
@@ -3549,6 +3578,7 @@ namespace tpublic::MapGenerators
 		builder.InitCaves();
 		builder.InitBosses();
 		builder.InitPlayerSpawns();
+		builder.InitEnemies();
 		builder.InitSpecialEntities();
 		builder.InitStructures();
 		builder.InitRoutes();

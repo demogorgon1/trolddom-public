@@ -382,22 +382,22 @@ name_template .demon_major_boss:
 
 tag_context .melee_demon_sprite:
 {
-	must_have_tags: [ demon melee ]
+	must_have_tags: [ gateway_demon melee ]
 	must_not_have_tags: [ boss ]
 }
 
 tag_context .melee_demon_boss_sprite:
 {
-	must_have_tags: [ demon boss melee ]
+	must_have_tags: [ gateway_demon boss melee ]
 }
 
 tag_context .caster_demon_sprite:
 {
-	must_have_tags: [ demon caster ]
+	must_have_tags: [ gateway_demon caster ]
 	must_not_have_tags: [ boss ]
 }
 
 tag_context .caster_demon_boss_sprite:
 {
-	must_have_tags: [ demon boss caster ]
+	must_have_tags: [ gateway_demon boss caster ]
 }
