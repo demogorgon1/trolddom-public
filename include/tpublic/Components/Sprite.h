@@ -64,6 +64,10 @@ namespace tpublic
 						{
 							m_zOffset = aChild->GetInt32();
 						}
+						else if (aChild->m_name == "glow")
+						{
+							m_glow = aChild->GetBool();
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
@@ -83,6 +87,7 @@ namespace tpublic
 					aWriter->WriteInt(m_zOffset);
 					aWriter->WritePOD(m_pingPong);
 					aWriter->WritePOD(m_useControlPointIndex);
+					aWriter->WritePOD(m_glow);
 				}
 
 				bool
@@ -105,6 +110,8 @@ namespace tpublic
 						return false;
 					if (!aReader->ReadPOD(m_useControlPointIndex))
 						return false;
+					if (!aReader->ReadPOD(m_glow))
+						return false;
 					return true;
 				}
 
@@ -117,6 +124,7 @@ namespace tpublic
 				int32_t							m_zOffset = 0;
 				bool							m_pingPong = false;
 				bool							m_useControlPointIndex = false;
+				bool							m_glow = false;				// Always fully lit (not darkened by the light map), only for 1x1 sprites
 			};
 
 			enum Field

@@ -48,6 +48,26 @@ namespace tpublic
 				npc->m_meleePushPriority = ((combatPrivate->m_weaponDamageRangeMax - combatPrivate->m_weaponDamageRangeMin) * 5) / 20;
 			}
 
+			// Glowing animations are drawn after the light map, one tile at a time (see WorldRenderer2 in the client), so they
+			// must fit in a tile
+			{
+				const Components::Sprite* sprite = aEntity->TryGetComponent<Components::Sprite>();
+				if(sprite != NULL)
+				{
+					for(const std::unique_ptr<Components::Sprite::Animation>& animation : sprite->m_animations)
+					{
+						if(!animation->m_glow)
+							continue;
+
+						for(uint32_t frameSpriteId : animation->m_frameSpriteIds)
+						{
+							const Data::Sprite* spriteData = aManifest->GetById<Data::Sprite>(frameSpriteId);
+							TP_VERIFY(spriteData->m_width <= 16 && spriteData->m_height <= 16, aEntity->m_debugInfo, "'%s' is larger than one tile, glow is only for 1x1 sprites.", spriteData->m_name.c_str());
+						}
+					}
+				}
+			}
+
 			// Identify NPCs with head anchor
 			if(npc != NULL)
 			{
