@@ -264,6 +264,7 @@ entity the_devouring_shroud_boss_6: !NPC
 				target_particle_system: green_spell_hit
 				projectile: $particle_system
 				{
+					light: { color: [ 0.4 1 0.4 ] radius: 3 }
 					particle:
 					{
 						sprites: [ effect_witch_bolt ]

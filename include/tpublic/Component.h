@@ -77,6 +77,7 @@ namespace tpublic
 			ID_PVP_RIFT,
 			ID_RECENT_PVP_KILLS,
 			ID_DIMINISHING_EFFECTS,
+			ID_LIGHT_EMITTER,
 
 			NUM_IDS
 		};
@@ -151,7 +152,8 @@ namespace tpublic
 			"survival_info",
 			"pvp_rift",
 			"recent_pvp_kills",
-			"diminishing_effects"
+			"diminishing_effects",
+			"light_emitter"
 		};
 
 		static_assert(sizeof(COMPONENT_NAMES) / sizeof(const char*) == (size_t)NUM_IDS);

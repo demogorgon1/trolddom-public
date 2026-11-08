@@ -383,6 +383,7 @@ ability witch_bolt:
 
 particle_system witch_bolt:
 {
+	light: { color: [ 0.4 1 0.4 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_witch_bolt ]
@@ -927,6 +928,7 @@ ability chain_lightning:
 
 particle_system witch_chain_lightning:
 {
+	light: { color: [ 1 0.6 0.9 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_pink_lightning_0 effect_pink_lightning_1 effect_pink_lightning_2 ]
@@ -954,6 +956,7 @@ ability witch_elemental_destruction:
 	speed: 7
 	projectile: $particle_system
 	{
+		light: { color: [ 1 0.6 0.3 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_frostbolt ]

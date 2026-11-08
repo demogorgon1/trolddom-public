@@ -13,6 +13,7 @@
 
 #include <tpublic/MapGenerators/World.h>
 
+#include <tpublic/AmbientLightMap.h>
 #include <tpublic/DistanceField.h>
 #include <tpublic/DoodadPlacement.h>
 #include <tpublic/Helpers.h>
@@ -261,6 +262,9 @@ namespace tpublic::MapGenerators
 
 			aOutMapData->m_worldInfoMap = std::make_unique<WorldInfoMap>();
 			aOutMapData->m_worldInfoMap->Build(m_manifest, (int32_t)m_width, (int32_t)m_height, &levels[0], NULL, zoneMap, flags.empty() ? NULL : &flags[0]);
+
+			aOutMapData->m_ambientLightMap = AmbientLightMap::Build(m_manifest, (int32_t)m_width, (int32_t)m_height, NULL, zoneMap,
+				aOutMapData->m_mapInfo.m_ambientLight.value_or(Image::RGBA(255, 255, 255, 255)));
 		}
 
 		// Roofs and other covers from structures

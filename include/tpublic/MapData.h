@@ -14,6 +14,7 @@
 namespace tpublic
 {
 
+	class AmbientLightMap;
 	class AutoDoodads;
 	class Manifest;
 	class MapPathData;
@@ -862,6 +863,9 @@ namespace tpublic
 								const MapData*					aMapData);
 		uint32_t			GetTile(
 								const Vec2&						aPosition) const;
+		Image::RGBA			GetAmbientLight(
+								float							aX,
+								float							aY) const;
 		void				WriteDebugTileMapPNG(
 								const Manifest*					aManifest,
 								const char*						aPath) const;
@@ -934,6 +938,7 @@ namespace tpublic
 		std::unique_ptr<MapPathData>				m_mapPathData;
 		std::unique_ptr<Generator>					m_generator;
 		std::unique_ptr<WorldInfoMap>				m_worldInfoMap;
+		std::unique_ptr<AmbientLightMap>			m_ambientLightMap;
 		std::unique_ptr<MapCovers>					m_mapCovers;
 		std::unique_ptr<MapRouteData>				m_mapRouteData;
 		std::unique_ptr<PVP>						m_pvp;

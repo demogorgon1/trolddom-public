@@ -159,6 +159,7 @@ entity durgan_urok_boss_6: !NPC
 				speed: 6
 				projectile: $particle_system
 				{
+					light: { color: [ 1 0.6 0.3 ] radius: 3 }
 					particle:
 					{
 						sprites: [ effect_firebolt_b ]
@@ -185,6 +186,7 @@ entity durgan_urok_boss_6: !NPC
 						{
 							position: { }		
 							owner: { }
+							light_emitter<static>: { color: [ 1 0.6 0.3 ] radius: 3 merge_distance: 1.5 }
 							environment: 
 							{
 								tick_interval: 10

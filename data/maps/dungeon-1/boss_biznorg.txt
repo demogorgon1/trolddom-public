@@ -100,6 +100,7 @@ cooldown .biznorg:
 
 particle_system .biznorg:
 {
+	light: { color: [ 1 0.6 0.3 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_firebolt_b ]

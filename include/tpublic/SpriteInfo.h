@@ -26,7 +26,8 @@ namespace tpublic
 			FLAG_STANDALONE					= 0x0400,
 			FLAG_CENTERED					= 0x0800,
 			FLAG_DOUBLED					= 0x1000,
-			FLAG_AUTOGLOW					= 0x2000
+			FLAG_AUTOGLOW					= 0x2000,
+			FLAG_TILE_FACE					= 0x4000	// Hard south facing surface (wall face), lit by what reaches the ground in front of it
 		};
 
 		struct NamedAnchor
@@ -125,6 +126,8 @@ namespace tpublic
 				return FLAG_DOUBLED;
 			if (strcmp(aString, "autoglow") == 0)
 				return FLAG_AUTOGLOW;
+			if (strcmp(aString, "tile_face") == 0)
+				return FLAG_TILE_FACE;
 			return 0;
 		}
 

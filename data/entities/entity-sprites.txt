@@ -1390,6 +1390,15 @@ sprites:
 	
 	cursor: { position: [ 0 144 ] }
 	sprite jul_tree: { }
+	sprite wall_torch_south_1: { }
+	sprite wall_torch_south_2: { }
+	sprite wall_torch_south_3: { }
+	sprite wall_torch_east_1: { }
+	sprite wall_torch_east_2: { }
+	sprite wall_torch_east_3: { }
+	sprite wall_torch_west_1: { }
+	sprite wall_torch_west_2: { }
+	sprite wall_torch_west_3: { }
 	
 }
 

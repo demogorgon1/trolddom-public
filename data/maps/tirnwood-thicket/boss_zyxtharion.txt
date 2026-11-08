@@ -139,6 +139,7 @@ entity tirnwood_thicket_zyxtharion: !NPC
 				speed: 5
 				projectile: $particle_system
 				{
+					light: { color: [ 0.4 1 0.4 ] radius: 3 }
 					particle:
 					{
 						sprites: [ effect_witch_bolt ]

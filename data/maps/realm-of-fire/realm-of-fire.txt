@@ -36,9 +36,11 @@ entity .throne_of_voraghul_portal:
 {
 	string: "Portal"	
 	systems: [ openable ]	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -72,9 +74,11 @@ entity .throne_of_voraghul_return_portal:
 {
 	string: "Portal"	
 	systems: [ openable ]	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:

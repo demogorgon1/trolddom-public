@@ -27,6 +27,7 @@
 #include <tpublic/Components/InteractableObject.h>
 #include <tpublic/Components/Inventory.h>
 #include <tpublic/Components/KillContribution.h>
+#include <tpublic/Components/LightEmitter.h>
 #include <tpublic/Components/Lootable.h>
 #include <tpublic/Components/MinionPrivate.h>
 #include <tpublic/Components/MinionPublic.h>
@@ -103,6 +104,7 @@ namespace tpublic
 		_Register<Components::InteractableObject>();
 		_Register<Components::Inventory>();
 		_Register<Components::KillContribution>();
+		_Register<Components::LightEmitter>();
 		_Register<Components::Lootable>();
 		_Register<Components::MinionPrivate>();
 		_Register<Components::MinionPublic>();

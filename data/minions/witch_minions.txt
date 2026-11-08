@@ -207,6 +207,7 @@
 		
 		particle_system .fiendish_spellcaster_fireball:
 		{
+			light: { color: [ 1 0.7 0.4 ] radius: 5 }
 			particle:
 			{
 				sprites: [ effect_fireball ]

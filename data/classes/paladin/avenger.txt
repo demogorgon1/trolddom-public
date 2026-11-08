@@ -401,6 +401,7 @@ ability piercing_strike:
 
 particle_system exorcism:
 {
+	light: { color: [ 1 1 1 ] radius: 4 fade_in: 50 duration: 150 fade_out: 350 }
 	particle:
 	{
 		sprites: [ effect_lightning ]
@@ -452,6 +453,7 @@ ability exorcism:
 
 particle_system divine_smite:
 {
+	light: { color: [ 1 1 1 ] radius: 4 fade_in: 50 duration: 150 fade_out: 350 }
 	particle:
 	{
 		sprites: [ effect_lightning ]
@@ -858,6 +860,7 @@ cooldown holy_storm:
 
 particle_system holy_storm:
 {
+	light: { color: [ 1 1 1 ] radius: 4 fade_in: 50 duration: 150 fade_out: 350 }
 	particle:
 	{
 		sprites: [ effect_whirlwind ]
@@ -907,6 +910,7 @@ cooldown reckoning:
 
 particle_system reckoning:
 {
+	light: { color: [ 1 1 1 ] radius: 4 fade_in: 50 duration: 150 fade_out: 350 }
 	particle:
 	{
 		sprites: [ effect_melee_swing_0 effect_melee_swing_1 effect_melee_swing_2 effect_melee_swing_3 effect_melee_swing_4 ]

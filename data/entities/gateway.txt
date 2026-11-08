@@ -3,6 +3,7 @@ entity gateway:
 	string: "Gateway"
 	
 	systems: [ gateway ]
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -12,6 +13,7 @@ entity gateway:
 			schedule: daily
 			use_position_for_randomization: true
 		}
+		light_emitter<static>: { color: [ 0.3 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -32,6 +34,7 @@ entity player_world_gateway:
 {
 	string: "Player Worlds"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -40,6 +43,7 @@ entity player_world_gateway:
 			maps: [ { map: player_world } ]
 			player_worlds: true
 		}
+		light_emitter<static>: { color: [ 0.2 1 0.75 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -60,6 +64,7 @@ entity the_shrouded_lands_light:
 {
 	string: "The Shrouded Lands"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -72,6 +77,7 @@ entity the_shrouded_lands_light:
 		{
 			requirements: { requirement self<must_be_disciple>: light }
 		}
+		light_emitter<static>: { color: [ 0.75 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -92,6 +98,7 @@ entity the_shrouded_lands_underworld:
 {
 	string: "The Shrouded Lands"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -104,6 +111,7 @@ entity the_shrouded_lands_underworld:
 		{
 			requirements: { requirement self<must_be_disciple>: underworld }
 		}		
+		light_emitter<static>: { color: [ 0.75 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -186,6 +194,7 @@ entity the_shrouded_lands_light_return:
 {
 	string: "Thalvaron"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -194,6 +203,7 @@ entity the_shrouded_lands_light_return:
 			maps: [ { map: thalvaron map_player_spawn: thalvaron_the_shrouded_lands_light_return } ]
 			schedule: none
 		}
+		light_emitter<static>: { color: [ 0.75 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -214,6 +224,7 @@ entity the_shrouded_lands_underworld_return:
 {
 	string: "Thalvaron"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -222,6 +233,7 @@ entity the_shrouded_lands_underworld_return:
 			maps: [ { map: thalvaron map_player_spawn: thalvaron_the_shrouded_lands_underworld_return } ]
 			schedule: none
 		}
+		light_emitter<static>: { color: [ 0.75 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -243,6 +255,7 @@ entity gateway_2:
 	string: "Gateway"
 	
 	systems: [ gateway ]
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -252,6 +265,7 @@ entity gateway_2:
 			schedule: daily
 			use_position_for_randomization: true
 		}
+		light_emitter<static>: { color: [ 0.3 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -273,6 +287,7 @@ entity gateway_3:
 	string: "Gateway"
 	
 	systems: [ gateway ]
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -282,6 +297,7 @@ entity gateway_3:
 			schedule: daily
 			use_position_for_randomization: true
 		}
+		light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -342,9 +358,11 @@ entity voraghul_portal_open:
 {
 	string: "Realm of Voraghul" 
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -374,9 +392,11 @@ entity voraghul_portal_rift:
 {
 	string: "Realm of Voraghul" 
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -402,9 +422,11 @@ entity voraghul_portal_return_portal:
 {
 	string: "Thalvaron" 
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -432,9 +454,11 @@ entity thalvaron_jungle_tower_portal:
 	
 	systems: [ openable ]
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 0.3 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -469,9 +493,11 @@ entity thalvaron_jungle_tower_portal_return:
 	
 	systems: [ openable ]
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 0.3 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -504,6 +530,7 @@ entity withering_glade_portal:
 {
 	string: "Lake of the Damned"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -512,6 +539,7 @@ entity withering_glade_portal:
 			maps: [ { map: withering_glade } ]
 			schedule: none
 		}
+		light_emitter<static>: { color: [ 0.75 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -532,6 +560,7 @@ entity withering_glade_portal_exit:
 {
 	string: "Thalvaron"
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -540,6 +569,7 @@ entity withering_glade_portal_exit:
 			maps: [ { map: thalvaron map_player_spawn: withering_glade_exit } ]
 			schedule: none
 		}
+		light_emitter<static>: { color: [ 0.75 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:

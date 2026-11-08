@@ -38,6 +38,7 @@ entity .spawn_effect:
 	{
 		position: { }		
 		owner: { }
+		light_emitter<static>: { color: [ 1 0.6 0.3 ] radius: 3 merge_distance: 1.5 }
 		environment: 
 		{
 			tick_interval: 80

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Image.h"
 #include "IReader.h"
 #include "IWriter.h"
 
@@ -127,6 +128,11 @@ namespace tpublic
 				m_survivalScriptId = aItem->GetId(DataType::ID_SURVIVAL_SCRIPT);
 				return true;
 			}
+			else if (aItem->m_name == "ambient_light")
+			{
+				m_ambientLight = Image::RGBA(aItem);
+				return true;
+			}
 			return false;
 		}
 
@@ -154,6 +160,7 @@ namespace tpublic
 			aWriter->WriteBool(m_openableElite);
 			aWriter->WriteUInt(m_survivalScriptId);
 			aWriter->WriteBool(m_heroicModeAvailable);
+			aWriter->WriteOptionalPOD(m_ambientLight);
 		}
 
 		bool
@@ -200,6 +207,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadBool(m_heroicModeAvailable))
 				return false;
+			if (!aReader->ReadOptionalPOD(m_ambientLight))
+				return false;
 			return true;
 		}
 
@@ -224,6 +233,7 @@ namespace tpublic
 		bool										m_openableElite = false;
 		uint32_t									m_survivalScriptId = 0;
 		bool										m_heroicModeAvailable = false;
+		std::optional<Image::RGBA>					m_ambientLight;			// Not set: white (no darkening)
 	};
 
 }

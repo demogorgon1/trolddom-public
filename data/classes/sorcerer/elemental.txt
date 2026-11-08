@@ -612,6 +612,7 @@ entity lake_of_fire:
 			duration: 60 
 			ability: lake_of_fire_tick
 		}		
+		light_emitter<static>: { color: [ 1 0.6 0.3 ] radius: 4 merge_distance: 1.5 }
 		sprite: 
 		{ 
 			animations: 
@@ -692,6 +693,8 @@ ability firebolt:
 
 particle_system firebolt:
 {
+	light: { color: [ 1 0.6 0.3 ] radius: 3 }
+
 	particle:
 	{
 		sprites: [ effect_firebolt_b ]
@@ -764,6 +767,7 @@ ability fireball:
 
 particle_system fireball:
 {
+	light: { color: [ 1 0.7 0.4 ] radius: 5 }
 	particle:
 	{
 		sprites: [ effect_flame_gradient_1 ] 
@@ -834,6 +838,7 @@ ability ice_lance:
 
 particle_system ice_lance:
 {
+	light: { color: [ 0.4 0.7 1 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_frostbolt ]

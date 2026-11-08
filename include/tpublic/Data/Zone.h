@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../DataBase.h"
+#include "../Image.h"
 #include "../Requirement.h"
 
 namespace tpublic
@@ -61,6 +62,8 @@ namespace tpublic
 							m_playerKillTriggerAbilityId = aChild->GetId(DataType::ID_ABILITY);
 						else if (aChild->m_name == "top_zone")
 							m_topZoneId = aChild->GetId(DataType::ID_ZONE);
+						else if (aChild->m_name == "ambient_light")
+							m_ambientLight = Image::RGBA(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -89,6 +92,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_playerKillTriggerAbilityId);
 				aWriter->WriteUInt(m_lootTableId);
 				aWriter->WriteUInt(m_topZoneId);
+				aWriter->WriteOptionalPOD(m_ambientLight);
 			}
 			
 			bool
@@ -125,6 +129,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadUInt(m_topZoneId))
 					return false;
+				if (!aReader->ReadOptionalPOD(m_ambientLight))
+					return false;
 				return true;
 			}
 
@@ -155,6 +161,7 @@ namespace tpublic
 
 			uint32_t					m_lootTableId = 0;
 			uint32_t					m_topZoneId = 0;
+			std::optional<Image::RGBA>	m_ambientLight;			// Not set: top zone's, then the map's
 		};
 
 	}

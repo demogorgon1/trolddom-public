@@ -483,6 +483,7 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 					
 					projectile: $particle_system
 					{
+						light: { color: [ 1 0.6 0.3 ] radius: 3 }
 						particle:
 						{
 							sprites: [ effect_firebolt_b ]
@@ -532,6 +533,7 @@ map_entity_spawn realm_of_fire_wizard_spawn_8: { spawn_timer: { only_when_trigge
 
 					projectile: $particle_system
 					{
+						light: { color: [ 1 0.7 0.4 ] radius: 5 }
 						particle:
 						{
 							sprites: [ effect_fireball ]

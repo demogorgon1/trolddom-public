@@ -54,6 +54,7 @@ talent paladin_judgement_for_all:
 
 particle_system judgement_for_all:
 {
+	light: { color: [ 1 1 1 ] radius: 4 fade_in: 50 duration: 150 fade_out: 350 }
 	particle:
 	{
 		sprites: [ effect_judgement_for_all ]

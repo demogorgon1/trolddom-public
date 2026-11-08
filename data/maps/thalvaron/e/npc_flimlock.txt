@@ -261,9 +261,11 @@ entity thalvaron_flimlock_3_portal:
 	
 	systems: [ openable ]
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 0.3 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:
@@ -298,9 +300,11 @@ entity thalvaron_flimlock_3_portal_return:
 	
 	systems: [ openable ]
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 0.3 0.45 1 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:

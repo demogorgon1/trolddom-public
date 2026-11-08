@@ -84,9 +84,11 @@ entity dominion_of_strife_rift:
 	
 	systems: [ pvp_rift ]
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
+		light_emitter<static>: { color: [ 1 0.25 0.15 ] radius: 4 }
 		sprite<static>: 
 		{ 
 			animations:

@@ -12,4 +12,5 @@ entity target_dummy: !NPC
 	_abilities: [ { id: npc_full_health target: self requirement self<must_have_less_health_than>: 99 update_target: false } ]
 	_can_move: false
 	_not_pushable: true
+	_immobile: true
 }

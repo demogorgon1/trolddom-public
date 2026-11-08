@@ -139,6 +139,7 @@ entity .survival_start_object:
 	
 	systems: [ openable ]
 	
+	flags: [ immobile ]
 	components:
 	{
 		position: { }		
@@ -398,6 +399,7 @@ map trial_of_fire:
 					maps: [ { map: thalvaron map_player_spawn: thalvaron_trial_of_fire_return_spawn } ]
 					schedule: none
 				}
+				light_emitter<static>: { color: [ 1 0.6 0.2 ] radius: 4 }
 				sprite<static>: 
 				{ 
 					animations:

@@ -176,6 +176,99 @@ namespace tpublic
 				float				m_waveSpeed = 0.0f; // tiles/second, positive moves waves from source towards target
 			};
 
+			// Light around the particle system while it's active (a projectile in flight, an aura on an entity), like the
+			// light emitter component
+			struct Light
+			{
+				Light()
+				{
+
+				}
+
+				Light(
+					const SourceNode*	aSource)
+				{
+					aSource->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "color")
+						{
+							const SourceNode* p = aChild->GetArray();
+							TP_VERIFY(p->m_children.size() == 3, aChild->m_debugInfo, "Light color must be [ r g b ].");
+							m_r = p->m_children[0]->GetFloat();
+							m_g = p->m_children[1]->GetFloat();
+							m_b = p->m_children[2]->GetFloat();
+						}
+						else if(aChild->m_name == "radius")
+						{
+							m_radius = aChild->GetFloat();
+						}
+						else if(aChild->m_name == "fade_in")
+						{
+							m_fadeIn = aChild->GetUInt32();
+						}
+						else if(aChild->m_name == "fade_out")
+						{
+							m_fadeOut = aChild->GetUInt32();
+						}
+						else if(aChild->m_name == "duration")
+						{
+							m_duration = aChild->GetUInt32();
+						}
+						else
+						{
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+						}
+					});
+
+					TP_VERIFY(m_radius > 0.0f, aSource->m_debugInfo, "Light radius must be greater than zero.");
+					TP_VERIFY(m_duration == 0 || m_duration >= m_fadeIn, aSource->m_debugInfo, "Light duration can't be shorter than its fade in.");
+				}
+
+				void
+				ToStream(
+					IWriter*			aWriter) const
+				{
+					aWriter->WriteFloat(m_r);
+					aWriter->WriteFloat(m_g);
+					aWriter->WriteFloat(m_b);
+					aWriter->WriteFloat(m_radius);
+					aWriter->WriteUInt(m_fadeIn);
+					aWriter->WriteUInt(m_fadeOut);
+					aWriter->WriteUInt(m_duration);
+				}
+
+				bool
+				FromStream(
+					IReader*			aReader)
+				{
+					if(!aReader->ReadFloat(m_r))
+						return false;
+					if(!aReader->ReadFloat(m_g))
+						return false;
+					if(!aReader->ReadFloat(m_b))
+						return false;
+					if(!aReader->ReadFloat(m_radius))
+						return false;
+					if(!aReader->ReadUInt(m_fadeIn))
+						return false;
+					if(!aReader->ReadUInt(m_fadeOut))
+						return false;
+					if(!aReader->ReadUInt(m_duration))
+						return false;
+					return true;
+				}
+
+				// Public data
+				float				m_r = 1.0f; // 1 is full brightness
+				float				m_g = 1.0f;
+				float				m_b = 1.0f;
+				float				m_radius = 0.0f; // tiles
+				uint32_t			m_fadeIn = 100; // ms, from when the particle system starts
+				uint32_t			m_fadeOut = 300; // ms, after the particle system ends (e.g. a projectile hits)
+				uint32_t			m_duration = 0; // ms, the light starts fading out this long after the particle system starts (0: when it ends)
+			};
+
 			struct Entry
 			{
 				Entry()
@@ -409,6 +502,8 @@ namespace tpublic
 					{
 						if (aChild->m_name == "particle")
 							m_particles.push_back(std::make_unique<Entry>(aChild));
+						else if (aChild->m_name == "light")
+							m_light = Light(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -420,6 +515,7 @@ namespace tpublic
 				IWriter*				aStream) const override
 			{
 				aStream->WriteObjectPointers(m_particles);
+				aStream->WriteOptionalObject(m_light);
 			}
 
 			bool
@@ -428,11 +524,14 @@ namespace tpublic
 			{
 				if(!aStream->ReadObjectPointers(m_particles))
 					return false;
+				if(!aStream->ReadOptionalObject(m_light))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>	m_particles;
+			std::optional<Light>				m_light;
 		};
 
 

@@ -93,6 +93,7 @@ entity zuthyg_the_golden: !NPC
 
 particle_system .zuthyg_the_golden:
 {
+	light: { color: [ 1 0.6 0.3 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_firebolt_b ]
@@ -152,6 +153,7 @@ entity .zuthyg_the_golden_fire:
 	{
 		position: { }		
 		owner: { }
+		light_emitter<static>: { color: [ 1 0.6 0.3 ] radius: 3 merge_distance: 1.5 }
 		environment: 
 		{
 			tick_interval: 10

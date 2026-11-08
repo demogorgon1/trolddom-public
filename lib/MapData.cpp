@@ -8,6 +8,7 @@
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Wall.h>
 
+#include <tpublic/AmbientLightMap.h>
 #include <tpublic/AutoDoodads.h>
 #include <tpublic/CliffBuilder.h>
 #include <tpublic/DebugPrintTimer.h>
@@ -405,6 +406,9 @@ namespace tpublic
 					m_worldInfoMap = std::make_unique<WorldInfoMap>();
 					m_worldInfoMap->Build(aManifest, m_width, m_height, &levelMap[0], &zoneMap[0], &subZoneMap[0], &flagsMap[0]);
 				}
+
+				m_ambientLightMap = AmbientLightMap::Build(aManifest, m_width, m_height, hasZoneMap ? &zoneMap[0] : NULL, hasSubZoneMap ? &subZoneMap[0] : NULL,
+					m_mapInfo.m_ambientLight.value_or(Image::RGBA(255, 255, 255, 255)));
 			}
 
 			if(hasCoverMap)
@@ -553,6 +557,7 @@ namespace tpublic
 		aStream->WriteUInts(m_realmBalanceIds);
 		aStream->WriteObjects(m_pointsOfInterest);
 		aStream->WriteOptionalObject(m_worldMap);
+		aStream->WriteOptionalObjectPointer(m_ambientLightMap);
 	}
 
 	bool	
@@ -637,6 +642,8 @@ namespace tpublic
 		if (!aStream->ReadObjects(m_pointsOfInterest))
 			return false;
 		if (!aStream->ReadOptionalObject(m_worldMap))
+			return false;
+		if (!aStream->ReadOptionalObjectPointer(m_ambientLightMap))
 			return false;
 
 		return true;
@@ -796,6 +803,13 @@ namespace tpublic
 			m_worldInfoMap->CopyFrom(aMapData->m_worldInfoMap.get());
 		}
 
+		if(aMapData->m_ambientLightMap)
+		{
+			assert(!m_ambientLightMap);
+
+			m_ambientLightMap = std::make_unique<AmbientLightMap>(*aMapData->m_ambientLightMap);
+		}
+
 		if(aMapData->m_mapCovers)
 		{
 			assert(!m_mapCovers);
@@ -836,6 +850,17 @@ namespace tpublic
 			return m_tileMap[p.m_x + p.m_y * m_width];
 
 		return 0;
+	}
+
+	Image::RGBA
+	MapData::GetAmbientLight(
+		float					aX,
+		float					aY) const
+	{
+		if(m_ambientLightMap)
+			return m_ambientLightMap->Get(aX, aY);
+
+		return m_mapInfo.m_ambientLight.value_or(Image::RGBA(255, 255, 255, 255));
 	}
 
 	void		

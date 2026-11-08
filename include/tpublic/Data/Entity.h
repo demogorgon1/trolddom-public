@@ -23,7 +23,8 @@ namespace tpublic
 
 			enum Flag : uint8_t
 			{
-				FLAG_ALWAYS_REPLICATE = 0x01
+				FLAG_ALWAYS_REPLICATE	= 0x01,
+				FLAG_IMMOBILE			= 0x02		// Never moves once spawned (e.g. a torch), so the client can treat it as fixed (cached lights etc)
 			};
 
 			static uint8_t
@@ -33,6 +34,8 @@ namespace tpublic
 				std::string_view t(aSource->GetIdentifier());
 				if (t == "always_replicate")
 					return FLAG_ALWAYS_REPLICATE;
+				if (t == "immobile")
+					return FLAG_IMMOBILE;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not an entity flag.", aSource->GetIdentifier());
 				return 0;
 			}
@@ -353,6 +356,9 @@ namespace tpublic
 				ToPropertyTableBase(aOut);
 				aOut["string"] = m_displayName;
 			}
+
+			// Helpers
+			bool		IsImmobile() const { return m_flags & FLAG_IMMOBILE; }
 
 			// Public data
 			std::string										m_displayName;

@@ -1,6 +1,7 @@
 !define local MISC_OBJECT
 {
-	string: @_string
+	<exists _string> string: @_string
+	flags: [ immobile ]
 	<exists _environment> systems: [ environment ]
 	
 	components:
@@ -21,23 +22,30 @@
 		}	
 		<exists _environment> environment: @_environment
 		<exists _environment> owner<static>: {}
+		<exists _light> light_emitter<static>: @_light
 	}
 }
 
 entity standing_stone: !MISC_OBJECT { _string: "Standing Stone" _frames: [ waypoint_1 ] }
 entity anvil: !MISC_OBJECT { _string: "Anvil" _frames: [ anvil ] }
-entity furnace: !MISC_OBJECT { _string: "Furnace" _frames: [ furnace ] }
-entity fireplace: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_1 fireplace_2 fireplace_3 ] }
+entity furnace: !MISC_OBJECT { _string: "Furnace" _frames: [ furnace ] _light: { color: [ 1 0.6 0.3 ] radius: 3 } }
+entity fireplace: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_1 fireplace_2 fireplace_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 4.2 offset: [ 0 1 ] } }
 entity fireplace_unlit: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_unlit ] }
-entity bonfire: !MISC_OBJECT { _string: "Bonfire" _frames: [ bonfire_1 bonfire_2 bonfire_3 ] }
+entity bonfire: !MISC_OBJECT { _string: "Bonfire" _frames: [ bonfire_1 bonfire_2 bonfire_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 6 } }
 entity cauldron: !MISC_OBJECT { _string: "Cauldron" _frames: [ cauldron_1 ] }
 entity bonfire_unlit: !MISC_OBJECT { _string: "Extinguished Bonfire" _frames: [ bonfire_unlit ] }
 entity jul_tree: !MISC_OBJECT { _string: "Jule Tree" _frames: [ jul_tree ] }
+
+# Placeholder sprites (blank until drawn). South: on a south facing wall, lighting the tile in front of it. East and west: on the floor tile next to the wall.
+entity wall_torch_south: !MISC_OBJECT { _frames: [ wall_torch_south_1 wall_torch_south_2 wall_torch_south_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 offset: [ 0 1 ] } }
+entity wall_torch_east: !MISC_OBJECT { _frames: [ wall_torch_east_1 wall_torch_east_2 wall_torch_east_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
+entity wall_torch_west: !MISC_OBJECT { _frames: [ wall_torch_west_1 wall_torch_west_2 wall_torch_west_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
 
 entity fire: !MISC_OBJECT 
 { 
 	_string: "Fire" 
 	_frames: [ fire_0 fire_1 fire_2 ] 
+	_light: { color: [ 1 0.6 0.3 ] radius: 5 }
 	_environment: 
 	{
 		tick_interval: 15

@@ -94,6 +94,8 @@ ability npc_strike:
 
 particle_system npc_firebolt:
 {
+	light: { color: [ 1 0.6 0.3 ] radius: 3 }
+
 	particle:
 	{
 		sprites: [ effect_firebolt_b ]
@@ -155,6 +157,7 @@ ability npc_fireball:
 
 	projectile: $particle_system
 	{
+		light: { color: [ 1 0.7 0.4 ] radius: 5 }
 		particle:
 		{
 			sprites: [ effect_fireball ]
@@ -228,6 +231,7 @@ ability npc_fireball_2:
 
 	projectile: $particle_system
 	{
+		light: { color: [ 1 0.7 0.4 ] radius: 5 }
 		particle:
 		{
 			sprites: [ effect_fireball ]
@@ -296,6 +300,7 @@ ability npc_frostbolt:
 
 	projectile: $particle_system 
 	{
+		light: { color: [ 0.4 0.7 1 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_frostbolt ]
@@ -352,6 +357,7 @@ ability npc_frostbolt_stacking:
 
 	projectile: $particle_system 
 	{
+		light: { color: [ 0.4 0.7 1 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_frostbolt ]
@@ -415,6 +421,7 @@ ability npc_frostbolt_2:
 
 	projectile: $particle_system 
 	{
+		light: { color: [ 0.4 0.7 1 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_frostbolt ]
@@ -470,6 +477,7 @@ ability npc_frostbolt_no_cooldown:
 
 	projectile: $particle_system 
 	{
+		light: { color: [ 0.4 0.7 1 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_frostbolt ]
@@ -797,6 +805,7 @@ aura npc_acid_spit:
 
 particle_system npc_acid_spit:
 {
+	light: { color: [ 0.4 1 0.4 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_witch_bolt ]
@@ -980,6 +989,7 @@ ability npc_chain_lightning:
 
 particle_system npc_chain_lightning:
 {
+	light: { color: [ 1 0.6 0.9 ] radius: 3 }
 	particle:
 	{
 		sprites: [ effect_pink_lightning_0 effect_pink_lightning_1 effect_pink_lightning_2 ]
@@ -1128,6 +1138,7 @@ entity npc_fire_attack_fire:
 	{
 		position: { }		
 		owner: { }
+		light_emitter<static>: { color: [ 1 0.6 0.3 ] radius: 3 merge_distance: 1.5 }
 		environment: 
 		{
 			tick_interval: 15
@@ -1520,6 +1531,7 @@ ability npc_poison_bolt:
 	target_particle_system: green_spell_hit
 	projectile: $particle_system
 	{
+		light: { color: [ 0.4 1 0.4 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_witch_bolt ]
@@ -1702,6 +1714,7 @@ ability npc_drain_life:
 	target_particle_system: green_spell_hit
 	projectile: $particle_system
 	{
+		light: { color: [ 0.4 1 0.4 ] radius: 3 }
 		particle:
 		{
 			sprites: [ effect_witch_bolt ]
