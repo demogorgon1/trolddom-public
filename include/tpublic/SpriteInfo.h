@@ -11,7 +11,7 @@ namespace tpublic
 	class SpriteInfo
 	{
 	public:
-		enum Flag : uint16_t
+		enum Flag : uint32_t
 		{
 			FLAG_TILE_WALKABLE				= 0x0001,
 			FLAG_TILE_BLOCK_LINE_OF_SIGHT	= 0x0002,
@@ -27,7 +27,9 @@ namespace tpublic
 			FLAG_CENTERED					= 0x0800,
 			FLAG_DOUBLED					= 0x1000,
 			FLAG_AUTOGLOW					= 0x2000,
-			FLAG_TILE_FACE					= 0x4000	// Hard south facing surface (wall face), lit by what reaches the ground in front of it
+			FLAG_TILE_FACE					= 0x4000,	// Hard south facing surface (wall face), lit by what reaches the ground in front of it
+			FLAG_TILE_WINDOW_OUTSIDE		= 0x8000,	// Window seen from outside (in a front wall), daylight comes in through it into the tile north of it
+			FLAG_TILE_WINDOW_INTERIOR		= 0x10000	// Window seen from inside (in a back wall), daylight comes in through it into the tile south of it
 		};
 
 		struct NamedAnchor
@@ -94,7 +96,7 @@ namespace tpublic
 			Rarity::Id				m_maxRarity = Rarity::INVALID_ID;
 		};
 
-		static inline uint16_t 
+		static inline uint32_t 
 		StringToFlag(			
 			const char*		aString)
 		{
@@ -128,18 +130,22 @@ namespace tpublic
 				return FLAG_AUTOGLOW;
 			if (strcmp(aString, "tile_face") == 0)
 				return FLAG_TILE_FACE;
+			if (strcmp(aString, "tile_window_outside") == 0)
+				return FLAG_TILE_WINDOW_OUTSIDE;
+			if (strcmp(aString, "tile_window_interior") == 0)
+				return FLAG_TILE_WINDOW_INTERIOR;
 			return 0;
 		}
 
-		static inline uint16_t
+		static inline uint32_t
 		SourceToFlags(
 			const SourceNode*	aSource)
 		{
-			uint16_t flags = 0;
+			uint32_t flags = 0;
 			aSource->GetArray()->ForEachChild([&flags](
 				const SourceNode* aChild)
 			{
-				uint16_t flag = StringToFlag(aChild->GetIdentifier());
+				uint32_t flag = StringToFlag(aChild->GetIdentifier());
 				TP_VERIFY(flag != 0, aChild->m_debugInfo, "'%s' is not a valid sprite flag.", aChild->GetIdentifier());
 				flags |= flag;
 			});
@@ -289,7 +295,7 @@ namespace tpublic
 		}
 
 		// Public data
-		uint16_t					m_flags = 0;
+		uint32_t					m_flags = 0;
 		uint32_t					m_tileLayer = 0;
 		std::vector<uint32_t>		m_borders;
 		Vec2						m_origin;

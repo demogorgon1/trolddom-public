@@ -155,6 +155,11 @@ map_entity_spawn wall_torch_west:
 	entity wall_torch_west: { weight: 1 }
 }
 
+map_entity_spawn fill_light:
+{
+	entity fill_light: { weight: 1 }
+}
+
 map_entity_spawn fire:
 {
 	entity fire: { }

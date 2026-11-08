@@ -203,7 +203,7 @@ namespace tpublic
 						aSpriteComponent->GetArray()->ForEachChild([&](
 							const SourceNode* aFlag)
 						{
-							uint16_t flag = SpriteInfo::StringToFlag(aFlag->GetIdentifier());
+							uint32_t flag = SpriteInfo::StringToFlag(aFlag->GetIdentifier());
 							TP_VERIFY(flag != 0, aFlag->m_debugInfo, "Not a valid sprite flag.");
 							sprite->m_info.m_flags |= flag;
 						});

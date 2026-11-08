@@ -36,8 +36,8 @@ sprites:
 	sprite ext_dungeon_wall: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite ext_dungeon_entrance: { flags: [ tile_walkable tile_top ] }
 	sprite ext_cave_entrance: { flags: [ tile_walkable tile_top ] }
-	sprite wood_wall_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }
 	sprite forest_2_entrance: { flags: [ tile_walkable tile_top  ] }
 	sprite water: { flags: [ tile_fishable tile_water ] water_floor: sand water_animation: [ water_1 water_2 water_3 ] }
 	sprite shallow_water: { flags: [ tile_fishable tile_water tile_walkable tile_no_waves ] overview_map_override: water water_floor: sand water_animation: [ water_1 water_2 water_3 ] 
@@ -75,8 +75,8 @@ sprites:
 	sprite ext_dungeon_wall_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite ext_dungeon_wall_start: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite ext_dungeon_wall_end: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_window_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_window_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_window_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_window_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
 	sprite road_1: { flags: [ tile_walkable ] alt_tiles: [ road_1_alt_1 road_1_alt_2 ] }
 	sprite road_1_alt_1: { flags: [ tile_walkable ] }
 	sprite road_1_alt_2: { flags: [ tile_walkable ] }
@@ -520,17 +520,17 @@ sprites:
 	sprite brick_open_door: { flags: [ tile_walkable tile_top ] }
 	sprite brick_wall_start: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite brick_wall_end: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite brick_wall_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite brick_wall_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
 	sprite brick_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite brick_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite brick_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 
 	sprite brick_2_wall: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite brick_2_open_door: { flags: [ tile_walkable tile_top ] }
 	sprite brick_2_wall_start: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite brick_2_wall_end: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite brick_2_wall_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite brick_2_wall_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
 	sprite brick_2_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite brick_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite brick_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 
 	cursor: { position: [ 0 272 ] }
 
@@ -557,15 +557,15 @@ sprites:
 	sprite fs_ground_2_border_17: { }
 	
 	sprite inside_1_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite inside_1_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite inside_1_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 	sprite inside_2_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite inside_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite inside_2_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 	sprite inside_3_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite inside_3_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite inside_3_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 	sprite inside_4_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite inside_4_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite inside_4_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 	sprite inside_5_solid_wall_face: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite inside_5_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite inside_5_solid_wall_face_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }	
 	sprite outside_wood_floor_1: { flags: [ tile_walkable tile_top ] alt_tiles: [ outside_wood_floor_1_alt_1 outside_wood_floor_1_alt_2 ] }
 	sprite outside_wood_floor_1_alt_1: { flags: [ tile_walkable ] }
 	sprite outside_wood_floor_1_alt_2: { flags: [ tile_walkable ] }
@@ -593,12 +593,12 @@ sprites:
 	sprite wood_wall_2_inside: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_2_start: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_2_end: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_2_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_2_window_inside: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_2_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_2_window_inside: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }
 	sprite wood_wall_2_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_2_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_2_window_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_2_window_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_2_window_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_2_window_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
 	sprite ice_cave_entrance: { flags: [ tile_walkable tile_top ] }
 	sprite rock_floor: { flags: [ tile_walkable ] alt_tiles: [ rock_floor_alt_1 rock_floor_alt_2 ] }
 	sprite rock_floor_alt_1: { flags: [ tile_walkable ] }
@@ -635,13 +635,13 @@ sprites:
 	
 	sprite wood_wall_3_alt_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_3_alt_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_3_window_alt_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_3_window_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_3_window_alt_1: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_3_window_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }
 	sprite wood_wall_3_inside_alt_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_3_start: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_3_end: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_3_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_3_window_inside: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_3_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_3_window_inside: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }
 	sprite wood_wall_3: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_3_entrance: { flags: [ tile_walkable tile_top ] }
 	sprite wood_wall_3_inside: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
@@ -822,12 +822,12 @@ sprites:
 	sprite wood_wall_4_inside: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_4_start: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_4_end: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_4_window: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_4_window_inside: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
+	sprite wood_wall_4_window: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_4_window_inside: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_interior ] }
 	sprite wood_wall_4_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
 	sprite wood_wall_4_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_4_window_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face ] }
-	sprite wood_wall_4_window_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face ] }	
+	sprite wood_wall_4_window_grass_1: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }
+	sprite wood_wall_4_window_grass_2: { flags: [ tile_block_line_of_sight tile_top tile_face tile_window_outside ] }	
 
 	cursor: { position: [ 0 400 ] }
 

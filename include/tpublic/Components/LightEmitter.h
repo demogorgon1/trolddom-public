@@ -101,8 +101,10 @@ namespace tpublic
 				FIELD_COLOR,
 				FIELD_RADIUS,
 				FIELD_OFFSET,
-				FIELD_MERGE_DISTANCE		// Lights of the same entity type this close to each other (also through others in between) are
+				FIELD_MERGE_DISTANCE,		// Lights of the same entity type this close to each other (also through others in between) are
 											// drawn as one light, e.g. for an AOE that spawns one entity per tile
+				FIELD_SHADOWS				// False: lights everything within its radius, through walls and rocks (e.g. a faint light to
+											// brighten up a dark cave). It still doesn't light roofs seen from outside if it's under one.
 			};
 
 			static void
@@ -113,6 +115,7 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_RADIUS, "radius", offsetof(LightEmitter, m_radius));
 				aSchema->DefineCustomObject<Offset>(FIELD_OFFSET, "offset", offsetof(LightEmitter, m_offset));
 				aSchema->Define(ComponentSchema::TYPE_FLOAT, FIELD_MERGE_DISTANCE, "merge_distance", offsetof(LightEmitter, m_mergeDistance));
+				aSchema->Define(ComponentSchema::TYPE_BOOL, FIELD_SHADOWS, "shadows", offsetof(LightEmitter, m_shadows));
 			}
 
 			void
@@ -122,6 +125,7 @@ namespace tpublic
 				m_radius = 0.0f;
 				m_offset = Offset();
 				m_mergeDistance = 0.0f;
+				m_shadows = true;
 			}
 
 			// Public data
@@ -129,6 +133,7 @@ namespace tpublic
 			float					m_radius = 0.0f;			// In tiles
 			Offset					m_offset;
 			float					m_mergeDistance = 0.0f;		// In tiles, see FIELD_MERGE_DISTANCE
+			bool					m_shadows = true;			// See FIELD_SHADOWS
 		};
 	}
 

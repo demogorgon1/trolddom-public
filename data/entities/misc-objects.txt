@@ -36,10 +36,20 @@ entity cauldron: !MISC_OBJECT { _string: "Cauldron" _frames: [ cauldron_1 ] }
 entity bonfire_unlit: !MISC_OBJECT { _string: "Extinguished Bonfire" _frames: [ bonfire_unlit ] }
 entity jul_tree: !MISC_OBJECT { _string: "Jule Tree" _frames: [ jul_tree ] }
 
-# Placeholder sprites (blank until drawn). South: on a south facing wall, lighting the tile in front of it. East and west: on the floor tile next to the wall.
 entity wall_torch_south: !MISC_OBJECT { _frames: [ wall_torch_south_1 wall_torch_south_2 wall_torch_south_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 offset: [ 0 1 ] } }
 entity wall_torch_east: !MISC_OBJECT { _frames: [ wall_torch_east_1 wall_torch_east_2 wall_torch_east_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
 entity wall_torch_west: !MISC_OBJECT { _frames: [ wall_torch_west_1 wall_torch_west_2 wall_torch_west_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
+
+entity fill_light:
+{
+	flags: [ immobile ]
+
+	components:
+	{
+		position: { }
+		light_emitter<static>: { color: [ 0.3 0.3 0.3 ] radius: 6 shadows: false }
+	}
+}
 
 entity fire: !MISC_OBJECT 
 { 

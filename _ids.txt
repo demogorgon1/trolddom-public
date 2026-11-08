@@ -26568,6 +26568,7 @@ entity world_enemies_3_npc_223 2473
 entity wall_torch_south 2474
 entity wall_torch_east 2475
 entity wall_torch_west 2476
+entity fill_light 2477
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -27626,6 +27627,7 @@ map_entity_spawn __maps_gateway_world_3_herbalism 1109
 map_entity_spawn wall_torch_south 1110
 map_entity_spawn wall_torch_east 1111
 map_entity_spawn wall_torch_west 1112
+map_entity_spawn fill_light 1113
 map_player_spawn dungeon_1_exit 9
 map_player_spawn __maps_dungeon_1_player_spawn 12
 map_player_spawn __maps_dungeon_2_player_spawn 13

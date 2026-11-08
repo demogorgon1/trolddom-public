@@ -323,7 +323,7 @@ namespace tpublic
 
 				bool
 				CheckTileFlags(
-					uint16_t		aTileFlags) const
+					uint32_t		aTileFlags) const
 				{
 					if((aTileFlags & m_mustNotHaveTileFlags) != 0)
 						return false;
@@ -337,8 +337,8 @@ namespace tpublic
 				std::vector<std::unique_ptr<SpawnCondition>>	m_spawnConditions;
 				UIntRange										m_level;
 				std::vector<uint32_t>							m_zones;
-				uint16_t										m_mustHaveTileFlags = 0;
-				uint16_t										m_mustNotHaveTileFlags = 0;
+				uint32_t										m_mustHaveTileFlags = 0;
+				uint32_t										m_mustNotHaveTileFlags = 0;
 				std::optional<ControlPointRequirement>			m_controlPointRequirement;
 			};
 

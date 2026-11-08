@@ -623,6 +623,7 @@ zone .zone_13:
 {
 	string: "Twilight Thicket"
 	preposition: "in the"
+	ambient_light: [ 170 143 240 ]
 }
 
 zone .town:
@@ -707,6 +708,8 @@ map_palette .tiles:
 
 map_palette .stuff:
 {
+	!DEFAULT_MAP_ENTITY_SPAWN_PALETTE{}
+
 	entity_spawn mining: [ 200 200 200 ]
 	entity_spawn herbalism: [ 0 255 0 ]
 	entity_spawn spirit_stone: [ 0 0 0 ]	
