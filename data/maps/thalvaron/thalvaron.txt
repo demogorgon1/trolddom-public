@@ -165,7 +165,7 @@ zone .withering_glade: { string: "Withering Glade" preposition: "in the" }
 zone .central_ashira: { string: "Central Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" }
 zone .ashiran_peaks: { string: "Ashiran Peaks" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in the" }
 zone .caves_of_limdrok: { string: "Caves of Lim'Drok" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" }
-zone .corrupted_highlands: { string: "Corrupted Highlands" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" }
+zone .corrupted_highlands: { string: "Corrupted Highlands" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" ambient_light: [ 240 143 170 ] }
 zone .kareth_landing: { string: "Gate of Karethi" preposition: "at the" }
 zone .the_sunken_reach: { string: "The Sunken Reach" preposition: "in" }
 zone .wreck_zone_1: { string: "Green Cape" preposition: "in" }
@@ -178,7 +178,7 @@ zone .wreck_zone_7: { string: "Drowned Temple" preposition: "in" }
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
 zone thalvaron_lurker: { fishing_trigger_ability: thalvaron_lurker_spawn fishing_trigger_ability_chance: 50 fishing_loot_table: $loot_table { } }
-zone .frozen_landing: { string: "Frozen Landing" preposition: "at the" }
+zone .frozen_landing: { string: "Frozen Landing" preposition: "at the" ambient_light: [ 170 143 240 ] }
 	
 route thalvaron_default_patrol: { }
 

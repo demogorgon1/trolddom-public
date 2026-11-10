@@ -148,7 +148,7 @@ terrain lava:
 terrain coast_volcanic:
 {
 	tile<dark_rocky_dirt>: { threshold<temperature>: { less_than: 64 } }
-	tile<molten_rock>: { }
+	tile<molten_rock_2>: { }
 	
 	walkable: true
 	

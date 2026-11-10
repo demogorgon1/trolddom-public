@@ -1698,4 +1698,35 @@ sprites:
 	sprite red_grass_border_17: { }	
 	sprite red_grass_alt_1: { flags: [ tile_walkable ] }
 	sprite red_grass_alt_2: { flags: [ tile_walkable ] }		
+	
+	cursor: { position: [ 0 944 ] }
+	
+	sprite molten_rock_2: 
+	{ 
+		flags: [ tile_walkable ] 
+		borders: [ molten_rock_2_border_1 molten_rock_2_border_2 molten_rock_2_border_3 molten_rock_2_border_4 molten_rock_2_border_5 molten_rock_2_border_6 molten_rock_2_border_7
+		           molten_rock_2_border_8 molten_rock_2_border_9 molten_rock_2_border_10 molten_rock_2_border_11 molten_rock_2_border_12 molten_rock_2_border_13 molten_rock_2_border_14
+		           molten_rock_2_border_15 molten_rock_2_border_16 molten_rock_2_border_17 ] 				  						   
+		alt_tiles: [ molten_rock_2_alt_1 molten_rock_2_alt_2 ]
+	}	
+	sprite molten_rock_2_border_1: { }
+	sprite molten_rock_2_border_2: { }
+	sprite molten_rock_2_border_3: { }
+	sprite molten_rock_2_border_4: { }
+	sprite molten_rock_2_border_5: { }
+	sprite molten_rock_2_border_6: { }
+	sprite molten_rock_2_border_7: { }
+	sprite molten_rock_2_border_8: { }
+	sprite molten_rock_2_border_9: { }
+	sprite molten_rock_2_border_10: { }
+	sprite molten_rock_2_border_11: { }
+	sprite molten_rock_2_border_12: { }
+	sprite molten_rock_2_border_13: { }
+	sprite molten_rock_2_border_14: { }
+	sprite molten_rock_2_border_15: { }
+	sprite molten_rock_2_border_16: { }
+	sprite molten_rock_2_border_17: { }
+	sprite molten_rock_2_alt_1: { flags: [ tile_walkable ] }
+	sprite molten_rock_2_alt_2: { flags: [ tile_walkable ] }		
+	
 }

@@ -6,6 +6,7 @@ tile_layering:
 	
 	# Natural walkables
 	molten_rock
+	molten_rock_2
 	ice
 	fs_ground_2
 	mud
