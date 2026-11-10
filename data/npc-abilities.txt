@@ -688,6 +688,7 @@ ability npc_rend:
 
 particle_system npc_shoot:
 {
+	projectile_arc: 1
 	particle:
 	{
 		sprites: [ effect_arrow ]
@@ -839,7 +840,77 @@ ability npc_acid_spit:
 		flags: [ can_be_critical ]
 		damage_type: physical
 		function: { expression: a_mul_x x: weapon a: 0.6 }
-	}	
+	}
+}
+
+cooldown npc_grenade:
+{
+	duration: 40
+}
+
+particle_system npc_grenade_projectile:
+{
+	projectile_arc: 2
+	particle:
+	{
+		sprites: [ effect_rock ]
+		flags: [ attached no_rotation no_scaling ]
+		count: 1
+	}
+}
+
+particle_system npc_grenade_explosion:
+{
+	particle:
+	{
+		sprites: [ effect_expl_2_0 effect_expl_2_1 effect_expl_2_2 effect_expl_2_3 effect_expl_2_4 effect_expl_2_5 ]
+		sprite_interval: 110
+		flags: [ attached no_loop ]
+		duration: 660
+		count: 1
+		scale: 2
+		alpha: 1
+		fade_out: 80
+	}
+
+	particle:
+	{
+		sprites: [ effect_frag_0 effect_frag_1 effect_frag_2 ]
+		sprite_interval: 50
+		flags: [ attached no_loop ]
+		duration: 180
+		count: 1
+		scale: 2.2
+		alpha: 1
+	}
+}
+
+# Thrown at where the target was when casting began (target_aoe without target_self)
+ability npc_grenade:
+{
+	string: "Grenade"
+	range: 8
+	min_range: 3
+	cast_time: 20
+	cooldowns: [ global npc_grenade ]
+	flags: [ offensive target_aoe target_aoe_hostile ]
+	states: [ in_combat ]
+	icon: icon_grenade_1
+	speed: 6
+	aoe_radius: 2
+	aoe_cap: 6
+	aoe_requirement target<must_not_be_in_state>: { id: dead }
+	projectile: npc_grenade_projectile
+	target_particle_system: npc_grenade_explosion
+	sound_effects: { resolve: [ explosion_1 explosion_2 ] }
+
+	direct_effect damage:
+	{
+		flags: [ can_be_critical ]
+		damage_type: physical
+		function: { expression: a a: [ [ 1 25 ] [ 10 75 ] [ 20 150 ] [ 30 300 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
+		spread: !DEFAULT_SPREAD{}
+	}
 }
 
 ability npc_trap:

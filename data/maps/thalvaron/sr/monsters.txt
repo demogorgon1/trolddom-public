@@ -319,7 +319,7 @@ loot_table .reefblaster:
 	entity thalvaron_sr_reefblaster_wrecker_b: !NPC { _string: "Reefblaster Wrecker" _sprite: man_95 _sprite_dead: man_95_dead }
 }
 
-# Powder monkeys (they throw fire)
+# Powder monkeys (they throw fire and grenades)
 {
 	${
 		_faction: monsters
@@ -330,7 +330,7 @@ loot_table .reefblaster:
 		_weapon_damage: 0.9
 		_resource_health: 0.9
 		_resource_mana: 1
-		_abilities: [ { id: npc_firebolt } { id: npc_attack } ]
+		_abilities: [ { id: npc_grenade target: random_player update_target: false } { id: npc_firebolt } { id: npc_attack } ]
 	}
 
 	entity thalvaron_sr_reefblaster_powder_monkey: !NPC { _string: "Reefblaster Powder Monkey" _sprite: man_96 _sprite_dead: man_96_dead }
@@ -349,7 +349,7 @@ loot_table .reefblaster:
 		_resource_mana: 1
 		_immune_to_stun: true
 		_max_leash_distance: 20
-		_abilities: [ { id: npc_fireball } { id: npc_strike } { id: npc_attack } ]
+		_abilities: [ { id: npc_grenade target: random_player update_target: false } { id: npc_fireball } { id: npc_strike } { id: npc_attack } ]
 	}
 
 	entity thalvaron_sr_blastmaster: !NPC { _string: "Blastmaster Orrin Vey" _sprite: man_99 _sprite_dead: man_99_dead }

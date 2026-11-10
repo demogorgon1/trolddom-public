@@ -920,6 +920,7 @@ item consumable_fragmentation_grenade:
 
 		projectile: $particle_system
 		{
+			projectile_arc: 2
 			particle:
 			{
 				sprites: [ effect_rock ]
@@ -1008,6 +1009,7 @@ item consumable_incendiary_grenade:
 
 		projectile: $particle_system
 		{
+			projectile_arc: 2
 			particle:
 			{
 				sprites: [ effect_rock ]
@@ -1102,6 +1104,7 @@ item consumable_frost_grenade:
 
 		projectile: $particle_system
 		{
+			projectile_arc: 2
 			particle:
 			{
 				sprites: [ effect_rock ]

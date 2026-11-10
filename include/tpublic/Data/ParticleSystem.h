@@ -504,6 +504,8 @@ namespace tpublic
 							m_particles.push_back(std::make_unique<Entry>(aChild));
 						else if (aChild->m_name == "light")
 							m_light = Light(aChild);
+						else if (aChild->m_name == "projectile_arc")
+							m_projectileArc = aChild->GetFloat();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -516,6 +518,7 @@ namespace tpublic
 			{
 				aStream->WriteObjectPointers(m_particles);
 				aStream->WriteOptionalObject(m_light);
+				aStream->WriteFloat(m_projectileArc);
 			}
 
 			bool
@@ -526,12 +529,15 @@ namespace tpublic
 					return false;
 				if(!aStream->ReadOptionalObject(m_light))
 					return false;
+				if(!aStream->ReadFloat(m_projectileArc))
+					return false;
 				return true;
 			}
 
 			// Public data
 			std::vector<std::unique_ptr<Entry>>	m_particles;
 			std::optional<Light>				m_light;
+			float								m_projectileArc = 0.0f; // tiles, as a projectile it flies along a 2nd order bezier curve with the middle control point this far above the midpoint (the curve peaks at half of it)
 		};
 
 

@@ -62,6 +62,27 @@ namespace tpublic::Systems
 
 			return Helpers::CalculateDistanceSquared(aPosition, otherPosition) <= 1;
 		}
+
+		// Abilities that target a location (target_aoe without target_self, like grenades) are aimed at where the target
+		// is when the NPC starts using them, so the target can get away during the cast
+		bool
+		_GetLocationTarget(
+			const IWorldView*			aWorldView,
+			const Data::Ability*		aAbility,
+			uint32_t					aTargetEntityInstanceId,
+			Vec2&						aOutLocation)
+		{
+			if(!aAbility->TargetAOE() || aAbility->TargetSelf())
+				return false;
+
+			const EntityInstance* target = aWorldView->WorldViewSingleEntityInstance(aTargetEntityInstanceId);
+			const Components::Position* targetPosition = target != NULL ? target->GetComponent<Components::Position>() : NULL;
+			if(targetPosition == NULL)
+				return false;
+
+			aOutLocation = targetPosition->m_position;
+			return true;
+		}
 	}
 
 	//--------------------------------------------------------------------------------------------
@@ -818,6 +839,10 @@ namespace tpublic::Systems
 
 										npc->m_cooldowns.AddAbility(GetManifest(), ability, aContext->m_tick, 0.0f, NULL); // FIXME: cooldown modifier from haste?
 
+										Vec2 aoeTarget;
+										if(_GetLocationTarget(aContext->m_worldView, ability, targetEntityInstanceId, aoeTarget))
+											targetEntityInstanceId = 0;
+
 										if (ability->m_castTime > 0)
 										{
 											int32_t castTime = ability->m_castTime;
@@ -827,13 +852,14 @@ namespace tpublic::Systems
 											CastInProgress cast;
 											cast.m_abilityId = ability->m_id;
 											cast.m_targetEntityInstanceId = targetEntityInstanceId;
+											cast.m_aoeTarget = aoeTarget;
 											cast.m_start = aContext->m_tick;
 											cast.m_end = cast.m_start + castTime;
 											npc->m_castInProgress = cast;
 										}
 										else
 										{
-											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, targetEntityInstanceId, Vec2(), ability, ItemInstanceReference(), NULL);
+											aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, targetEntityInstanceId, aoeTarget, ability, ItemInstanceReference(), NULL);
 										}
 
 										break;
@@ -1123,22 +1149,28 @@ namespace tpublic::Systems
 									aContext->m_eventQueue->EventQueueChat(aEntityInstanceId, *bark);
 								}
 
+								uint32_t targetEntityInstanceId = useAbilityTarget.m_entityInstanceId;
+								Vec2 aoeTarget;
+								if(_GetLocationTarget(aContext->m_worldView, useAbility, targetEntityInstanceId, aoeTarget))
+									targetEntityInstanceId = 0;
+
 								if(useAbility->m_castTime > 0)
-								{	
+								{
 									int32_t castTime = useAbility->m_castTime;
 									if(useAbility->IsSpell())
 										castTime = Haste::CalculateCastTime(castTime, auras->GetSpellHaste(GetManifest()));
 
 									CastInProgress cast;
 									cast.m_abilityId = useAbility->m_id;
-									cast.m_targetEntityInstanceId = useAbilityTarget.m_entityInstanceId;
+									cast.m_targetEntityInstanceId = targetEntityInstanceId;
+									cast.m_aoeTarget = aoeTarget;
 									cast.m_start = aContext->m_tick;
 									cast.m_end = cast.m_start + castTime;
 									npc->m_castInProgress = cast;
 								}
 								else
 								{
-									aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, useAbilityTarget.m_entityInstanceId, Vec2(), useAbility, ItemInstanceReference(), NULL);
+									aContext->m_eventQueue->EventQueueAbility({ aEntityInstanceId, 0 }, targetEntityInstanceId, aoeTarget, useAbility, ItemInstanceReference(), NULL);
 								}
 							}
 							else if(distanceSquared > 1 && !auras->HasEffect(AuraEffect::ID_IMMOBILIZE, NULL))

@@ -7,6 +7,7 @@ ability fighter_attack:
 
 particle_system fighter_shoot:
 {
+	projectile_arc: 1
 	particle:
 	{	
 		sprites: [ effect_arrow ]
