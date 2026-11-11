@@ -24184,6 +24184,8 @@ ability craft_hands_emberward_gloves 37185
 ability learn_hands_emberward_gloves 37186
 ability _item_recipe_fire_ward_potion_use_ability 37187
 ability npc_grenade 37188
+ability _item___maps_thalvaron_nw_mathew_larsen_2_seeking_stone_use_ability 37189
+ability __maps_thalvaron_nw_mathew_larsen_2_quest_item 37190
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -26570,6 +26572,8 @@ entity wall_torch_south 2474
 entity wall_torch_east 2475
 entity wall_torch_west 2476
 entity fill_light 2477
+entity thalvaron_mathew_larsen_2_quest_item 2478
+entity thalvaron_mathew_larsen_2_fire_elemental 2479
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -27629,6 +27633,7 @@ map_entity_spawn wall_torch_south 1110
 map_entity_spawn wall_torch_east 1111
 map_entity_spawn wall_torch_west 1112
 map_entity_spawn fill_light 1113
+map_entity_spawn __maps_gateway_world_3_tower_quest_item 1114
 map_player_spawn dungeon_1_exit 9
 map_player_spawn __maps_dungeon_1_player_spawn 12
 map_player_spawn __maps_dungeon_2_player_spawn 13
@@ -70464,6 +70469,9 @@ item legs_emberward_leggings 63453
 item recipe_legs_emberward_leggings 63454
 item hands_emberward_gloves 63455
 item recipe_hands_emberward_gloves 63456
+item __maps_thalvaron_nw_mathew_larsen_2_quest_item 63457
+item __maps_thalvaron_nw_mathew_larsen_2_seeking_stone 63458
+item __maps_thalvaron_nw_mathew_larsen_2_reward 63459
 aura knock 1
 aura dont_touch_me_bro 2
 aura immortality 3
@@ -73205,6 +73213,7 @@ aura chest_emberward_robe 4802
 aura legs_emberward_leggings 4803
 aura hands_emberward_gloves 4804
 aura _ability_consumable_fire_ward_potion_direct_effect_apply_aura_aura 4805
+aura __maps_thalvaron_nw_mathew_larsen_2_reward 4806
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11
@@ -73631,6 +73640,8 @@ loot_table __maps_saltclaw_grotto_brinecoil 479
 loot_table __maps_saltclaw_grotto_brinecoil_heroic 480
 loot_table _zone___maps_saltclaw_grotto_brinecoil_fishing_loot_table 481
 loot_table __maps_gateway_world_3_gateway_world_3 482
+loot_table __maps_thalvaron_nw_mathew_larsen_2_quest_item 483
+loot_table _entity_thalvaron_mathew_larsen_2_fire_elemental_components_lootable_loot_table 484
 loot_group world_drops_junk 8
 loot_group world_drops_uncommon 9
 loot_group world_drops_consumable 10
@@ -74020,6 +74031,7 @@ loot_group __maps_saltclaw_grotto_brinecoil_heroic 429
 loot_group gateway_world_3_formulas 430
 loot_group gateway_world_3_infernal_ash 431
 loot_group gateway_world_3_demon_ichor 432
+loot_group __maps_thalvaron_nw_mathew_larsen_2_quest_item 433
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -75664,6 +75676,7 @@ objective __maps_thalvaron_e_faria_1 419
 objective __maps_thalvaron_e_quizlob_3 422
 objective __maps_thalvaron_sr_wendel_crane_1_a 423
 objective __maps_thalvaron_sr_wendel_crane_1_b 424
+objective __maps_thalvaron_nw_mathew_larsen_2 425
 quest spawn_of_umbracoth 3
 quest spawn_of_umbracoth_2 4
 quest gateway_world_quest_1 5
@@ -76070,6 +76083,7 @@ quest __maps_thalvaron_sr_hesk_5 463
 quest thalvaron_faria_1 464
 quest __maps_thalvaron_e_quizlob_3 466
 quest __maps_thalvaron_sr_wendel_crane_1 467
+quest __maps_thalvaron_nw_mathew_larsen_2 468
 achievement cash_loot_1 6
 achievement cash_loot_2 7
 achievement cash_loot_3 8
@@ -76824,6 +76838,7 @@ cooldown _ability__entity_thalvaron_ashira_ulgoroth_components_npc_state_in_comb
 cooldown _ability__entity_thalvaron_sr_kharkesh_components_npc_state_in_combat_abilities_id_cooldown 223
 cooldown _ability_npc_frostbolt_stacking_cooldown 224
 cooldown npc_grenade 225
+cooldown _ability__item___maps_thalvaron_nw_mathew_larsen_2_seeking_stone_use_ability_cooldown 226
 sound fantastic_a 1
 sound button_1 2
 sound switch_1 3

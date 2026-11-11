@@ -37,6 +37,11 @@ dialogue_screen .mathew_larsen_dialogue:
 			requirement self<must_not_have_completed_quest>: { id: __maps_thalvaron_sr_bryn_tallow_1 }
 			requirement self<must_not_have_active_quest>: { id: __maps_thalvaron_sr_bryn_tallow_1 }
 		}
+
+		{
+			quest: .mathew_larsen_2
+			requirement self<must_be_at_least_level>: 28
+		}
 	]
 }
 
@@ -92,4 +97,154 @@ quest .mathew_larsen_1:
 	reward_xp_multiplier: 0.25
 	next_quest: __maps_thalvaron_sr_bryn_tallow_1
 	level: 31
+}
+
+############################################################
+# Quest 2 (sends players to the tower beyond the orange gateway in Frozen Landing, gateway world 3)
+
+loot_group .mathew_larsen_2_quest_item: {}
+
+item .mathew_larsen_2_quest_item:
+{
+	icon: icon_figurine_1
+	item_level: 32
+	loot_groups: [ .mathew_larsen_2_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Brimstone Figurine"
+	flavor: "Warm to the touch. Slightly too warm."
+	quest: .mathew_larsen_2
+}
+
+loot_table .mathew_larsen_2_quest_item: { slots: [ { possibility: { loot_group: .mathew_larsen_2_quest_item } } ] }
+
+# Spawned on the 'interior' anchor of the tower in gateway world 3
+entity thalvaron_mathew_larsen_2_quest_item:
+{
+	string: "Brimstone Figurine"
+	systems: [ openable ]
+	components:
+	{
+		position: { }
+		sprite: { animations: [ { states: [ default ] frames: [ doodad_altar_1 ] z_offset: -3 } ] }
+		openable:
+		{
+			loot_table: .mathew_larsen_2_quest_item
+			verb: pick_up
+			range: 1
+			level: 32
+			despawn: true
+			required_quest: .mathew_larsen_2
+			trigger_ability: .mathew_larsen_2_quest_item
+		}
+	}
+}
+
+# Spawned on the altar when the figurine is picked up
+entity thalvaron_mathew_larsen_2_fire_elemental: !NPC
+{
+	_string: "Brimstone Elemental"
+	_level: 32
+	_faction: monsters
+	_creature_type: elemental
+	_sprite: fire_elemental_1
+	_sprite_dead: fire_elemental_1_dead
+	_abilities: [ { id: npc_fireball } { id: npc_attack } ]
+	_evade_despawn: true
+	_loot_table: $loot_table
+	{
+		slots:
+		[
+			!WORLD_DROPS {}
+			!WORLD_DROPS_FIRE_ELEMENTALS {}
+		]
+	}
+}
+
+ability .mathew_larsen_2_quest_item:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner detached ]
+		npc_target_threat: 20
+		entity: thalvaron_mathew_larsen_2_fire_elemental
+	}
+}
+
+item .mathew_larsen_2_seeking_stone:
+{
+	string: "Appraiser's Lodestone"
+	flags: [ unique not_sellable ]
+	icon: icon_crystal_2
+	quest: .mathew_larsen_2
+	item_level: 32
+	use_ability: $ability [ string icon ]
+	{
+		description: "Locate the Brimstone Figurine. Only works beyond the gateway."
+		flags: [ target_self item ]
+		cooldowns: [ global ]
+		cooldown: $cooldown { duration: 50 }
+		states: [ default in_combat ]
+		direct_effect simple<entity_compass>: thalvaron_mathew_larsen_2_quest_item
+	}
+}
+
+objective .mathew_larsen_2:
+{
+	string: "Brimstone Figurine"
+
+	maps: [ gateway_world_3 ]
+
+	collect_items: { item: .mathew_larsen_2_quest_item count: 1 }
+}
+
+aura .mathew_larsen_2_reward:
+{
+	string: "Brimstone Band"
+	description: "Reduces Fire damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ fire ] multiplier: 0.9 }
+}
+
+{
+	${ _level: 32 }
+	item .mathew_larsen_2_reward: !QUEST_REWARD_FINGER{ _string: "Brimstone Band" _icon: icon_ring_12 _rarity: rare _constitution: 1 _budget_bias: -25 _item_aura: .mathew_larsen_2_reward }
+}
+quest .mathew_larsen_2:
+{
+	string: "A Discerning Client"
+
+	text:
+	[
+		"Enter the orange gateway in Frozen Landing, find the Brimstone Figurine in the tower beyond it, and bring it to Mathew Larsen in Valoris."
+	]
+
+	description:
+	[
+		"I have a client. Very discerning, very wealthy, wears a great deal of black. I don't ask questions, and neither should you. My client wants a figurine carved from brimstone, and I happen to know"
+		"exactly where one is: in a tower that stands in the burning world beyond the orange gateway, far to the north in Frozen Landing.\n"
+		"\n"
+		"How does a tower end up in a place like that? A very good question, and not one I'm being paid to answer. Take this lodestone. Once you're through the gateway it will point you to the figurine."
+		"Bring it back in one piece, and try not to look at it too long."
+	]
+
+	progress:
+	[
+		"Any luck with my client's figurine?"
+	]
+
+	completion:
+	[
+		"Ah! Exquisite. Put it down on the counter, please. Gently. No, don't touch it again.\n"
+		"\n"
+		"My client will be delighted. I'm sure the faint smell of sulfur will be gone from the shop by tomorrow."
+	]
+
+	objectives: [ .mathew_larsen_2 ]
+	quest_items: [ .mathew_larsen_2_seeking_stone ]
+	reward_all_items: [ .mathew_larsen_2_reward ]
+	reward_cash_multiplier: 1.5
+	level: 32
 }

@@ -92,6 +92,8 @@ class sorcerer:
 		priest_healing:   { string: "Sage" }
 		witch_demonology: { string: "Summoner" }
 		paladin_guardian: { string: "Spellwarden" item_types: [ shield ] }
+		priest_dragon:    { string: "Dragon Mage" }
+		witch_necromancy: { string: "Necromancer" }
 	}
 
 	hybrid:

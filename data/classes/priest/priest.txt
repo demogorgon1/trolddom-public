@@ -86,6 +86,8 @@ class priest:
 		sorcerer_arcane:    { string: "Mystic" }
 		witch_necromancy:   { string: "Shadow Priest" }
 		fighter_combat: 	{ string: "Warpriest" }
+		witch_demonology:   { string: "Cultist" }
+		sorcerer_elemental: { string: "Pyromancer" }
 	}
 
 	hybrid:

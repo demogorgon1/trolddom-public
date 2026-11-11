@@ -101,6 +101,8 @@ class paladin:
 		fighter_combat:      { string: "Templar" }
 		priest_condemnation: { string: "Zealot" }
 		sorcerer_elemental:  { string: "Stormcaller" }
+		sorcerer_battle_mage: { string: "Runeknight" }
+		witch_malice: { string: "Oathbreaker" }
 	}
 
 	hybrid:

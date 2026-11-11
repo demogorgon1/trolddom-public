@@ -135,6 +135,9 @@ map_entity_spawn .object:
 {	
 }
 
+# Quest object in the tower (Mathew Larsen in Valoris)
+map_entity_spawn .tower_quest_item: { entity thalvaron_mathew_larsen_2_quest_item: { init_state: default } spawn_timer: !QUEST_ITEM_RESPAWN_TIMER{} }
+
 map_entity_spawn .mining: { spawn_timer: { despawn_required: true } entity mining_cindralite_vein: { init_state: default } }
 map_entity_spawn .herbalism: { spawn_timer: { despawn_required: true } entity herbalism_ashveil: { init_state: default } }
 
@@ -400,6 +403,7 @@ map gateway_world_3:
 			{
 				map_segments: [ tower_1 ]
 				count: 1
+				anchor interior: [ .tower_quest_item ]
 			}
 
 			# More enemies everywhere, not only where the bosses have influence (placed after the bosses' packs)

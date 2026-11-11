@@ -134,6 +134,8 @@ class witch:
 
 		priest_condemnation: { string: "Heretic" }
 		sorcerer_elemental:  { string: "Storm Witch" }
+		priest_dragon:       { string: "Wyrm Witch" }
+		sorcerer_arcane:     { string: "Hex Mage" }
 	}
 
 	hybrid:

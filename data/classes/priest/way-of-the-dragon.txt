@@ -630,7 +630,7 @@ aura priest_dragon_skin_1:
 	flags: [ persist_in_death ]
 	type: hidden
 	description: "Increases your armor by 12%."
-	stat_modifiers: { armor: { add_percent: 20 } }
+	stat_modifiers: { armor: { add_percent: 12 } }
 }
 
 aura priest_dragon_skin_2:

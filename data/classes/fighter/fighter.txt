@@ -163,6 +163,8 @@ class fighter:
 		sorcerer_arcane:  { string: "Arcane Fighter" }
 		witch_necromancy: { string: "Death Knight" }
 		paladin_healer: { string: "Sanctifier" }
+		paladin_avenger: { string: "Crusader" }
+		sorcerer_elemental: { string: "Flameblade" }
 	}
 
 	hybrid:
