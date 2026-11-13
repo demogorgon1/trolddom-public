@@ -67,12 +67,12 @@ quest .jim_farseer_1:
 
 	progress:
 	[
-		"Why are you still here?"
+		"Why are you still here? The ancient temple is inside the Tirnwood Thicket, to the east. Blow the horn there."
 	]
 	
 	completion:
 	[
-		"I knew you'd make it eventually."
+		"I knew you'd make it eventually. It will be back, or something like it will. But not today."
 	]
 	
 	objectives: [ .jim_farseer_1 ]

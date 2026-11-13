@@ -103,7 +103,7 @@ quest .urgon_lark_2:
 
 	text:
 	[
-		"Collect helmets from the undead Emerald Phalanx of eastern Karath."
+		"Collect helmets from the undead Emerald Phalanx of eastern Kareth."
 	]
 	
 	description: 
@@ -118,7 +118,7 @@ quest .urgon_lark_2:
 
 	progress:
 	[
-		"Too much sand, am I right?"
+		"Too much sand, am I right? The Emerald Phalanx roams the desert to the east."
 	]
 	
 	completion:
@@ -226,13 +226,13 @@ quest thalvaron_urgon_lark_4:
 	description: 
 	[
 		"The Temple of Karethi is a large complex and deeper inside you'll encounter more dangerous types of undeath. One of these monstrosities are the remains of the once great"
-		"Command Hizua, leader of the Emerald Phalanx. He is said to possess a shield with unique properties. Properties the order of the Light is very interested in. I need you to"
+		"Commander Hizua, leader of the Emerald Phalanx. He is said to possess a shield with unique properties. Properties the order of the Light is very interested in. I need you to"
 		"locate this monster, destroy it, and return its shield to me."
 	]
 
 	progress:
 	[
-		"Yeah?"
+		"Yeah? Commander Hizua is deep inside the Temple of Karethi."
 	]
 	
 	completion:

@@ -71,19 +71,20 @@ quest .maude_johansson_1:
 		"Hunt down poachers east of the Johansson farm."
 	]
 	
-	description: 
+	description:
 	[
-		"We're struggling with poachers hunting down the deer in the area. I need you to make them stop."
+		"We're struggling with poachers hunting down the deer in the area. They come in at dawn, shoot whatever they can find, and leave the rest to rot.\n\n"
+		"These are my woods and I won't have it. The poachers are east of the farm. I need you to make them stop."
 	]
 
 	progress:
 	[
-		"Did you get them?"
+		"Did you get them? They're east of the farm."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. That should teach them, but I doubt it's the end of it."
 	]
 
 	level: 11
@@ -130,12 +131,12 @@ quest .maude_johansson_2:
 
 	progress:
 	[
-		"Giving up?"
+		"Giving up? Jimbo's camp is somewhere to the east."
 	]
 	
 	completion:
 	[
-		"Excellent."
+		"Excellent. Without Jimbo the rest of them will think twice before setting foot on my land again."
 	]
 
 	level: 11

@@ -1,8 +1,8 @@
 dialogue_screen .ophelie_dialogue:
 {
-	text: 
-	[	
-		"How is life in the city?"
+	text:
+	[
+		"How is life in the city? We don't get much news up here. Tyron likes it that way."
 	]		
 	
 	options:
@@ -72,12 +72,12 @@ quest .ophelie_1:
 
 	progress:
 	[
-		"It's a big mean oinker, isn't it?"
+		"It's a big mean oinker, isn't it? It's down by the potato field. Probably eating my potatoes right now."
 	]
 	
 	completion:
 	[
-		"Thank you so much!"
+		"Thank you so much! And those tusks... I suppose we'll be having boar tonight."
 	]
 
 	objectives: [ .ophelie_1 ]

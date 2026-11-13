@@ -2,7 +2,7 @@ dialogue_screen .elara_nightshade_the_shrouded_lands:
 {
 	text:
 	[
-		"The shrouded lands? Yes, of course. I used to have a portal here, but it has faltered. Seek out the secret society of the underworld in Valoris if you to fight on our side."
+		"The shrouded lands? Yes, of course. I used to have a portal here, but it has faltered. Seek out the secret society of the underworld in Valoris if you want to fight on our side."
 	]
 }
 
@@ -107,7 +107,9 @@ quest .elara_nightshade_1:
 	
 	completion:
 	[
-		"Great. Want a taste test?"
+		"Great. That's exactly the right consistency.\n"
+		"\n"
+		"Want a taste test? No? Your loss. The last person who tried it saw colors for a week. Some of them don't even exist."
 	]
 
 	objectives: [ .elara_nightshade_1 ]

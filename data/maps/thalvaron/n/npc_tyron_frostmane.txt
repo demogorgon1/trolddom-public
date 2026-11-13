@@ -73,7 +73,7 @@ quest .tyron_frostmane_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The rebel camp is up north."
 	]
 	
 	completion:
@@ -131,7 +131,7 @@ quest .tyron_frostmane_2:
 	
 	completion:
 	[
-		"Great!"
+		"Great! Now we can sleep without keeping one eye open."
 	]
 
 	objectives: [ .tyron_frostmane_2 ]

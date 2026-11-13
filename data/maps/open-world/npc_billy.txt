@@ -67,14 +67,15 @@ quest .billy_1:
 		"Figure out if gnomes are real or not."
 	]
 	
-	description: 
+	description:
 	[
-		"My dad refuses to believe me and all my mom can think about are potatoes. Gnomes keep breaking into our house at night and they've been stealing my stuff!"
+		"My dad refuses to believe me and all my mom can think about are potatoes. Gnomes keep breaking into our house at night and they've been stealing my stuff!\n"
+
 	]
 
 	progress:
 	[
-		"Any progress?"
+		"Did you find one? They're sneaky, but they can't hide forever. Look for the pointy hats!"
 	]
 	
 	completion:

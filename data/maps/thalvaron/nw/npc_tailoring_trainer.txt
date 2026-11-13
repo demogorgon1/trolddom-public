@@ -2,9 +2,9 @@ dialogue_screen .tailoring_trainer_trainer: !DEFAULT_TAILORING_TRAINER{}
 
 dialogue_screen .tailoring_trainer_dialogue:
 {
-	text: 
-	[	
-		"Yes?"
+	text:
+	[
+		"Yes? Careful with that, it's silk. Are you here to learn, or just to touch things?"
 	]
 	
 	options:

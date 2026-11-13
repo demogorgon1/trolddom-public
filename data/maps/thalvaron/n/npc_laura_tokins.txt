@@ -157,12 +157,12 @@ quest .laura_tokins_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Wild roses and Nightsong flowers. They grow all around Ravenreach."
 	]
 	
 	completion:
 	[
-		"Thanks!"
+		"Thanks! Now I can finally get some cooking done."
 	]
 
 	objectives: [ .laura_tokins_1 .laura_tokins_1b ]
@@ -251,12 +251,12 @@ quest .laura_tokins_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Dead Man's Blume grows near the abbey, deep in the woods to the east."
 	]
 	
 	completion:
 	[
-		"Thanks!"
+		"Thanks! I hope the abbey wasn't too frightening."
 	]
 
 	objectives: [ .laura_tokins_2 ]

@@ -95,7 +95,7 @@ quest .brill_craigsworth_1:
 	
 	completion:
 	[
-		"Bananas? I suppose that will do."
+		"Brill sent you? Bananas? I suppose that will do. The spiders don't share their food."
 	]
 
 	objectives: [ .brill_craigsworth_1 ]
@@ -142,12 +142,12 @@ quest .brill_craigsworth_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The carnivorous plants are in the jungle to the west. Wear gloves."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Ah, all ten fingers still attached. These will make a fine stew."
 	]
 
 	objectives: [ .brill_craigsworth_2 ]

@@ -103,7 +103,7 @@ quest .fradi_1:
 
 	progress:
 	[
-		"Out of junk?"
+		"Out of junk? There's always more junk."
 	]
 	
 	completion:

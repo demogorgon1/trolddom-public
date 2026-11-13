@@ -71,12 +71,12 @@ quest .blacksmithing_trainer_1:
 
 	progress:
 	[
-		"Glory to the kingdom!"
+		"Glory to the kingdom! Now, where is that ore? Copper and iron, as much as you can find."
 	]
 	
 	completion:
 	[
-		"Great, your support will not be forgotten."
+		"Great, your support will not be forgotten. The army needs every sword we can make."
 	]
 	
 	objectives: [ .blacksmithing_trainer_1_a .blacksmithing_trainer_1_b ]

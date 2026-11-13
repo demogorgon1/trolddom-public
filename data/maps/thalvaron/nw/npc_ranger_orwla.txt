@@ -1,8 +1,8 @@
 dialogue_screen .ranger_orwla_dialogue:
 {
-	text: 
-	[	
-		"Be careful around here."
+	text:
+	[
+		"Be careful around here. The rebels keep an eye on this bridge, and they're not the only ones."
 	]		
 	
 	options:
@@ -64,12 +64,12 @@ quest .ranger_orwla_1:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? Follow the road north, then east, and you'll find the farm."
 	]
 	
 	completion:
 	[
-		"Good job. I have another job for you."
+		"Good job. Clean and quiet. I have another job for you."
 	]
 
 	level: 12
@@ -157,7 +157,7 @@ quest .ranger_orwla_2:
 
 	progress:
 	[
-		"You don't like fire?"
+		"You don't like fire? The tents are in the rebel camp, near the farm."
 	]
 	
 	completion:

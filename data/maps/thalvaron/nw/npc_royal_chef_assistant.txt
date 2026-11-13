@@ -79,7 +79,7 @@ quest .royal_chef_assistant_1:
 
 	progress:
 	[
-		"Did you find some eggs?"
+		"Did you find some eggs? Owlbears live in the Iceveil Highlands to the east. Please hurry, the chef is starting to ask questions."
 	]
 	
 	completion:

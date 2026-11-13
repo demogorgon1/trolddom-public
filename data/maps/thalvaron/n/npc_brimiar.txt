@@ -154,7 +154,7 @@ quest .brimiar_2:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The harpy colony is a bit further east in the gorge. Just follow the screeching."
 	]
 	
 	completion:
@@ -214,12 +214,12 @@ quest .brimiar_3:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The lizards are in the southern part of the gorge. Mind the bites."
 	]
 	
 	completion:
 	[
-		"Uh, splendid! Looks delicious!"
+		"Uh, splendid! Looks delicious! Remember, they're venomous, not poisonous. Probably."
 	]
 
 	objectives: [ .brimiar_3 ]

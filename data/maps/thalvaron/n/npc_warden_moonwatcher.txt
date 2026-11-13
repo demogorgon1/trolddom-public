@@ -72,17 +72,17 @@ quest .warden_moonwatcher_1:
 	
 	description: 
 	[
-		"The rotting corpses have been raised from the dead and has overrun the outskirts of our little town! Please help put them back in the ground!"
+		"The rotting corpses have been raised from the dead and have overrun the outskirts of our little town! Please help put them back in the ground!"
 	]
 
 	progress:
 	[
-		"Make haste, $class$!"
+		"Make haste, $class$! The rotting corpses are all around the outskirts of town."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. The town can breathe a little easier."
 	]
 
 	objectives: [ .warden_moonwatcher_1 ]
@@ -123,7 +123,7 @@ quest .warden_moonwatcher_2:
 	
 	completion:
 	[
-		"Ah, yes..."
+		"Ah, yes... I can feel the darkness within this orb. Let me look closer."
 	]
 
 	level: 18

@@ -97,7 +97,9 @@ quest .randy_1:
 	
 	completion:
 	[
-		"Nice! I'm sure there is good business in this, somewhere."
+		"Nice! Look at the size of this one. City folk will pay a fortune for a claw like that.\n"
+		"\n"
+		"I'm sure there is good business in this, somewhere."
 	]
 
 	objectives: [ .randy_1 .randy_2 ]
@@ -141,7 +143,9 @@ quest open_world_randy_2:
 	
 	completion:
 	[
-		"Oh, that weirdo Randy sent you? With a package of junk? Let me see..."
+		"Oh, that weirdo Randy sent you? With a package of junk? Let me see...\n"
+		"\n"
+		"Crab claws. Of course it's crab claws. Well, I've sold stranger things. Last week I sold a man his own hat."
 	]
 
 	level: 7

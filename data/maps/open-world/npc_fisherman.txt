@@ -15,8 +15,11 @@ dialogue_screen .fisherman_trainer: !DEFAULT_FISHING_TRAINER{}
 
 dialogue_screen .fisherman_greetings:
 {
-	text: 
-	[	
+	text:
+	[
+		"Ahoy there. Forty years at sea and now I fish off the shore like an old man. Don't laugh. The fish around this island are bigger than you'd think,"
+		"and some of them have more teeth than any fish ought to.\n"
+		"\n"
 		"What can I do for you?"
 	]
 	

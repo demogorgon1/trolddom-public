@@ -68,7 +68,7 @@ quest .dag_hammerfest_1:
 
 	progress:
 	[
-		"Yeah?"
+		"Yeah? The stalkers are all over the Kareth desert. Mind the spikes."
 	]
 	
 	completion:
@@ -112,7 +112,7 @@ objective .dag_hammerfest_2:
 
 quest .dag_hammerfest_2:
 {
-	string: "Icing of the Cake"
+	string: "Icing on the Cake"
 
 	text:
 	[
@@ -127,7 +127,7 @@ quest .dag_hammerfest_2:
 
 	progress:
 	[
-		"Getting too hot?"
+		"Getting too hot? The cave is south of the oasis, in the mountains at the far side of the desert."
 	]
 	
 	completion:

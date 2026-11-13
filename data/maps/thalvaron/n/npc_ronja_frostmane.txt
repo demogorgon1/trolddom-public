@@ -73,12 +73,12 @@ quest .ronja_frostmane_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The yetis are in the frozen fields to the east."
 	]
 	
 	completion:
 	[
-		"Hmm, they're more itchy than expected."
+		"Hmm, they're more itchy than expected. Much more itchy."
 	]
 
 	objectives: [ .ronja_frostmane_1 ]
@@ -133,7 +133,7 @@ quest .ronja_frostmane_2:
 
 	progress:
 	[
-		"How's it going?"
+		"How's it going? The white yetis live in the caves beyond the frozen lake."
 	]
 	
 	completion:

@@ -135,12 +135,14 @@ quest open_world_gnome_1:
 
 	progress:
 	[
-		"Any progress?"
+		"The merchandise is in the abandoned house out east. Chop chop, time is money. My money."
 	]
 	
 	completion:
 	[
-		"Excellent. I have something for you, let me just go get it..."
+		"Excellent! Hand it over. Careful, careful! That's very valuable merchandise.\n"
+		"\n"
+		"Now, I have something for you, let me just go get it..."
 	]
 
 	reward_cash_multiplier: 0

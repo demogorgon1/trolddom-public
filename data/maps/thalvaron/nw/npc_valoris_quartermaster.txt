@@ -9,9 +9,9 @@ dialogue_screen .valoris_quartermaster_vendor:
 
 dialogue_screen .valoris_quartermaster_dialogue:
 {
-	text: 
-	[	
-		"What can I help you with?"
+	text:
+	[
+		"What can I help you with? Supplies are meant for those who serve Valoris, but I'm sure we can work something out."
 	]
 	
 	options:

@@ -95,12 +95,12 @@ quest .thalorion_1:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? Mona and Jack were spotted north of Lake Ylynor, to the east."
 	]
 	
 	completion:
 	[
-		"Hmm, that will do."
+		"Hmm, that will do. Remarkably well preserved, for hair that spent years at the bottom of a lake."
 	]
 
 	level: 18

@@ -1,8 +1,8 @@
 dialogue_screen .captain_jerrington_dialogue:
 {
-	text: 
-	[	
-		"We need to bring back order to the city."
+	text:
+	[
+		"We need to bring back order to the city. Every day those rebels hold Eastgate, they grow bolder."
 	]		
 	
 	options:
@@ -84,12 +84,12 @@ quest .captain_jerrington_1:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? Follow the street north into Eastgate and find out what those rebels are planning."
 	]
 	
 	completion:
 	[
-		"What is this? This looks interesting."
+		"What is this? This looks interesting. Some kind of code."
 	]
 
 	objectives: [ .captain_jerrington_1 ]
@@ -176,7 +176,7 @@ quest .captain_jerrington_3:
 
 	progress:
 	[
-		"What are you waiting for?"
+		"What are you waiting for? Jorgenson is holed up in occupied Eastgate. Bring friends."
 	]
 	
 	completion:
@@ -277,7 +277,7 @@ quest .captain_jerrington_4:
 
 	progress:
 	[
-		"What are you waiting for?"
+		"What are you waiting for? Those goblins in Northgrove are coming from somewhere. Find out where."
 	]
 	
 	completion:

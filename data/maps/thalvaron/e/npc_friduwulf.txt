@@ -1,8 +1,8 @@
 dialogue_screen .friduwulf:
 {
-	text: 
-	[	
-		"Greetings."
+	text:
+	[
+		"Greetings. You look like someone who has seen their share of crabs."
 	]		
 	
 	options:
@@ -63,12 +63,12 @@ quest .friduwulf_1:
 
 	progress:
 	[
-		"Giving up?"
+		"Giving up? The beaches of Zilkore are covered in them."
 	]
 	
 	completion:
 	[
-		"Good job!"
+		"Good job! Maybe we'll have fish for dinner again."
 	]
 	
 	objectives: [ .friduwulf_1 ]

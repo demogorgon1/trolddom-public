@@ -2,7 +2,7 @@ dialogue_screen .buck_dialogue:
 {
 	text: 
 	[	
-		"Ah, yes. I pressume you're a fellow swamp enjoyer?"
+		"Ah, yes. I presume you're a fellow swamp enjoyer?"
 	]		
 	
 	options:
@@ -112,12 +112,12 @@ quest .buck_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? I need flowers of the Buzzing Delight variety. They grow all over the swamp."
 	]
 	
 	completion:
 	[
-		"Thanks."
+		"Thanks. Now the mosquitoes can go bother someone else."
 	]
 
 	objectives: [ .buck_1 ]
@@ -203,12 +203,12 @@ quest .buck_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The seaweed washes up along the coast around here."
 	]
 	
 	completion:
 	[
-		"Thanks."
+		"Thanks. The crabs will be thrilled."
 	]
 
 	objectives: [ .buck_2 ]
@@ -277,7 +277,7 @@ quest .buck_3:
 
 	text:
 	[
-		"Find a swamp rose and return it to buck."
+		"Find a swamp rose and return it to Buck."
 	]
 	
 	description: 
@@ -288,7 +288,7 @@ quest .buck_3:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The swamp rose is blue. Kinda hard to miss if you're looking for it."
 	]
 	
 	completion:

@@ -86,12 +86,12 @@ quest .blunt_ronson_1:
 
 	progress:
 	[
-		"Yes?"
+		"Did you get it? My house is just inside the gate. The document is in the chest."
 	]
 	
 	completion:
 	[
-		"Ah, that's one less thing to worry about."
+		"Ah, that's one less thing to worry about. And no, you can't read it."
 	]
 
 	level: 19

@@ -69,7 +69,7 @@ quest .johnson_1:
 
 	progress:
 	[
-		"Watch out what you step on."
+		"Watch out what you step on. The kobolds are further inside the mine."
 	]
 	
 	completion:

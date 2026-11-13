@@ -1,8 +1,8 @@
 dialogue_screen .chad_wartorn:
 {
-	text: 
-	[	
-		"What's up?"
+	text:
+	[
+		"What's up? Keep your voice down, there are orcs about."
 	]		
 	
 	options:
@@ -64,7 +64,7 @@ quest .chad_wartorn_1:
 
 	progress:
 	[
-		"Yeah?"
+		"Yeah? Eeklong and his band went south. Find them before they find us."
 	]
 	
 	completion:

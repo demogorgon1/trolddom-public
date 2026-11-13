@@ -1,8 +1,8 @@
 dialogue_screen .fernwick_inn_keeper_dialogue:
 {
-	text: 
-	[	
-		"Welcome to Fernwick."
+	text:
+	[
+		"Welcome to Fernwick. Sit wherever you like, but the stools by the window are the only ones that don't wobble."
 	]		
 	
 	options:

@@ -63,7 +63,7 @@ quest .deputy_reumer_1:
 
 	progress:
 	[
-		"Too many mosquitoes? I agree."
+		"Too many mosquitoes? I agree. The creeps are in the swamp to the south."
 	]
 	
 	completion:

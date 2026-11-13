@@ -1,8 +1,8 @@
 dialogue_screen .ghorm:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? Not too warm, I hope. You get used to the heat after a while. Mostly."
 	]			
 	
 	options:

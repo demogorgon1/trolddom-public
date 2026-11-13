@@ -1,8 +1,8 @@
 dialogue_screen .spirit_of_joonor_dialogue:
 {
-	text: 
-	[	
-		"Welcome."
+	text:
+	[
+		"Welcome, traveller. Few find their way to this island. Fewer still have reason to."
 	]		
 	
 	options:
@@ -52,7 +52,7 @@ quest .spirit_of_joonor_1:
 	
 	completion:
 	[
-		"Ah... I knew you were coming."
+		"Ah... I knew you were coming. The spirits said an ally would come. I was hoping for an army, but you will do."
 	]
 
 	level: 19

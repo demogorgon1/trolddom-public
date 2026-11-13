@@ -5,7 +5,7 @@ dialogue_screen .werner_benny:
 	text: 
 	[			
 		"We've recently had some problems with red spots on our linen at night. I'm afraid there could be a vampire roaming the woods, sucking our blood at night, but it seems very unlikely."
-		"There not supposed to be any left. Either way, it's nice to have a vampire hunter looking out for us. Every night he goes out in the woods, searching for traces of any blood suckers. He's very brave."
+		"There aren't supposed to be any left. Either way, it's nice to have a vampire hunter looking out for us. Every night he goes out in the woods, searching for traces of any blood suckers. He's very brave."
 	]		
 	
 	options:
@@ -119,12 +119,14 @@ quest .werner_1:
 
 	progress:
 	[
-		"Any progress?"
+		"The mudweed grows along the coast up north, right in the mud. You'll know it when you smell it."
 	]
 	
 	completion:
 	[
-		"That's wonderful. Here, have something for your troubles."
+		"That's wonderful. Linda will be so pleased. It tastes like the bottom of a pond, but it's the only thing that helps.\n"
+		"\n"
+		"Here, have something for your troubles."
 	]
 
 	objectives: [ .werner_1 ]

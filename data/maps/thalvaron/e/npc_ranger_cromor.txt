@@ -67,12 +67,12 @@ quest .ranger_cromor_1:
 
 	progress:
 	[
-		"Scared of lizards?"
+		"Scared of lizards? Scalemaw lives in the jungle to the north."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. Now the locals might actually get some sleep."
 	]
 	
 	objectives: [ .ranger_cromor_1 ]

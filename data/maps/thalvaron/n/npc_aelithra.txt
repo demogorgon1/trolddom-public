@@ -70,7 +70,7 @@ quest .aelithra_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Look for the skull on a pole by the side of the road, then enter the woods."
 	]
 	
 	completion:
@@ -104,7 +104,7 @@ quest .aelithra_2:
 
 	completion:
 	[
-		"We can use all the help we can get."
+		"Aelithra sent you? Good. We can use all the help we can get up here."
 	]
 
 	level: 18

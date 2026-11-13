@@ -2,7 +2,7 @@ dialogue_screen .sheriff_nordberg:
 {
 	text: 
 	[	
-		"Welcome to New Thalyssar. Doesn't look like much yet, but hopeful people will come live here. It's pretty nice, if you ignore the bugs."
+		"Welcome to New Thalyssar. Doesn't look like much yet, but hopefully people will come live here. It's pretty nice, if you ignore the bugs."
 	]		
 	
 	options:

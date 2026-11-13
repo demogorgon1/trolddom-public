@@ -2,7 +2,7 @@ dialogue_screen .ola_howton_dialogue_2:
 {
 	text: 
 	[	
-		"Thanks for checking up on us! I could really need some help, actually."
+		"Thanks for checking up on us! I could really use some help, actually."
 	]		
 	
 	options:
@@ -14,9 +14,9 @@ dialogue_screen .ola_howton_dialogue_2:
 
 dialogue_screen .ola_howton_dialogue:
 {
-	text: 
-	[	
-		"Welcome to the country side."
+	text:
+	[
+		"Welcome to the countryside. Quiet out here, mostly. Unless there are bandits about."
 	]		
 	
 	options:
@@ -232,7 +232,7 @@ quest .ola_howton_1:
 
 	progress:
 	[
-		"Have you found anything? No?"
+		"Have you found anything? No? They have to be around here somewhere. Bandits don't carry things far."
 	]
 	
 	completion:

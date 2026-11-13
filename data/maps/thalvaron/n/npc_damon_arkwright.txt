@@ -75,7 +75,7 @@ quest .damon_arkwright_1:
 	
 	completion:
 	[
-		"Let me see."
+		"Let me see. Yes... just as I feared."
 	]
 
 	level: 16	

@@ -72,7 +72,7 @@ quest .foramil_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The tree elementals are east of here, on both sides of the river."
 	]
 	
 	completion:

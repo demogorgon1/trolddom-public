@@ -2,9 +2,9 @@ dialogue_screen .kirk_gibson_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
 
 dialogue_screen .kirk_gibson_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"What can I do for you? I hope you don't mind the heat from the forge."
 	]
 	
 	options:

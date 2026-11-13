@@ -1,8 +1,8 @@
 dialogue_screen .ilhuna_greetings:
 {
-	text: 
-	[	
-		"Ssh."
+	text:
+	[
+		"Ssh. Keep your head down. The demons have eyes all over this courtyard."
 	]				
 	
 	options:
@@ -129,7 +129,7 @@ quest .ilhuna_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The glow is to the east of the courtyard. Hold up the amulet near any portals you find."
 	]
 	
 	completion:
@@ -210,17 +210,17 @@ quest .ilhuna_2:
 		"They're clearly trying to mount a full invasion of this realm, under the command of the mad wizard. Let me think...\n"
 		"\n"
 		"Well, to the north of here is the Bastion of Urk. It's an ancient fortification that has been taken over by these demons. I'm sure that inside you'll find it littered with their ugly totems. These foul"
-		"artifacts allow them to communicate with each other, like some kind of hive mind. I have a plan that involved a bunch of those totems, so how about you go in there and get me some?"
+		"artifacts allow them to communicate with each other, like some kind of hive mind. I have a plan that involves a bunch of those totems, so how about you go in there and get me some?"
 	]
 	
 	progress:
 	[
-		"Time is of the essence."
+		"Time is of the essence. The Bastion of Urk is to the north, and it's full of totems."
 	]
 	
 	completion:
 	[
-		"Those a some damn ugly totems."
+		"Those are some damn ugly totems. Perfect."
 	]
 
 	prerequisites: [ .ilhuna_1 ]
@@ -288,7 +288,7 @@ quest .ilhuna_3:
 
 	text:
 	[
-		"Bring the bundle of totems to the satyr alter in the east and defeat the demon."
+		"Bring the bundle of totems to the satyr altar in the east and defeat the demon."
 	]
 	
 	description: 
@@ -298,7 +298,7 @@ quest .ilhuna_3:
 	
 	completion:
 	[
-		"Good."
+		"Good. Without their commander the invasion will stall. For now."
 	]
 
 	prerequisites: [ .ilhuna_2 ]

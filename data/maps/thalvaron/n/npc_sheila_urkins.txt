@@ -1,8 +1,8 @@
 dialogue_screen .sheila_urkins_dialogue:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? Don't mind the jars. Everything in them is perfectly dead."
 	]		
 	
 	options:
@@ -138,12 +138,12 @@ quest .sheila_urkins_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The spiders are to the south, across the river by the mountains. The eggs are in the cave."
 	]
 	
 	completion:
 	[
-		"Amazing! Hmm, it's quite sticky."
+		"Amazing! Hmm, it's quite sticky. That's good. It's supposed to be sticky."
 	]
 
 	objectives: [ .sheila_urkins_1_a .sheila_urkins_1_b ]
@@ -230,12 +230,12 @@ quest .sheila_urkins_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The flowers grow a bit south of where you found the spiders."
 	]
 	
 	completion:
 	[
-		"That's for me? How nice!"
+		"That's for me? How nice! Nobody ever brings me flowers. I mean, I asked for them, but still."
 	]
 
 	objectives: [ .sheila_urkins_2 ]
@@ -323,12 +323,12 @@ quest .sheila_urkins_3:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Tirnwood Thicket is far to the east, beyond the undying lands and Faerandor."
 	]
 	
 	completion:
 	[
-		"Excellent!"
+		"Excellent! I've never seen thorns like these."
 	]
 
 	objectives: [ .sheila_urkins_3 ]
@@ -357,7 +357,7 @@ quest thalvaron_sheila_urkins_4:
 
 	completion:
 	[
-		"I have been expecting you."
+		"I have been expecting you. Let me see that tentacle. Yes... I know exactly where this came from."
 	]
 
 	prerequisites: [ .tentacle_monster ]

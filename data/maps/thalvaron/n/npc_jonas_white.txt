@@ -110,7 +110,7 @@ quest .jonas_white_1:
 	
 	completion:
 	[
-		"Uh, how exciting!"
+		"Uh, how exciting! Look at these markings."
 	]
 
 	objectives: [ .jonas_white_1 ]
@@ -159,7 +159,7 @@ quest .jonas_white_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The crab with the tablet should still be on the beach somewhere. It's faster than it looks."
 	]
 	
 	completion:

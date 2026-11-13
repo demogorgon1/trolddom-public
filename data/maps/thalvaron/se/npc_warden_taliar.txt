@@ -65,12 +65,12 @@ quest .warden_taliar_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? Mogdug is somewhere in the outer areas of Durgan Urok."
 	]
 	
 	completion:
 	[
-		"Excellent job!"
+		"Excellent job! Without Mogdug the outer garrison will be in disarray."
 	]
 
 	objectives: [ .warden_taliar_1 ]

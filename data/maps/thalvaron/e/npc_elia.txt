@@ -72,12 +72,12 @@ quest .elia_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The clawflowers walk around these woods. Mind the thorns. That's rather the point."
 	]
 	
 	completion:
 	[
-		"That's exactly what we need, thanks!"		
+		"That's exactly what we need, thanks! My employer will be pleased."
 	]
 
 	level: 30
@@ -139,7 +139,7 @@ quest .elia_2:
 	
 	completion:
 	[
-		"Excellent! Thank you so much!"		
+		"Excellent! Thank you so much! It's all still here."
 	]
 
 	level: 30

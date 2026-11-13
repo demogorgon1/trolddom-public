@@ -8,9 +8,9 @@ dialogue_screen .inn_keeper_dialogue_gnome:
 
 dialogue_screen .inn_keeper_dialogue:
 {
-	text: 
-	[	
-		"Greetings traveller."
+	text:
+	[
+		"Greetings, traveller. The ale is cold and the beds are warm. If you hear anyone talking about rebels in here, I didn't hear it."
 	]		
 	
 	options:

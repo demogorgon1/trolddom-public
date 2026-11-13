@@ -107,7 +107,7 @@ quest .ranger_roel_1:
 	
 	completion:
 	[
-		"Thank you."
+		"Thank you. Everything is still here. The goblins didn't even eat the cheese."
 	]
 
 	objectives: [ .ranger_roel_1 ]
@@ -191,12 +191,12 @@ quest .ranger_roel_3:
 
 	progress:
 	[
-		"Cold feet?"
+		"Cold feet? The crab is up by the old fort, north of Outcast Coast. Don't stand in water."
 	]
 	
 	completion:
 	[
-		"That's less to worry about, good."
+		"That's less to worry about, good. Let's hope that was the only one of its kind."
 	]
 
 	level: 24

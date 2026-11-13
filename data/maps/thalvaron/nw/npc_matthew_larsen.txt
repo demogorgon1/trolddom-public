@@ -39,6 +39,11 @@ dialogue_screen .mathew_larsen_dialogue:
 		}
 
 		{
+			quest: .mathew_larsen_3
+			requirement self<must_be_at_least_level>: 28
+		}
+
+		{
 			quest: .mathew_larsen_2
 			requirement self<must_be_at_least_level>: 28
 		}
@@ -96,6 +101,66 @@ quest .mathew_larsen_1:
 	reward_cash_multiplier: 0.25
 	reward_xp_multiplier: 0.25
 	next_quest: __maps_thalvaron_sr_bryn_tallow_1
+	level: 31
+}
+
+############################################################
+# Quest 3 (level 31, leads into quest 2): heartstone from a Thornbound Golem in the thickets of northern Ashira.
+# The golem is in thalvaron/a/monsters.txt.
+
+loot_group .mathew_larsen_3_quest_item: {}
+
+item .mathew_larsen_3_quest_item:
+{
+	icon: icon_crystal_3
+	item_level: 31
+	loot_groups: [ .mathew_larsen_3_quest_item ]
+	flags: [ unique not_sellable ]
+	string: "Thornbound Heartstone"
+	flavor: "It pulses faintly, like something trying to remember how to beat."
+	quest: .mathew_larsen_3
+}
+
+objective .mathew_larsen_3:
+{
+	string: "Thornbound Heartstone"
+
+	maps: [ thalvaron ]
+
+	collect_items: { item: .mathew_larsen_3_quest_item count: 1 }
+}
+
+quest .mathew_larsen_3:
+{
+	string: "A Test of Discretion"
+
+	text:
+	[
+		"Kill Thornbound Golems in the dense thickets of northern Ashira and bring a Thornbound Heartstone to Mathew Larsen in Valoris."
+	]
+
+	description:
+	[
+		"I have a client. Very discerning, very wealthy, wears a great deal of black. I don't ask questions, and neither should you.\n"
+		"\n"
+		"My client has a delicate job for someone who can be trusted, but first wants proof that you're capable. In the dense thickets of northern Ashira there are golems so overgrown with thorns that you"
+		"can barely see the stone. Somewhere inside each of them is a heartstone. My client wants one. What for? See the part about not asking questions."
+	]
+
+	progress:
+	[
+		"Have you got the heartstone? My client is not a patient person."
+	]
+
+	completion:
+	[
+		"Still warm. And still... beating? No, that must be my imagination.\n"
+		"\n"
+		"My client will be very pleased. Pleased enough, I think, to give you the real job."
+	]
+
+	objectives: [ .mathew_larsen_3 ]
+	next_quest: .mathew_larsen_2
 	level: 31
 }
 
@@ -223,7 +288,7 @@ quest .mathew_larsen_2:
 
 	description:
 	[
-		"I have a client. Very discerning, very wealthy, wears a great deal of black. I don't ask questions, and neither should you. My client wants a figurine carved from brimstone, and I happen to know"
+		"My client was delighted with the heartstone. Delighted enough to trust you with the real job. My client wants a figurine carved from brimstone, and I happen to know"
 		"exactly where one is: in a tower that stands in the burning world beyond the orange gateway, far to the north in Frozen Landing.\n"
 		"\n"
 		"How does a tower end up in a place like that? A very good question, and not one I'm being paid to answer. Take this lodestone. Once you're through the gateway it will point you to the figurine."
@@ -242,6 +307,7 @@ quest .mathew_larsen_2:
 		"My client will be delighted. I'm sure the faint smell of sulfur will be gone from the shop by tomorrow."
 	]
 
+	prerequisites: [ .mathew_larsen_3 ]
 	objectives: [ .mathew_larsen_2 ]
 	quest_items: [ .mathew_larsen_2_seeking_stone ]
 	reward_all_items: [ .mathew_larsen_2_reward ]

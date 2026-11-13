@@ -95,12 +95,12 @@ quest .sylvaris_thornleaf_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The riverthistle grows down by the river. Mind the crocodiles."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Lovely. That will make a fine cup of tea."
 	]
 
 	objectives: [ .sylvaris_thornleaf_1 ]
@@ -165,7 +165,7 @@ quest .sylvaris_thornleaf_2:
 
 	text:
 	[
-		"Collect archeological artifacts around the Xandralis temple ruins and return them to Sylvaris Thronleaf."
+		"Collect archeological artifacts around the Xandralis temple ruins and return them to Sylvaris Thornleaf."
 	]
 	
 	description: 
@@ -177,12 +177,12 @@ quest .sylvaris_thornleaf_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The temple ruins are to the south, on the other side of the river."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Look at the craftsmanship! And no ghosts? Good."
 	]
 
 	objectives: [ .sylvaris_thornleaf_2 ]
@@ -277,7 +277,7 @@ quest .sylvaris_thornleaf_3:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The Shrine of Ryux should be further south, close to the Howling Pass."
 	]
 	
 	completion:

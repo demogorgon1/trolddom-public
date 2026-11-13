@@ -105,7 +105,7 @@ quest .captain_blackstone_1:
 	
 	completion:
 	[
-		"Ah, yes, thank you for the help."
+		"Ah, yes, thank you for the help. It's all here. Even the parts I'd rather not explain."
 	]
 	
 	progress:

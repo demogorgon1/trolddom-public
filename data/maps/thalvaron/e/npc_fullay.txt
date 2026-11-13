@@ -101,7 +101,7 @@ quest .fullay_2:
 	
 	completion:
 	[
-		"Oh, those will bring in the cash! Thanks!"
+		"Fullay sent you? Oh, those will bring in the cash! Thanks!"
 	]
 	
 	progress:

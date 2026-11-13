@@ -66,7 +66,7 @@ quest .anna_skrald_1:
 	
 	description: 
 	[
-		"I prayed to the Light and Powe has delivered! I need urgent help dealing with some pesky goblins that have set up camp in the woods northwest of here. I don't know what hole they've crawled out of to get here"
+		"I prayed to the Light and the Light has delivered! I need urgent help dealing with some pesky goblins that have set up camp in the woods northwest of here. I don't know what hole they've crawled out of to get here"
 		"but they've been interfering with our business.\n"
 		"\n"
 		"They come out at night and steal our shipments! Their leader is a particularly ugly, large goblin going by the name of \"Lobnorg\". I've been told that he's easily identifiable by a large club he drags around"
@@ -75,12 +75,12 @@ quest .anna_skrald_1:
 
 	progress:
 	[
-		"Yes?"
+		"Did you find Lobnorg? Big, ugly, drags a club around everywhere. You can't miss him."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. Without their leader those goblins will scatter, and our shipments can move again. Nobody needs to know how they move."
 	]
 	
 	prerequisites: [ .bar_patrol_trogor_1 ]

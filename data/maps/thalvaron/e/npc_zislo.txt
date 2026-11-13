@@ -60,9 +60,9 @@ quest .zislo_1:
 		"Deliver the strange figurine to Flimlock."
 	]
 	
-	description: 
+	description:
 	[
-		"Here. Take this. The great wizard Flimlock."
+		"Here. Take this. Give to great wizard Flimlock. He understand."
 	]
 	
 	completion:

@@ -5,9 +5,9 @@ expression .pearly_c_has_item:
 
 dialogue_screen .pearly_c_dialogue_1:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? I have been waiting for someone brave enough to face what lies in the north."
 	]		
 	
 	options:
@@ -209,7 +209,7 @@ quest .pearly_c_1:
 	
 	completion:
 	[
-		"This pleases me."
+		"This pleases me. With the blood of the deity, the lich can be truly destroyed."
 	]
 
 	objectives: [ .pearly_c_1_a .pearly_c_1_b ]

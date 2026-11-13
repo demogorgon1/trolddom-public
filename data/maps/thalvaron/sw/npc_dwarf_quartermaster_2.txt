@@ -8,9 +8,9 @@ dialogue_screen .dwarf_quartermaster_2_vendor:
 
 dialogue_screen .dwarf_quartermaster_2_dialogue:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? Need anything for the road? The badlands aren't kind to the unprepared."
 	]
 	
 	options:

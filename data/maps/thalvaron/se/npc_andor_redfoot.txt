@@ -137,12 +137,12 @@ quest .andor_redfoot_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The gorillas are just up behind me. Keep the disguise on."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"They ate them all? Wonderful. Gentle souls, every one of them."
 	]
 
 	objectives: [ .andor_redfoot_1 ]

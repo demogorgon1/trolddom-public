@@ -15,9 +15,11 @@ dialogue_screen .elysia_trainer: !DEFAULT_HERBALISM_TRAINER{}
 
 dialogue_screen .elysia_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"Oh, hello! Careful where you step, I've got herbs drying on just about everything.\n"
+		"\n"
+		"Is there something I can help you with? Or, better yet, something you could help me with?"
 	]
 	
 	options:
@@ -112,14 +114,17 @@ quest .elysia_1:
 		"Venture into the dark woods to the east and collect mushrooms."
 	]
 	
-	description: 
+	description:
 	[
-		"Everyone loves mushrooms, right? Unfortunately I've run out and would love it if you'd go into the woods to the east and collect some for me?"
+		"Everyone loves mushrooms, right? I put them in everything: stews, salves, tea. The neighbors say they can smell my kitchen from the road.\n"
+		"\n"
+		"Unfortunately I've run out. There's a patch of spongy ones in the dark woods to the east, but I'm not as quick on my feet as I used to be, and that forest is full"
+		"of things with far too many legs. Would you go and pick some for me?"
 	]
 
 	progress:
 	[
-		"Any progress?"
+		"No mushrooms yet? Look in the shade, under the trees. They don't like the sun any more than I like spiders."
 	]
 	
 	completion:
@@ -205,7 +210,7 @@ quest .elysia_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Remember, the Elderwood ones are the spicy ones. If your eyes don't water when you sniff them, you've picked the wrong kind."
 	]
 	
 	completion:

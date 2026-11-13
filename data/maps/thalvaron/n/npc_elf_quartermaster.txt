@@ -11,9 +11,9 @@ dialogue_screen .elf_quartermaster_vendor:
 
 dialogue_screen .elf_quartermaster_dialogue:
 {
-	text: 
-	[	
-		"What can I help you with?"
+	text:
+	[
+		"What can I help you with? The Children of the Moon take care of those who fight for them."
 	]
 	
 	options:

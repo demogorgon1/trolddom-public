@@ -6,9 +6,9 @@ dialogue_screen .elf_quartermaster_2_vendor:
 
 dialogue_screen .elf_quartermaster_2_dialogue:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? You look like you could use some new equipment."
 	]
 	
 	options:

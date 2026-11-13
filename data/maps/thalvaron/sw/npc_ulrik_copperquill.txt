@@ -71,7 +71,7 @@ quest .ulrik_copperquill_1:
 
 	progress:
 	[
-		"Hello."
+		"Hello. Dust lizards, west of Durgan Tharok. I need their scales."
 	]
 	
 	completion:
@@ -130,12 +130,12 @@ quest .ulrik_copperquill_2:
 
 	progress:
 	[
-		"Hello."
+		"Hello. The Dread Scorpions are in the western parts of the badlands."
 	]
 	
 	completion:
 	[
-		"Nice."
+		"Nice. That's the last of it, I promise."
 	]
 	
 	objectives: [ .ulrik_copperquill_2 ]

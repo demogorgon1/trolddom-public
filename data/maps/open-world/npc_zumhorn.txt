@@ -112,7 +112,9 @@ quest .zumhorn_1:
 	
 	completion:
 	[
-		"This is good."
+		"This is good. Can you feel it? The mist grows thicker already, and the trees breathe easier.\n"
+		"\n"
+		"But cleansing the waters only tends to the wound. Something is still feeding the corruption."
 	]
 	
 	level: 9
@@ -205,18 +207,20 @@ quest .zumhorn_2:
 	
 	description: 
 	[
-		"With the water cleansed, one final task is ahead of you. You must find the lone young tree in the center of the woods and lay your hand on it. This wall cause corruption to materialize itself"
+		"With the water cleansed, one final task is ahead of you. You must find the lone young tree in the center of the woods and lay your hand on it. This will cause the corruption to materialize itself"
 		"as an avatar. You must defeat it."
 	]
 
 	progress:
 	[
-		"Are we there yet?"
+		"The young tree waits at the heart of the woods. The corruption will not wait much longer."
 	]
 	
 	completion:
 	[
-		"Finally the trees can have some rest."
+		"It is done. The corruption has been torn out by its roots.\n"
+		"\n"
+		"Finally the trees can have some rest. The forest will remember what you did here, $class$, even if its people forget."
 	]
 	
 	level: 9

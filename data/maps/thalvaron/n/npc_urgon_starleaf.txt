@@ -95,12 +95,12 @@ quest .urgon_starleaf_1:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? The bears are in the woods behind me, to the east."
 	]
 	
 	completion:
 	[
-		"Hmm, interesting."
+		"Hmm, interesting. And disgusting."
 	]
 
 	level: 18
@@ -136,7 +136,7 @@ quest .urgon_starleaf_2:
 	
 	completion:
 	[
-		"Uh. What's the smell?"
+		"Uh. What's the smell? Oh. Oh! Infected animal parts? For me? Wonderful."
 	]
 
 	level: 19

@@ -2,7 +2,7 @@ dialogue_screen .rumin_whiterock_dialogue:
 {
 	text: 
 	[	
-		"Durgan Tharok is great and all, but I can't wait to go home to the real mountains. This expedition is getting about tiresome."
+		"Durgan Tharok is great and all, but I can't wait to go home to the real mountains. This expedition is getting rather tiresome."
 	]		
 	
 	options:
@@ -75,7 +75,7 @@ quest .rumin_whiterock_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? One-Eyed Moe prowls outside the walls of the camp. Usually at night."
 	]
 	
 	completion:
@@ -130,12 +130,12 @@ quest .rumin_whiterock_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The harpy colony is to the east, close to the mountains."
 	]
 	
 	completion:
 	[
-		"Excellent."
+		"Excellent. Look at the colors on these!"
 	]
 
 	level: 15

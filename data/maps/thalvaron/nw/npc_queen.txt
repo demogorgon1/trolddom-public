@@ -1,8 +1,8 @@
 dialogue_screen .queen_dialogue:
 {
-	text: 
-	[	
-		"Yes?"
+	text:
+	[
+		"Yes? Be brief. Half my city is in the hands of rebels, and the other half wants to know what I'm doing about it."
 	]		
 	
 	options:

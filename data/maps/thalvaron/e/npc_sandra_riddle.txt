@@ -2,7 +2,7 @@ dialogue_screen .sandra_riddle:
 {
 	text: 
 	[	
-		"Do you brings news from the north?"
+		"Do you bring news from the north?"
 	]		
 	
 	options:
@@ -114,12 +114,12 @@ quest .sandra_riddle_1:
 
 	progress:
 	[
-		"Yeah?"
+		"Yeah? The crowns are on the statues all around the keep."
 	]
 	
 	completion:
 	[
-		"I hope you didn't get spooked."
+		"I hope you didn't get spooked. Father will be pleased. He likes crowns."
 	]
 
 	objectives: [ .sandra_riddle_1 ]
@@ -204,7 +204,7 @@ quest .sandra_riddle_2:
 
 	progress:
 	[
-		"Got lost?"
+		"Got lost? The burial grounds are west of here."
 	]
 	
 	completion:

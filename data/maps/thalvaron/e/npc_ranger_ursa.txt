@@ -1,8 +1,8 @@
 dialogue_screen .ranger_ursa:
 {
-	text: 
-	[	
-		"Welcome to the gates of Urthon."
+	text:
+	[
+		"Welcome to the gates of Urthon. Few people pass through them these days, and fewer come back."
 	]		
 	
 	options:
@@ -60,12 +60,12 @@ quest .ranger_ursa_1:
 
 	progress:
 	[
-		"No luck tracking them down?"
+		"No luck tracking them down? Look in the woods to the left once you're past the wall."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. Without Uglor the rest of his scouts will turn back."
 	]
 	
 	objectives: [ .ranger_ursa_1 ]
@@ -117,7 +117,7 @@ quest .ranger_ursa_2:
 	
 	completion:
 	[
-		"Excellent!"
+		"Excellent! That should mean fewer wolf riders for a while."
 	]
 	
 	objectives: [ .ranger_ursa_2 ]

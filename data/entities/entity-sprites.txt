@@ -1399,6 +1399,9 @@ sprites:
 	sprite wall_torch_west_1: { }
 	sprite wall_torch_west_2: { }
 	sprite wall_torch_west_3: { }
+	sprite brazier_1: { }
+	sprite brazier_2: { }
+	sprite brazier_3: { }
 	
 }
 

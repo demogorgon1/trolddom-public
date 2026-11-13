@@ -67,12 +67,14 @@ quest .theodore_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Plenty of boar and deer left out there. Remember, the quiet approach. Shh."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Nice. Very nice. Clean kills too, mostly.\n"
+		"\n"
+		"Don't listen to whatever Hobart has been telling you. Somebody has to keep the numbers down, and his little tags certainly won't do it."
 	]
 
 	objectives: [ .theodore_1 ]
@@ -141,7 +143,7 @@ quest .theodore_2:
 
 	text:
 	[
-		"Venture unto the south eastern peninsula and find Theodore's lost satchel."
+		"Venture onto the south eastern peninsula and find Theodore's lost satchel."
 	]
 	
 	description: 
@@ -153,12 +155,14 @@ quest .theodore_2:
 
 	progress:
 	[
-		"Any progress?"
+		"No satchel yet? The wolves are on the south eastern peninsula. Smelly, bitey, hairy wolves."
 	]
 	
 	completion:
 	[
-		"Thanks. Hopefully my ankle will be better soon."
+		"My satchel! It's been chewed on and it smells like wolf, but everything is still in it.\n"
+		"\n"
+		"Thanks. Hopefully my ankle will be better soon. It's feeling better already, actually. Funny how that works."
 	]
 
 	objectives: [ .theodore_2 ]

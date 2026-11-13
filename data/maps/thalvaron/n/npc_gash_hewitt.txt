@@ -2,7 +2,7 @@ dialogue_screen .gash_hewitt_dialogue:
 {
 	text: 
 	[	
-		"Greeting traveller! Many dangerous creatures lurk in these woods. Be careful."
+		"Greetings, traveller! Many dangerous creatures lurk in these woods. Be careful."
 	]		
 	
 	options:
@@ -77,7 +77,7 @@ quest .gash_hewitt_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The wood elementals are in the trees behind me. And not a word to Joanna."
 	]
 	
 	completion:

@@ -59,7 +59,7 @@ quest .ulok_ironspear_1:
 	
 	description: 
 	[
-		"I know a guy back in Durgan Tharok who does a lot of alchemy. Never said me anything to me, but whatever. He pays pretty good for weird ingredients that I locate around the world.\n"
+		"I know a guy back in Durgan Tharok who does a lot of alchemy. Never said much to me, but whatever. He pays pretty good for weird ingredients that I locate around the world.\n"
 		"\n"
 		"Apparently wolf teeth are a useful reagent, for some reason. There happens to be wolves all over the place here. Maybe go grab me some teeth and we can share the profit?"
 	]
@@ -71,7 +71,7 @@ quest .ulok_ironspear_1:
 	
 	progress:
 	[
-		"Huh? Cold feet?"
+		"Huh? Cold feet? The wolves are all over Urthon."
 	]
 
 	level: 28
@@ -129,7 +129,7 @@ quest .ulok_ironspear_2:
 	
 	progress:
 	[
-		"Do you have anything for me?"
+		"Do you have anything for me? The scorpions are in Kareth, the desert to the south."
 	]
 
 	level: 29

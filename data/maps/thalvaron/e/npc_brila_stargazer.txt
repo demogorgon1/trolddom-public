@@ -130,7 +130,7 @@ quest .brila_stargazer_1:
 	
 	completion:
 	[
-		"Ah, that should work."
+		"Ah, that should work. Give me a moment to brew this."
 	]
 
 	objectives: [ .brila_stargazer_1_a .brila_stargazer_1_b ]

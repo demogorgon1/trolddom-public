@@ -88,7 +88,7 @@ quest .warmaster_jounheim_1:
 
 	progress:
 	[
-		"Why are you still here?"
+		"Why are you still here? The orcs are in the Badlands to the south."
 	]
 	
 	completion:
@@ -141,7 +141,7 @@ quest .warmaster_jounheim_2:
 
 	progress:
 	[
-		"Why are you still here?"
+		"Why are you still here? Gorvak is in the south eastern Badlands, by the old mines."
 	]
 	
 	completion:
@@ -264,7 +264,7 @@ quest .warmaster_jounheim_3:
 
 	progress:
 	[
-		"Why are you still here?"
+		"Why are you still here? Karthul Blackfang is inside Durgan Urok. Make sure he's dead."
 	]
 	
 	completion:

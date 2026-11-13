@@ -78,7 +78,7 @@ quest .doctor_hulius_camp_1:
 	
 	completion:
 	[
-		"Please help!"
+		"Please help! Get me out of here before it comes back!"
 	]
 
 	level: 14

@@ -108,6 +108,8 @@ namespace tpublic
 		int32_t											GetStateTick() const { return m_stateTick; }
 		uint8_t											GetSeq() const { return m_seq; }
 		uint8_t											GetEntityFlags() const { return m_entityFlags; }
+		bool											IsClientSpawned() const { return m_clientSpawned; }
+		void											SetClientSpawned() { m_clientSpawned = true; }
 		
 	private:
 		
@@ -120,6 +122,7 @@ namespace tpublic
 		std::vector<ComponentEntry>					m_components;
 		bool										m_dirty = false;
 		uint8_t										m_entityFlags = 0;
+		bool										m_clientSpawned = false;	// Spawned by the client from the map data, so the server doesn't replicate it (see MapData::GetClientSpawnEntityId())
 	};
 
 }

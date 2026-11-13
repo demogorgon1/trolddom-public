@@ -65,7 +65,7 @@ quest .sheriff_cunningham_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? The kobolds are by the blocked pass to the west."
 	]
 	
 	completion:
@@ -149,12 +149,12 @@ quest .sheriff_cunningham_2:
 
 	progress:
 	[
-		"Wet socks?"
+		"Wet socks? The smugglers are in the caves north of town."
 	]
 	
 	completion:
 	[
-		"Huh, that's not particularly surprising."
+		"Huh, that's not particularly surprising. People around here will pay anything for a drink."
 	]
 
 	objectives: [ .sheriff_cunningham_2 ]

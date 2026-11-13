@@ -73,7 +73,7 @@ quest .lieutenant_tusleholm_1:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? The Mudlord is in the most north eastern part of the marshlands."
 	]
 	
 	completion:
@@ -129,12 +129,12 @@ quest .lieutenant_tusleholm_2:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? The kobold caves are in the eastern mountains, near where you found the Mudlord."
 	]
 	
 	completion:
 	[
-		"Good job!"
+		"Good job! They'll be back, they always are, but it will take them a while."
 	]
 
 	level: 12

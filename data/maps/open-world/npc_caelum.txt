@@ -15,9 +15,11 @@ dialogue_screen .caelum_trainer: !DEFAULT_FIRST_AID_TRAINER{}
 
 dialogue_screen .caelum_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"Mind the stains on the floor, they're not mine. Most of them, anyway.\n"
+		"\n"
+		"If you're bleeding, sit down. If you want to learn how to stop other people from bleeding, stay standing."
 	]
 	
 	options:

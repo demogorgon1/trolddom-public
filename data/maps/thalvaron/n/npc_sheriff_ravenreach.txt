@@ -70,7 +70,7 @@ quest .sheriff_ravenreach_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? The hounds are in the woods east of town."
 	]
 	
 	completion:

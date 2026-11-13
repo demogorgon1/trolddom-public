@@ -108,12 +108,12 @@ quest .gyo_starleaf_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The dark elf house is to the south west, past the owlbear colony."
 	]
 	
 	completion:
 	[
-		"Thank you, I'll bring this to my friend."
+		"Thank you, I'll bring this to my friend. It has been in their family for generations."
 	]
 
 	objectives: [ .gyo_starleaf_1 ]

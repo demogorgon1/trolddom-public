@@ -136,12 +136,14 @@ quest .ezekiel_1:
 
 	progress:
 	[
-		"Any progress?"
+		"The dead still walk in Eastshore. I can feel it in my bones. Mostly in my knees."
 	]
 	
 	completion:
 	[
-		"Good job. Maybe you'll become a vampire hunter like me one day."
+		"Good job. Eastshore will rest a little easier tonight, and so will its dead.\n"
+		"\n"
+		"You have the makings of a hunter, $class$. Maybe you'll become a vampire hunter like me one day."
 	]
 
 	objectives: [ .ezekiel_1 ]

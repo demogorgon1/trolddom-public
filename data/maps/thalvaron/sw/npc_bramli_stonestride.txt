@@ -18,7 +18,7 @@ dialogue_root .bramli_stonestride_dialogue:
 
 entity thalvaron_bramli_stonestride: !NPC
 {
-	_string: "Bramli Stonestridew"
+	_string: "Bramli Stonestride"
 	_dialogue_root: .bramli_stonestride_dialogue	
 	_sprite: dwarf_13
 	_sprite_dead: dwarf_13_dead
@@ -78,7 +78,7 @@ quest .bramli_stonestride_1:
 
 	progress:
 	[
-		"You don't like spiders either?"
+		"You don't like spiders either? The cave is to the south east, not far from here."
 	]
 	
 	completion:

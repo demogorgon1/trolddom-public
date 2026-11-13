@@ -70,7 +70,9 @@ quest .hermit_1:
 	
 	completion:
 	[
-		"Now I'll be able to sleep better at night, thanks!"
+		"Gone? Really gone? Now I'll be able to sleep better at night, thanks!\n"
+		"\n"
+		"Well, as well as anyone can sleep with skeletons rattling around down the hall."
 	]
 
 	objectives: [ .hermit_1 ]

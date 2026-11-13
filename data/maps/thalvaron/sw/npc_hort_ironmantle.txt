@@ -77,12 +77,12 @@ quest .hort_ironmantle_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The elemental is deep in a cave south of Tyson's farm."
 	]
 	
 	completion:
 	[
-		"Looking good!"
+		"Looking good! Look at the way it glimmers."
 	]
 
 	level: 14
@@ -100,7 +100,7 @@ quest .hort_ironmantle_2:
 
 	text:
 	[
-		"Kill the larger than usual earth elemental in the cave south of Tyson's farm and return its infused elemental stone to Hort Ironmantle."
+		"Deliver the infused elemental stone to Rurik Ironmantle in Durgan Tharok."
 	]
 	
 	description: 

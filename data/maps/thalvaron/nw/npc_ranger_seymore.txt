@@ -91,12 +91,12 @@ quest .ranger_seymore_1:
 
 	progress:
 	[
-		"Don't waste your time."
+		"Don't waste your time. The dark elves are behind the hotel."
 	]
 	
 	completion:
 	[
-		"Good."
+		"Good. But they didn't come all this way just to summon a few demons. Something else is going on."
 	]
 
 	level: 12
@@ -156,12 +156,12 @@ quest .ranger_seymore_2:
 
 	progress:
 	[
-		"Are they dead yet?"
+		"Are they dead yet? Jim's camp is behind the hotel. And don't forget to check their bodies for documents."
 	]
 	
 	completion:
 	[
-		"Great."
+		"Great. Now let's see what they were up to."
 	]
 
 	level: 12
@@ -211,7 +211,7 @@ quest .ranger_seymore_3:
 	
 	completion:
 	[
-		"I heard of your deeds."
+		"I heard of your deeds. Seymore was right to send you. Whatever that orb was meant to do, it won't do it now."
 	]
 
 	level: 12

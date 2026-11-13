@@ -75,12 +75,12 @@ quest .thora_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The elementals are in the western parts of the woods, around the lake."
 	]
 	
 	completion:
 	[
-		"That should do the trick!"
+		"That should do the trick! Give me a moment. This kind of thing can't be rushed."
 	]
 
 	objectives: [ .thora_1 ]

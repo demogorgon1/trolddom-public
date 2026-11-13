@@ -1,8 +1,8 @@
 dialogue_screen .general_store_john_dialogue:
 {
-	text: 
-	[	
-		"Hello, $class$ $name$."
+	text:
+	[
+		"Hello, $class$ $name$. Looking for supplies? We have a bit of everything, and crab meat when we can get it."
 	]		
 	
 	options:
@@ -76,12 +76,12 @@ quest .general_store_john_1:
 
 	progress:
 	[
-		"I'm still open for business."
+		"I'm still open for business. The mud crawlers are all around the moat, just outside the city."
 	]
 	
 	completion:
 	[
-		"Excellent. That will do nicely."
+		"Excellent. That will do nicely. Don't ask me why everyone suddenly wants crab."
 	]
 
 	objectives: [ .general_store_john_1 ]

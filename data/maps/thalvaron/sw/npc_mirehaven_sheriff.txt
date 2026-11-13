@@ -1,8 +1,8 @@
 dialogue_screen .mirehaven_sheriff_dialogue:
 {
-	text: 
-	[	
-		"Greetings, $class$."
+	text:
+	[
+		"Greetings, $class$. Mirehaven isn't much, but it's peaceful. Mostly."
 	]		
 	
 	options:
@@ -69,12 +69,12 @@ quest .mirehaven_sheriff_1:
 
 	progress:
 	[
-		"Any bandits left?"
+		"Any bandits left? Their camp is somewhere to the east."
 	]
 	
 	completion:
 	[
-		"Great! Here's a little something for you."
+		"Great! Here's a little something for you. Mirehaven owes you one."
 	]
 
 	level: 13

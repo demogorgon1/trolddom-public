@@ -1,8 +1,8 @@
 dialogue_screen .clara_hawthorne_dialogue:
 {
-	text: 
-	[	
-		"Are you also an archaeologist?"
+	text:
+	[
+		"Are you also an archaeologist? No? Pity. Nobody in this city wants to talk about anything older than last week's gossip."
 	]			
 	
 	options:

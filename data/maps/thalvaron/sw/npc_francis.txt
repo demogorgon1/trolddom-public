@@ -2,7 +2,7 @@ dialogue_screen .francis_dialogue:
 {
 	text: 
 	[	
-		"Welcome to Mirahaven."
+		"Welcome to Mirehaven."
 	]		
 	
 	options:
@@ -100,13 +100,13 @@ quest .francis_1:
 	
 	description: 
 	[
-		"I recently bought the rights to and old mine out east. My master prospector went there to check it out, but he never returned. Can you go look for him?\n\n"
+		"I recently bought the rights to an old mine out east. My master prospector went there to check it out, but he never returned. Can you go look for him?\n\n"
 		"Be careful, it's close to where the ogre lives. You should stay clear of that guy."
 	]
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The mine is to the east, towards the mountains. Stay clear of the ogre."
 	]
 	
 	completion:

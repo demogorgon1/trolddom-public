@@ -71,7 +71,7 @@ quest .swampman_1:
 
 	progress:
 	[
-		"Got teeth?"
+		"Got teeth? Pristine ones, from the crocodiles of the North Marshlands."
 	]
 	
 	completion:
@@ -137,12 +137,12 @@ quest .swampman_2:
 
 	progress:
 	[
-		"Yes."
+		"Yes. The swamp monsters are all over the Northern Marshlands."
 	]
 	
 	completion:
 	[
-		"Great! Here's a little something for you."
+		"Great! Here's a little something for you. Maybe now I can sleep with the curtains open."
 	]
 
 	level: 12

@@ -2,9 +2,9 @@ dialogue_screen .dwarf_blacksmith_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
 
 dialogue_screen .dwarf_blacksmith_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"What can I do for you? If it's metal, I can hit it until it's something better."
 	]
 	
 	options:

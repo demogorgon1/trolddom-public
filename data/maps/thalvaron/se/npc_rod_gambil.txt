@@ -76,12 +76,12 @@ quest .rod_gambil_1:
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? The wolves are along the path beyond my house, to the east."
 	]
 	
 	completion:
 	[
-		"That's great, good job."
+		"That's great, good job. Maybe I'll get some sleep tonight."
 	]
 
 	objectives: [ .rod_gambil_1_a .rod_gambil_1_b ]
@@ -169,7 +169,7 @@ quest .rod_gambil_2:
 	
 	completion:
 	[
-		"Excellent."
+		"Excellent. It's all here. Even the good spoons."
 	]
 
 	objectives: [ .rod_gambil_2 ]
@@ -199,7 +199,7 @@ quest .rod_gambil_3:
 	
 	completion:
 	[
-		"Ah, yes, a fellow big game hunter?"
+		"Ah, yes, a fellow big game hunter? Keep your voice down, you'll scare off the snakes."
 	]
 
 	level: 20

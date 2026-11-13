@@ -161,7 +161,7 @@ quest .fennian_starleaf_2:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? The owlbear colony is to the south, along the road."
 	]
 	
 	completion:
@@ -306,12 +306,12 @@ quest .fennian_starleaf_4:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? The Devouring Shroud is no place to linger. Find the high priest."
 	]
 	
 	completion:
 	[
-		"I could sense it."
+		"I could sense it. The jungle breathes a little easier now."
 	]
 
 	quest_items: [ the_devouring_shroud_boss_6_spawn_item ]

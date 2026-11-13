@@ -1,8 +1,10 @@
 dialogue_screen .eldrin_the_enchanter_greetings:
 {
-	text: 
-	[	
-		"Greetings."
+	text:
+	[
+		"Ah, a visitor. Do mind the runes on the floor, they're still settling.\n"
+		"\n"
+		"I study the flow of magic on this island, and lately something about it has changed. It's been turning up in places it has no business being."
 	]		
 	
 	options:
@@ -70,12 +72,14 @@ quest .eldrin_the_enchanter_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Have you found Grimwort yet? A goblin with a wand is like a child with a torch in a hayloft. The sooner it's out of his hands, the better."
 	]
 	
 	completion:
 	[
-		"How peculiar. I wasn't aware that goblins possessed this kind of magic."
+		"How peculiar. I wasn't aware that goblins possessed this kind of magic.\n"
+		"\n"
+		"Goblins can barely sharpen a stick. Someone made this rod for them, or taught them how to make it. I would very much like to know who."
 	]
 
 	objectives: [ .eldrin_the_enchanter_1 ]
@@ -124,7 +128,7 @@ quest eldrin_the_enchanter_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Nothing yet? Look deeper under the mountains. Wherever this magic is coming from, it isn't from the surface."
 	]
 	
 	completion:

@@ -1,8 +1,8 @@
 dialogue_screen .joar:
 {
-	text: 
-	[	
-		"Greetings."
+	text:
+	[
+		"Greetings. We've had enough adventure for one trip, if you're wondering."
 	]
 	
 	options:
@@ -33,12 +33,12 @@ quest .joar_1:
 
 	text:
 	[
-		"Find Seren Vireleth and offer you assistance."
+		"Find Seren Virelith and offer your assistance."
 	]
 	
 	description: 
 	[
-		"If you look for adventure... We ran into a woman going by the name of Seren Vireleth, apparently some kind of demon hunter. She wanted help with dealing with some nasty demonic business, but we"
+		"If you look for adventure... We ran into a woman going by the name of Seren Virelith, apparently some kind of demon hunter. She wanted help with dealing with some nasty demonic business, but we"
 		"figured it was probably a bit too much. Maybe you want to assist her? She set up camp quite a bit further down the coast.\n\n"
 		"Follow the road east, it will bend south and eventually it will fork. Go right down towards the sea and you'll find her."		
 	]

@@ -102,7 +102,7 @@ quest .flimlock_1:
 	
 	completion:
 	[
-		"Thank you."
+		"Thank you. These are wonderfully murky."
 	]
 	
 	level: 27
@@ -473,7 +473,7 @@ quest .flimlock_4:
 
 	progress:
 	[
-		"Can't find it? Follow your nose."
+		"Can't find it? Follow your nose. It's in a cave somewhere in the Devouring Shroud."
 	]
 	
 	completion:

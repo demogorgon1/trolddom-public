@@ -1,8 +1,8 @@
 dialogue_screen .warden_ghourian_dialogue:
 {
-	text: 
-	[	
-		"I'm keeping watch over this pass."
+	text:
+	[
+		"I'm keeping watch over this pass. Nothing gets through without me seeing it."
 	]		
 	
 	options:
@@ -63,12 +63,12 @@ quest .warden_ghourian_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? The orcs are further south in the gorge."
 	]
 	
 	completion:
 	[
-		"Excellent job!"
+		"Excellent job! Skullforge orcs, this far north... Something is stirring."
 	]
 
 	objectives: [ .warden_ghourian_1 ]
@@ -106,7 +106,7 @@ quest .warden_ghourian_2:
 	
 	completion:
 	[
-		"Excellent job!"
+		"Skullforge orcs? Here? That's the last thing we need with the dead walking the woods. Excellent job reporting it."
 	]
 
 	level: 18

@@ -61,19 +61,20 @@ quest .elf_collector_1:
 		"Deliver ores to Rhoi Starleaf in Shadowthorn Forest."
 	]
 	
-	description: 
+	description:
 	[
-		"We don't have a large supply of ores in this area. If you can deliver some to us we will be very grateful."
+		"We don't have a large supply of ores in this area. The elves of these woods have never been much for mining, and the dwarves who used to trade with us stopped coming a long time ago.\n\n"
+		"If you can deliver some ore to us we will be very grateful."
 	]
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Every bit of ore helps."
 	]
 	
 	completion:
 	[
-		"Great, your support will not be forgotten."
+		"Great, your support will not be forgotten. The Children of the Moon remember their friends."
 	]
 	
 	objectives: [ .elf_collector_1_a .elf_collector_1_b ]
@@ -122,12 +123,12 @@ quest .elf_collector_2:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Bring us whatever herbs you can find."
 	]
 	
 	completion:
 	[
-		"Excellent, thanks!"
+		"Excellent, thanks! These will go straight to our healers."
 	]
 	
 	objectives: [ .elf_collector_2_a .elf_collector_2_b ]

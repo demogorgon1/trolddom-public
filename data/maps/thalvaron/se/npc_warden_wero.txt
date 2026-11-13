@@ -1,8 +1,8 @@
 dialogue_screen .warden_wero:
 {
-	text: 
-	[	
-		"Greetings, $class$."
+	text:
+	[
+		"Greetings, $class$. Keep your eyes open. The orcs have scouts all over southern Xandralis."
 	]
 	
 	options:
@@ -109,7 +109,7 @@ quest .warden_wero_1:
 	
 	progress:
 	[
-		"Make haste, don't waste time."
+		"Make haste, don't waste time. The orc camp is to the south, by the mountains."
 	]
 	
 	completion:
@@ -142,7 +142,7 @@ quest .warden_wero_2:
 	
 	completion:
 	[
-		"I've been expecting you."
+		"I've been expecting you. Wero said help was on the way."
 	]
 
 	reward_cash_multiplier: 0

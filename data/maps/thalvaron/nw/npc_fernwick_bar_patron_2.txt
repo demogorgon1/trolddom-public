@@ -106,12 +106,12 @@ quest .fernwick_bar_patron_2:
 
 	progress:
 	[
-		"Did you find it?"
+		"Did you find it? It's in the chest in my bedroom, in the house on the other side of the stream."
 	]
 	
 	completion:
 	[
-		"Thank you!"
+		"Thank you! I was right at the exciting part."
 	]
 
 	objectives: [ .fernwick_bar_patron_2 ]

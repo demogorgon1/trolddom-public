@@ -1,8 +1,8 @@
 dialogue_screen .rurik_ironmantle_dialogue:
 {
-	text: 
-	[	
-		"Yes?"
+	text:
+	[
+		"Yes? If you're not here to talk about rocks, I'm not sure we have much to talk about."
 	]		
 	
 	options:
@@ -73,9 +73,9 @@ quest thalvaron_rurik_ironmantle_1:
 		"intriguing stones. Please seek it out and return one of its rocks to me."
 	]
 
-	progress: 
+	progress:
 	[
-		"How is it going?"
+		"How is it going? The golem roams the corridors of outer Durgan Urok, to the south east."
 	]
 		
 	completion:
@@ -160,13 +160,13 @@ quest thalvaron_rurik_ironmantle_2:
 	
 	description: 
 	[
-		"The stone you brought me has convinced that the myths of the Runecore Sentinel are true. Dwarves have long been talking about an ancient golem that was constructed to defend our underground realm, but was"
+		"The stone you brought me has convinced me that the myths of the Runecore Sentinel are true. Dwarves have long been talking about an ancient golem that was constructed to defend our underground realm, but was"
 		"corrupted. They call it the Runecore Sentinel. I want you to seek it out and bring back one of its stones. Get going, please."
 	]
 
-	progress: 
+	progress:
 	[
-		"How is it going?"
+		"How is it going? The Runecore Sentinel is deep inside Durgan Urok."
 	]
 		
 	completion:

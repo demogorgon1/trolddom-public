@@ -90,7 +90,7 @@ quest thalvaron_benji_1:
 
 	text:
 	[
-		"Collect horns from Thunder Lizards in the Xandralis Highlands and return to Thora Stormpiercer."
+		"Collect crystals in the crystal caves of the western Xandralis Highlands and bring them to Brick Johnson in Valoris."
 	]
 	
 	description: 

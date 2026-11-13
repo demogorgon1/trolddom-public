@@ -65,12 +65,12 @@ quest .thora_stormpiercer_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The thunder lizards graze to the south. Bring me their horns."
 	]
 	
 	completion:
 	[
-		"Yes!"
+		"Yes! One step closer to a world without thunder lizards."
 	]
 
 	objectives: [ .thora_stormpiercer_1 ]
@@ -122,7 +122,7 @@ quest .thora_stormpiercer_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Stormgoros roams the central highlands. You'll know him when you see him. He's the ugly one."
 	]
 	
 	completion:

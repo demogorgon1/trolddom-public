@@ -61,7 +61,7 @@ quest .city_guard_special_2_1:
 
 	progress:
 	[
-		"Yes?"
+		"Is he dead? He's in one of the nearby buildings, and he won't stay there forever."
 	]
 	
 	completion:

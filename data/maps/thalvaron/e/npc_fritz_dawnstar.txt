@@ -72,7 +72,7 @@ quest .fritz_dawnstar_1:
 
 	progress:
 	[
-		"The unholy must be destroyed."
+		"The unholy must be destroyed. The graveyard is north west of here, across the bridge."
 	]
 	
 	completion:
@@ -129,7 +129,7 @@ quest .fritz_dawnstar_2:
 	
 	completion:
 	[
-		"By the light! Good."
+		"By the light! Good. Urthon is a little cleaner for it."
 	]
 	
 	objectives: [ .fritz_dawnstar_2 ]

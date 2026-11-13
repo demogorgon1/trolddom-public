@@ -61,12 +61,12 @@ quest .joana_1:
 
 	progress:
 	[
-		"Lost in the desert?"
+		"Lost in the desert? Xildur's compound is north east of the Serpent's Rest."
 	]
 	
 	completion:
 	[
-		"Good job, but we're not done yet."
+		"Good job, but we're not done yet. Xildur was only one of them."
 	]
 	
 	objectives: [ .joana_1 ]
@@ -161,7 +161,7 @@ quest thalvaron_joana_2:
 	
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The orbs are in the Tomb of Kralier, the Tomb of Jurgorth and the Tomb of the Last King. Take them to Father Tobias."
 	]
 
 	level: 29
@@ -213,7 +213,7 @@ quest .joana_3:
 
 	progress:
 	[
-		"Is it done?"
+		"Is it done? Go through the troll caves of Lim'Drok in Ashira until you reach the sea."
 	]
 
 	completion:

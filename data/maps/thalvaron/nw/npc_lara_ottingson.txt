@@ -6,9 +6,9 @@ dialogue_screen .lara_ottingson_vendor:
 
 dialogue_screen .lara_ottingson_greetings:
 {
-	text: 
-	[	
-		"Interested in horses?"
+	text:
+	[
+		"Interested in horses? Best mounts in Valoris. They don't spook, they don't bite, and they only kick people who deserve it."
 	]
 	
 	options:

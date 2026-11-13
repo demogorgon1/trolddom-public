@@ -13,9 +13,9 @@ dialogue_screen .frederik_tyson_dialogue_2:
 
 dialogue_screen .frederik_tyson_dialogue:
 {
-	text: 
-	[	
-		"Hello."
+	text:
+	[
+		"Hello. Don't mind the mud. Everything around here is covered in mud."
 	]		
 	
 	options:
@@ -106,7 +106,7 @@ quest .frederik_tyson_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The ooze that took Mr. Mivvy is somewhere around the farm. Dead or alive, I want him back."
 	]
 	
 	completion:

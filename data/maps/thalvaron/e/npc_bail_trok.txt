@@ -118,7 +118,7 @@ quest .bail_trok_1:
 	
 	completion:
 	[
-		"Well, that looks about right."
+		"Well, that looks about right. My client will be delighted. She gets excited about the strangest things."
 	]
 
 	objectives: [ .bail_trok_1 ]

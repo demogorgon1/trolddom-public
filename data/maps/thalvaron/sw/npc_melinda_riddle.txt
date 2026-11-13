@@ -70,7 +70,7 @@ quest thalvaron_melinda_riddle_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Jim is somewhere inside the occupied part of Valoris. Please hurry."
 	]
 	
 	completion:

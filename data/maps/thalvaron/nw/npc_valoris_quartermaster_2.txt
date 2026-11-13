@@ -7,9 +7,9 @@ dialogue_screen .valoris_quartermaster_2_vendor:
 
 dialogue_screen .valoris_quartermaster_2_dialogue:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? If you're heading out to fight the rebels, you'll want something better than that."
 	]
 	
 	options:

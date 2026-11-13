@@ -2,7 +2,7 @@ dialogue_screen .halfeye_lanior_dialogue:
 {
 	text: 
 	[	
-		"We must put and end to the evil powers of the lich."
+		"We must put an end to the evil powers of the lich."
 	]		
 	
 	options:
@@ -71,12 +71,12 @@ quest .halfeye_lanior_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? Droogor and his detachment are in the woods to the north."
 	]
 	
 	completion:
 	[
-		"Good."
+		"Good. One less servant for the lich."
 	]
 
 	objectives: [ .halfeye_lanior_1 ]
@@ -124,12 +124,12 @@ quest .halfeye_lanior_2:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? Malrik waits in the Tower of Indulath to the east. Bring friends."
 	]
 	
 	completion:
 	[
-		"Excellent."
+		"Excellent. The lich is no more, and the dead in these lands can finally rest."
 	]
 
 	objectives: [ .halfeye_lanior_2 ]

@@ -2,9 +2,11 @@ dialogue_screen .orgh_vendor: !TRADE_SUPPLIES{}
 
 dialogue_screen .orgh_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"I keep the shop while the mistress does her research. She doesn't like to be disturbed, so whatever you need, you need it from me.\n"
+		"\n"
+		"I sell supplies. I also buy ingredients. Unusual ones."
 	]
 	
 	options:
@@ -75,12 +77,14 @@ quest .orgh_1:
 
 	progress:
 	[
-		"Any progress?"
+		"No brains yet? They're inside the heads. Of the dead people. In the old town to the north east."
 	]
 	
 	completion:
 	[
-		"Those are some nice brains. Let me just take them off your hands."
+		"Those are some nice brains. Plump, slimy and hardly chewed on. Let me just take them off your hands.\n"
+		"\n"
+		"The mistress will be pleased. When the mistress is pleased, I get to keep mine."
 	]
 
 	objectives: [ .orgh_1 ]
@@ -129,12 +133,14 @@ quest .orgh_2:
 
 	progress:
 	[
-		"Any progress?"
+		"The mistress is waiting. She doesn't like waiting, and I don't like it when she's waiting."
 	]
 	
 	completion:
 	[
-		"Doesn't look like much, but what do I know. Thanks."
+		"Doesn't look like much, does it? Grey, damp and a little bit cold. The mistress says that's where the good stuff is.\n"
+		"\n"
+		"What do I know. Thanks."
 	]
 
 	prerequisites: [ .orgh_1 ]

@@ -89,7 +89,7 @@ quest thalvaron_blimcraft_assistant_1:
 		
 	completion:
 	[
-		"Blimcraft will be happy to hear about this."
+		"Blimcraft will be happy to hear about this. He'll be insufferable for a week, but happy."
 	]
 
 	level: 20

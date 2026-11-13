@@ -15,9 +15,12 @@ dialogue_screen .rorion_trainer: !DEFAULT_BLACKSMITING_TRAINER{}
 
 dialogue_screen .rorion_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"Stand back from the forge unless you want to lose your eyebrows.\n"
+		"\n"
+		"If you're here to buy a sword, I'm all out. Everyone on this island wants one now that there are crab men on every beach. If you want to learn to make your"
+		"own, that I can help you with."
 	]
 	
 	options:

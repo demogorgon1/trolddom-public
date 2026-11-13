@@ -75,7 +75,7 @@ quest .fernwick_bar_patron_1:
 
 	progress:
 	[
-		"Did you find it?"
+		"Did you find it? It's a wooden box. My wife will notice if it's missing. She notices everything."
 	]
 	
 	completion:

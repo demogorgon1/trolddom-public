@@ -99,12 +99,12 @@ quest .block_manson_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? Where are my shards? The scavengers are at the crash site to the west."
 	]
 	
 	completion:
 	[
-		"Ah... Yes!"
+		"Ah... Yes! Look at them sparkle."
 	]
 
 	objectives: [ .block_manson_1 ]
@@ -157,12 +157,12 @@ quest .block_manson_2:
 
 	progress:
 	[
-		"No heart?"
+		"No heart? Mordargh lives in a cave to the north east. I want that heart."
 	]
 	
 	completion:
 	[
-		"Mmh..."
+		"Mmh... Still warm."
 	]
 
 	objectives: [ .block_manson_2 ]

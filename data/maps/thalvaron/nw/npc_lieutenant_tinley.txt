@@ -71,12 +71,12 @@ quest .lieutenant_tinley_1:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? The woods are full of rebels. Go thin them out."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. That should keep them from getting too comfortable."
 	]
 
 	level: 10
@@ -152,7 +152,7 @@ quest .lieutenant_tinley_3:
 
 	progress:
 	[
-		"What are you still doing here?"
+		"What are you still doing here? The Mountain Hotel is up in the mountains to the north east. Bring Cubert back."
 	]
 	
 	completion:

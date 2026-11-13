@@ -108,7 +108,7 @@ quest .father_tobias_1:
 
 	progress:
 	[
-		"Did you go down there?"
+		"Did you go down there? The gate is in the basement. You get there from outside the castle, on the east side."
 	]
 
 	completion:
@@ -298,7 +298,7 @@ quest thalvaron_father_tobias_3:
 
 	progress:
 	[
-		"How are you doing?"
+		"How are you doing? Urjux rests at the Temple of Kareth. Defeat him, burn his bones, and report to Joana."
 	]
 	
 	completion:
@@ -338,7 +338,7 @@ quest .father_tobias_4:
 
 	completion:
 	[
-		"Oh, let me see what you've got."
+		"Tobias sent you? Let me see what you've got. Yes... that's the stuff. Infernal, through and through."
 	]
 
 	level: 30

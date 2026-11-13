@@ -105,7 +105,7 @@ quest .durk_1:
 	
 	completion:
 	[
-		"Good. Durk doesn't like mean wizards."
+		"Good. Durk doesn't like mean wizards. Durk will plant the little one somewhere safe."
 	]
 
 	objectives: [ .durk_1_a .durk_1_b ]

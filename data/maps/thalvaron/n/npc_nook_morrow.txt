@@ -113,7 +113,7 @@ quest .nook_morrow_1:
 
 	progress:
 	[
-		"Can't handle the smell?"
+		"Can't handle the smell? Put on more perfume. The ice caves are on the eastern side of the highlands."
 	]
 	
 	completion:
@@ -241,12 +241,12 @@ quest .nook_morrow_2:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The owlbear is south of the frozen lake. Gently, please!"
 	]
 	
 	completion:
 	[
-		"Hmm, let me see."
+		"Hmm, let me see. That's odd."
 	]
 
 	level: 13

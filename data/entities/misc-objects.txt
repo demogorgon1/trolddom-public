@@ -1,7 +1,7 @@
 !define local MISC_OBJECT
 {
 	<exists _string> string: @_string
-	flags: [ immobile ]
+	flags: [ immobile client_spawn ]
 	<exists _environment> systems: [ environment ]
 	
 	components:
@@ -40,10 +40,11 @@ entity jul_tree: !MISC_OBJECT { _string: "Jule Tree" _frames: [ jul_tree ] }
 entity wall_torch_south: !MISC_OBJECT { _frames: [ wall_torch_south_1 wall_torch_south_2 wall_torch_south_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 3.5 offset: [ 0 1 ] } }
 entity wall_torch_east: !MISC_OBJECT { _frames: [ wall_torch_east_1 wall_torch_east_2 wall_torch_east_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
 entity wall_torch_west: !MISC_OBJECT { _frames: [ wall_torch_west_1 wall_torch_west_2 wall_torch_west_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
+entity brazier: !MISC_OBJECT { _string: "Brazier" _frames: [ brazier_1 brazier_2 brazier_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 4.5 } }
 
 entity fill_light:
 {
-	flags: [ immobile ]
+	flags: [ immobile client_spawn ]
 
 	components:
 	{

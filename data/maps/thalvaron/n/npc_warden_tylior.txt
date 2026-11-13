@@ -93,12 +93,12 @@ quest .warden_tylior_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? Follow the skeletons. Their captains are never far away."
 	]
 	
 	completion:
 	[
-		"Excellent job!"
+		"Excellent job! Without their captains they're just bones wandering around."
 	]
 
 	objectives: [ .warden_tylior_1_a .warden_tylior_1_b .warden_tylior_1_c ]

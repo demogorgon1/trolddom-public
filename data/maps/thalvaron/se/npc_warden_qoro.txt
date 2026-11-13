@@ -43,7 +43,7 @@ quest .warden_qoro_1:
 
 	completion:
 	[
-		"Some elf sent you? I see."
+		"Some elf sent you? I see. Well, since you're here, you might as well make yourself useful."
 	]
 
 	level: 21

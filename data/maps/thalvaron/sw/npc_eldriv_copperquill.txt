@@ -57,7 +57,7 @@ quest .eldriv_copperquill_1:
 
 	text:
 	[
-		"Deliver herbs to Eldriv Copperquill in Durgan Tharokt."
+		"Deliver herbs to Eldriv Copperquill in Durgan Tharok."
 	]
 	
 	description: 
@@ -68,12 +68,12 @@ quest .eldriv_copperquill_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? I need as many herbs as you can find."
 	]
 	
 	completion:
 	[
-		"Excellent, thanks!"
+		"Excellent, thanks! Nature's quiet miracles, every one of them."
 	]
 	
 	objectives: [ .eldriv_copperquill_1_a .eldriv_copperquill_1_b ]

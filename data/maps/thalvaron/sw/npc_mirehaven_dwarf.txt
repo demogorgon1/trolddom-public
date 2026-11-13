@@ -79,12 +79,12 @@ quest .mirehaven_dwarf_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The entrance is in the mountains, just north of the pass to the badlands."
 	]
 	
 	completion:
 	[
-		"That's interesting, thanks."
+		"That's interesting, thanks. Very old, and very dwarven. I'll need some time with it."
 	]
 	
 	objectives: [ .mirehaven_dwarf_1 ]

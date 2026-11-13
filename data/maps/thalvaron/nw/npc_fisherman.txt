@@ -70,12 +70,12 @@ quest .fisherman_1:
 
 	progress:
 	[
-		"They're everywhere!"
+		"They're everywhere! Up and down the beach. I can't even get to my boat."
 	]
 	
 	completion:
 	[
-		"That should help, thanks."
+		"That should help, thanks. But I don't think we've seen the last of them."
 	]
 
 	level: 11
@@ -122,12 +122,12 @@ quest .fisherman_2:
 
 	progress:
 	[
-		"Crabs don't kill themselves."
+		"Crabs don't kill themselves. Old Man's Cave is further down south, along the coast."
 	]
 	
 	completion:
 	[
-		"Good work!"
+		"Good work! That cave has been trouble for as long as I can remember."
 	]
 
 	level: 12

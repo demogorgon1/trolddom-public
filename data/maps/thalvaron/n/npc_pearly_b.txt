@@ -5,9 +5,9 @@ expression .pearly_b_has_item:
 
 dialogue_screen .pearly_b_dialogue_1:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing? The water is restless today. I can feel it in my scales."
 	]		
 	
 	options:

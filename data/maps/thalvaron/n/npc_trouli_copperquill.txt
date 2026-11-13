@@ -95,7 +95,7 @@ quest .trouli_copperquill_1:
 	
 	completion:
 	[
-		"Great!"
+		"Great! These will keep me busy for a while."
 	]
 
 	level: 19
@@ -152,7 +152,7 @@ quest thalvaron_trouli_copperquill_2:
 	
 	completion:
 	[
-		"Great! That sounds like quite an adventure."
+		"Great! That sounds like quite an adventure. Now, let's have a look at this sample."
 	]
 
 	level: 20

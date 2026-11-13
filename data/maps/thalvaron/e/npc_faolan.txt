@@ -100,7 +100,7 @@ quest .faolan_1:
 	
 	completion:
 	[
-		"Thanks. Here, have a blessing."
+		"Herbs! How thoughtful. Here, have a blessing."
 	]
 
 	level: 25

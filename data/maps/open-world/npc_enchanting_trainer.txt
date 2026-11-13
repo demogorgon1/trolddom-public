@@ -2,9 +2,11 @@ dialogue_screen .enchanting_trainer_trainer: !DEFAULT_ENCHANTING_TRAINER{}
 
 dialogue_screen .enchanting_trainer_greetings:
 {
-	text: 
-	[	
-		"Hello."
+	text:
+	[
+		"Hello there. Don't touch the dust on the table, it took me three days to grind.\n"
+		"\n"
+		"Enchanting is patient work. You take something you don't need, break it down into the magic it was made with, and put that magic into something you do need."
 	]
 	
 	options:

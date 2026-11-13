@@ -15,9 +15,9 @@ dialogue_screen .dwarf_miner_trainer: !DEFAULT_MINING_TRAINER{}
 
 dialogue_screen .dwarf_miner_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"What can I do for you? Looking to learn the pick, or just admiring my beard?"
 	]
 	
 	options:
@@ -78,19 +78,20 @@ quest .dwarf_miner_1:
 		"Deliver ores to Torvick Dainor in Durgan Tharok."
 	]
 	
-	description: 
+	description:
 	[
-		"You got any ore for me? If you bring me some I'll make sure to put in a good word for you."
+		"You got any ore for me? The forges of Durgan Tharok are always hungry, and the mines around here don't give up much these days.\n\n"
+		"If you bring me some I'll make sure to put in a good word for you."
 	]
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Every bit of ore helps."
 	]
 	
 	completion:
 	[
-		"Uh, wonderful!"
+		"Uh, wonderful! The forges will be glad."
 	]
 	
 	objectives: [ .dwarf_miner_1_a .dwarf_miner_1_b ]

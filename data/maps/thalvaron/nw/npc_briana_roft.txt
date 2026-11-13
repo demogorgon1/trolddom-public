@@ -1,8 +1,8 @@
 dialogue_screen .briana_roft_dialogue:
 {
-	text: 
-	[	
-		"What?"
+	text:
+	[
+		"What? I'm just standing here. People are allowed to stand near catacombs, aren't they?"
 	]			
 	
 	options:
@@ -107,7 +107,7 @@ quest .briana_roft_1:
 	
 	completion:
 	[
-		"Ah, that's exactly it. Thanks."
+		"Ah, that's exactly it. Thanks. My client will be very pleased, and Prince Gerth won't be needing it."
 	]
 
 	objectives: [ .briana_roft_1 ]

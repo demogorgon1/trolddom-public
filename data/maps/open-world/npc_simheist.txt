@@ -1,8 +1,10 @@
 dialogue_screen .simheist_greetings:
 {
-	text: 
-	[	
-		"Greetings."
+	text:
+	[
+		"Be still for a moment, traveler. Listen. Can you hear the ancient forest breathing beyond the trees?\n"
+		"\n"
+		"I have watched over its edge for longer than I care to remember, and I have never seen it as troubled as it is now."
 	]		
 	
 	options:
@@ -71,12 +73,14 @@ quest .simheist_1:
 
 	progress:
 	[
-		"Any progress?"
+		"The goblins still crawl around Dirith Bay. I can smell them from here."
 	]
 	
 	completion:
 	[
-		"This soothes me."
+		"This soothes me. Every ear is one less goblin creeping toward the ancient forest.\n"
+		"\n"
+		"But they keep coming, and goblins don't march in step unless someone is shouting at them. Someone is leading them."
 	]
 
 	objectives: [ .simheist_1 ]
@@ -121,7 +125,9 @@ quest .simheist_2:
 	
 	completion:
 	[
-		"Did you get him before he managed to hide in the woods? Good."
+		"Did you get him before he managed to hide in the woods? Good. Without Hogroth the rest of them will scatter.\n"
+		"\n"
+		"I fear their filth has already reached deeper into the forest than we thought."
 	]
 
 	objectives: [ .simheist_2 ]

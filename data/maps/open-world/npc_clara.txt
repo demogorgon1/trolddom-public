@@ -59,7 +59,7 @@ quest .clara_1:
 
 	progress:
 	[
-		"Any progress?"
+		"The potatoes won't dig themselves up, dear. The field is right here."
 	]
 	
 	completion:

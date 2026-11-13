@@ -67,7 +67,9 @@ quest .frinrir_1:
 	
 	completion:
 	[
-		"Oh, this is great. Thanks."
+		"Supplies from Frinrir? Oh, this is great. Thanks.\n"
+		"\n"
+		"Tell him I'm doing fine. The skeletons are mostly polite, as long as you keep the door locked."
 	]
 
 	quest_items: [ .frinrir_1 ]

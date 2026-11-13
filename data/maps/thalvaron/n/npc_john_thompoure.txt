@@ -1,8 +1,8 @@
 dialogue_screen .john_thompoure_dialogue:
 {
-	text: 
-	[	
-		"Any news?"
+	text:
+	[
+		"Any news? Is someone finally coming to relieve me? I'm out of snacks."
 	]
 
 	options:

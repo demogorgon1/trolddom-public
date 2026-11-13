@@ -69,12 +69,12 @@ quest .jor_starleaf_1:
 
 	progress:
 	[
-		"Be careful."
+		"Be careful. The ghouls are all over these woods."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. They'll keep coming as long as that evil lingers in Shadowthorn Abbey, but this helps."
 	]
 
 	level: 17

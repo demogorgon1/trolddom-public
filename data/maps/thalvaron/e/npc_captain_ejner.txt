@@ -57,7 +57,7 @@ quest .captain_ejner_1:
 	
 	progress:
 	[
-		"Yarh?"
+		"Yarh? Where's my rum? Rod Gambil, up in the Howling Pass."
 	]
 
 	level: 28
@@ -145,12 +145,12 @@ quest .captain_ejner_2:
 	
 	completion:
 	[
-		"Ah, yes! Excellent!"
+		"Ah, yes! Excellent! Just as I left it. Mostly."
 	]
 	
 	progress:
 	[
-		"You found it yet?"
+		"You found it yet? It's on the beach. Somewhere. I think."
 	]
 
 	level: 29

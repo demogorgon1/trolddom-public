@@ -1,8 +1,8 @@
 dialogue_screen .seren_virelith:
 {
-	text: 
-	[	
-		"These are dark times."
+	text:
+	[
+		"These are dark times. The demons grow bolder every night."
 	]
 	
 	options:
@@ -62,12 +62,12 @@ quest .seren_virelith_1:
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? The demons are all along the coast around here."
 	]
 	
 	completion:
 	[
-		"That's great, good job."
+		"That's great, good job. But more will come."
 	]
 
 	objectives: [ .seren_virelith_1 ]
@@ -115,12 +115,12 @@ quest .seren_virelith_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The Tower of Voraghul is across the bridge to the south."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Good. Disgusting, but good. Let me take a closer look."
 	]
 
 	objectives: [ .seren_virelith_2 ]
@@ -161,7 +161,7 @@ quest thalvaron_seren_virelith_3:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The portal must be somewhere in his tower."
 	]
 	
 	completion:
@@ -254,7 +254,7 @@ quest thalvaron_seren_virelith_4:
 	
 	completion:
 	[
-		"Ohh, what is that?"
+		"Ohh, what is that? A mushroom? For me? Seren sent you? Who is Seren?"
 	]
 
 	objectives: [ .seren_virelith_4 ]

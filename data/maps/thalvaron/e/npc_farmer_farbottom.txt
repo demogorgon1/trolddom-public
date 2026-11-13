@@ -66,12 +66,12 @@ quest .farmer_farbottom_1:
 	
 	completion:
 	[
-		"Ah, that's a lot of bones. I hope it works!"
+		"Ah, that's a lot of bones. I hope it works! If my turnips start walking around, I'll let you know."
 	]
 	
 	progress:
 	[
-		"Did you find any undead?"
+		"Did you find any undead? The desert south of here is full of skeletons."
 	]
 
 	level: 29
@@ -117,12 +117,12 @@ quest .farmer_farbottom_2:
 
 	progress:
 	[
-		"Yeah?"
+		"Yeah? The cave entrance is just west of here."
 	]
 	
 	completion:
 	[
-		"I hope that helps."
+		"I hope that helps. My potatoes thank you."
 	]
 	
 	objectives: [ .farmer_farbottom_2 ]

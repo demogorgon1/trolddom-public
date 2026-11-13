@@ -68,14 +68,16 @@ quest .sylas_1:
 		"Hunt down goblins in Eldertree Woods."
 	]
 	
-	description: 
+	description:
 	[
-		"Goblins have ventured out from their caves under the mountains and have been spotted all over the forest. I need you to hunt them down."
+		"Goblins have ventured out from their caves under the mountains and have been spotted all over the forest. They steal, they burn and they leave a mess wherever they go.\n"
+		"\n"
+		"I've been tracking them for weeks, but there are too many for one ranger. Hunt them down. The fewer goblins in these woods, the fewer will dare to follow."
 	]
 
 	progress:
 	[
-		"Any progress?"
+		"There are still goblins roaming these woods. Keep hunting."
 	]
 	
 	completion:
@@ -146,7 +148,7 @@ quest .sylas_3:
 
 	text:
 	[
-		"Bring the secret document to Xyzax in the mountains north of Cape Arrival."
+		"Bring the secret document to Xazax in the mountains north of Cape Arrival."
 	]
 	
 	description: 
@@ -157,7 +159,7 @@ quest .sylas_3:
 
 	progress:
 	[
-		"Take the document to Xyzax."
+		"Take the document to Xazax. He lives in the mountains north of Cape Arrival."
 	]
 	
 	completion:
@@ -202,9 +204,12 @@ quest .sylas_4:
 		"Venture into the fortress under the mountain and slay Zarvok the Cunning."
 	]
 	
-	description: 
+	description:
 	[
-		"Another goblin lord down there? Seems like it wasn't Ignorg alone who was running the show. You must kill this Zarvok and hopefully it will be the end of it."
+		"Another goblin lord down there? Seems like it wasn't Ignorg alone who was running the show.\n"
+		"\n"
+		"If Xazax read that document right, this Zarvok means to summon something to do his bidding. I don't want to find out what. Go into the fortress under the mountain"
+		"and kill Zarvok before he gets the chance. Hopefully that will be the end of it."
 	]
 
 	progress:

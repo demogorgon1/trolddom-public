@@ -12,9 +12,9 @@ dialogue_screen .dwarf_quartermaster_vendor:
 
 dialogue_screen .dwarf_quartermaster_dialogue:
 {
-	text: 
-	[	
-		"What can I help you with?"
+	text:
+	[
+		"What can I help you with? Dwarven steel, the best in the kingdom. Don't let the humans tell you otherwise."
 	]
 	
 	options:

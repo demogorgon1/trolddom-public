@@ -101,7 +101,7 @@ quest .orm_thogore_1:
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? The ruins are just north of here. My bag is somewhere in the caves below."
 	]
 	
 	completion:

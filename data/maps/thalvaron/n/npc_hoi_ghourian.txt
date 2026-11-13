@@ -2,7 +2,7 @@ dialogue_screen .hoi_ghourian_dialogue:
 {
 	text: 
 	[	
-		"My name is Hoi and I'm a liason between the trees of these woods and the more fleshy creatures like us."
+		"My name is Hoi and I'm a liaison between the trees of these woods and the more fleshy creatures like us."
 	]		
 	
 	options:
@@ -54,7 +54,7 @@ quest .hoi_ghourian_1:
 
 	text:
 	[
-		"Locate the owlbear colony south of Edmund's Haunt and thin out their numbers."
+		"Venture into the dark woods behind Hoi Ghourian's house and put down Yrk."
 	]
 	
 	description: 
@@ -65,7 +65,7 @@ quest .hoi_ghourian_1:
 
 	progress:
 	[
-		"Back already?"
+		"Back already? Yrk is in the dark woods behind my house."
 	]
 	
 	completion:
@@ -149,7 +149,7 @@ quest .hoi_ghourian_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? My satchel is somewhere in the caves behind my house. Mind the lizards."
 	]
 	
 	completion:
@@ -211,7 +211,7 @@ quest .hoi_ghourian_3:
 
 	progress:
 	[
-		"Did they get you?"
+		"Did they get you? The fire lizards are south, across the river by the mountains."
 	]
 	
 	completion:
@@ -250,7 +250,7 @@ quest .hoi_ghourian_4:
 	
 	completion:
 	[
-		"Huh... You came to talk to me? Durk?"
+		"Huh... You came to talk to me? Durk? Nobody comes to talk to Durk anymore."
 	]
 
 	prerequisites: [ .hoi_ghourian_3 ]

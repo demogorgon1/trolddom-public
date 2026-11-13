@@ -60,7 +60,7 @@ quest .bar_patrol_trogor_1:
 
 	completion:
 	[
-		"Trogor sent you?"
+		"Trogor sent you? Keep your voice down. Well, if he trusts you, I suppose I'll have to as well."
 	]
 	
 	level: 23

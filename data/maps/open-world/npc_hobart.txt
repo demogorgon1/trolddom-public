@@ -2,7 +2,7 @@ dialogue_screen .hobart_greetings:
 {
 	text: 
 	[	
-		"Shh! Thread carefully! This area is home to the rare blue-bottomed honking frog!"
+		"Shh! Tread carefully! This area is home to the rare blue-bottomed honking frog!"
 	]
 	
 	options:
@@ -104,7 +104,7 @@ quest .hobart_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Tagged a few yet? Gently, please. The poor things are frightened enough without you poking them."
 	]
 	
 	completion:

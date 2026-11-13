@@ -1,8 +1,8 @@
 dialogue_screen .wizard_dialogue:
 {
-	text: 
-	[	
-		"Huh?"
+	text:
+	[
+		"Huh? How did you get in here? And how did you get past the dog?"
 	]		
 	
 	options:

@@ -1,8 +1,8 @@
 dialogue_screen .mirehaven_mayor_dialogue:
 {
-	text: 
-	[	
-		"Hello."
+	text:
+	[
+		"Hello. Mayor Riddle, at your service. Well, at the service of Mirehaven, which is mostly the same thing."
 	]		
 	
 	options:
@@ -70,7 +70,7 @@ quest .mirehaven_mayor_0:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Ria Tyson lives in a shack just north of town."
 	]
 	
 	completion:
@@ -122,7 +122,7 @@ quest .mirehaven_mayor_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? Frederik Tyson's farm is to the south. Don't let him talk his way out of it."
 	]
 	
 	completion:
@@ -244,12 +244,12 @@ quest .mirehaven_mayor_2:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The ogre lives in the eastern part of the swamp, near the mountains."
 	]
 	
 	completion:
 	[
-		"Good job. You can be proud of yourself."
+		"Good job. You can be proud of yourself. Not many bureaucrats come back from that ogre."
 	]
 
 	objectives: [ .mirehaven_mayor_2 ]

@@ -2,9 +2,10 @@ dialogue_screen .alchemy_trainer_trainer: !DEFAULT_ALCHEMY_TRAINER{}
 
 dialogue_screen .alchemy_trainer_greetings:
 {
-	text: 
-	[	
-		"Welcome. Are you interested in alchemy?"
+	text:
+	[
+		"Welcome. Mind the table, please. Everything on it is clean and I would like it to stay that way.\n\n"
+		"Are you interested in alchemy?"
 	]
 	
 	options:
@@ -83,7 +84,7 @@ quest thalvaron_alchemy_trainer_1:
 
 	progress:
 	[
-		"Too dirty for you?"
+		"Too dirty for you? The mud slingers I need are in the northernmost parts of the marshlands. Wear gloves."
 	]
 	
 	completion:
@@ -130,17 +131,17 @@ quest .alchemy_trainer_2:
 	
 	description: 
 	[
-		"I have a lot of alchemy to do and what do I need for that? Herbs! And a lot of them! Bring me all your can and I'll make sure to tell the higher ups."
+		"I have a lot of alchemy to do and what do I need for that? Herbs! And a lot of them! Bring me all you can and I'll make sure to tell the higher ups."
 	]
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Dewleaf and mistflower, as much as you can carry. I go through them faster than you would think."
 	]
 	
 	completion:
 	[
-		"Excellent, thanks!"
+		"Excellent, thanks! I will make sure the higher ups hear about this."
 	]
 	
 	objectives: [ .alchemy_trainer_2_a .alchemy_trainer_2_b ]

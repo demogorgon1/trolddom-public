@@ -2,7 +2,7 @@ dialogue_screen .gob_fulbro_dialogue:
 {
 	text: 
 	[	
-		"The water around here is full of vicous beasts. You never know what's hiding just beneath the surface, watching you..."
+		"The water around here is full of vicious beasts. You never know what's hiding just beneath the surface, watching you..."
 	]		
 	
 	options:
@@ -78,7 +78,7 @@ quest .gob_fulbro_1:
 
 	progress:
 	[
-		"Any luck?"
+		"Any luck? The crocodile patrols the waters along the coast to the south."
 	]
 	
 	completion:

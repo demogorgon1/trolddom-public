@@ -204,6 +204,43 @@ map_entity_spawn thalvaron_ashira_golem: { entity thalvaron_ashira_golem: {} spa
 	entity thalvaron_ashira_golem: !NPC { _string: "Redstone Golem" _sprite: golem_4 _sprite_dead: golem_4_dead }
 }
 
+# Thornbound golems in the dense thickets of northern Ashira (Mathew Larsen's quest in Valoris). Not placed on the map yet.
+map_entity_spawn thalvaron_ashira_thornbound_golem: { entity thalvaron_ashira_thornbound_golem: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
+
+{
+	loot_table .ashira_thornbound_golem:
+	{
+		slots:
+		[
+			{
+				possibility: { weight: 2 }
+				possibility:
+				{
+					weight: 1
+					loot_group: __maps_thalvaron_nw_mathew_larsen_3_quest_item
+					requirement self<must_have_active_quest>: __maps_thalvaron_nw_mathew_larsen_3
+					requirement self<must_not_have_item>: __maps_thalvaron_nw_mathew_larsen_3_quest_item
+				}
+			}
+			!WORLD_DROPS {}
+			!WORLD_DROPS_EARTH_ELEMENTALS {}
+		]
+	}
+
+	${
+		_faction: monsters
+		_creature_type: elemental
+		_default_behavior_state: .passive
+		_loot_table: .ashira_thornbound_golem
+		_level: 31
+		_weapon_damage: 1.5
+		_resource_health: 1.5
+		_immune_to_stun: true
+		_abilities: [ { id: npc_sunder } { id: npc_attack } ]
+	}
+
+	entity thalvaron_ashira_thornbound_golem: !NPC { _string: "Thornbound Golem" _sprite: golem_4 _sprite_dead: golem_4_dead }
+}
 ##########################################################################################
 # Ashiran peaks
 

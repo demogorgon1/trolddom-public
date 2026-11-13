@@ -78,7 +78,7 @@ quest .lieutenant_gordon_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The kobolds are in the old dwarven ruins north of the pass."
 	]
 	
 	completion:

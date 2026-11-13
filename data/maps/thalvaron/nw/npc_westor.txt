@@ -103,7 +103,7 @@ quest .westor_1:
 
 	progress:
 	[
-		"Did you find it?"
+		"Did you find it? It's in the cave. Along with whatever was growling at me."
 	]
 	
 	completion:
@@ -227,12 +227,12 @@ quest .westor_3:
 
 	progress:
 	[
-		"Did you find some?"
+		"Did you find some? Look in the area behind The Mountain Hotel. Mind the bandits."
 	]
 	
 	completion:
 	[
-		"Those will do just fine, thanks!"
+		"Those will do just fine, thanks! I will be out here a while longer."
 	]
 
 	level: 12

@@ -1,8 +1,8 @@
 dialogue_screen .junior_dialogue:
 {
-	text: 
-	[	
-		"Huh?"
+	text:
+	[
+		"Huh? Oh. I'm hunting bears. Obviously."
 	]		
 	
 	options:
@@ -65,12 +65,12 @@ quest .junior_1:
 
 	progress:
 	[
-		"Are they too mean and scary?"
+		"Are they too mean and scary? Don't worry, I won't tell Dad."
 	]
 	
 	completion:
 	[
-		"Those will do fine, perfect."
+		"Those will do fine, perfect. Dad will think I did it all myself."
 	]
 
 	objectives: [ .junior_1 ]

@@ -2,9 +2,9 @@ dialogue_screen .herbalism_trainer_trainer: !DEFAULT_HERBALISM_TRAINER{}
 
 dialogue_screen .herbalism_trainer_dialogue:
 {
-	text: 
-	[	
-		"Yes?"
+	text:
+	[
+		"Yes? Oh, a student. Watch where you step. Half of what grows around here is useful and the other half will make you sick."
 	]
 	
 	options:

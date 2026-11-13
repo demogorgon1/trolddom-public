@@ -2,6 +2,7 @@
 
 #include <tpublic/Data/CliffStyle.h>
 #include <tpublic/Data/Doodad.h>
+#include <tpublic/Data/Entity.h>
 #include <tpublic/Data/MapCliff.h>
 #include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/MapPalette.h>
@@ -994,6 +995,44 @@ namespace tpublic
 				}
 			}
 		}
+	}
+
+	uint32_t
+	MapData::GetClientSpawnEntityId(
+		const Manifest*			aManifest,
+		const EntitySpawn&		aEntitySpawn,
+		EntityState::Id*		aOutInitState)
+	{
+		// Server and client must agree on this, so only spawns that always spawn the same entity with nothing else deciding
+		uint32_t entityId = 0;
+		EntityState::Id initState = EntityState::ID_DEFAULT;
+
+		if(aEntitySpawn.m_entityId != 0)
+		{
+			entityId = aEntitySpawn.m_entityId;
+		}
+		else if(aEntitySpawn.m_mapEntitySpawnId != 0)
+		{
+			const Data::MapEntitySpawn* mapEntitySpawn = aManifest->GetById<Data::MapEntitySpawn>(aEntitySpawn.m_mapEntitySpawnId);
+			if(mapEntitySpawn->m_entities.size() != 1 || mapEntitySpawn->m_spawnTimer.m_onlyWhenTriggered || mapEntitySpawn->m_spawnTimer.m_despawnRequired)
+				return 0;
+
+			const Data::MapEntitySpawn::Entity* possibility = mapEntitySpawn->m_entities[0].get();
+			if(!possibility->m_spawnConditions.empty() || possibility->m_controlPointRequirement.has_value() || !possibility->m_zones.empty() ||
+				possibility->m_level.m_min != 0 || possibility->m_level.m_max != 0 || possibility->m_mustHaveTileFlags != 0 || possibility->m_mustNotHaveTileFlags != 0)
+				return 0;
+
+			entityId = possibility->m_entityId;
+			initState = possibility->m_initState;
+		}
+
+		if(entityId == 0 || !aManifest->GetById<Data::Entity>(entityId)->IsClientSpawn())
+			return 0;
+
+		if(aOutInitState != NULL)
+			*aOutInitState = initState;
+
+		return entityId;
 	}
 
 	//--------------------------------------------------------------------

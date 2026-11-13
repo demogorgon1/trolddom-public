@@ -49,7 +49,7 @@ quest .egon_riddle_1:
 
 	completion:
 	[
-		"Welcome to the dump."
+		"Welcome to the dump. Father sent you? Of course he did. He'd send the whole kingdom down here if he thought there was something to sell."
 	]
 	
 	level: 28

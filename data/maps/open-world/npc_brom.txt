@@ -15,9 +15,11 @@ dialogue_screen .brom_trainer: !DEFAULT_MINING_TRAINER{}
 
 dialogue_screen .brom_greetings:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"You've got the look of someone who has never swung a pick. Soft hands. We can fix that.\n"
+		"\n"
+		"I'd be down in the mine myself if it wasn't for the spiders. Big ones. Don't ask."
 	]
 	
 	options:
@@ -84,7 +86,7 @@ quest .brom_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Are the spiders gone yet? I can still hear them skittering around in there. Or maybe that's just in my head now."
 	]
 	
 	completion:

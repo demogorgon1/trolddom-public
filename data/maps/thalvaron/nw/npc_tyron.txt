@@ -72,12 +72,12 @@ quest .tyron_1:
 
 	progress:
 	[
-		"Yes?"
+		"Yes? The crabs are down on the beach. Mind the wolves."
 	]
 	
 	completion:
 	[
-		"Yummy. They'll go straight into the pot."
+		"Yummy. They'll go straight into the pot. You can have a bowl if you like. Crabs and potatoes, as usual."
 	]
 
 	objectives: [ .tyron_1 ]

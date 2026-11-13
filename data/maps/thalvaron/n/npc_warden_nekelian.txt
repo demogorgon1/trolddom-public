@@ -2,7 +2,7 @@ dialogue_screen .warden_nekelian_dialogue:
 {
 	text: 
 	[	
-		"They undead horde must be stopped."
+		"The undead horde must be stopped."
 	]		
 	
 	options:
@@ -75,19 +75,20 @@ quest .warden_nekelian_1:
 		"Hunt down the undead of the north."
 	]
 	
-	description: 
+	description:
 	[
-		"Living skeletons are hiding behind every tree up here. Slay them all!"
+		"Living skeletons are hiding behind every tree up here. Whatever raised them is still at work, and every day there are more of them.\n\n"
+		"Slay them all!"
 	]
 
 	progress:
 	[
-		"Back already?"
+		"Back already? There are plenty more where those came from."
 	]
 	
 	completion:
 	[
-		"Good!"
+		"Good! That should slow them down."
 	]
 
 	objectives: [ .warden_nekelian_1_a .warden_nekelian_1_b ]

@@ -73,7 +73,7 @@ quest .fenris_1:
 	
 	progress:
 	[
-		"Have you done the deed?"
+		"Have you done the deed? Fryzilk lives deep in the forest of the Forbidden Island, to the north."
 	]
 
 	level: 25
@@ -113,12 +113,12 @@ quest .fenris_2:
 
 	progress:
 	[
-		"Did you get all of them? No?"
+		"Did you get all of them? No? The beaches east of here are still crawling with them."
 	]
 	
 	completion:
 	[
-		"Ah, yes."
+		"Ah, yes. That's a start."
 	]
 	
 	objectives: [ .fenris_2 ]
@@ -179,7 +179,7 @@ quest .fenris_3:
 
 	progress:
 	[
-		"Nasty creatures, right?"
+		"Nasty creatures, right? The cave is on the beach to the east."
 	]
 	
 	completion:

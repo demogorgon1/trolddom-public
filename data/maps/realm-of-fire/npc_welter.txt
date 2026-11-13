@@ -110,7 +110,7 @@ quest .werner_1:
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? The red crystals stick out of the ground all around here."
 	]
 	
 	completion:

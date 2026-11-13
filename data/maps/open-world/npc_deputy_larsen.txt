@@ -1,8 +1,10 @@
 dialogue_screen .deputy_larsen_greetings:
 {
-	text: 
-	[	
-		"Greetings."
+	text:
+	[
+		"Keep away from the water's edge, $class$. Every time I turn my back, another one of those crab men comes crawling out of the surf.\n"
+		"\n"
+		"Sheriff Wellington sent me out here to keep an eye on things. Mostly I've been keeping an eye on crabs."
 	]
 	
 	options:
@@ -67,7 +69,7 @@ quest .deputy_larsen_1:
 
 	progress:
 	[
-		"Any progress?"
+		"There are still plenty of crab men on the beach. I can hear them clacking from here."
 	]
 	
 	completion:
@@ -97,7 +99,7 @@ quest .deputy_larsen_2:
 	[
 		"Good job with the crab men, that will help hold them at bay for a while longer.\n"
 		"\n"
-		"Unfortunately, they're not the only dangers we're facing at the moment. There have been reports of sinister activity in the Eldersong Woods to the north.\n"
+		"Unfortunately, they're not the only dangers we're facing at the moment. There have been reports of sinister activity in the Eldertree Woods to the north.\n"
 		"\n"
 		"The ranger Sylas is up there somewhere. You should seek him out and see if you can assist him."
 	]

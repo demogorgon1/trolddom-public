@@ -2,9 +2,11 @@ dialogue_screen .tailoring_trainer_trainer: !DEFAULT_TAILORING_TRAINER{}
 
 dialogue_screen .tailoring_trainer_greetings:
 {
-	text: 
-	[	
-		"You like sewing?"
+	text:
+	[
+		"You like sewing? Good. Everyone on this island needs clothes, and half of them come back to me with holes made by crab claws.\n"
+		"\n"
+		"Pick up a needle and I'll show you what to do with it."
 	]
 	
 	options:

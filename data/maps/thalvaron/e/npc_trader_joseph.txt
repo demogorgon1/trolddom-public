@@ -1,8 +1,8 @@
 dialogue_screen .trader_joseph:
 {
-	text: 
-	[	
-		"What can I do for you?"
+	text:
+	[
+		"What can I do for you? Buying or selling? Mostly I'm buying."
 	]		
 	
 	options:
@@ -90,7 +90,7 @@ quest .trader_joseph_1:
 
 	text:
 	[
-		"Collect mangoes in the jungle west of New Thalissar and return to Trader Joseph."
+		"Collect mangoes in the jungle west of New Thalyssar and return to Trader Joseph."
 	]
 	
 	description: 
@@ -192,12 +192,12 @@ quest .trader_joseph_2:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Swamp bananas grow all over the Verdant Mire to the south."
 	]
 	
 	completion:
 	[
-		"Well, well, well. Here, let me pay you."
+		"Well, well, well. Fine bananas. Here, let me pay you."
 	]
 
 	objectives: [ .trader_joseph_2 ]

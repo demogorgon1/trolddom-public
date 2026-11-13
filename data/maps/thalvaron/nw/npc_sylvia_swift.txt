@@ -91,12 +91,12 @@ quest .sylvia_swift_1:
 
 	progress:
 	[
-		"Not into killing people anymore?"
+		"Not into killing people anymore? Inhale the powder and go through one of the portals to the Shrouded Lands."
 	]
 	
 	completion:
 	[
-		"Nice! Did they get really annoyed?"
+		"Nice! Did they get really annoyed? I bet they got really annoyed."
 	]
 
 	objectives: [ .sylvia_swift_1 ]
@@ -139,12 +139,12 @@ quest .sylvia_swift_2:
 
 	progress:
 	[
-		"Not into killing people anymore?"
+		"Not into killing people anymore? Inhale the powder and go through one of the portals to the Shrouded Lands."
 	]
 	
 	completion:
 	[
-		"Nice! Did they get really annoyed?"
+		"Nice! Did they get really annoyed? I bet they got really annoyed."
 	]
 
 	objectives: [ .sylvia_swift_2 ]

@@ -50,7 +50,7 @@ quest thalvaron_ranger_virgil_1:
 
 	completion:
 	[
-		"You come from Roel and you speak of crabs?"
+		"You come from Roel and you speak of crabs? Roel always did talk too much about crabs."
 	]
 
 	reward_xp_multiplier: 0.25
@@ -78,7 +78,7 @@ quest thalvaron_ranger_virgil_2:
 
 	completion:
 	[
-		"Oh, how wonderful."
+		"Virgil sent you? Oh, how wonderful. Tell him I'm fine. Better than fine. Nobody bothers me out here."
 	]
 
 	reward_xp_multiplier: 0.25

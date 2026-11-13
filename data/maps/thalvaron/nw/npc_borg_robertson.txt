@@ -14,9 +14,9 @@ dialogue_screen .borg_robertson_dialogue_2:
 
 dialogue_screen .borg_robertson_dialogue:
 {
-	text: 
-	[	
-		"What are you doing here?"
+	text:
+	[
+		"What are you doing here? If you're looking for work, this is a farm. There's always work."
 	]		
 	
 	options:
@@ -84,7 +84,7 @@ quest .borg_robertson_1:
 
 	progress:
 	[
-		"Did you get 'em?"
+		"Did you get 'em? They come sniffing around the barn at night, so the woods around the farm are a good place to start."
 	]
 	
 	completion:

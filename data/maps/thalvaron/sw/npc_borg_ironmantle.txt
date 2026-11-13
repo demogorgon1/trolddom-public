@@ -2,9 +2,9 @@
 
 dialogue_screen .borg_ironmantle_dialogue:
 {
-	text: 
-	[	
-		"Welcome to our great underground refuge."
+	text:
+	[
+		"Welcome to our great underground refuge. Mind your head. Durgan Tharok was built by dwarves, for dwarves."
 	]		
 	
 	options:

@@ -111,14 +111,14 @@ quest .mumle_whiterock_1:
 		"Look at those weird elementals moving around in it. Seems like they're made of the mud themselves. Can you bring me some samples?"
 	]
 	
-	progress: 
+	progress:
 	[
-		"How is it going?"
+		"How is it going? The mud elementals are in the middle of what used to be Lake Dourgol."
 	]
 	
 	completion:
 	[
-		"Good job."
+		"Good job. They're even muddier up close."
 	]
 
 	level: 16

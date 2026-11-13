@@ -1,8 +1,8 @@
 dialogue_screen .city_guard_special_dialogue:
 {
-	text: 
-	[	
-		"Welcome to Valoris."
+	text:
+	[
+		"Welcome to Valoris. Stay out of Eastgate unless you're looking for a fight, and don't believe a word the rebels tell you."
 	]		
 	
 	options:

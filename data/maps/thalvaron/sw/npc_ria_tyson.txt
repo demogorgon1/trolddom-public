@@ -15,9 +15,9 @@ dialogue_screen .ria_tyson_dialogue_2:
 
 dialogue_screen .ria_tyson_dialogue:
 {
-	text: 
-	[	
-		"Hi."
+	text:
+	[
+		"Hi. If you're selling something, I'm not buying."
 	]		
 	
 	options:

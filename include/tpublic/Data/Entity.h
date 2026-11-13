@@ -24,7 +24,8 @@ namespace tpublic
 			enum Flag : uint8_t
 			{
 				FLAG_ALWAYS_REPLICATE	= 0x01,
-				FLAG_IMMOBILE			= 0x02		// Never moves once spawned (e.g. a torch), so the client can treat it as fixed (cached lights etc)
+				FLAG_IMMOBILE			= 0x02,		// Never moves once spawned (e.g. a torch), so the client can treat it as fixed (cached lights etc)
+				FLAG_CLIENT_SPAWN		= 0x04		// Spawned by the client itself where a map always spawns it, instead of being replicated (see MapData::GetClientSpawnEntityId())
 			};
 
 			static uint8_t
@@ -36,6 +37,8 @@ namespace tpublic
 					return FLAG_ALWAYS_REPLICATE;
 				if (t == "immobile")
 					return FLAG_IMMOBILE;
+				if (t == "client_spawn")
+					return FLAG_CLIENT_SPAWN;
 				TP_VERIFY(false, aSource->m_debugInfo, "'%s' is not an entity flag.", aSource->GetIdentifier());
 				return 0;
 			}
@@ -306,6 +309,7 @@ namespace tpublic
 						else if(aMember->m_name == "flags")
 						{
 							m_flags = SourceToFlags(aMember);
+							TP_VERIFY((m_flags & FLAG_CLIENT_SPAWN) == 0 || (m_flags & FLAG_IMMOBILE) != 0, aMember->m_debugInfo, "'client_spawn' requires 'immobile'.");
 						}
 						else
 						{
@@ -359,6 +363,7 @@ namespace tpublic
 
 			// Helpers
 			bool		IsImmobile() const { return m_flags & FLAG_IMMOBILE; }
+			bool		IsClientSpawn() const { return m_flags & FLAG_CLIENT_SPAWN; }
 
 			// Public data
 			std::string										m_displayName;

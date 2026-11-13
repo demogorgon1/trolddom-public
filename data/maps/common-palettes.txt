@@ -3,6 +3,7 @@
 	entity_spawn wall_torch_south: [ 49 14 105 ]
 	entity_spawn wall_torch_east: [ 49 114 105 ]
 	entity_spawn wall_torch_west: [ 149 14 105 ]
+	entity_spawn brazier: [ 149 114 105 ]
 }
 
 !define DEFAULT_TILE_PALETTE

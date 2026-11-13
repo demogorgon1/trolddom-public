@@ -1,8 +1,8 @@
 dialogue_screen .emma_brown_dialogue:
 {
-	text: 
-	[	
-		"What is going to happen to my price winning cabbage? Those brutes will trample it!"
+	text:
+	[
+		"Don't mind the books. Vampires, ghouls, things that crawl out of the ground at night. Someone in this city has to know about these things."
 	]		
 	
 	options:
@@ -109,12 +109,12 @@ quest thalvaron_emma_brown_1:
 
 	progress:
 	[
-		"Yes?"
+		"Have you found the blood? Seek out his children deep in the forests of Shadowthorn, then take it to Damon."
 	]
 	
 	completion:
 	[
-		"May the souls of his victims rest in peace."
+		"The blood of one of his children. Good. Infused with this, the mark will call to Kaelithor, and he won't be able to resist answering."
 	]
 	
 	level: 17

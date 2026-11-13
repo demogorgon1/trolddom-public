@@ -106,7 +106,7 @@ quest .blimcraft_highborne_1:
 
 	progress:
 	[
-		"Who?"
+		"Who? Oh, right. Mushrooms. They're all over these caves, I think."
 	]
 	
 	completion:
@@ -167,12 +167,12 @@ quest .blimcraft_highborne_2:
 
 	progress:
 	[
-		"Yes!"
+		"Yes! I mean, yes? Oh, the wand. The big ooze in my tower swallowed it."
 	]
 	
 	completion:
 	[
-		"Ah, my wand. I wonder if it still works."
+		"Ah, my wand. I wonder if it still works. Let's not test it in here."
 	]
 
 	objectives: [ .blimcraft_highborne_2 ]

@@ -5,9 +5,9 @@ expression .pearly_a_has_item:
 
 dialogue_screen .pearly_a_dialogue_1:
 {
-	text: 
-	[	
-		"How are you doing?"
+	text:
+	[
+		"How are you doing, little $class$? Few remember the old ways and bring a seashell to speak with me."
 	]		
 	
 	options:
@@ -78,7 +78,7 @@ quest .pearly_a_1:
 
 	progress:
 	[
-		"Is that rice you have there?"
+		"Is that rice you have there? No? A trained cook or an innkeeper should be able to help you. I'm really very hungry."
 	]
 	
 	completion:

@@ -1,8 +1,8 @@
 dialogue_screen .dwarf_guard_1_dialogue:
 {
-	text: 
-	[	
-		"Welcome to the Kingdom of Thuldarim."
+	text:
+	[
+		"Welcome to the Kingdom of Thuldarim. The gates of Durgan Tharok are open to friends of the dwarves."
 	]		
 	
 	options:

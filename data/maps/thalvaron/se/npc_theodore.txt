@@ -74,12 +74,12 @@ quest .theodore_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The snakes are in the jungle east of here, across the river. I'd go myself, but, you know. Allergies."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Nice. Very nice. Look at those fangs."
 	]
 
 	objectives: [ .theodore_1 ]
@@ -126,12 +126,12 @@ quest .theodore_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The panthers are in the dense jungle to the south."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Nice. Very nice. Big cats, big paws."
 	]
 
 	objectives: [ .theodore_2 ]
@@ -187,12 +187,12 @@ quest .theodore_3:
 
 	progress:
 	[
-		"Any progress?"
+		"Any progress? The gorillas are east of the old ruined house, across the river in the highlands."
 	]
 	
 	completion:
 	[
-		"Nice. Very nice."
+		"Nice. Very nice. Now, I wish for... hmm. Nothing happened. Let me try another one."
 	]
 
 	objectives: [ .theodore_3 ]

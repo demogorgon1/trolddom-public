@@ -56,8 +56,8 @@ quest .old_man_james_1:
 	
 	description: 
 	[
-		"Ah, kobolds. Constant nuisance for anyone living close to their habitats. I've noticed that the water river has become contaminated and I'm certain it's related to kobold activity. Let's just say that those\n"
-		"little guys aren't known for borrowing their droppings in the ground.\n"
+		"Ah, kobolds. Constant nuisance for anyone living close to their habitats. I've noticed that the river has become contaminated and I'm certain it's related to kobold activity. Let's just say that those"
+		"little guys aren't known for burying their droppings in the ground.\n"
 		"\n"
 		"There is a cave system on the other side of the river. To enter it, you'll need to head south and cross the river at the first opportunity. You'll find a cave which probably is full of kobolds. Kill a bunch of"
 		"them and hopefully they'll scatter and go live somewhere else."
@@ -65,7 +65,7 @@ quest .old_man_james_1:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? Head south and cross the river at the first opportunity. The cave is on the other side."
 	]
 	
 	completion:
@@ -156,7 +156,7 @@ quest .old_man_james_2:
 	
 	completion:
 	[
-		"Huh, they didn't like that, did they?"
+		"Huh, they didn't like that, did they? Serves them right."
 	]
 	
 	level: 26
@@ -218,12 +218,12 @@ quest .old_man_james_3:
 
 	progress:
 	[
-		"How is it going?"
+		"How is it going? The harpies are at the Firbiu and Feruc temples in the jungle to the south."
 	]
 	
 	completion:
 	[
-		"Good job!"
+		"Good job! Maybe now I can eat in peace."
 	]
 	
 	objectives: [ .old_man_james_3_a .old_man_james_3_b ]

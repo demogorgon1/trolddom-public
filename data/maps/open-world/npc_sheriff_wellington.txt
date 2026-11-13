@@ -72,7 +72,7 @@ quest .sheriff_wellington_1:
 
 	progress:
 	[
-		"Any progress?"
+		"Still crab men on the peninsula? Keep at it. Harald wants his house back."
 	]
 	
 	completion:
@@ -147,7 +147,7 @@ quest .sheriff_wellington_2:
 
 	progress:
 	[
-		"Any progress?"
+		"Watch out for that big one at the old fort. I'd rather not have to tell anyone's family it was a crab."
 	]
 	
 	completion:

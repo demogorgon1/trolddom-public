@@ -99,12 +99,12 @@ quest .swirl_tonkins_2:
 	
 	progress:
 	[
-		"It's getting too hot for you?"
+		"It's getting too hot for you? The lava worms are in the Smoldering Fields to the west."
 	]
 	
 	completion:
 	[
-		"Ah, good job."
+		"Ah, good job. You'll do. Now for something that actually matters."
 	]
 
 	level: 23
@@ -158,12 +158,12 @@ quest .swirl_tonkins_3:
 	
 	progress:
 	[
-		"Do you have something for me?"
+		"Do you have something for me? Remember, the amulet goes to Ilhuna, in the north eastern corner of the courtyard."
 	]
 	
 	completion:
 	[
-		"Very interesting."
+		"Tonkins sent you? Let me see that amulet. Very interesting."
 	]
 
 	level: 23
@@ -207,19 +207,19 @@ quest .swirl_tonkins_4:
 	
 	description: 
 	[
-		"The elemental binding you returned to me has given me an important insight into how Voraghul channels the powers of this realm. I think we me might be able to construct some sort of weapon that can damage him."
+		"The elemental binding you returned to me has given me an important insight into how Voraghul channels the powers of this realm. I think we might be able to construct some sort of weapon that can damage him."
 		"I'm gonna need you to do the heavy lifting. Travel east to the Desolate Plains where you'll find a lot of elementals, no doubt under the influence of Voraghul. Go there, slay some of them and collect their"
 		"corrupted stones. Return them to me."
 	]
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? The elementals are to the east, in the Desolate Plains. I need their corrupted stones."
 	]
 	
 	completion:
 	[
-		"Good, but we're not done yet."
+		"Good, but we're not done yet. These stones won't be enough on their own."
 	]
 
 	level: 25
@@ -270,12 +270,12 @@ quest .swirl_tonkins_5:
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? The fire elementals are in the lava south of the Desolate Plains."
 	]
 	
 	completion:
 	[
-		"Excellent."
+		"Excellent. That should be everything I need."
 	]
 
 	level: 25
@@ -411,7 +411,7 @@ quest .swirl_tonkins_6:
 	
 	progress:
 	[
-		"Yes?"
+		"Yes? Take the rod to the shrine of Solkara, just south of here. Then find Voraghul."
 	]
 	
 	completion:

@@ -889,6 +889,12 @@ namespace tpublic
 								std::function<bool(const Vec2&)> aCallback,
 								std::vector<Vec2>&				aOut) const;
 
+		// The entity a map entity spawn always spawns, if the client should spawn it itself instead of the server replicating it, otherwise zero
+		static uint32_t		GetClientSpawnEntityId(
+								const Manifest*					aManifest,
+								const EntitySpawn&				aEntitySpawn,
+								EntityState::Id*				aOutInitState = NULL);
+
 		inline bool
 		DoesTileBlockLineOfSight(
 			int32_t						aX,

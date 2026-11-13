@@ -1,8 +1,8 @@
 dialogue_screen .frida:
 {
-	text: 
-	[	
-		"Huh?"
+	text:
+	[
+		"Huh? Oh, a visitor. Don't get many of those out here. Not living ones, anyway."
 	]		
 	
 	options:
@@ -70,7 +70,7 @@ quest .frida_1:
 	
 	completion:
 	[
-		"Damn, how about that."
+		"Damn, how about that. Rest in peace, little Biscuit."
 	]
 	
 	objectives: [ .frida_1 ]
