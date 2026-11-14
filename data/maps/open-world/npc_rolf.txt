@@ -6,7 +6,7 @@ dialogue_screen .rolf_greetings:
 	[
 		"Don't mind the mess. I don't get many visitors out here, and the ones I do get usually have claws.\n"
 		"\n"
-		"Since you're here, you might as well buy something. I've got rope, I've got food, and I've got plenty of opinions about crab men."
+		"Since you're here, you might as well buy something. I've got food, and I've got plenty of opinions about crab men."
 	]		
 	
 	options:

@@ -17,8 +17,6 @@ dialogue_screen .elysia_greetings:
 {
 	text:
 	[
-		"Oh, hello! Careful where you step, I've got herbs drying on just about everything.\n"
-		"\n"
 		"Is there something I can help you with? Or, better yet, something you could help me with?"
 	]
 	

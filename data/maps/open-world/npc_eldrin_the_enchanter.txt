@@ -2,8 +2,6 @@ dialogue_screen .eldrin_the_enchanter_greetings:
 {
 	text:
 	[
-		"Ah, a visitor. Do mind the runes on the floor, they're still settling.\n"
-		"\n"
 		"I study the flow of magic on this island, and lately something about it has changed. It's been turning up in places it has no business being."
 	]		
 	

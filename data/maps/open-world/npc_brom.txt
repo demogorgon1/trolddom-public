@@ -86,7 +86,7 @@ quest .brom_1:
 
 	progress:
 	[
-		"Are the spiders gone yet? I can still hear them skittering around in there. Or maybe that's just in my head now."
+		"Are the spiders gone yet?"
 	]
 	
 	completion:

@@ -70,7 +70,6 @@ quest .billy_1:
 	description:
 	[
 		"My dad refuses to believe me and all my mom can think about are potatoes. Gnomes keep breaking into our house at night and they've been stealing my stuff!\n"
-
 	]
 
 	progress:

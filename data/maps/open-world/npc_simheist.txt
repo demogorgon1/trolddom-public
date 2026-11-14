@@ -78,7 +78,7 @@ quest .simheist_1:
 	
 	completion:
 	[
-		"This soothes me. Every ear is one less goblin creeping toward the ancient forest.\n"
+		"This soothes me. Every two ears are one less goblin creeping toward the ancient forest.\n"
 		"\n"
 		"But they keep coming, and goblins don't march in step unless someone is shouting at them. Someone is leading them."
 	]
