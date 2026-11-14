@@ -88,12 +88,12 @@ class sorcerer:
 
 	hybrid_talent_trees:
 	{
-		fighter_combat:   { string: "Spellblade" item_types: [ armor_mail ] }
-		priest_healing:   { string: "Sage" }
-		witch_demonology: { string: "Summoner" }
-		paladin_guardian: { string: "Spellwarden" item_types: [ shield ] }
-		priest_dragon:    { string: "Dragon Mage" }
-		witch_necromancy: { string: "Necromancer" }
+		fighter_combat:   { string: "Spellblade" required_achievement: fighter_level_10 item_types: [ armor_mail ] }
+		priest_healing:   { string: "Sage" required_achievement: priest_level_10 }
+		witch_demonology: { string: "Summoner" required_achievement: witch_level_10 }
+		paladin_guardian: { string: "Spellwarden" required_achievement: paladin_level_10 item_types: [ shield ] }
+		priest_dragon:    { string: "Dragon Mage" required_achievement: priest_level_10 }
+		witch_necromancy: { string: "Necromancer" required_achievement: witch_level_10 }
 	}
 
 	hybrid:
@@ -231,6 +231,7 @@ achievement sorcerer_level_10:
 	points: 10 
 	icon: icon_sorcerer 
 	no_progress_values: true 
+	available_in_front_end: true
 }
 
 achievement sorcerer_level_20: 

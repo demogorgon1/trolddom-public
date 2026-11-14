@@ -370,6 +370,16 @@ namespace tpublic
 				{
 					aChild->GetStringArray(m_empowerStrings);
 				}
+				else if(aChild->m_name == "item_type_icons")
+				{
+					aChild->ForEachChild([&](
+						const SourceNode* aItemType)
+					{
+						ItemType::Id itemTypeId = ItemType::StringToId(aItemType->m_name.c_str());
+						TP_VERIFY(itemTypeId != ItemType::INVALID_ID, aItemType->m_debugInfo, "'%s' is not a valid item type.", aItemType->m_name.c_str());
+						m_itemTypeIconSpriteIds[itemTypeId] = aItemType->GetId(DataType::ID_SPRITE);
+					});
+				}
 				else
 				{
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -401,6 +411,9 @@ namespace tpublic
 
 			for (uint32_t i = 1; i < (uint32_t)Rarity::NUM_IDS; i++)
 				m_rarityMultipliers[i].ToStream(aStream);
+
+			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
+				aStream->WriteUInt(m_itemTypeIconSpriteIds[i]);
 		}
 
 		bool
@@ -445,6 +458,12 @@ namespace tpublic
 			for (uint32_t i = 1; i < (uint32_t)Rarity::NUM_IDS; i++)
 			{
 				if (!m_rarityMultipliers[i].FromStream(aStream))
+					return false;
+			}
+
+			for (uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
+			{
+				if (!aStream->ReadUInt(m_itemTypeIconSpriteIds[i]))
 					return false;
 			}
 
@@ -558,6 +577,7 @@ namespace tpublic
 		float									m_tokenCostBaseMultiplier = 0.1f;
 		InvalidStats							m_invalidStats;
 		std::vector<std::string>				m_empowerStrings;
+		uint32_t								m_itemTypeIconSpriteIds[ItemType::NUM_IDS] = { 0 };	// For showing item types hybrids can use
 	};
 
 }

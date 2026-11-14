@@ -278,40 +278,40 @@ aura witch_bone_armor_1:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 12%."
-	stat_modifiers: { armor: { add_percent: 20 } }
+	description: "Increases your armor from cloth by 12%."
+	armor_modifiers: { armor_cloth: { add_percent: 12 } }
 }
 
 aura witch_bone_armor_2:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 24%."
-	stat_modifiers: { armor: { add_percent: 24 } }
+	description: "Increases your armor from cloth by 24%."
+	armor_modifiers: { armor_cloth: { add_percent: 24 } }
 }
 
 aura witch_bone_armor_3:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 36%."
-	stat_modifiers: { armor: { add_percent: 36 } }
+	description: "Increases your armor from cloth by 36%."
+	armor_modifiers: { armor_cloth: { add_percent: 36 } }
 }
 
 aura witch_bone_armor_4:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 48%."
-	stat_modifiers: { armor: { add_percent: 48 } }
+	description: "Increases your armor from cloth by 48%."
+	armor_modifiers: { armor_cloth: { add_percent: 48 } }
 }
 
 aura witch_bone_armor_5:
 {
 	flags: [ persist_in_death ]
 	type: hidden
-	description: "Increases your armor by 60%."
-	stat_modifiers: { armor: { add_percent: 60 } }
+	description: "Increases your armor from cloth by 60%."
+	armor_modifiers: { armor_cloth: { add_percent: 60 } }
 }
 
 ###############################################################################

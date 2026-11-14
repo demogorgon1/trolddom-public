@@ -7,6 +7,7 @@
 
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/AbilityModifier.h>
+#include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/Cooldown.h>
@@ -19,6 +20,7 @@
 
 #include <tpublic/DataErrorHandling.h>
 #include <tpublic/HybridClass.h>
+#include <tpublic/ItemMetrics.h>
 #include <tpublic/Manifest.h>
 #include <tpublic/XPMetrics.h>
 
@@ -335,6 +337,8 @@ namespace tpublic
 				file.PrintF("\"string\":%s,", _JSONString(classExport->m_data->m_displayName).c_str());
 				file.PrintF("\"description\":%s,", _JSONString(classExport->m_data->m_description).c_str());
 				file.PrintF("\"sprite\":%zu,", classExport->m_sprite->m_index);
+				if(classExport->m_data->m_unlockedByAchievementId != 0)
+					file.PrintF("\"unlocked_by_achievement\":%s,", _JSONString(m_manifest->GetById<Data::Achievement>(classExport->m_data->m_unlockedByAchievementId)->m_name).c_str());
 				file.PrintF("\r\n");
 
 				file.PrintF("\"talent_trees\":[\r\n");
@@ -393,10 +397,23 @@ namespace tpublic
 					file.PrintF("%s{\"talent_tree\":%s,\"string\":%s,", j > 0 ? "," : "",
 						_JSONString(m_manifest->GetById<Data::TalentTree>(hybridTalentTree.m_talentTreeId)->m_name).c_str(),
 						_JSONString(hybridTalentTree.m_string).c_str());
+					if(hybridTalentTree.m_requiredAchievementId != 0)
+						file.PrintF("\"required_achievement\":%s,", _JSONString(m_manifest->GetById<Data::Achievement>(hybridTalentTree.m_requiredAchievementId)->m_name).c_str());
+
+					const HybridExport& hybridExport = classExport->m_hybrids[j];
+
+					// Item types the hybrid can use, which the class can't
+					file.PrintF("\"item_types\":[");
+					for(size_t k = 0; k < hybridExport.m_extraItemTypes.size(); k++)
+					{
+						const ItemType::Info* itemTypeInfo = ItemType::GetInfo((ItemType::Id)hybridExport.m_extraItemTypes[k].first);
+						file.PrintF("%s{\"name\":%s,\"string\":%s,\"icon\":%zu}", k > 0 ? "," : "", _JSONString(itemTypeInfo->m_name).c_str(),
+							_JSONString(itemTypeInfo->m_displayNameCategory).c_str(), hybridExport.m_extraItemTypes[k].second->m_index);
+					}
+					file.PrintF("],");
 
 					// The character's abilities with this hybrid, by the class' talent tree it replaces
 					file.PrintF("\"abilities\":{");
-					const HybridExport& hybridExport = classExport->m_hybrids[j];
 					for(size_t k = 0; k < hybridExport.m_abilitiesByReplacedTalentTreeId.size(); k++)
 					{
 						file.PrintF("%s%s:", k > 0 ? "," : "", _JSONString(m_manifest->GetById<Data::TalentTree>(hybridExport.m_abilitiesByReplacedTalentTreeId[k].first)->m_name).c_str());
@@ -565,6 +582,18 @@ namespace tpublic
 			file.PrintF("},\r\n");
 		}
 
+		// Achievements required by classes and hybrids
+		{
+			file.PrintF("\"achievements\":{");
+			for(size_t i = 0; i < m_achievements.size(); i++)
+			{
+				const Data::Achievement* achievement = m_achievements[i]->m_data;
+				file.PrintF("%s%s:{\"string\":%s,\"description\":%s,\"icon\":%zu}", i > 0 ? "," : "", _JSONString(achievement->m_name).c_str(),
+					_JSONString(achievement->m_string).c_str(), _JSONString(achievement->m_description).c_str(), m_achievements[i]->m_icon->m_index);
+			}
+			file.PrintF("},\r\n");
+		}
+
 		// UI sprites by name
 		{
 			file.PrintF("\"ui_sprites\":{");
@@ -637,6 +666,12 @@ namespace tpublic
 				HybridExport hybridExport;
 				hybridExport.m_talentTreeId = hybridTalentTree.m_talentTreeId;
 
+				for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
+				{
+					if((hybridTalentTree.m_itemTypesMask & (1 << i)) != 0 && !aClass->CanUseItemType((ItemType::Id)i))
+						hybridExport.m_extraItemTypes.push_back({ i, _GetSpriteExport(m_manifest->m_itemMetrics->m_itemTypeIconSpriteIds[i]) });
+				}
+
 				for(uint32_t replacedTalentTreeId : aClass->m_talentTrees)
 				{
 					Components::Talents talents;
@@ -649,7 +684,13 @@ namespace tpublic
 				}
 
 				classExport->m_hybrids.push_back(hybridExport);
+
+				if(hybridTalentTree.m_requiredAchievementId != 0)
+					_AddAchievement(hybridTalentTree.m_requiredAchievementId);
 			}
+
+			if(aClass->m_unlockedByAchievementId != 0)
+				_AddAchievement(aClass->m_unlockedByAchievementId);
 
 			// Abilities that use the icon of the equipped weapon or ranged weapon (like Attack), with the start equipment.
 			// Like the game, the ability's own icon if nothing is equipped there, except a bow for ranged attacks.
@@ -784,6 +825,20 @@ namespace tpublic
 
 			m_talents.push_back(std::move(talentExport));
 		});
+	}
+
+	void
+	JSONManifest::_AddAchievement(
+		uint32_t				aAchievementId)
+	{
+		if(m_achievementIds.contains(aAchievementId))
+			return;
+		m_achievementIds.insert(aAchievementId);
+
+		std::unique_ptr<AchievementExport> achievementExport = std::make_unique<AchievementExport>();
+		achievementExport->m_data = m_manifest->GetById<Data::Achievement>(aAchievementId);
+		achievementExport->m_icon = _GetSpriteExport(achievementExport->m_data->m_iconSpriteId);
+		m_achievements.push_back(std::move(achievementExport));
 	}
 
 	JSONManifest::SpriteExport*

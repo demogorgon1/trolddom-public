@@ -1,9 +1,11 @@
 #include "Pcheader.h"
 
 #include <tpublic/Data/Ability.h>
+#include <tpublic/Data/Achievement.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/TalentTree.h>
 
+#include <tpublic/ItemMetrics.h>
 #include <tpublic/Manifest.h>
 
 #include "PostProcessClasses.h"
@@ -61,6 +63,20 @@ namespace tpublic
 
 					const Data::Class* donorClass = aManifest->GetById<Data::Class>(talentTree->m_classId);
 					TP_VERIFY(donorClass->m_hybrid, debugInfo, "Hybrid talent tree '%s' belongs to '%s', which has no 'hybrid' definition.", talentTree->m_name.c_str(), donorClass->m_name.c_str());
+
+					// The gateway only knows about front end achievements
+					const Data::Achievement* requiredAchievement = aManifest->GetById<Data::Achievement>(hybridTalentTree.m_requiredAchievementId);
+					TP_VERIFY(requiredAchievement->m_availableInFrontEnd, debugInfo, "Hybrid talent tree '%s' requires achievement '%s', which isn't 'available_in_front_end'.", talentTree->m_name.c_str(), requiredAchievement->m_name.c_str());
+
+					// Extra item types are shown with an icon from item metrics (for example on the talent calculator web page)
+					for(uint32_t i = 1; i < (uint32_t)ItemType::NUM_IDS; i++)
+					{
+						if((hybridTalentTree.m_itemTypesMask & (1 << i)) != 0 && !aClass->CanUseItemType((ItemType::Id)i))
+						{
+							TP_VERIFY(aManifest->m_itemMetrics->m_itemTypeIconSpriteIds[i] != 0, debugInfo, "Hybrid talent tree '%s' can use '%s', which has no icon in 'item_type_icons'.",
+								talentTree->m_name.c_str(), ItemType::GetInfo((ItemType::Id)i)->m_name);
+						}
+					}
 
 					// Extra level progression can only unlock abilities
 					if(hybridTalentTree.m_levelProgression)

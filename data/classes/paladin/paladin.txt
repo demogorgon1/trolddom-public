@@ -98,11 +98,11 @@ class paladin:
 
 	hybrid_talent_trees:
 	{
-		fighter_combat:      { string: "Templar" }
-		priest_condemnation: { string: "Zealot" }
-		sorcerer_elemental:  { string: "Stormcaller" }
-		sorcerer_battle_mage: { string: "Runeknight" }
-		witch_malice: { string: "Oathbreaker" }
+		fighter_combat:      { string: "Templar" required_achievement: fighter_level_10 }
+		priest_condemnation: { string: "Zealot" required_achievement: priest_level_10 }
+		sorcerer_elemental:  { string: "Stormcaller" required_achievement: sorcerer_level_10 }
+		sorcerer_battle_mage: { string: "Runeknight" required_achievement: sorcerer_level_10 }
+		witch_malice: { string: "Oathbreaker" required_achievement: witch_level_10 }
 	}
 
 	hybrid:
@@ -252,6 +252,7 @@ achievement paladin_level_10:
 	points: 10 
 	icon: icon_paladin
 	no_progress_values: true 
+	available_in_front_end: true
 }
 
 achievement paladin_level_20: 

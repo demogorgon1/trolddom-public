@@ -119,6 +119,7 @@ class witch:
 		fighter_subtlety:
 		{
 			string: "Hexblade"
+			required_achievement: fighter_level_10
 			item_types: [ ranged_bow ranged_crossbow ]
 			stats_conversion:
 			{
@@ -132,10 +133,10 @@ class witch:
 			]
 		}
 
-		priest_condemnation: { string: "Heretic" }
-		sorcerer_elemental:  { string: "Storm Witch" }
-		priest_dragon:       { string: "Wyrm Witch" }
-		sorcerer_arcane:     { string: "Hex Mage" }
+		priest_condemnation: { string: "Heretic" required_achievement: priest_level_10 }
+		sorcerer_elemental:  { string: "Storm Witch" required_achievement: sorcerer_level_10 }
+		priest_dragon:       { string: "Wyrm Witch" required_achievement: priest_level_10 }
+		sorcerer_arcane:     { string: "Hex Mage" required_achievement: sorcerer_level_10 }
 	}
 
 	hybrid:
@@ -269,6 +270,7 @@ achievement witch_level_10:
 	points: 10 
 	icon: icon_witch
 	no_progress_values: true 
+	available_in_front_end: true
 }
 
 achievement witch_level_20: 

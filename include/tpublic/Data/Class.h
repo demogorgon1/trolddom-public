@@ -937,6 +937,10 @@ namespace tpublic
 						{
 							aChild->GetIdArray(DataType::ID_ABILITY, m_excludeAbilities);
 						}
+						else if(aChild->m_name == "required_achievement")
+						{
+							m_requiredAchievementId = aChild->GetId(DataType::ID_ACHIEVEMENT);
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
@@ -944,6 +948,7 @@ namespace tpublic
 					});
 
 					TP_VERIFY(!m_string.empty(), aSource->m_debugInfo, "'%s' has no 'string'.", aSource->m_name.c_str());
+					TP_VERIFY(m_requiredAchievementId != 0, aSource->m_debugInfo, "'%s' has no 'required_achievement'.", aSource->m_name.c_str());
 				}
 
 				void
@@ -956,6 +961,7 @@ namespace tpublic
 					m_statsConversion.ToStream(aStream);
 					aStream->WriteOptionalObjectPointer(m_levelProgression);
 					aStream->WriteUInts(m_excludeAbilities);
+					aStream->WriteUInt(m_requiredAchievementId);
 				}
 
 				bool
@@ -974,6 +980,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadUInts(m_excludeAbilities))
 						return false;
+					if(!aStream->ReadUInt(m_requiredAchievementId))
+						return false;
 					return true;
 				}
 
@@ -984,6 +992,7 @@ namespace tpublic
 				StatsConversion										m_statsConversion;			// Extra stats conversions, the highest is used
 				std::unique_ptr<LevelProgression>					m_levelProgression;			// Extra abilities (only abilities)
 				std::vector<uint32_t>								m_excludeAbilities;			// Abilities the hybrid would otherwise get from the donor class
+				uint32_t											m_requiredAchievementId = 0;	// Must be among the account's front end achievements on the realm to make this hybrid
 				std::optional<DataErrorHandling::DebugInfo>			m_debugInfo;				// Not serialized, only for error messages
 			};
 
@@ -1146,6 +1155,22 @@ namespace tpublic
 						return &t;
 				}
 				return NULL;
+			}
+
+			// Level at which the level progression grants the achievement (as an account achievement), or 0 if it doesn't
+			uint32_t
+			GetLevelProgressionAchievementLevel(
+				uint32_t				aAchievementId) const
+			{
+				if(m_levelProgression)
+				{
+					for(const std::unique_ptr<LevelProgressionLevel>& level : m_levelProgression->m_levels)
+					{
+						if(level->m_achievementId == aAchievementId)
+							return level->m_level;
+					}
+				}
+				return 0;
 			}
 
 			// Hybrid name (e.g. "Holy Fighter") if the hybrid talent tree is set and allowed, otherwise the class name

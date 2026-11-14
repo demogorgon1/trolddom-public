@@ -5,6 +5,7 @@
 #include "../CombatFunction.h"
 #include "../DataBase.h"
 #include "../Image.h"
+#include "../ItemType.h"
 #include "../Requirement.h"
 #include "../StatModifiers.h"
 
@@ -86,6 +87,50 @@ namespace tpublic
 				// Public data
 				uint32_t							m_auraEffectId = 0;
 				std::unique_ptr<AuraEffectBase>		m_auraEffectBase;
+			};
+
+			// Percentage bonus to the armor from equipped items of one armor type (cloth, mail, plate, shield). Applied before
+			// the 'armor' stat modifier, which applies to all armor.
+			struct ArmorModifier
+			{
+				ArmorModifier()
+				{
+
+				}
+
+				ArmorModifier(
+					const SourceNode*	aSource)
+				{
+					m_itemTypeId = ItemType::StringToId(aSource->m_name.c_str());
+					TP_VERIFY(m_itemTypeId != ItemType::INVALID_ID && (ItemType::GetInfo(m_itemTypeId)->m_flags & ItemType::FLAG_ARMOR) != 0, aSource->m_debugInfo, "'%s' is not an armor item type.", aSource->m_name.c_str());
+
+					Modifier modifier(aSource);
+					TP_VERIFY(modifier.m_add == 0.0f, aSource->m_debugInfo, "Armor modifiers only support 'add_percent'.");
+					m_addPercent = modifier.m_addPercent;
+				}
+
+				void
+				ToStream(
+					IWriter*			aStream) const
+				{
+					aStream->WritePOD(m_itemTypeId);
+					aStream->WriteFloat(m_addPercent);
+				}
+
+				bool
+				FromStream(
+					IReader*			aStream)
+				{
+					if(!aStream->ReadPOD(m_itemTypeId))
+						return false;
+					if(!aStream->ReadFloat(m_addPercent))
+						return false;
+					return true;
+				}
+
+				// Public data
+				ItemType::Id						m_itemTypeId = ItemType::INVALID_ID;
+				float								m_addPercent = 0.0f;
 			};
 
 			enum Type : uint8_t
@@ -278,6 +323,8 @@ namespace tpublic
 							m_maxStack = aChild->GetUInt32();
 						else if (aChild->m_name == "stat_modifiers")
 							m_statModifiers = std::make_unique<StatModifiers>(aChild);
+						else if (aChild->m_name == "armor_modifiers")
+							aChild->ForEachChild([&](const SourceNode* aArmorModifier) { m_armorModifiers.push_back(ArmorModifier(aArmorModifier)); });
 						else if(aChild->m_name == "charges")
 							m_charges = CombatFunction(aChild);
 						else if (aChild->m_name == "sound")
@@ -343,6 +390,7 @@ namespace tpublic
 				aStream->WriteUInt(m_diminishingEffectId);
 				aStream->WriteUInt(m_headEffectSpriteId);
 				aStream->WriteUInt(m_lootTableId);
+				aStream->WriteObjects(m_armorModifiers);
 			}
 			 
 			bool
@@ -476,6 +524,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadObjects(m_armorModifiers))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -494,6 +548,7 @@ namespace tpublic
 			uint32_t										m_flags = 0;
 			std::vector<std::unique_ptr<AuraEffectEntry>>	m_auraEffects;
 			std::unique_ptr<StatModifiers>					m_statModifiers;
+			std::vector<ArmorModifier>						m_armorModifiers;
 			std::vector<Stat::Conversion>					m_statConversions;
 			CombatFunction									m_charges;
 			uint32_t										m_encounterId = 0;

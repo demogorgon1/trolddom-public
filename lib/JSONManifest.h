@@ -13,6 +13,7 @@ namespace tpublic
 	namespace Data
 	{
 		struct Ability;
+		struct Achievement;
 		struct Class;
 		struct Talent;
 		struct TalentTree;
@@ -73,6 +74,7 @@ namespace tpublic
 		{
 			uint32_t											m_talentTreeId = 0;
 			std::vector<std::pair<uint32_t, AbilityUnlocks>>	m_abilitiesByReplacedTalentTreeId;
+			std::vector<std::pair<uint32_t, const SpriteExport*>> m_extraItemTypes;	// Item type id and icon, for item types the class can't use
 		};
 
 		struct ClassExport
@@ -107,6 +109,15 @@ namespace tpublic
 		std::vector<std::unique_ptr<TalentExport>>				m_talents;
 		std::unordered_set<uint32_t>							m_talentIds;
 
+		struct AchievementExport
+		{
+			const Data::Achievement*							m_data = NULL;
+			const SpriteExport*									m_icon = NULL;
+		};
+
+		std::vector<std::unique_ptr<AchievementExport>>			m_achievements;				// Required by classes and hybrids
+		std::unordered_set<uint32_t>							m_achievementIds;
+
 		std::vector<std::pair<std::string, const SpriteExport*>> m_uiSprites;
 
 		void			_ExtractClasses();
@@ -122,6 +133,8 @@ namespace tpublic
 							const AbilityUnlocks&	aAbilityUnlocks);
 		void			_ExtractTalents(
 							const Data::TalentTree*	aTalentTree);
+		void			_AddAchievement(
+							uint32_t				aAchievementId);
 		SpriteExport*	_GetSpriteExport(
 							uint32_t				aSpriteId);
 		SpriteExport*	_GetCharacterSpriteExport(

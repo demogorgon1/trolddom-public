@@ -82,12 +82,12 @@ class priest:
 
 	hybrid_talent_trees:
 	{
-		paladin_guardian:   { string: "Warden" item_types: [ shield ] }
-		sorcerer_arcane:    { string: "Mystic" }
-		witch_necromancy:   { string: "Shadow Priest" }
-		fighter_combat: 	{ string: "Warpriest" }
-		witch_demonology:   { string: "Cultist" }
-		sorcerer_elemental: { string: "Pyromancer" }
+		paladin_guardian:   { string: "Warden" required_achievement: paladin_level_10 item_types: [ shield ] }
+		sorcerer_arcane:    { string: "Mystic" required_achievement: sorcerer_level_10 }
+		witch_necromancy:   { string: "Shadow Priest" required_achievement: witch_level_10 }
+		fighter_combat: 	{ string: "Warpriest" required_achievement: fighter_level_10 }
+		witch_demonology:   { string: "Cultist" required_achievement: witch_level_10 }
+		sorcerer_elemental: { string: "Pyromancer" required_achievement: sorcerer_level_10 }
 	}
 
 	hybrid:
@@ -234,6 +234,7 @@ achievement priest_level_10:
 	points: 10 
 	icon: icon_priest
 	no_progress_values: true 
+	available_in_front_end: true
 }
 
 achievement priest_level_20: 

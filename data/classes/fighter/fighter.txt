@@ -159,12 +159,12 @@ class fighter:
 
 	hybrid_talent_trees:
 	{
-		priest_healing:   { string: "Holy Fighter" }
-		sorcerer_arcane:  { string: "Arcane Fighter" }
-		witch_necromancy: { string: "Death Knight" }
-		paladin_healer: { string: "Sanctifier" }
-		paladin_avenger: { string: "Crusader" }
-		sorcerer_elemental: { string: "Flameblade" }
+		priest_healing:   { string: "Holy Fighter" required_achievement: priest_level_10 }
+		sorcerer_arcane:  { string: "Arcane Fighter" required_achievement: sorcerer_level_10 }
+		witch_necromancy: { string: "Death Knight" required_achievement: witch_level_10 }
+		paladin_healer: { string: "Sanctifier" required_achievement: paladin_level_10 }
+		paladin_avenger: { string: "Crusader" required_achievement: paladin_level_10 }
+		sorcerer_elemental: { string: "Flameblade" required_achievement: sorcerer_level_10 }
 	}
 
 	hybrid:
@@ -270,6 +270,7 @@ achievement fighter_level_10:
 	points: 10 
 	icon: icon_fighter 
 	no_progress_values: true 
+	available_in_front_end: true
 }
 
 achievement fighter_level_20: 

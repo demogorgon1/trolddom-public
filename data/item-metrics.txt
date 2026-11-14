@@ -197,6 +197,9 @@ item_metrics:
 	item_type_multipliers ranged_bow: 		{ 				cost: 7     stat_budget: 0.8	token_cost: 2 }
 	item_type_multipliers ranged_crossbow: 	{ 				cost: 7     stat_budget: 0.8	token_cost: 2 }
 	
+	# Shown (for example on the talent calculator web page) for item types a hybrid can use in addition to its class' item types
+	item_type_icons: { armor_mail: icon_mail_shirt_1 shield: icon_shield_1 ranged_bow: icon_bow_1 ranged_crossbow: icon_crossbow_1 }
+	
 	equipment_slot_multipliers head:		{ armor: 3		cost: 2 	stat_budget: 1.6 	token_cost: 1.6 }
 	equipment_slot_multipliers chest:		{ armor: 4	    cost: 2.5   stat_budget: 1.8 	token_cost: 1.8 }
 	equipment_slot_multipliers legs:		{ armor: 3.5	cost: 2.25  stat_budget: 1.6 	token_cost: 1.6 }
