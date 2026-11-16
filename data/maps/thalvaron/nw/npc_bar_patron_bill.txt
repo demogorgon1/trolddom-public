@@ -11,7 +11,7 @@ dialogue_screen .bar_patron_bill_dialogue:
 {
 	text:
 	[
-		"Hello? Oh, I thought you were the barmaid. If you see her, tell her I'm still waiting for that refill."
+		"Hello?"
 	]		
 	
 	options:

@@ -75,6 +75,8 @@ namespace tpublic
 			ID_WORLD_MAP,
 			ID_DIMINISHING_EFFECT,
 			ID_SEASONAL_EVENT,
+			ID_MUSIC_GEN_PARAMS,
+			ID_INSTRUMENTS,
 
 			NUM_IDS
 		};
@@ -147,7 +149,9 @@ namespace tpublic
 			"survival_script",
 			"world_map",
 			"diminishing_effect",
-			"seasonal_event"
+			"seasonal_event",
+			"music_gen_params",
+			"instruments"
 		};
 
 		static_assert(sizeof(STRINGS) / sizeof(const char*) == (size_t)NUM_IDS);

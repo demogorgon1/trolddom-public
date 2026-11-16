@@ -86,7 +86,7 @@ quest .blunt_ronson_1:
 
 	progress:
 	[
-		"Did you get it? My house is just inside the gate. The document is in the chest."
+		"Did you get it?"
 	]
 	
 	completion:

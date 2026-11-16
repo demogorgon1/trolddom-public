@@ -58,6 +58,10 @@ namespace tpublic
 		aManifest->GetContainer<tpublic::Data::Sound>()->ForEach([&](
 			const tpublic::Data::Sound* aSound)
 		{
+			// Generated music has no file
+			if(aSound->m_musicGen)
+				return true;
+
 			std::filesystem::path path = aSound->m_source.c_str();
 			std::string extension = path.extension().string();
 

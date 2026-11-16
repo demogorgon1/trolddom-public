@@ -25,6 +25,7 @@
 #include <tpublic/Data/Entity.h>
 #include <tpublic/Data/Expression.h>
 #include <tpublic/Data/Faction.h>
+#include <tpublic/Data/Instruments.h>
 #include <tpublic/Data/Item.h>
 #include <tpublic/Data/LootCooldown.h>
 #include <tpublic/Data/LootGroup.h>
@@ -40,6 +41,7 @@
 #include <tpublic/Data/MapTrigger.h>
 #include <tpublic/Data/MinionMode.h>
 #include <tpublic/Data/Mount.h>
+#include <tpublic/Data/MusicGenParams.h>
 #include <tpublic/Data/NameTemplate.h>
 #include <tpublic/Data/Noise.h>
 #include <tpublic/Data/NPCBehaviorState.h>
@@ -123,6 +125,7 @@ namespace tpublic
 		RegisterDataContainer<Data::Entity>();
 		RegisterDataContainer<Data::Expression>();
 		RegisterDataContainer<Data::Faction>();
+		RegisterDataContainer<Data::Instruments>();
 		RegisterDataContainer<Data::Item>();
 		RegisterDataContainer<Data::LootCooldown>();
 		RegisterDataContainer<Data::LootGroup>();
@@ -138,6 +141,7 @@ namespace tpublic
 		RegisterDataContainer<Data::MapTrigger>();		
 		RegisterDataContainer<Data::MinionMode>();
 		RegisterDataContainer<Data::Mount>();
+		RegisterDataContainer<Data::MusicGenParams>();
 		RegisterDataContainer<Data::NameTemplate>();
 		RegisterDataContainer<Data::Noise>();
 		RegisterDataContainer<Data::NPCBehaviorState>();

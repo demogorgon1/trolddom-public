@@ -10,7 +10,7 @@ dialogue_screen .harbor_vendor_dialogue:
 {
 	text:
 	[
-		"Want to buy something? Rope, nets, salted fish. Everything a sailor needs, and a few things they don't."
+		"Want to buy something?"
 	]		
 	
 	options:

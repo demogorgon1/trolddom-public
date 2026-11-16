@@ -18,6 +18,8 @@ namespace tpublic
 			Verify() const
 			{
 				VerifyBase();
+				TP_VERIFY(m_source.empty() == m_musicGen, m_debugInfo, "'%s' needs either a source or music_gen, not both.", m_name.c_str());
+				TP_VERIFY(!m_musicGen || m_musicGenParamsId != 0, m_debugInfo, "'%s' needs music_gen params.", m_name.c_str());
 			}
 
 			// Base implementation
@@ -38,6 +40,8 @@ namespace tpublic
 							m_cooldownMS = aChild->GetUInt32();
 						else if (aChild->m_name == "volume")
 							m_volume = aChild->GetFloat();
+						else if(aChild->m_name == "music_gen")
+							_ReadMusicGen(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -51,6 +55,9 @@ namespace tpublic
 				aWriter->WriteBool(m_streamed);
 				aWriter->WriteUInt(m_cooldownMS);
 				aWriter->WriteFloat(m_volume);
+				aWriter->WriteBool(m_musicGen);
+				aWriter->WriteUInt(m_musicGenParamsId);
+				aWriter->WriteUInt(m_musicGenSeed);
 			}
 			
 			bool
@@ -63,6 +70,12 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadFloat(m_volume))
 					return false;
+				if(!aReader->ReadBool(m_musicGen))
+					return false;
+				if(!aReader->ReadUInt(m_musicGenParamsId))
+					return false;
+				if(!aReader->ReadUInt(m_musicGenSeed))
+					return false;
 				return true;
 			}
 
@@ -70,7 +83,30 @@ namespace tpublic
 			bool				m_streamed = false;
 			uint32_t			m_cooldownMS = 80;
 			float				m_volume = 1.0f;
+			bool				m_musicGen = false;		// Generated music instead of a source file
+			uint32_t			m_musicGenParamsId = 0;
+			uint32_t			m_musicGenSeed = 0;
 			std::string			m_source; // Not serialized
+
+		private:
+
+			void
+			_ReadMusicGen(
+				const SourceNode*		aSource)
+			{
+				m_musicGen = true;
+
+				aSource->GetObject()->ForEachChild([&](
+					const SourceNode* aChild)
+				{
+					if(aChild->m_name == "params")
+						m_musicGenParamsId = aChild->GetId(DataType::ID_MUSIC_GEN_PARAMS);
+					else if(aChild->m_name == "seed")
+						m_musicGenSeed = aChild->GetUInt32();
+					else
+						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
+				});
+			}
 		};
 
 	}
