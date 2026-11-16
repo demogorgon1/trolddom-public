@@ -38,6 +38,7 @@ map_palette .subzones:
 map lair_of_zuthyg:
 {
 	string: "Lair of Zuthyg"
+	music: !ZONE_MUSIC{ _params: lair_monster _seed: 33 _palette: synth_dungeon _mode: harmonic_minor }
 	type: private
 	reset: bidaily
 	default_tile: rocks

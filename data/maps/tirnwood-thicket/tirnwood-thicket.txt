@@ -149,6 +149,7 @@ map_palette .cliffs:
 map tirnwood_thicket:
 {
 	string: "Tirnwood Thicket"
+	music: !ZONE_MUSIC{ _params: forest_dark _seed: 78 _palette: choir_and_harp _mode: phrygian }
 	type: private
 	reset: manual
 	default_tile: pine_forest_1

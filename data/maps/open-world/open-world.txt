@@ -550,78 +550,91 @@ map_portal .saltclaw_grotto_entrance:
 zone .zone_1:
 {
 	string: "Cape Arrival"
+	music: !ZONE_MUSIC{ _params: coast_seaside _seed: 45 _palette: choir_and_harp _mode: dorian }
 	preposition: "at"
 }
 
 zone .zone_2:
 {
 	string: "Southshore"
+	music: !ZONE_MUSIC{ _params: coast_seaside _seed: 198 _palette: choir_and_harp _mode: aeolian }
 	preposition: "at"
 }
 
 zone .zone_3:
 {
 	string: "Eldertree Woods"
+	music: !ZONE_MUSIC{ _params: forest_calm _seed: 269 _palette: choir_and_harp _mode: dorian }
 	preposition: "in"
 }
 
 zone .zone_4:
 {
 	string: "The Hidden Cove"
+	music: !ZONE_MUSIC{ _params: coast_seaside _seed: 92 _palette: crypt_organ _mode: aeolian }
 	preposition: "at"	
 }
 
 zone .zone_5:
 {
 	string: "Eastshore"
+	music: !ZONE_MUSIC{ _params: coast_seaside _seed: 124 _palette: choir_and_harp _mode: aeolian }
 	preposition: "around"
 }
 
 zone .zone_6:
 {
 	string: "Aetheris Mountains"
+	music: !ZONE_MUSIC{ _params: mountains_high _seed: 212 _palette: heroic_hall _mode: aeolian }
 	preposition: "in the"
 }
 
 zone .zone_7:
 {
 	string: "Aetheris Bay"
+	music: !ZONE_MUSIC{ _params: coast_seaside _seed: 87 _palette: choir_and_harp _mode: aeolian }
 	preposition: "around"
 }
 
 zone .zone_8:
 {
 	string: "Black Woods"
+	music: !ZONE_MUSIC{ _params: forest_dark _seed: 19 _palette: crypt_organ _mode: aeolian }
 	preposition: "in the"
 }
 
 zone .zone_9:
 {
 	string: "Bramble Heath"
+	music: !ZONE_MUSIC{ _params: meadow_pastoral _seed: 52 _palette: choir_and_harp _mode: aeolian }
 	preposition: "on"
 }
 
 zone .zone_10:
 {
 	string: "Xazax's Hideaway"
+	music: !ZONE_MUSIC{ _params: lair_monster _seed: 41 _palette: synth_dungeon _mode: phrygian }
 	preposition: "in"
 }
 
 zone .zone_11:
 {
 	string: "The Old Fort"
+	music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 20 _palette: crypt_organ _mode: aeolian }
 	preposition: "around"
 }
 
 zone .zone_12:
 {
 	string: "Peninsula Cave"
+	music: !ZONE_MUSIC{ _params: cave_echoing _seed: 42 _palette: glass_cavern _mode: phrygian }
 	preposition: "in"
 }
 
 zone .zone_13:
 {
 	string: "Twilight Thicket"
+	music: !ZONE_MUSIC{ _params: forest_dark _seed: 90 _palette: glass_cavern _mode: aeolian }
 	preposition: "in the"
 	ambient_light: [ 170 143 240 ]
 }
@@ -629,6 +642,7 @@ zone .zone_13:
 zone .town:
 {
 	string: "Tidewatch"
+	music: !ZONE_MUSIC{ _params: town_peaceful _seed: 118 _palette: strings_and_harpsichord _mode: dorian }
 	preposition: "in"
 	town: true
 }
@@ -636,12 +650,14 @@ zone .town:
 zone .undead:
 {
 	string: "Blouville"
+	music: !ZONE_MUSIC{ _params: crypt_undead _seed: 13 _palette: crypt_organ _mode: harmonic_minor }
 	preposition: "around"
 }
 
 zone .junjun:
 {
 	string: "Fortress of Junjun"
+	music: !ZONE_MUSIC{ _params: fortress_military _seed: 104 _palette: heroic_hall _mode: dorian }
 	preposition: "in the"
 	town: true
 }
@@ -649,6 +665,7 @@ zone .junjun:
 zone .temple:
 {
 	string: "Temple of Luminara"
+	music: !ZONE_MUSIC{ _params: temple_sacred _seed: 192 _palette: choir_and_harp _mode: aeolian }
 	preposition: "at the"
 }
 
@@ -925,6 +942,7 @@ map_palette .cliffs:
 map open_world:
 {
 	string: "Aetheris Isle"
+	music: !ZONE_MUSIC{ _params: meadow_pastoral _seed: 294 _palette: strings_and_harpsichord _mode: dorian }
 	type: open_world
 	default_tile: water
 	default_player_spawn: .player_spawn

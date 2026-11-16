@@ -321,90 +321,9 @@ namespace tpublic
 					}
 
 					aTokenizer.ConsumeToken(":");
-
-					if(aTokenizer.IsToken("$"))
-					{
-						aTokenizer.Proceed();
-
-						std::unique_ptr<SourceNode> embeddedObject = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-
-						embeddedObject->m_tag = aTokenizer.ConsumeAnyIdentifier();
-
-						if (aTokenizer.IsToken("<"))
-						{
-							aTokenizer.Proceed();
-
-							std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-							_ParseValue(aNamespace, aTokenizer, annotation.get());
-
-							embeddedObject->m_annotation = std::move(annotation);
-
-							aTokenizer.ConsumeToken(">");
-						}
-
-						if (aTokenizer.IsToken("("))
-						{
-							aTokenizer.Proceed();
-
-							std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-							_ParseValue(aNamespace, aTokenizer, annotation.get());
-
-							embeddedObject->m_extraAnnotation = std::move(annotation);
-
-							aTokenizer.ConsumeToken(")");
-						}
-
-						std::string name;
-
-						if (aTokenizer.IsToken("@"))
-						{
-							aTokenizer.Proceed();
-
-							if (aTokenizer.IsToken("<"))
-							{
-								aTokenizer.Proceed();
-
-								if(aTokenizer.IsToken(">"))
-								{
-									name = "?";
-								}
-								else
-								{
-									name = "!"; // Indicate it's a tag that needs to be resolved
-									name += aTokenizer.ConsumeAnyIdentifier();
-								}
-
-								aTokenizer.ConsumeToken(">");
-							}
-							else
-							{
-								name = aTokenizer.ConsumeAnyIdentifier();
-							}
-						}
-
-						std::unique_ptr<SourceNode> importArray;
-
-						if(aTokenizer.IsToken("["))
-						{
-							aTokenizer.Proceed();
-							importArray = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
-							_ParseArray(aNamespace, aTokenizer, importArray.get());
-						}
-
-						_ParseValue(aNamespace, aTokenizer, embeddedObject.get());
-
-						embeddedObject->m_name = std::move(name);
-
-						node->m_type = SourceNode::TYPE_EMBEDDED_DATA_OBJECT;
-						node->m_children.push_back(std::move(embeddedObject));
-
-						if(importArray)
-							node->m_children.push_back(std::move(importArray));
-					}
 				}			
 
-				if(node->m_type != SourceNode::TYPE_EMBEDDED_DATA_OBJECT)
-					_ParseValue(aNamespace, aTokenizer, node.get());
+				_ParseValue(aNamespace, aTokenizer, node.get());
 
 				aObject->m_children.push_back(std::move(node));
 			}
@@ -500,6 +419,86 @@ namespace tpublic
 				node->m_value = referenceName;
 				aParent->m_children.push_back(std::move(node));
 			}
+		}
+		else if (aTokenizer.IsToken("$"))
+		{
+			// Embedded data object: $<type> [<name>] { ... }
+			aTokenizer.Proceed();
+
+			std::unique_ptr<SourceNode> embeddedObject = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+
+			embeddedObject->m_tag = aTokenizer.ConsumeAnyIdentifier();
+
+			if (aTokenizer.IsToken("<"))
+			{
+				aTokenizer.Proceed();
+
+				std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+				_ParseValue(aNamespace, aTokenizer, annotation.get());
+
+				embeddedObject->m_annotation = std::move(annotation);
+
+				aTokenizer.ConsumeToken(">");
+			}
+
+			if (aTokenizer.IsToken("("))
+			{
+				aTokenizer.Proceed();
+
+				std::unique_ptr<SourceNode> annotation = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+				_ParseValue(aNamespace, aTokenizer, annotation.get());
+
+				embeddedObject->m_extraAnnotation = std::move(annotation);
+
+				aTokenizer.ConsumeToken(")");
+			}
+
+			std::string name;
+
+			if (aTokenizer.IsToken("@"))
+			{
+				aTokenizer.Proceed();
+
+				if (aTokenizer.IsToken("<"))
+				{
+					aTokenizer.Proceed();
+
+					if(aTokenizer.IsToken(">"))
+					{
+						name = "?";
+					}
+					else
+					{
+						name = "!"; // Indicate it's a tag that needs to be resolved
+						name += aTokenizer.ConsumeAnyIdentifier();
+					}
+
+					aTokenizer.ConsumeToken(">");
+				}
+				else
+				{
+					name = aTokenizer.ConsumeAnyIdentifier();
+				}
+			}
+
+			std::unique_ptr<SourceNode> importArray;
+
+			if(aTokenizer.IsToken("["))
+			{
+				aTokenizer.Proceed();
+				importArray = std::make_unique<SourceNode>(m_root.m_sourceContext, aTokenizer);
+				_ParseArray(aNamespace, aTokenizer, importArray.get());
+			}
+
+			_ParseValue(aNamespace, aTokenizer, embeddedObject.get());
+
+			embeddedObject->m_name = std::move(name);
+
+			aParent->m_type = SourceNode::TYPE_EMBEDDED_DATA_OBJECT;
+			aParent->m_children.push_back(std::move(embeddedObject));
+
+			if(importArray)
+				aParent->m_children.push_back(std::move(importArray));
 		}
 		else if (aTokenizer.IsToken("{"))
 		{	

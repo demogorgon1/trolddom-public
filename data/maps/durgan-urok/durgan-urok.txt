@@ -165,6 +165,7 @@ map_palette .cliffs:
 map durgan_urok:
 {
 	string: "Durgan Urok"
+	music: !ZONE_MUSIC{ _params: dungeon_deep _seed: 284 _palette: heroic_hall _mode: phrygian }
 	type: private
 	reset: manual
 	default_tile: rocks

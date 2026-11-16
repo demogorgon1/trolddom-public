@@ -53,21 +53,21 @@ map_entity_spawn .shroud_crystal:
 	entity shroud_crystal_2: { weight: 1 init_state: default }
 }
 
-zone .underworld_zone: { string: "Altar of the Unseen" preposition: "at the" }
-zone .light_zone: { string: "Landing of the Dawnbringer" preposition: "around" }
-zone .the_fringe: { string: "The Fringe" preposition: "around" }
-zone .blasted_wastes: { string: "Blasted Wastes" preposition: "at the" }
-zone .fortress_of_light: { string: "Fortress of Light" preposition: "at the" }
-zone .the_sinister_bastion: { string: "The Sinister Bastern" preposition: "at" }
-zone .crystal_fields: { string: "Crystal Fields" preposition: "in the" }
-zone .ghorynth: { string: "Ghorynth" preposition: "in" }
+zone .underworld_zone: { string: "Altar of the Unseen" preposition: "at the" music: !ZONE_MUSIC{ _params: cult_profane _seed: 220 _palette: crypt_organ _mode: harmonic_minor } }
+zone .light_zone: { string: "Landing of the Dawnbringer" preposition: "around" music: !ZONE_MUSIC{ _params: outpost_frontier _seed: 160 _palette: heroic_hall _mode: dorian } }
+zone .the_fringe: { string: "The Fringe" preposition: "around" music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 166 _palette: synth_dungeon _mode: aeolian } }
+zone .blasted_wastes: { string: "Blasted Wastes" preposition: "at the" music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 203 _palette: synth_dungeon _mode: aeolian } }
+zone .fortress_of_light: { string: "Fortress of Light" preposition: "at the" music: !ZONE_MUSIC{ _params: fortress_military _seed: 168 _palette: heroic_hall _mode: dorian } }
+zone .the_sinister_bastion: { string: "The Sinister Bastern" preposition: "at" music: !ZONE_MUSIC{ _params: fortress_military _seed: 8 _palette: heroic_hall _mode: phrygian } }
+zone .crystal_fields: { string: "Crystal Fields" preposition: "in the" music: !ZONE_MUSIC{ _params: realm_otherworldly _seed: 91 _palette: glass_cavern _mode: aeolian } }
+zone .ghorynth: { string: "Ghorynth" preposition: "in" music: !ZONE_MUSIC{ _params: lair_monster _seed: 206 _palette: synth_dungeon _mode: phrygian } }
 
-zone .rylions_cave: { string: "Rylion's Cave" preposition: "in" }
-zone .the_graveyard: { string: "The Graveyard" preposition: "at" }
-zone .drowned_temple: { string: "Drowned Temple" preposition: "at the" }
-zone .the_black_watch: { string: "The Black Watch" preposition: "around" }
-zone .dawnbringer_keep: { string: "Dawnbringer Keep" preposition: "around" }
-zone .the_foul_breach: { string: "The Foul Breach" preposition: "around" }
+zone .rylions_cave: { string: "Rylion's Cave" preposition: "in" music: !ZONE_MUSIC{ _params: cave_echoing _seed: 154 _palette: glass_cavern _mode: phrygian } }
+zone .the_graveyard: { string: "The Graveyard" preposition: "at" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 1 _palette: crypt_organ _mode: phrygian } }
+zone .drowned_temple: { string: "Drowned Temple" preposition: "at the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 114 _palette: crypt_organ _mode: aeolian } }
+zone .the_black_watch: { string: "The Black Watch" preposition: "around" music: !ZONE_MUSIC{ _params: outpost_frontier _seed: 227 _palette: heroic_hall _mode: aeolian } }
+zone .dawnbringer_keep: { string: "Dawnbringer Keep" preposition: "around" music: !ZONE_MUSIC{ _params: fortress_military _seed: 173 _palette: heroic_hall _mode: dorian } }
+zone .the_foul_breach: { string: "The Foul Breach" preposition: "around" music: !ZONE_MUSIC{ _params: realm_otherworldly _seed: 93 _palette: synth_dungeon _mode: phrygian } }
 
 zone .demon_spawn: { }
 
@@ -239,6 +239,7 @@ loot_table .fish:
 map the_shrouded_lands:
 {
 	string: "The Shrouded Lands"
+	music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 137 _palette: synth_dungeon _mode: aeolian }
 	type: open_world
 	default_tile: fs_rocks_1
 	default_player_spawn: .player_spawn

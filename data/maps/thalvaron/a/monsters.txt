@@ -204,7 +204,7 @@ map_entity_spawn thalvaron_ashira_golem: { entity thalvaron_ashira_golem: {} spa
 	entity thalvaron_ashira_golem: !NPC { _string: "Redstone Golem" _sprite: golem_4 _sprite_dead: golem_4_dead }
 }
 
-# Thornbound golems in the dense thickets of northern Ashira (Mathew Larsen's quest in Valoris). Not placed on the map yet.
+# Thornbound golems in the dense thickets of northern Ashira (Mathew Larsen's quest in Valoris)
 map_entity_spawn thalvaron_ashira_thornbound_golem: { entity thalvaron_ashira_thornbound_golem: {} spawn_timer: !NPC_RESPAWN_NORMAL{} }
 
 {

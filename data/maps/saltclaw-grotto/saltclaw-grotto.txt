@@ -150,6 +150,7 @@ map_palette .cliffs:
 map saltclaw_grotto:
 {
 	string: "Saltclaw Grotto"
+	music: !ZONE_MUSIC{ _params: cave_echoing _seed: 143 _palette: glass_cavern _mode: phrygian }
 	type: private
 	reset: manual
 	default_tile: dungeon_wall

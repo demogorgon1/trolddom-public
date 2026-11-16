@@ -158,6 +158,7 @@ map_palette .cliffs:
 map lich_tower:
 {
 	string: "Tower of Indulath"
+	music: !ZONE_MUSIC{ _params: crypt_undead _seed: 15 _palette: crypt_organ _mode: harmonic_minor }
 	type: private
 	reset: manual
 	default_tile: dungeon_wall

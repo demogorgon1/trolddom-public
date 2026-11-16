@@ -162,6 +162,7 @@ map_palette .cliffs:
 map karethi_temple:
 {
 	string: "Karethi Temple"
+	music: !ZONE_MUSIC{ _params: cult_profane _seed: 199 _palette: choir_and_harp _mode: phrygian }
 	type: private
 	reset: manual
 	default_tile: rocks

@@ -211,6 +211,7 @@ map_palette .cliffs:
 map withering_glade:
 {
 	string: "Lake of the Damned"
+	music: !ZONE_MUSIC{ _params: crypt_undead _seed: 117 _palette: crypt_organ _mode: aeolian }
 	type: private
 	reset: manual
 	default_tile: rocks

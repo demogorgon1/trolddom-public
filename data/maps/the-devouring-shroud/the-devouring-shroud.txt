@@ -216,6 +216,7 @@ map_palette .cliffs:
 map the_devouring_shroud:
 {
 	string: "The Devouring Shroud"
+	music: !ZONE_MUSIC{ _params: dungeon_deep _seed: 264 _palette: synth_dungeon _mode: phrygian }
 	type: private
 	reset: manual
 	default_tile: rocks

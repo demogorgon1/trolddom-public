@@ -20,6 +20,7 @@ namespace tpublic
 				VerifyBase();
 				TP_VERIFY(m_source.empty() == m_musicGen, m_debugInfo, "'%s' needs either a source or music_gen, not both.", m_name.c_str());
 				TP_VERIFY(!m_musicGen || m_musicGenParamsId != 0, m_debugInfo, "'%s' needs music_gen params.", m_name.c_str());
+				// Palette and mode names are checked by the game, which knows them
 			}
 
 			// Base implementation
@@ -58,6 +59,8 @@ namespace tpublic
 				aWriter->WriteBool(m_musicGen);
 				aWriter->WriteUInt(m_musicGenParamsId);
 				aWriter->WriteUInt(m_musicGenSeed);
+				aWriter->WriteString(m_musicGenPalette);
+				aWriter->WriteString(m_musicGenMode);
 			}
 			
 			bool
@@ -76,6 +79,10 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadUInt(m_musicGenSeed))
 					return false;
+				if(!aReader->ReadString(m_musicGenPalette))
+					return false;
+				if(!aReader->ReadString(m_musicGenMode))
+					return false;
 				return true;
 			}
 
@@ -86,6 +93,8 @@ namespace tpublic
 			bool				m_musicGen = false;		// Generated music instead of a source file
 			uint32_t			m_musicGenParamsId = 0;
 			uint32_t			m_musicGenSeed = 0;
+			std::string			m_musicGenPalette;		// Empty: the seed picks
+			std::string			m_musicGenMode;			// Empty: the seed picks
 			std::string			m_source; // Not serialized
 
 		private:
@@ -103,6 +112,10 @@ namespace tpublic
 						m_musicGenParamsId = aChild->GetId(DataType::ID_MUSIC_GEN_PARAMS);
 					else if(aChild->m_name == "seed")
 						m_musicGenSeed = aChild->GetUInt32();
+					else if(aChild->m_name == "palette")
+						m_musicGenPalette = aChild->GetIdentifier();
+					else if(aChild->m_name == "mode")
+						m_musicGenMode = aChild->GetIdentifier();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});
