@@ -30,3 +30,14 @@ item item_emberfelt_cloth:
 	item_level: 20
 	tags: [ tailoring ]
 }
+
+item item_duskweave_cloth:
+{
+	string: "Duskweave Cloth"
+	loot_groups: [ world_drops_cloth ]
+	icon: icon_duskweave_cloth
+	stack: 20
+	level_range: [ 29 40 ]
+	item_level: 35
+	tags: [ tailoring ]
+}

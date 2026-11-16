@@ -601,6 +601,21 @@ namespace tpublic
 							m_consumeItems = std::make_unique<Items>(aMember);
 						else if (aMember->m_name == "produce_items")
 							m_produceItems = std::make_unique<Items>(aMember);
+						else if (aMember->m_name == "produce_items_loot_table")
+						{
+							aMember->GetObject()->ForEachChild([&](
+								const SourceNode* aChild)
+							{
+								if (aChild->m_name == "loot_table")
+									m_produceItemsLootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+								else if (aChild->m_name == "level")
+									m_produceItemsLootTableLevel = aChild->GetUInt32();
+								else
+									TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
+							});
+
+							TP_VERIFY(m_produceItemsLootTableId != 0 && m_produceItemsLootTableLevel != 0, aMember->m_debugInfo, "'produce_items_loot_table' needs a 'loot_table' and a 'level'.");
+						}
 						else if (aMember->m_name == "required_profession")
 							m_requiredProfession = RequiredProfession(aMember);
 						else if (aMember->m_tag == "requirement")
@@ -708,6 +723,9 @@ namespace tpublic
 
 				for(uint32_t i = 1; i < (uint32_t)Resource::NUM_IDS; i++)
 					aWriter->WriteUInt(m_resourceCosts[i]);
+
+				aWriter->WriteUInt(m_produceItemsLootTableId);
+				aWriter->WriteUInt(m_produceItemsLootTableLevel);
 			}
 			
 			bool	
@@ -825,6 +843,14 @@ namespace tpublic
 						return false;
 				}
 
+				if(!aReader->IsEnd())
+				{
+					if (!aReader->ReadUInt(m_produceItemsLootTableId))
+						return false;
+					if (!aReader->ReadUInt(m_produceItemsLootTableLevel))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -882,6 +908,8 @@ namespace tpublic
 			uint32_t											m_consumeSourceAuraId = 0;
 			SecondaryAbility									m_killTriggerAbility;
 			uint32_t											m_consumeTargetAuraId = 0;
+			uint32_t											m_produceItemsLootTableId = 0;		// Items produced by rolling a loot table, at this level
+			uint32_t											m_produceItemsLootTableLevel = 0;
 		};
 
 	}

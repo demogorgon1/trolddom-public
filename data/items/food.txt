@@ -546,3 +546,24 @@
 	ability consumable_desert_baked_rustfin: !ABILITY_FOOD {}
 	item consumable_desert_baked_rustfin: !ITEM_FOOD {}
 }
+
+#####################################################
+# Grilled Grouper Steak
+{
+	${
+		_string: "Grilled Grouper Steak"
+		_description: "Restores 1800 health and mana over 10 seconds. Can't be used in combat."
+		_level: 32
+		_icon: icon_fish_12_cooked
+		_heal_tick: 180
+		_ability_tick: consumable_grilled_grouper_steak_tick
+		_ability: consumable_grilled_grouper_steak
+		_aura: consumable_grilled_grouper_steak
+		_item: { consumable_grilled_grouper_steak: 1 }
+	}
+
+	ability consumable_grilled_grouper_steak_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_grilled_grouper_steak: !AURA_FOOD {}
+	ability consumable_grilled_grouper_steak: !ABILITY_FOOD {}
+	item consumable_grilled_grouper_steak: !ITEM_FOOD {}
+}

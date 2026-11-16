@@ -490,3 +490,34 @@
 		}				
 	}	
 }
+
+#####################################################
+# Macro for defining openable items
+
+!define OPENABLE_ITEM
+{
+	string: @_string
+	icon: @_icon
+	rarity: @_rarity
+	item_level: @_level
+	type: miscellaneous
+	flags: [ openable ]
+	<exists _flavor> flavor: @_flavor
+	<exists _stack> stack: @_stack
+	<exists _loot_groups> loot_groups: @_loot_groups
+	<exists _level_range> level_range: @_level_range
+	use_ability: $ability [ string icon ]
+	{
+		flags: [ target_self item ]
+		states: [ default ]
+		cast_time: 10
+		cooldowns: [ global ]
+		consume_items: { entry: { item: @_id quantity: 1 } }
+		produce_items_loot_table: { loot_table: @_loot_table level: @_loot_level }
+	}
+}
+
+#####################################################
+# Fishing loot table slot for a rare lockbox on top of the fish (see items/lockboxes.txt)
+
+!define FISHING_LOCKBOX { possibility: { weight: 99 } possibility: { weight: 1 loot_group: fishing_lockboxes } }

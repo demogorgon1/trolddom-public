@@ -26,6 +26,9 @@ namespace tpublic
 
 			// Abilities from both
 			std::vector<uint32_t>										m_abilityIds;
+
+			// Level achievements from the class and the hybrid talent tree
+			std::vector<uint32_t>										m_achievementIds;
 		};
 
 		const Data::Class*	GetDonorClass(

@@ -103,6 +103,8 @@
 	train_ability: craft_heavy_cottonweave_bandage
 	train_ability: craft_emberfelt_bandage
 	train_ability: craft_heavy_emberfelt_bandage
+	train_ability: craft_duskweave_bandage
+	train_ability: craft_heavy_duskweave_bandage
 	
 	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }

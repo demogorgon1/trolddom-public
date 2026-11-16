@@ -133,6 +133,11 @@ namespace tpublic
 				m_ambientLight = Image::RGBA(aItem);
 				return true;
 			}
+			else if (aItem->m_name == "music")
+			{
+				m_musicSoundId = aItem->GetId(DataType::ID_SOUND);
+				return true;
+			}
 			return false;
 		}
 
@@ -161,6 +166,7 @@ namespace tpublic
 			aWriter->WriteUInt(m_survivalScriptId);
 			aWriter->WriteBool(m_heroicModeAvailable);
 			aWriter->WriteOptionalPOD(m_ambientLight);
+			aWriter->WriteUInt(m_musicSoundId);
 		}
 
 		bool
@@ -209,6 +215,8 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadOptionalPOD(m_ambientLight))
 				return false;
+			if (!aReader->ReadUInt(m_musicSoundId))
+				return false;
 			return true;
 		}
 
@@ -234,6 +242,7 @@ namespace tpublic
 		uint32_t									m_survivalScriptId = 0;
 		bool										m_heroicModeAvailable = false;
 		std::optional<Image::RGBA>					m_ambientLight;			// Not set: white (no darkening)
+		uint32_t									m_musicSoundId = 0;		// Not set: default music
 	};
 
 }

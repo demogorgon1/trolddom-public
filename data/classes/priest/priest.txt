@@ -82,12 +82,12 @@ class priest:
 
 	hybrid_talent_trees:
 	{
-		paladin_guardian:   { string: "Warden" required_achievement: paladin_level_10 item_types: [ shield ] }
-		sorcerer_arcane:    { string: "Mystic" required_achievement: sorcerer_level_10 }
-		witch_necromancy:   { string: "Shadow Priest" required_achievement: witch_level_10 }
-		fighter_combat: 	{ string: "Warpriest" required_achievement: fighter_level_10 }
-		witch_demonology:   { string: "Cultist" required_achievement: witch_level_10 }
-		sorcerer_elemental: { string: "Pyromancer" required_achievement: sorcerer_level_10 }
+		paladin_guardian:   { string: "Warden" required_achievement: paladin_level_10 item_types: [ shield ] level_progression: [ { level: 30 achievement: priest_hybrid_paladin_guardian_level_30 } ] }
+		sorcerer_arcane:    { string: "Mystic" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: priest_hybrid_sorcerer_arcane_level_30 } ] }
+		witch_necromancy:   { string: "Shadow Priest" required_achievement: witch_level_10 level_progression: [ { level: 30 achievement: priest_hybrid_witch_necromancy_level_30 } ] }
+		fighter_combat: 	{ string: "Warpriest" required_achievement: fighter_level_10 level_progression: [ { level: 30 achievement: priest_hybrid_fighter_combat_level_30 } ] }
+		witch_demonology:   { string: "Cultist" required_achievement: witch_level_10 level_progression: [ { level: 30 achievement: priest_hybrid_witch_demonology_level_30 } ] }
+		sorcerer_elemental: { string: "Pyromancer" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: priest_hybrid_sorcerer_elemental_level_30 } ] }
 	}
 
 	hybrid:
@@ -257,6 +257,66 @@ achievement priest_level_30:
 	icon: icon_priest
 	no_progress_values: true 
 	root: priest_level_10
+}
+
+achievement priest_hybrid_paladin_guardian_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Warden (Level 30)" 
+	description: "Reach level 30 as a Warden." 
+	points: 10 
+	icon: icon_guardian 
+	no_progress_values: true 
+}
+
+achievement priest_hybrid_sorcerer_arcane_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Mystic (Level 30)" 
+	description: "Reach level 30 as a Mystic." 
+	points: 10 
+	icon: icon_arcane 
+	no_progress_values: true 
+}
+
+achievement priest_hybrid_witch_necromancy_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Shadow Priest (Level 30)" 
+	description: "Reach level 30 as a Shadow Priest." 
+	points: 10 
+	icon: icon_skull_1 
+	no_progress_values: true 
+}
+
+achievement priest_hybrid_fighter_combat_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Warpriest (Level 30)" 
+	description: "Reach level 30 as a Warpriest." 
+	points: 10 
+	icon: icon_fighter_combat 
+	no_progress_values: true 
+}
+
+achievement priest_hybrid_witch_demonology_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Cultist (Level 30)" 
+	description: "Reach level 30 as a Cultist." 
+	points: 10 
+	icon: icon_fear 
+	no_progress_values: true 
+}
+
+achievement priest_hybrid_sorcerer_elemental_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Pyromancer (Level 30)" 
+	description: "Reach level 30 as a Pyromancer." 
+	points: 10 
+	icon: icon_elemental 
+	no_progress_values: true 
 }
 
 ###############################################################################

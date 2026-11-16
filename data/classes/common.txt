@@ -38,3 +38,5 @@
 	beard_color<"Dark Purple">: [ 70 9 77 ]
 	beard_color<"Dark Green">: [ 17 60 6 ]
 }
+
+achievement_category hybrid_classes: { string: "Hybrid Classes" order_key: 1 }

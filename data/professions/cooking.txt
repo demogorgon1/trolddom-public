@@ -330,3 +330,41 @@ item recipe_desert_baked_rustfin:
 		}
 	}
 }
+
+#####################################################
+# Grilled Grouper Steak
+
+ability craft_grilled_grouper_steak: !COOKING_CRAFT
+{
+	_string: "Grilled Grouper Steak"
+	_item: consumable_grilled_grouper_steak
+	_produce: { consumable_grilled_grouper_steak: 1 } 
+	_materials: { item_deepwater_grouper: 1 }	
+	_skill: 120
+}
+
+item recipe_grilled_grouper_steak:
+{
+	binds: when_picked_up
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 32
+	icon: icon_scroll_1
+	string: "Recipe: Grilled Grouper Steak"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Grilled Grouper Steak."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_grilled_grouper_steak: 1 }
+		required_profession<120>: cooking
+		requirement self<must_not_have_profession_ability>: craft_grilled_grouper_steak
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_grilled_grouper_steak
+		}
+	}
+}

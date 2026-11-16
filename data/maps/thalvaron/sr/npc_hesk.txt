@@ -1,3 +1,5 @@
+dialogue_screen .hesk_vendor: { !TRADE_SUPPLIES {} sell recipe_grilled_grouper_steak: { quantity: 1 cost: 60000 } }
+
 dialogue_screen .hesk:
 {
 	text:
@@ -14,6 +16,7 @@ dialogue_screen .hesk:
 		{ quest<offer_only>: .hesk_3 }
 		{ quest: .hesk_4 }
 		{ quest: .hesk_5 }
+		{ goto: .hesk_vendor text: "Do you have anything to trade?" }
 		{ goto: .hesk_house text: "Why do you live in a human house?" }
 	]
 }

@@ -84,11 +84,11 @@ aura recently_bandaged:
 {
 	${
 		_string: "Linen Bandage"
-		_description: "Restores 100 health over 5 seconds."
+		_description: "Restores 160 health over 5 seconds."
 		_craft_description: "Craft a Linen Bandage."
 		_level: 1
 		_icon: icon_linen_bandage
-		_heal_tick: 20
+		_heal_tick: 32
 		_ability_tick: consumable_linen_bandage_tick
 		_ability: consumable_linen_bandage
 		_aura: consumable_linen_bandage
@@ -109,11 +109,11 @@ aura recently_bandaged:
 {
 	${
 		_string: "Heavy Linen Bandage"
-		_description: "Restores 140 health over 5 seconds."
+		_description: "Restores 225 health over 5 seconds."
 		_craft_description: "Craft a Heavy Linen Bandage."
 		_level: 4
 		_icon: icon_heavy_linen_bandage
-		_heal_tick: 28
+		_heal_tick: 45
 		_ability_tick: consumable_heavy_linen_bandage_tick
 		_ability: consumable_heavy_linen_bandage
 		_aura: consumable_heavy_linen_bandage
@@ -134,11 +134,11 @@ aura recently_bandaged:
 {
 	${
 		_string: "Cottonweave Bandage"
-		_description: "Restores 180 health over 5 seconds."
+		_description: "Restores 290 health over 5 seconds."
 		_craft_description: "Craft a Cottonweave Bandage."
 		_level: 7
 		_icon: icon_cottonweave_bandage
-		_heal_tick: 36
+		_heal_tick: 58
 		_ability_tick: consumable_cottonweave_bandage_tick
 		_ability: consumable_cottonweave_bandage
 		_aura: consumable_cottonweave_bandage
@@ -159,11 +159,11 @@ aura recently_bandaged:
 {
 	${
 		_string: "Heavy Cottonweave Bandage"
-		_description: "Restores 220 health over 5 seconds."
+		_description: "Restores 350 health over 5 seconds."
 		_craft_description: "Craft a Heavy Cottonweave Bandage."
 		_level: 10
 		_icon: icon_heavy_cottonweave_bandage
-		_heal_tick: 44
+		_heal_tick: 70
 		_ability_tick: consumable_heavy_cottonweave_bandage_tick
 		_ability: consumable_heavy_cottonweave_bandage
 		_aura: consumable_heavy_cottonweave_bandage
@@ -184,11 +184,11 @@ aura recently_bandaged:
 {
 	${
 		_string: "Emberfelt Bandage"
-		_description: "Restores 260 health over 5 seconds."
+		_description: "Restores 415 health over 5 seconds."
 		_craft_description: "Craft a Emberfelt Bandage."
 		_level: 13
 		_icon: icon_emberfelt_bandage
-		_heal_tick: 52
+		_heal_tick: 83
 		_ability_tick: consumable_emberfelt_bandage_tick
 		_ability: consumable_emberfelt_bandage
 		_aura: consumable_emberfelt_bandage
@@ -209,11 +209,11 @@ aura recently_bandaged:
 {
 	${
 		_string: "Heavy Emberfelt Bandage"
-		_description: "Restores 300 health over 5 seconds."
+		_description: "Restores 480 health over 5 seconds."
 		_craft_description: "Craft a Heavy Emberfelt Bandage."
 		_level: 16
 		_icon: icon_heavy_emberfelt_bandage
-		_heal_tick: 60
+		_heal_tick: 96
 		_ability_tick: consumable_heavy_emberfelt_bandage_tick
 		_ability: consumable_heavy_emberfelt_bandage
 		_aura: consumable_heavy_emberfelt_bandage
@@ -227,4 +227,54 @@ aura recently_bandaged:
 	ability consumable_heavy_emberfelt_bandage:	!ABILITY_BANDAGE {}
 	item consumable_heavy_emberfelt_bandage: !ITEM_BANDAGE {}
 	ability craft_heavy_emberfelt_bandage: !ABILITY_CRAFT_BANDAGE {}
+}
+
+#####################################################
+# Duskweave Bandage
+{
+	${
+		_string: "Duskweave Bandage"
+		_description: "Restores 545 health over 5 seconds."
+		_craft_description: "Craft a Duskweave Bandage."
+		_level: 19
+		_icon: icon_duskweave_bandage
+		_heal_tick: 109
+		_ability_tick: consumable_duskweave_bandage_tick
+		_ability: consumable_duskweave_bandage
+		_aura: consumable_duskweave_bandage
+		_materials: { item_duskweave_cloth: 1 }
+		_item: { consumable_duskweave_bandage: 1 }
+		_skill: 95
+	}
+
+	ability consumable_duskweave_bandage_tick: !ABILITY_BANDAGE_TICK {}
+	aura consumable_duskweave_bandage: !AURA_BANDAGE {}
+	ability consumable_duskweave_bandage: !ABILITY_BANDAGE {}
+	item consumable_duskweave_bandage: !ITEM_BANDAGE {}
+	ability craft_duskweave_bandage: !ABILITY_CRAFT_BANDAGE {}
+}
+
+#####################################################
+# Heavy Duskweave Bandage
+{
+	${
+		_string: "Heavy Duskweave Bandage"
+		_description: "Restores 610 health over 5 seconds."
+		_craft_description: "Craft a Heavy Duskweave Bandage."
+		_level: 22
+		_icon: icon_heavy_duskweave_bandage
+		_heal_tick: 122
+		_ability_tick: consumable_heavy_duskweave_bandage_tick
+		_ability: consumable_heavy_duskweave_bandage
+		_aura: consumable_heavy_duskweave_bandage
+		_materials: { item_duskweave_cloth: 2 }
+		_item: { consumable_heavy_duskweave_bandage: 1 }
+		_skill: 110
+	}
+
+	ability consumable_heavy_duskweave_bandage_tick: !ABILITY_BANDAGE_TICK {}
+	aura consumable_heavy_duskweave_bandage: !AURA_BANDAGE {}
+	ability consumable_heavy_duskweave_bandage: !ABILITY_BANDAGE {}
+	item consumable_heavy_duskweave_bandage: !ITEM_BANDAGE {}
+	ability craft_heavy_duskweave_bandage: !ABILITY_CRAFT_BANDAGE {}
 }

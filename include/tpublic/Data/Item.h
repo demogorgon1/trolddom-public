@@ -34,7 +34,8 @@ namespace tpublic
 				FLAG_FISHING_ROD					= 0x00000040,
 				FLAG_STARTS_QUEST					= 0x00000080,
 				FLAG_HEROIC							= 0x00000100,
-				FLAG_VARIANT						= 0x00000200
+				FLAG_VARIANT						= 0x00000200,
+				FLAG_OPENABLE						= 0x00000400
 			};
 
 			static inline uint32_t
@@ -64,6 +65,8 @@ namespace tpublic
 						flags |= FLAG_STARTS_QUEST;
 					else if (strcmp(identifier, "heroic") == 0)
 						flags |= FLAG_HEROIC;
+					else if (strcmp(identifier, "openable") == 0)
+						flags |= FLAG_OPENABLE;
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item flag.", identifier);
 				});
@@ -329,6 +332,7 @@ namespace tpublic
 			bool	IsDefined() const { return m_iconSpriteId != 0 && !m_string.empty(); }
 			bool	DoesStartQuest() const { return m_flags & FLAG_STARTS_QUEST; }
 			bool	IsHeroic() const { return m_flags & FLAG_HEROIC; }
+			bool	IsOpenable() const { return m_flags & FLAG_OPENABLE; }
 
 			// Base implementation
 			void
@@ -344,6 +348,8 @@ namespace tpublic
 
 				if(m_itemLevel == 0)
 					m_itemLevel = m_requiredLevel;
+
+				TP_VERIFY(!IsOpenable() || m_useAbilityId != 0, aSource->m_debugInfo, "Openable item needs a 'use_ability'.");
 
 				if(m_itemType == ItemType::ID_NONE)
 				{

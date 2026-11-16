@@ -78,13 +78,13 @@ namespace tpublic
 						}
 					}
 
-					// Extra level progression can only unlock abilities
+					// Extra level progression can only unlock abilities and give achievements
 					if(hybridTalentTree.m_levelProgression)
 					{
 						for(const std::unique_ptr<Data::Class::LevelProgressionLevel>& level : hybridTalentTree.m_levelProgression->m_levels)
 						{
-							TP_VERIFY(level->m_stats.IsEmpty() && level->m_resourceUpdates.empty() && level->m_addUnarmedWeaponDamageMin == 0 && level->m_addUnarmedWeaponDamageMax == 0 && level->m_achievementId == 0,
-								debugInfo, "Hybrid talent tree '%s' level progression (level %u) can only have abilities.", talentTree->m_name.c_str(), level->m_level);
+							TP_VERIFY(level->m_stats.IsEmpty() && level->m_resourceUpdates.empty() && level->m_addUnarmedWeaponDamageMin == 0 && level->m_addUnarmedWeaponDamageMax == 0,
+								debugInfo, "Hybrid talent tree '%s' level progression (level %u) can only have abilities and achievements.", talentTree->m_name.c_str(), level->m_level);
 						}
 					}
 

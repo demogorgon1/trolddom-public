@@ -232,6 +232,7 @@ loot_table .fish:
 		{
 			possibility: { weight: 1 loot_group: the_shrouded_lands_fish }
 		}		
+		!FISHING_LOCKBOX {}
 	]		
 }
 

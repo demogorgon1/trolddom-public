@@ -1028,6 +1028,21 @@ sprites:
 	sprite icon_potion_13 : { tags: [ icon ] }
 	sprite icon_fish_11 : { tags: [ icon ] }
 	sprite icon_fish_10_cooked : { tags: [ icon ] }
+	sprite icon_magic_crystal_5 : { tags: [ icon ] }
+	sprite icon_magic_dust_5 : { tags: [ icon ] }
+	sprite icon_duskweave_cloth : { tags: [ icon ] }
+	sprite icon_duskweave_bandage : { tags: [ icon ] }
+	sprite icon_heavy_duskweave_bandage : { tags: [ icon ] }
+	sprite icon_fish_12 : { tags: [ icon ] }
+	sprite icon_fish_12_cooked : { tags: [ icon ] }
+	sprite icon_lockbox_1 : { tags: [ icon ] }
+	sprite icon_lockbox_2 : { tags: [ icon ] }
+	sprite icon_lockbox_3 : { tags: [ icon ] }
+	sprite icon_lockbox_4 : { tags: [ icon ] }
+
+	cursor: { position: [ 0 912 ] }
+	sprite icon_lockbox_5 : { tags: [ icon ] }
+	sprite icon_lockbox_6 : { tags: [ icon ] }
 }
 
 

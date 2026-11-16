@@ -159,12 +159,12 @@ class fighter:
 
 	hybrid_talent_trees:
 	{
-		priest_healing:   { string: "Holy Fighter" required_achievement: priest_level_10 }
-		sorcerer_arcane:  { string: "Arcane Fighter" required_achievement: sorcerer_level_10 }
-		witch_necromancy: { string: "Death Knight" required_achievement: witch_level_10 }
-		paladin_healer: { string: "Sanctifier" required_achievement: paladin_level_10 }
-		paladin_avenger: { string: "Crusader" required_achievement: paladin_level_10 }
-		sorcerer_elemental: { string: "Flameblade" required_achievement: sorcerer_level_10 }
+		priest_healing:   { string: "Holy Fighter" required_achievement: priest_level_10 level_progression: [ { level: 30 achievement: fighter_hybrid_priest_healing_level_30 } ] }
+		sorcerer_arcane:  { string: "Arcane Fighter" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: fighter_hybrid_sorcerer_arcane_level_30 } ] }
+		witch_necromancy: { string: "Death Knight" required_achievement: witch_level_10 level_progression: [ { level: 30 achievement: fighter_hybrid_witch_necromancy_level_30 } ] }
+		paladin_healer: { string: "Sanctifier" required_achievement: paladin_level_10 level_progression: [ { level: 30 achievement: fighter_hybrid_paladin_healer_level_30 } ] }
+		paladin_avenger: { string: "Crusader" required_achievement: paladin_level_10 level_progression: [ { level: 30 achievement: fighter_hybrid_paladin_avenger_level_30 } ] }
+		sorcerer_elemental: { string: "Flameblade" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: fighter_hybrid_sorcerer_elemental_level_30 } ] }
 	}
 
 	hybrid:
@@ -293,6 +293,66 @@ achievement fighter_level_30:
 	icon: icon_fighter 
 	no_progress_values: true 
 	root: fighter_level_10
+}
+
+achievement fighter_hybrid_priest_healing_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Holy Fighter (Level 30)" 
+	description: "Reach level 30 as a Holy Fighter." 
+	points: 10 
+	icon: icon_star_1 
+	no_progress_values: true 
+}
+
+achievement fighter_hybrid_sorcerer_arcane_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Arcane Fighter (Level 30)" 
+	description: "Reach level 30 as an Arcane Fighter." 
+	points: 10 
+	icon: icon_arcane 
+	no_progress_values: true 
+}
+
+achievement fighter_hybrid_witch_necromancy_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Death Knight (Level 30)" 
+	description: "Reach level 30 as a Death Knight." 
+	points: 10 
+	icon: icon_skull_1 
+	no_progress_values: true 
+}
+
+achievement fighter_hybrid_paladin_healer_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Sanctifier (Level 30)" 
+	description: "Reach level 30 as a Sanctifier." 
+	points: 10 
+	icon: icon_healer 
+	no_progress_values: true 
+}
+
+achievement fighter_hybrid_paladin_avenger_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Crusader (Level 30)" 
+	description: "Reach level 30 as a Crusader." 
+	points: 10 
+	icon: icon_avenger 
+	no_progress_values: true 
+}
+
+achievement fighter_hybrid_sorcerer_elemental_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Flameblade (Level 30)" 
+	description: "Reach level 30 as a Flameblade." 
+	points: 10 
+	icon: icon_elemental 
+	no_progress_values: true 
 }
 
 ###############################################################################

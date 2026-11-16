@@ -130,13 +130,14 @@ class witch:
 			level_progression:
 			[
 				{ level: 1 unlock_abilities: [ fighter_shoot ] }
+				{ level: 30 achievement: witch_hybrid_fighter_subtlety_level_30 }
 			]
 		}
 
-		priest_condemnation: { string: "Heretic" required_achievement: priest_level_10 }
-		sorcerer_elemental:  { string: "Storm Witch" required_achievement: sorcerer_level_10 }
-		priest_dragon:       { string: "Wyrm Witch" required_achievement: priest_level_10 }
-		sorcerer_arcane:     { string: "Hex Mage" required_achievement: sorcerer_level_10 }
+		priest_condemnation: { string: "Heretic" required_achievement: priest_level_10 level_progression: [ { level: 30 achievement: witch_hybrid_priest_condemnation_level_30 } ] }
+		sorcerer_elemental:  { string: "Storm Witch" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: witch_hybrid_sorcerer_elemental_level_30 } ] }
+		priest_dragon:       { string: "Wyrm Witch" required_achievement: priest_level_10 level_progression: [ { level: 30 achievement: witch_hybrid_priest_dragon_level_30 } ] }
+		sorcerer_arcane:     { string: "Hex Mage" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: witch_hybrid_sorcerer_arcane_level_30 } ] }
 	}
 
 	hybrid:
@@ -293,6 +294,56 @@ achievement witch_level_30:
 	icon: icon_witch
 	no_progress_values: true 
 	root: witch_level_10
+}
+
+achievement witch_hybrid_priest_condemnation_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Heretic (Level 30)" 
+	description: "Reach level 30 as a Heretic." 
+	points: 10 
+	icon: icon_condemnation 
+	no_progress_values: true 
+}
+
+achievement witch_hybrid_sorcerer_elemental_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Storm Witch (Level 30)" 
+	description: "Reach level 30 as a Storm Witch." 
+	points: 10 
+	icon: icon_elemental 
+	no_progress_values: true 
+}
+
+achievement witch_hybrid_priest_dragon_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Wyrm Witch (Level 30)" 
+	description: "Reach level 30 as a Wyrm Witch." 
+	points: 10 
+	icon: icon_dragon 
+	no_progress_values: true 
+}
+
+achievement witch_hybrid_fighter_subtlety_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Hexblade (Level 30)" 
+	description: "Reach level 30 as a Hexblade." 
+	points: 10 
+	icon: icon_fighter_subtlety 
+	no_progress_values: true 
+}
+
+achievement witch_hybrid_sorcerer_arcane_level_30: 
+{ 
+	category: hybrid_classes 
+	string: "Hex Mage (Level 30)" 
+	description: "Reach level 30 as a Hex Mage." 
+	points: 10 
+	icon: icon_arcane 
+	no_progress_values: true 
 }
 
 ###############################################################################

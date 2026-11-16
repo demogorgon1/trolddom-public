@@ -64,6 +64,8 @@ namespace tpublic
 							m_topZoneId = aChild->GetId(DataType::ID_ZONE);
 						else if (aChild->m_name == "ambient_light")
 							m_ambientLight = Image::RGBA(aChild);
+						else if (aChild->m_name == "music")
+							m_musicSoundId = aChild->GetId(DataType::ID_SOUND);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -93,6 +95,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_lootTableId);
 				aWriter->WriteUInt(m_topZoneId);
 				aWriter->WriteOptionalPOD(m_ambientLight);
+				aWriter->WriteUInt(m_musicSoundId);
 			}
 			
 			bool
@@ -131,6 +134,8 @@ namespace tpublic
 					return false;
 				if (!aReader->ReadOptionalPOD(m_ambientLight))
 					return false;
+				if (!aReader->ReadUInt(m_musicSoundId))
+					return false;
 				return true;
 			}
 
@@ -162,6 +167,7 @@ namespace tpublic
 			uint32_t					m_lootTableId = 0;
 			uint32_t					m_topZoneId = 0;
 			std::optional<Image::RGBA>	m_ambientLight;			// Not set: top zone's, then the map's
+			uint32_t					m_musicSoundId = 0;		// Not set: top zone's, then the map's
 		};
 
 	}

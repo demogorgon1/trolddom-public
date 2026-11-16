@@ -140,6 +140,7 @@ namespace tpublic
 			aOut.m_levels.clear();
 			aOut.m_hybridLevels.clear();
 			aOut.m_abilityIds.clear();
+			aOut.m_achievementIds.clear();
 
 			// Core abilities: a class keeps these even if it has replaced the talent tree they belong to
 			std::vector<uint32_t> coreAbilityIds;
@@ -162,6 +163,9 @@ namespace tpublic
 					continue;
 
 				aOut.m_levels.push_back(level.get());
+
+				if(level->m_achievementId != 0)
+					aOut.m_achievementIds.push_back(level->m_achievementId);
 
 				for(uint32_t abilityId : level->m_unlockAbilities)
 				{
@@ -213,13 +217,16 @@ namespace tpublic
 				}
 			}
 
-			// Extra abilities for this particular combination
+			// Extra abilities and level achievements for this particular combination
 			if(hybridTalentTree->m_levelProgression)
 			{
 				for(const std::unique_ptr<Data::Class::LevelProgressionLevel>& level : hybridTalentTree->m_levelProgression->m_levels)
 				{
 					if(aLevel < level->m_level)
 						continue;
+
+					if(level->m_achievementId != 0)
+						aOut.m_achievementIds.push_back(level->m_achievementId);
 
 					for(uint32_t abilityId : level->m_unlockAbilities)
 						_AddUnique(aOut.m_abilityIds, abilityId);
