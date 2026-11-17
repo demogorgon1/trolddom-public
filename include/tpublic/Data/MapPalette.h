@@ -30,7 +30,8 @@ namespace tpublic
 				ENTRY_TYPE_FLAGS,
 				ENTRY_TYPE_CLIFF,
 				ENTRY_TYPE_STRUCTURE_ENTRANCE,	// Structure sheets only
-				ENTRY_TYPE_STRUCTURE_ANCHOR		// Structure sheets only, name in m_string
+				ENTRY_TYPE_STRUCTURE_ANCHOR,	// Structure sheets only, name in m_string
+				ENTRY_TYPE_MUSIC				// Music sound for the zone the pixel is in (most pixels wins)
 			};
 
 			struct Color
@@ -170,6 +171,11 @@ namespace tpublic
 							TP_VERIFY(entry.m_string.empty(), aChild->m_debugInfo, "Structure anchors can't have a tool tip.");
 							entry.m_type = ENTRY_TYPE_STRUCTURE_ANCHOR;
 							entry.m_string = aChild->m_name;
+						}
+						else if (aChild->m_tag == "music")
+						{
+							entry.m_type = ENTRY_TYPE_MUSIC;
+							entry.m_value = aNode->m_sourceContext->m_persistentIdTable->GetId(aChild->m_debugInfo, DataType::ID_SOUND, aChild->m_name.c_str());
 						}
 						else
 						{

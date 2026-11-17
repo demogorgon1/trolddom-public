@@ -276,6 +276,7 @@ loot_table .gateway_world:
 map gateway_world:
 {
 	string: "Gateway World"
+	music: !ZONE_MUSIC{ _params: outpost_frontier _seed: 61 _palette: heroic_hall _mode: aeolian }
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true

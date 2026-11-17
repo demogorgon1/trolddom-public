@@ -8,6 +8,7 @@
 #include <tpublic/Data/MapPalette.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Wall.h>
+#include <tpublic/Data/Zone.h>
 
 #include <tpublic/AmbientLightMap.h>
 #include <tpublic/AutoDoodads.h>
@@ -244,6 +245,10 @@ namespace tpublic
 			flagsMap.resize(m_width * m_height, 0);
 			bool hasFlagsMap = false;
 
+			std::vector<uint32_t> musicMap;
+			musicMap.resize(m_width * m_height, 0);
+			bool hasMusicMap = false;
+
 			std::unique_ptr<CliffBuilder> cliffBuilder;
 
 			std::unordered_map<Vec2, uint32_t, Vec2::Hasher> doodadCoverageMap;
@@ -373,6 +378,11 @@ namespace tpublic
 										}
 										break;
 
+									case Data::MapPalette::ENTRY_TYPE_MUSIC:
+										musicMap[mapX + mapY * m_width] = entry->m_value;
+										hasMusicMap = true;
+										break;
+
 									case Data::MapPalette::ENTRY_TYPE_STRUCTURE_ENTRANCE:
 									case Data::MapPalette::ENTRY_TYPE_STRUCTURE_ANCHOR:
 										TP_VERIFY(false, layer->m_debugInfo, "Structure entrances and anchors can only be used in structure sheets (%d, %d) in layer '%s'.", x, y, layer->m_source.c_str());
@@ -410,6 +420,45 @@ namespace tpublic
 
 				m_ambientLightMap = AmbientLightMap::Build(aManifest, m_width, m_height, hasZoneMap ? &zoneMap[0] : NULL, hasSubZoneMap ? &subZoneMap[0] : NULL,
 					m_mapInfo.m_ambientLight.value_or(Image::RGBA(255, 255, 255, 255)));
+			}
+
+			if(hasMusicMap)
+			{
+				// Zones and sub zones without their own music get the music with the most pixels inside them, so the music
+				// layer can be drawn roughly
+				typedef std::map<uint32_t, uint32_t> MusicCounts;
+				std::unordered_map<uint32_t, MusicCounts> zoneMusicCounts;
+
+				for(size_t i = 0; i < musicMap.size(); i++)
+				{
+					if(musicMap[i] == 0)
+						continue;
+
+					if(zoneMap[i] != 0)
+						zoneMusicCounts[zoneMap[i]][musicMap[i]]++;
+					if(subZoneMap[i] != 0)
+						zoneMusicCounts[subZoneMap[i]][musicMap[i]]++;
+				}
+
+				for(const std::pair<const uint32_t, MusicCounts>& zoneMusicCount : zoneMusicCounts)
+				{
+					if(aManifest->GetById<Data::Zone>(zoneMusicCount.first)->m_musicSoundId != 0)
+						continue;
+
+					// Ties go to the lowest sound id, so builds are the same every time
+					uint32_t bestSoundId = 0;
+					uint32_t bestCount = 0;
+					for(const std::pair<const uint32_t, uint32_t>& musicCount : zoneMusicCount.second)
+					{
+						if(musicCount.second > bestCount)
+						{
+							bestSoundId = musicCount.first;
+							bestCount = musicCount.second;
+						}
+					}
+
+					m_zoneMusicSoundIds[zoneMusicCount.first] = bestSoundId;
+				}
 			}
 
 			if(hasCoverMap)
@@ -559,6 +608,7 @@ namespace tpublic
 		aStream->WriteObjects(m_pointsOfInterest);
 		aStream->WriteOptionalObject(m_worldMap);
 		aStream->WriteOptionalObjectPointer(m_ambientLightMap);
+		aStream->WriteUIntToUIntTable<uint32_t, uint32_t>(m_zoneMusicSoundIds);
 	}
 
 	bool	
@@ -645,6 +695,8 @@ namespace tpublic
 		if (!aStream->ReadOptionalObject(m_worldMap))
 			return false;
 		if (!aStream->ReadOptionalObjectPointer(m_ambientLightMap))
+			return false;
+		if (!aStream->ReadUIntToUIntTable(m_zoneMusicSoundIds))
 			return false;
 
 		return true;
@@ -840,6 +892,7 @@ namespace tpublic
 		m_staticPositionToolTips = aMapData->m_staticPositionToolTips;
 		m_pointsOfInterest = aMapData->m_pointsOfInterest;
 		m_worldMap = aMapData->m_worldMap;
+		m_zoneMusicSoundIds = aMapData->m_zoneMusicSoundIds;
 	}
 
 	uint32_t	
@@ -918,6 +971,16 @@ namespace tpublic
 				return &t;
 		}
 		return NULL;
+	}
+
+	uint32_t
+	MapData::GetZoneMusicSoundId(
+		uint32_t				aZoneId) const
+	{
+		std::unordered_map<uint32_t, uint32_t>::const_iterator i = m_zoneMusicSoundIds.find(aZoneId);
+		if(i == m_zoneMusicSoundIds.end())
+			return 0;
+		return i->second;
 	}
 
 	void				

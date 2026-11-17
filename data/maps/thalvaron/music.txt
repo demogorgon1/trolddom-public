@@ -1,0 +1,77 @@
+# Music for the regions drawn in the "music" layer of thalvaron.xcf (palette .music in thalvaron.txt). Each zone and
+# sub zone without its own music gets the region covering most of it. Params are in sound/music-gen-params.txt.
+
+# Kareth: Northern, Eastern and Southern Kareth, The Serpent's Rest, Karethi Temple, Balidor, the tombs
+sound .music_kareth: { music_gen: { params: desert_vast seed: 116 palette: choir_and_harp mode: phrygian } }
+
+# Ashira, Ashiran Peaks, Central Ashira, Corrupted Highlands, Kareth Pass, Caves of Lim'Drok
+sound .music_ashira: { music_gen: { params: desert_vast seed: 3 palette: glass_cavern mode: aeolian } }
+
+# North and South Badlands, Lake Dourgol, Durgan Urok, Durgan Tharok
+sound .music_badlands: { music_gen: { params: desert_vast seed: 17 palette: heroic_hall mode: aeolian } }
+
+# Urthon, Urthonak Keep, Urthon Gate, Skaldrun and its shores, swamp and pass, Entor Spring, Tower of Voraghul
+sound .music_urthon_skaldrun: { music_gen: { params: outpost_frontier seed: 212 palette: heroic_hall mode: aeolian } }
+
+# Thalyssian Wilds (all parts), Thalyssian Highlands, The Devouring Shroud, The Verdant Mire, New Thalyssar, Twin Temples
+sound .music_thalyssian_wilds: { music_gen: { params: forest_calm seed: 94 palette: choir_and_harp mode: dorian } }
+
+# Desolate Lowlands, Southern Thalyssian Wilds, Desolate Tower
+sound .music_desolate_lowlands: { music_gen: { params: wasteland_blighted seed: 137 palette: synth_dungeon mode: aeolian } }
+
+# Faerandor, Eastern Faerandor, Shadowthorn Forest, Thicket and Abbey, Ravenreach, Ravenreach Pass, Lakes Joonor and Ylynor
+sound .music_faerandor_shadowthorn: { music_gen: { params: forest_dark seed: 28 palette: choir_and_harp mode: aeolian } }
+
+# Duskwhisper Vale, The Lonely Coast, Edmund's Haunt, Duskwhisper Caves, Echo's Rest
+sound .music_duskwhisper: { music_gen: { params: forest_dark seed: 90 palette: glass_cavern mode: aeolian } }
+
+# Zilkore, Tirnwood Vale, Southern Tirnwood, Forbidden Island, Dark Strand, Shrine of Zilu
+sound .music_tirnwood_zilkore: { music_gen: { params: forest_dark seed: 213 palette: glass_cavern mode: dorian } }
+
+# Hollows of the Undying, Tower of Indulath, Temple of the Undying
+sound .music_hollows_of_the_undying: { music_gen: { params: crypt_undead seed: 220 palette: crypt_organ mode: harmonic_minor } }
+
+# Withering Glade
+sound .music_withering_glade: { music_gen: { params: wasteland_blighted seed: 84 palette: crypt_organ mode: phrygian } }
+
+# Valoris and its districts, Holy Temple of Valoris
+sound .music_valoris: { music_gen: { params: capital_grand seed: 21 palette: strings_and_harpsichord mode: dorian } }
+
+# Royal Catacombs, Northern Tunnels, Society of the Underworld
+sound .music_valoris_underground: { music_gen: { params: dungeon_shallow seed: 20 palette: crypt_organ mode: aeolian } }
+
+# Eastview, Fernwick, Fernwick Hills, Clearview, Clearview Slopes, Iceveil Pass, Old Man's Cave
+sound .music_valoris_countryside: { music_gen: { params: meadow_pastoral seed: 101 palette: choir_and_harp mode: aeolian } }
+
+# Eastview Woods
+sound .music_eastview_woods: { music_gen: { params: forest_calm seed: 82 palette: choir_and_harp mode: aeolian } }
+
+# Northgrove, Northgrove Caves, Tyron's Land, Tyron's Rock, Brior Hills, Outcast Coast, Cape Valor
+sound .music_northgrove: { music_gen: { params: forest_calm seed: 169 palette: heroic_hall mode: aeolian } }
+
+# Kaldor Island, Ancient Battleground, Stillwater, Tower of Tyrion, The Jungle Passage, Green Cape, Flink's Hideout, Welk's Cave
+sound .music_kaldor: { music_gen: { params: coast_seaside seed: 226 palette: choir_and_harp mode: aeolian } }
+
+# Iceveil Highlands
+sound .music_iceveil: { music_gen: { params: snowfield_lonely seed: 131 palette: glass_cavern mode: aeolian } }
+
+# The Frozen Borderlands, The Northern Pass, Frozen Landing, Crash Site
+sound .music_frozen_borderlands: { music_gen: { params: snowfield_lonely seed: 188 palette: glass_cavern mode: dorian } }
+
+# Marshlands (North, Middle and South), Mirehaven, Mongo's Swamp
+sound .music_marshlands: { music_gen: { params: swamp_murky seed: 6 palette: synth_dungeon mode: aeolian } }
+
+# Dark Water
+sound .music_dark_water: { music_gen: { params: swamp_murky seed: 202 palette: crypt_organ mode: aeolian } }
+
+# Xandralis, Shrine of Ryux, Ancient Temple
+sound .music_xandralis: { music_gen: { params: jungle_wild seed: 24 palette: glass_cavern mode: aeolian } }
+
+# Xandralis Highlands, Xandralis Mountains, Faerandor Gorge, The Desolate Pass, Great Ape Sanctuary, The Crystal Caves
+sound .music_xandralis_highlands: { music_gen: { params: mountains_high seed: 242 palette: glass_cavern mode: aeolian } }
+
+# Eastern Wilds, Wreck Isle, Lagoon Isle, Eastern Isle, Tidecaller Isles, Drowned Temple
+sound .music_wreck_isles: { music_gen: { params: coast_seaside seed: 250 palette: glass_cavern mode: aeolian } }
+
+# Realm of the Wizard, Realm of the Highborne, Desolate Tower (inside)
+sound .music_otherworldly_realms: { music_gen: { params: realm_otherworldly seed: 183 palette: glass_cavern mode: harmonic_minor } }

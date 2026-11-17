@@ -29,7 +29,13 @@ namespace tpublic
 			FLAG_AUTOGLOW					= 0x2000,
 			FLAG_TILE_FACE					= 0x4000,	// Hard south facing surface (wall face), lit by what reaches the ground in front of it
 			FLAG_TILE_WINDOW_OUTSIDE		= 0x8000,	// Window seen from outside (in a front wall), daylight comes in through it into the tile north of it
-			FLAG_TILE_WINDOW_INTERIOR		= 0x10000	// Window seen from inside (in a back wall), daylight comes in through it into the tile south of it
+			FLAG_TILE_WINDOW_INTERIOR		= 0x10000,	// Window seen from inside (in a back wall), daylight comes in through it into the tile south of it
+
+			// What a tile is when used as cover (on a map's cover layer), for the music. Every tile that's used as cover
+			// should have one: "trolddomutil cover_tiles" lists those that don't.
+			FLAG_TILE_COVER_HOUSE			= 0x20000,	// Roof
+			FLAG_TILE_COVER_CAVE			= 0x40000,	// Rock
+			FLAG_TILE_COVER_FOREST			= 0x80000	// Canopy
 		};
 
 		struct NamedAnchor
@@ -134,6 +140,12 @@ namespace tpublic
 				return FLAG_TILE_WINDOW_OUTSIDE;
 			if (strcmp(aString, "tile_window_interior") == 0)
 				return FLAG_TILE_WINDOW_INTERIOR;
+			if (strcmp(aString, "tile_cover_house") == 0)
+				return FLAG_TILE_COVER_HOUSE;
+			if (strcmp(aString, "tile_cover_cave") == 0)
+				return FLAG_TILE_COVER_CAVE;
+			if (strcmp(aString, "tile_cover_forest") == 0)
+				return FLAG_TILE_COVER_FOREST;
 			return 0;
 		}
 

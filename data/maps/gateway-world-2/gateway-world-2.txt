@@ -273,6 +273,7 @@ loot_table .gateway_world_2:
 !define local MAP
 {
 	string: "Gateway World"
+	music: !ZONE_MUSIC{ _params: forest_dark _seed: 33 _palette: choir_and_harp _mode: dorian }
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true

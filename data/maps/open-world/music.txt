@@ -1,0 +1,26 @@
+# Music for the regions drawn in open-world-music.png (palette .music in open-world.txt). Each zone and sub zone
+# without its own music gets the region covering most of it. Params are in sound/music-gen-params.txt.
+
+# Cape Arrival, Tidewatch, Peninsula Cave, The Old Fort, Xazax's Hideaway
+sound .music_cape_arrival: { music_gen: { params: coast_seaside seed: 45 palette: choir_and_harp mode: dorian } }
+
+# Southshore
+sound .music_southshore: { music_gen: { params: coast_seaside seed: 198 palette: choir_and_harp mode: aeolian } }
+
+# Aetheris Bay
+sound .music_aetheris_bay: { music_gen: { params: coast_seaside seed: 87 palette: strings_and_harpsichord mode: aeolian } }
+
+# Eldertree Woods, The Hidden Cove, Temple of Luminara
+sound .music_eldertree_woods: { music_gen: { params: forest_calm seed: 269 palette: choir_and_harp mode: dorian } }
+
+# Bramble Heath
+sound .music_bramble_heath: { music_gen: { params: meadow_pastoral seed: 52 palette: choir_and_harp mode: aeolian } }
+
+# Black Woods
+sound .music_black_woods: { music_gen: { params: forest_dark seed: 19 palette: crypt_organ mode: aeolian } }
+
+# Twilight Thicket
+sound .music_twilight_thicket: { music_gen: { params: forest_dark seed: 90 palette: glass_cavern mode: aeolian } }
+
+# Aetheris Mountains, Eastshore, Blouville, Fortress of Junjun
+sound .music_aetheris_mountains: { music_gen: { params: mountains_high seed: 212 palette: heroic_hall mode: aeolian } }

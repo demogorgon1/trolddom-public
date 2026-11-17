@@ -13,6 +13,7 @@ map_palette .stuff:
 map test:
 {
 	string: "Test Map"
+	music: !ZONE_MUSIC{ _params: town_peaceful _seed: 1 _palette: strings_and_harpsichord _mode: dorian }
 	type: open_world
 	default_tile: water
 	default_player_spawn: .player_spawn

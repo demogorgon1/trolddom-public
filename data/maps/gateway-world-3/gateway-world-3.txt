@@ -296,6 +296,7 @@ loot_table .gateway_world_3:
 map gateway_world_3:
 {
 	string: "Gateway World"
+	music: !ZONE_MUSIC{ _params: realm_fire _seed: 66 _palette: synth_dungeon _mode: harmonic_minor }
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true

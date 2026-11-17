@@ -100,6 +100,7 @@ map_entity_spawn .object:
 !define LOST_ISLES
 {
 	string: @_string
+	music: !ZONE_MUSIC{ _params: coast_seaside _seed: 77 _palette: glass_cavern _mode: aeolian }
 	type: private
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true

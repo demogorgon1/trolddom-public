@@ -877,6 +877,8 @@ namespace tpublic
 								const Vec2&						aPosition) const;
 		const PlayerSpawn*	GetPlayerSpawn(
 								uint32_t						aMapPlayerSpawnId) const;
+		uint32_t			GetZoneMusicSoundId(
+								uint32_t						aZoneId) const;
 		void				GetWalkableFloodFillPositions(
 								const Vec2&						aPosition,
 								uint32_t						aMinSteps,
@@ -951,6 +953,7 @@ namespace tpublic
 		std::vector<uint32_t>						m_realmBalanceIds;
 		std::vector<PointOfInterest>				m_pointsOfInterest;
 		std::optional<WorldMap>						m_worldMap;
+		std::unordered_map<uint32_t, uint32_t>		m_zoneMusicSoundIds;	// From music pixels, for zones and sub zones without their own music
 		bool										m_built;
 	
 		typedef std::unordered_map<Vec2, std::string, Vec2::Hasher> StaticPositionToolTipTable;

@@ -27,15 +27,15 @@ map_player_spawn thalvaron_realm_of_fire_return_spawn: { }
 
 map_player_spawn withering_glade_exit: { }
 
-zone .top_zone_marshlands: { string: "The Marshlands" preposition: "in" music: !ZONE_MUSIC{ _params: swamp_murky _seed: 6 _palette: synth_dungeon _mode: aeolian } }
-zone .top_zone_badlands: { string: "The Badlands" preposition: "in" music: !ZONE_MUSIC{ _params: desert_vast _seed: 17 _palette: choir_and_harp _mode: aeolian } }
-zone .top_zone_kareth: { string: "Kareth" loot_table: .kareth_zone_drops preposition: "in" music: !ZONE_MUSIC{ _params: desert_vast _seed: 116 _palette: choir_and_harp _mode: phrygian } }
-zone .top_zone_thallysian_wilds: { string: "Thalyssian Wilds" loot_table: .thallysian_wilds_zone_drops preposition: "in the" music: !ZONE_MUSIC{ _params: forest_calm _seed: 94 _palette: choir_and_harp _mode: dorian } }
+zone .top_zone_marshlands: { string: "The Marshlands" preposition: "in" }
+zone .top_zone_badlands: { string: "The Badlands" preposition: "in" }
+zone .top_zone_kareth: { string: "Kareth" loot_table: .kareth_zone_drops preposition: "in" }
+zone .top_zone_thallysian_wilds: { string: "Thalyssian Wilds" loot_table: .thallysian_wilds_zone_drops preposition: "in the" }
 
-zone .valoris: { string: "Valoris" preposition: "in" music: !ZONE_MUSIC{ _params: capital_grand _seed: 21 _palette: strings_and_harpsichord _mode: dorian } }
-zone .valoris_south: { string: "Fernwick Hills" preposition: "around" music: !ZONE_MUSIC{ _params: meadow_pastoral _seed: 101 _palette: choir_and_harp _mode: aeolian } }
-zone .valoris_south_mountains: { string: "Clearview Slopes" preposition: "around" music: !ZONE_MUSIC{ _params: mountains_high _seed: 289 _palette: heroic_hall _mode: aeolian } }
-zone .valoris_south_sea: { string: "Clearview" preposition: "around" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 37 _palette: choir_and_harp _mode: aeolian } }
+zone .valoris: { string: "Valoris" preposition: "in" }
+zone .valoris_south: { string: "Fernwick Hills" preposition: "around" }
+zone .valoris_south_mountains: { string: "Clearview Slopes" preposition: "around" }
+zone .valoris_south_sea: { string: "Clearview" preposition: "around" }
 zone .valoris_docks: { string: "Docks" town: true preposition: "at the" }
 zone .valoris_trade_district: { string: "Trade District" town: true preposition: "in the" }
 zone .valoris_royal_gardens: { string: "Royal Gardens" town: true preposition: "in the" }
@@ -48,137 +48,137 @@ zone .valoris_south_town: { string: "Fernwick" preposition: "in"}
 zone .north_wetlands: { string: "North Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
 zone .middle_wetlands: { string: "Middle Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
 zone .south_wetlands: { string: "South Marshlands" top_zone: .top_zone_marshlands preposition: "in the" }
-zone .wetlands_town: { string: "Mirehaven" top_zone: .top_zone_marshlands preposition: "in" music: !ZONE_MUSIC{ _params: village_quiet _seed: 40 _palette: strings_and_harpsichord _mode: aeolian } }
+zone .wetlands_town: { string: "Mirehaven" top_zone: .top_zone_marshlands preposition: "in" }
 zone .south_badlands: { string: "South Badlands" top_zone: .top_zone_badlands preposition: "in the" }
 zone .north_badlands: { string: "North Badlands" top_zone: .top_zone_badlands preposition: "in the" }
-zone .center_pass: { string: "Ravenreach Pass" preposition: "at" music: !ZONE_MUSIC{ _params: mountains_high _seed: 43 _palette: crypt_organ _mode: dorian } }
-zone .valoris_east: { string: "Eastview" preposition: "in" music: !ZONE_MUSIC{ _params: meadow_pastoral _seed: 110 _palette: strings_and_harpsichord _mode: dorian } }
-zone .valoris_north_woods: { string: "Eastview Woods" preposition: "in" music: !ZONE_MUSIC{ _params: forest_calm _seed: 82 _palette: choir_and_harp _mode: aeolian } }
-zone .north_pass: { string: "Iceveil Pass" preposition: "at" music: !ZONE_MUSIC{ _params: snowfield_lonely _seed: 89 _palette: glass_cavern _mode: aeolian } }
-zone .mountains: { string: "Iceveil Highlands" preposition: "at" music: !ZONE_MUSIC{ _params: snowfield_lonely _seed: 131 _palette: glass_cavern _mode: aeolian } }
-zone .myst_woodlands_town: { string: "Edmund's Haunt" preposition: "in" music: !ZONE_MUSIC{ _params: village_quiet _seed: 75 _palette: crypt_organ _mode: dorian } }
-zone .myst_woodlands: { string: "Duskwhisper Vale" preposition: "in" music: !ZONE_MUSIC{ _params: forest_dark _seed: 90 _palette: glass_cavern _mode: aeolian } }
-zone .haunted_woods_main: { string: "Shadowthorn Forest" preposition: "in" music: !ZONE_MUSIC{ _params: forest_dark _seed: 28 _palette: crypt_organ _mode: aeolian } }
-zone .haunted_woods_west: { string: "Shadowthorn Thicket" preposition: "in" music: !ZONE_MUSIC{ _params: forest_dark _seed: 114 _palette: crypt_organ _mode: aeolian } }
-zone .haunted_woods_town: { string: "Ravenreach" preposition: "in" music: !ZONE_MUSIC{ _params: village_quiet _seed: 238 _palette: crypt_organ _mode: dorian } }
-zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" preposition: "at" music: !ZONE_MUSIC{ _params: shrine_forgotten _seed: 11 _palette: crypt_organ _mode: aeolian } }
-zone .haunted_woods_east: { string: "Faerandor" preposition: "in" music: !ZONE_MUSIC{ _params: forest_calm _seed: 269 _palette: choir_and_harp _mode: dorian } }
-zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_jungle preposition: "in" music: !ZONE_MUSIC{ _params: jungle_wild _seed: 24 _palette: glass_cavern _mode: aeolian } }
-zone .lich_woods: { string: "Hollows of the Undying" preposition: "in the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 220 _palette: crypt_organ _mode: harmonic_minor } }
-zone .way_north_pass: { string: "The Northern Pass" preposition: "at" music: !ZONE_MUSIC{ _params: snowfield_lonely _seed: 141 _palette: glass_cavern _mode: aeolian } }
-zone .duskwhisper_caves: { string: "Duskwhisper Caves" preposition: "in the" music: !ZONE_MUSIC{ _params: cave_echoing _seed: 42 _palette: glass_cavern _mode: phrygian } }
-zone .old_mans_cave: { string: "Old Man's Cave" preposition: "in the" music: !ZONE_MUSIC{ _params: cave_echoing _seed: 148 _palette: glass_cavern _mode: aeolian } }
-zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true preposition: "in the" music: !ZONE_MUSIC{ _params: realm_otherworldly _seed: 183 _palette: glass_cavern _mode: harmonic_minor } }
-zone .eastern_faerandor: { string: "Eastern Faerandor" preposition: "in" music: !ZONE_MUSIC{ _params: forest_calm _seed: 103 _palette: choir_and_harp _mode: aeolian } }
-zone .myst_woodlands_coast: { string: "The Lonely Coast" preposition: "at the" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 92 _palette: crypt_organ _mode: aeolian } }
+zone .center_pass: { string: "Ravenreach Pass" preposition: "at" }
+zone .valoris_east: { string: "Eastview" preposition: "in" }
+zone .valoris_north_woods: { string: "Eastview Woods" preposition: "in" }
+zone .north_pass: { string: "Iceveil Pass" preposition: "at" }
+zone .mountains: { string: "Iceveil Highlands" preposition: "at" }
+zone .myst_woodlands_town: { string: "Edmund's Haunt" preposition: "in" }
+zone .myst_woodlands: { string: "Duskwhisper Vale" preposition: "in" }
+zone .haunted_woods_main: { string: "Shadowthorn Forest" preposition: "in" }
+zone .haunted_woods_west: { string: "Shadowthorn Thicket" preposition: "in" }
+zone .haunted_woods_town: { string: "Ravenreach" preposition: "in" }
+zone .haunted_woods_clearing: { string: "Shadowthorn Abbey" preposition: "at" }
+zone .haunted_woods_east: { string: "Faerandor" preposition: "in" }
+zone thalvaron_jungle: { string: "Xandralis" fishing_loot_table: fish_jungle preposition: "in" }
+zone .lich_woods: { string: "Hollows of the Undying" preposition: "in the" }
+zone .way_north_pass: { string: "The Northern Pass" preposition: "at" }
+zone .duskwhisper_caves: { string: "Duskwhisper Caves" preposition: "in the" }
+zone .old_mans_cave: { string: "Old Man's Cave" preposition: "in the" }
+zone .realm_of_the_wizard: { string: "Realm of the Wizard" no_map: true preposition: "in the" }
+zone .eastern_faerandor: { string: "Eastern Faerandor" preposition: "in" }
+zone .myst_woodlands_coast: { string: "The Lonely Coast" preposition: "at the" }
 zone .mongos_swamp: { string: "Mongo's Swamp" top_zone: .top_zone_marshlands preposition: "around"}
-zone .dwarf_city: { string: "Durgan Tharok" town: true preposition: "in" music: !ZONE_MUSIC{ _params: capital_grand _seed: 79 _palette: heroic_hall _mode: aeolian } }
-zone .lake_dourgol: { string: "Lake Dourgol" preposition: "around" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 87 _palette: choir_and_harp _mode: aeolian } }
-zone .faerandor_gorge: { string: "Faerandor Gorge" preposition: "around" music: !ZONE_MUSIC{ _params: mountains_high _seed: 29 _palette: choir_and_harp _mode: aeolian } }
-zone .dark_strand: { string: "Dark Strand" preposition: "around" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 105 _palette: crypt_organ _mode: aeolian } }
+zone .dwarf_city: { string: "Durgan Tharok" town: true preposition: "in" }
+zone .lake_dourgol: { string: "Lake Dourgol" preposition: "around" }
+zone .faerandor_gorge: { string: "Faerandor Gorge" preposition: "around" }
+zone .dark_strand: { string: "Dark Strand" preposition: "around" }
 zone .lake_ylynor: { string: "Lake Ylynor" preposition: "around" }
 zone .lake_joonor: { string: "Lake Joonor" preposition: "around" }
-zone .highborne_tower: { string: "Tower of Xalizant" preposition: "at the" music: !ZONE_MUSIC{ _params: realm_otherworldly _seed: 44 _palette: glass_cavern _mode: dorian } }
-zone .lich_tower: { string: "Tower of Indulath" preposition: "at the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 2 _palette: crypt_organ _mode: phrygian } }
-zone .temple_of_the_undying: { string: "Temple of the Undying" preposition: "at the" music: !ZONE_MUSIC{ _params: cult_profane _seed: 13 _palette: crypt_organ _mode: harmonic_minor } }
-zone .tirnwood: { string: "Tirnwood Vale" preposition: "in" music: !ZONE_MUSIC{ _params: forest_calm _seed: 126 _palette: choir_and_harp _mode: dorian } }
-zone .holy_temple: { string: "Holy Temple of Valoris" preposition: "at the" music: !ZONE_MUSIC{ _params: temple_sacred _seed: 192 _palette: choir_and_harp _mode: aeolian } }
-zone .underworld_society: { string: "Society of the Underworld" preposition: "at the" music: !ZONE_MUSIC{ _params: cult_profane _seed: 93 _palette: synth_dungeon _mode: phrygian } }
-zone .echosrest: { string: "Echo's Rest" preposition: "at" music: !ZONE_MUSIC{ _params: sanctuary_rest _seed: 60 _palette: choir_and_harp _mode: aeolian } }
-zone .highborne_realm: { string: "Realm of the Highborne" no_map: true preposition: "in the" music: !ZONE_MUSIC{ _params: realm_otherworldly _seed: 279 _palette: glass_cavern _mode: aeolian } }
-zone .jungle_highlands: { string: "Xandralis Highlands" preposition: "in the" music: !ZONE_MUSIC{ _params: mountains_high _seed: 242 _palette: glass_cavern _mode: aeolian } }
-zone .the_desolate_pass: { string: "The Desolate Pass" preposition: "at" music: !ZONE_MUSIC{ _params: desert_vast _seed: 111 _palette: synth_dungeon _mode: aeolian } }
-zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } preposition: "around" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 236 _palette: heroic_hall _mode: aeolian } }
-zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun preposition: "around" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 234 _palette: heroic_hall _mode: aeolian } }
-zone .skaldrun: { string: "Skaldrun" preposition: "in" music: !ZONE_MUSIC{ _params: jungle_wild _seed: 26 _palette: synth_dungeon _mode: dorian } }
-zone .durgan_urok: { string: "Durgan Urok" preposition: "in" music: !ZONE_MUSIC{ _params: fortress_military _seed: 284 _palette: heroic_hall _mode: phrygian } }
-zone .hidden_pool: { string: "Great Ape Sanctuary" top_zone: thalvaron_jungle preposition: "at the" music: !ZONE_MUSIC{ _params: sanctuary_rest _seed: 260 _palette: glass_cavern _mode: dorian } }
-zone .skaldrun_pass: { string: "Howling Pass" preposition: "at the" music: !ZONE_MUSIC{ _params: mountains_high _seed: 228 _palette: heroic_hall _mode: aeolian } }
-zone .urthon_gate: { string: "Urthon Gate" preposition: "around" music: !ZONE_MUSIC{ _params: fortress_military _seed: 122 _palette: heroic_hall _mode: phrygian } }
-zone .entor_spring: { string: "Entor Spring" preposition: "around" music: !ZONE_MUSIC{ _params: sanctuary_rest _seed: 52 _palette: choir_and_harp _mode: aeolian } }
-zone .jungle_temple: { string: "Ancient Temple" top_zone: thalvaron_jungle preposition: "at the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 10 _palette: glass_cavern _mode: phrygian } }
-zone .shrine_of_ryux: { string: "Shrine of Ryux" preposition: "at the" music: !ZONE_MUSIC{ _params: shrine_forgotten _seed: 50 _palette: glass_cavern _mode: aeolian } }
-zone .tower_of_voraghul: { string: "Tower of Voraghul" preposition: "in the" music: !ZONE_MUSIC{ _params: realm_fire _seed: 25 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .the_crystal_caves: { string: "The Crystal Caves" top_zone: thalvaron_jungle preposition: "in" music: !ZONE_MUSIC{ _params: cave_echoing _seed: 48 _palette: glass_cavern _mode: dorian } }
-zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" preposition: "in the" music: !ZONE_MUSIC{ _params: swamp_murky _seed: 31 _palette: synth_dungeon _mode: aeolian } }
-zone .inner_durgan_urok: { string: "Inner Durgan Urok" preposition: "in" music: !ZONE_MUSIC{ _params: dungeon_shallow _seed: 4 _palette: synth_dungeon _mode: phrygian } }
-zone .northern_tunnels: { string: "Northern Tunnels" preposition: "in the" music: !ZONE_MUSIC{ _params: mine_abandoned _seed: 39 _palette: synth_dungeon _mode: aeolian } }
-zone .northgrove: { string: "Northgrove" preposition: "in" music: !ZONE_MUSIC{ _params: forest_calm _seed: 169 _palette: choir_and_harp _mode: aeolian } }
-zone .northgrove_caves: { string: "Northgrove Caves" preposition: "in the" music: !ZONE_MUSIC{ _params: cave_echoing _seed: 108 _palette: glass_cavern _mode: aeolian } }
-zone .outcast_coast: { string: "Outcast Coast" preposition: "at the" music: !ZONE_MUSIC{ _params: outpost_frontier _seed: 64 _palette: strings_and_harpsichord _mode: aeolian } }
-zone .tyrons_land: { string: "Tyron's Land" preposition: "around" music: !ZONE_MUSIC{ _params: mountains_high _seed: 162 _palette: heroic_hall _mode: aeolian } }
-zone .tyrons_rock: { string: "Tyron's Rock" preposition: "around" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 153 _palette: choir_and_harp _mode: aeolian } }
-zone .cape_valor: { string: "Cape Valor" preposition: "at" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 127 _palette: heroic_hall _mode: dorian } }
-zone .brior_hills: { string: "Brior Hills" preposition: "in" music: !ZONE_MUSIC{ _params: meadow_pastoral _seed: 256 _palette: choir_and_harp _mode: aeolian } }
-zone .catacombs: { string: "Royal Catacombs" top_zone: .valoris preposition: "in the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 20 _palette: crypt_organ _mode: aeolian } }
-zone .southern_tirnwood: { string: "Southern Tirnwood" preposition: "in" music: !ZONE_MUSIC{ _params: forest_calm _seed: 182 _palette: choir_and_harp _mode: aeolian } }
-zone .zilkore: { string: "Zilkore" preposition: "in" music: !ZONE_MUSIC{ _params: forest_dark _seed: 213 _palette: glass_cavern _mode: aeolian } }
+zone .highborne_tower: { string: "Tower of Xalizant" preposition: "at the" }
+zone .lich_tower: { string: "Tower of Indulath" preposition: "at the" }
+zone .temple_of_the_undying: { string: "Temple of the Undying" preposition: "at the" }
+zone .tirnwood: { string: "Tirnwood Vale" preposition: "in" }
+zone .holy_temple: { string: "Holy Temple of Valoris" preposition: "at the" }
+zone .underworld_society: { string: "Society of the Underworld" preposition: "at the" }
+zone .echosrest: { string: "Echo's Rest" preposition: "at" }
+zone .highborne_realm: { string: "Realm of the Highborne" no_map: true preposition: "in the" }
+zone .jungle_highlands: { string: "Xandralis Highlands" preposition: "in the" }
+zone .the_desolate_pass: { string: "The Desolate Pass" preposition: "at" }
+zone .skaldrun_coast_west: { string: "Western Skaldrun Shore" fishing_loot_table: $loot_table { } preposition: "around" }
+zone .skaldrun_coast_east: { string: "Eastern Skaldrun Shore" fishing_loot_table: fish_skaldrun preposition: "around" }
+zone .skaldrun: { string: "Skaldrun" preposition: "in" }
+zone .durgan_urok: { string: "Durgan Urok" preposition: "in" }
+zone .hidden_pool: { string: "Great Ape Sanctuary" top_zone: thalvaron_jungle preposition: "at the" }
+zone .skaldrun_pass: { string: "Howling Pass" preposition: "at the" }
+zone .urthon_gate: { string: "Urthon Gate" preposition: "around" }
+zone .entor_spring: { string: "Entor Spring" preposition: "around" }
+zone .jungle_temple: { string: "Ancient Temple" top_zone: thalvaron_jungle preposition: "at the" }
+zone .shrine_of_ryux: { string: "Shrine of Ryux" preposition: "at the" }
+zone .tower_of_voraghul: { string: "Tower of Voraghul" preposition: "in the" }
+zone .the_crystal_caves: { string: "The Crystal Caves" top_zone: thalvaron_jungle preposition: "in" }
+zone .swamp_of_skaldrun: { string: "Swamp of Skaldrun" preposition: "in the" }
+zone .inner_durgan_urok: { string: "Inner Durgan Urok" preposition: "in" }
+zone .northern_tunnels: { string: "Northern Tunnels" preposition: "in the" }
+zone .northgrove: { string: "Northgrove" preposition: "in" }
+zone .northgrove_caves: { string: "Northgrove Caves" preposition: "in the" }
+zone .outcast_coast: { string: "Outcast Coast" preposition: "at the" }
+zone .tyrons_land: { string: "Tyron's Land" preposition: "around" }
+zone .tyrons_rock: { string: "Tyron's Rock" preposition: "around" }
+zone .cape_valor: { string: "Cape Valor" preposition: "at" }
+zone .brior_hills: { string: "Brior Hills" preposition: "in" }
+zone .catacombs: { string: "Royal Catacombs" top_zone: .valoris preposition: "in the" }
+zone .southern_tirnwood: { string: "Southern Tirnwood" preposition: "in" }
+zone .zilkore: { string: "Zilkore" preposition: "in" }
 zone .northern_thalyssian_wilds: { string: "Northern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
 zone .emerald_strand: { string: "Emerald Strand" top_zone: .top_zone_thallysian_wilds preposition: "at the" }
 zone .thalyssian_wilds: { string: "Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
-zone .the_devouring_shroud: { string: "The Devouring Shroud" top_zone: .top_zone_thallysian_wilds preposition: "in" music: !ZONE_MUSIC{ _params: forest_dark _seed: 7 _palette: synth_dungeon _mode: phrygian } }
+zone .the_devouring_shroud: { string: "The Devouring Shroud" top_zone: .top_zone_thallysian_wilds preposition: "in" }
 zone .thalyssian_highlands: { string: "Thalyssian Highlands" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
 zone .southern_thalyssian_wilds: { string: "Southern Thalyssian Wilds" top_zone: .top_zone_thallysian_wilds preposition: "in the" }
-zone .new_thalyssar: { string: "New Thalyssar" top_zone: .top_zone_thallysian_wilds preposition: "in New Thalyssar" music: !ZONE_MUSIC{ _params: town_peaceful _seed: 185 _palette: strings_and_harpsichord _mode: dorian } }
+zone .new_thalyssar: { string: "New Thalyssar" top_zone: .top_zone_thallysian_wilds preposition: "in New Thalyssar" }
 zone .riddles_crossing: { string: "Riddle's Crossing" top_zone: .top_zone_thallysian_wilds preposition: "at" }
-zone .the_verdant_mire: { string: "The Verdant Mire" top_zone: .top_zone_thallysian_wilds preposition: "in" music: !ZONE_MUSIC{ _params: swamp_murky _seed: 85 _palette: synth_dungeon _mode: aeolian } }
-zone .xandralis_mountains: { string: "Xandralis Mountains" preposition: "in the" music: !ZONE_MUSIC{ _params: mountains_high _seed: 125 _palette: glass_cavern _mode: aeolian } }
-zone .the_desolate_lowlands: { string: "The Desolate Lowlands" preposition: "in" music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 137 _palette: synth_dungeon _mode: aeolian } }
-zone .urthon: { string: "Urthon" preposition: "in" music: !ZONE_MUSIC{ _params: outpost_frontier _seed: 212 _palette: heroic_hall _mode: aeolian } }
-zone .faerandor_pass: { string: "Faerandor Pass" preposition: "at" music: !ZONE_MUSIC{ _params: mountains_high _seed: 195 _palette: choir_and_harp _mode: aeolian } }
-zone .forbidden_island: { string: "Forbidden Island" preposition: "on the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 65 _palette: crypt_organ _mode: phrygian } }
-zone .twin_temples: { string: "Twin Temples" preposition: "at the" music: !ZONE_MUSIC{ _params: temple_sacred _seed: 207 _palette: choir_and_harp _mode: phrygian } }
+zone .the_verdant_mire: { string: "The Verdant Mire" top_zone: .top_zone_thallysian_wilds preposition: "in" }
+zone .xandralis_mountains: { string: "Xandralis Mountains" preposition: "in the" }
+zone .the_desolate_lowlands: { string: "The Desolate Lowlands" preposition: "in" }
+zone .urthon: { string: "Urthon" preposition: "in" }
+zone .faerandor_pass: { string: "Faerandor Pass" preposition: "at" }
+zone .forbidden_island: { string: "Forbidden Island" preposition: "on the" }
+zone .twin_temples: { string: "Twin Temples" preposition: "at the" }
 zone .temple_of_firbiu: { string: "Temple of Firbiu" preposition: "at the" }
 zone .temple_of_feruc: { string: "Temple of Feruc" preposition: "at the" }
-zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true preposition: "at the" music: !ZONE_MUSIC{ _params: realm_otherworldly _seed: 121 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" preposition: "at the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 55 _palette: synth_dungeon _mode: phrygian } }
-zone .urthonak_keep: { string: "Urthonak Keep" preposition: "at" music: !ZONE_MUSIC{ _params: fortress_military _seed: 273 _palette: heroic_hall _mode: phrygian } }
-zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" preposition: "around the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 71 _palette: crypt_organ _mode: aeolian } }
+zone .realm_of_the_lizard_wizard: { string: "Desolate Tower" no_map: true preposition: "at the" }
+zone .realm_of_the_lizard_wizard_ext: { string: "Desolate Tower" preposition: "at the" }
+zone .urthonak_keep: { string: "Urthonak Keep" preposition: "at" }
+zone .urthon_burial_grounds: { string: "Urthon Burial Grounds" preposition: "around the" }
 zone .northern_kareth: { string: "Northern Kareth" top_zone: .top_zone_kareth preposition: "in" }
-zone .the_serpents_rest: { string: "The Serpent's Rest" top_zone: .top_zone_kareth preposition: "at" music: !ZONE_MUSIC{ _params: shrine_forgotten _seed: 35 _palette: choir_and_harp _mode: harmonic_minor } }
+zone .the_serpents_rest: { string: "The Serpent's Rest" top_zone: .top_zone_kareth preposition: "at" }
 zone .eastern_kareth: { string: "Eastern Kareth" top_zone: .top_zone_kareth preposition: "in" }
 zone .southern_kareth: { string: "Southern Kareth" top_zone: .top_zone_kareth preposition: "in" }
 zone .kareth_pass: { string: "Kareth Pass" top_zone: .top_zone_kareth preposition: "around" }
-zone .balidor: { string: "Balidor" preposition: "in" music: !ZONE_MUSIC{ _params: village_quiet _seed: 174 _palette: strings_and_harpsichord _mode: aeolian } }
-zone .ashira: { string: "Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" music: !ZONE_MUSIC{ _params: desert_vast _seed: 3 _palette: glass_cavern _mode: aeolian } }
-zone .karethi_temple: { string: "Karethi Temple" preposition: "at the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 156 _palette: choir_and_harp _mode: phrygian } }
-zone .tomb_of_kralir: { string: "Tomb of Kralir" preposition: "in the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 109 _palette: crypt_organ _mode: phrygian } }
-zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" preposition: "in the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 194 _palette: crypt_organ _mode: phrygian } }
-zone .tomb_of_the_last_king: { string: "Tomb of the Last King" preposition: "in the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 209 _palette: crypt_organ _mode: phrygian } }
-zone .lonely_cove: { string: "Lonely Cove" preposition: "at the" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 176 _palette: choir_and_harp _mode: aeolian } }
-zone .shrine_of_zilu: { string: "Shrine of Zilu" preposition: "at the" music: !ZONE_MUSIC{ _params: shrine_forgotten _seed: 276 _palette: choir_and_harp _mode: phrygian } }
-zone .ancient_burial_site: { string: "Ancient Burial Site" preposition: "at the" music: !ZONE_MUSIC{ _params: crypt_undead _seed: 81 _palette: crypt_organ _mode: aeolian } }
-zone .kobold_shrine: { string: "Kobold Shrine" preposition: "at the" music: !ZONE_MUSIC{ _params: cult_profane _seed: 41 _palette: synth_dungeon _mode: phrygian } }
-zone .the_lizard_coast: { string: "The Lizard Coast" preposition: "on" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 123 _palette: synth_dungeon _mode: dorian } }
-zone .stillwater: { string: "Stillwater" preposition: "in" music: !ZONE_MUSIC{ _params: village_quiet _seed: 167 _palette: strings_and_harpsichord _mode: aeolian } }
-zone .kaldor_island: { string: "Kaldor Island" preposition: "on" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 226 _palette: choir_and_harp _mode: aeolian } }
-zone .the_jungle_passage: { string: "The Jungle Passage" preposition: "in" music: !ZONE_MUSIC{ _params: jungle_wild _seed: 9 _palette: synth_dungeon _mode: aeolian } }
-zone thalvaron_ancient_battleground: { string: "Ancient Battleground" preposition: "on the" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger music: !ZONE_MUSIC{ _params: battlefield _seed: 227 _palette: heroic_hall _mode: aeolian } }
-zone thalvaron_welks_cave: { string: "Welk's Cave" preposition: "in" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger music: !ZONE_MUSIC{ _params: lair_monster _seed: 51 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" music: !ZONE_MUSIC{ _params: outpost_frontier _seed: 292 _palette: strings_and_harpsichord _mode: aeolian } }
-zone .tower_of_tyrion: { string: "Tower of Tyrion" preposition: "at" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 59 _palette: glass_cavern _mode: phrygian } }
-zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true music: !ZONE_MUSIC{ _params: swamp_murky _seed: 202 _palette: crypt_organ _mode: aeolian } }
-zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" music: !ZONE_MUSIC{ _params: mine_abandoned _seed: 130 _palette: synth_dungeon _mode: aeolian } }
-zone .the_frozen_borderlands: { string: "The Frozen Borderlands" preposition: "in" music: !ZONE_MUSIC{ _params: snowfield_lonely _seed: 188 _palette: glass_cavern _mode: aeolian } }
+zone .balidor: { string: "Balidor" preposition: "in" }
+zone .ashira: { string: "Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" }
+zone .karethi_temple: { string: "Karethi Temple" preposition: "at the" }
+zone .tomb_of_kralir: { string: "Tomb of Kralir" preposition: "in the" }
+zone .tomb_of_jurgorth: { string: "Tomb of Jurgorth" preposition: "in the" }
+zone .tomb_of_the_last_king: { string: "Tomb of the Last King" preposition: "in the" }
+zone .lonely_cove: { string: "Lonely Cove" preposition: "at the" }
+zone .shrine_of_zilu: { string: "Shrine of Zilu" preposition: "at the" }
+zone .ancient_burial_site: { string: "Ancient Burial Site" preposition: "at the" }
+zone .kobold_shrine: { string: "Kobold Shrine" preposition: "at the" }
+zone .the_lizard_coast: { string: "The Lizard Coast" preposition: "on" }
+zone .stillwater: { string: "Stillwater" preposition: "in" }
+zone .kaldor_island: { string: "Kaldor Island" preposition: "on" }
+zone .the_jungle_passage: { string: "The Jungle Passage" preposition: "in" }
+zone thalvaron_ancient_battleground: { string: "Ancient Battleground" preposition: "on the" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger }
+zone thalvaron_welks_cave: { string: "Welk's Cave" preposition: "in" pvp: true player_kill_trigger_ability: dominion_of_strife_kill_trigger }
+zone .flinks_hideout: { string: "Flink's Hideout" preposition: "at" }
+zone .tower_of_tyrion: { string: "Tower of Tyrion" preposition: "at" }
+zone .dark_water: { string: "Dark Water" preposition: "at" no_map: true }
+zone .kobold_caves: { string: "Kobold Caves" preposition: "in the" }
+zone .the_frozen_borderlands: { string: "The Frozen Borderlands" preposition: "in" }
 zone .crash_site: { string: "Crash Site" preposition: "at the" top_zone: .the_frozen_borderlands }
-zone .withering_glade: { string: "Withering Glade" preposition: "in the" music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 84 _palette: crypt_organ _mode: phrygian } } 
-zone .central_ashira: { string: "Central Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" music: !ZONE_MUSIC{ _params: desert_vast _seed: 287 _palette: glass_cavern _mode: aeolian } }
-zone .ashiran_peaks: { string: "Ashiran Peaks" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in the" music: !ZONE_MUSIC{ _params: mountains_high _seed: 178 _palette: glass_cavern _mode: aeolian } }
-zone .caves_of_limdrok: { string: "Caves of Lim'Drok" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" music: !ZONE_MUSIC{ _params: cave_echoing _seed: 34 _palette: glass_cavern _mode: phrygian } }
-zone .corrupted_highlands: { string: "Corrupted Highlands" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" ambient_light: [ 240 143 170 ] music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 72 _palette: synth_dungeon _mode: aeolian } }
-zone .kareth_landing: { string: "Gate of Karethi" preposition: "at the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 157 _palette: choir_and_harp _mode: harmonic_minor } }
-zone .the_sunken_reach: { string: "The Sunken Reach" preposition: "in" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 211 _palette: glass_cavern _mode: aeolian } }
-zone .wreck_zone_1: { string: "Green Cape" preposition: "in" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 246 _palette: choir_and_harp _mode: aeolian } }
-zone .wreck_zone_2: { string: "Wreck Isle" preposition: "on" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 138 _palette: synth_dungeon _mode: aeolian } }
-zone .wreck_zone_3: { string: "Eastern Wilds" preposition: "in the" music: !ZONE_MUSIC{ _params: jungle_wild _seed: 47 _palette: synth_dungeon _mode: dorian } }
-zone .wreck_zone_4: { string: "Lagoon Isle" preposition: "on" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 250 _palette: glass_cavern _mode: aeolian } }
-zone .wreck_zone_5: { string: "Tidecaller Isles" preposition: "on the" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 254 _palette: choir_and_harp _mode: aeolian } }
-zone .wreck_zone_6: { string: "Eastern Isle" preposition: "on" music: !ZONE_MUSIC{ _params: coast_seaside _seed: 205 _palette: strings_and_harpsichord _mode: aeolian } }
-zone .wreck_zone_7: { string: "Drowned Temple" preposition: "in" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 102 _palette: crypt_organ _mode: phrygian } }
+zone .withering_glade: { string: "Withering Glade" preposition: "in the" } 
+zone .central_ashira: { string: "Central Ashira" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in" }
+zone .ashiran_peaks: { string: "Ashiran Peaks" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira preposition: "in the" }
+zone .caves_of_limdrok: { string: "Caves of Lim'Drok" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" }
+zone .corrupted_highlands: { string: "Corrupted Highlands" loot_table: .ashira_zone_drops fishing_loot_table: fish_ashira_corrupted preposition: "in the" ambient_light: [ 240 143 170 ] }
+zone .kareth_landing: { string: "Gate of Karethi" preposition: "at the" }
+zone .the_sunken_reach: { string: "The Sunken Reach" preposition: "in" }
+zone .wreck_zone_1: { string: "Green Cape" preposition: "in" }
+zone .wreck_zone_2: { string: "Wreck Isle" preposition: "on" }
+zone .wreck_zone_3: { string: "Eastern Wilds" preposition: "in the" }
+zone .wreck_zone_4: { string: "Lagoon Isle" preposition: "on" }
+zone .wreck_zone_5: { string: "Tidecaller Isles" preposition: "on the" }
+zone .wreck_zone_6: { string: "Eastern Isle" preposition: "on" }
+zone .wreck_zone_7: { string: "Drowned Temple" preposition: "in" }
 zone thalvaron_crab_giant: { } 
 zone thalvaron_vampire_boss: { } 
 zone thalvaron_lurker: { fishing_trigger_ability: thalvaron_lurker_spawn fishing_trigger_ability_chance: 50 fishing_loot_table: $loot_table { } }
-zone .frozen_landing: { string: "Frozen Landing" preposition: "at the" ambient_light: [ 170 143 240 ] music: !ZONE_MUSIC{ _params: snowfield_lonely _seed: 280 _palette: glass_cavern _mode: aeolian } }
+zone .frozen_landing: { string: "Frozen Landing" preposition: "at the" ambient_light: [ 170 143 240 ] }
 	
 route thalvaron_default_patrol: { }
 
@@ -1531,6 +1531,35 @@ map_palette .sub_zones:
 	
 }
 
+map_palette .music:
+{
+	music .music_kareth: [ 31 134 141 ]
+	music .music_ashira: [ 35 31 141 ]
+	music .music_badlands: [ 105 107 148 ]
+	music .music_urthon_skaldrun: [ 148 147 105 ]
+	music .music_thalyssian_wilds: [ 105 109 148 ]
+	music .music_desolate_lowlands: [ 88 210 52 ]
+	music .music_faerandor_shadowthorn: [ 105 148 125 ]
+	music .music_duskwhisper: [ 156 59 196 ]
+	music .music_tirnwood_zilkore: [ 229 207 131 ]
+	music .music_hollows_of_the_undying: [ 77 200 132 ]
+	music .music_withering_glade: [ 40 100 63 ]
+	music .music_valoris: [ 157 137 240 ]
+	music .music_valoris_underground: [ 137 240 213 ]
+	music .music_valoris_countryside: [ 196 183 59 ]
+	music .music_eastview_woods: [ 240 230 137 ]
+	music .music_northgrove: [ 180 240 137 ]
+	music .music_kaldor: [ 52 144 210 ]
+	music .music_iceveil: [ 59 90 196 ]
+	music .music_frozen_borderlands: [ 59 196 125 ]
+	music .music_marshlands: [ 196 59 152 ]
+	music .music_dark_water: [ 155 38 229 ]
+	music .music_xandralis: [ 149 52 210 ]
+	music .music_xandralis_highlands: [ 210 52 128 ]
+	music .music_wreck_isles: [ 138 31 141 ]
+	music .music_otherworldly_realms: [ 38 229 180 ]
+}
+
 map_palette .routes:
 {
 	route thalvaron_default_patrol: [ 192 16 186 ]	
@@ -1711,6 +1740,11 @@ map thalvaron:
 			palettes:	[ .sub_zones ]
 			source:		"thalvaron-subzones.png"
 		}						
+
+		{
+			palettes:	[ .music ]
+			source:		"thalvaron-music.png"
+		}
 		
 		{
 			palettes:	[ .routes ]

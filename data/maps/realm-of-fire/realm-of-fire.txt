@@ -3,21 +3,21 @@ map_player_spawn .player_spawn: { }
 map_player_spawn .throne_of_voraghul_spawn: { }
 map_player_spawn .throne_of_voraghul_return_spawn: { }
 
-zone .realm_of_voraghul_landing: { string: "The Charred Verge" preposition: "at" music: !ZONE_MUSIC{ _params: realm_fire _seed: 6 _palette: synth_dungeon _mode: aeolian } }
-zone .smoldering_fields: { string: "Smoldering Fields" preposition: "on the" music: !ZONE_MUSIC{ _params: realm_fire _seed: 9 _palette: synth_dungeon _mode: aeolian } }
-zone .burning_approach: { string: "The Burning Approach" preposition: "at" music: !ZONE_MUSIC{ _params: realm_fire _seed: 51 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .bastion_courtyard: { string: "Bastion Courtyard" preposition: "around the" music: !ZONE_MUSIC{ _params: fortress_military _seed: 96 _palette: heroic_hall _mode: phrygian } }
-zone .fiery_rift: { string: "Fiery Crevice" preposition: "around the" music: !ZONE_MUSIC{ _params: lair_monster _seed: 7 _palette: synth_dungeon _mode: phrygian } }
-zone .desolate_plains: { string: "Desolate Plains" preposition: "at the" music: !ZONE_MUSIC{ _params: wasteland_blighted _seed: 111 _palette: synth_dungeon _mode: aeolian } }
-zone .bastion_of_urt: { string: "Bastion of Urt" preposition: "in the" music: !ZONE_MUSIC{ _params: fortress_military _seed: 122 _palette: heroic_hall _mode: phrygian } }
-zone .altar_of_urt: { string: "Altar of Urt" preposition: "by the" music: !ZONE_MUSIC{ _params: cult_profane _seed: 93 _palette: synth_dungeon _mode: phrygian } }
-zone .satyr_altar: { string: "Satyr Altar" preposition: "at the" music: !ZONE_MUSIC{ _params: cult_profane _seed: 144 _palette: synth_dungeon _mode: phrygian } }
-zone .the_infernal_flow: { string: "The Infernal Flow" preposition: "around" music: !ZONE_MUSIC{ _params: realm_fire _seed: 255 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .voraghuls_landing: { string: "Voraghul's Landing" preposition: "at" music: !ZONE_MUSIC{ _params: realm_fire _seed: 285 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .throne_of_voraghul: { string: "Throne of Voraghul" no_map: true preposition: "at the" music: !ZONE_MUSIC{ _params: lair_monster _seed: 204 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .ruined_tower: { string: "Tower Ruins" preposition: "in the" music: !ZONE_MUSIC{ _params: ruins_ancient _seed: 59 _palette: glass_cavern _mode: phrygian } }
-zone .magma_pass: { string: "Magma Pass" preposition: "at the" music: !ZONE_MUSIC{ _params: realm_fire _seed: 152 _palette: synth_dungeon _mode: harmonic_minor } }
-zone .tower_of_urt: { string: "Tower of Urt" preposition: "in the" music: !ZONE_MUSIC{ _params: fortress_military _seed: 273 _palette: heroic_hall _mode: phrygian } }
+zone .realm_of_voraghul_landing: { string: "The Charred Verge" preposition: "at" }
+zone .smoldering_fields: { string: "Smoldering Fields" preposition: "on the" }
+zone .burning_approach: { string: "The Burning Approach" preposition: "at" }
+zone .bastion_courtyard: { string: "Bastion Courtyard" preposition: "around the" }
+zone .fiery_rift: { string: "Fiery Crevice" preposition: "around the" }
+zone .desolate_plains: { string: "Desolate Plains" preposition: "at the" }
+zone .bastion_of_urt: { string: "Bastion of Urt" preposition: "in the" }
+zone .altar_of_urt: { string: "Altar of Urt" preposition: "by the" }
+zone .satyr_altar: { string: "Satyr Altar" preposition: "at the" }
+zone .the_infernal_flow: { string: "The Infernal Flow" preposition: "around" }
+zone .voraghuls_landing: { string: "Voraghul's Landing" preposition: "at" }
+zone .throne_of_voraghul: { string: "Throne of Voraghul" no_map: true preposition: "at the" }
+zone .ruined_tower: { string: "Tower Ruins" preposition: "in the" }
+zone .magma_pass: { string: "Magma Pass" preposition: "at the" }
+zone .tower_of_urt: { string: "Tower of Urt" preposition: "in the" }
 	
 route realm_of_fire_default_patrol: { }
 

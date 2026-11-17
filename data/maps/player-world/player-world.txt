@@ -100,6 +100,7 @@ map_entity_spawn .object:
 map player_world:
 {
 	string: "Player World"
+	music: !ZONE_MUSIC{ _params: meadow_pastoral _seed: 8 _palette: strings_and_harpsichord _mode: dorian }
 	type: open_world
 	default_player_spawn: .player_spawn
 	has_dynamic_overview_map: true
