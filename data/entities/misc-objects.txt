@@ -29,18 +29,18 @@
 
 entity standing_stone: !MISC_OBJECT { _string: "Standing Stone" _frames: [ waypoint_1 ] }
 entity anvil: !MISC_OBJECT { _string: "Anvil" _frames: [ anvil ] }
-entity furnace: !MISC_OBJECT { _string: "Furnace" _frames: [ furnace ] _light: { color: [ 1 0.6 0.3 ] radius: 3 } }
-entity fireplace: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_1 fireplace_2 fireplace_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 4.2 offset: [ 0 1 ] } }
+entity furnace: !MISC_OBJECT { _string: "Furnace" _frames: [ furnace ] _light: { color: [ 1 0.6 0.3 ] radius: 3 tail: true } }
+entity fireplace: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_1 fireplace_2 fireplace_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 4.2 offset: [ 0 1 ] tail: true } }
 entity fireplace_unlit: !MISC_OBJECT { _string: "Fireplace" _frames: [ fireplace_unlit ] }
-entity bonfire: !MISC_OBJECT { _string: "Bonfire" _frames: [ bonfire_1 bonfire_2 bonfire_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 6 } }
+entity bonfire: !MISC_OBJECT { _string: "Bonfire" _frames: [ bonfire_1 bonfire_2 bonfire_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 6 tail: true } }
 entity cauldron: !MISC_OBJECT { _string: "Cauldron" _frames: [ cauldron_1 ] }
 entity bonfire_unlit: !MISC_OBJECT { _string: "Extinguished Bonfire" _frames: [ bonfire_unlit ] }
 entity jul_tree: !MISC_OBJECT { _string: "Jule Tree" _frames: [ jul_tree ] }
 
-entity wall_torch_south: !MISC_OBJECT { _frames: [ wall_torch_south_1 wall_torch_south_2 wall_torch_south_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 3.5 offset: [ 0 1 ] } }
-entity wall_torch_east: !MISC_OBJECT { _frames: [ wall_torch_east_1 wall_torch_east_2 wall_torch_east_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
-entity wall_torch_west: !MISC_OBJECT { _frames: [ wall_torch_west_1 wall_torch_west_2 wall_torch_west_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 } }
-entity brazier: !MISC_OBJECT { _string: "Brazier" _frames: [ brazier_1 brazier_2 brazier_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 4.5 } }
+entity wall_torch_south: !MISC_OBJECT { _frames: [ wall_torch_south_1 wall_torch_south_2 wall_torch_south_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 3.5 offset: [ 0 1 ] tail: true } }
+entity wall_torch_east: !MISC_OBJECT { _frames: [ wall_torch_east_1 wall_torch_east_2 wall_torch_east_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 tail: true } }
+entity wall_torch_west: !MISC_OBJECT { _frames: [ wall_torch_west_1 wall_torch_west_2 wall_torch_west_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 tail: true } }
+entity brazier: !MISC_OBJECT { _string: "Brazier" _frames: [ brazier_1 brazier_2 brazier_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 4.5 tail: true } }
 
 entity fill_light:
 {
@@ -57,7 +57,7 @@ entity fire: !MISC_OBJECT
 { 
 	_string: "Fire" 
 	_frames: [ fire_0 fire_1 fire_2 ] 
-	_light: { color: [ 1 0.6 0.3 ] radius: 5 }
+	_light: { color: [ 1 0.6 0.3 ] radius: 4 tail: true }
 	_environment: 
 	{
 		tick_interval: 15
