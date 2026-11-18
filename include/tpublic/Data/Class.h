@@ -888,6 +888,57 @@ namespace tpublic
 				StatsConversionEntry								m_dexToAttackPower;
 			};
 
+			// Permanent passive aura given to a hybrid, mostly for balancing that particular combination. Only given if the
+			// character has all the required talent trees, i.e. hasn't replaced any of them (for an aura that affects
+			// abilities from them).
+			struct HybridPassiveAura
+			{
+				HybridPassiveAura()
+				{
+
+				}
+
+				HybridPassiveAura(
+					const SourceNode*		aSource)
+				{
+					m_auraId = aSource->m_sourceContext->m_persistentIdTable->GetId(aSource->m_debugInfo, DataType::ID_AURA, aSource->m_name.c_str());
+					m_debugInfo = aSource->m_debugInfo;
+
+					aSource->GetObject()->ForEachChild([&](
+						const SourceNode* aChild)
+					{
+						if(aChild->m_name == "required_talent_trees")
+							aChild->GetIdArray(DataType::ID_TALENT_TREE, m_requiredTalentTreeIds);
+						else
+							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
+					});
+				}
+
+				void
+				ToStream(
+					IWriter*				aStream) const
+				{
+					aStream->WriteUInt(m_auraId);
+					aStream->WriteUInts(m_requiredTalentTreeIds);
+				}
+
+				bool
+				FromStream(
+					IReader*				aStream)
+				{
+					if(!aStream->ReadUInt(m_auraId))
+						return false;
+					if(!aStream->ReadUInts(m_requiredTalentTreeIds))
+						return false;
+					return true;
+				}
+
+				// Public data
+				uint32_t											m_auraId = 0;
+				std::vector<uint32_t>								m_requiredTalentTreeIds;
+				std::optional<DataErrorHandling::DebugInfo>			m_debugInfo;				// Not serialized, only for error messages
+			};
+
 			// A talent tree from another class that this class can take as a hybrid: what the hybrid is called, and what
 			// this particular combination gets on top of the donor class' 'hybrid' block.
 			struct HybridTalentTree
@@ -941,6 +992,10 @@ namespace tpublic
 						{
 							m_requiredAchievementId = aChild->GetId(DataType::ID_ACHIEVEMENT);
 						}
+						else if(aChild->m_tag == "passive_aura")
+						{
+							m_passiveAuras.push_back(HybridPassiveAura(aChild));
+						}
 						else
 						{
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' not a valid member.", aChild->m_name.c_str());
@@ -962,6 +1017,7 @@ namespace tpublic
 					aStream->WriteOptionalObjectPointer(m_levelProgression);
 					aStream->WriteUInts(m_excludeAbilities);
 					aStream->WriteUInt(m_requiredAchievementId);
+					aStream->WriteObjects(m_passiveAuras);
 				}
 
 				bool
@@ -982,6 +1038,8 @@ namespace tpublic
 						return false;
 					if(!aStream->ReadUInt(m_requiredAchievementId))
 						return false;
+					if(!aStream->ReadObjects(m_passiveAuras))
+						return false;
 					return true;
 				}
 
@@ -993,6 +1051,7 @@ namespace tpublic
 				std::unique_ptr<LevelProgression>					m_levelProgression;			// Extra abilities (only abilities)
 				std::vector<uint32_t>								m_excludeAbilities;			// Abilities the hybrid would otherwise get from the donor class
 				uint32_t											m_requiredAchievementId = 0;	// Must be among the account's front end achievements on the realm to make this hybrid
+				std::vector<HybridPassiveAura>						m_passiveAuras;				// Shown first in the hybrid talent tree's tab in the abilities window
 				std::optional<DataErrorHandling::DebugInfo>			m_debugInfo;				// Not serialized, only for error messages
 			};
 

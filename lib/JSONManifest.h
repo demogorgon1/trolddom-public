@@ -75,6 +75,7 @@ namespace tpublic
 			uint32_t											m_talentTreeId = 0;
 			std::vector<std::pair<uint32_t, AbilityUnlocks>>	m_abilitiesByReplacedTalentTreeId;
 			std::vector<std::pair<uint32_t, const SpriteExport*>> m_extraItemTypes;	// Item type id and icon, for item types the class can't use
+			std::vector<std::pair<uint32_t, std::vector<std::pair<uint32_t, const SpriteExport*>>>> m_passiveAurasByReplacedTalentTreeId;	// Aura id and icon
 		};
 
 		struct ClassExport

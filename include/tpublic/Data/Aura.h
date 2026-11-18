@@ -353,6 +353,8 @@ namespace tpublic
 							m_headEffectSpriteId = aChild->GetId(DataType::ID_SPRITE);
 						else if (aChild->m_name == "loot_table")
 							m_lootTableId = aChild->GetId(DataType::ID_LOOT_TABLE);
+						else if (aChild->m_name == "hybrid_passive")
+							m_hybridPassive = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid member.", aChild->m_name.c_str());
 					}
@@ -391,6 +393,7 @@ namespace tpublic
 				aStream->WriteUInt(m_headEffectSpriteId);
 				aStream->WriteUInt(m_lootTableId);
 				aStream->WriteObjects(m_armorModifiers);
+				aStream->WriteBool(m_hybridPassive);
 			}
 			 
 			bool
@@ -530,6 +533,12 @@ namespace tpublic
 						return false;
 				}
 
+				if (!aStream->IsEnd())
+				{
+					if (!aStream->ReadBool(m_hybridPassive))
+						return false;
+				}
+
 				return true;
 			}
 
@@ -568,6 +577,7 @@ namespace tpublic
 			uint32_t										m_diminishingEffectId = 0;
 			uint32_t										m_headEffectSpriteId = 0;
 			uint32_t										m_lootTableId = 0;
+			bool											m_hybridPassive = false;	// Granted by hybrid talent trees (Data::Class::HybridTalentTree), removed from characters that no longer qualify
 		};
 
 	}

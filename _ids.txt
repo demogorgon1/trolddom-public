@@ -73283,6 +73283,7 @@ aura __maps_thalvaron_nw_mathew_larsen_2_reward 4806
 aura consumable_duskweave_bandage 4807
 aura consumable_heavy_duskweave_bandage 4808
 aura consumable_grilled_grouper_steak 4809
+aura paladin_templar_holy_strike 4810
 map_portal __maps_dungeon_1_exit 9
 map_portal __maps_dungeon_2_exit 10
 map_portal __maps_open_world_dungeon_1_entrance 11

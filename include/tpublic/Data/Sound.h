@@ -61,6 +61,7 @@ namespace tpublic
 				aWriter->WriteUInt(m_musicGenSeed);
 				aWriter->WriteString(m_musicGenPalette);
 				aWriter->WriteString(m_musicGenMode);
+				aWriter->WriteString(m_musicGenAtmosphere);
 			}
 			
 			bool
@@ -83,6 +84,11 @@ namespace tpublic
 					return false;
 				if(!aReader->ReadString(m_musicGenMode))
 					return false;
+				if(!aReader->IsEnd())
+				{
+					if(!aReader->ReadString(m_musicGenAtmosphere))
+						return false;
+				}
 				return true;
 			}
 
@@ -95,6 +101,7 @@ namespace tpublic
 			uint32_t			m_musicGenSeed = 0;
 			std::string			m_musicGenPalette;		// Empty: the seed picks
 			std::string			m_musicGenMode;			// Empty: the seed picks
+			std::string			m_musicGenAtmosphere;	// Empty: the seed (and palette) picks
 			std::string			m_source; // Not serialized
 
 		private:
@@ -116,6 +123,8 @@ namespace tpublic
 						m_musicGenPalette = aChild->GetIdentifier();
 					else if(aChild->m_name == "mode")
 						m_musicGenMode = aChild->GetIdentifier();
+					else if(aChild->m_name == "atmosphere")
+						m_musicGenAtmosphere = aChild->GetIdentifier();
 					else
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 				});

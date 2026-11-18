@@ -130,6 +130,36 @@ namespace tpublic
 		}
 
 		void
+		GetPassiveAuras(
+			const Manifest*										aManifest,
+			const Data::Class*									aClass,
+			const Components::Talents*							aTalents,
+			std::vector<uint32_t>&								aOut)
+		{
+			aOut.clear();
+
+			if(!aTalents->IsHybrid() || GetDonorClass(aManifest, aTalents->m_hybridTalentTreeId) == NULL)
+				return;
+
+			const Data::Class::HybridTalentTree* hybridTalentTree = aClass->GetHybridTalentTree(aTalents->m_hybridTalentTreeId);
+			if(hybridTalentTree == NULL)
+				return;
+
+			for(const Data::Class::HybridPassiveAura& passiveAura : hybridTalentTree->m_passiveAuras)
+			{
+				bool hasRequiredTalentTrees = true;
+				for(uint32_t talentTreeId : passiveAura.m_requiredTalentTreeIds)
+				{
+					if(!aTalents->CanUseTalentTree(aClass->m_talentTrees, talentTreeId))
+						hasRequiredTalentTrees = false;
+				}
+
+				if(hasRequiredTalentTrees)
+					_AddUnique(aOut, passiveAura.m_auraId);
+			}
+		}
+
+		void
 		GetLevelProgression(
 			const Manifest*										aManifest,
 			const Data::Class*									aClass,

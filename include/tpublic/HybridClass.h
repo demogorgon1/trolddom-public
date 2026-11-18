@@ -53,6 +53,11 @@ namespace tpublic
 								const Data::Class*							aClass,
 								uint32_t									aHybridTalentTreeId,
 								Data::Class::StatsConversion&				aOut);
+		void				GetPassiveAuras(
+								const Manifest*								aManifest,
+								const Data::Class*							aClass,
+								const Components::Talents*					aTalents,
+								std::vector<uint32_t>&						aOut);
 		void				GetLevelProgression(
 								const Manifest*								aManifest,
 								const Data::Class*							aClass,

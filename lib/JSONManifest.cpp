@@ -419,6 +419,22 @@ namespace tpublic
 						file.PrintF("%s%s:", k > 0 ? "," : "", _JSONString(m_manifest->GetById<Data::TalentTree>(hybridExport.m_abilitiesByReplacedTalentTreeId[k].first)->m_name).c_str());
 						_WriteAbilityUnlocks(file, hybridExport.m_abilitiesByReplacedTalentTreeId[k].second);
 					}
+					file.PrintF("},");
+
+					// Permanent passive auras of this hybrid, by the class' talent tree it replaces
+					file.PrintF("\"passive_auras\":{");
+					for(size_t k = 0; k < hybridExport.m_passiveAurasByReplacedTalentTreeId.size(); k++)
+					{
+						file.PrintF("%s%s:[", k > 0 ? "," : "", _JSONString(m_manifest->GetById<Data::TalentTree>(hybridExport.m_passiveAurasByReplacedTalentTreeId[k].first)->m_name).c_str());
+						const std::vector<std::pair<uint32_t, const SpriteExport*>>& passiveAuras = hybridExport.m_passiveAurasByReplacedTalentTreeId[k].second;
+						for(size_t l = 0; l < passiveAuras.size(); l++)
+						{
+							const Data::Aura* aura = m_manifest->GetById<Data::Aura>(passiveAuras[l].first);
+							file.PrintF("%s{\"name\":%s,\"string\":%s,\"description\":%s,\"icon\":%zu}", l > 0 ? "," : "", _JSONString(aura->m_name).c_str(),
+								_JSONString(aura->m_string).c_str(), _JSONString(aura->m_description).c_str(), passiveAuras[l].second->m_index);
+						}
+						file.PrintF("]");
+					}
 					file.PrintF("}}");
 				}
 				file.PrintF("],\r\n");
@@ -681,6 +697,14 @@ namespace tpublic
 					AbilityUnlocks abilityUnlocks;
 					_GetAbilityUnlocks(aClass, &talents, abilityUnlocks);
 					hybridExport.m_abilitiesByReplacedTalentTreeId.push_back({ replacedTalentTreeId, abilityUnlocks });
+
+					// Passive auras also depend on which tree was replaced
+					std::vector<uint32_t> passiveAuraIds;
+					HybridClass::GetPassiveAuras(m_manifest, aClass, &talents, passiveAuraIds);
+					std::vector<std::pair<uint32_t, const SpriteExport*>> passiveAuras;
+					for(uint32_t auraId : passiveAuraIds)
+						passiveAuras.push_back({ auraId, _GetSpriteExport(m_manifest->GetById<Data::Aura>(auraId)->m_iconSpriteId) });
+					hybridExport.m_passiveAurasByReplacedTalentTreeId.push_back({ replacedTalentTreeId, passiveAuras });
 				}
 
 				classExport->m_hybrids.push_back(hybridExport);

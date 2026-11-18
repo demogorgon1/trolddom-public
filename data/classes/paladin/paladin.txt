@@ -98,7 +98,14 @@ class paladin:
 
 	hybrid_talent_trees:
 	{
-		fighter_combat:      { string: "Templar" required_achievement: fighter_level_10 level_progression: [ { level: 30 achievement: paladin_hybrid_fighter_combat_level_30 } ] }
+		fighter_combat:
+		{
+			string: "Templar"
+			required_achievement: fighter_level_10
+			level_progression: [ { level: 30 achievement: paladin_hybrid_fighter_combat_level_30 } ]
+			passive_aura paladin_templar_holy_strike: { }
+		}
+
 		priest_condemnation: { string: "Zealot" required_achievement: priest_level_10 level_progression: [ { level: 30 achievement: paladin_hybrid_priest_condemnation_level_30 } ] }
 		sorcerer_elemental:  { string: "Stormcaller" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: paladin_hybrid_sorcerer_elemental_level_30 } ] }
 		sorcerer_battle_mage: { string: "Runeknight" required_achievement: sorcerer_level_10 level_progression: [ { level: 30 achievement: paladin_hybrid_sorcerer_battle_mage_level_30 } ] }
@@ -323,8 +330,29 @@ achievement paladin_hybrid_witch_malice_level_30:
 	string: "Oathbreaker (Level 30)" 
 	description: "Reach level 30 as an Oathbreaker." 
 	points: 10 
-	icon: icon_malice 
-	no_progress_values: true 
+	icon: icon_malice
+	no_progress_values: true
+}
+
+###############################################################################
+# Hybrid passive auras (for balancing hybrids, given in 'hybrid_talent_trees')
+
+aura paladin_templar_holy_strike:
+{
+	string: "Holy Strike"
+	description: "30% increased damage from Strike against undead creatures."
+	icon: icon_strike
+	type: hidden
+	flags: [ persist_in_death ]
+	hybrid_passive: true
+
+	aura_effect damage_output_modifier:
+	{
+		requirement target<must_be_creature_type>: undead
+		multiplier: 1.3
+		type_mask: [ all ]
+		apply_to_abilities: [ strike ]
+	}
 }
 
 ###############################################################################

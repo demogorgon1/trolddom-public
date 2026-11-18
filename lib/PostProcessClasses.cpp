@@ -2,11 +2,13 @@
 
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Achievement.h>
+#include <tpublic/Data/Aura.h>
 #include <tpublic/Data/Class.h>
 #include <tpublic/Data/TalentTree.h>
 
 #include <tpublic/ItemMetrics.h>
 #include <tpublic/Manifest.h>
+#include <tpublic/ToolTipMultiplier.h>
 
 #include "PostProcessClasses.h"
 
@@ -115,6 +117,76 @@ namespace tpublic
 						}
 
 						TP_VERIFY(found, debugInfo, "Hybrid talent tree '%s' excludes '%s', which it wouldn't get anyway.", talentTree->m_name.c_str(), aManifest->GetById<Data::Ability>(excludedAbilityId)->m_name.c_str());
+					}
+
+					// Passive auras
+					{
+						// Abilities the hybrid has no matter which talent tree was replaced: the class' core abilities and the
+						// donor class' 'hybrid' abilities
+						std::unordered_set<uint32_t> alwaysAvailableAbilityIds;
+						for(const Data::Class* t : { (const Data::Class*)aClass, donorClass })
+						{
+							if(t->m_hybrid && t->m_hybrid->m_levelProgression)
+							{
+								for(const std::unique_ptr<Data::Class::LevelProgressionLevel>& level : t->m_hybrid->m_levelProgression->m_levels)
+								{
+									for(uint32_t abilityId : level->m_unlockAbilities)
+										alwaysAvailableAbilityIds.insert(abilityId);
+								}
+							}
+						}
+
+						std::unordered_set<uint32_t> passiveAuraIds;
+
+						for(const Data::Class::HybridPassiveAura& passiveAura : hybridTalentTree.m_passiveAuras)
+						{
+							const Data::Aura* aura = aManifest->GetById<Data::Aura>(passiveAura.m_auraId);
+							const std::optional<DataErrorHandling::DebugInfo>& auraDebugInfo = passiveAura.m_debugInfo;
+
+							TP_VERIFY(!passiveAuraIds.contains(aura->m_id), auraDebugInfo, "Passive aura '%s' listed more than once.", aura->m_name.c_str());
+							passiveAuraIds.insert(aura->m_id);
+
+							// Characters have these auras permanently, the flag makes sure they're removed again when they no longer qualify
+							TP_VERIFY(aura->m_hybridPassive, auraDebugInfo, "Passive aura '%s' must have 'hybrid_passive: true'.", aura->m_name.c_str());
+							TP_VERIFY(aura->m_type == Data::Aura::TYPE_HIDDEN && (aura->m_flags & Data::Aura::FLAG_PERSIST_IN_DEATH) != 0 && aura->m_duration == 0,
+								auraDebugInfo, "Passive aura '%s' must be 'type: hidden', 'persist_in_death' and have no duration.", aura->m_name.c_str());
+							TP_VERIFY(aura->m_iconSpriteId != 0 && !aura->m_string.empty() && !aura->m_description.empty(), auraDebugInfo, "Passive aura '%s' needs an icon, a string and a description (it's shown in the abilities window).", aura->m_name.c_str());
+
+							for(uint32_t requiredTalentTreeId : passiveAura.m_requiredTalentTreeIds)
+							{
+								TP_VERIFY(aClass->HasTalentTree(requiredTalentTreeId), auraDebugInfo, "Passive aura '%s' requires talent tree '%s', which isn't one of the class' own.",
+									aura->m_name.c_str(), aManifest->GetById<Data::TalentTree>(requiredTalentTreeId)->m_name.c_str());
+							}
+
+							// Abilities the aura affects (as far as the tool tip multipliers tell) must be ones the character has: the
+							// talent trees of any class abilities must be required, as they might have been replaced
+							for(const std::unique_ptr<Data::Aura::AuraEffectEntry>& auraEffect : aura->m_auraEffects)
+							{
+								auraEffect->m_auraEffectBase->ForEachToolTipMultiplier([&](
+									ToolTipMultiplier& aToolTipMultiplier)
+								{
+									for(uint32_t abilityId : aToolTipMultiplier.m_abilityIds)
+									{
+										const Data::Ability* ability = aManifest->GetById<Data::Ability>(abilityId);
+										if(ability->m_talentTreeId == 0 || ability->m_talentTreeId == talentTree->m_id || alwaysAvailableAbilityIds.contains(abilityId))
+											continue;
+
+										TP_VERIFY(aClass->HasTalentTree(ability->m_talentTreeId), auraDebugInfo, "Passive aura '%s' affects '%s', which a '%s' can't have.",
+											aura->m_name.c_str(), ability->m_name.c_str(), hybridTalentTree.m_string.c_str());
+
+										bool required = false;
+										for(uint32_t requiredTalentTreeId : passiveAura.m_requiredTalentTreeIds)
+										{
+											if(requiredTalentTreeId == ability->m_talentTreeId)
+												required = true;
+										}
+
+										TP_VERIFY(required, auraDebugInfo, "Passive aura '%s' affects '%s', so it must have 'required_talent_trees' with '%s' (it might have been replaced).",
+											aura->m_name.c_str(), ability->m_name.c_str(), aManifest->GetById<Data::TalentTree>(ability->m_talentTreeId)->m_name.c_str());
+									}
+								});
+							}
+						}
 					}
 				}
 				return true;
