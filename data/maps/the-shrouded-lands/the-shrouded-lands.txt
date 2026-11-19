@@ -101,6 +101,8 @@ map_palette .tiles:
 
 map_palette .stuff:
 {	
+	!DEFAULT_MAP_ENTITY_SPAWN_PALETTE{}
+	
 	entity_spawn underworld_shrine_top_deity: [ 160 135 60 ]	
 	entity_spawn holy_altar_top_deity: [ 35 160 60 ]	
 	entity_spawn bonfire: [ 251 43 66 ]		
@@ -252,6 +254,7 @@ map the_shrouded_lands:
 	max_players: 80
 	level: 10
 	allow_spirit_travel: false
+	ambient_light: [ 230 240 250 ]
 	
 	realm_balance: [ the_shrouded_lands_light the_shrouded_lands_underworld ]
 	

@@ -85,6 +85,8 @@ map_entity_spawn .flimlock_4_quest_item: { entity thalvaron_flimlock_4_quest_ite
 
 map_palette .stuff:
 {
+	!DEFAULT_MAP_ENTITY_SPAWN_PALETTE{}
+
 	player_spawn .player_spawn: [ 0 0 255 ]
 	
 	portal .exit: [ 0 253 0 ]	
@@ -231,6 +233,7 @@ map the_devouring_shroud:
 	max_players: 5
 	max_minions: 1
 	openable_elite: true
+	ambient_light: [ 230 245 230 ]
 	
 	layers:
 	[
