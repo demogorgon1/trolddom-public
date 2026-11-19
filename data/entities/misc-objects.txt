@@ -41,6 +41,8 @@ entity wall_torch_south: !MISC_OBJECT { _frames: [ wall_torch_south_1 wall_torch
 entity wall_torch_east: !MISC_OBJECT { _frames: [ wall_torch_east_1 wall_torch_east_2 wall_torch_east_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 tail: true } }
 entity wall_torch_west: !MISC_OBJECT { _frames: [ wall_torch_west_1 wall_torch_west_2 wall_torch_west_3 ] _light: { color: [ 1 0.7 0.4 ] radius: 3.5 tail: true } }
 entity brazier: !MISC_OBJECT { _string: "Brazier" _frames: [ brazier_1 brazier_2 brazier_3 ] _glow: true _light: { color: [ 1 0.7 0.4 ] radius: 4.5 tail: true } }
+entity brazier_green: !MISC_OBJECT { _string: "Brazier" _frames: [ brazier_green_1 brazier_green_2 brazier_green_3 ] _glow: true _light: { color: [ 0 0.8 0.5 ] radius: 4.5 tail: true } }
+entity brazier_blue: !MISC_OBJECT { _string: "Brazier" _frames: [ brazier_blue_1 brazier_blue_2 brazier_blue_3 ] _glow: true _light: { color: [ 0 0.4 0.8 ] radius: 4.5 tail: true } }
 
 entity fill_light:
 {

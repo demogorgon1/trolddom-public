@@ -160,6 +160,16 @@ map_entity_spawn brazier:
 	entity brazier: { weight: 1 }
 }
 
+map_entity_spawn brazier_green:
+{
+	entity brazier_green: { weight: 1 }
+}
+
+map_entity_spawn brazier_blue:
+{
+	entity brazier_blue: { weight: 1 }
+}
+
 map_entity_spawn fill_light:
 {
 	entity fill_light: { weight: 1 }

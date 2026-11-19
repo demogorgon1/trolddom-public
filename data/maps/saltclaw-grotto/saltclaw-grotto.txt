@@ -28,6 +28,8 @@ map_palette .tiles: !DEFAULT_TILE_PALETTE{}
 
 map_palette .stuff:
 {
+	!DEFAULT_MAP_ENTITY_SPAWN_PALETTE{}
+
 	wall stone_wall: [ 128 128 128 ]
 
 	player_spawn .player_spawn: [ 0 0 255 ]

@@ -526,7 +526,7 @@
 # Generated music for a zone or map: music: !ZONE_MUSIC{ _params: forest_calm _seed: 1234 _palette: choir_and_harp _mode: dorian _atmosphere: cave }
 # _params is a music_gen_params (see sound/music/music-gen-params.txt in kaos), _seed picks instruments, key, tempo and theme.
 # _palette (choir_and_harp, strings_and_harpsichord, crypt_organ, synth_dungeon, heroic_hall, glass_cavern), _mode (dorian,
-# aeolian, harmonic_minor, phrygian, from bright to dark) and _atmosphere (hall, cathedral, crypt, cave, worn_tape,
+# aeolian, harmonic_minor, phrygian, from bright to dark) and _atmosphere (hall, cathedral, crypt, cave,
 # open_air: the space the music is played in) are optional: set them to keep the character if the generator changes.
 
 !define ZONE_MUSIC $sound { music_gen: { params: @_params seed: @_seed <exists _palette> palette: @_palette <exists _mode> mode: @_mode <exists _atmosphere> atmosphere: @_atmosphere } }

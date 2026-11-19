@@ -26592,6 +26592,8 @@ entity thalvaron_mathew_larsen_2_quest_item 2478
 entity thalvaron_mathew_larsen_2_fire_elemental 2479
 entity brazier 2480
 entity thalvaron_ashira_thornbound_golem 2481
+entity brazier_green 2482
+entity brazier_blue 2483
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -27654,6 +27656,8 @@ map_entity_spawn fill_light 1113
 map_entity_spawn __maps_gateway_world_3_tower_quest_item 1114
 map_entity_spawn brazier 1115
 map_entity_spawn thalvaron_ashira_thornbound_golem 1116
+map_entity_spawn brazier_green 1117
+map_entity_spawn brazier_blue 1118
 map_player_spawn dungeon_1_exit 9
 map_player_spawn __maps_dungeon_1_player_spawn 12
 map_player_spawn __maps_dungeon_2_player_spawn 13
@@ -34358,6 +34362,12 @@ sprite __unnamed_908__ 6456
 sprite __unnamed_910__ 6457
 sprite __unnamed_911__ 6458
 sprite __unnamed_912__ 6459
+sprite brazier_green_1 6460
+sprite brazier_green_2 6461
+sprite brazier_green_3 6462
+sprite brazier_blue_1 6463
+sprite brazier_blue_2 6464
+sprite brazier_blue_3 6465
 faction monsters 1
 faction wildlife 2
 faction npcs 3

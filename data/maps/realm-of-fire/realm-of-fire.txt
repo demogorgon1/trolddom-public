@@ -144,6 +144,8 @@ map_entity_spawn .welter: { entity .welter: { init_state: default } }
 
 map_palette .stuff:
 {
+	!DEFAULT_MAP_ENTITY_SPAWN_PALETTE{}
+	
 	entity_spawn spirit_stone: [ 0 0 0 ]	
 	entity_spawn fire: [ 255 122 0 ]	
 	entity_spawn default_chest: [ 40 143 66 ]		

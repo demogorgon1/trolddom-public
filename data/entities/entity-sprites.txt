@@ -1402,6 +1402,14 @@ sprites:
 	sprite brazier_1: { }
 	sprite brazier_2: { }
 	sprite brazier_3: { }
+	sprite brazier_green_1: { }
+	sprite brazier_green_2: { }
+	sprite brazier_green_3: { }
+
+	cursor: { position: [ 0 160 ] }
+	sprite brazier_blue_1: { }
+	sprite brazier_blue_2: { }
+	sprite brazier_blue_3: { }
 	
 }
 

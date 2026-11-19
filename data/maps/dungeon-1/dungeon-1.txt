@@ -37,6 +37,8 @@ map_palette .tiles:
 
 map_palette .stuff:
 {
+	!DEFAULT_MAP_ENTITY_SPAWN_PALETTE{}
+
 	entity_spawn mining: [ 200 200 200 ]
 	entity_spawn herbalism: [ 0 255 0 ]
 	entity_spawn holy_altar: [ 0 0 40 ]	

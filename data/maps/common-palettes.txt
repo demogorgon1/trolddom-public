@@ -4,6 +4,9 @@
 	entity_spawn wall_torch_east: [ 49 114 105 ]
 	entity_spawn wall_torch_west: [ 149 14 105 ]
 	entity_spawn brazier: [ 149 114 105 ]
+	entity_spawn brazier_green: [ 20 249 100 ]
+	entity_spawn brazier_blue: [ 120 249 100 ]
+	entity_spawn fill_light: [ 220 249 100 ]
 }
 
 !define DEFAULT_TILE_PALETTE
