@@ -899,6 +899,8 @@ item consumable_poison_protection_potion (potion):
 item consumable_fragmentation_grenade:
 {
 	icon: icon_grenade_1
+	loot_groups: [ fishing_myrmidon_grenade ]
+	level_range: [ 1 32 ] # Any level can drop it (only myrmidons do)
 	string: "Fragmentation Grenade"
 	stack: 20	
 	item_level: 10

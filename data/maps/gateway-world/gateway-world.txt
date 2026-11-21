@@ -285,6 +285,7 @@ map gateway_world:
 
 	default_tile: water
 	default_fishing_loot_table: fish
+	default_fishing_map_entity_spawn: fishing_monsters
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 45			

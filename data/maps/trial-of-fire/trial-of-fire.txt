@@ -188,6 +188,7 @@ map trial_of_fire:
 	
 	default_tile: lava_b	
 	default_fishing_loot_table: fish_realm_of_fire
+	default_fishing_map_entity_spawn: fishing_monsters_lava_22
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 45			

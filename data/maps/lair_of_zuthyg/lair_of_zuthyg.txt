@@ -45,6 +45,7 @@ map lair_of_zuthyg:
 	default_player_spawn: .player_spawn
 	default_exit_portal: .exit
 	default_fishing_loot_table: fish
+	default_fishing_map_entity_spawn: fishing_monsters
 	view_attenuation: 30
 	view_attenuation_bias: 50
 	view_hidden_visibility: 0

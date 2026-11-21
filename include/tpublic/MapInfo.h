@@ -76,6 +76,16 @@ namespace tpublic
 				m_defaultFishingLootTableId = aItem->GetId(DataType::ID_LOOT_TABLE);
 				return true;
 			}
+			else if (aItem->m_name == "default_fishing_map_entity_spawn")
+			{
+				m_defaultFishingMapEntitySpawnId = aItem->GetId(DataType::ID_MAP_ENTITY_SPAWN);
+				return true;
+			}
+			else if (aItem->m_name == "fishing_monster_chance")
+			{
+				m_fishingMonsterChance = aItem->GetUInt32();
+				return true;
+			}
 			else if (aItem->m_name == "has_overview_map")
 			{
 				if(aItem->GetBool())
@@ -167,6 +177,8 @@ namespace tpublic
 			aWriter->WriteBool(m_heroicModeAvailable);
 			aWriter->WriteOptionalPOD(m_ambientLight);
 			aWriter->WriteUInt(m_musicSoundId);
+			aWriter->WriteUInt(m_defaultFishingMapEntitySpawnId);
+			aWriter->WriteUInt(m_fishingMonsterChance);
 		}
 
 		bool
@@ -217,6 +229,10 @@ namespace tpublic
 				return false;
 			if (!aReader->ReadUInt(m_musicSoundId))
 				return false;
+			if (!aReader->ReadUInt(m_defaultFishingMapEntitySpawnId))
+				return false;
+			if (!aReader->ReadUInt(m_fishingMonsterChance))
+				return false;
 			return true;
 		}
 
@@ -243,6 +259,8 @@ namespace tpublic
 		bool										m_heroicModeAvailable = false;
 		std::optional<Image::RGBA>					m_ambientLight;			// Not set: white (no darkening)
 		uint32_t									m_musicSoundId = 0;		// Not set: default music
+		uint32_t									m_defaultFishingMapEntitySpawnId = 0;	// Monsters that can show up instead of a fishing splash, by level of the fishing tile
+		uint32_t									m_fishingMonsterChance = 20;			// Per 1000 fishing splashes
 	};
 
 }

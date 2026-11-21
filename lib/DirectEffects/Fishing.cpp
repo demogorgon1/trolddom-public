@@ -1,5 +1,6 @@
 #include "../Pcheader.h"
 
+#include <tpublic/Components/NPC.h>
 #include <tpublic/Components/Openable.h>
 #include <tpublic/Components/PlayerPrivate.h>
 #include <tpublic/Components/Position.h>
@@ -7,6 +8,7 @@
 #include <tpublic/Data/Ability.h>
 #include <tpublic/Data/Entity.h>
 #include <tpublic/Data/LootTable.h>
+#include <tpublic/Data/MapEntitySpawn.h>
 #include <tpublic/Data/Profession.h>
 #include <tpublic/Data/Sprite.h>
 #include <tpublic/Data/Zone.h>
@@ -23,6 +25,82 @@
 
 namespace tpublic::DirectEffects
 {
+
+	namespace
+	{
+
+		// Sometimes a monster takes the bait instead of a fish (with a splash that can't be caught): picked from the map's
+		// fishing map entity spawn (by level, zone and tile flags of the fishing tile, like any other map entity spawn) and
+		// attacking the fisher right away
+		bool
+		_SpawnMonster(
+			std::mt19937&					aRandom,
+			const Manifest*					aManifest,
+			const MapData*					aMap,
+			uint32_t						aLevel,
+			uint32_t						aZoneId,
+			uint32_t						aTileFlags,
+			const Vec2&						aPosition,
+			EntityInstance*					aFisher,
+			IEventQueue*					aEventQueue)
+		{
+			const MapInfo& mapInfo = aMap->m_mapInfo;
+			if(mapInfo.m_defaultFishingMapEntitySpawnId == 0 || mapInfo.m_fishingMonsterChance == 0)
+				return false;
+
+			UniformDistribution<uint32_t> chance(1, 1000);
+			if(chance(aRandom) > mapInfo.m_fishingMonsterChance)
+				return false;
+
+			const Data::MapEntitySpawn* mapEntitySpawn = aManifest->GetById<Data::MapEntitySpawn>(mapInfo.m_defaultFishingMapEntitySpawnId);
+
+			std::vector<const Data::MapEntitySpawn::Entity*> possibilities;
+			uint32_t totalWeight = 0;
+			for(const std::unique_ptr<Data::MapEntitySpawn::Entity>& entity : mapEntitySpawn->m_entities)
+			{
+				if(entity->m_weight > 0 && entity->HasLevel(aLevel) && entity->HasZone(aZoneId) && entity->CheckTileFlags(aTileFlags))
+				{
+					possibilities.push_back(entity.get());
+					totalWeight += entity->m_weight;
+				}
+			}
+
+			if(totalWeight == 0)
+				return false;
+
+			const Data::MapEntitySpawn::Entity* selected = NULL;
+			{
+				UniformDistribution<uint32_t> distribution(1, totalWeight);
+				uint32_t roll = distribution(aRandom);
+				for(const Data::MapEntitySpawn::Entity* possibility : possibilities)
+				{
+					if(roll <= possibility->m_weight)
+					{
+						selected = possibility;
+						break;
+					}
+					roll -= possibility->m_weight;
+				}
+				assert(selected != NULL);
+			}
+
+			EntityInstance* monster = aEventQueue->EventQueueSpawnEntity(selected->m_entityId, selected->m_initState, 0, false);
+
+			monster->GetComponent<Components::Position>()->m_position = aPosition;
+
+			Components::NPC* npc = monster->GetComponent<Components::NPC>();
+			if(npc != NULL)
+				npc->m_spawnWithTarget = { { aFisher->GetEntityInstanceId(), aFisher->GetSeq() }, 1 };
+
+			// Splash where it came out of the water, with nothing to catch
+			uint32_t splashEntityId = aManifest->GetExistingIdByName<Data::Entity>("fishing_monster_splash");
+			EntityInstance* splash = aEventQueue->EventQueueSpawnEntity(splashEntityId, EntityState::ID_DEFAULT, 0, false);
+			splash->GetComponent<Components::Position>()->m_position = aPosition;
+
+			return true;
+		}
+
+	}
 
 	void
 	Fishing::FromSource(
@@ -80,6 +158,7 @@ namespace tpublic::DirectEffects
 		};
 
 		std::optional<Vec2> fishingPosition;
+		uint32_t fishingTileFlags = 0;
 
 		uint32_t startOffset = aRandom() % 8;
 		for(uint32_t i = 0; i < 8; i++)
@@ -93,6 +172,7 @@ namespace tpublic::DirectEffects
 				if(tileSpriteData->m_info.m_flags & SpriteInfo::FLAG_TILE_FISHABLE)
 				{
 					fishingPosition = p;
+					fishingTileFlags = tileSpriteData->m_info.m_flags;
 					break;
 				}
 			}
@@ -101,6 +181,7 @@ namespace tpublic::DirectEffects
 		if(fishingPosition.has_value())
 		{
 			uint32_t level = 0;
+			uint32_t zoneId = 0;
 			uint32_t lootTableId = 0;
 			uint32_t triggerAbilityId = 0;
 			uint32_t triggerAbilityChance = 0;
@@ -110,6 +191,7 @@ namespace tpublic::DirectEffects
 				const WorldInfoMap::Entry& worldInfo = map->m_worldInfoMap->Get(fishingPosition.value());
 
 				level = worldInfo.m_level;
+				zoneId = worldInfo.m_zoneId;
 
 				const Data::Zone* zone = worldInfo.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_zoneId) : NULL;
 				const Data::Zone* subZone = worldInfo.m_subZoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_subZoneId) : NULL;
@@ -175,7 +257,7 @@ namespace tpublic::DirectEffects
 					{
 						// Each tick has 15% chance of making a splash
 						UniformDistribution<uint32_t> distribution(1, 100);
-						if (distribution(aRandom) <= 15)
+						if (distribution(aRandom) <= 15 && !_SpawnMonster(aRandom, aManifest, map, level, zoneId, fishingTileFlags, fishingPosition.value(), aTarget, aEventQueue))
 						{
 							uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<Data::Entity>("fishing_splash");
 

@@ -1147,10 +1147,26 @@ sprites:
 	cursor: { position: [ 0 992 ] }
 	sprite zombie_8: { dead: zombie_8_dead tags: [ undead ] }
 	sprite boar_4: { dead: boar_4_dead }
+	sprite sea_witch_1: { dead: sea_witch_1_dead }
+	sprite myrmidon_1: { dead: myrmidon_1_dead }
+	sprite sea_witch_2: { dead: sea_witch_2_dead }
+	sprite myrmidon_2: { dead: myrmidon_2_dead }
+	sprite sea_witch_3: { dead: sea_witch_3_dead }
+	sprite myrmidon_3: { dead: myrmidon_3_dead }
+	sprite sea_witch_4: { dead: sea_witch_4_dead }
+	sprite myrmidon_4: { dead: myrmidon_4_dead }
 
 	cursor: { position: [ 0 1008 ] }
 	sprite zombie_8_dead: { }
 	sprite boar_4_dead: { }
+	sprite sea_witch_1_dead: { }
+	sprite myrmidon_1_dead: { }
+	sprite sea_witch_2_dead: { }
+	sprite myrmidon_2_dead: { }
+	sprite sea_witch_3_dead: { }
+	sprite myrmidon_3_dead: { }
+	sprite sea_witch_4_dead: { }
+	sprite myrmidon_4_dead: { }
 	
 }
 

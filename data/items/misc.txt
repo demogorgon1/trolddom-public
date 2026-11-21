@@ -476,7 +476,7 @@ item item_polished_stone:
 	rarity: uncommon
 	string: "Polished Stone"
 	stack: 10
-	loot_groups: [ demons_uncommon earth_elementals_uncommon ]
+	loot_groups: [ demons_uncommon earth_elementals_uncommon fishing_polished_stone ]
 	tags: [ reagent ]		
 }
 

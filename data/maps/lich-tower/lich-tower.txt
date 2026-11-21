@@ -167,6 +167,7 @@ map lich_tower:
 	default_player_spawn: .player_spawn
 	default_exit_portal: .exit
 	default_fishing_loot_table: fish_slime
+	default_fishing_map_entity_spawn: fishing_monsters_slime_18
 	view_attenuation: 0
 	view_attenuation_bias: 0
 	view_hidden_visibility: 45	
