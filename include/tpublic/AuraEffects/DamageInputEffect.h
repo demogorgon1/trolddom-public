@@ -132,6 +132,7 @@ namespace tpublic
 
 			// AuraEffectBase implementation
 			void				OnDamageInput(
+									const Manifest*					aManifest,
 									const EntityInstance*			aSource,
 									const EntityInstance*			aTarget,
 									const SourceEntityInstance&		aAuraSource,
@@ -182,6 +183,14 @@ namespace tpublic
 					{
 						m_combatLogAbilityId = aChild->GetId(DataType::ID_ABILITY);
 					}
+					else if(aChild->m_name == "health_threshold")
+					{
+						m_healthThreshold = aChild->GetUInt32();
+					}
+					else if(aChild->m_name == "ability")
+					{
+						m_abilityId = aChild->GetId(DataType::ID_ABILITY);
+					}
 					else
 					{
 						TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
@@ -198,6 +207,8 @@ namespace tpublic
 				aStream->WriteObjects(m_effects);
 				aStream->WriteBool(m_auraSourceOnly);
 				aStream->WriteUInt(m_combatLogAbilityId);
+				aStream->WriteUInt(m_healthThreshold);
+				aStream->WriteUInt(m_abilityId);
 			}
 
 			bool
@@ -214,6 +225,10 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadUInt(m_combatLogAbilityId))
 					return false;
+				if (!aStream->ReadUInt(m_healthThreshold))
+					return false;
+				if (!aStream->ReadUInt(m_abilityId))
+					return false;
 				return true;
 			}
 
@@ -227,6 +242,8 @@ namespace tpublic
 				t->m_effects = m_effects;
 				t->m_auraSourceOnly = m_auraSourceOnly;
 				t->m_combatLogAbilityId = m_combatLogAbilityId;
+				t->m_healthThreshold = m_healthThreshold;
+				t->m_abilityId = m_abilityId;
 
 				return t;
 			}
@@ -236,6 +253,8 @@ namespace tpublic
 			std::vector<Effect>		m_effects;			
 			bool					m_auraSourceOnly = false;
 			uint32_t				m_combatLogAbilityId = 0;
+			uint32_t				m_healthThreshold = 0;	// Percent: only when the damage takes the target from at least this much health to below it
+			uint32_t				m_abilityId = 0;		// Used by the target (the one with the aura) on itself
 		};
 
 	}

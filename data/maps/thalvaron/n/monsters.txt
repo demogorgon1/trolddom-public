@@ -2092,3 +2092,74 @@ map_entity_spawn thalvaron_mordargh_the_soul_drinker:
 
 	entity thalvaron_mordargh_the_soul_drinker: !NPC { _string: "Mordargh the Soul Drinker" _sprite: demon_1 _sprite_dead: demon_1_dead }
 }
+
+##########################################################################################
+# Frozen Landing
+
+map_entity_spawn thalvaron_gateway_sentinel: 
+{ 
+	entity thalvaron_gateway_sentinel: {} 
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
+# Gateway Sentinel: stationary demon casting fireballs (no cooldown) at range
+{
+	loot_table .gateway_sentinel: 
+	{
+		slots:
+		[	
+			!WORLD_DROPS {}
+			!WORLD_DROPS_DEMONS {}
+		]	
+	}
+
+	ability .gateway_sentinel_fireball:
+	{
+		string: "Fireball"
+		range: 10
+		cast_time: 20
+		cooldowns: [ global spell_fire_lockout ]
+		flags: [ spell offensive target_other target_hostile can_miss interruptable ]
+		states: [ in_combat ]
+		icon: icon_firebolt
+		speed: 6
+		target_particle_system: orange_spell_hit
+
+		projectile: $particle_system
+		{
+			light: { color: [ 1 0.7 0.4 ] radius: 5 }
+			particle:
+			{
+				sprites: [ effect_fireball ]
+				flags: [ attached no_rotation face_target ]
+				count: 1
+				scale: 0.5
+			}
+		}
+
+		# Same damage as the NPC frostbolt (without the burning), since there is no cooldown
+		direct_effect damage:
+		{
+			flags: [ can_be_critical is_magical ]
+			damage_type: fire
+			function: { expression: a a: [ [ 1 12 ] [ 10 35 ] [ 20 70 ] [ 30 140 ] ] elite_multiplier: 1.7 heroic_multiplier: 2 }
+			spread: !DEFAULT_SPREAD{}
+		}
+	}
+
+	entity thalvaron_gateway_sentinel: !NPC 
+	{ 
+		_string: "Gateway Sentinel"
+		_level: 31
+		_faction: monsters
+		_creature_type: demon
+		_can_move: false
+		_loot_table: .gateway_sentinel
+		_sprite: demon_9
+		_sprite_dead: demon_9_dead
+		_abilities:
+		[
+			{ id: .gateway_sentinel_fireball }
+		]
+	}
+}

@@ -735,6 +735,9 @@ namespace tpublic
 			if(openable == NULL)
 				return false;
 
+			if(openable->m_encounterId != 0)
+				return false; // Doors controlled by an encounter
+
 			if (openable->m_requiredProfessionId != 0)
 			{
 				const tpublic::Components::PlayerPrivate* playerPrivate = aSelf->GetComponent<tpublic::Components::PlayerPrivate>();

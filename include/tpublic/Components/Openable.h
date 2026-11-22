@@ -146,7 +146,9 @@ namespace tpublic
 				FIELD_CONTEXT_HELP,
 				FIELD_SPRITE_INDEX,
 				FIELD_CHATS,
-				FIELD_UNLOCK_MAP_TRIGGER_IDS
+				FIELD_UNLOCK_MAP_TRIGGER_IDS,
+				FIELD_ENCOUNTER_ID,
+				FIELD_ENCOUNTER_TRANSITION_TICKS
 			};
 
 			static void
@@ -177,6 +179,8 @@ namespace tpublic
 				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_SPRITE_INDEX, "sprite_index", offsetof(Openable, m_spriteIndex));
 				aSchema->DefineCustomObjects<Chat>(FIELD_CHATS, "chats", offsetof(Openable, m_chats));
 				aSchema->Define(ComponentSchema::TYPE_UINT32_ARRAY, FIELD_UNLOCK_MAP_TRIGGER_IDS, "unlock_map_triggers", offsetof(Openable, m_unlockMapTriggerids))->SetDataType(DataType::ID_MAP_TRIGGER);
+				aSchema->Define(ComponentSchema::TYPE_UINT32, FIELD_ENCOUNTER_ID, "encounter", offsetof(Openable, m_encounterId))->SetDataType(DataType::ID_ENCOUNTER);
+				aSchema->Define(ComponentSchema::TYPE_INT32, FIELD_ENCOUNTER_TRANSITION_TICKS, "encounter_transition_ticks", offsetof(Openable, m_encounterTransitionTicks));
 			}
 
 			void
@@ -206,6 +210,8 @@ namespace tpublic
 				m_spriteIndex = 0;
 				m_chats.clear();
 				m_unlockMapTriggerids.clear();
+				m_encounterId = 0;
+				m_encounterTransitionTicks = 0;
 
 				m_ownerEntityInstanceId = 0;
 			}
@@ -235,6 +241,8 @@ namespace tpublic
 			uint32_t					m_spriteIndex = 0;
 			std::vector<Chat>			m_chats;
 			std::vector<uint32_t>		m_unlockMapTriggerids;
+			uint32_t					m_encounterId = 0;	// Door closed while this encounter is active, open otherwise (can't be opened by players)
+			int32_t						m_encounterTransitionTicks = 0;	// Closing (spawning state) and opening (despawning state) take this long, for animations
 
 			// Server only
 			uint32_t					m_ownerEntityInstanceId = 0;

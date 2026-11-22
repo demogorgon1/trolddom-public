@@ -362,7 +362,7 @@ namespace tpublic
 										break;
 
 									case Data::MapPalette::ENTRY_TYPE_FLAGS:
-										flagsMap[mapX + mapY * m_width] = (uint8_t)entry->m_value;
+										flagsMap[mapX + mapY * m_width] |= (uint8_t)entry->m_value;	// Combined, so each flag can have its own layer
 										hasFlagsMap = true;
 										break;
 

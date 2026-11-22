@@ -208,7 +208,7 @@ namespace tpublic
 				const Data::LootTable* lootTable = aLootGenerator->GetManifest()->GetById<Data::LootTable>(node->m_params[0]);
 
 				std::vector<const EntityInstance*> playerInstances = { aPlayerEntityInstance };
-				aLootGenerator->GenerateItems(aRandom, playerInstances, NULL, aItem->m_itemLevel, 0, false, lootTable, [&](
+				aLootGenerator->GenerateItems(aRandom, playerInstances, NULL, aItem->m_itemLevel, 0, false, 0, lootTable, [&](
 					const ItemInstance& aItemInstance,
 					uint32_t			/*aLootCooldownId*/)
 				{

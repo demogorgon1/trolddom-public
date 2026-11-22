@@ -77,6 +77,7 @@ namespace tpublic
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
 		bool										aElite,
+		uint8_t								aWorldFlags,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{		
@@ -114,7 +115,7 @@ namespace tpublic
 		}
 
 		// Items
-		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, lootTable, aPlayerWorldCharacterId, aLootable);
+		GenerateLootableItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, aWorldFlags, lootTable, aPlayerWorldCharacterId, aLootable);
 	}
 
 	void		
@@ -125,13 +126,14 @@ namespace tpublic
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
 		bool										aElite,
+		uint8_t								aWorldFlags,
 		const Data::LootTable*						aLootTable,
 		uint32_t									aPlayerWorldCharacterId,
 		Components::Lootable*						aLootable) const
 	{
 		const Components::KillContribution* killContribution = aLootableEntityInstance->GetComponent<Components::KillContribution>();
 
-		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, aLootTable, [&](
+		GenerateItems(aRandom, aPlayerEntityInstances, aLootableEntityInstance, aLevel, aCreatureTypeId, aElite, aWorldFlags, aLootTable, [&](
 			const ItemInstance& aItemInstance,
 			uint32_t			aLootCooldownId)			
 		{			
@@ -219,6 +221,7 @@ namespace tpublic
 		uint32_t									aLevel,
 		uint32_t									aCreatureTypeId,
 		bool										aElite,
+		uint8_t								aWorldFlags,
 		const Data::LootTable*						aLootTable,
 		ItemCallback								aItemCallback) const
 	{	
@@ -240,6 +243,9 @@ namespace tpublic
 			for(const Data::LootTable::Possibility& possibility : slot->m_possibilities)
 			{
 				if(!possibility.HasCreatureType(aCreatureTypeId))
+					continue;
+
+				if(!possibility.CheckWorldFlags(aWorldFlags))
 					continue;
 
 				if(possibility.m_elite != Data::LootTable::Possibility::ELITE_DOES_NOT_MATTER)

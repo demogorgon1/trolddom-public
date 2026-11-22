@@ -1002,6 +1002,7 @@ map_palette .stuff:
 	entity_spawn thalvaron_gray_horse: [ 134 94 245 ]
 	entity_spawn thalvaron_demonic_scavenger: [ 38 73 105 ]
 	entity_spawn thalvaron_mordargh_the_soul_drinker: [ 138 53 105 ]
+	entity_spawn thalvaron_gateway_sentinel: [ 238 73 105 ]
 	entity_spawn thalvaron_block_manson: [ 97 84 171 ]
 
 	# SW
@@ -1682,6 +1683,12 @@ map_palette .restricted:
 	flags<[ restricted ]>: [ 255 255 255 ]
 }
 
+map_palette .ocean_and_rivers:
+{
+	flags<[ ocean ]>: [ 0 0 200 ]
+	flags<[ river ]>: [ 0 100 180 ]
+}
+
 map thalvaron:
 {
 	string: "Thalvaron"
@@ -1765,7 +1772,12 @@ map thalvaron:
 		{
 			palettes:	[ .restricted ]
 			source:		"thalvaron-restricted.png"
-		}											
+		}				
+
+		{
+			palettes: 	[ .ocean_and_rivers ]
+			source:     "thalvaron-ocean-and-rivers.png"
+		}
 	]	
 }
  

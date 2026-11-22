@@ -17,7 +17,9 @@ namespace tpublic
 		{
 			FLAG_DEMO		= 0x01,
 			FLAG_INDOOR		= 0x02,
-			FLAG_RESTRICTED	= 0x04
+			FLAG_RESTRICTED	= 0x04,
+			FLAG_OCEAN		= 0x08,
+			FLAG_RIVER		= 0x10
 		};
 
 		static void AutoIndoor(
@@ -41,6 +43,10 @@ namespace tpublic
 					flags |= FLAG_INDOOR;
 				else if (aChild->IsIdentifier("restricted"))
 					flags |= FLAG_RESTRICTED;
+				else if (aChild->IsIdentifier("ocean"))
+					flags |= FLAG_OCEAN;
+				else if (aChild->IsIdentifier("river"))
+					flags |= FLAG_RIVER;
 				else
 					TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid flag.", aChild->GetIdentifier());					
 			});

@@ -368,3 +368,132 @@ item recipe_grilled_grouper_steak:
 		}
 	}
 }
+
+#####################################################
+# Poached Grayling (river fish)
+
+ability craft_poached_grayling: !COOKING_CRAFT
+{
+	_string: "Poached Grayling"
+	_item: consumable_poached_grayling
+	_produce: { consumable_poached_grayling: 1 } 
+	_materials: { item_silverfin_grayling: 1 }	
+	_skill: 85
+}
+
+#####################################################
+# Pike Chowder (river fish)
+
+ability craft_pike_chowder: !COOKING_CRAFT
+{
+	_string: "Pike Chowder"
+	_item: consumable_pike_chowder
+	_produce: { consumable_pike_chowder: 1 } 
+	_materials: { item_streamrunner_pike: 1 item_water: 1 }	
+	_skill: 100
+}
+
+item recipe_pike_chowder:
+{
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 20
+	loot_groups: [ world_drops_uncommon_recipe ]
+	level_range: [ 20 25 ]
+	icon: icon_scroll_1
+	string: "Recipe: Pike Chowder"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Pike Chowder."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_pike_chowder: 1 }
+		required_profession<100>: cooking
+		requirement self<must_not_have_profession_ability>: craft_pike_chowder
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_pike_chowder
+		}
+	}
+}
+
+#####################################################
+# Smoked Riverback Salmon (river fish)
+
+ability craft_smoked_riverback_salmon: !COOKING_CRAFT
+{
+	_string: "Smoked Riverback Salmon"
+	_item: consumable_smoked_riverback_salmon
+	_produce: { consumable_smoked_riverback_salmon: 1 } 
+	_materials: { item_riverback_salmon: 1 item_wild_herbs: 1 }	
+	_skill: 105
+}
+
+item recipe_smoked_riverback_salmon:
+{
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 25
+	loot_groups: [ world_drops_uncommon_recipe ]
+	level_range: [ 24 29 ]
+	icon: icon_scroll_1
+	string: "Recipe: Smoked Riverback Salmon"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Smoked Riverback Salmon."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_smoked_riverback_salmon: 1 }
+		required_profession<105>: cooking
+		requirement self<must_not_have_profession_ability>: craft_smoked_riverback_salmon
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_smoked_riverback_salmon
+		}
+	}
+}
+
+#####################################################
+# Blackened Catfish (river fish)
+
+ability craft_blackened_catfish: !COOKING_CRAFT
+{
+	_string: "Blackened Catfish"
+	_item: consumable_blackened_catfish
+	_produce: { consumable_blackened_catfish: 1 } 
+	_materials: { item_mudwhisker_catfish: 1 item_wild_herbs: 1 }	
+	_skill: 115
+}
+
+item recipe_blackened_catfish:
+{
+	type: miscellaneous
+	flags: [ unique ]
+	rarity: uncommon
+	item_level: 30
+	loot_groups: [ world_drops_uncommon_recipe ]
+	level_range: [ 28 32 ]
+	icon: icon_scroll_1
+	string: "Recipe: Blackened Catfish"
+	use_ability: $ability [ string icon ]
+	{
+		description: "Learn to make Blackened Catfish."
+		flags: [ target_self item ]
+		cast_time: 20
+		cooldowns: [ global ]	
+		consume_items: { recipe_blackened_catfish: 1 }
+		required_profession<115>: cooking
+		requirement self<must_not_have_profession_ability>: craft_blackened_catfish
+		direct_effect learn_profession_ability:
+		{
+			profession: cooking
+			ability: craft_blackened_catfish
+		}
+	}
+}

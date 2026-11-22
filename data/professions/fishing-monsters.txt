@@ -7,25 +7,34 @@ map_entity_spawn fishing_monsters:
 	entity fishing_monster_reef_crab: { level: [ 4 7 ] weight: 5 }
 	entity fishing_monster_brine_crab: { level: [ 5 10 ] weight: 5 }
 	entity fishing_monster_bloodclaw_crab: { level: [ 8 13 ] weight: 5 }
-	entity fishing_monster_crabman_snapper: { level: [ 11 16 ] weight: 5 }
-	entity fishing_monster_crabman_tidecaller: { level: [ 14 19 ] weight: 5 }
-	entity fishing_monster_myrmidon_skirmisher: { level: [ 17 22 ] weight: 5 }
-	entity fishing_monster_sea_witch: { level: [ 20 25 ] weight: 5 }
-	entity fishing_monster_myrmidon_tideguard: { level: [ 23 28 ] weight: 5 }
-	entity fishing_monster_sea_witch_matriarch: { level: [ 26 32 ] weight: 5 }
-	entity fishing_monster_spawn_of_the_deep: { level: [ 29 99 ] weight: 5 }
+	entity fishing_monster_crabman_snapper: { level: [ 11 16 ] weight: 5 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_crabman_tidecaller: { level: [ 14 19 ] weight: 5 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_myrmidon_skirmisher: { level: [ 17 22 ] weight: 5 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_sea_witch: { level: [ 20 25 ] weight: 5 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_myrmidon_tideguard: { level: [ 23 28 ] weight: 5 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_sea_witch_matriarch: { level: [ 26 32 ] weight: 5 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_spawn_of_the_deep: { level: [ 29 99 ] weight: 5 must_have_world_flags: [ ocean ] }
+
+	# Generic crabs away from the ocean (no special loot)
+	entity fishing_monster_crab_13: { level: [ 11 16 ] weight: 5 must_not_have_world_flags: [ ocean ] }
+	entity fishing_monster_crab_16: { level: [ 14 19 ] weight: 5 must_not_have_world_flags: [ ocean ] }
+	entity fishing_monster_crab_19: { level: [ 17 22 ] weight: 5 must_not_have_world_flags: [ ocean ] }
+	entity fishing_monster_crab_22: { level: [ 20 25 ] weight: 5 must_not_have_world_flags: [ ocean ] }
+	entity fishing_monster_crab_25: { level: [ 23 28 ] weight: 5 must_not_have_world_flags: [ ocean ] }
+	entity fishing_monster_crab_28: { level: [ 26 32 ] weight: 5 must_not_have_world_flags: [ ocean ] }
+	entity fishing_monster_crab_31: { level: [ 29 99 ] weight: 5 must_not_have_world_flags: [ ocean ] }
 
 	entity fishing_monster_named_shore_crab: { level: [ 1 4 ] weight: 1 }
 	entity fishing_monster_named_reef_crab: { level: [ 4 7 ] weight: 1 }
 	entity fishing_monster_named_brine_crab: { level: [ 5 10 ] weight: 1 }
 	entity fishing_monster_named_bloodclaw_crab: { level: [ 8 13 ] weight: 1 }
-	entity fishing_monster_named_crabman_snapper: { level: [ 11 16 ] weight: 1 }
-	entity fishing_monster_named_crabman_tidecaller: { level: [ 14 19 ] weight: 1 }
-	entity fishing_monster_named_myrmidon_skirmisher: { level: [ 17 22 ] weight: 1 }
-	entity fishing_monster_named_sea_witch: { level: [ 20 25 ] weight: 1 }
-	entity fishing_monster_named_myrmidon_tideguard: { level: [ 23 28 ] weight: 1 }
-	entity fishing_monster_named_sea_witch_matriarch: { level: [ 26 32 ] weight: 1 }
-	entity fishing_monster_named_spawn_of_the_deep: { level: [ 29 99 ] weight: 1 }
+	entity fishing_monster_named_crabman_snapper: { level: [ 11 16 ] weight: 1 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_named_crabman_tidecaller: { level: [ 14 19 ] weight: 1 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_named_myrmidon_skirmisher: { level: [ 17 22 ] weight: 1 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_named_sea_witch: { level: [ 20 25 ] weight: 1 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_named_myrmidon_tideguard: { level: [ 23 28 ] weight: 1 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_named_sea_witch_matriarch: { level: [ 26 32 ] weight: 1 must_have_world_flags: [ ocean ] }
+	entity fishing_monster_named_spawn_of_the_deep: { level: [ 29 99 ] weight: 1 must_have_world_flags: [ ocean ] }
 }
 
 # Splash shown where a monster comes out of the water
@@ -595,6 +604,58 @@ entity fishing_monster_crabman_tidecaller: !NPC
 ##########################################################################################
 # Level 19: Myrmidon Skirmisher
 
+ability .fishing_shiv_of_the_deep_bleed:
+{
+	string: "Shiv of the Deep"
+	icon: icon_rend
+	flags: [ always_in_range always_in_line_of_sight ]
+	direct_effect apply_aura:
+	{
+		aura: $aura
+		{
+			string: "Deep Wound"
+			description: "Bleeding."
+			icon: icon_rend
+			type: debuff
+			duration: based_on_effects
+			flags: [ unique_per_source ]
+			aura_effect repeat:
+			{
+				update_interval: 20
+				update_count: 5
+				ability: $ability [ string icon ]
+				{
+					states: [ default in_combat ]
+					flags: [ always_in_range always_in_line_of_sight ]
+					direct_effect damage:
+					{
+						damage_type: bleed
+						function: 12
+						direct: false
+					}
+				}
+			}
+		}
+	}
+}
+
+aura .fishing_shiv_of_the_deep:
+{
+	string: "Shiv of the Deep"
+	icon: icon_rend
+	description: "Chance on hit: Wounds the target, causing 12 bleed damage every 2 seconds for 10 seconds."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect combat_event_trigger:
+	{
+		combat_event<source>: [ hit critical ]
+		combat_event_ability_mask: [ offensive melee ]
+		combat_event_ability_reject_mask: [ always_in_range always_in_line_of_sight ]
+		ability<target>: .fishing_shiv_of_the_deep_bleed
+		probability: 20
+	}
+}
+
 item weapon_fishing_myrmidon_skirmisher:
 {
 	type: weapon_1h_knife
@@ -608,6 +669,7 @@ item weapon_fishing_myrmidon_skirmisher:
 	stat_weight strength: 2
 	stat_weight dexterity: 1
 	weapon_cooldown: 20
+	aura: .fishing_shiv_of_the_deep
 }
 
 loot_group .fishing_monster_myrmidon_skirmisher: { }
@@ -641,7 +703,7 @@ item ring_fishing_sea_witch:
 	rarity: uncommon
 	string: "Signet of the Sea Witch"
 	stat_weight wisdom: 1
-	stat_weight spell_damage: 1
+	stat_weight healing: 1
 	stat_weight spirit: 1
 }
 
@@ -1035,6 +1097,40 @@ entity fishing_monster_named_myrmidon_skirmisher: !NPC
 ##########################################################################################
 # Level 22, named: Morvessa of the Third Tide
 
+ability .fishing_rope_of_the_drowned:
+{
+	string: "Rope of the Drowned"
+	icon: icon_necklace_14
+	states: [ default in_combat ]
+	flags: [ always_in_range always_in_line_of_sight ]
+	direct_effect apply_aura:
+	{
+		aura: $aura [ string icon ]
+		{
+			description: "Restoring mana faster."
+			type: buff
+			flags: [ unique ]
+			duration: 300
+			stat_modifiers: { mana_per_5: { add: 40 } }
+		}
+	}
+}
+
+aura .fishing_rope_of_the_drowned:
+{
+	string: "Rope of the Drowned"
+	icon: icon_necklace_14
+	description: "Restore mana faster when you're low health."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_effect:
+	{
+		type_mask: [ all ]
+		health_threshold: 20
+		ability: .fishing_rope_of_the_drowned
+	}
+}
+
 item neck_fishing_named_sea_witch:
 {
 	equipment_slots: [ neck ]
@@ -1046,6 +1142,7 @@ item neck_fishing_named_sea_witch:
 	string: "Rope of the Drowned"
 	stat_weight wisdom: 1
 	stat_weight spell_damage: 2
+	aura: .fishing_rope_of_the_drowned
 }
 
 loot_group .fishing_monster_named_sea_witch: { }
@@ -1149,6 +1246,16 @@ entity fishing_monster_named_sea_witch_matriarch: !NPC
 ##########################################################################################
 # Level 31, named: The Abyssal Maw
 
+aura .fishing_eye_of_the_abyssal_maw:
+{
+	string: "Eye of the Abyssal Maw"
+	icon: icon_tentacle_2
+	description: "Reduces Frost damage taken by 10%."
+	type: hidden
+	flags: [ item silent ]
+	aura_effect damage_input_modifier: { type_mask: [ frost ] multiplier: 0.9 }
+}
+
 item neck_fishing_named_spawn_of_the_deep:
 {
 	equipment_slots: [ neck ]
@@ -1162,6 +1269,7 @@ item neck_fishing_named_spawn_of_the_deep:
 	stat_weight constitution: 2
 	stat_weight wisdom: 1
 	stat_weight strength: 1
+	aura: .fishing_eye_of_the_abyssal_maw
 }
 
 loot_group .fishing_monster_named_spawn_of_the_deep: { }
@@ -1181,6 +1289,115 @@ entity fishing_monster_named_spawn_of_the_deep: !NPC
 	_loot_table: .fishing_monster_named_spawn_of_the_deep
 	_creature_type: beast
 	_abilities: [ { id: npc_frenzy } { id: .fishing_monster_crushing_tentacles } { id: npc_drain_life } { id: npc_attack } ]
+}
+
+##########################################################################################
+# Generic crabs at the levels where the others need the ocean, with only world drops
+
+loot_table .fishing_monster_crab:
+{
+	slots:
+	[
+		!WORLD_DROPS{}
+	]
+}
+
+entity fishing_monster_crab_13: !NPC
+{
+	_string: "Mudshell Crab"
+	_level: 13
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_5
+	_sprite_dead: crab_5_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_pinch } { id: npc_attack } ]
+}
+
+entity fishing_monster_crab_16: !NPC
+{
+	_string: "Riverbank Crab"
+	_level: 16
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_1
+	_sprite_dead: crab_1_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_pinch } { id: npc_attack } ]
+}
+
+entity fishing_monster_crab_19: !NPC
+{
+	_string: "Silt Crab"
+	_level: 19
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_6
+	_sprite_dead: crab_6_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_pinch } { id: npc_attack } ]
+}
+
+entity fishing_monster_crab_22: !NPC
+{
+	_string: "Rockshell Crab"
+	_level: 22
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_3
+	_sprite_dead: crab_3_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_shell_up } { id: .fishing_monster_pinch } { id: npc_attack } ]
+}
+
+entity fishing_monster_crab_25: !NPC
+{
+	_string: "Spiny Crab"
+	_level: 25
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_2
+	_sprite_dead: crab_2_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_shell_up } { id: .fishing_monster_pinch } { id: npc_attack } ]
+}
+
+entity fishing_monster_crab_28: !NPC
+{
+	_string: "Ironshell Crab"
+	_level: 28
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_5
+	_sprite_dead: crab_5_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_shell_up } { id: .fishing_monster_pinch } { id: npc_attack } ]
+}
+
+entity fishing_monster_crab_31: !NPC
+{
+	_string: "Elder Crab"
+	_level: 31
+	_faction: monsters
+	_can_move_on_all_non_view_blocking_tiles: true
+	_despawn_on_leave_combat: true
+	_sprite: crab_4
+	_sprite_dead: crab_4_dead
+	_loot_table: .fishing_monster_crab
+	_creature_type: beast
+	_abilities: [ { id: .fishing_monster_shell_up } { id: .fishing_monster_pinch } { id: npc_attack } ]
 }
 
 ##########################################################################################

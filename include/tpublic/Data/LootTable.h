@@ -3,6 +3,7 @@
 #include "../DataBase.h"
 #include "../Requirement.h"
 #include "../UIntRange.h"
+#include "../WorldInfoMap.h"
 
 namespace tpublic
 {
@@ -99,6 +100,10 @@ namespace tpublic
 							m_requirements.push_back(Requirement(aChild));
 						else if(aChild->m_name == "use_special_loot_cooldown")
 							m_useSpecialLootCooldown = aChild->GetBool();
+						else if(aChild->m_name == "must_have_world_flags")
+							m_mustHaveWorldFlags = WorldInfoMap::SourceToFlags(aChild);
+						else if(aChild->m_name == "must_not_have_world_flags")
+							m_mustNotHaveWorldFlags = WorldInfoMap::SourceToFlags(aChild);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -116,6 +121,8 @@ namespace tpublic
 					aStream->WriteUInt(m_lootCooldownId);
 					aStream->WriteBool(m_useSpecialLootCooldown);
 					aStream->WritePOD(m_elite);
+					aStream->WritePOD(m_mustHaveWorldFlags);
+					aStream->WritePOD(m_mustNotHaveWorldFlags);
 				}
 
 				bool
@@ -138,6 +145,10 @@ namespace tpublic
 						return false;
 					if (!aStream->ReadPOD(m_elite))
 						return false;
+					if (!aStream->ReadPOD(m_mustHaveWorldFlags))
+						return false;
+					if (!aStream->ReadPOD(m_mustNotHaveWorldFlags))
+						return false;
 					return true;
 				}
 
@@ -159,6 +170,15 @@ namespace tpublic
 					return false;
 				}
 
+				bool
+				CheckWorldFlags(
+					uint8_t		aWorldFlags) const
+				{
+					if((aWorldFlags & m_mustNotHaveWorldFlags) != 0)
+						return false;
+					return (aWorldFlags & m_mustHaveWorldFlags) == m_mustHaveWorldFlags;
+				}
+
 				// Public data
 				uint32_t						m_weight = 1;
 				uint32_t						m_lootGroupId = 0;
@@ -168,6 +188,8 @@ namespace tpublic
 				uint32_t						m_lootCooldownId = 0;
 				bool							m_useSpecialLootCooldown = false;
 				Elite							m_elite = ELITE_DOES_NOT_MATTER;
+				uint8_t							m_mustHaveWorldFlags = 0;		// WorldInfoMap flags (e.g. ocean) where the loot is generated
+				uint8_t							m_mustNotHaveWorldFlags = 0;
 			};
 
 			struct Slot

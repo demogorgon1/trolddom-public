@@ -125,6 +125,7 @@
 	train_ability: craft_seared_bass
 	train_ability: craft_spicy_perch_fillet
 	train_ability: craft_mistveil_balls	
+	train_ability: craft_poached_grayling
 	
 	nothing_to_train_dialogue_screen: $dialogue_screen { text: [ "I don't have anything more to teach you." ] }
 }

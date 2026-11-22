@@ -256,6 +256,7 @@ namespace tpublic
 									std::function<void(ToolTipMultiplier&)>		/*aCallback*/) const { }
 		virtual float			GetResourceCostMultiplier() const { return 1.0f; }
 		virtual void			OnDamageInput(
+									const Manifest*								/*aManifest*/,
 									const EntityInstance*						/*aSource*/,
 									const EntityInstance*						/*aTarget*/,
 									const SourceEntityInstance&					/*aAuraSource*/,

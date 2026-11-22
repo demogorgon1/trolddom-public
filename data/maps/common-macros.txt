@@ -48,3 +48,60 @@
 	color: [ 200 0 100 200 ] 
 	heroic_color: [ 220 120 0 200 ] 	
 }
+
+#####################################################
+# Encounter barriers
+
+!define ENCOUNTER_DOOR
+{
+	string: "Gate"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			encounter: @_encounter
+			sound: inventory_1
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ default spawning ] frames: [ door_closed_1 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ door_open_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}
+
+!define ENCOUNTER_SPIKES
+{
+	string: "Spikes"
+	
+	systems: [ door ]
+	
+	components:
+	{
+		position: { }		
+		sound_source: { }
+		openable: 
+		{
+			encounter: @_encounter
+			encounter_transition_ticks: 5
+		}
+		sprite: 
+		{ 
+			animations:
+			[
+				{ states: [ spawning ] frames: [ spike_gate_2 ] z_offset: -3 }
+				{ states: [ default ] frames: [ spike_gate_3 ] z_offset: -3 }
+				{ states: [ despawning ] frames: [ spike_gate_2 ] z_offset: -3 }
+				{ states: [ dead ] frames: [ spike_gate_1 ] z_offset: -3 }
+			]		
+		}		
+	}
+}

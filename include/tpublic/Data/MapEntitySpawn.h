@@ -4,6 +4,7 @@
 #include "../EntityState.h"
 #include "../IntRange.h"
 #include "../SpriteInfo.h"
+#include "../WorldInfoMap.h"
 
 namespace tpublic
 {
@@ -238,6 +239,14 @@ namespace tpublic
 						{
 							m_mustNotHaveTileFlags = SpriteInfo::SourceToFlags(aChild);
 						}
+						else if (aChild->m_name == "must_have_world_flags")
+						{
+							m_mustHaveWorldFlags = WorldInfoMap::SourceToFlags(aChild);
+						}
+						else if (aChild->m_name == "must_not_have_world_flags")
+						{
+							m_mustNotHaveWorldFlags = WorldInfoMap::SourceToFlags(aChild);
+						}
 						else if (aChild->m_name == "init_state")
 						{
 							m_initState = EntityState::StringToId(aChild->GetIdentifier());
@@ -271,6 +280,8 @@ namespace tpublic
 					aStream->WritePOD(m_mustHaveTileFlags);
 					aStream->WritePOD(m_mustNotHaveTileFlags);
 					aStream->WriteOptionalObject(m_controlPointRequirement);
+					aStream->WritePOD(m_mustHaveWorldFlags);
+					aStream->WritePOD(m_mustNotHaveWorldFlags);
 				}
 
 				bool
@@ -294,6 +305,10 @@ namespace tpublic
 					if (!aStream->ReadPOD(m_mustNotHaveTileFlags))
 						return false;
 					if(!aStream->ReadOptionalObject(m_controlPointRequirement))
+						return false;
+					if (!aStream->ReadPOD(m_mustHaveWorldFlags))
+						return false;
+					if (!aStream->ReadPOD(m_mustNotHaveWorldFlags))
 						return false;
 					return true;
 				}
@@ -330,6 +345,15 @@ namespace tpublic
 					return (aTileFlags & m_mustHaveTileFlags) == m_mustHaveTileFlags;
 				}
 
+				bool
+				CheckWorldFlags(
+					uint8_t			aWorldFlags) const
+				{
+					if((aWorldFlags & m_mustNotHaveWorldFlags) != 0)
+						return false;
+					return (aWorldFlags & m_mustHaveWorldFlags) == m_mustHaveWorldFlags;
+				}
+
 				// Public data
 				uint32_t										m_entityId = 0;
 				uint32_t										m_weight = 1;
@@ -340,6 +364,8 @@ namespace tpublic
 				uint32_t										m_mustHaveTileFlags = 0;
 				uint32_t										m_mustNotHaveTileFlags = 0;
 				std::optional<ControlPointRequirement>			m_controlPointRequirement;
+				uint8_t											m_mustHaveWorldFlags = 0;		// WorldInfoMap flags (e.g. ocean) of the spawn position
+				uint8_t											m_mustNotHaveWorldFlags = 0;
 			};
 
 			struct SpawnTimer

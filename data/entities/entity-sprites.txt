@@ -1426,7 +1426,9 @@ sprites:
 	sprite brazier_blue_1: { }
 	sprite brazier_blue_2: { }
 	sprite brazier_blue_3: { }
-	
+	sprite spike_gate_1: { }
+	sprite spike_gate_2: { }
+	sprite spike_gate_3: { }
 }
 
 sprites:

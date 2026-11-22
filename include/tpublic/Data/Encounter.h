@@ -261,6 +261,8 @@ namespace tpublic
 							aChild->GetIdArray(DataType::ID_ENTITY, m_mainEntityIds);
 						else if (aChild->m_name == "script")
 							m_scripts.push_back(std::make_unique<Script>(aChild));
+						else if(aChild->m_name == "block_entry_zone")
+							m_blockEntryZoneId = aChild->GetId(DataType::ID_ZONE);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -276,6 +278,7 @@ namespace tpublic
 				aStream->WriteObjectPointers(m_spawns);
 				aStream->WriteUInts(m_mainEntityIds);
 				aStream->WriteObjectPointers(m_scripts);
+				aStream->WriteUInt(m_blockEntryZoneId);
 			}
 
 			bool
@@ -291,6 +294,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadObjectPointers(m_scripts))
 					return false;
+				if(!aStream->ReadUInt(m_blockEntryZoneId))
+					return false;
 				return true;
 			}
 
@@ -298,6 +303,7 @@ namespace tpublic
 			std::vector<std::unique_ptr<Spawn>>		m_spawns;
 			std::vector<uint32_t>					m_mainEntityIds;
 			std::vector<std::unique_ptr<Script>>	m_scripts;
+			uint32_t								m_blockEntryZoneId = 0;	// Players can't move into this (sub) zone from the outside while the encounter is active
 		};
 
 	}

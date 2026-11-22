@@ -438,7 +438,7 @@ namespace tpublic::Components
 			for (const std::unique_ptr<AuraEffectBase>& effect : entry->m_effects)
 			{
 				if(effect->CheckRequirements(aManifest, aWorldView, aSource, aTarget))
-					effect->OnDamageInput(aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
+					effect->OnDamageInput(aManifest, aSource, aTarget, entry->m_sourceEntityInstance, aDamageType, aDamage, aCombatEventId, aEventQueue, aWorldView, aResourceChangeQueue);
 			}
 		}
 	}

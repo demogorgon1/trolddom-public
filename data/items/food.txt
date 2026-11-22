@@ -567,3 +567,91 @@
 	ability consumable_grilled_grouper_steak: !ABILITY_FOOD {}
 	item consumable_grilled_grouper_steak: !ITEM_FOOD {}
 }
+
+#####################################################
+# Poached Grayling
+{
+	${
+		_string: "Poached Grayling"
+		_description: "Restores 1200 health and mana over 10 seconds. Gain 7 Spirit for 20 min. Can't be used in combat."
+		_level: 15
+		_icon: icon_fish_4_cooked
+		_heal_tick: 120
+		_ability_tick: consumable_poached_grayling_tick
+		_ability: consumable_poached_grayling
+		_aura: consumable_poached_grayling
+		_item: { consumable_poached_grayling: 1 }
+	}
+
+	aura consumable_poached_grayling_buff: !AURA_FOOD_BUFF { _stat_modifiers: { spirit: { add: 7 } } }
+	ability consumable_poached_grayling_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_poached_grayling: !AURA_FOOD { _buff: consumable_poached_grayling_buff }
+	ability consumable_poached_grayling: !ABILITY_FOOD {}
+	item consumable_poached_grayling: !ITEM_FOOD {}
+}
+
+#####################################################
+# Pike Chowder
+{
+	${
+		_string: "Pike Chowder"
+		_description: "Restores 1400 health and mana over 10 seconds. Gain 10 Wisdom for 20 min. Can't be used in combat."
+		_level: 20
+		_icon: icon_fish_1_cooked
+		_heal_tick: 140
+		_ability_tick: consumable_pike_chowder_tick
+		_ability: consumable_pike_chowder
+		_aura: consumable_pike_chowder
+		_item: { consumable_pike_chowder: 1 }
+	}
+
+	aura consumable_pike_chowder_buff: !AURA_FOOD_BUFF { _stat_modifiers: { wisdom: { add: 10 } } }
+	ability consumable_pike_chowder_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_pike_chowder: !AURA_FOOD { _buff: consumable_pike_chowder_buff }
+	ability consumable_pike_chowder: !ABILITY_FOOD {}
+	item consumable_pike_chowder: !ITEM_FOOD {}
+}
+
+#####################################################
+# Smoked Riverback Salmon
+{
+	${
+		_string: "Smoked Riverback Salmon"
+		_description: "Restores 1480 health and mana over 10 seconds. Increases Attack Power by 20 for 20 min. Can't be used in combat."
+		_level: 25
+		_icon: icon_fish_6_cooked
+		_heal_tick: 148
+		_ability_tick: consumable_smoked_riverback_salmon_tick
+		_ability: consumable_smoked_riverback_salmon
+		_aura: consumable_smoked_riverback_salmon
+		_item: { consumable_smoked_riverback_salmon: 1 }
+	}
+
+	aura consumable_smoked_riverback_salmon_buff: !AURA_FOOD_BUFF { _stat_modifiers: { attack_power: { add: 20 } } }
+	ability consumable_smoked_riverback_salmon_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_smoked_riverback_salmon: !AURA_FOOD { _buff: consumable_smoked_riverback_salmon_buff }
+	ability consumable_smoked_riverback_salmon: !ABILITY_FOOD {}
+	item consumable_smoked_riverback_salmon: !ITEM_FOOD {}
+}
+
+#####################################################
+# Blackened Catfish
+{
+	${
+		_string: "Blackened Catfish"
+		_description: "Restores 1650 health and mana over 10 seconds. Increases attack and cast speed by 1% for 20 min. Can't be used in combat."
+		_level: 30
+		_icon: icon_fish_2_cooked
+		_heal_tick: 165
+		_ability_tick: consumable_blackened_catfish_tick
+		_ability: consumable_blackened_catfish
+		_aura: consumable_blackened_catfish
+		_item: { consumable_blackened_catfish: 1 }
+	}
+
+	aura consumable_blackened_catfish_buff: !AURA_FOOD_BUFF { _stat_modifiers: { attack_haste: { add: 1 } spell_haste: { add: 1 } } }
+	ability consumable_blackened_catfish_tick: !ABILITY_FOOD_TICK {}
+	aura consumable_blackened_catfish: !AURA_FOOD { _buff: consumable_blackened_catfish_buff }
+	ability consumable_blackened_catfish: !ABILITY_FOOD {}
+	item consumable_blackened_catfish: !ITEM_FOOD {}
+}

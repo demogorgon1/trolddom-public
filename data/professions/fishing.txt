@@ -94,13 +94,14 @@ loot_group fish_slime_common: { }
 loot_group fish_slime_uncommon: { }
 loot_group fish_ashira: { }
 loot_group fish_ashira_corrupted: { }
+loot_group fish_river: { }
 loot_group fishing_lockboxes: { }
 
-loot_table fish: { slots: [ { possibility: { weight: 1 loot_group: fish } } !FISHING_LOCKBOX{} ] }
-loot_table fish_jungle: { slots: [ { possibility: { weight: 2 loot_group: fish_jungle } possibility: { weight: 1 loot_group: fish } } !FISHING_LOCKBOX{} ] }
-loot_table fish_skaldrun: { slots: [ { possibility: { weight: 2 loot_group: fish_skaldrun } possibility: { weight: 1 loot_group: fish } } !FISHING_LOCKBOX{} ] }
+loot_table fish: { slots: [ { possibility: { weight: 1 loot_group: fish } possibility: { weight: 1 loot_group: fish_river must_have_world_flags: [ river ] } } !FISHING_LOCKBOX{} ] }
+loot_table fish_jungle: { slots: [ { possibility: { weight: 2 loot_group: fish_jungle } possibility: { weight: 1 loot_group: fish } possibility: { weight: 1 loot_group: fish_river must_have_world_flags: [ river ] } } !FISHING_LOCKBOX{} ] }
+loot_table fish_skaldrun: { slots: [ { possibility: { weight: 2 loot_group: fish_skaldrun } possibility: { weight: 1 loot_group: fish } possibility: { weight: 1 loot_group: fish_river must_have_world_flags: [ river ] } } !FISHING_LOCKBOX{} ] }
 loot_table fish_slime: { slots: [ { possibility: { weight: 5 loot_group: fish_slime_common } possibility: { weight: 1 loot_group: fish_slime_uncommon } } !FISHING_LOCKBOX{} ] }
-loot_table fish_ashira: { slots: [ { possibility: { weight: 2 loot_group: fish_ashira } possibility: { weight: 1 loot_group: fish } } !FISHING_LOCKBOX{} ] }
+loot_table fish_ashira: { slots: [ { possibility: { weight: 2 loot_group: fish_ashira } possibility: { weight: 1 loot_group: fish } possibility: { weight: 1 loot_group: fish_river must_have_world_flags: [ river ] } } !FISHING_LOCKBOX{} ] }
 loot_table fish_ashira_corrupted: { slots: [ { possibility: { weight: 2 loot_group: fish_ashira_corrupted } possibility: { weight: 1 loot_group: fish_ashira } } !FISHING_LOCKBOX{} ] }
 
 loot_table fish_realm_of_fire: 
@@ -337,4 +338,56 @@ item item_deepwater_grouper:
 	stack: 20
 	item_level: 32
 	level_range: [ 32 37 ]
+}
+
+################################################################################
+# Silverfin Grayling (rivers only)
+
+item item_silverfin_grayling:
+{
+	loot_groups: [ fish_river ]		
+	string: "Silverfin Grayling"
+	icon: icon_fish_4
+	stack: 20
+	item_level: 10
+	level_range: [ 10 17 ]
+}
+
+################################################################################
+# Streamrunner Pike (rivers only)
+
+item item_streamrunner_pike:
+{
+	loot_groups: [ fish_river ]		
+	string: "Streamrunner Pike"
+	icon: icon_fish_1
+	stack: 20
+	item_level: 15
+	level_range: [ 15 22 ]
+}
+
+################################################################################
+# Riverback Salmon (rivers only)
+
+item item_riverback_salmon:
+{
+	loot_groups: [ fish_river ]		
+	string: "Riverback Salmon"
+	icon: icon_fish_6
+	stack: 20
+	item_level: 20
+	level_range: [ 20 27 ]
+}
+
+################################################################################
+# Mudwhisker Catfish (rivers only)
+
+item item_mudwhisker_catfish:
+{
+	loot_groups: [ fish_river ]		
+	string: "Mudwhisker Catfish"
+	icon: icon_fish_2
+	stack: 20
+	item_level: 25
+	level_range: [ 25 32 ]
 }

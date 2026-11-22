@@ -33,6 +33,7 @@ namespace tpublic
 							uint32_t									aLevel,
 							uint32_t									aCreatureTypeId,
 							bool										aElite,
+							uint8_t								aWorldFlags,
 							uint32_t									aPlayerWorldCharacterId,
 							Components::Lootable*						aLootable) const;
 		void			GenerateLootableItems(
@@ -42,6 +43,7 @@ namespace tpublic
 							uint32_t									aLevel,
 							uint32_t									aCreatureTypeId,
 							bool										aElite,
+							uint8_t								aWorldFlags,
 							const Data::LootTable*						aLootTable,
 							uint32_t									aPlayerWorldCharacterId,
 							Components::Lootable*						aLootable) const;
@@ -52,6 +54,7 @@ namespace tpublic
 							uint32_t									aLevel,
 							uint32_t									aCreatureTypeId,
 							bool										aElite,
+							uint8_t								aWorldFlags,
 							const Data::LootTable*						aLootTable,
 							ItemCallback								aItemCallback) const;			
 		void			QueryLootGroup(

@@ -934,6 +934,12 @@ map_palette .cliffs:
 	cliff .rocky_cliff_ramp: [ 36 152 174 ]
 }
 
+map_palette .ocean_and_rivers:
+{
+	flags<[ ocean ]>: [ 0 0 200 ]
+	flags<[ river ]>: [ 0 100 180 ]
+}
+
 map open_world:
 {
 	string: "Aetheris Isle"
@@ -1012,6 +1018,11 @@ map open_world:
 		{
 			palettes:	[ .cliffs ]
 			source:		"open-world-9.png"
+		}								
+		
+		{
+			palettes:	[ .ocean_and_rivers ]
+			source:		"open-world-ocean-and-rivers.png"
 		}								
 		
 	]

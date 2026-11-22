@@ -40,6 +40,7 @@ namespace tpublic::DirectEffects
 			uint32_t						aLevel,
 			uint32_t						aZoneId,
 			uint32_t						aTileFlags,
+			uint8_t						aWorldFlags,
 			const Vec2&						aPosition,
 			EntityInstance*					aFisher,
 			IEventQueue*					aEventQueue)
@@ -58,7 +59,7 @@ namespace tpublic::DirectEffects
 			uint32_t totalWeight = 0;
 			for(const std::unique_ptr<Data::MapEntitySpawn::Entity>& entity : mapEntitySpawn->m_entities)
 			{
-				if(entity->m_weight > 0 && entity->HasLevel(aLevel) && entity->HasZone(aZoneId) && entity->CheckTileFlags(aTileFlags))
+				if(entity->m_weight > 0 && entity->HasLevel(aLevel) && entity->HasZone(aZoneId) && entity->CheckTileFlags(aTileFlags) && entity->CheckWorldFlags(aWorldFlags))
 				{
 					possibilities.push_back(entity.get());
 					totalWeight += entity->m_weight;
@@ -182,6 +183,7 @@ namespace tpublic::DirectEffects
 		{
 			uint32_t level = 0;
 			uint32_t zoneId = 0;
+			uint8_t worldFlags = 0;
 			uint32_t lootTableId = 0;
 			uint32_t triggerAbilityId = 0;
 			uint32_t triggerAbilityChance = 0;
@@ -192,6 +194,7 @@ namespace tpublic::DirectEffects
 
 				level = worldInfo.m_level;
 				zoneId = worldInfo.m_zoneId;
+				worldFlags = worldInfo.m_flags;
 
 				const Data::Zone* zone = worldInfo.m_zoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_zoneId) : NULL;
 				const Data::Zone* subZone = worldInfo.m_subZoneId != 0 ? aManifest->GetById<Data::Zone>(worldInfo.m_subZoneId) : NULL;
@@ -234,7 +237,7 @@ namespace tpublic::DirectEffects
 					{
 						for (const Data::LootTable::Possibility& possibility : slot->m_possibilities)
 						{
-							if (Requirements::CheckList(aManifest, possibility.m_requirements, aWorldView, aSource, aTarget))
+							if (possibility.CheckWorldFlags(worldFlags) && Requirements::CheckList(aManifest, possibility.m_requirements, aWorldView, aSource, aTarget))
 							{
 								hasPossibleLoot = true;
 								break;
@@ -257,7 +260,7 @@ namespace tpublic::DirectEffects
 					{
 						// Each tick has 15% chance of making a splash
 						UniformDistribution<uint32_t> distribution(1, 100);
-						if (distribution(aRandom) <= 15 && !_SpawnMonster(aRandom, aManifest, map, level, zoneId, fishingTileFlags, fishingPosition.value(), aTarget, aEventQueue))
+						if (distribution(aRandom) <= 15 && !_SpawnMonster(aRandom, aManifest, map, level, zoneId, fishingTileFlags, worldFlags, fishingPosition.value(), aTarget, aEventQueue))
 						{
 							uint32_t fishingSplashEntityId = aManifest->GetExistingIdByName<Data::Entity>("fishing_splash");
 

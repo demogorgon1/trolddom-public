@@ -6,10 +6,14 @@
 #include <tpublic/Components/PlayerMinions.h>
 #include <tpublic/Components/Position.h>
 
+#include <tpublic/Data/Ability.h>
+
 #include <tpublic/EntityInstance.h>
 #include <tpublic/Helpers.h>
+#include <tpublic/IEventQueue.h>
 #include <tpublic/IResourceChangeQueue.h>
 #include <tpublic/IWorldView.h>
+#include <tpublic/Manifest.h>
 
 namespace tpublic
 {
@@ -71,13 +75,14 @@ namespace tpublic
 
 		void				
 		DamageInputEffect::OnDamageInput(
+			const Manifest*					aManifest,
 			const EntityInstance*			aSource,
 			const EntityInstance*			aTarget,
 			const SourceEntityInstance&		aAuraSource,
 			DirectEffect::DamageType		aDamageType,
 			int32_t							aDamage,
 			CombatEvent::Id					/*aCombatEventId*/,
-			IEventQueue*					/*aEventQueue*/,
+			IEventQueue*					aEventQueue,
 			const IWorldView*				aWorldView,
 			IResourceChangeQueue*			aResourceChangeQueue) const
 		{
@@ -86,6 +91,27 @@ namespace tpublic
 
 			if(m_auraSourceOnly && aAuraSource.m_entityInstanceId != aSource->GetEntityInstanceId())
 				return;
+
+			if(m_healthThreshold != 0)
+			{
+				// Only when this damage takes the target from at least the threshold to below it
+				const Components::CombatPublic* combatPublic = aTarget->GetComponent<Components::CombatPublic>();
+				const Components::CombatPublic::ResourceEntry* health = combatPublic != NULL ? combatPublic->GetResourceEntry(Resource::ID_HEALTH) : NULL;
+				if(health == NULL || health->m_max == 0 || aDamage <= 0)
+					return;
+
+				uint64_t threshold = (uint64_t)health->m_max * (uint64_t)m_healthThreshold;
+				uint64_t before = (uint64_t)health->m_current * 100;
+				uint64_t after = health->m_current > (uint32_t)aDamage ? (uint64_t)(health->m_current - (uint32_t)aDamage) * 100 : 0;
+				if(before < threshold || after >= threshold)
+					return;
+			}
+
+			if(m_abilityId != 0)
+			{
+				const Data::Ability* ability = aManifest->GetById<Data::Ability>(m_abilityId);
+				aEventQueue->EventQueueAbility({ aTarget->GetEntityInstanceId(), aTarget->GetSeq() }, aTarget->GetEntityInstanceId(), Vec2(), ability);
+			}
 
 			const Components::Position* targetPosition = aTarget->GetComponent<Components::Position>();
 
