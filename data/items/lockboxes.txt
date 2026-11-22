@@ -17,7 +17,6 @@ item lockbox_barnacled_tackle_box: !OPENABLE_ITEM
 {
 	_id: lockbox_barnacled_tackle_box
 	_string: "Barnacled Tackle Box"
-	_flavor: "Someone lost more than their bait."
 	_icon: icon_lockbox_2
 	_rarity: uncommon
 	_level: 6
@@ -31,7 +30,6 @@ item lockbox_sodden_coin_pouch: !OPENABLE_ITEM
 {
 	_id: lockbox_sodden_coin_pouch
 	_string: "Sodden Coin Pouch"
-	_flavor: "Heavy, wet, and tied with a sailor's knot."
 	_icon: icon_lockbox_3
 	_rarity: uncommon
 	_level: 11
@@ -45,7 +43,6 @@ item lockbox_kelp_wrapped_bundle: !OPENABLE_ITEM
 {
 	_id: lockbox_kelp_wrapped_bundle
 	_string: "Kelp-Wrapped Bundle"
-	_flavor: "Wrapped tight, as if someone meant to come back for it."
 	_icon: icon_lockbox_4
 	_rarity: uncommon
 	_level: 16
@@ -59,7 +56,6 @@ item lockbox_rusted_strongbox: !OPENABLE_ITEM
 {
 	_id: lockbox_rusted_strongbox
 	_string: "Rusted Strongbox"
-	_flavor: "The lock is rusted shut, but the hinges are not."
 	_icon: icon_lockbox_5
 	_rarity: uncommon
 	_level: 21
@@ -73,7 +69,6 @@ item lockbox_drowned_sailors_chest: !OPENABLE_ITEM
 {
 	_id: lockbox_drowned_sailors_chest
 	_string: "Drowned Sailor's Chest"
-	_flavor: "Initials are carved into the lid."
 	_icon: icon_lockbox_6
 	_rarity: uncommon
 	_level: 26
@@ -87,7 +82,6 @@ item lockbox_waterlogged: !OPENABLE_ITEM
 {
 	_id: lockbox_waterlogged
 	_string: "Waterlogged Lockbox"
-	_flavor: "Something rattles inside."
 	_icon: icon_lockbox_1
 	_rarity: uncommon
 	_level: 31

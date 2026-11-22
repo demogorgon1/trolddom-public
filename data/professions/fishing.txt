@@ -347,7 +347,7 @@ item item_silverfin_grayling:
 {
 	loot_groups: [ fish_river ]		
 	string: "Silverfin Grayling"
-	icon: icon_fish_4
+	icon: icon_fish_13
 	stack: 20
 	item_level: 10
 	level_range: [ 10 17 ]
@@ -360,7 +360,7 @@ item item_streamrunner_pike:
 {
 	loot_groups: [ fish_river ]		
 	string: "Streamrunner Pike"
-	icon: icon_fish_1
+	icon: icon_fish_14
 	stack: 20
 	item_level: 15
 	level_range: [ 15 22 ]
@@ -373,7 +373,7 @@ item item_riverback_salmon:
 {
 	loot_groups: [ fish_river ]		
 	string: "Riverback Salmon"
-	icon: icon_fish_6
+	icon: icon_fish_15
 	stack: 20
 	item_level: 20
 	level_range: [ 20 27 ]
@@ -386,7 +386,7 @@ item item_mudwhisker_catfish:
 {
 	loot_groups: [ fish_river ]		
 	string: "Mudwhisker Catfish"
-	icon: icon_fish_2
+	icon: icon_fish_16
 	stack: 20
 	item_level: 25
 	level_range: [ 25 32 ]

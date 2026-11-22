@@ -575,7 +575,7 @@
 		_string: "Poached Grayling"
 		_description: "Restores 1200 health and mana over 10 seconds. Gain 7 Spirit for 20 min. Can't be used in combat."
 		_level: 15
-		_icon: icon_fish_4_cooked
+		_icon: icon_fish_13_cooked
 		_heal_tick: 120
 		_ability_tick: consumable_poached_grayling_tick
 		_ability: consumable_poached_grayling
@@ -597,7 +597,7 @@
 		_string: "Pike Chowder"
 		_description: "Restores 1400 health and mana over 10 seconds. Gain 10 Wisdom for 20 min. Can't be used in combat."
 		_level: 20
-		_icon: icon_fish_1_cooked
+		_icon: icon_fish_14_cooked
 		_heal_tick: 140
 		_ability_tick: consumable_pike_chowder_tick
 		_ability: consumable_pike_chowder
@@ -619,7 +619,7 @@
 		_string: "Smoked Riverback Salmon"
 		_description: "Restores 1480 health and mana over 10 seconds. Increases Attack Power by 20 for 20 min. Can't be used in combat."
 		_level: 25
-		_icon: icon_fish_6_cooked
+		_icon: icon_fish_15_cooked
 		_heal_tick: 148
 		_ability_tick: consumable_smoked_riverback_salmon_tick
 		_ability: consumable_smoked_riverback_salmon
@@ -641,7 +641,7 @@
 		_string: "Blackened Catfish"
 		_description: "Restores 1650 health and mana over 10 seconds. Increases attack and cast speed by 1% for 20 min. Can't be used in combat."
 		_level: 30
-		_icon: icon_fish_2_cooked
+		_icon: icon_fish_16_cooked
 		_heal_tick: 165
 		_ability_tick: consumable_blackened_catfish_tick
 		_ability: consumable_blackened_catfish
