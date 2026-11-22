@@ -129,6 +129,7 @@ namespace tpublic
 				m_recall = false;
 				m_xpGain = 0;
 				m_professionSkillUseEvents.clear();
+				m_lootedItemIds.clear();
 				m_errorNotification = ErrorNotification::INVALID_ID;
 				m_abilityModifierList = NULL;
 				m_equippedItemTypeFlags = UINT16_MAX;
@@ -187,6 +188,7 @@ namespace tpublic
 			};
 
 			std::vector<ProfessionSkillUseEvent>							m_professionSkillUseEvents;			
+			std::vector<uint32_t>											m_lootedItemIds;	// Looted since last update (not traded, crafted, etc.), for achievements
 			ErrorNotification::Id											m_errorNotification = ErrorNotification::INVALID_ID;
 			std::optional<Vec2>												m_entityCompassEvent;
 

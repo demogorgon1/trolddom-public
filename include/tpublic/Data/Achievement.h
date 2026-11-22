@@ -146,6 +146,8 @@ namespace tpublic
 							m_reputationTrigger = ReputationTrigger(aChild);
 						else if(aChild->m_name == "need_achievements")
 							aChild->GetIdArray(DataType::ID_ACHIEVEMENT, m_needAchievementIds);
+						else if(aChild->m_name == "loot_items")
+							aChild->GetIdArray(DataType::ID_ITEM, m_lootItemIds);
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					}
@@ -174,6 +176,7 @@ namespace tpublic
 				aStream->WriteBool(m_availableInFrontEnd);
 				aStream->WriteUInt(m_killTriggerMustBeAliveEntityId);
 				aStream->WriteBool(m_heroic);
+				aStream->WriteUInts(m_lootItemIds);
 			}
 
 			bool
@@ -216,6 +219,8 @@ namespace tpublic
 					return false;
 				if (!aStream->ReadBool(m_heroic))
 					return false;
+				if(!aStream->ReadUInts(m_lootItemIds))
+					return false;
 				return true;
 			}
 
@@ -242,6 +247,7 @@ namespace tpublic
 			uint32_t							m_killTriggerEntityId = 0;
 			uint32_t							m_killTriggerEntityTagId = 0;
 			uint32_t							m_killTriggerMustBeAliveEntityId = 0;
+			std::vector<uint32_t>				m_lootItemIds;					// Must have looted all of these (not necessarily at the same time)
 			uint64_t							m_sortKey = 0;
 			bool								m_noProgressValues = false;
 			bool								m_accountWide = false;

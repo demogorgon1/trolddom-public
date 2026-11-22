@@ -61,6 +61,9 @@ namespace tpublic
 							uint32_t									aLootGroupId,
 							uint32_t									aLevel,
 							ItemCallback								aItemCallback) const;
+		bool			HasLootGroupItems(
+							uint32_t									aLootGroupId,
+							uint32_t									aLevel) const;
 
 		// Data access
 		const Manifest*	GetManifest() const { return m_manifest; }

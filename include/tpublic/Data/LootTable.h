@@ -104,6 +104,8 @@ namespace tpublic
 							m_mustHaveWorldFlags = WorldInfoMap::SourceToFlags(aChild);
 						else if(aChild->m_name == "must_not_have_world_flags")
 							m_mustNotHaveWorldFlags = WorldInfoMap::SourceToFlags(aChild);
+						else if(aChild->m_name == "skip_if_empty")
+							m_skipIfEmpty = aChild->GetBool();
 						else
 							TP_VERIFY(false, aChild->m_debugInfo, "'%s' is not a valid item.", aChild->m_name.c_str());
 					});
@@ -123,6 +125,7 @@ namespace tpublic
 					aStream->WritePOD(m_elite);
 					aStream->WritePOD(m_mustHaveWorldFlags);
 					aStream->WritePOD(m_mustNotHaveWorldFlags);
+					aStream->WriteBool(m_skipIfEmpty);
 				}
 
 				bool
@@ -148,6 +151,8 @@ namespace tpublic
 					if (!aStream->ReadPOD(m_mustHaveWorldFlags))
 						return false;
 					if (!aStream->ReadPOD(m_mustNotHaveWorldFlags))
+						return false;
+					if (!aStream->ReadBool(m_skipIfEmpty))
 						return false;
 					return true;
 				}
@@ -190,6 +195,7 @@ namespace tpublic
 				Elite							m_elite = ELITE_DOES_NOT_MATTER;
 				uint8_t							m_mustHaveWorldFlags = 0;		// WorldInfoMap flags (e.g. ocean) where the loot is generated
 				uint8_t							m_mustNotHaveWorldFlags = 0;
+				bool								m_skipIfEmpty = false;			// Ignored if the loot group has nothing at this level (instead of giving nothing)
 			};
 
 			struct Slot

@@ -74326,6 +74326,7 @@ loot_group __professions_fishing_monster_named_spawn_of_the_deep 457
 loot_group fishing_myrmidon_grenade 458
 loot_group fishing_polished_stone 459
 loot_group fish_river 460
+loot_group fish_ocean 461
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -76570,6 +76571,7 @@ achievement witch_hybrid_sorcerer_elemental_level_30 205
 achievement witch_hybrid_priest_dragon_level_30 206
 achievement witch_hybrid_fighter_subtlety_level_30 207
 achievement witch_hybrid_sorcerer_arcane_level_30 208
+achievement fish_all_kinds 209
 achievement_category general 2
 achievement_category __maps_open_world_open_world 3
 achievement_category __maps_dungeon_1_dungeon_1 4

@@ -15,5 +15,21 @@ achievement fish_2: { category: profession string: "River Angler" description: "
 achievement fish_3: { category: profession string: "Menace of the Lake" description: "Catch 150 fish." points: 10 priority: 2 root: fish_1 stat_trigger fish_caught: 150 icon: icon_fish_1 }
 achievement fish_4: { category: profession string: "Ocean Destroyer" description: "Catch 500 fish." points: 10 priority: 3 root: fish_1 stat_trigger fish_caught: 500 icon: icon_fish_1 }
 
+achievement fish_all_kinds:
+{
+	category: profession
+	string: "Plenty of Fish in the Sea"
+	description: "Catch every kind of fish."
+	points: 20
+	icon: icon_fish_12
+	loot_items:
+	[
+		item_herring item_large_sucker item_eel item_blue_moonfish item_bony_toesnapper item_silverfin_grayling item_blueback_trout
+		item_stormscale_bass item_perch item_streamrunner_pike item_mistveil item_riverback_salmon item_majestic_slime_eel item_piranha
+		item_skaldrun_snapper item_mudwhisker_catfish item_ashiran_rustfin item_hollowgill item_deepwater_grouper
+		item_slime_worms item_lava_shrimp
+	]
+}
+
 
 

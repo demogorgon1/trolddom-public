@@ -248,6 +248,9 @@ namespace tpublic
 				if(!possibility.CheckWorldFlags(aWorldFlags))
 					continue;
 
+				if(possibility.m_skipIfEmpty && !HasLootGroupItems(possibility.m_lootGroupId, aLevel))
+					continue;
+
 				if(possibility.m_elite != Data::LootTable::Possibility::ELITE_DOES_NOT_MATTER)
 				{
 					if(possibility.m_elite == Data::LootTable::Possibility::ELITE_MUST_BE && !aElite)
@@ -367,6 +370,21 @@ namespace tpublic
 					aItemCallback(ItemInstance{ itemId }, 0);
 			}		
 		}
+	}
+
+	bool
+	LootGenerator::HasLootGroupItems(
+		uint32_t									aLootGroupId,
+		uint32_t									aLevel) const
+	{
+		bool hasItems = false;
+		QueryLootGroup(aLootGroupId, aLevel, [&](
+			const ItemInstance&		/*aItemInstance*/,
+			uint32_t				/*aLootCooldownId*/)
+		{
+			hasItems = true;
+		});
+		return hasItems;
 	}
 
 	//---------------------------------------------------------------------------------
