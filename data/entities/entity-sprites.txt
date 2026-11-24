@@ -1155,6 +1155,7 @@ sprites:
 	sprite myrmidon_3: { dead: myrmidon_3_dead }
 	sprite sea_witch_4: { dead: sea_witch_4_dead }
 	sprite myrmidon_4: { dead: myrmidon_4_dead }
+	sprite cow: { dead: cow_dead }
 
 	cursor: { position: [ 0 1008 ] }
 	sprite zombie_8_dead: { }
@@ -1167,6 +1168,7 @@ sprites:
 	sprite myrmidon_3_dead: { }
 	sprite sea_witch_4_dead: { }
 	sprite myrmidon_4_dead: { }
+	sprite cow_dead: { }
 	
 }
 

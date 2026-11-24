@@ -1310,7 +1310,7 @@ namespace tpublic::MapGenerators
 
 					for (uint32_t x = 0; x < m_width; x++)
 					{
-						m_tiles[y * m_height + x] = *p;
+						m_tiles[y * m_width + x] = *p;
 						p++;
 					}
 				}

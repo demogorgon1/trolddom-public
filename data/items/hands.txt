@@ -62,3 +62,15 @@ item hands_simheist_1:
 }
 
 
+
+item hands_sheriff_wellington_1:
+{
+	type: armor_cloth
+	binds: when_picked_up
+	equipment_slots: [ hands ]
+	required_level: 2
+	icon: icon_cloth_hands_1
+	rarity: uncommon
+	string: "Howler's Gloves"
+	stat_weight wisdom: 1
+}

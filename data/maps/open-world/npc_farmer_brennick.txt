@@ -1,0 +1,204 @@
+############################################################
+# Farmer Brennick, barricaded in the barn next to his farmhouse south of Tidewatch, after the wolves overran the farm
+# (see Wolves at the Door in npc_sheriff_wellington.txt). His cow ran into the woods east of the farm.
+
+dialogue_screen .farmer_brennick_greetings:
+{
+	text:
+	[
+		"Is that... a person? Not a wolf? Thank the gods. I've been holed up in this barn for three days.\n"
+		"\n"
+		"Every time I stick my head out, there's a pair of yellow eyes watching me from the trees."
+	]
+
+	options:
+	[
+		{ quest: .farmer_brennick_1 }
+	]
+}
+
+dialogue_root .farmer_brennick_dialogue:
+{
+	.farmer_brennick_greetings: { }
+}
+
+entity .farmer_brennick: !NPC
+{
+	_string: "Farmer Brennick"
+	_dialogue_root: .farmer_brennick_dialogue
+	_sprite: man_34
+	_sprite_dead: man_34_dead
+	_level: 10
+	_faction: npcs
+	_creature_type: humanoid
+	_loot_table: .npc
+	_not_pushable: true
+}
+
+map_entity_spawn .farmer_brennick:
+{
+	entity .farmer_brennick: { weight: 1 }
+}
+
+############################################################
+# Daisy the cow, escorted from the woods east of the farm back to the farmhouse
+
+dialogue_screen .farmer_brennick_cow_dialogue:
+{
+	text:
+	[
+		"Moo?"
+	]
+
+	options:
+	[
+		{ text: "Come on, Daisy. Let's get you home." requirement self<must_have_active_quest>: .farmer_brennick_1 script: npc_trigger }
+	]
+}
+
+dialogue_root .farmer_brennick_cow_dialogue:
+{
+	.farmer_brennick_cow_dialogue: { }
+}
+
+entity .farmer_brennick_cow: !NPC
+{
+	_string: "Daisy"
+	_dialogue_root: .farmer_brennick_cow_dialogue
+	_dialogue_scripts: [ npc_trigger ]
+	_sprite: cow
+	_sprite_dead: cow_dead
+	_level: 3
+	_faction: combat_npcs
+	_creature_type: beast
+	_not_pushable: true
+	_default_trigger_ability: .farmer_brennick_cow_start_escort
+	_default_behavior_state: .farmer_brennick_cow
+	_is_threat_source: true
+	_blocking: false
+	_no_combat_tag: true
+}
+
+map_entity_spawn .farmer_brennick_cow: { entity .farmer_brennick_cow: { init_state: default } spawn_timer: !ESCORT_RESPAWN{} }
+
+# Painted on the routes layer from the cow in the woods to the farmhouse. The trigger numbers are positions along the
+# painted route, so they need to match it once it's painted: a wolf at about a quarter, half and three quarters of the way,
+# and the event (which completes the objective) where the route reaches the farmhouse.
+route .farmer_brennick_cow_escort:
+{
+	origin_map_entity_spawn: .farmer_brennick_cow
+
+	trigger<2>: { chat: { type: say text: "Moo!" } }
+	trigger<16>: { ability: .farmer_brennick_cow_ambush_1 }
+	trigger<33>: { ability: .farmer_brennick_cow_ambush_2 }
+	trigger<57>: { ability: .farmer_brennick_cow_ambush_3 }
+	trigger<63>: { chat: { type: say text: "Mooo!" } event: true }
+	trigger<max>: { despawn: true }
+}
+
+npc_behavior_state .farmer_brennick_cow:
+{
+	behavior: patrolling
+	combat_event_pause_ticks: 20
+	despawn_if_lost_player: true
+	patrol_move_interval_ticks: 9
+}
+
+ability .farmer_brennick_cow_start_escort:
+{
+	flags: [ always_in_range always_in_line_of_sight ]
+
+	direct_effect start_route: { route: .farmer_brennick_cow_escort }
+}
+
+# One level 3 wolf at each of the three points along the route
+map_entity_spawn .farmer_brennick_cow_ambush_1: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .farmer_brennick_cow_ambush_2: { spawn_timer: { only_when_triggered: true } }
+map_entity_spawn .farmer_brennick_cow_ambush_3: { spawn_timer: { only_when_triggered: true } }
+
+ability .farmer_brennick_cow_ambush_1:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .wolf_3
+		map_entity_spawn: .farmer_brennick_cow_ambush_1
+	}
+}
+
+ability .farmer_brennick_cow_ambush_2:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .wolf_3
+		map_entity_spawn: .farmer_brennick_cow_ambush_2
+	}
+}
+
+ability .farmer_brennick_cow_ambush_3:
+{
+	direct_effect spawn_entity:
+	{
+		spawn_flags: [ no_owner ]
+		npc_target_threat: 20
+		entity: .wolf_3
+		map_entity_spawn: .farmer_brennick_cow_ambush_3
+	}
+}
+
+############################################################
+# Quest 1
+
+objective .farmer_brennick_1:
+{
+	string: "Escort Daisy Back To The Farmhouse"
+
+	maps: [ open_world ]
+
+	route_npc:
+	{
+		entities: [ .farmer_brennick_cow ]
+	}
+}
+
+{
+	${ _level: 3 }
+	item .farmer_brennick_1_a: !QUEST_REWARD_FEET{ _string: "Muddy Farmhand Boots" _icon: icon_mail_boots_1 _strength: 1 _constitution: 1 _type: armor_mail }
+	item .farmer_brennick_1_b: !QUEST_REWARD_BACK{ _string: "Hay-Stitched Cloak" _icon: icon_cape_2 _wisdom: 1 _constitution: 1 _type: armor_cloth }
+	item .farmer_brennick_1_c: !QUEST_REWARD_WAIST{ _string: "Herder's Rope Belt" _icon: icon_belt_1 _dexterity: 1 _constitution: 1 _type: armor_mail }
+}
+
+quest .farmer_brennick_1:
+{
+	string: "Daisy Ran Off"
+
+	text:
+	[
+		"Find Farmer Brennick's cow, Daisy, in the woods east of the farm, and escort her back to the farmhouse."
+	]
+
+	description:
+	[
+		"When the wolves came, Daisy panicked and bolted into the woods behind the farm, east of here. She's the only cow I've got left.\n"
+		"\n"
+		"She's probably hiding in there somewhere, scared out of her wits. If you find her, she'll follow you home, she's a good girl."
+		" But those wolves will smell her a mile away, so stay close to her and keep them off her."
+	]
+
+	progress:
+	[
+		"Any sign of Daisy?"
+	]
+
+	completion:
+	[
+		"Daisy! There's my girl! I can't thank you enough. Here, take this. It's not much, but it's yours."
+	]
+
+	level: 3
+	objectives: [ .farmer_brennick_1 ]
+	reward_one_item: [ .farmer_brennick_1_a .farmer_brennick_1_b .farmer_brennick_1_c ]
+}

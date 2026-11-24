@@ -99,6 +99,25 @@ item .coarse_hair:
 loot_table .deer: !WILDLIFE_LOOT_TABLE { _loot_group: .deer_drops }
 loot_table .boar: !WILDLIFE_LOOT_TABLE { _loot_group: .boar_drops }
 loot_table .wolf: !WILDLIFE_LOOT_TABLE { _loot_group: .wolf_drops }
+
+# Level 2 and 3 wolves also drop pelts for Wolves at the Door (npc_sheriff_wellington.txt)
+loot_table .wolf_with_pelt:
+{
+	slots:
+	[
+		{
+			possibility: { weight: 1 }
+			possibility: { weight: 1 loot_group: .wolf_drops }
+		}
+
+		{
+			possibility: { weight: 1 }
+			possibility: { loot_group: .sheriff_wellington_4_pelt weight: 4 requirement self<must_have_active_quest>: { id: .sheriff_wellington_4 } }
+		}
+
+		!WORLD_DROPS{}
+	]
+}
 loot_table .bear:
 {
 	slots:
@@ -177,6 +196,29 @@ entity .boar_2: !NPC
 	_default_behavior_state: .wildlife
 }
 
+# Only at the overrun farm south of Tidewatch (.wolves_2), not in the general wildlife spawn: a gentler first
+# meeting with aggressive wolves than the level 3 ones
+entity .wolf_2: !NPC
+{
+	_string: "Wolf"
+	_level: 2
+	_faction: wildlife_aggressive
+	_sprite: wolf_1
+	_sprite_dead: wolf_1_dead
+	_weapon_damage: 1
+	_resource_health: 1
+	_loot_table: .wolf_with_pelt
+	_creature_type: beast
+	_default_behavior_state: .wildlife
+}
+
+map_entity_spawn .wolves_2:
+{
+	entity .wolf_2: { }
+
+	spawn_timer: !NPC_RESPAWN_NORMAL{}
+}
+
 entity .wolf_3: !NPC
 {
 	_string: "Wolf"
@@ -184,9 +226,9 @@ entity .wolf_3: !NPC
 	_faction: wildlife_aggressive
 	_sprite: wolf_1
 	_sprite_dead: wolf_1_dead 
-	_weapon_damage: 1.4 
+	_weapon_damage: 1.3 
 	_resource_health: 1
-	_loot_table: .wolf
+	_loot_table: .wolf_with_pelt
 	_creature_type: beast
 	_default_behavior_state: .wildlife
 }

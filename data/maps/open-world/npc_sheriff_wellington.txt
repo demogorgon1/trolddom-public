@@ -11,6 +11,7 @@ dialogue_screen .sheriff_wellington_greetings:
 	[
 		{ quest: .sheriff_wellington_1 }
 		{ quest: .sheriff_wellington_2 }
+		{ quest: .sheriff_wellington_4 }
 		{ quest: .sheriff_wellington_3 requirement self<must_be_at_least_level>: 7 }
 		{ quest<completion_only>: spawn_of_umbracoth_2 }
 		{ quest<completion_only>: .crab_boss_5_quest }
@@ -160,6 +161,69 @@ quest .sheriff_wellington_2:
 	level: 3
 	
 	reward_one_item: [ chest_sheriff_wellington_2 weapon_sheriff_wellington_1 ]
+}
+
+############################################################
+# Quest 4 (offered alongside The Old Fort, so the next step after We've Got Crabs isn't only more crabs)
+
+# Dropped by the wolves around the farm (.wolf_2 and .wolf_3, loot table .wolf_with_pelt in wildlife.txt)
+loot_group .sheriff_wellington_4_pelt: { }
+
+item .wolf_pelt:
+{
+	binds: when_picked_up
+	loot_groups: [ .sheriff_wellington_4_pelt ]
+	string: "Wolf Pelt"
+	icon: icon_fur
+	stack: 6
+	item_level: 2
+	quest: .sheriff_wellington_4
+	flags: [ not_sellable ]
+}
+
+objective .sheriff_wellington_4:
+{
+	string: "Wolf Pelts"
+	collect_items: { item: .wolf_pelt count: 6 }
+}
+
+quest .sheriff_wellington_4:
+{
+	string: "Wolves at the Door"
+
+	text:
+	[
+		"Follow the road south to the overrun farm, and bring back 6 wolf pelts to Sheriff Wellington in Tidewatch."
+	]
+
+	description:
+	[
+		"Crab men aren't the only trouble we've got. The wolf packs have grown bold this year, and a few days ago they overran"
+		" old Brennick's farm down south. Last I heard, he'd barricaded himself in his barn and refused to leave his animals behind."
+		" Stubborn old goat.\n"
+		"\n"
+		"Follow the road south out of town and you can't miss it. Thin out the pack and bring me their pelts, so I know the job's done."
+		" And check on Brennick while you're there.\n"
+		"\n"
+		"Wolves don't wait for you to come to them. Once they've spotted you, they'll run you down, so keep your eyes open and don't"
+		" wander into a whole pack at once."
+	]
+
+	progress:
+	[
+		"Any luck at the farm? Is Brennick still holding out in that barn?"
+	]
+
+	completion:
+	[
+		"Good, good. With the pack thinned out, Brennick can finally come out of that barn. Here, you've earned this."
+	]
+
+	objectives: [ .sheriff_wellington_4 ]
+	prerequisites: [ .sheriff_wellington_1 ]
+	level: 2
+
+	reward_one_item: [ wrists_sheriff_wellington_1 hands_sheriff_wellington_1 ]
 }
 
 ############################################################

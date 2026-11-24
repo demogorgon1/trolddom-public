@@ -24233,6 +24233,10 @@ ability __professions_fishing_shiv_of_the_deep_bleed 37234
 ability _aura__ability___professions_fishing_shiv_of_the_deep_bleed_direct_effect_apply_aura_aura_aura_effect_repeat_ability 37235
 ability __professions_fishing_rope_of_the_drowned 37236
 ability __maps_thalvaron_n_gateway_sentinel_fireball 37239
+ability __maps_open_world_farmer_brennick_cow_start_escort 37240
+ability __maps_open_world_farmer_brennick_cow_ambush_1 37241
+ability __maps_open_world_farmer_brennick_cow_ambush_2 37242
+ability __maps_open_world_farmer_brennick_cow_ambush_3 37243
 class fighter 1
 class priest 2
 class sorcerer 3
@@ -26659,6 +26663,9 @@ entity fishing_monster_crab_25 2514
 entity fishing_monster_crab_28 2515
 entity fishing_monster_crab_31 2516
 entity thalvaron_gateway_sentinel 2518
+entity __maps_open_world_wolf_2 2519
+entity __maps_open_world_farmer_brennick 2520
+entity __maps_open_world_farmer_brennick_cow 2521
 map open_world 4
 map dungeon_2 5
 map dungeon_1 6
@@ -27728,6 +27735,12 @@ map_entity_spawn fishing_monsters_lava_22 1120
 map_entity_spawn fishing_monsters_lava_31 1121
 map_entity_spawn fishing_monsters_slime_18 1122
 map_entity_spawn thalvaron_gateway_sentinel 1124
+map_entity_spawn __maps_open_world_wolves_2 1125
+map_entity_spawn __maps_open_world_farmer_brennick 1126
+map_entity_spawn __maps_open_world_farmer_brennick_cow 1127
+map_entity_spawn __maps_open_world_farmer_brennick_cow_ambush_1 1128
+map_entity_spawn __maps_open_world_farmer_brennick_cow_ambush_2 1129
+map_entity_spawn __maps_open_world_farmer_brennick_cow_ambush_3 1130
 map_player_spawn dungeon_1_exit 9
 map_player_spawn __maps_dungeon_1_player_spawn 12
 map_player_spawn __maps_dungeon_2_player_spawn 13
@@ -34475,6 +34488,8 @@ sprite __unnamed_917__ 6497
 sprite __unnamed_918__ 6498
 sprite __unnamed_919__ 6499
 sprite __unnamed_920__ 6500
+sprite cow_dead 6501
+sprite cow 6502
 faction monsters 1
 faction wildlife 2
 faction npcs 3
@@ -70688,6 +70703,12 @@ item consumable_blackened_catfish 63504
 item recipe_pike_chowder 63505
 item recipe_smoked_riverback_salmon 63506
 item recipe_blackened_catfish 63507
+item hands_sheriff_wellington_1 63508
+item wrists_sheriff_wellington_1 63509
+item __maps_open_world_wolf_pelt 63510
+item __maps_open_world_farmer_brennick_1_a 63511
+item __maps_open_world_farmer_brennick_1_b 63512
+item __maps_open_world_farmer_brennick_1_c 63513
 aura knock 1
 aura dont_touch_me_bro 2
 aura immortality 3
@@ -73909,6 +73930,7 @@ loot_table __professions_fishing_monster_lava_crab 509
 loot_table __professions_fishing_monster_slime 510
 loot_table __professions_fishing_monster_crab 511
 loot_table __maps_thalvaron_n_gateway_sentinel 513
+loot_table __maps_open_world_wolf_with_pelt 514
 loot_group world_drops_junk 8
 loot_group world_drops_uncommon 9
 loot_group world_drops_consumable 10
@@ -74327,6 +74349,7 @@ loot_group fishing_myrmidon_grenade 458
 loot_group fishing_polished_stone 459
 loot_group fish_river 460
 loot_group fish_ocean 461
+loot_group __maps_open_world_sheriff_wellington_4_pelt 462
 map_trigger __maps_dungeon_1_ignorg_killed 3
 map_trigger __maps_dungeon_1_biznorg_killed 4
 map_trigger __maps_dungeon_1_zarvok_killed 5
@@ -74937,6 +74960,8 @@ dialogue_screen __maps_thalvaron_sr_hesk_house 555
 dialogue_screen __maps_thalvaron_e_faria 556
 dialogue_screen __maps_thalvaron_sr_wendel_crane 557
 dialogue_screen __maps_thalvaron_sr_hesk_vendor 558
+dialogue_screen __maps_open_world_farmer_brennick_greetings 559
+dialogue_screen __maps_open_world_farmer_brennick_cow_dialogue 560
 expression __maps_open_world_rob_beaurichard_can_afford_guild_registration 13
 expression __maps_open_world_rob_beaurichard_cannot_afford_guild_registration 14
 expression __maps_open_world_rob_beaurichard_is_in_guild 15
@@ -75250,6 +75275,8 @@ dialogue_root _entity_thalvaron_hesk_components_combat_public_dialogue_root 355
 dialogue_root _entity_thalvaron_marro_finch_components_combat_public_dialogue_root 356
 dialogue_root _entity_thalvaron_dorrik_ironvein_components_combat_public_dialogue_root 358
 dialogue_root _entity_thalvaron_wendel_crane_components_combat_public_dialogue_root 359
+dialogue_root __maps_open_world_farmer_brennick_dialogue 360
+dialogue_root __maps_open_world_farmer_brennick_cow_dialogue 361
 npc_behavior_state __maps_open_world_wildlife 3
 npc_behavior_state __maps_open_world_wandering_short 4
 npc_behavior_state __maps_dungeon_1_wandering 5
@@ -75332,6 +75359,7 @@ npc_behavior_state __maps_saltclaw_grotto_wandering_short 91
 npc_behavior_state __maps_saltclaw_grotto_passive 92
 npc_behavior_state __maps_saltclaw_grotto_patrol 93
 npc_behavior_state __generation_jobs_demon_wandering 94
+npc_behavior_state __maps_open_world_farmer_brennick_cow 95
 map_segment __maps_dungeon_2_random_room_1 25
 map_segment __maps_dungeon_2_entrance_1 26
 map_segment __maps_dungeon_2_entrance_2 27
@@ -75599,6 +75627,8 @@ zone __maps_saltclaw_grotto_snapjaw 269
 zone __maps_saltclaw_grotto_tidecaller_brekk 270
 zone __maps_saltclaw_grotto_brinecoil 272
 zone __maps_thalvaron_frozen_landing 273
+zone __maps_open_world_zone_14 274
+zone __maps_open_world_zone_14_dark 275
 creature_type humanoid 1
 creature_type beast 2
 creature_type undead 3
@@ -75975,6 +76005,8 @@ objective __maps_thalvaron_sr_wendel_crane_1_a 423
 objective __maps_thalvaron_sr_wendel_crane_1_b 424
 objective __maps_thalvaron_nw_mathew_larsen_2 425
 objective __maps_thalvaron_nw_mathew_larsen_3 426
+objective __maps_open_world_sheriff_wellington_4 427
+objective __maps_open_world_farmer_brennick_1 428
 quest spawn_of_umbracoth 3
 quest spawn_of_umbracoth_2 4
 quest gateway_world_quest_1 5
@@ -76383,6 +76415,8 @@ quest __maps_thalvaron_e_quizlob_3 466
 quest __maps_thalvaron_sr_wendel_crane_1 467
 quest __maps_thalvaron_nw_mathew_larsen_2 468
 quest __maps_thalvaron_nw_mathew_larsen_3 469
+quest __maps_open_world_sheriff_wellington_4 470
+quest __maps_open_world_farmer_brennick_1 471
 achievement cash_loot_1 6
 achievement cash_loot_2 7
 achievement cash_loot_3 8
@@ -78041,6 +78075,7 @@ route the_devouring_shroud_default_patrol 24
 route withering_glade_default_patrol 25
 route __maps_withering_glade_boss_route 26
 route saltclaw_grotto_default_patrol 27
+route __maps_open_world_farmer_brennick_cow_escort 28
 tile_modifier wood_wall_grass 1
 tile_modifier wood_wall_window_grass 2
 tile_modifier wood_wall_start 4
@@ -78299,6 +78334,18 @@ map_cliff __maps_saltclaw_grotto_dummy_cliff_1 155
 map_cliff __maps_saltclaw_grotto_dummy_cliff_1_ramp 156
 map_cliff __maps_saltclaw_grotto_dummy_cliff_2 157
 map_cliff __maps_saltclaw_grotto_dummy_cliff_2_ramp 158
+map_cliff __maps_open_world_badlands_cliff 159
+map_cliff __maps_open_world_badlands_cliff_ramp 160
+map_cliff __maps_open_world_wall_cliff 161
+map_cliff __maps_open_world_wall_cliff_ramp 162
+map_cliff __maps_open_world_dummy_cliff_minus_0 163
+map_cliff __maps_open_world_dummy_cliff_minus_0_ramp 164
+map_cliff __maps_open_world_dummy_cliff_0 165
+map_cliff __maps_open_world_dummy_cliff_0_ramp 166
+map_cliff __maps_open_world_dummy_cliff_1 167
+map_cliff __maps_open_world_dummy_cliff_1_ramp 168
+map_cliff __maps_open_world_dummy_cliff_2 169
+map_cliff __maps_open_world_dummy_cliff_2_ramp 170
 context_help fishing 1
 minion_mode __minions_mercenary_contract_barbarian_aggressive 1
 minion_mode __minions_mercenary_contract_barbarian_defensive 2
