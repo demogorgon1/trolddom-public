@@ -93,6 +93,7 @@ sprites:
 	sprite effect_jul_hat_blue: { flags: [ ] }
 	sprite effect_jul_hat_purple: { flags: [ ] }
 	sprite effect_jul_hat_red: { flags: [ ] }
+	sprite effect_jul_hat_black: { flags: [ ] }
 	
 	cursor: { position: [ 0 20 ] }	
 	size: { width: 24 height: 24 }

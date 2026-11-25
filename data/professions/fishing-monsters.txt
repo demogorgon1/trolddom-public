@@ -1100,7 +1100,7 @@ entity fishing_monster_named_myrmidon_skirmisher: !NPC
 ability .fishing_rope_of_the_drowned:
 {
 	string: "Rope of the Drowned"
-	icon: icon_necklace_14
+	icon: icon_rope
 	states: [ default in_combat ]
 	flags: [ always_in_range always_in_line_of_sight ]
 	direct_effect apply_aura:
@@ -1119,7 +1119,7 @@ ability .fishing_rope_of_the_drowned:
 aura .fishing_rope_of_the_drowned:
 {
 	string: "Rope of the Drowned"
-	icon: icon_necklace_14
+	icon: icon_rope
 	description: "Restore mana faster when you're low health."
 	type: hidden
 	flags: [ item silent ]
@@ -1137,7 +1137,7 @@ item neck_fishing_named_sea_witch:
 	binds: when_equipped
 	loot_groups: [ .fishing_monster_named_sea_witch ]
 	required_level: 22
-	icon: icon_necklace_14
+	icon: icon_rope
 	rarity: rare
 	string: "Rope of the Drowned"
 	stat_weight wisdom: 1

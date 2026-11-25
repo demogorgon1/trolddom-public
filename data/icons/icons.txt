@@ -1043,9 +1043,8 @@ sprites:
 	cursor: { position: [ 0 912 ] }
 	sprite icon_lockbox_5 : { tags: [ icon ] }
 	sprite icon_lockbox_6 : { tags: [ icon ] }
-
-	# River fish (empty, to be drawn)
-	cursor: { position: [ 64 912 ] }
+	sprite icon_rope : { tags: [ icon ] }
+	sprite icon_jul_hat_black : { tags: [ icon ] }
 	sprite icon_fish_13 : { tags: [ icon ] }
 	sprite icon_fish_13_cooked : { tags: [ icon ] }
 	sprite icon_fish_14 : { tags: [ icon ] }

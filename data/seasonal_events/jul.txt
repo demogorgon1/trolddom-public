@@ -49,6 +49,14 @@ seasonal_event jul:
 		requirement self<must_be_npc_with_head_anchor>: {}
 		requirement self<must_be_at_least_level>: 20
 	}	
+	
+	random_npc_aura:
+	{
+		aura: jul_hat_rare_3
+		probability: 1
+		requirement self<must_be_npc_with_head_anchor>: {}
+		requirement self<must_be_at_least_level>: 30
+	}		
 }
 
 faction jul_consortium:
@@ -76,11 +84,13 @@ loot_group jul_hat_common: {}
 loot_group jul_hat_uncommon: {}
 loot_group jul_hat_rare_1: {}
 loot_group jul_hat_rare_2: {}
+loot_group jul_hat_rare_3: {}
 
 aura jul_hat_common: !NPC_AURA { _icon: icon_jul_hat_red _hat: effect_jul_hat_red _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_common } } ] } }
 aura jul_hat_uncommon: !NPC_AURA { _icon: icon_jul_hat_green _hat: effect_jul_hat_green _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_uncommon } } ] } }
 aura jul_hat_rare_1: !NPC_AURA { _icon: icon_jul_hat_blue _hat: effect_jul_hat_blue _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_rare_1 } } ] } }
 aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat_purple _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_rare_2 } } ] } }
+aura jul_hat_rare_3: !NPC_AURA { _icon: icon_jul_hat_black _hat: effect_jul_hat_black _loot_table: $loot_table { slots: [ { possibility: { loot_group: jul_hat_rare_3 } } ] } }
 
 !define local ITEM
 {
@@ -147,6 +157,13 @@ aura jul_hat_rare_2: !NPC_AURA { _icon: icon_jul_hat_purple _hat: effect_jul_hat
 
 	ability jul_hat_rare_2: !ITEM_ABILITY { _stat: purple_winter_hats_worn }
 	item jul_hat_rare_2: !ITEM { _ability: jul_hat_rare_2 }	
+}
+
+{
+	${ _string: "Black Winter Hat" _icon: icon_jul_hat_black _hat: effect_jul_hat_black _loot_group: jul_hat_rare_3 }
+
+	ability jul_hat_rare_3: !ITEM_ABILITY { _stat: black_winter_hats_worn }
+	item jul_hat_rare_3: !ITEM { _ability: jul_hat_rare_3 }	
 }
 
 item jul_voucher:

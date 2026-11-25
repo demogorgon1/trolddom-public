@@ -32,6 +32,7 @@ namespace tpublic
 			ID_GREEN_WINTER_HATS_WORN,
 			ID_BLUE_WINTER_HATS_WORN,
 			ID_PURPLE_WINTER_HATS_WORN,
+			ID_BLACK_WINTER_HATS_WORN,
 
 			NUM_IDS
 		};
@@ -66,6 +67,7 @@ namespace tpublic
 			{ "green_winter_hats_worn",		NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 			{ "blue_winter_hats_worn",		NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 			{ "purple_winter_hats_worn",	NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
+			{ "black_winter_hats_worn",		NULL,												ComponentBase::PENDING_PERSISTENCE_UPDATE_LOW_PRIORITY },
 		};
 
 		static_assert(sizeof(INFO) / sizeof(Info) == NUM_IDS);
