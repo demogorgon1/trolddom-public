@@ -1053,6 +1053,10 @@ sprites:
 	sprite icon_fish_15_cooked : { tags: [ icon ] }
 	sprite icon_fish_16 : { tags: [ icon ] }
 	sprite icon_fish_16_cooked : { tags: [ icon ] }
+	sprite icon_chain : { tags: [ icon ] }
+	sprite icon_infernal_ash : { tags: [ icon ] }
+	sprite icon_demon_ichor : { tags: [ icon ] }
+	
 }
 
 

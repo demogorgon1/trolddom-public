@@ -1067,7 +1067,7 @@ item weapon_fishing_named_myrmidon_skirmisher:
 	binds: when_equipped
 	loot_groups: [ .fishing_monster_named_myrmidon_skirmisher ]
 	required_level: 19
-	icon: icon_necklace_2
+	icon: icon_chain
 	rarity: rare
 	string: "Chain of Murder"
 	stat_weight strength: 2
